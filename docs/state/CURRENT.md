@@ -155,3 +155,8 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   loose permissions refused; destroy = zero + fsync + unlink (local disk only; other copies are the
   operator step). Mutations: version dropped from AAD → 1 fail; permission check removed → 1 fail.
   Results: pytest (keys) 22 passed.
+- 2026-09-30: INDEX #11 `keys/get_or_create_key.py` (get_or_create_key + load_key; one functionality:
+  data-key resolution). Wraps bound to key id/stream/subject/month; master wrap bound to stream; no cache (D1).
+  Tests include 4-thread concurrent creation, shredded data/master key → None, moved wraps fail,
+  destroyed root version → unresolvable. Mutations: ON CONFLICT removed → 2 fail; DEK wrap AAD reduced
+  → 1 fail. Results: pytest (keys) 36 passed.
