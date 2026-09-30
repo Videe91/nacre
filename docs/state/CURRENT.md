@@ -28,6 +28,7 @@ committing and pushing after each.
 Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`):
 1. Idempotent retries return the original commit, with no duplicates.
 2. AS_OF(N) snapshots are stable (MNEXA ADR-0010 R-18: byte-identical after later commits).
+   *Status: tested through read_stream (#16): snapshot at N identical after 10 later commits; beyond-head refused.*
 3. The chain verifier detects tampering, including a full-stream rewrite (caught by checkpoints).
 4. Shredding makes payloads unreadable while the chain still verifies.
 5. The cross-scope read test fails as expected (D-0005 S-3). *Status: suite in place and passing through the
@@ -402,3 +403,12 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   checkpointer roles), records its own ledger event (the org stream's first event). Added: refuses an org id
   that already names a scope or a stream, checked under the stream lock in the same transaction. Mutation:
   existence check removed → 2 fail.
+- 2026-09-30: INDEX #16 read_stream (+ head) and #17 replay_cycle.
+  D1 notes:
+  - AS_OF beyond the head is REFUSED, not clamped (ADR-0010 rule 9: only exposed watermarks are stable);
+  - an unreadable stream is refused explicitly, not returned empty;
+  - Shredded events are returned as Shredded;
+  - replay is single-stream (cross-stream needs Phase 3's watermark vector).
+
+  Gate item 2 is tested (AS_OF(3) identical after 10 later commits). Mutations: beyond-head check removed →
+  1 fail; ordered by time instead of commit_seq → 3 fail.
