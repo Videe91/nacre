@@ -17,7 +17,7 @@ Build the Phase 1 files in `docs/modules/INDEX.md` order, one functionality + te
 committing and pushing after each.
 - Done: #1 `core/event.py`, #2 `core/db.py`, #2a `core/blob_store.py`, #2b `core/root_key_provider.py`,
   #3 `schema/apply_migrations.py` + SQL 0001–0003, #2c `core/encode_cbor.py`, #2d `core/decode_cbor.py`, #4 `ledger/encode_envelope.py`, #5 `ledger/seal_event.py`, #3d `sql/0004_checkpoints.sql`.
-- Next: #6 with the corpus (provider-format research in hand, see evidence/A-0010-provider-formats.md), then 14, 7, 8.
+- Next: D-0011 decision → supplementary rules → remove xfails → switch the hook (D-0010). Then #14, #7, #8.
 - To run DB tests: `docker compose up -d --wait`, then `pytest`.
 - **Owner tool:** `scripts/measure_token_format.py` measures real tokens' prefix/length/charset without
   printing them (D-0007 amendment 4). Run locally; paste only its suggested ASSUMPTIONS row back.
@@ -43,6 +43,11 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   comparison to the owner as part of A-0017.
 
 ## Open questions
+- **D-0011 (supplementary detection rules) PROPOSED.** The first measurement meets the FP target (0.36%)
+  and keeps every public value, but 8 groups are below 99%: URL/DB passwords (no gitleaks rule), Sentry
+  legacy DSN, GitHub stateless ghs_, Heroku, Supabase sb_secret, and Sentry sntrys_ outside Bearer
+  contexts. Evidence: evidence/A-0010-measurement-2026-09-30.md. The 8 are strict-xfail tests tied to D-0011.
+- **The pre-commit hook stays on the temporary scanner** until strip_secrets meets its targets (D-0010).
 - **#6 provider coverage, state after verification (evidence/A-0010-format-verification.md).**
   - **Generated now** (fully documented by the provider): GitHub classic + ghs stateless; GitLab legacy +
     routable (exact CRC); PyPI (V2 macaroon); Heroku HRKU-UUID form; Supabase sb_secret / sb_publishable
@@ -279,3 +284,15 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   position). Mutations: GitLab CRC without prefix → 1 fail; anon generator emitting service_role → 1 fail.
   Corpus sha256 686f67…b175. Results: pytest (corpus) 32 passed.
 - 2026-09-30: D-0008 amendment 5 (optional public_credentials body key), D-0007 amendment 5.
+- 2026-09-30: INDEX #6 `ledger/strip_secrets.py` built: gitleaks under RE2 (sha256-pinned; any compile
+  failure fails the load), public layer, entropy layer. Measurement (tests/ledger/secret_corpus/measure.py):
+  FP 2/561 = 0.36%, public kept 100%, 8 groups below target (see Open questions); coverage 12/221 rules.
+  Tuning path, reported in full:
+  - First run: FP 4.1%. A bug: the entropy candidate truncated long runs to 120 chars instead of
+    rejecting them; fixed → FP 1.25%.
+  - Then two D1 cue rules (skip `//` URL tails; after a spaced ` = ` only quoted values) → FP 0.36%.
+  - The bug fix also removed accidental entropy catches of long ghs_/sntrys_ tokens. Correct: known
+    formats need rules (D-0011).
+  Other bugs: re2 has no IGNORECASE (inline (?i) used); a nonsense test line was removed before commit.
+  Mutations: public layer off → 2 fail; rules pin off → 1 fail.
+  Results: pytest (strip_secrets) 22 passed + 8 strict xfail.

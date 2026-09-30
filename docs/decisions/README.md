@@ -12,3 +12,4 @@
 | D-0008 | Encrypted body format (header, AEAD, deterministic CBOR) | D2 | accepted |
 | D-0009 | Regex engine for secret detection — google-re2 | D2 | accepted |
 | D-0010 | Pre-commit secret scan | D2 | accepted |
+| D-0011 | Nacre supplementary detection rules | D2 | proposed |
