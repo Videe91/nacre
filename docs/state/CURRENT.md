@@ -17,7 +17,7 @@ Build the Phase 1 files in `docs/modules/INDEX.md` order, one functionality + te
 committing and pushing after each.
 - Done: #1 `core/event.py`, #2 `core/db.py`, #2a `core/blob_store.py`, #2b `core/root_key_provider.py`,
   #3 `schema/apply_migrations.py` + SQL 0001–0003, #2c `core/encode_cbor.py`, #2d `core/decode_cbor.py`, #4 `ledger/encode_envelope.py`, #5 `ledger/seal_event.py`, #3d `sql/0004_checkpoints.sql`.
-- **#6 CLOSED 2026-09-30** (H3 official). **#14 built; A-0007 measured; #7, #7a, #8 built.** Next: #15 onward (attachments, read_stream, replay_cycle, checkpoints, verify_chain, shredding/rotation, delete_scope).
+- **#6 CLOSED 2026-09-30** (H3 official). **#14 built; A-0007 measured; #7, #7a, #8 built.** #16 and #17 built. Remaining Phase 1 work is blocked on D-0013 (#15, #15a, #18, #19) and D-0014 (#20, #20a, #20b, #21).
 - To run DB tests: `docker compose up -d --wait`, then `pytest`.
 - **Owner tool:** `scripts/measure_token_format.py` measures real tokens' prefix/length/charset without
   printing them (D-0007 amendment 4). Run locally; paste only its suggested ASSUMPTIONS row back.
@@ -47,6 +47,9 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   comparison to the owner as part of A-0017.
 
 ## Open questions
+- **D-0014 PROPOSED (D3; blocks #20, #20a, #20b, #21):** a `nacre_keyadmin` role (key tables and scope registry
+  only, never events); who may delete scopes, erase people, forget periods, and rotate the root; audit events;
+  single-transaction master rotation; "marked" derived from the ledger; root-rotation audit per org stream.
 - **D-0013 PROPOSED (blocks #15, #15a, #18, #19):** attachment blob byte format and disk layout; checkpoint signed
   message, signing-key file, external JSON Lines witness file. #16 read_stream and #17 replay_cycle proceed meanwhile.
 - Resolved 2026-09-30: A-0007 rescoped (≤ 4 writers p99 < 50 ms; 16-writer stress ceiling 150 ms), met unpooled; A-0019 added (remedy = group commit).

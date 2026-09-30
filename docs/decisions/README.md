@@ -15,3 +15,4 @@
 | D-0011 | Nacre supplementary detection rules | D2 | accepted |
 | D-0012 | Trust by source and author, and the idempotency request MAC | D3/D2 | accepted |
 | D-0013 | Attachment blob format and checkpoint signature format | D2 | proposed |
+| D-0014 | Shredding authority, key-administration roles, and rotation mechanics | D3 | proposed |
