@@ -17,7 +17,7 @@ Build the Phase 1 files in `docs/modules/INDEX.md` order, one functionality + te
 committing and pushing after each.
 - Done: #1 `core/event.py`, #2 `core/db.py`, #2a `core/blob_store.py`, #2b `core/root_key_provider.py`,
   #3 `schema/apply_migrations.py` + SQL 0001–0003, #2c `core/encode_cbor.py`, #2d `core/decode_cbor.py`, #4 `ledger/encode_envelope.py`, #5 `ledger/seal_event.py`, #3d `sql/0004_checkpoints.sql`.
-- **#6 CLOSED 2026-09-30** (H3 official). **#14 built; A-0007 measured; #7, #7a, #8 built.** #16 and #17 built. Remaining Phase 1 work is blocked on D-0013 (#15, #15a, #18, #19) and D-0014 (#20, #20a, #20b, #21).
+- **#6 CLOSED 2026-09-30** (H3 official). **#14 built; A-0007 measured; #7, #7a, #8 built.** #15/#15a/#15b, #16, #17, #18, #19 built. Next: #20/#20a/#20b (shredding with grace period, master and root rotation), #21 delete_scope, #15c orphan GC.
 - To run DB tests: `docker compose up -d --wait`, then `pytest`.
 - **Owner tool:** `scripts/measure_token_format.py` measures real tokens' prefix/length/charset without
   printing them (D-0007 amendment 4). Run locally; paste only its suggested ASSUMPTIONS row back.
@@ -30,7 +30,10 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
 2. AS_OF(N) snapshots are stable (MNEXA ADR-0010 R-18: byte-identical after later commits).
    *Status: tested through read_stream (#16): snapshot at N identical after 10 later commits; beyond-head refused.*
 3. The chain verifier detects tampering, including a full-stream rewrite (caught by checkpoints).
+   *Status: tested (#19): edited ciphertext, edited header, deleted row, reordered rows, and a full rewrite with
+   recomputed seals caught only by the signed checkpoint.*
 4. Shredding makes payloads unreadable while the chain still verifies.
+   *Status: chain side tested (#19, master key destroyed → still verifies); full check with #20 shred_keys.*
 5. The cross-scope read test fails as expected (D-0005 S-3). *Status: suite in place and passing through the
    door (#10: 25 kind pairs + reuse/rollback/revoke); re-run at the gate with real appended events.*
 6. A-0007 throughput is measured and the result recorded (pass/fail against the provisional target is reported, not hidden).
@@ -430,3 +433,13 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   Mutations: sha check off → 3 fail. The plaintext-ref check off at first SURVIVED (AEAD already binds blob to ref),
   so a writer-bug test was added (right ref, wrong plaintext); it now fails.
   Note: append_event.py is 338 lines (soft limit 300, hard 400); split validation out if it grows further.
+- 2026-09-30: INDEX #18 write_checkpoint and #19 verify_chain.
+  - Signed message frozen, with signing_key_id carrying the key version.
+  - The witness is the trust anchor: a DB checkpoint absent from the witness = tampering; a witness entry absent
+    from the DB = warning (crash window).
+  - Streams never checkpointed are checkpointed on the next round (the checkpointer cannot read event times).
+
+  Tamper suite (gate 3): edited ciphertext, edited header, deleted row, reordered rows, and a full rewrite with
+  recomputed seals (caught ONLY by the checkpoint); untrusted key and altered signature caught. A destroyed master
+  key still verifies (gate 4, chain side). Mutations: checkpoint-on-chain → 1 fail; seal recompute → 2 fail;
+  signature check → 1 fail.
