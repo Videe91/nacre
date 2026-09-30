@@ -87,16 +87,22 @@ def _rng(seed: int, name: str) -> random.Random:
     return random.Random(int.from_bytes(hashlib.sha256(f"{seed}|{name}".encode()).digest()[:8], "big"))
 
 
-def build(seed: int = 20260930, per_generator: int = 50, contexts=None) -> list[Sample]:
+def build(seed: int = 20260930, per_generator: int = 50, contexts=None,
+          embed_documents: bool = False, cover_all_contexts: bool = False) -> list[Sample]:
     """Every registered generator, `per_generator` samples each, deterministic for a given seed.
-    Default = the WORKING set. The holdout is build_holdout()."""
+    Default = the WORKING set. embed_documents: multi-line documents (PEM, .env) are embedded in the
+    contexts too. cover_all_contexts: every generator yields at least one sample per context
+    (D-0011 amendment 5: every covered rule in every embedding context)."""
     contexts = contexts or CONTEXTS
     samples = []
     for name in sorted(GENERATORS):
         g, rng = GENERATORS[name], _rng(seed, name)
-        for i in range(g.count or per_generator):
+        n = g.count or per_generator
+        if cover_all_contexts:
+            n = max(n, len(contexts))
+        for i in range(n):
             value = g.make(rng)
-            text = contexts[i % len(contexts)](value) if g.embed else value
+            text = contexts[i % len(contexts)](value) if (g.embed or embed_documents) else value
             samples.append(Sample(g.category, g.provider, g.kind, g.expected, text,
                                   None if g.expected == "negative" else _secret_of(value, g)))
     return samples
