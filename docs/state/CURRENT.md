@@ -19,6 +19,8 @@ committing and pushing after each.
   #3 `schema/apply_migrations.py` + SQL 0001–0003, #2c `core/encode_cbor.py`, #2d `core/decode_cbor.py`, #4 `ledger/encode_envelope.py`, #5 `ledger/seal_event.py`, #3d `sql/0004_checkpoints.sql`.
 - Next: #6 with the corpus (provider-format research in hand, see evidence/A-0010-provider-formats.md), then 14, 7, 8.
 - To run DB tests: `docker compose up -d --wait`, then `pytest`.
+- **Owner tool:** `scripts/measure_token_format.py` measures real tokens' prefix/length/charset without
+  printing them (D-0007 amendment 4). Run locally; paste only its suggested ASSUMPTIONS row back.
 - **Every clone:** `git config core.hooksPath scripts/hooks` (D-0010 pre-commit secret scan; needs `.venv`
   with `google-re2`). Temporary scanner `scripts/scan_staged_secrets.py` is replaced by #6.
 
@@ -184,3 +186,7 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   file is still caught. Finding for #6: the private-key rule redacts docs that merely quote PEM labels,
   so it is an FP source to measure.
 - 2026-09-30: D-0007 amendment 4 (no-doc providers unmeasured + generic-layer measurement; owner-measured facts via local script, SDK check before fallback; public credentials neutral, not stripped, tagged; look-alike rules).
+- 2026-09-30: `scripts/measure_token_format.py` for the owner. It never prints token-derived characters:
+  the prefix shown is the one the owner typed, confirmed yes/no. Tests assert no 4-char substring of any
+  token appears in the output, including prefix-less hex tokens. Mutation: reporting the token's first
+  10 chars as the prefix → 4 fail.
