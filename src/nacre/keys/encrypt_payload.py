@@ -4,7 +4,7 @@ Functionality: Everything the write path does with a data key: encrypt an event 
 Owns: body validation (D-0008 body map v1), the ciphertext header, the AAD, the per-key encryption
   count and its 2^28 cap, and HKDF sub-keys for request_mac / attachment_ref.
 Public entry: encrypt_payload(), derive_mac()
-Decisions: D-0002, D-0004, D-0008
+Decisions: D-0002, D-0004, D-0007, D-0008
 Assumptions: A-0015
 Notes: Ciphertext = version(0x01) | algorithm(0x01, AES-256-GCM) | flags(0x00) | key_id(16) | nonce(12) | ct+tag.
   AAD = encode_envelope(AAD fields) | header bytes 0-2 (D-0008): the event's identity, type and
@@ -31,7 +31,8 @@ from nacre.ledger.encode_envelope import Purpose, encode_envelope
 
 FORMAT_VERSION, ALGORITHM_AES_256_GCM, FLAGS_V1 = 0x01, 0x01, 0x00
 HEADER_BYTES = 3 + 16 + 12
-_BODY_KEYS = {"content_version", "content", "person", "source_ref", "attachment", "redactions"}
+_BODY_KEYS = {"content_version", "content", "person", "source_ref", "attachment", "redactions",
+              "public_credentials"}  # D-0008 amendment 5: optional
 _PERSON_KEYS = {"name", "handle", "email"}
 _ATTACHMENT_KEYS = {"description", "media_type"}
 
@@ -95,9 +96,9 @@ def _validate_body(body: object) -> None:
     _check_map(body, "attachment", _ATTACHMENT_KEYS)
     if "source_ref" in body and type(body["source_ref"]) is not str:
         raise EncryptError("source_ref must be text")
-    if "redactions" in body and (type(body["redactions"]) is not list
-                                 or any(type(r) is not str for r in body["redactions"])):
-        raise EncryptError("redactions must be a list of rule ids")
+    for name in ("redactions", "public_credentials"):
+        if name in body and (type(body[name]) is not list or any(type(r) is not str for r in body[name])):
+            raise EncryptError(f"{name} must be a list of text")
 
 
 def _check_map(body: dict, name: str, allowed: set[str]) -> None:

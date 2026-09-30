@@ -82,9 +82,10 @@ def test_aad_must_name_this_key_and_stream(writer):
     ({"content_version": 1, "content": "x", "person": {"name": "Ada", "age": "36"}}, "person"),
     ({"content_version": 1, "content": "x", "attachment": {"description": 3}}, "attachment"),
     ({"content_version": 1, "content": "x", "redactions": ["ok", 7]}, "redactions"),
+    ({"content_version": 1, "content": "x", "public_credentials": "stripe-publishable"}, "public_credentials"),
     ({"content_version": 1, "content": "x", "source_ref": 5}, "source_ref"),
     (["not", "a", "map"], "must be a dict"),
-], ids=["no-version", "version-0", "no-content", "extra-key", "person-key", "attachment-type", "redaction-type",
+], ids=["no-version", "version-0", "no-content", "extra-key", "person-key", "attachment-type", "redaction-type", "public-cred-type",
         "source-type", "not-a-map"])
 def test_body_rules(writer, body, match):
     s, key = writer
@@ -119,3 +120,18 @@ def test_unknown_mac_purpose(writer):
     _, key = writer
     with pytest.raises(EncryptError):
         derive_mac(key, "request_mac", b"x")
+
+
+def test_public_credentials_is_optional_and_absence_encodes_as_before():
+    # D-0008 amendment 5, owner condition: a body without the key is byte-identical to before.
+    from nacre.core.encode_cbor import encode_cbor
+    body = {"content_version": 1, "content": "the build is green", "source_ref": "ci:run-42"}
+    assert encode_cbor(body).hex() == "a367636f6e74656e7472746865206275696c6420697320677265656e6a736f757263655f7265666963693a72756e2d34326f636f6e74656e745f76657273696f6e01"   # frozen before the amendment
+    tagged = {**body, "public_credentials": ["stripe-publishable"]}
+    assert encode_cbor(tagged) != encode_cbor(body)
+
+
+def test_tagged_body_round_trips(writer):
+    s, key = writer
+    ct = encrypt_payload(s.conn, key, aad(key), {**BODY, "public_credentials": ["sentry-dsn-public"]})
+    assert ct[:3] == b"\x01\x01\x00"

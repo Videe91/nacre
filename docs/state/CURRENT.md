@@ -70,6 +70,34 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
     checksums).
   - **Undocumented prefixes seen in provider code** (not generated): cfoat_, sk-ant-req-, ek_, rkcs, uk_,
     sntrya_, sntryi_.
+- Resolved 2026-09-30: public-credential tag = optional encrypted body key (D-0008 amendment 5); owner-measured examples for the generic layer only; the seven undocumented prefixes are prefix-only (D-0007 amendment 5).
+- **#6 provider coverage, state after verification (evidence/A-0010-format-verification.md).**
+  - **Generated now** (fully documented by the provider): GitHub classic + ghs stateless; GitLab legacy +
+    routable (exact CRC); PyPI (V2 macaroon); Heroku HRKU-UUID form; Supabase sb_secret / sb_publishable
+    (exact checksum), legacy service_role / anon JWTs; Sentry sntryu_ / sntrys_, DSN public vs legacy.
+  - **Waiting for owner-measured facts** (one documented fact missing):
+    - Cloudflare cfk_ / cfut_ / cfat_: charset and checksum length.
+    - Cloudflare cfast_: checksum charset.
+    - Replicate r8_: charset.
+    - Heroku 65-char form: charset.
+    - SendGrid SG.: part lengths and charset.
+    - Shopify shpat_ / shpca_ / shppa_ / shpss_: charset. The only "hex" statement is a Shopify CLI comment
+      that cites gitleaks, which fails the independence rule.
+  - **Prefix-only**, SDKs checked and no length or charset validation found: Stripe, Slack, Anthropic,
+    OpenAI admin, Hugging Face, DigitalOcean, npm, Docker Hub, Vercel, Netlify, Notion, GitHub fine-grained,
+    Google AIza, AWS, Datadog. Useful SDK facts:
+    - Stripe CLI: ≥ 12 chars, three '_' parts, extra prefix `rkcs`.
+    - npm redaction: npm_/npms_ + 36–48 alnum.
+    - Vercel CLI: token charset [A-Za-z0-9_].
+    - AWS models: key ID 16–128 word chars.
+    - Datadog agent scrubber: 32-hex API keys, 40-hex app keys.
+
+    All of these need the measuring script (owner).
+  - **GitHub checksum gap:** GitHub does not publish the CRC32 input bytes or the Base62 alphabet order,
+    so the corpus uses 6 random base62 chars. This does not affect catch rates (rules don't validate
+    checksums).
+  - **Undocumented prefixes seen in provider code** (not generated): cfoat_, sk-ant-req-, ek_, rkcs, uk_,
+    sntrya_, sntryi_.
 - **Where the "public credential" tag lives (proposal; needs owner approval, D2).** D-0007 amendment 4 tags
   public values in metadata, but D-0008 fixes the body map's v1 keys. Proposal: a D-0008 amendment
   adding one optional body key, `public_credentials`: an array of `{kind, span}`, encrypted like the
@@ -250,3 +278,4 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   First run: 1 test bug (split the Supabase checksum on '_', which base64url may contain; now parsed by
   position). Mutations: GitLab CRC without prefix → 1 fail; anon generator emitting service_role → 1 fail.
   Corpus sha256 686f67…b175. Results: pytest (corpus) 32 passed.
+- 2026-09-30: D-0008 amendment 5 (optional public_credentials body key), D-0007 amendment 5.

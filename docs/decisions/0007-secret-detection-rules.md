@@ -59,6 +59,15 @@
        `service_role` is secret.
      - Stripe `pk_` (public) vs `sk_` / `rk_` (secret).
      - Modern Sentry DSNs (public key only) vs legacy DSNs carrying a secret part (secret).
+5. **2026-09-30 — owner-measured examples and undocumented prefixes.**
+   - **No official format:** realistic examples are built from owner-measured facts (the measuring
+     script), for the **generic-layer measurement only**. They are labelled **"owner-measured"** and
+     never produce a per-provider catch rate.
+   - **Owner handling:** tokens are throwaway, minimum-permission, and revoked after measuring. Only
+     the printed rows come back.
+   - **The seven undocumented prefixes seen in provider code** (cfoat_, sk-ant-req-, ek_, rkcs, uk_,
+     sntrya_, sntryi_): treated as prefix-only. They are measured if the owner holds such tokens,
+     otherwise listed as unmeasured.
 
 ## Context
 D-0002 requires secrets to be stripped before any write. A-0010 sets the bar: at least 99% caught

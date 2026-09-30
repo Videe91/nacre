@@ -18,6 +18,19 @@
    - **Tests:** `cbor2` as a test-only cross-check, `hypothesis` round-trip tests (test-only),
      and frozen byte vectors.
 
+## Amendments after acceptance (owner-directed; additive, no accepted text changed)
+5. **2026-09-30 — optional `public_credentials` body key** (D-0007 amendment 4: public credentials are
+   not stripped but tagged).
+   - **Shape:** `public_credentials`: array of text, the public-credential kinds found in `content`
+     (e.g. `stripe-publishable`, `supabase-anon-jwt`, `sentry-dsn-public`). It is encrypted with the
+     rest of the body, so which public values an event holds is not plaintext either.
+   - **Owner conditions:**
+     1. Optional: a body without the key encodes and decodes exactly as before. No body version bump is
+        needed, and `content_version` is unchanged.
+     2. All frozen byte vectors pass unchanged.
+   - **Checks:** the codec is untouched (the frozen CBOR and envelope vectors are unchanged), and a test
+     shows a body without the key round-trips byte-identically before and after the amendment.
+
 ## Context
 D-0002 left the byte format of `body_ciphertext` open. It is a persistence format: every event
 ever written must stay decryptable, and `request_mac` (idempotency) is computed over the plaintext
@@ -99,6 +112,7 @@ key** with a counter (A-0015). Monthly data keys (D-0004) keep real use far belo
   | `source_ref` | text | Optional |
   | `attachment` | map | Optional; `description`, `media_type` |
   | `redactions` | array of text | Optional; D-0007 rule ids |
+  | `public_credentials` | array of text | Optional; amendment 5 |
 
 **Compression:** none in v1. The flag bit is reserved; a future ADR names the algorithm and sets it.
 
