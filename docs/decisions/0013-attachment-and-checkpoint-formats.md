@@ -1,12 +1,20 @@
 # D-0013: Attachment blob format and checkpoint signature format
 
-- **Status:** proposed — awaiting owner approval (blocks INDEX #15, #15a, #18, #19)
+- **Status:** accepted (owner, 2026-09-30, with additions below)
 - **Tier:** D2 (persistence formats)
 - **Date:** 2026-09-30
 - **Relies on assumptions:** A-0008, A-0013, A-0015
 - **Related:** D-0002 (`attachment_ref`, `attachment_sha256`), D-0003 (checkpoints: cadence, separate process,
   key outside the DB), D-0004 (attachments under the event's data key, dedup within that key), D-0005 amendment 2
   (checkpointer role), D-0006 (local disk behind an interface), D-0008 (body ciphertext format)
+
+## Amendment history (owner additions, before acceptance)
+1. **Attachments are written before the event commits.** Orphan files are harmless and garbage-collected; an event
+   must never point to a missing file.
+2. **Every attachment read verifies its fingerprint:** the stored blob against `attachment_sha256`, and the
+   plaintext against `attachment_ref`. The 16 MiB Phase 1 limit stands.
+3. **Every checkpoint carries its signing-key version** (`signing_key_id`, part of the signed bytes).
+4. **Assumption A-0020:** the witness file moves off-machine later (separate storage or a write-once bucket).
 
 ## Context
 Two stored formats are named by accepted ADRs but not specified byte for byte:
@@ -28,7 +36,7 @@ Two stored formats are named by accepted ADRs but not specified byte for byte:
    second format to own. Not needed while Phase 1 attachments are small.
 3. **Store attachments inline in the body.** Contradicts SPEC ("keeps the ledger fast") and D-0006.
 
-### Proposed: option 1
+### Decision: option 1
 - **Layout and AAD:** as in option 1.
 - **Ref:** `attachment_ref` = HMAC-SHA256 under the data key's `attachment_ref` sub-key (D-0004); it doubles as
   the blob store key. `attachment_sha256` = SHA-256 of the stored blob bytes.
@@ -50,7 +58,7 @@ Two stored formats are named by accepted ADRs but not specified byte for byte:
 2. **Sign a JSON document.** Readable, but has canonicalisation pitfalls.
 3. **Sign the Postgres row text.** Postgres output formatting is not a contract.
 
-### Proposed: option 1, plus
+### Decision: option 1, plus
 - **Signing key file:** a 32-byte raw Ed25519 private seed in a 0600 file outside the repo and DB, read only by the
   checkpointer. The same permission rule as root keys: loose permissions are refused.
   - `signing_key_id` = the first 16 hex chars of SHA-256 of the raw public key.

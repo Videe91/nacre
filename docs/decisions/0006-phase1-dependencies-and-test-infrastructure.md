@@ -5,6 +5,12 @@
 - **Date:** 2026-09-30
 - **Relies on assumptions:** A-0002, A-0016
 
+## Amendments after acceptance (owner-directed)
+1. **2026-09-30 — `psycopg_pool` adopted** (`psycopg[pool]`) as the production connection setup.
+   - **Condition:** scope settings stay transaction-local (D-0005).
+   - **Test:** a pooled connection must never carry scope between principals.
+   - A-0007 is re-measured with the pool.
+
 ## Context
 D-0002 to D-0005 need a Postgres driver, AES-GCM/HKDF/Ed25519, a Postgres to test RLS against
 (RLS can't be faked), a Python with `uuid.uuid7`, and somewhere to put attachments.

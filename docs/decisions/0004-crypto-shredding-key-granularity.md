@@ -67,6 +67,9 @@
      - A-0008's extended test covers person and month erasure.
      - A crash test kills the rotation job mid-way and proves that resuming loses no surviving data key.
 
+8. **2026-09-30 — cadence superseded by D-0014 amendment 2:** root rotation runs **weekly**, plus on demand when a
+   grace period ends. Grace period plus rotation completes within 30 days.
+
 ## Context
 SPEC open decision: "Crypto-shredding key granularity: per user, per project, or per memory."
 The hard case none of those alone covers: erasing **one person's contributions inside a shared

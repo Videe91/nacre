@@ -1,12 +1,24 @@
 # D-0014: Shredding authority, key-administration roles, and rotation mechanics
 
-- **Status:** proposed — awaiting owner approval (D3: privacy and security boundary)
+- **Status:** accepted (owner, 2026-09-30, explicit D3 approval, with the safety net below)
 - **Tier:** D3 (who may destroy keys, and through which database roles), with D2 parts (audit event formats)
 - **Date:** 2026-09-30
 - **Relies on assumptions:** A-0008, A-0012
 - **Related:** D-0004 (amendments 4, 6, 7: key hierarchy, finality at root rotation, master rotation after data-key
   shreds), D-0005 (roles, RLS, S-1..S-3, C-1..C-6), D-0003 (append path), D-0012 (trust)
 - **Blocks:** INDEX #20 shred_keys, #20a rotate_root_key, #20b rotate_master_key, #21 delete_scope
+
+## Amendment history (owner safety net, before acceptance)
+1. **Requests, then execution after a grace period.** Destructive actions (delete scope, erase person, forget period)
+   are first recorded as **requests**. Key destruction happens only after a **7-day grace period**, cancellable by
+   any org admin. Request, cancellation and execution are all ledger events.
+2. **Grace period plus root rotation within 30 days.** Root rotation runs **weekly**, plus on demand when a grace
+   period ends (this supersedes D-0004 amendment 6's "at least monthly").
+3. **Self-erasure executes automatically** after the grace period, unless an org admin places an explicit,
+   recorded, **time-limited legal hold**. The hold is a ledger event with an expiry; when it expires, execution
+   proceeds.
+4. Everything else stands as proposed: the keyadmin role, operator-only root rotation, single-transaction master
+   rotation, rotation needs derived from the ledger, and audit events per org.
 
 ## Context
 D-0004 fixes WHAT shredding and rotation do. No ADR fixes WHO may do them, THROUGH WHICH database role, or HOW
@@ -28,7 +40,7 @@ the audit trail is written. Today's roles cannot express the operations:
 3. **Do it all as the DB admin (superuser).** Simplest, but no least-privilege boundary and invisible in RLS
    terms. Rejected.
 
-## Proposed decision: option 2
+## Decision: option 2
 
 ### Role `nacre_keyadmin` (migration, with invariants tested like S-1 and C-1..C-6)
 - SELECT, UPDATE(`wrapped_key`, `root_key_version`), DELETE on `keys.stream_master_keys`.

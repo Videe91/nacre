@@ -47,13 +47,13 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   comparison to the owner as part of A-0017.
 
 ## Open questions
-- **D-0014 PROPOSED (D3; blocks #20, #20a, #20b, #21):** a `nacre_keyadmin` role (key tables and scope registry
-  only, never events); who may delete scopes, erase people, forget periods, and rotate the root; audit events;
-  single-transaction master rotation; "marked" derived from the ledger; root-rotation audit per org stream.
-- **D-0013 PROPOSED (blocks #15, #15a, #18, #19):** attachment blob byte format and disk layout; checkpoint signed
-  message, signing-key file, external JSON Lines witness file. #16 read_stream and #17 replay_cycle proceed meanwhile.
+- Resolved 2026-09-30:
+  - D-0013 accepted: attachments are written before commit and fingerprint-verified on every read; checkpoints
+    carry the key version; A-0020 added.
+  - D-0014 accepted: 7-day cancellable grace; weekly root rotation; grace + rotation ≤ 30 days; self-erasure is
+    automatic unless an org admin places a time-limited legal hold.
+  - psycopg_pool adopted (D-0006 amendment 1).
 - Resolved 2026-09-30: A-0007 rescoped (≤ 4 writers p99 < 50 ms; 16-writer stress ceiling 150 ms), met unpooled; A-0019 added (remedy = group commit).
-- **Pending (owner):** choose a connection pool (or none); A-0007 is re-measured afterwards.
 - Resolved 2026-09-30: D-0012 accepted with owner corrections (trust by source + author, trust_basis, key rules, original-erased error); D-0002 amendment 4 (envelope v2).
 - **PHASE 3 GATE ITEM (owner, 2026-09-30): credential-slot target.** Before real agent data flows through the
   interface, set a target for "random value in a credential slot" (H3: 54–72%) and raise it, measured on a
@@ -415,3 +415,4 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
 
   Gate item 2 is tested (AS_OF(3) identical after 10 later commits). Mutations: beyond-head check removed →
   1 fail; ordered by time instead of commit_seq → 3 fail.
+- 2026-09-30: D-0013 and D-0014 accepted with owner additions; D-0006 amendment 1 (psycopg_pool); D-0004 amendment 8 (weekly root rotation); A-0020.
