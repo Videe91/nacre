@@ -1,0 +1,8221 @@
+{
+ "rules": [
+  {
+   "id": "1password-secret-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 0.0003502909967210144,
+     "probe": "near-miss[0]"
+    },
+    "re_ascii": {
+     "seconds": 0.00037641699600499123,
+     "probe": "near-miss[0]"
+    },
+    "re2": {
+     "seconds": 0.0001168750022770837,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "1password-service-account-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 5.270801193546504e-05,
+     "probe": "near-miss[0]"
+    },
+    "re_ascii": {
+     "seconds": 5.220901221036911e-05,
+     "probe": "near-miss[0]"
+    },
+    "re2": {
+     "seconds": 0.00013854200369678438,
+     "probe": "half-prefix[2]"
+    }
+   }
+  },
+  {
+   "id": "adafruit-api-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 23,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 58 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.015997583002899773,
+     "probe": "kw[adafruit]+a"
+    },
+    "re_ascii": {
+     "seconds": 0.014952917001210153,
+     "probe": "run['a']"
+    },
+    "re2": {
+     "seconds": 0.00024212499556597322,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "adobe-client-id",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 23,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 55 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.014573250009561889,
+     "probe": "kw[adobe]+a"
+    },
+    "re_ascii": {
+     "seconds": 0.014841542011708952,
+     "probe": "run['a']"
+    },
+    "re2": {
+     "seconds": 0.00022604200057685375,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "adobe-client-secret",
+   "compile": {
+    "re": "PatternError: global flags not at the start of the expression at position 7",
+    "re_ascii": "PatternError: global flags not at the start of the expression at position 7",
+    "re2": null
+   },
+   "compiled": {
+    "re": false,
+    "re_ascii": false,
+    "re2": true
+   },
+   "positives": 0,
+   "span_diff_docs": {},
+   "span_diff_example": {},
+   "worst": {
+    "re2": {
+     "seconds": 0.00013995800691191107,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "age-secret-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 4.891700518783182e-05,
+     "probe": "near-miss[0]"
+    },
+    "re_ascii": {
+     "seconds": 5.2916991990059614e-05,
+     "probe": "near-miss[1]"
+    },
+    "re2": {
+     "seconds": 0.00021225000091362745,
+     "probe": "run['A']"
+    }
+   }
+  },
+  {
+   "id": "airtable-api-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 27,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 41 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.022083999996539205,
+     "probe": "run['A']"
+    },
+    "re_ascii": {
+     "seconds": 0.015957249997882172,
+     "probe": "kw[airtable]+a"
+    },
+    "re2": {
+     "seconds": 0.0002439170057186857,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "airtable-personnal-access-token",
+   "compile": {
+    "re": "warning: Possible nested set at position 7",
+    "re_ascii": "warning: Possible nested set at position 7",
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 30,
+    "re_ascii": 30
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    },
+    "re_ascii": {
+     "re_ascii": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.0002479999966453761,
+     "probe": "near-miss[0]"
+    },
+    "re_ascii": {
+     "seconds": 0.0003464170004008338,
+     "probe": "near-miss[1]"
+    },
+    "re2": {
+     "seconds": 0.00013179199595469981,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "algolia-api-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 23,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 58 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.017328333997284062,
+     "probe": "run['a']"
+    },
+    "re_ascii": {
+     "seconds": 0.015027916990220547,
+     "probe": "kw[algolia]+a"
+    },
+    "re2": {
+     "seconds": 0.00023529199825134128,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "alibaba-access-key-id",
+   "compile": {
+    "re": "PatternError: global flags not at the start of the expression at position 7",
+    "re_ascii": "PatternError: global flags not at the start of the expression at position 7",
+    "re2": null
+   },
+   "compiled": {
+    "re": false,
+    "re_ascii": false,
+    "re2": true
+   },
+   "positives": 0,
+   "span_diff_docs": {},
+   "span_diff_example": {},
+   "worst": {
+    "re2": {
+     "seconds": 0.00013329199282452464,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "alibaba-secret-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 20,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 56 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.014505042010569014,
+     "probe": "run['A']"
+    },
+    "re_ascii": {
+     "seconds": 0.015103624988114461,
+     "probe": "kw[alibaba]+a"
+    },
+    "re2": {
+     "seconds": 0.0002284579968545586,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "anthropic-admin-api-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 7,
+    "re_ascii": 1
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    },
+    "re_ascii": {
+     "re_ascii": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.00025154100148938596,
+     "probe": "kw[sk-ant-admin01] repeated"
+    },
+    "re_ascii": {
+     "seconds": 0.0002537079999456182,
+     "probe": "half-prefix[2]"
+    },
+    "re2": {
+     "seconds": 0.00013770800433121622,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "anthropic-api-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 7,
+    "re_ascii": 1
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    },
+    "re_ascii": {
+     "re_ascii": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.00026695799897424877,
+     "probe": "kw[sk-ant-api03] repeated"
+    },
+    "re_ascii": {
+     "seconds": 0.0002494590007700026,
+     "probe": "kw[sk-ant-api03] repeated"
+    },
+    "re2": {
+     "seconds": 0.00015474999963771552,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "artifactory-api-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 0.00023804200463928282,
+     "probe": "run['A']"
+    },
+    "re_ascii": {
+     "seconds": 0.00028912500420119613,
+     "probe": "near-miss[1]"
+    },
+    "re2": {
+     "seconds": 0.00012529100058600307,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "artifactory-reference-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 0.0002592920063761994,
+     "probe": "run['x']"
+    },
+    "re_ascii": {
+     "seconds": 0.00029491599707398564,
+     "probe": "near-miss[2]"
+    },
+    "re2": {
+     "seconds": 0.00012229199637658894,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "asana-client-id",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 27,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 39 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.022635333996731788,
+     "probe": "kw[asana]+a"
+    },
+    "re_ascii": {
+     "seconds": 0.015085834005731158,
+     "probe": "kw[asana]+a"
+    },
+    "re2": {
+     "seconds": 0.00023291699471883476,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "asana-client-secret",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 24,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 57 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.023071791991242208,
+     "probe": "run['a']"
+    },
+    "re_ascii": {
+     "seconds": 0.015171500010183081,
+     "probe": "run['a']"
+    },
+    "re2": {
+     "seconds": 0.00023008299467619509,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "atlassian-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 19,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 44 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.07357845899241511,
+     "probe": "run['A']"
+    },
+    "re_ascii": {
+     "seconds": 0.07203770898922812,
+     "probe": "run['A']"
+    },
+    "re2": {
+     "seconds": 0.0002927499881479889,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "authress-service-client-access-key",
+   "compile": {
+    "re": "PatternError: global flags not at the start of the expression at position 30",
+    "re_ascii": "PatternError: global flags not at the start of the expression at position 30",
+    "re2": null
+   },
+   "compiled": {
+    "re": false,
+    "re_ascii": false,
+    "re2": true
+   },
+   "positives": 0,
+   "span_diff_docs": {},
+   "span_diff_example": {},
+   "worst": {
+    "re2": {
+     "seconds": 0.00014679200830869377,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "aws-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 0.0002896249934565276,
+     "probe": "near-miss[0]"
+    },
+    "re_ascii": {
+     "seconds": 0.0004530000005615875,
+     "probe": "near-miss[1]"
+    },
+    "re2": {
+     "seconds": 0.00011758400069084018,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "aws-amazon-bedrock-api-key-long-lived",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 2,
+    "re_ascii": 1
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    },
+    "re_ascii": {
+     "re_ascii": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.00022183400869835168,
+     "probe": "run['0']"
+    },
+    "re_ascii": {
+     "seconds": 0.000272749995929189,
+     "probe": "half-prefix[2]"
+    },
+    "re2": {
+     "seconds": 0.00011937500676140189,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "aws-amazon-bedrock-api-key-short-lived",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 2.7292000595480204e-05,
+     "probe": "run['a']"
+    },
+    "re_ascii": {
+     "seconds": 3.0459006666205823e-05,
+     "probe": "run['a']"
+    },
+    "re2": {
+     "seconds": 6.491600652225316e-05,
+     "probe": "near-miss[2]"
+    }
+   }
+  },
+  {
+   "id": "azure-ad-client-secret",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 17,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 39 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.0008195409900508821,
+     "probe": "run['\\n']"
+    },
+    "re_ascii": {
+     "seconds": 0.0008206250058719888,
+     "probe": "run[' ']"
+    },
+    "re2": {
+     "seconds": 0.00013862499326933175,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "beamer-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 69 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.01330866600619629,
+     "probe": "half-prefix[0]"
+    },
+    "re_ascii": {
+     "seconds": 0.013025541004026309,
+     "probe": "run['_']"
+    },
+    "re2": {
+     "seconds": 0.00018200000340584666,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "bitbucket-client-id",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 24,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 59 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013251249998575076,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.013580041995737702,
+     "probe": "run['x']"
+    },
+    "re2": {
+     "seconds": 0.000149500003317371,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "bitbucket-client-secret",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 21,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.01748879200022202,
+     "probe": "half-prefix[1]"
+    },
+    "re_ascii": {
+     "seconds": 0.015414833993418142,
+     "probe": "half-prefix[1]"
+    },
+    "re2": {
+     "seconds": 0.00015862500004004687,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "bittrex-access-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 24,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 58 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013261416999739595,
+     "probe": "run['0']"
+    },
+    "re_ascii": {
+     "seconds": 0.013520915992558002,
+     "probe": "run['x']"
+    },
+    "re2": {
+     "seconds": 0.00016420800238847733,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "bittrex-secret-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 24,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 58 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013515208993339911,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.012585749995196238,
+     "probe": "run['f']"
+    },
+    "re2": {
+     "seconds": 0.000151833999552764,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "cisco-meraki-api-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 65 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 1.2042673749965616,
+     "probe": "run['0']"
+    },
+    "re_ascii": {
+     "seconds": 1.1488365410041297,
+     "probe": "run['0']"
+    },
+    "re2": {
+     "seconds": 0.00021187499805819243,
+     "probe": "kw[meraki]+a"
+    }
+   }
+  },
+  {
+   "id": "clickhouse-cloud-api-secret-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 0.0002534590021241456,
+     "probe": "run['A']"
+    },
+    "re_ascii": {
+     "seconds": 0.00029195800016168505,
+     "probe": "near-miss[1]"
+    },
+    "re2": {
+     "seconds": 0.0001478750054957345,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "clojars-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 0.00031708400638308376,
+     "probe": "half-prefix[2]"
+    },
+    "re_ascii": {
+     "seconds": 0.0003652079903986305,
+     "probe": "half-prefix[2]"
+    },
+    "re2": {
+     "seconds": 9.845801105257124e-05,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "cloudflare-api-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 20,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 65 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.015407667000545189,
+     "probe": "half-prefix[2]"
+    },
+    "re_ascii": {
+     "seconds": 0.012940417000208981,
+     "probe": "kw[cloudflare]+a"
+    },
+    "re2": {
+     "seconds": 0.00015899998834356666,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "cloudflare-global-api-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 63 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013406457990640774,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.012489457993069664,
+     "probe": "run['a']"
+    },
+    "re2": {
+     "seconds": 0.0001564999984111637,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "cloudflare-origin-ca-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 4,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.00028862500039394945,
+     "probe": "kw[v1.0-] repeated"
+    },
+    "re_ascii": {
+     "seconds": 0.0003349999897181988,
+     "probe": "near-miss[2]"
+    },
+    "re2": {
+     "seconds": 0.00013887500972487032,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "codecov-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 26,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 58 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.01357145799556747,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.01248679200944025,
+     "probe": "run['a']"
+    },
+    "re2": {
+     "seconds": 0.00019299999985378236,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "cohere-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 27,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 65 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 1.2110942089930177,
+     "probe": "run['0']"
+    },
+    "re_ascii": {
+     "seconds": 1.212695583992172,
+     "probe": "run['_']"
+    },
+    "re2": {
+     "seconds": 0.00017920800019055605,
+     "probe": "kw[cohere]+a"
+    }
+   }
+  },
+  {
+   "id": "coinbase-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 27,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.01675358299689833,
+     "probe": "half-prefix[2]"
+    },
+    "re_ascii": {
+     "seconds": 0.012490458000684157,
+     "probe": "run['a']"
+    },
+    "re2": {
+     "seconds": 0.00021554100385401398,
+     "probe": "kw[coinbase]+a"
+    }
+   }
+  },
+  {
+   "id": "confluent-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 25,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 41 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.014463916013482958,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.012775875002262183,
+     "probe": "run['a']"
+    },
+    "re2": {
+     "seconds": 0.00015395799709949642,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "confluent-secret-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.01355058400076814,
+     "probe": "half-prefix[1]"
+    },
+    "re_ascii": {
+     "seconds": 0.013590791000751778,
+     "probe": "half-prefix[1]"
+    },
+    "re2": {
+     "seconds": 0.0001707500050542876,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "contentful-delivery-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 22,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 68 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013239417006843723,
+     "probe": "run['0']"
+    },
+    "re_ascii": {
+     "seconds": 0.013644416991155595,
+     "probe": "run['x']"
+    },
+    "re2": {
+     "seconds": 0.00019779200374614447,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "curl-auth-header",
+   "compile": {
+    "re": "PatternError: global flags not at the start of the expression at position 86",
+    "re_ascii": "PatternError: global flags not at the start of the expression at position 86",
+    "re2": null
+   },
+   "compiled": {
+    "re": false,
+    "re_ascii": false,
+    "re2": true
+   },
+   "positives": 0,
+   "span_diff_docs": {},
+   "span_diff_example": {},
+   "worst": {
+    "re2": {
+     "seconds": 0.00017862499225884676,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "curl-auth-user",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 25,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 15 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": Infinity,
+     "probe": "TIMEOUT:half-prefix[1]"
+    },
+    "re_ascii": {
+     "seconds": Infinity,
+     "probe": "TIMEOUT:half-prefix[1]"
+    },
+    "re2": {
+     "seconds": 0.003941833012504503,
+     "probe": "near-miss[1]"
+    }
+   }
+  },
+  {
+   "id": "databricks-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 17,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 39 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.000269667012616992,
+     "probe": "kw[dapi] repeated"
+    },
+    "re_ascii": {
+     "seconds": 0.00033170801179949194,
+     "probe": "near-miss[2]"
+    },
+    "re2": {
+     "seconds": 0.00016004098870325834,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "datadog-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 65 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013688250008272007,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.01260379199811723,
+     "probe": "run['0']"
+    },
+    "re2": {
+     "seconds": 0.00015345799329224974,
+     "probe": "kw[datadog]+a"
+    }
+   }
+  },
+  {
+   "id": "defined-networking-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 27,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.023319833999266848,
+     "probe": "half-prefix[0]"
+    },
+    "re_ascii": {
+     "seconds": 0.020766083005582914,
+     "probe": "half-prefix[0]"
+    },
+    "re2": {
+     "seconds": 0.0001667079923208803,
+     "probe": "half-prefix[0]"
+    }
+   }
+  },
+  {
+   "id": "digitalocean-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 6,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 72 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.0002533330116420984,
+     "probe": "run['0']"
+    },
+    "re_ascii": {
+     "seconds": 0.00033191700640600175,
+     "probe": "near-miss[2]"
+    },
+    "re2": {
+     "seconds": 0.0001548329892102629,
+     "probe": "near-miss[2]"
+    }
+   }
+  },
+  {
+   "id": "digitalocean-pat",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 6,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 72 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.00024120899615809321,
+     "probe": "near-miss[2]"
+    },
+    "re_ascii": {
+     "seconds": 0.000331000002915971,
+     "probe": "near-miss[2]"
+    },
+    "re2": {
+     "seconds": 0.00014525000005960464,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "digitalocean-refresh-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 2,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 72 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.0003871669905493036,
+     "probe": "near-miss[2]"
+    },
+    "re_ascii": {
+     "seconds": 0.0003857500123558566,
+     "probe": "near-miss[2]"
+    },
+    "re2": {
+     "seconds": 0.0001433750003343448,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "discord-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 25,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.01362304099893663,
+     "probe": "half-prefix[1]"
+    },
+    "re_ascii": {
+     "seconds": 0.012835665998863988,
+     "probe": "run['x']"
+    },
+    "re2": {
+     "seconds": 0.0001508330024080351,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "discord-client-id",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 43 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013263665998238139,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.012610250007128343,
+     "probe": "run['x']"
+    },
+    "re2": {
+     "seconds": 0.00019587500719353557,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "discord-client-secret",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 21,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 57 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.016276333000860177,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.01272737501130905,
+     "probe": "run['A']"
+    },
+    "re2": {
+     "seconds": 0.00024504099565092474,
+     "probe": "kw[discord] repeated"
+    }
+   }
+  },
+  {
+   "id": "doppler-api-token",
+   "compile": {
+    "re": "PatternError: global flags not at the start of the expression at position 8",
+    "re_ascii": "PatternError: global flags not at the start of the expression at position 8",
+    "re2": null
+   },
+   "compiled": {
+    "re": false,
+    "re_ascii": false,
+    "re2": true
+   },
+   "positives": 0,
+   "span_diff_docs": {},
+   "span_diff_example": {},
+   "worst": {
+    "re2": {
+     "seconds": 9.841599967330694e-05,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "droneci-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 58 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.01325070799794048,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.012862916992162354,
+     "probe": "run['a']"
+    },
+    "re2": {
+     "seconds": 0.00016324999160133302,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "dropbox-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 27,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 40 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013701459000003524,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.015621416998328641,
+     "probe": "run['f']"
+    },
+    "re2": {
+     "seconds": 0.0001506669941591099,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "dropbox-long-lived-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.017831957986345515,
+     "probe": "half-prefix[1]"
+    },
+    "re_ascii": {
+     "seconds": 0.015530083008343354,
+     "probe": "half-prefix[1]"
+    },
+    "re2": {
+     "seconds": 0.00020645800395868719,
+     "probe": "kw[dropbox]+a"
+    }
+   }
+  },
+  {
+   "id": "dropbox-short-lived-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 27,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.020566707986290567,
+     "probe": "half-prefix[0]"
+    },
+    "re_ascii": {
+     "seconds": 0.01823912499821745,
+     "probe": "half-prefix[0]"
+    },
+    "re2": {
+     "seconds": 0.00016466699889861047,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "duffel-api-token",
+   "compile": {
+    "re": "PatternError: global flags not at the start of the expression at position 21",
+    "re_ascii": "PatternError: global flags not at the start of the expression at position 21",
+    "re2": null
+   },
+   "compiled": {
+    "re": false,
+    "re_ascii": false,
+    "re2": true
+   },
+   "positives": 0,
+   "span_diff_docs": {},
+   "span_diff_example": {},
+   "worst": {
+    "re2": {
+     "seconds": 0.00010895899322349578,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "dynatrace-api-token",
+   "compile": {
+    "re": "PatternError: global flags not at the start of the expression at position 8",
+    "re_ascii": "PatternError: global flags not at the start of the expression at position 8",
+    "re2": null
+   },
+   "compiled": {
+    "re": false,
+    "re_ascii": false,
+    "re2": true
+   },
+   "positives": 0,
+   "span_diff_docs": {},
+   "span_diff_example": {},
+   "worst": {
+    "re2": {
+     "seconds": 9.962498734239489e-05,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "easypost-api-token",
+   "compile": {
+    "re": "PatternError: global flags not at the start of the expression at position 6",
+    "re_ascii": "PatternError: global flags not at the start of the expression at position 6",
+    "re2": null
+   },
+   "compiled": {
+    "re": false,
+    "re_ascii": false,
+    "re2": true
+   },
+   "positives": 0,
+   "span_diff_docs": {},
+   "span_diff_example": {},
+   "worst": {
+    "re2": {
+     "seconds": 0.00013899999612476677,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "easypost-test-api-token",
+   "compile": {
+    "re": "PatternError: global flags not at the start of the expression at position 6",
+    "re_ascii": "PatternError: global flags not at the start of the expression at position 6",
+    "re2": null
+   },
+   "compiled": {
+    "re": false,
+    "re_ascii": false,
+    "re2": true
+   },
+   "positives": 0,
+   "span_diff_docs": {},
+   "span_diff_example": {},
+   "worst": {
+    "re2": {
+     "seconds": 0.00014529099280480295,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "etsy-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 27,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 47 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.02311612499761395,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.022586042003240436,
+     "probe": "kw[etsy]+a"
+    },
+    "re2": {
+     "seconds": 0.00017699999443721026,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "facebook-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 22,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 44 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.00032270899100694805,
+     "probe": "half-prefix[1]"
+    },
+    "re_ascii": {
+     "seconds": 0.00042633300472516567,
+     "probe": "half-prefix[1]"
+    },
+    "re2": {
+     "seconds": 0.00016604199481662363,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "facebook-page-access-token",
+   "compile": {
+    "re": "PatternError: global flags not at the start of the expression at position 10",
+    "re_ascii": "PatternError: global flags not at the start of the expression at position 10",
+    "re2": null
+   },
+   "compiled": {
+    "re": false,
+    "re_ascii": false,
+    "re2": true
+   },
+   "positives": 0,
+   "span_diff_docs": {},
+   "span_diff_example": {},
+   "worst": {
+    "re2": {
+     "seconds": 0.000167582998983562,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "facebook-secret",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 25,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 56 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.014437291989452206,
+     "probe": "run['f']"
+    },
+    "re_ascii": {
+     "seconds": 0.015254292011377402,
+     "probe": "run['f']"
+    },
+    "re2": {
+     "seconds": 0.00015345800784416497,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "fastly-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 27,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 56 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.014435750010306947,
+     "probe": "run['f']"
+    },
+    "re_ascii": {
+     "seconds": 0.015205333998892456,
+     "probe": "run['f']"
+    },
+    "re2": {
+     "seconds": 0.00017358300101477653,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "finicity-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 25,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 56 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.02173525000398513,
+     "probe": "run['f']"
+    },
+    "re_ascii": {
+     "seconds": 0.015474457992240787,
+     "probe": "run['f']"
+    },
+    "re2": {
+     "seconds": 0.00015395799709949642,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "finicity-client-secret",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 27,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 44 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.021739792005973868,
+     "probe": "run['f']"
+    },
+    "re_ascii": {
+     "seconds": 0.014783833001274616,
+     "probe": "run['f']"
+    },
+    "re2": {
+     "seconds": 0.0001621670089662075,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "finnhub-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 27,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 44 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.021753666995209642,
+     "probe": "run['f']"
+    },
+    "re_ascii": {
+     "seconds": 0.014991791991633363,
+     "probe": "run['f']"
+    },
+    "re2": {
+     "seconds": 0.0001531669986434281,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "flickr-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 57 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.014436583005590364,
+     "probe": "run['f']"
+    },
+    "re_ascii": {
+     "seconds": 0.01481337500445079,
+     "probe": "run['f']"
+    },
+    "re2": {
+     "seconds": 0.0002489159960532561,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "flutterwave-encryption-key",
+   "compile": {
+    "re": "PatternError: global flags not at the start of the expression at position 13",
+    "re_ascii": "PatternError: global flags not at the start of the expression at position 13",
+    "re2": null
+   },
+   "compiled": {
+    "re": false,
+    "re_ascii": false,
+    "re2": true
+   },
+   "positives": 0,
+   "span_diff_docs": {},
+   "span_diff_example": {},
+   "worst": {
+    "re2": {
+     "seconds": 0.00010983301035594195,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "flutterwave-public-key",
+   "compile": {
+    "re": "PatternError: global flags not at the start of the expression at position 13",
+    "re_ascii": "PatternError: global flags not at the start of the expression at position 13",
+    "re2": null
+   },
+   "compiled": {
+    "re": false,
+    "re_ascii": false,
+    "re2": true
+   },
+   "positives": 0,
+   "span_diff_docs": {},
+   "span_diff_example": {},
+   "worst": {
+    "re2": {
+     "seconds": 0.0001025829988066107,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "flutterwave-secret-key",
+   "compile": {
+    "re": "PatternError: global flags not at the start of the expression at position 13",
+    "re_ascii": "PatternError: global flags not at the start of the expression at position 13",
+    "re2": null
+   },
+   "compiled": {
+    "re": false,
+    "re_ascii": false,
+    "re2": true
+   },
+   "positives": 0,
+   "span_diff_docs": {},
+   "span_diff_example": {},
+   "worst": {
+    "re2": {
+     "seconds": 0.0001246659958269447,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "flyio-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 18,
+    "re_ascii": 1
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    },
+    "re_ascii": {
+     "re_ascii": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.000331375005771406,
+     "probe": "kw[fm1] repeated"
+    },
+    "re_ascii": {
+     "seconds": 0.00037037499714642763,
+     "probe": "kw[fm1] repeated"
+    },
+    "re2": {
+     "seconds": 0.00018008299230132252,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "frameio-api-token",
+   "compile": {
+    "re": "PatternError: global flags not at the start of the expression at position 6",
+    "re_ascii": "PatternError: global flags not at the start of the expression at position 6",
+    "re2": null
+   },
+   "compiled": {
+    "re": false,
+    "re_ascii": false,
+    "re2": true
+   },
+   "positives": 0,
+   "span_diff_docs": {},
+   "span_diff_example": {},
+   "worst": {
+    "re2": {
+     "seconds": 0.0004099999932805076,
+     "probe": "kw[fio-u-] repeated"
+    }
+   }
+  },
+  {
+   "id": "freemius-secret-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 24,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 59 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.00045458300155587494,
+     "probe": "half-prefix[2]"
+    },
+    "re_ascii": {
+     "seconds": 0.00030524999601766467,
+     "probe": "half-prefix[0]"
+    },
+    "re2": {
+     "seconds": 0.00016466699889861047,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "freshbooks-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 26,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.014413707991479896,
+     "probe": "run['f']"
+    },
+    "re_ascii": {
+     "seconds": 0.01485658300225623,
+     "probe": "run['f']"
+    },
+    "re2": {
+     "seconds": 0.00015875000099185854,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "gcp-api-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 40 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.0003242499951738864,
+     "probe": "half-prefix[2]"
+    },
+    "re_ascii": {
+     "seconds": 0.00026029199943877757,
+     "probe": "run['a']"
+    },
+    "re2": {
+     "seconds": 0.00019862499902956188,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "generic-api-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 26,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 39 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.09911383398866747,
+     "probe": "run['A']"
+    },
+    "re_ascii": {
+     "seconds": 0.09045408399833832,
+     "probe": "run['A']"
+    },
+    "re2": {
+     "seconds": 0.002958041994133964,
+     "probe": "kw[access]+a"
+    }
+   }
+  },
+  {
+   "id": "github-app-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 8.504200377501547e-05,
+     "probe": "kw[ghs_] repeated"
+    },
+    "re_ascii": {
+     "seconds": 8.774999878369272e-05,
+     "probe": "kw[ghs_] repeated"
+    },
+    "re2": {
+     "seconds": 0.0001001250057015568,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "github-fine-grained-pat",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.00011329200060572475,
+     "probe": "near-miss[1]"
+    },
+    "re_ascii": {
+     "seconds": 8.758300100453198e-05,
+     "probe": "near-miss[0]"
+    },
+    "re2": {
+     "seconds": 9.454200335312635e-05,
+     "probe": "near-miss[0]"
+    }
+   }
+  },
+  {
+   "id": "github-oauth",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 5.7833007303997874e-05,
+     "probe": "half-prefix[2]"
+    },
+    "re_ascii": {
+     "seconds": 5.704199429601431e-05,
+     "probe": "half-prefix[1]"
+    },
+    "re2": {
+     "seconds": 9.383299038745463e-05,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "github-pat",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 5.9250000049360096e-05,
+     "probe": "half-prefix[0]"
+    },
+    "re_ascii": {
+     "seconds": 5.7541008573025465e-05,
+     "probe": "half-prefix[1]"
+    },
+    "re2": {
+     "seconds": 0.00010558300709817559,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "github-refresh-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 5.875001079402864e-05,
+     "probe": "half-prefix[0]"
+    },
+    "re_ascii": {
+     "seconds": 6.079199374653399e-05,
+     "probe": "half-prefix[2]"
+    },
+    "re2": {
+     "seconds": 8.366699330508709e-05,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "gitlab-cicd-job-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 6.574999133590609e-05,
+     "probe": "half-prefix[2]"
+    },
+    "re_ascii": {
+     "seconds": 5.8250006986781955e-05,
+     "probe": "near-miss[0]"
+    },
+    "re2": {
+     "seconds": 9.0667002950795e-05,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "gitlab-deploy-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 4.975000047124922e-05,
+     "probe": "near-miss[1]"
+    },
+    "re_ascii": {
+     "seconds": 5.00839960295707e-05,
+     "probe": "near-miss[1]"
+    },
+    "re2": {
+     "seconds": 0.00010275001113768667,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "gitlab-feature-flag-client-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 4.545900446828455e-05,
+     "probe": "near-miss[0]"
+    },
+    "re_ascii": {
+     "seconds": 4.833299317397177e-05,
+     "probe": "near-miss[0]"
+    },
+    "re2": {
+     "seconds": 8.587499905843288e-05,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "gitlab-feed-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 5.020800745114684e-05,
+     "probe": "near-miss[1]"
+    },
+    "re_ascii": {
+     "seconds": 4.8416011850349605e-05,
+     "probe": "near-miss[0]"
+    },
+    "re2": {
+     "seconds": 8.283399802166969e-05,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "gitlab-incoming-mail-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 4.8999994760379195e-05,
+     "probe": "near-miss[1]"
+    },
+    "re_ascii": {
+     "seconds": 4.8834001063369215e-05,
+     "probe": "near-miss[1]"
+    },
+    "re2": {
+     "seconds": 8.287500531878322e-05,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "gitlab-kubernetes-agent-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 6.09580019954592e-05,
+     "probe": "half-prefix[2]"
+    },
+    "re_ascii": {
+     "seconds": 6.00829953327775e-05,
+     "probe": "half-prefix[2]"
+    },
+    "re2": {
+     "seconds": 8.429199806414545e-05,
+     "probe": "half-prefix[2]"
+    }
+   }
+  },
+  {
+   "id": "gitlab-oauth-app-secret",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 5.3499999921768904e-05,
+     "probe": "half-prefix[2]"
+    },
+    "re_ascii": {
+     "seconds": 5.2749994210898876e-05,
+     "probe": "half-prefix[2]"
+    },
+    "re2": {
+     "seconds": 9.283299732487649e-05,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "gitlab-pat",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 29,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 26 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.00011429200822021812,
+     "probe": "near-miss[1]"
+    },
+    "re_ascii": {
+     "seconds": 8.662499021738768e-05,
+     "probe": "near-miss[0]"
+    },
+    "re2": {
+     "seconds": 0.00010374998964834958,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "gitlab-pat-routable",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 0.0002306669921381399,
+     "probe": "run['0']"
+    },
+    "re_ascii": {
+     "seconds": 0.0003034169931197539,
+     "probe": "near-miss[0]"
+    },
+    "re2": {
+     "seconds": 0.00015579198952764273,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "gitlab-ptt",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 7.291599467862397e-05,
+     "probe": "half-prefix[1]"
+    },
+    "re_ascii": {
+     "seconds": 6.200000643730164e-05,
+     "probe": "half-prefix[1]"
+    },
+    "re2": {
+     "seconds": 8.379199425689876e-05,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "gitlab-rrt",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 29,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 29 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.00010879200999625027,
+     "probe": "near-miss[0]"
+    },
+    "re_ascii": {
+     "seconds": 9.183399379253387e-05,
+     "probe": "near-miss[0]"
+    },
+    "re2": {
+     "seconds": 8.970800263341516e-05,
+     "probe": "near-miss[0]"
+    }
+   }
+  },
+  {
+   "id": "gitlab-runner-authentication-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 4.8667003284208477e-05,
+     "probe": "near-miss[0]"
+    },
+    "re_ascii": {
+     "seconds": 4.9291993491351604e-05,
+     "probe": "near-miss[1]"
+    },
+    "re2": {
+     "seconds": 9.483400208409876e-05,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "gitlab-runner-authentication-token-routable",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 29,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 45 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.0002846249990398064,
+     "probe": "near-miss[1]"
+    },
+    "re_ascii": {
+     "seconds": 0.0002862499968614429,
+     "probe": "near-miss[0]"
+    },
+    "re2": {
+     "seconds": 0.00015941700257826596,
+     "probe": "half-prefix[0]"
+    }
+   }
+  },
+  {
+   "id": "gitlab-scim-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 4.545800038613379e-05,
+     "probe": "near-miss[1]"
+    },
+    "re_ascii": {
+     "seconds": 4.729200736619532e-05,
+     "probe": "near-miss[1]"
+    },
+    "re2": {
+     "seconds": 7.850000110920519e-05,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "gitlab-session-cookie",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 4.937499761581421e-05,
+     "probe": "near-miss[1]"
+    },
+    "re_ascii": {
+     "seconds": 5.037500523030758e-05,
+     "probe": "near-miss[1]"
+    },
+    "re2": {
+     "seconds": 0.00018850000924430788,
+     "probe": "run['_']"
+    }
+   }
+  },
+  {
+   "id": "gitter-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 63 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.017779957997845486,
+     "probe": "half-prefix[2]"
+    },
+    "re_ascii": {
+     "seconds": 0.013047041997197084,
+     "probe": "run['_']"
+    },
+    "re2": {
+     "seconds": 0.0001806660002330318,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "gocardless-api-token",
+   "compile": {
+    "re": "PatternError: global flags not at the start of the expression at position 114",
+    "re_ascii": "PatternError: global flags not at the start of the expression at position 114",
+    "re2": null
+   },
+   "compiled": {
+    "re": false,
+    "re_ascii": false,
+    "re2": true
+   },
+   "positives": 0,
+   "span_diff_docs": {},
+   "span_diff_example": {},
+   "worst": {
+    "re2": {
+     "seconds": 0.00033112500386778265,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "grafana-api-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 2,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.00039016600931063294,
+     "probe": "half-prefix[2]"
+    },
+    "re_ascii": {
+     "seconds": 0.0003050420054933056,
+     "probe": "kw[eyjrijoi] repeated"
+    },
+    "re2": {
+     "seconds": 0.00018879200797528028,
+     "probe": "half-prefix[0]"
+    }
+   }
+  },
+  {
+   "id": "grafana-cloud-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 3,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 52 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.00028425001073628664,
+     "probe": "kw[glc_] repeated"
+    },
+    "re_ascii": {
+     "seconds": 0.000548875003005378,
+     "probe": "near-miss[2]"
+    },
+    "re2": {
+     "seconds": 0.00017150001076515764,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "grafana-service-account-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 2,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 47 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.0003273330075899139,
+     "probe": "near-miss[2]"
+    },
+    "re_ascii": {
+     "seconds": 0.00044470799912232906,
+     "probe": "near-miss[2]"
+    },
+    "re2": {
+     "seconds": 0.00014920899411663413,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "harness-api-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 0.000232374994084239,
+     "probe": "kw[sat.] repeated"
+    },
+    "re_ascii": {
+     "seconds": 0.00022229101159609854,
+     "probe": "kw[sat.] repeated"
+    },
+    "re2": {
+     "seconds": 0.00014487499720416963,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "hashicorp-tf-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 0.0027333329926477745,
+     "probe": "run['a']"
+    },
+    "re_ascii": {
+     "seconds": 0.0036054170050192624,
+     "probe": "run['A']"
+    },
+    "re2": {
+     "seconds": 0.0001397500018356368,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "hashicorp-tf-password",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 24,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 36 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.08325816701108124,
+     "probe": "half-prefix[2]"
+    },
+    "re_ascii": {
+     "seconds": 0.027665874993545003,
+     "probe": "half-prefix[1]"
+    },
+    "re2": {
+     "seconds": 0.00026737499865703285,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "heroku-api-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 24,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 59 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013241499997093342,
+     "probe": "run['0']"
+    },
+    "re_ascii": {
+     "seconds": 0.013720499991904944,
+     "probe": "run['x']"
+    },
+    "re2": {
+     "seconds": 0.0001817500015022233,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "heroku-api-key-v2",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 2,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 66 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.0002676659933058545,
+     "probe": "kw[hrku-aa] repeated"
+    },
+    "re_ascii": {
+     "seconds": 0.00028245900466572493,
+     "probe": "half-prefix[1]"
+    },
+    "re2": {
+     "seconds": 0.00017079200188163668,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "hubspot-api-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 25,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 60 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013237959006801248,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.012587708988576196,
+     "probe": "run['a']"
+    },
+    "re2": {
+     "seconds": 0.00015533299301750958,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "huggingface-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 3,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 38 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.0003448329953243956,
+     "probe": "half-prefix[2]"
+    },
+    "re_ascii": {
+     "seconds": 0.000351458991644904,
+     "probe": "half-prefix[2]"
+    },
+    "re2": {
+     "seconds": 0.00014258400187827647,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "huggingface-organization-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 3,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 43 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.0003132499987259507,
+     "probe": "half-prefix[2]"
+    },
+    "re_ascii": {
+     "seconds": 0.00038187499740161,
+     "probe": "half-prefix[2]"
+    },
+    "re2": {
+     "seconds": 0.00017349999689031392,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "infracost-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 8,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 37 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.0002349580026930198,
+     "probe": "kw[ico-] repeated"
+    },
+    "re_ascii": {
+     "seconds": 0.0002650829992489889,
+     "probe": "half-prefix[2]"
+    },
+    "re2": {
+     "seconds": 0.00016158299695234746,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "intercom-api-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 24,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.02120962500339374,
+     "probe": "run['0']"
+    },
+    "re_ascii": {
+     "seconds": 0.014867707999655977,
+     "probe": "half-prefix[0]"
+    },
+    "re2": {
+     "seconds": 0.00018433399964123964,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "intra42-client-secret",
+   "compile": {
+    "re": "PatternError: global flags not at the start of the expression at position 19",
+    "re_ascii": "PatternError: global flags not at the start of the expression at position 19",
+    "re2": null
+   },
+   "compiled": {
+    "re": false,
+    "re_ascii": false,
+    "re2": true
+   },
+   "positives": 0,
+   "span_diff_docs": {},
+   "span_diff_example": {},
+   "worst": {
+    "re2": {
+     "seconds": 0.00016220800171140581,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "jfrog-api-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 27,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.036581292006303556,
+     "probe": "kw[jfrog]+a"
+    },
+    "re_ascii": {
+     "seconds": 0.03831929100851994,
+     "probe": "kw[artifactory]+a"
+    },
+    "re2": {
+     "seconds": 0.0002765829995041713,
+     "probe": "kw[jfrog]+a"
+    }
+   }
+  },
+  {
+   "id": "jfrog-identity-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.036222415990778245,
+     "probe": "kw[jfrog]+a"
+    },
+    "re_ascii": {
+     "seconds": 0.03894858300918713,
+     "probe": "run['x']"
+    },
+    "re2": {
+     "seconds": 0.00028866701177321374,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "jwt",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 5,
+    "re_ascii": 1
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 77 chars]"
+     ],
+     "re2": []
+    },
+    "re_ascii": {
+     "re_ascii": [
+      "[redacted synthetic match, 77 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.00027754199982155114,
+     "probe": "kw[ey] repeated"
+    },
+    "re_ascii": {
+     "seconds": 0.00029512499168049544,
+     "probe": "kw[ey] repeated"
+    },
+    "re2": {
+     "seconds": 0.0001382080081384629,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "jwt-base64",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 0.0005714580038329586,
+     "probe": "half-prefix[2]"
+    },
+    "re_ascii": {
+     "seconds": 0.0005572919908445328,
+     "probe": "near-miss[0]"
+    },
+    "re2": {
+     "seconds": 0.0015134999994188547,
+     "probe": "half-prefix[0]"
+    }
+   }
+  },
+  {
+   "id": "kraken-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 22,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.027348667004844174,
+     "probe": "half-prefix[1]"
+    },
+    "re_ascii": {
+     "seconds": 0.02496545900066849,
+     "probe": "half-prefix[1]"
+    },
+    "re2": {
+     "seconds": 0.00045250001130625606,
+     "probe": "kw[kraken] repeated"
+    }
+   }
+  },
+  {
+   "id": "kubernetes-secret-yaml",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 29,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 76 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.09653779098880477,
+     "probe": "near-miss[2]"
+    },
+    "re_ascii": {
+     "seconds": 0.005552624992560595,
+     "probe": "half-prefix[0]"
+    },
+    "re2": {
+     "seconds": 0.00038062500243540853,
+     "probe": "near-miss[1]"
+    }
+   }
+  },
+  {
+   "id": "kucoin-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 48 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013273625008878298,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.013225791000877507,
+     "probe": "run['x']"
+    },
+    "re2": {
+     "seconds": 0.00015320800594054163,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "kucoin-secret-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 24,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 59 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013251625001430511,
+     "probe": "run['0']"
+    },
+    "re_ascii": {
+     "seconds": 0.013585583001258783,
+     "probe": "run['_']"
+    },
+    "re2": {
+     "seconds": 0.00015662499936297536,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "launchdarkly-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 1
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 66 chars]"
+     ],
+     "re2": []
+    },
+    "re_ascii": {
+     "re_ascii": [
+      "[redacted synthetic match, 57 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013286999994306825,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.013582250001491047,
+     "probe": "kw[launchdarkly]+a"
+    },
+    "re2": {
+     "seconds": 0.0001678749977145344,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "linear-api-key",
+   "compile": {
+    "re": "PatternError: global flags not at the start of the expression at position 8",
+    "re_ascii": "PatternError: global flags not at the start of the expression at position 8",
+    "re2": null
+   },
+   "compiled": {
+    "re": false,
+    "re_ascii": false,
+    "re2": true
+   },
+   "positives": 0,
+   "span_diff_docs": {},
+   "span_diff_example": {},
+   "worst": {
+    "re2": {
+     "seconds": 0.0001195419899886474,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "linear-client-secret",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 55 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013244542002212256,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.01488216700090561,
+     "probe": "run['x']"
+    },
+    "re2": {
+     "seconds": 0.00017262500477954745,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "linkedin-client-id",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 26,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 38 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013333666996913962,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.012758624987327494,
+     "probe": "run['x']"
+    },
+    "re2": {
+     "seconds": 0.0001492080045863986,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "linkedin-client-secret",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 27,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 40 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013254874997073784,
+     "probe": "run['0']"
+    },
+    "re_ascii": {
+     "seconds": 0.01322779200563673,
+     "probe": "run['_']"
+    },
+    "re2": {
+     "seconds": 0.00015824999718461186,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "lob-api-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 62 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013296292003360577,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.012903166003525257,
+     "probe": "run['a']"
+    },
+    "re2": {
+     "seconds": 0.00016658299136906862,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "lob-pub-api-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 24,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 62 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013536500002373941,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.012948457995662466,
+     "probe": "run['_']"
+    },
+    "re2": {
+     "seconds": 0.00017220800509676337,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "looker-client-id",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 27,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 43 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.01337354100542143,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.013567624991992489,
+     "probe": "run['_']"
+    },
+    "re2": {
+     "seconds": 0.00017425000260118395,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "looker-client-secret",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 47 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013519041996914893,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.012462083992431872,
+     "probe": "run['x']"
+    },
+    "re2": {
+     "seconds": 0.00021295899932738394,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "mailchimp-api-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 61 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.023472374989069067,
+     "probe": "run['0']"
+    },
+    "re_ascii": {
+     "seconds": 0.024088083999231458,
+     "probe": "run['_']"
+    },
+    "re2": {
+     "seconds": 0.000173916996573098,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "mailgun-private-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 23,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 62 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.01323687499098014,
+     "probe": "run['0']"
+    },
+    "re_ascii": {
+     "seconds": 0.012451834001694806,
+     "probe": "kw[mailgun]+a"
+    },
+    "re2": {
+     "seconds": 0.00016795899136923254,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "mailgun-pub-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 63 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013345958010177128,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.013583542007836513,
+     "probe": "run['x']"
+    },
+    "re2": {
+     "seconds": 0.00022266698942985386,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "mailgun-signing-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 27,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 74 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013246417001937516,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.01255091700295452,
+     "probe": "run['A']"
+    },
+    "re2": {
+     "seconds": 0.00015220799832604825,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "mapbox-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.016862374992342666,
+     "probe": "half-prefix[0]"
+    },
+    "re_ascii": {
+     "seconds": 0.015819916006876156,
+     "probe": "half-prefix[1]"
+    },
+    "re2": {
+     "seconds": 0.0001894169981824234,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "mattermost-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 51 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013239916996099055,
+     "probe": "run['0']"
+    },
+    "re_ascii": {
+     "seconds": 0.013544125002226792,
+     "probe": "run['_']"
+    },
+    "re2": {
+     "seconds": 0.00018000000272877514,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "maxmind-license-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 1,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 41 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.00023091700859367847,
+     "probe": "run['0']"
+    },
+    "re_ascii": {
+     "seconds": 0.00033650000113993883,
+     "probe": "near-miss[2]"
+    },
+    "re2": {
+     "seconds": 0.00023770899861119688,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "messagebird-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 27,
+    "re_ascii": 3
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 49 chars]"
+     ],
+     "re2": []
+    },
+    "re_ascii": {
+     "re_ascii": [
+      "[redacted synthetic match, 41 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013271208998048678,
+     "probe": "run['0']"
+    },
+    "re_ascii": {
+     "seconds": 0.012522332996013574,
+     "probe": "run['_']"
+    },
+    "re2": {
+     "seconds": 0.00017099999240599573,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "messagebird-client-id",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 24,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 60 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013239459003671072,
+     "probe": "run['0']"
+    },
+    "re_ascii": {
+     "seconds": 0.013571874995250255,
+     "probe": "run['_']"
+    },
+    "re2": {
+     "seconds": 0.00018087499483954161,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "microsoft-teams-webhook",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 0.0001737500133458525,
+     "probe": "near-miss[0]"
+    },
+    "re_ascii": {
+     "seconds": 0.00017216699779964983,
+     "probe": "near-miss[0]"
+    },
+    "re2": {
+     "seconds": 0.00010991700401064008,
+     "probe": "near-miss[0]"
+    }
+   }
+  },
+  {
+   "id": "netlify-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 66 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.015122791999601759,
+     "probe": "half-prefix[1]"
+    },
+    "re_ascii": {
+     "seconds": 0.013723958007176407,
+     "probe": "half-prefix[1]"
+    },
+    "re2": {
+     "seconds": 0.0002629160007927567,
+     "probe": "kw[netlify] repeated"
+    }
+   }
+  },
+  {
+   "id": "new-relic-browser-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 25,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 51 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013248832998215221,
+     "probe": "run['0']"
+    },
+    "re_ascii": {
+     "seconds": 0.013597750003100373,
+     "probe": "run['x']"
+    },
+    "re2": {
+     "seconds": 0.00016308299382217228,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "new-relic-insert-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 24,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 62 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.01323825000145007,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.013082333010970615,
+     "probe": "run['_']"
+    },
+    "re2": {
+     "seconds": 0.0001634579966776073,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "new-relic-user-api-id",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 26,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013248250004835427,
+     "probe": "half-prefix[1]"
+    },
+    "re_ascii": {
+     "seconds": 0.013115666006342508,
+     "probe": "run['_']"
+    },
+    "re2": {
+     "seconds": 0.00016583400429226458,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "new-relic-user-api-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 26,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 59 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013263333006761968,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.01357616699533537,
+     "probe": "run['_']"
+    },
+    "re2": {
+     "seconds": 0.00017620799189899117,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "notion-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 11,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 51 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.00025279099645558745,
+     "probe": "kw[ntn_] repeated"
+    },
+    "re_ascii": {
+     "seconds": 0.00029629199707414955,
+     "probe": "near-miss[2]"
+    },
+    "re2": {
+     "seconds": 0.00014654200640507042,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "npm-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 5,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 41 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.00044508300197776407,
+     "probe": "half-prefix[2]"
+    },
+    "re_ascii": {
+     "seconds": 0.00036412499321158975,
+     "probe": "half-prefix[2]"
+    },
+    "re2": {
+     "seconds": 0.000145500001963228,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "nuget-config-password",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 27,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 50 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.054372917002183385,
+     "probe": "near-miss[1]"
+    },
+    "re_ascii": {
+     "seconds": 0.05455025000264868,
+     "probe": "near-miss[1]"
+    },
+    "re2": {
+     "seconds": 0.00010729201312642545,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "nytimes-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 25,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 56 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.01324662500701379,
+     "probe": "run['x']"
+    },
+    "re_ascii": {
+     "seconds": 0.013585250009782612,
+     "probe": "run['x']"
+    },
+    "re2": {
+     "seconds": 0.00024891700013540685,
+     "probe": "kw[nytimes] repeated"
+    }
+   }
+  },
+  {
+   "id": "octopus-deploy-api-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 1,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 31 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.00023666700872126967,
+     "probe": "run['a']"
+    },
+    "re_ascii": {
+     "seconds": 0.0002793749881675467,
+     "probe": "half-prefix[2]"
+    },
+    "re2": {
+     "seconds": 0.00014466600259765983,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "okta-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 65 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 1.1788991249923129,
+     "probe": "run['0']"
+    },
+    "re_ascii": {
+     "seconds": 1.1626758750062436,
+     "probe": "run['0']"
+    },
+    "re2": {
+     "seconds": 0.00017254200065508485,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "openai-api-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 0.00020083400886505842,
+     "probe": "near-miss[2]"
+    },
+    "re_ascii": {
+     "seconds": 0.00025516700407024473,
+     "probe": "run['a']"
+    },
+    "re2": {
+     "seconds": 0.0001760829909471795,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "openshift-user-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 29,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 51 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.0002497089881217107,
+     "probe": "run['a']"
+    },
+    "re_ascii": {
+     "seconds": 0.00026462500682100654,
+     "probe": "run['a']"
+    },
+    "re2": {
+     "seconds": 0.00017850000585895032,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "perplexity-api-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 2,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 54 chars]"
+     ],
+     "re2": [
+      "[redacted synthetic match, 53 chars]"
+     ]
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.0002305000089108944,
+     "probe": "kw[pplx-] repeated"
+    },
+    "re_ascii": {
+     "seconds": 0.0003101250040344894,
+     "probe": "near-miss[2]"
+    },
+    "re2": {
+     "seconds": 0.00015666599210817367,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "plaid-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 26,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 78 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.018622292001964524,
+     "probe": "half-prefix[2]"
+    },
+    "re_ascii": {
+     "seconds": 0.012509041000157595,
+     "probe": "run['a']"
+    },
+    "re2": {
+     "seconds": 0.00015900000289548188,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "plaid-client-id",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 47 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013317416989593767,
+     "probe": "run['0']"
+    },
+    "re_ascii": {
+     "seconds": 0.012540915995487012,
+     "probe": "run['a']"
+    },
+    "re2": {
+     "seconds": 0.00020516700169537216,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "plaid-secret-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 27,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 55 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013240665997727774,
+     "probe": "run['0']"
+    },
+    "re_ascii": {
+     "seconds": 0.013583874999312684,
+     "probe": "run['_']"
+    },
+    "re2": {
+     "seconds": 0.00015404100122395903,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "planetscale-api-token",
+   "compile": {
+    "re": "PatternError: global flags not at the start of the expression at position 14",
+    "re_ascii": "PatternError: global flags not at the start of the expression at position 14",
+    "re2": null
+   },
+   "compiled": {
+    "re": false,
+    "re_ascii": false,
+    "re2": true
+   },
+   "positives": 0,
+   "span_diff_docs": {},
+   "span_diff_example": {},
+   "worst": {
+    "re2": {
+     "seconds": 0.000692083005560562,
+     "probe": "kw[pscale_tkn_] repeated"
+    }
+   }
+  },
+  {
+   "id": "planetscale-oauth-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 29,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 46 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.0021400000114226714,
+     "probe": "kw[pscale_oauth_] repeated"
+    },
+    "re_ascii": {
+     "seconds": 0.0022079580085119233,
+     "probe": "kw[pscale_oauth_] repeated"
+    },
+    "re2": {
+     "seconds": 0.0003395420062588528,
+     "probe": "kw[pscale_oauth_] repeated"
+    }
+   }
+  },
+  {
+   "id": "planetscale-password",
+   "compile": {
+    "re": "PatternError: global flags not at the start of the expression at position 17",
+    "re_ascii": "PatternError: global flags not at the start of the expression at position 17",
+    "re2": null
+   },
+   "compiled": {
+    "re": false,
+    "re_ascii": false,
+    "re2": true
+   },
+   "positives": 0,
+   "span_diff_docs": {},
+   "span_diff_example": {},
+   "worst": {
+    "re2": {
+     "seconds": 0.0006666669942205772,
+     "probe": "kw[pscale_pw_] repeated"
+    }
+   }
+  },
+  {
+   "id": "postman-api-token",
+   "compile": {
+    "re": "PatternError: global flags not at the start of the expression at position 8",
+    "re_ascii": "PatternError: global flags not at the start of the expression at position 8",
+    "re2": null
+   },
+   "compiled": {
+    "re": false,
+    "re_ascii": false,
+    "re2": true
+   },
+   "positives": 0,
+   "span_diff_docs": {},
+   "span_diff_example": {},
+   "worst": {
+    "re2": {
+     "seconds": 0.00015924999024719,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "prefect-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 6,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 41 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.00023829200654290617,
+     "probe": "kw[pnu_] repeated"
+    },
+    "re_ascii": {
+     "seconds": 0.00032333299168385565,
+     "probe": "near-miss[2]"
+    },
+    "re2": {
+     "seconds": 0.0001386660005664453,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "private-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 0.00018708300194703043,
+     "probe": "run['-']"
+    },
+    "re_ascii": {
+     "seconds": 0.0001667079923208803,
+     "probe": "run['-']"
+    },
+    "re2": {
+     "seconds": 0.000416958995629102,
+     "probe": "near-miss[0]"
+    }
+   }
+  },
+  {
+   "id": "privateai-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 57 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.686144332998083,
+     "probe": "run['0']"
+    },
+    "re_ascii": {
+     "seconds": 0.6437314159993548,
+     "probe": "run['a']"
+    },
+    "re2": {
+     "seconds": 0.00017379199562128633,
+     "probe": "kw[privateai]+a"
+    }
+   }
+  },
+  {
+   "id": "pulumi-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 2,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 45 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.00025775001267902553,
+     "probe": "half-prefix[2]"
+    },
+    "re_ascii": {
+     "seconds": 0.0004975000047124922,
+     "probe": "run['\\n']"
+    },
+    "re2": {
+     "seconds": 0.00015262499800883234,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "pypi-upload-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 70 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 9.879100252874196e-05,
+     "probe": "near-miss[1]"
+    },
+    "re_ascii": {
+     "seconds": 7.812499825377017e-05,
+     "probe": "near-miss[0]"
+    },
+    "re2": {
+     "seconds": 0.018033999993349425,
+     "probe": "half-prefix[0]"
+    }
+   }
+  },
+  {
+   "id": "rapidapi-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 75 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013221125002019107,
+     "probe": "run['0']"
+    },
+    "re_ascii": {
+     "seconds": 0.0137819590017898,
+     "probe": "run['x']"
+    },
+    "re2": {
+     "seconds": 0.0001677919935900718,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "readme-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 1,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 76 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.00024287500127684325,
+     "probe": "kw[rdme_] repeated"
+    },
+    "re_ascii": {
+     "seconds": 0.00026691700622905046,
+     "probe": "near-miss[2]"
+    },
+    "re2": {
+     "seconds": 0.00014266600192058831,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "rubygems-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 4,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 58 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.00023358399630524218,
+     "probe": "run['A']"
+    },
+    "re_ascii": {
+     "seconds": 0.0003172910073772073,
+     "probe": "near-miss[2]"
+    },
+    "re2": {
+     "seconds": 0.00013933298760093749,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "scalingo-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 29,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 55 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.00034149999555666,
+     "probe": "near-miss[2]"
+    },
+    "re_ascii": {
+     "seconds": 0.0002901250118156895,
+     "probe": "kw[tk-us-] repeated"
+    },
+    "re2": {
+     "seconds": 0.00013649999164044857,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "sendbird-access-id",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 24,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 60 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.02156525000464171,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.012852582993218675,
+     "probe": "run['x']"
+    },
+    "re2": {
+     "seconds": 0.00015704099496360868,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "sendbird-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 1
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 64 chars]"
+     ],
+     "re2": []
+    },
+    "re_ascii": {
+     "re_ascii": [
+      "[redacted synthetic match, 52 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.022264208004344255,
+     "probe": "run['x']"
+    },
+    "re_ascii": {
+     "seconds": 0.012484082995797507,
+     "probe": "run['a']"
+    },
+    "re2": {
+     "seconds": 0.00016833300469443202,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "sendgrid-api-token",
+   "compile": {
+    "re": "PatternError: global flags not at the start of the expression at position 7",
+    "re_ascii": "PatternError: global flags not at the start of the expression at position 7",
+    "re2": null
+   },
+   "compiled": {
+    "re": false,
+    "re_ascii": false,
+    "re2": true
+   },
+   "positives": 0,
+   "span_diff_docs": {},
+   "span_diff_example": {},
+   "worst": {
+    "re2": {
+     "seconds": 0.0001642499992158264,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "sendinblue-api-token",
+   "compile": {
+    "re": "PatternError: global flags not at the start of the expression at position 25",
+    "re_ascii": "PatternError: global flags not at the start of the expression at position 25",
+    "re2": null
+   },
+   "compiled": {
+    "re": false,
+    "re_ascii": false,
+    "re2": true
+   },
+   "positives": 0,
+   "span_diff_docs": {},
+   "span_diff_example": {},
+   "worst": {
+    "re2": {
+     "seconds": 0.00015875000099185854,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "sentry-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.022584499994991347,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.013910582987591624,
+     "probe": "kw[sentry]+a"
+    },
+    "re2": {
+     "seconds": 0.00018370800535194576,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "sentry-org-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 0.0003896669950336218,
+     "probe": "half-prefix[2]"
+    },
+    "re_ascii": {
+     "seconds": 0.0002934579970315099,
+     "probe": "half-prefix[2]"
+    },
+    "re2": {
+     "seconds": 0.00018012500368058681,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "sentry-user-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 6,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 72 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.00024533299438189715,
+     "probe": "near-miss[2]"
+    },
+    "re_ascii": {
+     "seconds": 0.0003320840041851625,
+     "probe": "near-miss[2]"
+    },
+    "re2": {
+     "seconds": 0.00017425000260118395,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "settlemint-application-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 7,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 24 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.0002503750001778826,
+     "probe": "run['A']"
+    },
+    "re_ascii": {
+     "seconds": 0.00025174999609589577,
+     "probe": "run['a']"
+    },
+    "re2": {
+     "seconds": 0.00017766699602361768,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "settlemint-personal-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 7,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 24 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.00023920799139887094,
+     "probe": "kw[sm_pat] repeated"
+    },
+    "re_ascii": {
+     "seconds": 0.0002572090015746653,
+     "probe": "run['a']"
+    },
+    "re2": {
+     "seconds": 0.0001911670115077868,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "settlemint-service-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 7,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 24 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.00023929099552333355,
+     "probe": "run['A']"
+    },
+    "re_ascii": {
+     "seconds": 0.00026125001022592187,
+     "probe": "run['a']"
+    },
+    "re2": {
+     "seconds": 0.0001919170026667416,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "shippo-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 1,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 53 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.00022591599554289132,
+     "probe": "run['a']"
+    },
+    "re_ascii": {
+     "seconds": 0.00028329199994914234,
+     "probe": "near-miss[2]"
+    },
+    "re2": {
+     "seconds": 0.00014429200382437557,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "shopify-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 5.1584007451310754e-05,
+     "probe": "near-miss[0]"
+    },
+    "re_ascii": {
+     "seconds": 5.3167008445598185e-05,
+     "probe": "near-miss[0]"
+    },
+    "re2": {
+     "seconds": 9.987498924601823e-05,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "shopify-custom-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 5.124999734107405e-05,
+     "probe": "near-miss[1]"
+    },
+    "re_ascii": {
+     "seconds": 5.08339871885255e-05,
+     "probe": "near-miss[0]"
+    },
+    "re2": {
+     "seconds": 0.00010900000052060932,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "shopify-private-app-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 5.195899575483054e-05,
+     "probe": "near-miss[0]"
+    },
+    "re_ascii": {
+     "seconds": 5.200000305194408e-05,
+     "probe": "near-miss[1]"
+    },
+    "re2": {
+     "seconds": 9.695799963083118e-05,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "shopify-shared-secret",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 5.3292009397409856e-05,
+     "probe": "near-miss[1]"
+    },
+    "re_ascii": {
+     "seconds": 5.733300349675119e-05,
+     "probe": "half-prefix[2]"
+    },
+    "re2": {
+     "seconds": 8.558400440961123e-05,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "sidekiq-secret",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 60 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.017605041997740045,
+     "probe": "half-prefix[1]"
+    },
+    "re_ascii": {
+     "seconds": 0.015297999998438172,
+     "probe": "half-prefix[0]"
+    },
+    "re2": {
+     "seconds": 0.00024379100068472326,
+     "probe": "half-prefix[0]"
+    }
+   }
+  },
+  {
+   "id": "sidekiq-sensitive-url",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 0.0003217920020688325,
+     "probe": "near-miss[0]"
+    },
+    "re_ascii": {
+     "seconds": 0.0003546249936334789,
+     "probe": "near-miss[0]"
+    },
+    "re2": {
+     "seconds": 0.00015033299860078841,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "slack-app-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 21,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 30 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.0003010420041391626,
+     "probe": "half-prefix[2]"
+    },
+    "re_ascii": {
+     "seconds": 0.000344749991199933,
+     "probe": "near-miss[0]"
+    },
+    "re2": {
+     "seconds": 8.787499973550439e-05,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "slack-bot-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 7.441600610036403e-05,
+     "probe": "near-miss[0]"
+    },
+    "re_ascii": {
+     "seconds": 7.2750000981614e-05,
+     "probe": "near-miss[0]"
+    },
+    "re2": {
+     "seconds": 0.00018849999469239265,
+     "probe": "run['x']"
+    }
+   }
+  },
+  {
+   "id": "slack-config-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 26,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.00028583299717865884,
+     "probe": "half-prefix[0]"
+    },
+    "re_ascii": {
+     "seconds": 0.0004309170035412535,
+     "probe": "half-prefix[0]"
+    },
+    "re2": {
+     "seconds": 8.891700417734683e-05,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "slack-config-refresh-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 27,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.00032920800731517375,
+     "probe": "run['x']"
+    },
+    "re_ascii": {
+     "seconds": 0.00030558399157598615,
+     "probe": "half-prefix[0]"
+    },
+    "re2": {
+     "seconds": 9.1583002358675e-05,
+     "probe": "near-miss[0]"
+    }
+   }
+  },
+  {
+   "id": "slack-legacy-bot-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 9.054099791683257e-05,
+     "probe": "half-prefix[0]"
+    },
+    "re_ascii": {
+     "seconds": 8.962499850895256e-05,
+     "probe": "half-prefix[0]"
+    },
+    "re2": {
+     "seconds": 0.00018841600103769451,
+     "probe": "run['x']"
+    }
+   }
+  },
+  {
+   "id": "slack-legacy-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 38 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.00017162499716505408,
+     "probe": "near-miss[0]"
+    },
+    "re_ascii": {
+     "seconds": 0.0001626250013941899,
+     "probe": "near-miss[0]"
+    },
+    "re2": {
+     "seconds": 8.399999933317304e-05,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "slack-legacy-workspace-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 15,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 15 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.0001919170026667416,
+     "probe": "half-prefix[1]"
+    },
+    "re_ascii": {
+     "seconds": 0.00018975000421050936,
+     "probe": "half-prefix[1]"
+    },
+    "re2": {
+     "seconds": 9.47499938774854e-05,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "slack-user-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 0.00013520799984689802,
+     "probe": "kw[xoxe-] repeated"
+    },
+    "re_ascii": {
+     "seconds": 0.00013708299957215786,
+     "probe": "kw[xoxe-] repeated"
+    },
+    "re2": {
+     "seconds": 8.949999755714089e-05,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "slack-webhook-url",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 0.0006007079937262461,
+     "probe": "half-prefix[1]"
+    },
+    "re_ascii": {
+     "seconds": 0.000595041987253353,
+     "probe": "half-prefix[1]"
+    },
+    "re2": {
+     "seconds": 0.0001245829917024821,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "snyk-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 26,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 60 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.021421457990072668,
+     "probe": "run['x']"
+    },
+    "re_ascii": {
+     "seconds": 0.012450458991224878,
+     "probe": "run['x']"
+    },
+    "re2": {
+     "seconds": 0.0001590830070199445,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "sonar-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 1
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 66 chars]"
+     ],
+     "re2": []
+    },
+    "re_ascii": {
+     "re_ascii": [
+      "[redacted synthetic match, 59 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.022524291009176522,
+     "probe": "run['x']"
+    },
+    "re_ascii": {
+     "seconds": 0.013599750003777444,
+     "probe": "run['x']"
+    },
+    "re2": {
+     "seconds": 0.0001865419908426702,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "sourcegraph-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 7,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 45 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.0009368750033900142,
+     "probe": "kw[sgp_] repeated"
+    },
+    "re_ascii": {
+     "seconds": 0.0008756659954087809,
+     "probe": "kw[sgp_] repeated"
+    },
+    "re2": {
+     "seconds": 0.0001833749993238598,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "square-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 20,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 41 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.00027616599982138723,
+     "probe": "kw[sq0atp-] repeated"
+    },
+    "re_ascii": {
+     "seconds": 0.00030012500064913183,
+     "probe": "kw[sq0atp-] repeated"
+    },
+    "re2": {
+     "seconds": 0.00016516700270585716,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "squarespace-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 63 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.021116834002896212,
+     "probe": "run['0']"
+    },
+    "re_ascii": {
+     "seconds": 0.012818582996260375,
+     "probe": "run['0']"
+    },
+    "re2": {
+     "seconds": 0.00017279198800679296,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "stripe-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 11,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 19 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.0002775000029942021,
+     "probe": "kw[sk_test] repeated"
+    },
+    "re_ascii": {
+     "seconds": 0.00032583299616817385,
+     "probe": "kw[sk_live] repeated"
+    },
+    "re2": {
+     "seconds": 0.00014979200204834342,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "sumologic-access-id",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 27,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 45 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 3.3659076659969287,
+     "probe": "half-prefix[2]"
+    },
+    "re_ascii": {
+     "seconds": 1.1462531669967575,
+     "probe": "run['x']"
+    },
+    "re2": {
+     "seconds": 0.00016908299585338682,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "sumologic-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 25,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.023926875001052395,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.022710000004735775,
+     "probe": "run['f']"
+    },
+    "re2": {
+     "seconds": 0.00016941600188147277,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "telegram-bot-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 24,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 70 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013511832992662676,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.012768417000188492,
+     "probe": "run['x']"
+    },
+    "re2": {
+     "seconds": 0.00019312500080559403,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "travisci-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 26,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 46 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013288916990859434,
+     "probe": "run['0']"
+    },
+    "re_ascii": {
+     "seconds": 0.013612541995826177,
+     "probe": "run['0']"
+    },
+    "re2": {
+     "seconds": 0.00016383400361519307,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "twilio-api-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 0,
+    "re_ascii": 0
+   },
+   "span_diff_example": {},
+   "worst": {
+    "re": {
+     "seconds": 6.358300743158907e-05,
+     "probe": "near-miss[0]"
+    },
+    "re_ascii": {
+     "seconds": 6.237500929273665e-05,
+     "probe": "near-miss[0]"
+    },
+    "re2": {
+     "seconds": 0.00010849999671336263,
+     "probe": "near-miss[0]"
+    }
+   }
+  },
+  {
+   "id": "twitch-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 25,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 55 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.01323949999641627,
+     "probe": "run['0']"
+    },
+    "re_ascii": {
+     "seconds": 0.012514375004684553,
+     "probe": "run['0']"
+    },
+    "re2": {
+     "seconds": 0.0001577079965500161,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "twitter-access-secret",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 23,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 70 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013721334005822428,
+     "probe": "half-prefix[2]"
+    },
+    "re_ascii": {
+     "seconds": 0.012775167007930577,
+     "probe": "run['_']"
+    },
+    "re2": {
+     "seconds": 0.00019229200552217662,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "twitter-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 70 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013263417000416666,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.012654417005251162,
+     "probe": "run['_']"
+    },
+    "re2": {
+     "seconds": 0.0001694999955361709,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "twitter-api-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 52 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.01329579199955333,
+     "probe": "run['0']"
+    },
+    "re_ascii": {
+     "seconds": 0.012469124994822778,
+     "probe": "run['a']"
+    },
+    "re2": {
+     "seconds": 0.00016779100405983627,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "twitter-api-secret",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 74 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.03295104100834578,
+     "probe": "run['x']"
+    },
+    "re_ascii": {
+     "seconds": 0.012774292001267895,
+     "probe": "run['f']"
+    },
+    "re2": {
+     "seconds": 0.00016466599481645972,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "twitter-bearer-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 27,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.01703674999589566,
+     "probe": "half-prefix[1]"
+    },
+    "re_ascii": {
+     "seconds": 0.015248833995428868,
+     "probe": "half-prefix[1]"
+    },
+    "re2": {
+     "seconds": 0.00040741699922364205,
+     "probe": "kw[twitter]+a"
+    }
+   }
+  },
+  {
+   "id": "typeform-api-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.016805292005301453,
+     "probe": "half-prefix[1]"
+    },
+    "re_ascii": {
+     "seconds": 0.014955209000618197,
+     "probe": "half-prefix[1]"
+    },
+    "re2": {
+     "seconds": 0.00019716699898708612,
+     "probe": "half-prefix[0]"
+    }
+   }
+  },
+  {
+   "id": "vault-batch-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 29,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.0002634590055095032,
+     "probe": "kw[hvb.] repeated"
+    },
+    "re_ascii": {
+     "seconds": 0.00030187499942258,
+     "probe": "kw[hvb.] repeated"
+    },
+    "re2": {
+     "seconds": 0.0001446249953005463,
+     "probe": "near-miss[2]"
+    }
+   }
+  },
+  {
+   "id": "vault-service-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 5,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.0004518329951679334,
+     "probe": "kw[s.] repeated"
+    },
+    "re_ascii": {
+     "seconds": 0.00048754199815448374,
+     "probe": "kw[s.] repeated"
+    },
+    "re2": {
+     "seconds": 0.00012858299305662513,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "yandex-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.02855483299936168,
+     "probe": "half-prefix[2]"
+    },
+    "re_ascii": {
+     "seconds": 0.01698012500128243,
+     "probe": "half-prefix[1]"
+    },
+    "re2": {
+     "seconds": 0.00016541600052732974,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "yandex-api-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 24,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 64 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013462959002936259,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.012884124997071922,
+     "probe": "run['x']"
+    },
+    "re2": {
+     "seconds": 0.00017616699915379286,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "yandex-aws-access-token",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 27,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 63 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013315916003193706,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.013380250005866401,
+     "probe": "run['_']"
+    },
+    "re2": {
+     "seconds": 0.00016862500342540443,
+     "probe": "run['a']"
+    }
+   }
+  },
+  {
+   "id": "zendesk-secret-key",
+   "compile": {
+    "re": null,
+    "re_ascii": null,
+    "re2": null
+   },
+   "compiled": {
+    "re": true,
+    "re_ascii": true,
+    "re2": true
+   },
+   "positives": 30,
+   "span_diff_docs": {
+    "re": 28,
+    "re_ascii": 0
+   },
+   "span_diff_example": {
+    "re": {
+     "re": [
+      "[redacted synthetic match, 65 chars]"
+     ],
+     "re2": []
+    }
+   },
+   "worst": {
+    "re": {
+     "seconds": 0.013441667004371993,
+     "probe": "run['_']"
+    },
+    "re_ascii": {
+     "seconds": 0.012455125004635192,
+     "probe": "run['a']"
+    },
+    "re2": {
+     "seconds": 0.00018224999075755477,
+     "probe": "run['a']"
+    }
+   }
+  }
+ ],
+ "corpus_docs": 1200,
+ "corpus_chars": 14431446,
+ "probe_len": 20000,
+ "timeout_s": 10.0,
+ "note": "Example match strings redacted: synthetic secret-shaped strings trip GitHub push protection. Counts are unchanged."
+}

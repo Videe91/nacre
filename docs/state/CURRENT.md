@@ -17,8 +17,7 @@ Build the Phase 1 files in `docs/modules/INDEX.md` order, one functionality + te
 committing and pushing after each.
 - Done: #1 `core/event.py`, #2 `core/db.py`, #2a `core/blob_store.py`, #2b `core/root_key_provider.py`,
   #3 `schema/apply_migrations.py` + SQL 0001–0003, #2c `core/encode_cbor.py`, #2d `core/decode_cbor.py`, #4 `ledger/encode_envelope.py`, #5 `ledger/seal_event.py`, #3d `sql/0004_checkpoints.sql`.
-- Next: #6 `strip_secrets` (starts with the A-0017 re vs google-re2 comparison for the owner),
-  then #7 onward.
+- Next: #6 `strip_secrets` once D-0009 is decided; #7 onward can proceed meanwhile.
 - To run DB tests: `docker compose up -d --wait`, then `pytest`.
 
 ## Phase 1 gate (FROZEN by owner 2026-09-30)
@@ -39,6 +38,19 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   comparison to the owner as part of A-0017.
 
 ## Open questions
+- **D-0009 (google-re2) is PROPOSED — owner approval needed before INDEX #6.** A-0017 is invalidated;
+  evidence in `docs/assumptions/evidence/A-0017-regex-engines.md`.
+- **A-0017 invalidation follow-up (per assumption rules):** dependents are D-0007 (it relied on
+  A-0017; its stated fallback is D-0009), D-0009, and INDEX #6. Task: after the D-0009 decision,
+  add a post-acceptance note to D-0007 pointing to the chosen engine. No code depended on A-0017.
+- **GitHub push protection vs the #6 labeled corpus (owner decision before #6 corpus lands).** The
+  first push of the A-0017 evidence was blocked: synthetic hypothesis-generated tokens matched
+  GitHub's secret patterns (DigitalOcean, Heroku, Hugging Face…). The results were redacted and the
+  unpushed commit amended; nothing was bypassed. D-0007's corpus of synthetic known-format secrets
+  will hit the same block. Options: (a) store corpus entries obfuscated, e.g. split or encoded and
+  reassembled at test time; (b) owner allow-lists the corpus path in GitHub secret-scanning
+  settings; (c) generate the corpus at test time from seeded generators and commit only the
+  generators plus a sha256 of the output.
 - Resolved 2026-09-30: data-key shred finality via master-key rotation (D-0004 amendment 7).
 - Resolved 2026-09-30: checkpointer role = new `nacre_checkpointer` (D-0005 amendment 2).
 - Resolved 2026-09-30: shredding final at root rotation (D-0004 amendment 6; A-0008 test updated).
@@ -119,3 +131,9 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   insert), so explicit has_table_privilege tests were added; the mutant now fails.
   Results: check_structure 0/0; pytest 333 passed.
 - 2026-09-30: D-0004 amendment 7 (master rotation after data-key shreds), A-0008 extended, INDEX #20b added.
+- 2026-09-30: A-0017 evaluation (scripts/a0017/, evidence/A-0017*). gitleaks v8.30.1, 221 regex rules,
+  1,200-file corpus + 7,290 generated docs; Go regexp as ground truth. google-re2: 221/221 agree
+  with Go, worst 0.018 s/20 KB. Python re: 22 compile failures, 1 misread, 10 disagreements (ASCII
+  mode), 1 exponential rule. The first timing run was flawed (cumulative, not per-probe, timeout);
+  it was fixed, rerun, and the flawed output kept. A-0017 marked invalidated; A-0018 and D-0009
+  (proposed) added.

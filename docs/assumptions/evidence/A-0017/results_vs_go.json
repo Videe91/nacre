@@ -1,0 +1,2465 @@
+{
+ "docs_corpus": 1200,
+ "rules": {
+  "1password-secret-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "1password-service-account-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "adafruit-api-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "adobe-client-id": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "adobe-client-secret": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "compile_error": "global flags not at the start of the expression at position 7"
+   }
+  },
+  "age-secret-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "airtable-api-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "airtable-personnal-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 30,
+    "example": {
+     "engine": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "go": "see go run"
+    }
+   }
+  },
+  "algolia-api-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "alibaba-access-key-id": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "compile_error": "global flags not at the start of the expression at position 7"
+   }
+  },
+  "alibaba-secret-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "anthropic-admin-api-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 1,
+    "example": {
+     "engine": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "go": "see go run"
+    }
+   }
+  },
+  "anthropic-api-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 1,
+    "example": {
+     "engine": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "go": "see go run"
+    }
+   }
+  },
+  "artifactory-api-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "artifactory-reference-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "asana-client-id": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "asana-client-secret": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "atlassian-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "authress-service-client-access-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "compile_error": "global flags not at the start of the expression at position 30"
+   }
+  },
+  "aws-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "aws-amazon-bedrock-api-key-long-lived": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 1,
+    "example": {
+     "engine": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "go": "see go run"
+    }
+   }
+  },
+  "aws-amazon-bedrock-api-key-short-lived": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "azure-ad-client-secret": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "beamer-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "bitbucket-client-id": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "bitbucket-client-secret": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "bittrex-access-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "bittrex-secret-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "cisco-meraki-api-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "clickhouse-cloud-api-secret-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "clojars-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "cloudflare-api-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "cloudflare-global-api-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "cloudflare-origin-ca-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "codecov-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "cohere-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "coinbase-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "confluent-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "confluent-secret-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "contentful-delivery-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "curl-auth-header": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "compile_error": "global flags not at the start of the expression at position 86"
+   }
+  },
+  "curl-auth-user": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "databricks-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "datadog-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "defined-networking-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "digitalocean-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "digitalocean-pat": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "digitalocean-refresh-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "discord-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "discord-client-id": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "discord-client-secret": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "doppler-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "compile_error": "global flags not at the start of the expression at position 8"
+   }
+  },
+  "droneci-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "dropbox-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "dropbox-long-lived-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "dropbox-short-lived-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "duffel-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "compile_error": "global flags not at the start of the expression at position 21"
+   }
+  },
+  "dynatrace-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "compile_error": "global flags not at the start of the expression at position 8"
+   }
+  },
+  "easypost-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "compile_error": "global flags not at the start of the expression at position 6"
+   }
+  },
+  "easypost-test-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "compile_error": "global flags not at the start of the expression at position 6"
+   }
+  },
+  "etsy-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "facebook-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "facebook-page-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "compile_error": "global flags not at the start of the expression at position 10"
+   }
+  },
+  "facebook-secret": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "fastly-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "finicity-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "finicity-client-secret": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "finnhub-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "flickr-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "flutterwave-encryption-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "compile_error": "global flags not at the start of the expression at position 13"
+   }
+  },
+  "flutterwave-public-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "compile_error": "global flags not at the start of the expression at position 13"
+   }
+  },
+  "flutterwave-secret-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "compile_error": "global flags not at the start of the expression at position 13"
+   }
+  },
+  "flyio-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 1,
+    "example": {
+     "engine": [
+      "[redacted synthetic match, 80 chars]"
+     ],
+     "go": "see go run"
+    }
+   }
+  },
+  "frameio-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "compile_error": "global flags not at the start of the expression at position 6"
+   }
+  },
+  "freemius-secret-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "freshbooks-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "gcp-api-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "generic-api-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "github-app-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "github-fine-grained-pat": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "github-oauth": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "github-pat": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "github-refresh-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "gitlab-cicd-job-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "gitlab-deploy-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "gitlab-feature-flag-client-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "gitlab-feed-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "gitlab-incoming-mail-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "gitlab-kubernetes-agent-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "gitlab-oauth-app-secret": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "gitlab-pat": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "gitlab-pat-routable": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "gitlab-ptt": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "gitlab-rrt": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "gitlab-runner-authentication-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "gitlab-runner-authentication-token-routable": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "gitlab-scim-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "gitlab-session-cookie": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "gitter-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "gocardless-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "compile_error": "global flags not at the start of the expression at position 114"
+   }
+  },
+  "grafana-api-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "grafana-cloud-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "grafana-service-account-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "harness-api-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "hashicorp-tf-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "hashicorp-tf-password": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "heroku-api-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "heroku-api-key-v2": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "hubspot-api-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "huggingface-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "huggingface-organization-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "infracost-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "intercom-api-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "intra42-client-secret": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "compile_error": "global flags not at the start of the expression at position 19"
+   }
+  },
+  "jfrog-api-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "jfrog-identity-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "jwt": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 1,
+    "example": {
+     "engine": [
+      "[redacted synthetic match, 77 chars]"
+     ],
+     "go": "see go run"
+    }
+   }
+  },
+  "jwt-base64": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "kraken-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "kubernetes-secret-yaml": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "kucoin-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "kucoin-secret-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "launchdarkly-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 1,
+    "example": {
+     "engine": [
+      "[redacted synthetic match, 57 chars]"
+     ],
+     "go": "see go run"
+    }
+   }
+  },
+  "linear-api-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "compile_error": "global flags not at the start of the expression at position 8"
+   }
+  },
+  "linear-client-secret": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "linkedin-client-id": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "linkedin-client-secret": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "lob-api-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "lob-pub-api-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "looker-client-id": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "looker-client-secret": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "mailchimp-api-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "mailgun-private-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "mailgun-pub-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "mailgun-signing-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "mapbox-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "mattermost-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "maxmind-license-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "messagebird-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 3,
+    "example": {
+     "engine": [
+      "[redacted synthetic match, 41 chars]"
+     ],
+     "go": "see go run"
+    }
+   }
+  },
+  "messagebird-client-id": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "microsoft-teams-webhook": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "netlify-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "new-relic-browser-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "new-relic-insert-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "new-relic-user-api-id": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "new-relic-user-api-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "notion-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "npm-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "nuget-config-password": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "nytimes-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "octopus-deploy-api-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "okta-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "openai-api-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "openshift-user-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "perplexity-api-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "plaid-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "plaid-client-id": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "plaid-secret-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "planetscale-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "compile_error": "global flags not at the start of the expression at position 14"
+   }
+  },
+  "planetscale-oauth-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "planetscale-password": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "compile_error": "global flags not at the start of the expression at position 17"
+   }
+  },
+  "postman-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "compile_error": "global flags not at the start of the expression at position 8"
+   }
+  },
+  "prefect-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "private-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "privateai-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "pulumi-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "pypi-upload-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "rapidapi-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "readme-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "rubygems-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "scalingo-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "sendbird-access-id": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "sendbird-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 1,
+    "example": {
+     "engine": [
+      "[redacted synthetic match, 52 chars]"
+     ],
+     "go": "see go run"
+    }
+   }
+  },
+  "sendgrid-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "compile_error": "global flags not at the start of the expression at position 7"
+   }
+  },
+  "sendinblue-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "compile_error": "global flags not at the start of the expression at position 25"
+   }
+  },
+  "sentry-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "sentry-org-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "sentry-user-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "settlemint-application-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "settlemint-personal-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "settlemint-service-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "shippo-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "shopify-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "shopify-custom-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "shopify-private-app-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "shopify-shared-secret": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "sidekiq-secret": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "sidekiq-sensitive-url": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "slack-app-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "slack-bot-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "slack-config-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "slack-config-refresh-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "slack-legacy-bot-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "slack-legacy-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "slack-legacy-workspace-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "slack-user-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "slack-webhook-url": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "snyk-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "sonar-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 1,
+    "example": {
+     "engine": [
+      "[redacted synthetic match, 59 chars]"
+     ],
+     "go": "see go run"
+    }
+   }
+  },
+  "sourcegraph-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "square-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "squarespace-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "stripe-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "sumologic-access-id": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "sumologic-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "telegram-bot-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "travisci-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "twilio-api-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "twitch-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "twitter-access-secret": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "twitter-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "twitter-api-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "twitter-api-secret": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "twitter-bearer-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "typeform-api-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "vault-batch-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "vault-service-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "yandex-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "yandex-api-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "yandex-aws-access-token": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  },
+  "zendesk-secret-key": {
+   "go_compile_error": null,
+   "re2": {
+    "diff_docs": 0,
+    "example": null
+   },
+   "re_ascii": {
+    "diff_docs": 0,
+    "example": null
+   }
+  }
+ },
+ "note": "Example match strings redacted (synthetic, secret-shaped). Counts are unchanged."
+}

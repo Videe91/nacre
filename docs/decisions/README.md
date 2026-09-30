@@ -10,3 +10,4 @@
 | D-0006 | Phase 1 dependencies and test infrastructure | D2 | accepted |
 | D-0007 | Secret detection — vendored gitleaks rules + entropy check | D2 | accepted |
 | D-0008 | Encrypted body format (header, AEAD, deterministic CBOR) | D2 | accepted |
+| D-0009 | Regex engine for secret detection — google-re2 | D2 | proposed |
