@@ -15,8 +15,9 @@
 ## Next
 Build the Phase 1 files in `docs/modules/INDEX.md` order, one functionality + test per step,
 committing and pushing after each.
-- Done: #1 `core/event.py`, #2 `core/db.py`, #2a `core/blob_store.py`, #2b `core/root_key_provider.py`.
-- Next: #2a `core/blob_store.py`, #2b `core/root_key_provider.py`, then #3 migrations (#2c waits on D-0008).
+- Done: #1 `core/event.py`, #2 `core/db.py`, #2a `core/blob_store.py`, #2b `core/root_key_provider.py`,
+  #3 `schema/apply_migrations.py` + SQL 0001–0003.
+- Next: #2c/#2d CBOR encoder/decoder (D-0008), then #4 `encode_envelope`, #5 `seal_event`.
 - To run DB tests: `docker compose up -d --wait`, then `pytest`.
 
 ## Phase 1 gate (FROZEN by owner 2026-09-30)
@@ -37,8 +38,31 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   comparison to the owner as part of A-0017.
 
 ## Open questions
+- **Checkpointer database role (blocks INDEX #3d / #18).** D-0003 puts the checkpointer in a separate
+  process holding the signing key. It must read every stream head (like `nacre_verifier`) and write
+  `ledger.checkpoints`. D-0005's role table has no role for it. Options: (a) a new `nacre_checkpointer`
+  role with SELECT on events + INSERT on checkpoints; (b) give `nacre_verifier` INSERT on checkpoints
+  (the verifier then writes). This is a security-boundary change to D-0005 (D3), so it needs the owner.
 - Resolved 2026-09-30: D-0008 accepted (payload_type kept in AAD, flags byte, header in AAD, own
   codec: no floats, separate strict decoder, cbor2 + hypothesis test-only, frozen vectors).
+
+## Local design notes from #3 (D1; recorded here and in file headers/comments)
+- Roles are created NOLOGIN by migration 0001; login and passwords are set by ops (tests: fixture).
+  Migrations run as the admin account from NACRE_DSN_MIGRATOR and `SET LOCAL ROLE nacre_migrator`,
+  so nacre_migrator owns every object (tested).
+- Settings: `nacre.read_streams`, `nacre.write_streams`, plus `nacre.principal` so a principal can
+  read its own grants before any stream is readable (the D-0005 door will set it; A-0012 applies).
+- `scope_grants` is insert-only; a row is a principal's full access to one stream as of an
+  org-stream commit_seq; the highest source_seq wins; revoke = both flags false; append ⇒ read (CHECK).
+- The linkage trigger takes the stream lock itself and runs as invoker, so append-without-read
+  fails closed (tested).
+- System subject = `subject_id = stream_id` in `keys.data_keys`.
+- Enums are `text` + CHECK (not PG enum types); short identifiers limited to `[A-Za-z0-9._:/+-]{1,128}`.
+- UPDATE/DELETE policies for scope status, key shredding and root-key rotation are deliberately
+  absent; each arrives as a new migration with the file that needs it (#20, #20a, #21).
+- **Finding for A-0008:** deleting a key row leaves the wrapped bytes in dead tuples until VACUUM.
+  `pg_dump` won't show them, but the data files will. `shred_keys` (#20) must account for this
+  (e.g. VACUUM the keys tables after shredding) and A-0008's test should check the files, not just a dump.
 
 ## Blockers
 - None.
@@ -62,3 +86,9 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
 - 2026-09-30: D-0008 accepted with owner resolutions; A-0017 test widened to google-re2; standing instructions recorded.
 - 2026-09-30: INDEX #2a `core/blob_store.py` (Protocol only; write-once, no delete). Results: check_structure 0/0; pytest 23 passed. No test file: an interface is exercised through #15a.
 - 2026-09-30: INDEX #2b `core/root_key_provider.py` (Protocol + WrappedKey; wrapping bound to stream_id context, D1). Results: check_structure 0/0; pytest 23 passed. Exercised through #11a.
+- 2026-09-30: INDEX #3 `schema/apply_migrations.py` + `sql/0001_ledger.sql`, `0002_scopes_rls.sql`,
+  `0003_keys.sql`, with tests (runner, append-only, linkage, envelope checks, D-0005 S-1, S-2, basic S-3,
+  keys). #3d deferred (checkpointer role, see Open questions). All schema tests passed on first run, so
+  they were mutation-checked: dropping the prev_hash check, opening the app read policy, removing the
+  append-only trigger, and granting the app UPDATE each made the targeted test fail at its assertion.
+  Results: `check_structure.py` → 0 failure(s), 0 warning(s); `pytest` → 82 passed (4.4 s).
