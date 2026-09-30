@@ -1,11 +1,40 @@
 # D-0011: Nacre supplementary detection rules
 
-- **Status:** proposed — awaiting owner approval
+- **Status:** accepted (owner, 2026-09-30, with conditions below)
 - **Tier:** D2 (changes what strip_secrets detects; cross-module behaviour at intake)
 - **Date:** 2026-09-30
 - **Relies on assumptions:** A-0010, A-0018
 - **Related:** D-0007 (gitleaks rules + entropy check), D-0009 (google-re2), D-0010 (the pre-commit hook will use strip_secrets)
 - **Evidence:** `docs/assumptions/evidence/A-0010-measurement-2026-09-30.md`
+
+## Amendment history (owner conditions, before acceptance)
+1. **Sealed holdout.** The corpus is split into:
+   - a **working set**, visible while writing rules;
+   - a **holdout**, never used for rule writing.
+
+   Official catch rates come from the holdout only. Both are reported, and any gap between them is
+   flagged as overfitting. The holdout is committed **before** any Nacre rule is written, so git
+   history shows it was fixed first.
+2. **Additive only.** Nacre rules add detections. They never disable, override or shadow a vendored
+   gitleaks rule without an ADR. The loader refuses duplicate rule ids, and Nacre allowlists apply
+   only to Nacre rules.
+3. **Upstream.** Once proven, the `ghs_` stateless and password-in-URL rules are prepared as
+   contributions to gitleaks. Not blocking.
+4. **Rule approval.**
+   - **Tightening changes** (adding a rule, or narrowing a rule so it catches more real secrets or fewer
+     non-secrets without allowlisting) are local changes in the rules file, under the admission
+     criteria below.
+   - **Loosening changes** (any new or wider allowlist, removing a rule, relaxing a pattern) need the
+     owner's explicit approval.
+   - The placeholder allowlist of `url-userinfo-password` below is approved as part of this ADR.
+
+## Admission criteria for a Nacre rule (written once; every rule entry carries these fields)
+- `source`: provider-owned URL(s) or a standard, never a scanner rule set; `source_date`: when it was checked.
+- `fact_ids`: A-IDs for any owner-measured fact the rule depends on (empty if none).
+- `test`: the test that exercises it.
+- `holdout`: the holdout catch rate of its group when admitted (≥ 99%), plus the FP rate with it
+  enabled (≤ 2%).
+- A rule is admitted only if the full A-0010 measurement still passes with it enabled.
 
 ## Context
 The first A-0010 measurement of `strip_secrets` (gitleaks v8.30.1 under RE2, the public-credential layer
@@ -35,7 +64,7 @@ a helpful variable name.
 4. **Widen the entropy layer to catch them.** Tried: it catches long tokens only by accident, and doing it
    on purpose raised the FP rate to 4.1% (base64 blobs). Rejected.
 
-## Decision (proposed)
+## Decision
 Option 1. `src/nacre/ledger/data/nacre-rules-v1.toml`, first contents:
 
 | id | Pattern (RE2) | Secret | Source |
@@ -46,9 +75,8 @@ Option 1. `src/nacre/ledger/data/nacre-rules-v1.toml`, first contents:
 | `supabase-secret-key` | `sb_secret_[A-Za-z0-9_-]{22}_[A-Za-z0-9_-]{8}` | match | Supabase's own key generator |
 | `sentry-org-token-full` | `sntrys_[A-Za-z0-9+/=]+_[A-Za-z0-9+/]{43}` | match | getsentry/sentry `orgauthtoken_token.py` |
 
-- **Growth:** later rules from owner-measured facts (D-0007 amendment 4) are added to this file.
-  **Proposed:** each such addition is a D1 change, recorded in the file with its source and measured
-  on the corpus, not a new ADR each time. The owner may prefer an ADR amendment per batch instead.
+- **Growth:** later rules from owner-measured facts are tightening changes under the admission
+  criteria (amendment 4). Loosening needs the owner's explicit approval.
 - **Boundaries:** the rules must match in every corpus context, including plain log lines. Every rule
   change re-runs the A-0010 measurement.
 

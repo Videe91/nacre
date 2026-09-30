@@ -43,10 +43,9 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   comparison to the owner as part of A-0017.
 
 ## Open questions
-- **D-0011 (supplementary detection rules) PROPOSED.** The first measurement meets the FP target (0.36%)
-  and keeps every public value, but 8 groups are below 99%: URL/DB passwords (no gitleaks rule), Sentry
-  legacy DSN, GitHub stateless ghs_, Heroku, Supabase sb_secret, and Sentry sntrys_ outside Bearer
-  contexts. Evidence: evidence/A-0010-measurement-2026-09-30.md. The 8 are strict-xfail tests tied to D-0011.
+- **D-0011 accepted** (holdout; additive only; admission criteria; loosening needs owner approval).
+- **Upstream (not blocking):** once proven on the holdout, prepare the `ghs_` stateless and
+  password-in-URL rules as gitleaks contributions (D-0011 amendment 3).
 - **The pre-commit hook stays on the temporary scanner** until strip_secrets meets its targets (D-0010).
 - **#6 provider coverage, state after verification (evidence/A-0010-format-verification.md).**
   - **Generated now** (fully documented by the provider): GitHub classic + ghs stateless; GitLab legacy +
@@ -296,3 +295,4 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   Other bugs: re2 has no IGNORECASE (inline (?i) used); a nonsense test line was removed before commit.
   Mutations: public layer off → 2 fail; rules pin off → 1 fail.
   Results: pytest (strip_secrets) 22 passed + 8 strict xfail.
+- 2026-09-30: D-0011 accepted with owner conditions (holdout, additive-only, admission criteria, loosening = owner approval).
