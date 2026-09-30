@@ -33,8 +33,9 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
 5. The cross-scope read test fails as expected (D-0005 S-3). *Status: suite in place and passing through the
    door (#10: 25 kind pairs + reuse/rollback/revoke); re-run at the gate with real appended events.*
 6. A-0007 throughput is measured and the result recorded (pass/fail against the provisional target is reported, not hidden).
-   *Status: MEASURED 2026-09-30 (unpooled). Throughput met; p99 met at 1 writer, missed at 16 concurrent writers
-   on one stream (≈ 80 ms). See A-0007 evidence.*
+   *Status: MEASURED 2026-09-30 (unpooled) against the owner's rescoped target: p99 < 50 ms at ≤ 4 writers per
+   stream — MET (worst 21.3 ms); 16-writer stress p99 ≤ 150 ms — MET (worst 93.6 ms). Re-measure after a
+   connection pool is chosen. Evidence: A-0007-append-throughput-2026-09-30.md; `pytest -m bench`.*
 
 ## Standing instructions (owner, 2026-09-30)
 - **A-0007 / gate item 6:** the throughput test must run with the **production connection setup**.
@@ -45,10 +46,8 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   comparison to the owner as part of A-0017.
 
 ## Open questions
-- **A-0007 p99 at 16 concurrent writers on ONE stream is ≈ 80 ms (target < 50 ms); throughput and single-writer
-  latency are met.** Is 16-way contention on one project stream the workload that matters for Phase 1? If yes,
-  D-0003's named remedies (per-stream sub-sequences, batched appends) need a new ADR. Alternatively, keep the
-  provisional target for ≤ N concurrent writers per stream and re-measure with a pool once one is chosen.
+- Resolved 2026-09-30: A-0007 rescoped (≤ 4 writers p99 < 50 ms; 16-writer stress ceiling 150 ms), met unpooled; A-0019 added (remedy = group commit).
+- **Pending (owner):** choose a connection pool (or none); A-0007 is re-measured afterwards.
 - Resolved 2026-09-30: D-0012 accepted with owner corrections (trust by source + author, trust_basis, key rules, original-erased error); D-0002 amendment 4 (envelope v2).
 - **PHASE 3 GATE ITEM (owner, 2026-09-30): credential-slot target.** Before real agent data flows through the
   interface, set a target for "random value in a credential slot" (H3: 54–72%) and raise it, measured on a
@@ -396,3 +395,8 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
 
   Mutations: retry writes a row anyway → 1 fail; append-implies-read check removed → 1 fail (the DB CHECK
   raises a different error). Results: pytest (scopes) 55 passed.
+- 2026-09-30: A-0007 re-measured against the rescoped target: ≤ 4 writers p99 12–21 ms (met), 16-writer stress p99 75–94 ms (under the 150 ms ceiling), threads and processes. A-0019 added. Bench tests behind the `bench` marker.
+- 2026-09-30: #7a hardened per owner review. Confirmed and tested: admin-only (refuses the app, verifier and
+  checkpointer roles), records its own ledger event (the org stream's first event). Added: refuses an org id
+  that already names a scope or a stream, checked under the stream lock in the same transaction. Mutation:
+  existence check removed → 2 fail.

@@ -39,3 +39,30 @@ def test_bootstrap_is_atomic(migrated_db, provider):
     with psycopg.connect(migrated_db["admin"]) as c:
         assert c.execute("SELECT count(*) FROM ledger.events").fetchone()[0] == 0
         assert c.execute("SELECT count(*) FROM scopes.scopes").fetchone()[0] == 0
+
+
+def test_bootstrap_refuses_an_org_that_already_exists(org, provider, migrated_db):
+    org_id, _, _ = org
+    with psycopg.connect(migrated_db["admin"]) as c:
+        before = c.execute("SELECT count(*) FROM ledger.events").fetchone()[0]
+    with connect(DbRole.MIGRATOR, dsn=migrated_db["admin"]) as admin, pytest.raises(BootstrapError, match="already exists"):
+        bootstrap_org(admin, provider, owner_principal_id=uuid.uuid4(), idempotency_key=str(uuid.uuid4()), org_id=org_id)
+    with psycopg.connect(migrated_db["admin"]) as c:
+        assert c.execute("SELECT count(*) FROM ledger.events").fetchone()[0] == before
+        assert c.execute("SELECT count(*) FROM scopes.scope_grants WHERE stream_id = %s", (org_id,)).fetchone()[0] == 1
+
+
+def test_bootstrap_refuses_an_id_already_used_by_another_stream(org, provider, migrated_db):
+    from nacre.scopes.register_scope import ScopeKind, register_scope
+    org_id, owner, open_ = org
+    proj = uuid.uuid4()
+    with open_(owner) as s:
+        register_scope(s, provider, org_id=org_id, stream_id=proj, kind=ScopeKind.PROJECT, idempotency_key=str(uuid.uuid4()))
+    with connect(DbRole.MIGRATOR, dsn=migrated_db["admin"]) as admin, pytest.raises(BootstrapError, match="already"):
+        bootstrap_org(admin, provider, owner_principal_id=uuid.uuid4(), idempotency_key=str(uuid.uuid4()), org_id=proj)
+
+
+def test_bootstrap_bypass_is_admin_only_for_every_app_side_role(migrated_db, provider):
+    for role_dsn in (migrated_db["app"], migrated_db["verifier"], migrated_db["checkpointer"]):
+        with connect(DbRole.APP, dsn=role_dsn) as conn, pytest.raises(BootstrapError, match="admin"):
+            bootstrap_org(conn, provider, owner_principal_id=uuid.uuid4(), idempotency_key=str(uuid.uuid4()))

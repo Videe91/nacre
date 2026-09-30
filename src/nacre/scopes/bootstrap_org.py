@@ -12,6 +12,8 @@ Notes: D-0005: "bootstrapping the first org and its owner is a special step, rec
     2. RESET ROLE, then insert the org's scope row and the owner's grant (read + append), both referencing
        that event, so the projection can be rebuilt from the ledger.
   It constructs the ScopedSession directly: the one deliberate bypass of open_scoped_session, admin only. (D1)
+  Guards: refuses a non-admin connection, and refuses any org id that already names a scope or a stream,
+  checked under the stream lock inside the same transaction.
 """
 import uuid
 from uuid import UUID
@@ -41,6 +43,11 @@ def bootstrap_org(admin_conn: psycopg.Connection, provider: RootKeyProvider, *, 
         raise BootstrapError("bootstrap_org needs an admin connection (NACRE_DSN_MIGRATOR)")
     org = org_id or uuid.uuid4()
     with admin_conn.transaction():
+        # Refuse an id that already names a scope or a stream (the lock serialises concurrent bootstraps of one id).
+        admin_conn.execute("SELECT pg_advisory_xact_lock(ledger.stream_lock_key(%s))", (org,))
+        if admin_conn.execute("SELECT EXISTS (SELECT 1 FROM scopes.scopes WHERE stream_id = %s) "
+                              "OR EXISTS (SELECT 1 FROM ledger.events WHERE stream_id = %s)", (org, org)).fetchone()[0]:
+            raise BootstrapError(f"org {org} already exists (or the id is already a stream); bootstrap refused")
         admin_conn.execute("SET LOCAL ROLE nacre_app")
         for name, value in (("nacre.principal", str(owner_principal_id)), ("nacre.read_streams", f"{{{org}}}"),
                             ("nacre.write_streams", f"{{{org}}}")):

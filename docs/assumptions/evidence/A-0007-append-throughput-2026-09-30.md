@@ -26,3 +26,30 @@
   resolution) moved before the lock. p99 under 16 writers fell from 111.5 to about 80 ms.
 - Getting below 50 ms at 16-way single-stream contention needs one of D-0003's own named remedies
   ("per-stream sub-sequences or batched appends"), which is a new ADR. Owner decision.
+
+## Rescoped target (owner, 2026-09-30) and re-measurement
+- **Phase 1 workload:** 1–4 agents plus webhooks per stream, each writing every few seconds.
+- **Target:** p99 < 50 ms at ≤ 4 concurrent writers per stream.
+- **Stress test:** 16 writers, p99 ceiling 150 ms (regression guard).
+- **Setup:** UNPOOLED, as above; the code after the D1 change (stripping outside the lock).
+
+| Mode | Writers | Appends | Appends/s | p50 | p95 | p99 | max | Gapless | Errors |
+|---|---|---|---|---|---|---|---|---|---|
+| threads | 1 | 400 | 106.0 | 9.6 ms | 11.8 ms | 13.6 ms | 14.4 ms | yes | 0 |
+| threads | 2 | 800 | 214.1 | 9.1 ms | 10.9 ms | 12.0 ms | 16.5 ms | yes | 0 |
+| threads | 3 | 1,200 | 263.3 | 11.2 ms | 12.5 ms | 14.5 ms | 21.3 ms | yes | 0 |
+| threads | **4** | 1,600 | 260.3 | 15.2 ms | 17.0 ms | **18.0 ms** | 27.0 ms | yes | 0 |
+| threads | 16 (stress) | 3,200 | 263.1 | 59.5 ms | 64.3 ms | **75.0 ms** | 105.2 ms | yes | 0 |
+| processes | 1 | 400 | 100.7 | 9.9 ms | 12.1 ms | 13.7 ms | 78.8 ms* | yes | 0 |
+| processes | 2 | 800 | 214.6 | 9.0 ms | 10.1 ms | 12.0 ms | 87.0 ms* | yes | 0 |
+| processes | 3 | 1,200 | 259.1 | 11.1 ms | 13.2 ms | 15.0 ms | 100.8 ms* | yes | 0 |
+| processes | **4** | 1,600 | 238.7 | 16.3 ms | 18.9 ms | **21.3 ms** | 122.7 ms* | yes | 0 |
+| processes | 16 (stress) | 3,200 | 245.1 | 63.9 ms | 72.1 ms | **93.6 ms** | 186.5 ms* | yes | 0 |
+
+\* Process-mode maxima are the first append in each fresh process, which compiles the 229 detection rules
+(cold start). They are not steady-state latency, and p99 is unaffected.
+
+**Verdict:**
+- ≤ 4 writers: **met** (worst p99 21.3 ms).
+- 16-writer stress: **under the 150 ms ceiling** (worst p99 93.6 ms).
+- **Still to do:** re-measure once a connection pool is chosen (owner). Machine load average was about 4.5–6 throughout.

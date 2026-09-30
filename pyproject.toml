@@ -21,5 +21,6 @@ testpaths = ["tests"]
 pythonpath = ["src"]
 # D-0011 amendment 8: holdout measurements are slow; they run when rules, detector code or the corpus
 # change (the pre-commit hook does this), or explicitly with `pytest -m holdout`.
-markers = ["holdout: slow A-0010 holdout/working measurements and holdout pins"]
-addopts = "-m 'not holdout'"
+markers = ["holdout: slow A-0010 holdout/working measurements and holdout pins",
+           "bench: A-0007 latency benchmarks (timing-sensitive; run with `pytest -m bench` on a quiet machine)"]
+addopts = "-m 'not holdout and not bench'"
