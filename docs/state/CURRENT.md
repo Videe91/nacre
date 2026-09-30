@@ -190,3 +190,13 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   the prefix shown is the one the owner typed, confirmed yes/no. Tests assert no 4-char substring of any
   token appears in the output, including prefix-less hex tokens. Mutation: reporting the token's first
   10 chars as the prefix → 4 fail.
+- 2026-09-30: #6 corpus, part 1: framework (`secret_corpus/corpus.py`: registry, per-generator seeds,
+  neutral-name contexts, "caught = secret string gone", pinned sha256) + generic category
+  (`secret_corpus/generic.py`): PKCS#8 RSA/EC, PKCS#1 RSA, SEC1 EC, OpenSSH ed25519/RSA (hand-built
+  per PROTOCOL.key for determinism), PostgreSQL/MySQL/MongoDB URIs, URL userinfo, HS256 JWTs, .env.
+  D1 choices: .env dialect = Docker Compose ".env file syntax"; encrypted PEM/OpenSSH variants omitted
+  (standard encryption draws random salts, which would break the pinned digest); RSA primes by seeded
+  Miller-Rabin with 8 rounds and 6 keys per RSA format, bringing the build from 25 s to 10 s.
+  Every output is validated by an independent parser (cryptography loads every key; urllib parses
+  every URI). Mutation: broken OpenSSH padding → 2 fail. 468 samples, sha256 10be73…bcec.
+  Results: pytest (corpus) 15 passed.
