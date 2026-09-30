@@ -123,7 +123,7 @@ PERMISSIVE = {"MIT", "MIT-0", "BSD-2-Clause", "BSD-3-Clause", "Apache-2.0", "PSF
               "Apache-2.0 OR BSD-2-Clause", "Apache-2.0 OR BSD-3-Clause"}
 
 
-@pytest.mark.parametrize("sub", ["negatives", "negatives_external", "negatives_holdout2"])
+@pytest.mark.parametrize("sub", ["negatives", "negatives_external", "negatives_holdout2", "negatives_holdout3"])
 def test_committed_negatives_match_their_manifest(sub):
     manifest = json.loads((CORPUS_DIR / sub / "MANIFEST.json").read_text())
     on_disk = {p.relative_to(CORPUS_DIR / sub).as_posix() for p in (CORPUS_DIR / sub).rglob("*")
@@ -272,3 +272,19 @@ def test_secret_parts_exclude_documented_prefixes_and_pem_armor():
     s = type("S", (), {"category": "generic", "provider": "private-key", "kind": "sec1-ec", "secret": pem})
     (a, b), = secret_parts(s)
     assert not pem[a:b].startswith("-----") and "-----" not in pem[a:b] and len(pem[a:b]) > 64
+
+
+# Sealed holdout H3 (D-0011 amendment 8): separate session blind to detector code; pinned before any H3 run.
+HOLDOUT3_SHA256 = "a4518c359e4da839a13ac91b21d150c84c9b13922c2d701e2eb2fbec58f22e0d"
+
+
+@pytest.mark.holdout
+def test_holdout3_is_pinned_distinct_and_slot_labelled():
+    from secret_corpus import holdout_2, holdout_3
+    s = holdout_3.build_holdout3()
+    assert digest(s) == HOLDOUT3_SHA256
+    probe = "PROBE-VALUE-123"
+    earlier = {c(probe) for c in CONTEXTS + HOLDOUT_CONTEXTS + holdout_2.HOLDOUT2_CONTEXTS}
+    assert not {c(probe) for c in holdout_3.HOLDOUT3_CONTEXTS} & earlier
+    assert 5 <= len(holdout_3.HOLDOUT3_CREDENTIAL_SLOTS) <= len(holdout_3.HOLDOUT3_CONTEXTS) - 5
+    assert all(x.secret is None for x in s if x.expected == "negative")

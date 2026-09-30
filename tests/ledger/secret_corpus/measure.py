@@ -33,10 +33,11 @@ def _split_of(name: str) -> str:
 def negative_documents(split: str = "all"):
     """split: "working" / "holdout" (H1 half, now working data too) / "all" over the first negative set,
     or "holdout2": the fresh CPython stdlib negatives sealed for H2."""
-    if split == "holdout2":
-        manifest = json.loads((CORPUS_DIR / "negatives_holdout2" / "MANIFEST.json").read_text())
-        return [(f"negatives_holdout2/{f['path']}",
-                 (CORPUS_DIR / "negatives_holdout2" / f["path"]).read_text(errors="replace")) for f in manifest["files"]]
+    if split in ("holdout2", "holdout3"):
+        sub = f"negatives_{split}"
+        manifest = json.loads((CORPUS_DIR / sub / "MANIFEST.json").read_text())
+        return [(f"{sub}/{f['path']}", (CORPUS_DIR / sub / f["path"]).read_text(errors="replace"))
+                for f in manifest["files"]]
     docs = []
     for sub in ("negatives", "negatives_external"):
         manifest = json.loads((CORPUS_DIR / sub / "MANIFEST.json").read_text())

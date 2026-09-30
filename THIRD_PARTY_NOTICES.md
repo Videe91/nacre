@@ -24,3 +24,8 @@ pycparser (BSD-3-Clause), Pygments (BSD-2-Clause), pytest (MIT), sortedcontainer
 - **Files:** `tests/ledger/secret_corpus/negatives_holdout2/` — 150 `.py` files truncated at a line boundary to
   16 KiB, test directories excluded; provenance in its `MANIFEST.json`.
 - **License:** PSF License (PSF-2.0); full text in `negatives_holdout2/LICENSES/LICENSE-PSF.txt`.
+
+## CPython 3.14.3 standard library excerpts (holdout H3 negatives)
+- **Files:** `tests/ledger/secret_corpus/negatives_holdout3/`: 150 further `.py` files (disjoint from H2's),
+  truncated at a line boundary to 16 KiB; provenance in its `MANIFEST.json`.
+- **License:** PSF License (PSF-2.0); full text in `negatives_holdout3/LICENSES/LICENSE-PSF.txt`.
