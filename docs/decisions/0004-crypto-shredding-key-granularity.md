@@ -42,20 +42,30 @@
    - `keys/shred_keys.py` (#20) and `keys/rotate_root_key.py` (#20a) implement this together.
    - A-0008's test is updated accordingly.
 
-   **Open issue raised by the builder (2026-09-30), awaiting owner decision.** Root rotation makes
-   *stream-master-key* shredding (scope deletion) final. It does **not** make *data-key* shredding
-   final: erasing a person or forgetting a month deletes data keys, not master keys. A deleted data
-   key recovered from a backup is wrapped under its stream's master key. That master key
-   *survives*, and is merely rewrapped under the new root, so the recovered data key still unwraps.
+   *Open issue raised by the builder on 2026-09-30 (data-key shredding not made final by root
+   rotation alone): resolved by amendment 7.*
+7. **2026-09-30 — master-key rotation after data-key shredding (owner-approved, D3).**
+   - **Marking:** any shred that deletes data keys in a stream (person erasure, forgetting months)
+     marks that stream for master-key rotation.
+   - **Once per cycle:** before the next root-key rotation, each marked stream gets **exactly one**
+     master rotation per rotation cycle, however many shreds it had.
+   - **Order:**
+     1. Create the new master key.
+     2. Rewrap all surviving data keys under it.
+     3. Delete the old master key.
 
-   Proposed fix: when a shred deletes data keys in a stream, that stream's master key must also
-   be rotated before the next root rotation:
-   1. Create a new master key.
-   2. Rewrap the stream's surviving data keys under it.
-   3. Delete the old master-key row.
-
-   The old master key then exists only in pre-rotation backups, wrapped under the root version
-   that the root rotation destroys. This is not part of amendment 6 until the owner approves it.
+     This runs as one transaction or as an idempotent, resumable job.
+   - **Crash safety:** a crash must never leave a data key wrapped only under a deleted master key.
+   - **Audit:** each step is a ledger event in the org stream.
+   - **Caches:** any in-process cache of unwrapped master or data keys is invalidated on rotation.
+   - **Why this closes the gap:** a deleted data key recovered from a backup was wrapped under the
+     *old* master key. That master key then exists only in backups, wrapped under a root version
+     that the following root rotation destroys. Neither can be unwrapped again.
+   - **Implementation:** `keys/shred_keys.py` (#20), `keys/rotate_master_key.py` (#20b) and
+     `keys/rotate_root_key.py` (#20a) are built together.
+   - **Checks:**
+     - A-0008's extended test covers person and month erasure.
+     - A crash test kills the rotation job mid-way and proves that resuming loses no surviving data key.
 
 ## Context
 SPEC open decision: "Crypto-shredding key granularity: per user, per project, or per memory."

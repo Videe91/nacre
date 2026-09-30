@@ -37,8 +37,9 @@ D-0002 … D-0006 accepted 2026-09-30.
 | 17 | ledger | Replay one cognitive cycle in causal order | `src/nacre/ledger/replay_cycle.py` | `tests/ledger/test_replay_cycle.py` | D-0002 | — | planned |
 | 18 | ledger | Checkpointer: sign stream heads every 1,000 events or hourly (DB table + external file); separate process holding the key | `src/nacre/ledger/write_checkpoint.py` | `tests/ledger/test_write_checkpoint.py` | D-0003 | A-0013 | planned |
 | 19 | ledger | Verify a stream's chain and checkpoints without keys (verifier role) | `src/nacre/ledger/verify_chain.py` | `tests/ledger/test_verify_chain.py` (tamper suite) | D-0003 | A-0013 | planned |
-| 20 | keys | Shred keys: a stream master key, a person's data keys, or chosen months; write deletion marker(s); built together with #20a (D-0004 amendment 6) | `src/nacre/keys/shred_keys.py` | `tests/keys/test_shred_keys.py` | D-0004 | A-0008 | planned |
+| 20 | keys | Shred keys: a stream master key, a person's data keys, or chosen months; write deletion marker(s); marks streams for master rotation; built together with #20a/#20b (D-0004 amendments 6, 7) | `src/nacre/keys/shred_keys.py` | `tests/keys/test_shred_keys.py` | D-0004 | A-0008 | planned |
 | 20a | keys | Rotate the root key (≥ monthly + on demand): rewrap surviving master keys, destroy the old root version, record the required backup-destruction step | `src/nacre/keys/rotate_root_key.py` | `tests/keys/test_rotate_root_key.py` | D-0004 | — | planned |
+| 20b | keys | Rotate a stream's master key after data-key shredding: new master → rewrap surviving data keys → delete old; resumable, one per stream per cycle; org-stream events; cache invalidation | `src/nacre/keys/rotate_master_key.py` | `tests/keys/test_rotate_master_key.py` (+ crash/resume test) | D-0004 | A-0008 | planned |
 | 21 | scopes | Delete a scope: shred all its keys, mark scope deleted | `src/nacre/scopes/delete_scope.py` | `tests/scopes/test_delete_scope.py` | D-0004, D-0005 | A-0008 | planned |
 
 Notes:

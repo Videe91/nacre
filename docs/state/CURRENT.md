@@ -18,7 +18,7 @@ committing and pushing after each.
 - Done: #1 `core/event.py`, #2 `core/db.py`, #2a `core/blob_store.py`, #2b `core/root_key_provider.py`,
   #3 `schema/apply_migrations.py` + SQL 0001–0003, #2c `core/encode_cbor.py`, #2d `core/decode_cbor.py`, #4 `ledger/encode_envelope.py`, #5 `ledger/seal_event.py`, #3d `sql/0004_checkpoints.sql`.
 - Next: #6 `strip_secrets` (starts with the A-0017 re vs google-re2 comparison for the owner),
-  then #7 onward. #20/#20a wait on the D-0004 open issue.
+  then #7 onward.
 - To run DB tests: `docker compose up -d --wait`, then `pytest`.
 
 ## Phase 1 gate (FROZEN by owner 2026-09-30)
@@ -39,10 +39,7 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   comparison to the owner as part of A-0017.
 
 ## Open questions
-- **D-0004 open issue (blocks #20/#20a, not before):** root rotation makes master-key shredding
-  final but not data-key shredding (person erasure, forget-month): a recovered data key still
-  unwraps under its surviving, rewrapped master key. Proposed: a data-key shred also rotates that
-  stream's master key before the next root rotation. Owner to decide (D3).
+- Resolved 2026-09-30: data-key shred finality via master-key rotation (D-0004 amendment 7).
 - Resolved 2026-09-30: checkpointer role = new `nacre_checkpointer` (D-0005 amendment 2).
 - Resolved 2026-09-30: shredding final at root rotation (D-0004 amendment 6; A-0008 test updated).
 - Resolved 2026-09-30: D-0008 accepted (payload_type kept in AAD, flags byte, header in AAD, own
@@ -121,3 +118,4 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   append-only trigger → 2 fail; verifier granted INSERT → SURVIVED (forced RLS still blocked the
   insert), so explicit has_table_privilege tests were added; the mutant now fails.
   Results: check_structure 0/0; pytest 333 passed.
+- 2026-09-30: D-0004 amendment 7 (master rotation after data-key shreds), A-0008 extended, INDEX #20b added.
