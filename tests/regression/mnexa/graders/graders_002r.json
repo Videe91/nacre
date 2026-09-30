@@ -1,0 +1,69 @@
+{
+  "profile": "seed-growth-002r-diagnostic",
+  "classification": "post-hoc-diagnostic",
+  "note": "Created after Seed Growth 002. It corrects the Helios each-of-the-parts surface-form mismatch only; it does not replace the original Seed Growth 002 score.",
+  "graders": {
+    "nebulapay-r17": {
+      "all_regex": [
+        ["\\b3\\s*(?:seconds?|s)\\b"],
+        ["\\bretry\\b.*\\b(?:exactly\\s+)?once\\b"],
+        ["x-nebula-replay"]
+      ],
+      "none_regex": [
+        "retry\\s+indefinitely"
+      ]
+    },
+    "orchiddb-l42": {
+      "all_regex": [
+        ["\\brefresh\\b.*\\blease\\s+token"],
+        ["\\bretry\\b.*\\bonce\\b"],
+        ["(?:do\\s+not|don.t|without)\\b.*\\breconnect"]
+      ],
+      "none_regex": [
+        "restart\\s+the\\s+database",
+        "retry\\s+indefinitely"
+      ]
+    },
+    "atlasparser-qn": {
+      "all_regex": [
+        ["\\bn\\b.*\\bfalse\\b"],
+        ["\\bbefore\\b.*\\b(?:schema\\s+)?validation\\b"]
+      ],
+      "none_regex": [
+        "reject\\s+n",
+        "drop\\s+the\\s+field"
+      ]
+    },
+    "heliosstore-e62": {
+      "all_regex": [
+        ["\\bmultipart\\b"],
+        ["\\b16\\s*(?:mib|mb)\\b"],
+        ["\\bsha-?256\\b"],
+        [
+          "\\b(?:every|each|per)\\b(?:\\s+of\\s+the\\s+\\w+)?\\s+parts?\\b"
+        ]
+      ],
+      "none_regex": [
+        "single[-\\s]part"
+      ]
+    },
+    "saffronqueue-amber7": {
+      "all_regex": [
+        [
+          "\\bnew\\s+correlation\\s+lease\\b",
+          "\\brequest\\s+a\\s+new\\s+lease\\b",
+          "\\bobtain\\s+a\\s+new\\s+lease\\b"
+        ],
+        ["\\bre-?queue\\b"],
+        ["\\bonce\\b"],
+        [
+          "(?:do\\s+not|don.t|not)\\b.*\\bretry\\b.*\\bsame\\b"
+        ]
+      ],
+      "none_regex": [
+        "retry\\s+indefinitely",
+        "keep\\s+retrying"
+      ]
+    }
+  }
+}

@@ -1,0 +1,3040 @@
+{
+  "experiment": "seed-growth-019",
+  "classification": "exploratory-fresh-degraded-identity-activation-ablation",
+  "run_id": "20260914T044729Z",
+  "taskset_sha256": "6b80cb0dd1e1c7c283ee29bd99cf3fc5fef7f79bbbb2141a7e3b5d502a7b1032",
+  "model": "gpt-4o-mini",
+  "embedder": "sentence-transformers/all-MiniLM-L6-v2",
+  "meter": "word-meter-v1",
+  "task_count": 20,
+  "pool_size": 20,
+  "hierarchy": [
+    "code",
+    "system",
+    "cluster",
+    "domain",
+    "global"
+  ],
+  "conditions": {
+    "A": "seed_018_exact_identity_overlap_else_global",
+    "B": "hierarchical_code_system_cluster_domain_global"
+  },
+  "current_task_passes": 15,
+  "hierarchical_task_passes": 19,
+  "current_task_pass_rate": 0.75,
+  "hierarchical_task_pass_rate": 0.95,
+  "current_semantic_violations": 5,
+  "hierarchical_semantic_violations": 1,
+  "current_target_visible_families": 15,
+  "hierarchical_target_visible_families": 18,
+  "current_families_with_wrong_memory_presented": 15,
+  "hierarchical_families_with_wrong_memory_presented": 10,
+  "current_wrong_family_clause_occurrences": 29,
+  "hierarchical_wrong_family_clause_occurrences": 17,
+  "mean_current_retrieval_precision": 0.45,
+  "mean_hierarchical_retrieval_precision": 0.6583333333333333,
+  "mean_current_retrieval_recall": 0.75,
+  "mean_hierarchical_retrieval_recall": 0.9,
+  "task_rescue_families": 5,
+  "task_harm_families": 1,
+  "visibility_rescue_families": 4,
+  "mean_current_candidate_count": 7.25,
+  "mean_hierarchical_candidate_count": 2.75,
+  "mean_current_candidate_precision": 0.3875,
+  "mean_hierarchical_candidate_precision": 0.6125,
+  "mean_current_candidate_recall": 1.0,
+  "mean_hierarchical_candidate_recall": 1.0,
+  "current_global_fallback_queries": 5,
+  "hierarchical_global_fallback_queries": 0,
+  "hierarchical_code_tier_queries": 10,
+  "hierarchical_system_tier_queries": 5,
+  "hierarchical_cluster_tier_queries": 5,
+  "hierarchical_domain_tier_queries": 0,
+  "mean_current_memory_words": 187.8,
+  "mean_hierarchical_memory_words": 150.0,
+  "mean_current_memory_segments": 2.2,
+  "mean_hierarchical_memory_segments": 1.75,
+  "current_mode_metrics": {
+    "code_only": {
+      "families": 5,
+      "task_passes": 5,
+      "task_pass_rate": 1.0,
+      "target_visible_families": 5,
+      "families_with_wrong_memory": 0,
+      "wrong_family_clause_occurrences": 0,
+      "mean_retrieval_precision": 1.0,
+      "mean_retrieval_recall": 1.0,
+      "mean_candidate_count": 1.0,
+      "fallback_queries": 0
+    },
+    "context_only": {
+      "families": 5,
+      "task_passes": 2,
+      "task_pass_rate": 0.4,
+      "target_visible_families": 2,
+      "families_with_wrong_memory": 5,
+      "wrong_family_clause_occurrences": 13,
+      "mean_retrieval_precision": 0.13333333333333333,
+      "mean_retrieval_recall": 0.4,
+      "mean_candidate_count": 20.0,
+      "fallback_queries": 5
+    },
+    "full_identity": {
+      "families": 5,
+      "task_passes": 4,
+      "task_pass_rate": 0.8,
+      "target_visible_families": 5,
+      "families_with_wrong_memory": 5,
+      "wrong_family_clause_occurrences": 7,
+      "mean_retrieval_precision": 0.4333333333333333,
+      "mean_retrieval_recall": 1.0,
+      "mean_candidate_count": 4.0,
+      "fallback_queries": 0
+    },
+    "system_only": {
+      "families": 5,
+      "task_passes": 4,
+      "task_pass_rate": 0.8,
+      "target_visible_families": 3,
+      "families_with_wrong_memory": 5,
+      "wrong_family_clause_occurrences": 9,
+      "mean_retrieval_precision": 0.2333333333333333,
+      "mean_retrieval_recall": 0.6,
+      "mean_candidate_count": 4.0,
+      "fallback_queries": 0
+    }
+  },
+  "hierarchical_mode_metrics": {
+    "code_only": {
+      "families": 5,
+      "task_passes": 5,
+      "task_pass_rate": 1.0,
+      "target_visible_families": 5,
+      "families_with_wrong_memory": 0,
+      "wrong_family_clause_occurrences": 0,
+      "mean_retrieval_precision": 1.0,
+      "mean_retrieval_recall": 1.0,
+      "mean_candidate_count": 1.0,
+      "fallback_queries": 0
+    },
+    "context_only": {
+      "families": 5,
+      "task_passes": 5,
+      "task_pass_rate": 1.0,
+      "target_visible_families": 5,
+      "families_with_wrong_memory": 5,
+      "wrong_family_clause_occurrences": 7,
+      "mean_retrieval_precision": 0.4333333333333333,
+      "mean_retrieval_recall": 1.0,
+      "mean_candidate_count": 5.0,
+      "fallback_queries": 0
+    },
+    "full_identity": {
+      "families": 5,
+      "task_passes": 5,
+      "task_pass_rate": 1.0,
+      "target_visible_families": 5,
+      "families_with_wrong_memory": 0,
+      "wrong_family_clause_occurrences": 0,
+      "mean_retrieval_precision": 1.0,
+      "mean_retrieval_recall": 1.0,
+      "mean_candidate_count": 1.0,
+      "fallback_queries": 0
+    },
+    "system_only": {
+      "families": 5,
+      "task_passes": 4,
+      "task_pass_rate": 0.8,
+      "target_visible_families": 3,
+      "families_with_wrong_memory": 5,
+      "wrong_family_clause_occurrences": 10,
+      "mean_retrieval_precision": 0.2,
+      "mean_retrieval_recall": 0.6,
+      "mean_candidate_count": 4.0,
+      "fallback_queries": 0
+    }
+  },
+  "compact_memory_bundles": 20,
+  "bundles_with_exact_semantic_clause_visible": 20,
+  "bundle_unsupported_claims_admitted": 0,
+  "initial_extraction_model_calls": 20,
+  "repair_model_calls": 20,
+  "current_transfer_model_calls": 20,
+  "hierarchical_transfer_model_calls": 20,
+  "current_router_model_calls": 0,
+  "hierarchical_router_model_calls": 0,
+  "all_target_lessons_identical_between_conditions": true,
+  "all_target_source_evidence_equal": true,
+  "all_transfer_queries_equal": true,
+  "all_compact_renderers_equal": true,
+  "all_context_budget_configuration_equal": true,
+  "all_reasoners_equal": true,
+  "all_candidate_selection_from_same_full_pool": true,
+  "hierarchical_router_used_family_id": false,
+  "hierarchical_router_used_semantic_clause": false,
+  "hierarchical_router_used_semantic_grader": false,
+  "hierarchical_router_used_model": false,
+  "families": [
+    {
+      "family_id": "alderworks-retry-policy-201",
+      "system_name": "AlderWorks",
+      "code_name": "AW-201",
+      "interference_cluster": "retry-policy",
+      "degradation_mode": "full_identity",
+      "semantic_operator": "exactly",
+      "semantic_dimension": "cardinality",
+      "query_prompt": "AlderWorks reports AW-201. State the retry-count rule.",
+      "query_entities": [
+        "system:AlderWorks",
+        "code:AW-201",
+        "domain:operations",
+        "cluster:retry-policy"
+      ],
+      "current_selection": {
+        "query_identity_anchors": [
+          "code:AW-201",
+          "system:AlderWorks"
+        ],
+        "candidate_family_ids": [
+          "alderworks-retry-policy-201",
+          "alderworks-lane-routing-202",
+          "alderworks-channel-session-203",
+          "alderworks-storage-finalization-204"
+        ],
+        "candidate_count": 4,
+        "matches": {
+          "alderworks-retry-policy-201": [
+            "code:AW-201",
+            "system:AlderWorks"
+          ],
+          "alderworks-lane-routing-202": [
+            "system:AlderWorks"
+          ],
+          "alderworks-channel-session-203": [
+            "system:AlderWorks"
+          ],
+          "alderworks-storage-finalization-204": [
+            "system:AlderWorks"
+          ]
+        },
+        "fallback_used": false,
+        "selection_mode": "exact_identity_anchor",
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 0.25,
+        "distractor_candidates": 3
+      },
+      "hierarchical_selection": {
+        "selection_tier": "code",
+        "candidate_family_ids": [
+          "alderworks-retry-policy-201"
+        ],
+        "candidate_count": 1,
+        "matched_entities": {
+          "alderworks-retry-policy-201": [
+            "code:AW-201"
+          ]
+        },
+        "fallback_used": false,
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 1.0,
+        "distractor_candidates": 0
+      },
+      "current": {
+        "snapshot_sha256": "6082ce049128e510f637e05b5d8d25a08fead3cbb4d91116542a88722ee84a60",
+        "copied_snapshot_sha256": "6082ce049128e510f637e05b5d8d25a08fead3cbb4d91116542a88722ee84a60",
+        "pre_eval_watermark": 16,
+        "post_eval_watermark": 18,
+        "transfer_decision": "The retry-count rule for AlderWorks AW-201 is to \"retry exactly twice.\"",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_21bd4a27ea474d1783b9024dbcbf8224:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=196:222] refresh the recovery lease\n[E2 role=authoritative_correction span=224:256] preserve the request fingerprint\n[E3 role=authoritative_correction span=258:277] retry exactly twice\n[E4 role=authoritative_correction span=279:305] close the stale connection\n\nREFERENCES:\n[P1] HANDLE=\"refresh the recovery lease\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry exactly twice\" -> E3\n[P4] HANDLE=\"close the stale connection\" -> E4",
+          "[interpretive:i_d86c0b1c80dd405bbc6794d86620a236:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=199:227] verify the manifest checksum\n[E2 role=authoritative_correction span=271:302] preserve the upload fingerprint\n[E3 role=authoritative_correction span=304:331] record the final generation\n[E4 role=authoritative_correction span=229:269] finalize only with X-Alder-Final: locked\n\nREFERENCES:\n[P1] HANDLE=\"verify the manifest checksum\" -> E1\n[P2] HANDLE=\"preserve the upload fingerprint\" -> E2\n[P3] HANDLE=\"record the final generation\" -> E3\n[G1] UNRESOLVED -> E4",
+          "[interpretive:i_26ee31e8c0f64ce5a0f1e79631819e7d:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=200:230] preserve the trace fingerprint\n[E2 role=authoritative_correction span=269:289] send one probe frame\n[E3 role=authoritative_correction span=291:320] record the channel generation\n[E4 role=authoritative_correction span=232:267] open only a fresh transport channel\n\nREFERENCES:\n[P1] HANDLE=\"preserve the trace fingerprint\" -> E1\n[P2] HANDLE=\"send one probe frame\" -> E2\n[P3] HANDLE=\"record the channel generation\" -> E3\n[G1] UNRESOLVED -> E4"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 253,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "alderworks-retry-policy-201",
+          "alderworks-channel-session-203",
+          "alderworks-storage-finalization-204"
+        ],
+        "wrong_family_ids": [
+          "alderworks-channel-session-203",
+          "alderworks-storage-finalization-204"
+        ],
+        "wrong_family_clause_count": 2,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "hierarchical": {
+        "snapshot_sha256": "e524514ab3a1c405168f4d1819a578d526d97537bfad1dabd1e43464cf270548",
+        "copied_snapshot_sha256": "e524514ab3a1c405168f4d1819a578d526d97537bfad1dabd1e43464cf270548",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "To handle the AlderWorks report AW-201, the action to take is:\n\n- Refresh the recovery lease.\n- Preserve the request fingerprint.\n- Retry exactly twice.\n- Close the stale connection.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_909ca2c4701a4543b9b85c237ce44e7f:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=196:222] refresh the recovery lease\n[E2 role=authoritative_correction span=224:256] preserve the request fingerprint\n[E3 role=authoritative_correction span=258:277] retry exactly twice\n[E4 role=authoritative_correction span=279:305] close the stale connection\n\nREFERENCES:\n[P1] HANDLE=\"refresh the recovery lease\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry exactly twice\" -> E3\n[P4] HANDLE=\"close the stale connection\" -> E4"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 84,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "alderworks-retry-policy-201"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "paired": {
+        "task_rescue": false,
+        "task_harm": false,
+        "visibility_rescue": false,
+        "visibility_harm": false,
+        "task_delta": 0,
+        "visibility_delta": 0,
+        "wrong_family_clause_delta": -2,
+        "candidate_count_delta": -3
+      }
+    },
+    {
+      "family_id": "alderworks-lane-routing-202",
+      "system_name": "AlderWorks",
+      "code_name": "AW-202",
+      "interference_cluster": "lane-routing",
+      "degradation_mode": "code_only",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "query_prompt": "The operation reports AW-202. State the permitted lane.",
+      "query_entities": [
+        "code:AW-202",
+        "domain:operations",
+        "cluster:lane-routing"
+      ],
+      "current_selection": {
+        "query_identity_anchors": [
+          "code:AW-202"
+        ],
+        "candidate_family_ids": [
+          "alderworks-lane-routing-202"
+        ],
+        "candidate_count": 1,
+        "matches": {
+          "alderworks-lane-routing-202": [
+            "code:AW-202"
+          ]
+        },
+        "fallback_used": false,
+        "selection_mode": "exact_identity_anchor",
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 1.0,
+        "distractor_candidates": 0
+      },
+      "hierarchical_selection": {
+        "selection_tier": "code",
+        "candidate_family_ids": [
+          "alderworks-lane-routing-202"
+        ],
+        "candidate_count": 1,
+        "matched_entities": {
+          "alderworks-lane-routing-202": [
+            "code:AW-202"
+          ]
+        },
+        "fallback_used": false,
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 1.0,
+        "distractor_candidates": 0
+      },
+      "current": {
+        "snapshot_sha256": "f449c400bd54443cd0e69aa186abe73ccb33e386a927321f824ec41ad1afbf6d",
+        "copied_snapshot_sha256": "f449c400bd54443cd0e69aa186abe73ccb33e386a927321f824ec41ad1afbf6d",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "Move the task only to the scarlet lane and preserve the original task ID. Retry once if necessary. Request a fresh checkpoint.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_4611674e6c7b4e3abec0881011464595:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=194:220] request a fresh checkpoint\n[E2 role=authoritative_correction span=222:260] move the task only to the scarlet lane\n[E3 role=authoritative_correction span=262:272] retry once\n[E4 role=authoritative_correction span=274:303] preserve the original task ID\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"move the task\" -> E2\n  META negation=\"only\"\n[P3] HANDLE=\"retry once\" -> E3\n[P4] HANDLE=\"preserve the original task ID\" -> E4"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 89,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "alderworks-lane-routing-202"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "hierarchical": {
+        "snapshot_sha256": "e02d68d95598f54e9b2e8ec11c97de91d9607cc9a8b94d72f2f0d029931ff4b6",
+        "copied_snapshot_sha256": "e02d68d95598f54e9b2e8ec11c97de91d9607cc9a8b94d72f2f0d029931ff4b6",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "Move the task only to the scarlet lane. Request a fresh checkpoint and preserve the original task ID. Retry once.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_1bed2875087c4755b43a8beefb541656:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=194:220] request a fresh checkpoint\n[E2 role=authoritative_correction span=222:260] move the task only to the scarlet lane\n[E3 role=authoritative_correction span=262:272] retry once\n[E4 role=authoritative_correction span=274:303] preserve the original task ID\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"move the task\" -> E2\n  META negation=\"only\"\n[P3] HANDLE=\"retry once\" -> E3\n[P4] HANDLE=\"preserve the original task ID\" -> E4"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 89,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "alderworks-lane-routing-202"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "paired": {
+        "task_rescue": false,
+        "task_harm": false,
+        "visibility_rescue": false,
+        "visibility_harm": false,
+        "task_delta": 0,
+        "visibility_delta": 0,
+        "wrong_family_clause_delta": 0,
+        "candidate_count_delta": 0
+      }
+    },
+    {
+      "family_id": "alderworks-channel-session-203",
+      "system_name": "AlderWorks",
+      "code_name": "AW-203",
+      "interference_cluster": "channel-session",
+      "degradation_mode": "system_only",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "query_prompt": "For AlderWorks, State the transport-channel rule.",
+      "query_entities": [
+        "system:AlderWorks",
+        "domain:operations",
+        "cluster:channel-session"
+      ],
+      "current_selection": {
+        "query_identity_anchors": [
+          "system:AlderWorks"
+        ],
+        "candidate_family_ids": [
+          "alderworks-retry-policy-201",
+          "alderworks-lane-routing-202",
+          "alderworks-channel-session-203",
+          "alderworks-storage-finalization-204"
+        ],
+        "candidate_count": 4,
+        "matches": {
+          "alderworks-retry-policy-201": [
+            "system:AlderWorks"
+          ],
+          "alderworks-lane-routing-202": [
+            "system:AlderWorks"
+          ],
+          "alderworks-channel-session-203": [
+            "system:AlderWorks"
+          ],
+          "alderworks-storage-finalization-204": [
+            "system:AlderWorks"
+          ]
+        },
+        "fallback_used": false,
+        "selection_mode": "exact_identity_anchor",
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 0.25,
+        "distractor_candidates": 3
+      },
+      "hierarchical_selection": {
+        "selection_tier": "system",
+        "candidate_family_ids": [
+          "alderworks-retry-policy-201",
+          "alderworks-lane-routing-202",
+          "alderworks-channel-session-203",
+          "alderworks-storage-finalization-204"
+        ],
+        "candidate_count": 4,
+        "matched_entities": {
+          "alderworks-retry-policy-201": [
+            "system:AlderWorks"
+          ],
+          "alderworks-lane-routing-202": [
+            "system:AlderWorks"
+          ],
+          "alderworks-channel-session-203": [
+            "system:AlderWorks"
+          ],
+          "alderworks-storage-finalization-204": [
+            "system:AlderWorks"
+          ]
+        },
+        "fallback_used": false,
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 0.25,
+        "distractor_candidates": 3
+      },
+      "current": {
+        "snapshot_sha256": "c7e203dd4ffffeb3f9f0ed6f24703e05eb22764881a793ee63792e72e0ad31cd",
+        "copied_snapshot_sha256": "c7e203dd4ffffeb3f9f0ed6f24703e05eb22764881a793ee63792e72e0ad31cd",
+        "pre_eval_watermark": 16,
+        "post_eval_watermark": 18,
+        "transfer_decision": "The transport-channel rule for AlderWorks is as follows:\n\n1. Open **only** a fresh transport channel.\n2. Preserve the trace fingerprint.\n3. Send one probe frame.\n4. Record the channel generation.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_5bdeffbd286c4b53af7c74c032227a1f:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=196:222] refresh the recovery lease\n[E2 role=authoritative_correction span=224:256] preserve the request fingerprint\n[E3 role=authoritative_correction span=258:277] retry exactly twice\n[E4 role=authoritative_correction span=279:305] close the stale connection\n\nREFERENCES:\n[P1] HANDLE=\"refresh the recovery lease\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry exactly twice\" -> E3\n[P4] HANDLE=\"close the stale connection\" -> E4",
+          "[interpretive:i_7280bae7964147019c6d67e5f6d05a13:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=199:227] verify the manifest checksum\n[E2 role=authoritative_correction span=271:302] preserve the upload fingerprint\n[E3 role=authoritative_correction span=304:331] record the final generation\n[E4 role=authoritative_correction span=229:269] finalize only with X-Alder-Final: locked\n\nREFERENCES:\n[P1] HANDLE=\"verify the manifest checksum\" -> E1\n[P2] HANDLE=\"preserve the upload fingerprint\" -> E2\n[P3] HANDLE=\"record the final generation\" -> E3\n[G1] UNRESOLVED -> E4",
+          "[interpretive:i_f9d4ffaaa52f48d49f799f74e271f591:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=200:230] preserve the trace fingerprint\n[E2 role=authoritative_correction span=269:289] send one probe frame\n[E3 role=authoritative_correction span=291:320] record the channel generation\n[E4 role=authoritative_correction span=232:267] open only a fresh transport channel\n\nREFERENCES:\n[P1] HANDLE=\"preserve the trace fingerprint\" -> E1\n[P2] HANDLE=\"send one probe frame\" -> E2\n[P3] HANDLE=\"record the channel generation\" -> E3\n[G1] UNRESOLVED -> E4"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 253,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "alderworks-retry-policy-201",
+          "alderworks-channel-session-203",
+          "alderworks-storage-finalization-204"
+        ],
+        "wrong_family_ids": [
+          "alderworks-retry-policy-201",
+          "alderworks-storage-finalization-204"
+        ],
+        "wrong_family_clause_count": 2,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "hierarchical": {
+        "snapshot_sha256": "80be764a294822cf390e6a367b5f557fae62721ab74dd22a1ea28472c4bb9872",
+        "copied_snapshot_sha256": "80be764a294822cf390e6a367b5f557fae62721ab74dd22a1ea28472c4bb9872",
+        "pre_eval_watermark": 16,
+        "post_eval_watermark": 18,
+        "transfer_decision": "To state the transport-channel rule for AlderWorks, follow these actions as outlined by the accumulated experience:\n\n1. **Open only a fresh transport channel.**\n2. **Preserve the trace fingerprint.**\n3. **Send one probe frame.**\n4. **Record the channel generation.**\n\nEnsure compliance with the specificity of these actions as required.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_12a34ba5badc4b40815f8b0a309faf32:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=196:222] refresh the recovery lease\n[E2 role=authoritative_correction span=224:256] preserve the request fingerprint\n[E3 role=authoritative_correction span=258:277] retry exactly twice\n[E4 role=authoritative_correction span=279:305] close the stale connection\n\nREFERENCES:\n[P1] HANDLE=\"refresh the recovery lease\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry exactly twice\" -> E3\n[P4] HANDLE=\"close the stale connection\" -> E4",
+          "[interpretive:i_83aaff75fbc142029529eb3f6f8587ad:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=200:230] preserve the trace fingerprint\n[E2 role=authoritative_correction span=269:289] send one probe frame\n[E3 role=authoritative_correction span=291:320] record the channel generation\n[E4 role=authoritative_correction span=232:267] open only a fresh transport channel\n\nREFERENCES:\n[P1] HANDLE=\"preserve the trace fingerprint\" -> E1\n[P2] HANDLE=\"send one probe frame\" -> E2\n[P3] HANDLE=\"record the channel generation\" -> E3\n[G1] UNRESOLVED -> E4",
+          "[interpretive:i_7618afdabd7843d9ae1244fbd6bf51ce:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=199:227] verify the manifest checksum\n[E2 role=authoritative_correction span=271:302] preserve the upload fingerprint\n[E3 role=authoritative_correction span=304:331] record the final generation\n[E4 role=authoritative_correction span=229:269] finalize only with X-Alder-Final: locked\n\nREFERENCES:\n[P1] HANDLE=\"verify the manifest checksum\" -> E1\n[P2] HANDLE=\"preserve the upload fingerprint\" -> E2\n[P3] HANDLE=\"record the final generation\" -> E3\n[G1] UNRESOLVED -> E4"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 253,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "alderworks-retry-policy-201",
+          "alderworks-channel-session-203",
+          "alderworks-storage-finalization-204"
+        ],
+        "wrong_family_ids": [
+          "alderworks-retry-policy-201",
+          "alderworks-storage-finalization-204"
+        ],
+        "wrong_family_clause_count": 2,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "paired": {
+        "task_rescue": false,
+        "task_harm": false,
+        "visibility_rescue": false,
+        "visibility_harm": false,
+        "task_delta": 0,
+        "visibility_delta": 0,
+        "wrong_family_clause_delta": 0,
+        "candidate_count_delta": 0
+      }
+    },
+    {
+      "family_id": "alderworks-storage-finalization-204",
+      "system_name": "AlderWorks",
+      "code_name": "AW-204",
+      "interference_cluster": "storage-finalization",
+      "degradation_mode": "context_only",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "query_prompt": "State the permitted finalization header.",
+      "query_entities": [
+        "domain:operations",
+        "cluster:storage-finalization"
+      ],
+      "current_selection": {
+        "query_identity_anchors": [],
+        "candidate_family_ids": [
+          "alderworks-retry-policy-201",
+          "alderworks-lane-routing-202",
+          "alderworks-channel-session-203",
+          "alderworks-storage-finalization-204",
+          "birchworks-retry-policy-205",
+          "birchworks-lane-routing-206",
+          "birchworks-channel-session-207",
+          "birchworks-storage-finalization-208",
+          "cedarworks-retry-policy-209",
+          "cedarworks-lane-routing-210",
+          "cedarworks-channel-session-211",
+          "cedarworks-storage-finalization-212",
+          "deltaworks-retry-policy-213",
+          "deltaworks-lane-routing-214",
+          "deltaworks-channel-session-215",
+          "deltaworks-storage-finalization-216",
+          "emberworks-retry-policy-217",
+          "emberworks-lane-routing-218",
+          "emberworks-channel-session-219",
+          "emberworks-storage-finalization-220"
+        ],
+        "candidate_count": 20,
+        "matches": {},
+        "fallback_used": true,
+        "selection_mode": "full_pool_rrf_fallback",
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 0.05,
+        "distractor_candidates": 19
+      },
+      "hierarchical_selection": {
+        "selection_tier": "cluster",
+        "candidate_family_ids": [
+          "alderworks-storage-finalization-204",
+          "birchworks-storage-finalization-208",
+          "cedarworks-storage-finalization-212",
+          "deltaworks-storage-finalization-216",
+          "emberworks-storage-finalization-220"
+        ],
+        "candidate_count": 5,
+        "matched_entities": {
+          "alderworks-storage-finalization-204": [
+            "cluster:storage-finalization"
+          ],
+          "birchworks-storage-finalization-208": [
+            "cluster:storage-finalization"
+          ],
+          "cedarworks-storage-finalization-212": [
+            "cluster:storage-finalization"
+          ],
+          "deltaworks-storage-finalization-216": [
+            "cluster:storage-finalization"
+          ],
+          "emberworks-storage-finalization-220": [
+            "cluster:storage-finalization"
+          ]
+        },
+        "fallback_used": false,
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 0.2,
+        "distractor_candidates": 4
+      },
+      "current": {
+        "snapshot_sha256": "de59e6577eddc8e11294f6dd7c8754cfa4731c6701f4658593baac96e623acea",
+        "copied_snapshot_sha256": "de59e6577eddc8e11294f6dd7c8754cfa4731c6701f4658593baac96e623acea",
+        "pre_eval_watermark": 80,
+        "post_eval_watermark": 82,
+        "transfer_decision": "Permitted finalization header:\n\n\"Verify the manifest checksum; do not purge the manifest unless the origin epoch changes; preserve the upload fingerprint; record the final generation; apply exactly five signature blocks.\"",
+        "semantic_task_pass": false,
+        "semantic_violation": true,
+        "semantic_required_ok": false,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_055eab33e3fb4449a48e302eb0f25eaa:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=194:344] verify the manifest checksum; do not purge the manifest unless the origin epoch changes; preserve the upload fingerprint; record the final generation.\n[E2 role=authoritative_correction span=283:343] preserve the upload fingerprint; record the final generation\n\nREFERENCES:\n[P1] HANDLE=\"verify the manifest checksum\" -> E1\n[P2] HANDLE=\"do not purge the manifest\" -> E1\n  META condition=\"unless the origin epoch changes\"\n[P3] HANDLE=\"preserve the upload fingerprint; record the final generation\" -> E2",
+          "[interpretive:i_62ef6b7c0f894eb9a2721a1fa998a53d:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=204:264] refresh the recovery lease; preserve the request fingerprint\n[E2 role=authoritative_correction span=266:338] retry only after renewing the recovery lease; close the stale connection\n\nREFERENCES:\n[P1] HANDLE=\"refresh the recovery lease\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E1\n[P3] HANDLE=\"close the stale connection\" -> E2",
+          "[interpretive:i_d6c4f76ecff547a99697a15b7ef52a18:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=190:318] verify the manifest checksum; apply exactly five signature blocks; preserve the upload fingerprint; record the final generation.\n\nREFERENCES:\n[P1] HANDLE=\"verify the manifest checksum\" -> E1\n[P2] HANDLE=\"apply exactly five signature blocks\" -> E1\n[P3] HANDLE=\"preserve the upload fingerprint\" -> E1\n[P4] HANDLE=\"record the final generation\" -> E1"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 253,
+        "target_clause_visible": false,
+        "visible_family_ids": [
+          "cedarworks-storage-finalization-212",
+          "emberworks-retry-policy-217",
+          "emberworks-storage-finalization-220"
+        ],
+        "wrong_family_ids": [
+          "cedarworks-storage-finalization-212",
+          "emberworks-retry-policy-217",
+          "emberworks-storage-finalization-220"
+        ],
+        "wrong_family_clause_count": 3,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 0.0,
+        "retrieval_precision": 0.0,
+        "wrong_rule_contamination": true,
+        "wrong_rule_family_ids": [
+          "cedarworks-storage-finalization-212",
+          "emberworks-storage-finalization-220"
+        ],
+        "wrong_rule_clause_count": 2
+      },
+      "hierarchical": {
+        "snapshot_sha256": "398c91aa533806a8914f989d9cb0414ce67a923192262e27ca883a68da28fd51",
+        "copied_snapshot_sha256": "398c91aa533806a8914f989d9cb0414ce67a923192262e27ca883a68da28fd51",
+        "pre_eval_watermark": 20,
+        "post_eval_watermark": 22,
+        "transfer_decision": "Finalize only with `X-Alder-Final: locked`, and do not finalize before manifest verification. Verify the manifest checksum, preserve the upload fingerprint, and record the final generation.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_253919407a8844ec8dce1832af46fc83:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=199:227] verify the manifest checksum\n[E2 role=authoritative_correction span=271:302] preserve the upload fingerprint\n[E3 role=authoritative_correction span=304:331] record the final generation\n[E4 role=authoritative_correction span=229:269] finalize only with X-Alder-Final: locked\n\nREFERENCES:\n[P1] HANDLE=\"verify the manifest checksum\" -> E1\n[P2] HANDLE=\"preserve the upload fingerprint\" -> E2\n[P3] HANDLE=\"record the final generation\" -> E3\n[G1] UNRESOLVED -> E4",
+          "[interpretive:i_4947aa708c114e31b52f5ed1f1f8ea39:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=190:318] verify the manifest checksum; apply exactly five signature blocks; preserve the upload fingerprint; record the final generation.\n\nREFERENCES:\n[P1] HANDLE=\"verify the manifest checksum\" -> E1\n[P2] HANDLE=\"apply exactly five signature blocks\" -> E1\n[P3] HANDLE=\"preserve the upload fingerprint\" -> E1\n[P4] HANDLE=\"record the final generation\" -> E1",
+          "[interpretive:i_c1f33a8efa1a46548756ea196f06e999:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=201:229] verify the manifest checksum\n[E2 role=authoritative_correction span=277:308] preserve the upload fingerprint\n[E3 role=authoritative_correction span=310:337] record the final generation\n[E4 role=authoritative_correction span=231:275] do not finalize before manifest verification\n\nREFERENCES:\n[P1] HANDLE=\"verify the manifest checksum\" -> E1\n[P2] HANDLE=\"preserve the upload fingerprint\" -> E2\n[P3] HANDLE=\"record the final generation\" -> E3\n[G1] UNRESOLVED -> E4"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 248,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "alderworks-storage-finalization-204",
+          "birchworks-storage-finalization-208",
+          "cedarworks-storage-finalization-212"
+        ],
+        "wrong_family_ids": [
+          "birchworks-storage-finalization-208",
+          "cedarworks-storage-finalization-212"
+        ],
+        "wrong_family_clause_count": 2,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "wrong_rule_contamination": true,
+        "wrong_rule_family_ids": [
+          "birchworks-storage-finalization-208"
+        ],
+        "wrong_rule_clause_count": 1
+      },
+      "paired": {
+        "task_rescue": true,
+        "task_harm": false,
+        "visibility_rescue": true,
+        "visibility_harm": false,
+        "task_delta": 1,
+        "visibility_delta": 1,
+        "wrong_family_clause_delta": -1,
+        "candidate_count_delta": -15
+      }
+    },
+    {
+      "family_id": "birchworks-retry-policy-205",
+      "system_name": "BirchWorks",
+      "code_name": "BW-205",
+      "interference_cluster": "retry-policy",
+      "degradation_mode": "code_only",
+      "semantic_operator": "at_most",
+      "semantic_dimension": "cardinality",
+      "query_prompt": "The operation reports BW-205. State the maximum retry-count rule.",
+      "query_entities": [
+        "code:BW-205",
+        "domain:operations",
+        "cluster:retry-policy"
+      ],
+      "current_selection": {
+        "query_identity_anchors": [
+          "code:BW-205"
+        ],
+        "candidate_family_ids": [
+          "birchworks-retry-policy-205"
+        ],
+        "candidate_count": 1,
+        "matches": {
+          "birchworks-retry-policy-205": [
+            "code:BW-205"
+          ]
+        },
+        "fallback_used": false,
+        "selection_mode": "exact_identity_anchor",
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 1.0,
+        "distractor_candidates": 0
+      },
+      "hierarchical_selection": {
+        "selection_tier": "code",
+        "candidate_family_ids": [
+          "birchworks-retry-policy-205"
+        ],
+        "candidate_count": 1,
+        "matched_entities": {
+          "birchworks-retry-policy-205": [
+            "code:BW-205"
+          ]
+        },
+        "fallback_used": false,
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 1.0,
+        "distractor_candidates": 0
+      },
+      "current": {
+        "snapshot_sha256": "da0c80fb5740b427b4c69ab79e4fb16c302659dea1cfd7bf12a1de8cce70bbcd",
+        "copied_snapshot_sha256": "da0c80fb5740b427b4c69ab79e4fb16c302659dea1cfd7bf12a1de8cce70bbcd",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "State the maximum retry-count rule for operation report BW-205: retry at most twice.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_ef371bdc016746f5a32988a10b40f9dc:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=180:206] refresh the recovery lease\n[E2 role=authoritative_correction span=208:240] preserve the request fingerprint\n[E3 role=authoritative_correction span=242:261] retry at most twice\n[E4 role=authoritative_correction span=263:290] close the stale connection.\n\nREFERENCES:\n[P1] HANDLE=\"refresh the recovery lease\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry\" -> E3\n  META scope=\"at most twice\"\n[P4] HANDLE=\"close the stale connection\" -> E4"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 87,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "birchworks-retry-policy-205"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "hierarchical": {
+        "snapshot_sha256": "dd21d80b1c793f562d828e684c1cb75f5fa387a4dd7ff5371df5c77cf41a1254",
+        "copied_snapshot_sha256": "dd21d80b1c793f562d828e684c1cb75f5fa387a4dd7ff5371df5c77cf41a1254",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "For operation reports BW-205, the maximum retry-count rule is as follows:\n\n\"Retry at most twice.\"",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_0ee5eb9d559c44eea4e75b1496afc52c:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=180:206] refresh the recovery lease\n[E2 role=authoritative_correction span=208:240] preserve the request fingerprint\n[E3 role=authoritative_correction span=242:261] retry at most twice\n[E4 role=authoritative_correction span=263:290] close the stale connection.\n\nREFERENCES:\n[P1] HANDLE=\"refresh the recovery lease\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry\" -> E3\n  META scope=\"at most twice\"\n[P4] HANDLE=\"close the stale connection\" -> E4"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 87,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "birchworks-retry-policy-205"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "paired": {
+        "task_rescue": false,
+        "task_harm": false,
+        "visibility_rescue": false,
+        "visibility_harm": false,
+        "task_delta": 0,
+        "visibility_delta": 0,
+        "wrong_family_clause_delta": 0,
+        "candidate_count_delta": 0
+      }
+    },
+    {
+      "family_id": "birchworks-lane-routing-206",
+      "system_name": "BirchWorks",
+      "code_name": "BW-206",
+      "interference_cluster": "lane-routing",
+      "degradation_mode": "system_only",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "query_prompt": "For BirchWorks, State the permitted lane.",
+      "query_entities": [
+        "system:BirchWorks",
+        "domain:operations",
+        "cluster:lane-routing"
+      ],
+      "current_selection": {
+        "query_identity_anchors": [
+          "system:BirchWorks"
+        ],
+        "candidate_family_ids": [
+          "birchworks-retry-policy-205",
+          "birchworks-lane-routing-206",
+          "birchworks-channel-session-207",
+          "birchworks-storage-finalization-208"
+        ],
+        "candidate_count": 4,
+        "matches": {
+          "birchworks-retry-policy-205": [
+            "system:BirchWorks"
+          ],
+          "birchworks-lane-routing-206": [
+            "system:BirchWorks"
+          ],
+          "birchworks-channel-session-207": [
+            "system:BirchWorks"
+          ],
+          "birchworks-storage-finalization-208": [
+            "system:BirchWorks"
+          ]
+        },
+        "fallback_used": false,
+        "selection_mode": "exact_identity_anchor",
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 0.25,
+        "distractor_candidates": 3
+      },
+      "hierarchical_selection": {
+        "selection_tier": "system",
+        "candidate_family_ids": [
+          "birchworks-retry-policy-205",
+          "birchworks-lane-routing-206",
+          "birchworks-channel-session-207",
+          "birchworks-storage-finalization-208"
+        ],
+        "candidate_count": 4,
+        "matched_entities": {
+          "birchworks-retry-policy-205": [
+            "system:BirchWorks"
+          ],
+          "birchworks-lane-routing-206": [
+            "system:BirchWorks"
+          ],
+          "birchworks-channel-session-207": [
+            "system:BirchWorks"
+          ],
+          "birchworks-storage-finalization-208": [
+            "system:BirchWorks"
+          ]
+        },
+        "fallback_used": false,
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 0.25,
+        "distractor_candidates": 3
+      },
+      "current": {
+        "snapshot_sha256": "37ec4190b221a6f13dcb6639e6ae825b7eb37f63ba27a21f30ce7ebbf465ee5a",
+        "copied_snapshot_sha256": "37ec4190b221a6f13dcb6639e6ae825b7eb37f63ba27a21f30ce7ebbf465ee5a",
+        "pre_eval_watermark": 16,
+        "post_eval_watermark": 18,
+        "transfer_decision": "Move the task only to the teal lane, request a fresh checkpoint, and preserve the original task ID. Retry once.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_12cb6fe0a42642e49fb85b538608bbda:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=180:206] refresh the recovery lease\n[E2 role=authoritative_correction span=208:240] preserve the request fingerprint\n[E3 role=authoritative_correction span=242:261] retry at most twice\n[E4 role=authoritative_correction span=263:290] close the stale connection.\n\nREFERENCES:\n[P1] HANDLE=\"refresh the recovery lease\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry\" -> E3\n  META scope=\"at most twice\"\n[P4] HANDLE=\"close the stale connection\" -> E4",
+          "[interpretive:i_d8a87aae662347c18b90f44807b6078f:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=197:223] request a fresh checkpoint\n[E2 role=authoritative_correction span=225:260] move the task only to the teal lane\n[E3 role=authoritative_correction span=262:272] retry once\n[E4 role=authoritative_correction span=274:303] preserve the original task ID\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"move the task\" -> E2\n  META negation=\"only\"\n[P3] HANDLE=\"retry once\" -> E3\n[P4] HANDLE=\"preserve the original task ID\" -> E4"
+        ],
+        "memory_segment_count": 2,
+        "memory_word_count": 176,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "birchworks-retry-policy-205",
+          "birchworks-lane-routing-206"
+        ],
+        "wrong_family_ids": [
+          "birchworks-retry-policy-205"
+        ],
+        "wrong_family_clause_count": 1,
+        "identifiable_family_clause_count": 2,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 0.5,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "hierarchical": {
+        "snapshot_sha256": "bbe779adbea7c1055a628bd0a9143e2423892a830f57e384a523d1ffd241ffcd",
+        "copied_snapshot_sha256": "bbe779adbea7c1055a628bd0a9143e2423892a830f57e384a523d1ffd241ffcd",
+        "pre_eval_watermark": 16,
+        "post_eval_watermark": 18,
+        "transfer_decision": "To proceed with the task for BirchWorks, you must:\n\n1. **Verify the manifest checksum** before taking any further actions. \n2. **Do not finalize before manifest verification** is completed. \n\nThese are critical constraints to ensure proper operation.",
+        "semantic_task_pass": false,
+        "semantic_violation": true,
+        "semantic_required_ok": false,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_2e4b056d339645a78a7455309264df50:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=201:229] verify the manifest checksum\n[E2 role=authoritative_correction span=277:308] preserve the upload fingerprint\n[E3 role=authoritative_correction span=310:337] record the final generation\n[E4 role=authoritative_correction span=231:275] do not finalize before manifest verification\n\nREFERENCES:\n[P1] HANDLE=\"verify the manifest checksum\" -> E1\n[P2] HANDLE=\"preserve the upload fingerprint\" -> E2\n[P3] HANDLE=\"record the final generation\" -> E3\n[G1] UNRESOLVED -> E4",
+          "[interpretive:i_72d7ff4c8d234cc190a1c46f99ef031c:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=180:206] refresh the recovery lease\n[E2 role=authoritative_correction span=208:240] preserve the request fingerprint\n[E3 role=authoritative_correction span=242:261] retry at most twice\n[E4 role=authoritative_correction span=263:290] close the stale connection.\n\nREFERENCES:\n[P1] HANDLE=\"refresh the recovery lease\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry\" -> E3\n  META scope=\"at most twice\"\n[P4] HANDLE=\"close the stale connection\" -> E4"
+        ],
+        "memory_segment_count": 2,
+        "memory_word_count": 172,
+        "target_clause_visible": false,
+        "visible_family_ids": [
+          "birchworks-retry-policy-205",
+          "birchworks-storage-finalization-208"
+        ],
+        "wrong_family_ids": [
+          "birchworks-retry-policy-205",
+          "birchworks-storage-finalization-208"
+        ],
+        "wrong_family_clause_count": 2,
+        "identifiable_family_clause_count": 2,
+        "retrieval_recall": 0.0,
+        "retrieval_precision": 0.0,
+        "wrong_rule_contamination": true,
+        "wrong_rule_family_ids": [
+          "birchworks-storage-finalization-208"
+        ],
+        "wrong_rule_clause_count": 1
+      },
+      "paired": {
+        "task_rescue": false,
+        "task_harm": true,
+        "visibility_rescue": false,
+        "visibility_harm": true,
+        "task_delta": -1,
+        "visibility_delta": -1,
+        "wrong_family_clause_delta": 1,
+        "candidate_count_delta": 0
+      }
+    },
+    {
+      "family_id": "birchworks-channel-session-207",
+      "system_name": "BirchWorks",
+      "code_name": "BW-207",
+      "interference_cluster": "channel-session",
+      "degradation_mode": "context_only",
+      "semantic_operator": "never",
+      "semantic_dimension": "polarity",
+      "query_prompt": "State the previous-session-nonce rule.",
+      "query_entities": [
+        "domain:operations",
+        "cluster:channel-session"
+      ],
+      "current_selection": {
+        "query_identity_anchors": [],
+        "candidate_family_ids": [
+          "alderworks-retry-policy-201",
+          "alderworks-lane-routing-202",
+          "alderworks-channel-session-203",
+          "alderworks-storage-finalization-204",
+          "birchworks-retry-policy-205",
+          "birchworks-lane-routing-206",
+          "birchworks-channel-session-207",
+          "birchworks-storage-finalization-208",
+          "cedarworks-retry-policy-209",
+          "cedarworks-lane-routing-210",
+          "cedarworks-channel-session-211",
+          "cedarworks-storage-finalization-212",
+          "deltaworks-retry-policy-213",
+          "deltaworks-lane-routing-214",
+          "deltaworks-channel-session-215",
+          "deltaworks-storage-finalization-216",
+          "emberworks-retry-policy-217",
+          "emberworks-lane-routing-218",
+          "emberworks-channel-session-219",
+          "emberworks-storage-finalization-220"
+        ],
+        "candidate_count": 20,
+        "matches": {},
+        "fallback_used": true,
+        "selection_mode": "full_pool_rrf_fallback",
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 0.05,
+        "distractor_candidates": 19
+      },
+      "hierarchical_selection": {
+        "selection_tier": "cluster",
+        "candidate_family_ids": [
+          "alderworks-channel-session-203",
+          "birchworks-channel-session-207",
+          "cedarworks-channel-session-211",
+          "deltaworks-channel-session-215",
+          "emberworks-channel-session-219"
+        ],
+        "candidate_count": 5,
+        "matched_entities": {
+          "alderworks-channel-session-203": [
+            "cluster:channel-session"
+          ],
+          "birchworks-channel-session-207": [
+            "cluster:channel-session"
+          ],
+          "cedarworks-channel-session-211": [
+            "cluster:channel-session"
+          ],
+          "deltaworks-channel-session-215": [
+            "cluster:channel-session"
+          ],
+          "emberworks-channel-session-219": [
+            "cluster:channel-session"
+          ]
+        },
+        "fallback_used": false,
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 0.2,
+        "distractor_candidates": 4
+      },
+      "current": {
+        "snapshot_sha256": "696c81aa95daf3738d8503ad0aec2dab71b994715e2f60d98ecc94432289f607",
+        "copied_snapshot_sha256": "696c81aa95daf3738d8503ad0aec2dab71b994715e2f60d98ecc94432289f607",
+        "pre_eval_watermark": 80,
+        "post_eval_watermark": 82,
+        "transfer_decision": "The previous-session-nonce rule requires the following actions:\n\n1. Refresh the recovery lease.\n2. Preserve the request fingerprint.\n3. Close the stale connection.\n4. Retry only after renewing the recovery lease.\n5. Retry exactly twice if necessary.",
+        "semantic_task_pass": false,
+        "semantic_violation": true,
+        "semantic_required_ok": false,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_1a0aa1d20a4042048a39536f9564fe67:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=204:264] refresh the recovery lease; preserve the request fingerprint\n[E2 role=authoritative_correction span=266:338] retry only after renewing the recovery lease; close the stale connection\n\nREFERENCES:\n[P1] HANDLE=\"refresh the recovery lease\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E1\n[P3] HANDLE=\"close the stale connection\" -> E2",
+          "[interpretive:i_65bf2f9b032144fab7f47e51649a42a3:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=196:222] refresh the recovery lease\n[E2 role=authoritative_correction span=224:256] preserve the request fingerprint\n[E3 role=authoritative_correction span=258:277] retry exactly twice\n[E4 role=authoritative_correction span=279:305] close the stale connection\n\nREFERENCES:\n[P1] HANDLE=\"refresh the recovery lease\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry exactly twice\" -> E3\n[P4] HANDLE=\"close the stale connection\" -> E4",
+          "[interpretive:i_834560a6bf1d43f691300c95424d1c38:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=195:221] request a fresh checkpoint\n[E2 role=authoritative_correction span=223:261] do not move the task to the black lane\n[E3 role=authoritative_correction span=263:273] retry once\n[E4 role=authoritative_correction span=275:304] preserve the original task ID\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"do not move the task to the black lane\" -> E2\n[P3] HANDLE=\"retry once\" -> E3\n[P4] HANDLE=\"preserve the original task ID\" -> E4"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 254,
+        "target_clause_visible": false,
+        "visible_family_ids": [
+          "alderworks-retry-policy-201",
+          "cedarworks-lane-routing-210",
+          "emberworks-retry-policy-217"
+        ],
+        "wrong_family_ids": [
+          "alderworks-retry-policy-201",
+          "cedarworks-lane-routing-210",
+          "emberworks-retry-policy-217"
+        ],
+        "wrong_family_clause_count": 3,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 0.0,
+        "retrieval_precision": 0.0,
+        "wrong_rule_contamination": true,
+        "wrong_rule_family_ids": [
+          "alderworks-retry-policy-201",
+          "emberworks-retry-policy-217"
+        ],
+        "wrong_rule_clause_count": 2
+      },
+      "hierarchical": {
+        "snapshot_sha256": "a28367aae23067231eb6eb9937e6344d41e8fc69267445fd12eafb2f0226ed8a",
+        "copied_snapshot_sha256": "a28367aae23067231eb6eb9937e6344d41e8fc69267445fd12eafb2f0226ed8a",
+        "pre_eval_watermark": 20,
+        "post_eval_watermark": 22,
+        "transfer_decision": "The previous-session-nonce rule states: \"Never reuse the previous session nonce.\"",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_344ce4fec1b8470ebb6b3175b4a4803b:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=196:226] preserve the trace fingerprint\n[E2 role=authoritative_correction span=268:288] send one probe frame\n[E3 role=authoritative_correction span=290:319] record the channel generation\n[E4 role=authoritative_correction span=228:266] never reuse the previous session nonce\n\nREFERENCES:\n[P1] HANDLE=\"preserve the trace fingerprint\" -> E1\n[P2] HANDLE=\"send one probe frame\" -> E2\n[P3] HANDLE=\"record the channel generation\" -> E3\n[G1] UNRESOLVED -> E4",
+          "[interpretive:i_3acfc823e9d94a3ca529fee688e51b70:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=185:215] preserve the trace fingerprint\n[E2 role=authoritative_correction span=217:241] wait at least 14 seconds\n[E3 role=authoritative_correction span=243:263] send one probe frame\n[E4 role=authoritative_correction span=265:294] record the channel generation\n\nREFERENCES:\n[P1] HANDLE=\"preserve the trace fingerprint\" -> E1\n[P2] HANDLE=\"wait at least 14 seconds\" -> E2\n[P3] HANDLE=\"send one probe frame\" -> E3\n[P4] HANDLE=\"record the channel generation\" -> E4"
+        ],
+        "memory_segment_count": 2,
+        "memory_word_count": 173,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "birchworks-channel-session-207",
+          "deltaworks-channel-session-215"
+        ],
+        "wrong_family_ids": [
+          "deltaworks-channel-session-215"
+        ],
+        "wrong_family_clause_count": 1,
+        "identifiable_family_clause_count": 2,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 0.5,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "paired": {
+        "task_rescue": true,
+        "task_harm": false,
+        "visibility_rescue": true,
+        "visibility_harm": false,
+        "task_delta": 1,
+        "visibility_delta": 1,
+        "wrong_family_clause_delta": -2,
+        "candidate_count_delta": -15
+      }
+    },
+    {
+      "family_id": "birchworks-storage-finalization-208",
+      "system_name": "BirchWorks",
+      "code_name": "BW-208",
+      "interference_cluster": "storage-finalization",
+      "degradation_mode": "full_identity",
+      "semantic_operator": "do_not",
+      "semantic_dimension": "polarity",
+      "query_prompt": "BirchWorks reports BW-208. State the manifest/finalization rule.",
+      "query_entities": [
+        "system:BirchWorks",
+        "code:BW-208",
+        "domain:operations",
+        "cluster:storage-finalization"
+      ],
+      "current_selection": {
+        "query_identity_anchors": [
+          "code:BW-208",
+          "system:BirchWorks"
+        ],
+        "candidate_family_ids": [
+          "birchworks-retry-policy-205",
+          "birchworks-lane-routing-206",
+          "birchworks-channel-session-207",
+          "birchworks-storage-finalization-208"
+        ],
+        "candidate_count": 4,
+        "matches": {
+          "birchworks-retry-policy-205": [
+            "system:BirchWorks"
+          ],
+          "birchworks-lane-routing-206": [
+            "system:BirchWorks"
+          ],
+          "birchworks-channel-session-207": [
+            "system:BirchWorks"
+          ],
+          "birchworks-storage-finalization-208": [
+            "code:BW-208",
+            "system:BirchWorks"
+          ]
+        },
+        "fallback_used": false,
+        "selection_mode": "exact_identity_anchor",
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 0.25,
+        "distractor_candidates": 3
+      },
+      "hierarchical_selection": {
+        "selection_tier": "code",
+        "candidate_family_ids": [
+          "birchworks-storage-finalization-208"
+        ],
+        "candidate_count": 1,
+        "matched_entities": {
+          "birchworks-storage-finalization-208": [
+            "code:BW-208"
+          ]
+        },
+        "fallback_used": false,
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 1.0,
+        "distractor_candidates": 0
+      },
+      "current": {
+        "snapshot_sha256": "c8335e35d629fc080b764ff6d8e3779477422e1e698bbe66d15f4c70c85bac35",
+        "copied_snapshot_sha256": "c8335e35d629fc080b764ff6d8e3779477422e1e698bbe66d15f4c70c85bac35",
+        "pre_eval_watermark": 16,
+        "post_eval_watermark": 18,
+        "transfer_decision": "To finalize the manifest for BirchWorks report BW-208, you must:\n\n1. **Verify the manifest checksum.**\n2. **Do not finalize before manifest verification.**\n3. **Preserve the upload fingerprint.**\n4. **Record the final generation.**",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_10d442d5b6d542eba74bbd3c7827c1a2:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=180:206] refresh the recovery lease\n[E2 role=authoritative_correction span=208:240] preserve the request fingerprint\n[E3 role=authoritative_correction span=242:261] retry at most twice\n[E4 role=authoritative_correction span=263:290] close the stale connection.\n\nREFERENCES:\n[P1] HANDLE=\"refresh the recovery lease\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry\" -> E3\n  META scope=\"at most twice\"\n[P4] HANDLE=\"close the stale connection\" -> E4",
+          "[interpretive:i_ec1065e931e64ee087383e62804dbbf7:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=201:229] verify the manifest checksum\n[E2 role=authoritative_correction span=277:308] preserve the upload fingerprint\n[E3 role=authoritative_correction span=310:337] record the final generation\n[E4 role=authoritative_correction span=231:275] do not finalize before manifest verification\n\nREFERENCES:\n[P1] HANDLE=\"verify the manifest checksum\" -> E1\n[P2] HANDLE=\"preserve the upload fingerprint\" -> E2\n[P3] HANDLE=\"record the final generation\" -> E3\n[G1] UNRESOLVED -> E4"
+        ],
+        "memory_segment_count": 2,
+        "memory_word_count": 172,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "birchworks-retry-policy-205",
+          "birchworks-storage-finalization-208"
+        ],
+        "wrong_family_ids": [
+          "birchworks-retry-policy-205"
+        ],
+        "wrong_family_clause_count": 1,
+        "identifiable_family_clause_count": 2,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 0.5,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "hierarchical": {
+        "snapshot_sha256": "ff9df07c610d30f78bba88619921b429752e67ce7157c6f3920fe5aa9e314af9",
+        "copied_snapshot_sha256": "ff9df07c610d30f78bba88619921b429752e67ce7157c6f3920fe5aa9e314af9",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "To finalize the task for BirchWorks report BW-208, the following rule must be applied:\n\n1. **Do not finalize before manifest verification** (E4).\n2. **Verify the manifest checksum** (E1).\n3. **Preserve the upload fingerprint** (E2).\n4. **Record the final generation** (E3). \n\nFollow this ordering and ensure that each step is adhered to strictly.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_cd54ee82ce63484d8716244a39281d61:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=201:229] verify the manifest checksum\n[E2 role=authoritative_correction span=277:308] preserve the upload fingerprint\n[E3 role=authoritative_correction span=310:337] record the final generation\n[E4 role=authoritative_correction span=231:275] do not finalize before manifest verification\n\nREFERENCES:\n[P1] HANDLE=\"verify the manifest checksum\" -> E1\n[P2] HANDLE=\"preserve the upload fingerprint\" -> E2\n[P3] HANDLE=\"record the final generation\" -> E3\n[G1] UNRESOLVED -> E4"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 85,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "birchworks-storage-finalization-208"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "paired": {
+        "task_rescue": false,
+        "task_harm": false,
+        "visibility_rescue": false,
+        "visibility_harm": false,
+        "task_delta": 0,
+        "visibility_delta": 0,
+        "wrong_family_clause_delta": -1,
+        "candidate_count_delta": -3
+      }
+    },
+    {
+      "family_id": "cedarworks-retry-policy-209",
+      "system_name": "CedarWorks",
+      "code_name": "CW-209",
+      "interference_cluster": "retry-policy",
+      "degradation_mode": "system_only",
+      "semantic_operator": "at_least",
+      "semantic_dimension": "cardinality",
+      "query_prompt": "For CedarWorks, State the minimum retry-count rule.",
+      "query_entities": [
+        "system:CedarWorks",
+        "domain:operations",
+        "cluster:retry-policy"
+      ],
+      "current_selection": {
+        "query_identity_anchors": [
+          "system:CedarWorks"
+        ],
+        "candidate_family_ids": [
+          "cedarworks-retry-policy-209",
+          "cedarworks-lane-routing-210",
+          "cedarworks-channel-session-211",
+          "cedarworks-storage-finalization-212"
+        ],
+        "candidate_count": 4,
+        "matches": {
+          "cedarworks-retry-policy-209": [
+            "system:CedarWorks"
+          ],
+          "cedarworks-lane-routing-210": [
+            "system:CedarWorks"
+          ],
+          "cedarworks-channel-session-211": [
+            "system:CedarWorks"
+          ],
+          "cedarworks-storage-finalization-212": [
+            "system:CedarWorks"
+          ]
+        },
+        "fallback_used": false,
+        "selection_mode": "exact_identity_anchor",
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 0.25,
+        "distractor_candidates": 3
+      },
+      "hierarchical_selection": {
+        "selection_tier": "system",
+        "candidate_family_ids": [
+          "cedarworks-retry-policy-209",
+          "cedarworks-lane-routing-210",
+          "cedarworks-channel-session-211",
+          "cedarworks-storage-finalization-212"
+        ],
+        "candidate_count": 4,
+        "matched_entities": {
+          "cedarworks-retry-policy-209": [
+            "system:CedarWorks"
+          ],
+          "cedarworks-lane-routing-210": [
+            "system:CedarWorks"
+          ],
+          "cedarworks-channel-session-211": [
+            "system:CedarWorks"
+          ],
+          "cedarworks-storage-finalization-212": [
+            "system:CedarWorks"
+          ]
+        },
+        "fallback_used": false,
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 0.25,
+        "distractor_candidates": 3
+      },
+      "current": {
+        "snapshot_sha256": "5133774d76fff2ad515e4d2f197b58e5b1e59d2fd5063244bff4ae0b3d4f7dab",
+        "copied_snapshot_sha256": "5133774d76fff2ad515e4d2f197b58e5b1e59d2fd5063244bff4ae0b3d4f7dab",
+        "pre_eval_watermark": 16,
+        "post_eval_watermark": 18,
+        "transfer_decision": "The minimum retry-count rule for CedarWorks is to \"retry once.\"",
+        "semantic_task_pass": false,
+        "semantic_violation": true,
+        "semantic_required_ok": false,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_9c8aae8971404360aa60cb5274f1b70e:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=190:318] verify the manifest checksum; apply exactly five signature blocks; preserve the upload fingerprint; record the final generation.\n\nREFERENCES:\n[P1] HANDLE=\"verify the manifest checksum\" -> E1\n[P2] HANDLE=\"apply exactly five signature blocks\" -> E1\n[P3] HANDLE=\"preserve the upload fingerprint\" -> E1\n[P4] HANDLE=\"record the final generation\" -> E1",
+          "[interpretive:i_8c3e724bda574f54b2b955855b2ee9d5:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=195:221] request a fresh checkpoint\n[E2 role=authoritative_correction span=223:261] do not move the task to the black lane\n[E3 role=authoritative_correction span=263:273] retry once\n[E4 role=authoritative_correction span=275:304] preserve the original task ID\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"do not move the task to the black lane\" -> E2\n[P3] HANDLE=\"retry once\" -> E3\n[P4] HANDLE=\"preserve the original task ID\" -> E4"
+        ],
+        "memory_segment_count": 2,
+        "memory_word_count": 173,
+        "target_clause_visible": false,
+        "visible_family_ids": [
+          "cedarworks-lane-routing-210",
+          "cedarworks-storage-finalization-212"
+        ],
+        "wrong_family_ids": [
+          "cedarworks-lane-routing-210",
+          "cedarworks-storage-finalization-212"
+        ],
+        "wrong_family_clause_count": 2,
+        "identifiable_family_clause_count": 2,
+        "retrieval_recall": 0.0,
+        "retrieval_precision": 0.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "hierarchical": {
+        "snapshot_sha256": "f9cf1963ef644149eb4632def9888ad2bf0b3160e4449c8e1d1f18105ee9c9a3",
+        "copied_snapshot_sha256": "f9cf1963ef644149eb4632def9888ad2bf0b3160e4449c8e1d1f18105ee9c9a3",
+        "pre_eval_watermark": 16,
+        "post_eval_watermark": 18,
+        "transfer_decision": "For CedarWorks, the minimum retry-count rule is: **retry at least twice**.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_98a6bcc142df42b196becac49fe8dedb:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=179:205] refresh the recovery lease\n[E2 role=authoritative_correction span=207:239] preserve the request fingerprint\n[E3 role=authoritative_correction span=241:261] retry at least twice\n[E4 role=authoritative_correction span=263:289] close the stale connection\n\nREFERENCES:\n[P1] HANDLE=\"refresh the recovery lease\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry at least twice\" -> E3\n[P4] HANDLE=\"close the stale connection\" -> E4",
+          "[interpretive:i_764ec2cb3aeb48a1b5454f5bb58291f7:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=190:318] verify the manifest checksum; apply exactly five signature blocks; preserve the upload fingerprint; record the final generation.\n\nREFERENCES:\n[P1] HANDLE=\"verify the manifest checksum\" -> E1\n[P2] HANDLE=\"apply exactly five signature blocks\" -> E1\n[P3] HANDLE=\"preserve the upload fingerprint\" -> E1\n[P4] HANDLE=\"record the final generation\" -> E1",
+          "[interpretive:i_1108e74a36e14d70900f9f0fefcb5c2c:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=191:221] preserve the trace fingerprint\n[E2 role=authoritative_correction span=223:257] send exactly four heartbeat frames\n[E3 role=authoritative_correction span=259:279] send one probe frame\n[E4 role=authoritative_correction span=281:310] record the channel generation\n\nREFERENCES:\n[P1] HANDLE=\"preserve the trace fingerprint\" -> E1\n[P2] HANDLE=\"send exactly four heartbeat frames\" -> E2\n[P3] HANDLE=\"send one probe frame\" -> E3\n[P4] HANDLE=\"record the channel generation\" -> E4"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 253,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "cedarworks-retry-policy-209",
+          "cedarworks-channel-session-211",
+          "cedarworks-storage-finalization-212"
+        ],
+        "wrong_family_ids": [
+          "cedarworks-channel-session-211",
+          "cedarworks-storage-finalization-212"
+        ],
+        "wrong_family_clause_count": 2,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "paired": {
+        "task_rescue": true,
+        "task_harm": false,
+        "visibility_rescue": true,
+        "visibility_harm": false,
+        "task_delta": 1,
+        "visibility_delta": 1,
+        "wrong_family_clause_delta": 0,
+        "candidate_count_delta": 0
+      }
+    },
+    {
+      "family_id": "cedarworks-lane-routing-210",
+      "system_name": "CedarWorks",
+      "code_name": "CW-210",
+      "interference_cluster": "lane-routing",
+      "degradation_mode": "context_only",
+      "semantic_operator": "do_not",
+      "semantic_dimension": "polarity",
+      "query_prompt": "State the rule governing the black lane.",
+      "query_entities": [
+        "domain:operations",
+        "cluster:lane-routing"
+      ],
+      "current_selection": {
+        "query_identity_anchors": [],
+        "candidate_family_ids": [
+          "alderworks-retry-policy-201",
+          "alderworks-lane-routing-202",
+          "alderworks-channel-session-203",
+          "alderworks-storage-finalization-204",
+          "birchworks-retry-policy-205",
+          "birchworks-lane-routing-206",
+          "birchworks-channel-session-207",
+          "birchworks-storage-finalization-208",
+          "cedarworks-retry-policy-209",
+          "cedarworks-lane-routing-210",
+          "cedarworks-channel-session-211",
+          "cedarworks-storage-finalization-212",
+          "deltaworks-retry-policy-213",
+          "deltaworks-lane-routing-214",
+          "deltaworks-channel-session-215",
+          "deltaworks-storage-finalization-216",
+          "emberworks-retry-policy-217",
+          "emberworks-lane-routing-218",
+          "emberworks-channel-session-219",
+          "emberworks-storage-finalization-220"
+        ],
+        "candidate_count": 20,
+        "matches": {},
+        "fallback_used": true,
+        "selection_mode": "full_pool_rrf_fallback",
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 0.05,
+        "distractor_candidates": 19
+      },
+      "hierarchical_selection": {
+        "selection_tier": "cluster",
+        "candidate_family_ids": [
+          "alderworks-lane-routing-202",
+          "birchworks-lane-routing-206",
+          "cedarworks-lane-routing-210",
+          "deltaworks-lane-routing-214",
+          "emberworks-lane-routing-218"
+        ],
+        "candidate_count": 5,
+        "matched_entities": {
+          "alderworks-lane-routing-202": [
+            "cluster:lane-routing"
+          ],
+          "birchworks-lane-routing-206": [
+            "cluster:lane-routing"
+          ],
+          "cedarworks-lane-routing-210": [
+            "cluster:lane-routing"
+          ],
+          "deltaworks-lane-routing-214": [
+            "cluster:lane-routing"
+          ],
+          "emberworks-lane-routing-218": [
+            "cluster:lane-routing"
+          ]
+        },
+        "fallback_used": false,
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 0.2,
+        "distractor_candidates": 4
+      },
+      "current": {
+        "snapshot_sha256": "f7965b87b7c1f168dd835ce809fbfe1bd86b4d4eda6652d130fc547eaf66c7ff",
+        "copied_snapshot_sha256": "f7965b87b7c1f168dd835ce809fbfe1bd86b4d4eda6652d130fc547eaf66c7ff",
+        "pre_eval_watermark": 80,
+        "post_eval_watermark": 82,
+        "transfer_decision": "Do not move the task to the black lane. Retry once while preserving the original task ID.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_5524cac011fc4ca3bc6c251004d30061:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=195:221] request a fresh checkpoint\n[E2 role=authoritative_correction span=223:261] do not move the task to the black lane\n[E3 role=authoritative_correction span=263:273] retry once\n[E4 role=authoritative_correction span=275:304] preserve the original task ID\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"do not move the task to the black lane\" -> E2\n[P3] HANDLE=\"retry once\" -> E3\n[P4] HANDLE=\"preserve the original task ID\" -> E4",
+          "[interpretive:i_2b14c16e02f6440da9b10ebfeded26eb:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=190:318] verify the manifest checksum; apply exactly five signature blocks; preserve the upload fingerprint; record the final generation.\n\nREFERENCES:\n[P1] HANDLE=\"verify the manifest checksum\" -> E1\n[P2] HANDLE=\"apply exactly five signature blocks\" -> E1\n[P3] HANDLE=\"preserve the upload fingerprint\" -> E1\n[P4] HANDLE=\"record the final generation\" -> E1",
+          "[interpretive:i_45ffaab4e8ea445c9271ef0dd0cb5f1b:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=204:264] refresh the recovery lease; preserve the request fingerprint\n[E2 role=authoritative_correction span=266:338] retry only after renewing the recovery lease; close the stale connection\n\nREFERENCES:\n[P1] HANDLE=\"refresh the recovery lease\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E1\n[P3] HANDLE=\"close the stale connection\" -> E2"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 249,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "cedarworks-lane-routing-210",
+          "cedarworks-storage-finalization-212",
+          "emberworks-retry-policy-217"
+        ],
+        "wrong_family_ids": [
+          "cedarworks-storage-finalization-212",
+          "emberworks-retry-policy-217"
+        ],
+        "wrong_family_clause_count": 2,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "hierarchical": {
+        "snapshot_sha256": "9249db8b42a284d0856c3336987c8b53e0e6b815831b3f25cdfb6b3adb0df1e3",
+        "copied_snapshot_sha256": "9249db8b42a284d0856c3336987c8b53e0e6b815831b3f25cdfb6b3adb0df1e3",
+        "pre_eval_watermark": 20,
+        "post_eval_watermark": 22,
+        "transfer_decision": "The rule governing the black lane is: **do not move the task to the black lane.**",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_eea381258a754876a7294928bf649a2a:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=195:221] request a fresh checkpoint\n[E2 role=authoritative_correction span=223:261] do not move the task to the black lane\n[E3 role=authoritative_correction span=263:273] retry once\n[E4 role=authoritative_correction span=275:304] preserve the original task ID\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"do not move the task to the black lane\" -> E2\n[P3] HANDLE=\"retry once\" -> E3\n[P4] HANDLE=\"preserve the original task ID\" -> E4",
+          "[interpretive:i_0af8dc5853fc4c6589f08453c74f7e2d:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=197:223] request a fresh checkpoint\n[E2 role=authoritative_correction span=225:260] move the task only to the teal lane\n[E3 role=authoritative_correction span=262:272] retry once\n[E4 role=authoritative_correction span=274:303] preserve the original task ID\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"move the task\" -> E2\n  META negation=\"only\"\n[P3] HANDLE=\"retry once\" -> E3\n[P4] HANDLE=\"preserve the original task ID\" -> E4"
+        ],
+        "memory_segment_count": 2,
+        "memory_word_count": 183,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "birchworks-lane-routing-206",
+          "cedarworks-lane-routing-210"
+        ],
+        "wrong_family_ids": [
+          "birchworks-lane-routing-206"
+        ],
+        "wrong_family_clause_count": 1,
+        "identifiable_family_clause_count": 2,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 0.5,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "paired": {
+        "task_rescue": false,
+        "task_harm": false,
+        "visibility_rescue": false,
+        "visibility_harm": false,
+        "task_delta": 0,
+        "visibility_delta": 0,
+        "wrong_family_clause_delta": -1,
+        "candidate_count_delta": -15
+      }
+    },
+    {
+      "family_id": "cedarworks-channel-session-211",
+      "system_name": "CedarWorks",
+      "code_name": "CW-211",
+      "interference_cluster": "channel-session",
+      "degradation_mode": "full_identity",
+      "semantic_operator": "exactly",
+      "semantic_dimension": "cardinality",
+      "query_prompt": "CedarWorks reports CW-211. State the exact heartbeat-frame count.",
+      "query_entities": [
+        "system:CedarWorks",
+        "code:CW-211",
+        "domain:operations",
+        "cluster:channel-session"
+      ],
+      "current_selection": {
+        "query_identity_anchors": [
+          "code:CW-211",
+          "system:CedarWorks"
+        ],
+        "candidate_family_ids": [
+          "cedarworks-retry-policy-209",
+          "cedarworks-lane-routing-210",
+          "cedarworks-channel-session-211",
+          "cedarworks-storage-finalization-212"
+        ],
+        "candidate_count": 4,
+        "matches": {
+          "cedarworks-retry-policy-209": [
+            "system:CedarWorks"
+          ],
+          "cedarworks-lane-routing-210": [
+            "system:CedarWorks"
+          ],
+          "cedarworks-channel-session-211": [
+            "code:CW-211",
+            "system:CedarWorks"
+          ],
+          "cedarworks-storage-finalization-212": [
+            "system:CedarWorks"
+          ]
+        },
+        "fallback_used": false,
+        "selection_mode": "exact_identity_anchor",
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 0.25,
+        "distractor_candidates": 3
+      },
+      "hierarchical_selection": {
+        "selection_tier": "code",
+        "candidate_family_ids": [
+          "cedarworks-channel-session-211"
+        ],
+        "candidate_count": 1,
+        "matched_entities": {
+          "cedarworks-channel-session-211": [
+            "code:CW-211"
+          ]
+        },
+        "fallback_used": false,
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 1.0,
+        "distractor_candidates": 0
+      },
+      "current": {
+        "snapshot_sha256": "bf1a33a1a24be32d71d012a1ce8e99cad66831a0c6786f88e776079f2c59b4cf",
+        "copied_snapshot_sha256": "bf1a33a1a24be32d71d012a1ce8e99cad66831a0c6786f88e776079f2c59b4cf",
+        "pre_eval_watermark": 16,
+        "post_eval_watermark": 18,
+        "transfer_decision": "The exact heartbeat-frame count is four.",
+        "semantic_task_pass": false,
+        "semantic_violation": true,
+        "semantic_required_ok": false,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_0d968599bc68413a9b86b8848affe60f:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=191:221] preserve the trace fingerprint\n[E2 role=authoritative_correction span=223:257] send exactly four heartbeat frames\n[E3 role=authoritative_correction span=259:279] send one probe frame\n[E4 role=authoritative_correction span=281:310] record the channel generation\n\nREFERENCES:\n[P1] HANDLE=\"preserve the trace fingerprint\" -> E1\n[P2] HANDLE=\"send exactly four heartbeat frames\" -> E2\n[P3] HANDLE=\"send one probe frame\" -> E3\n[P4] HANDLE=\"record the channel generation\" -> E4",
+          "[interpretive:i_1fffa2630ca24dfdb6463253b6522649:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=190:318] verify the manifest checksum; apply exactly five signature blocks; preserve the upload fingerprint; record the final generation.\n\nREFERENCES:\n[P1] HANDLE=\"verify the manifest checksum\" -> E1\n[P2] HANDLE=\"apply exactly five signature blocks\" -> E1\n[P3] HANDLE=\"preserve the upload fingerprint\" -> E1\n[P4] HANDLE=\"record the final generation\" -> E1",
+          "[interpretive:i_d4c441f132444e24bbbec70f49604946:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=179:205] refresh the recovery lease\n[E2 role=authoritative_correction span=207:239] preserve the request fingerprint\n[E3 role=authoritative_correction span=241:261] retry at least twice\n[E4 role=authoritative_correction span=263:289] close the stale connection\n\nREFERENCES:\n[P1] HANDLE=\"refresh the recovery lease\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry at least twice\" -> E3\n[P4] HANDLE=\"close the stale connection\" -> E4"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 253,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "cedarworks-retry-policy-209",
+          "cedarworks-channel-session-211",
+          "cedarworks-storage-finalization-212"
+        ],
+        "wrong_family_ids": [
+          "cedarworks-retry-policy-209",
+          "cedarworks-storage-finalization-212"
+        ],
+        "wrong_family_clause_count": 2,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "hierarchical": {
+        "snapshot_sha256": "df62ae3d191edabba7cd25f38838e8721491a8e4a9daf30989bac9981099c067",
+        "copied_snapshot_sha256": "df62ae3d191edabba7cd25f38838e8721491a8e4a9daf30989bac9981099c067",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "Send exactly four heartbeat frames.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_65f538ae22b347a5b727a4599e81a2a9:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=191:221] preserve the trace fingerprint\n[E2 role=authoritative_correction span=223:257] send exactly four heartbeat frames\n[E3 role=authoritative_correction span=259:279] send one probe frame\n[E4 role=authoritative_correction span=281:310] record the channel generation\n\nREFERENCES:\n[P1] HANDLE=\"preserve the trace fingerprint\" -> E1\n[P2] HANDLE=\"send exactly four heartbeat frames\" -> E2\n[P3] HANDLE=\"send one probe frame\" -> E3\n[P4] HANDLE=\"record the channel generation\" -> E4"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 88,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "cedarworks-channel-session-211"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "paired": {
+        "task_rescue": true,
+        "task_harm": false,
+        "visibility_rescue": false,
+        "visibility_harm": false,
+        "task_delta": 1,
+        "visibility_delta": 0,
+        "wrong_family_clause_delta": -2,
+        "candidate_count_delta": -3
+      }
+    },
+    {
+      "family_id": "cedarworks-storage-finalization-212",
+      "system_name": "CedarWorks",
+      "code_name": "CW-212",
+      "interference_cluster": "storage-finalization",
+      "degradation_mode": "code_only",
+      "semantic_operator": "exactly",
+      "semantic_dimension": "cardinality",
+      "query_prompt": "The operation reports CW-212. State the exact signature-block count.",
+      "query_entities": [
+        "code:CW-212",
+        "domain:operations",
+        "cluster:storage-finalization"
+      ],
+      "current_selection": {
+        "query_identity_anchors": [
+          "code:CW-212"
+        ],
+        "candidate_family_ids": [
+          "cedarworks-storage-finalization-212"
+        ],
+        "candidate_count": 1,
+        "matches": {
+          "cedarworks-storage-finalization-212": [
+            "code:CW-212"
+          ]
+        },
+        "fallback_used": false,
+        "selection_mode": "exact_identity_anchor",
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 1.0,
+        "distractor_candidates": 0
+      },
+      "hierarchical_selection": {
+        "selection_tier": "code",
+        "candidate_family_ids": [
+          "cedarworks-storage-finalization-212"
+        ],
+        "candidate_count": 1,
+        "matched_entities": {
+          "cedarworks-storage-finalization-212": [
+            "code:CW-212"
+          ]
+        },
+        "fallback_used": false,
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 1.0,
+        "distractor_candidates": 0
+      },
+      "current": {
+        "snapshot_sha256": "390621d7e40961d0e47ad0f530067e050615a792d6fecb9f2baecedb00ad888d",
+        "copied_snapshot_sha256": "390621d7e40961d0e47ad0f530067e050615a792d6fecb9f2baecedb00ad888d",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "Apply exactly five signature blocks.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_1db1fb664a9f4e6ebca94052e807cb4d:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=190:318] verify the manifest checksum; apply exactly five signature blocks; preserve the upload fingerprint; record the final generation.\n\nREFERENCES:\n[P1] HANDLE=\"verify the manifest checksum\" -> E1\n[P2] HANDLE=\"apply exactly five signature blocks\" -> E1\n[P3] HANDLE=\"preserve the upload fingerprint\" -> E1\n[P4] HANDLE=\"record the final generation\" -> E1"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 79,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "cedarworks-storage-finalization-212"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "hierarchical": {
+        "snapshot_sha256": "9b18e1a83060f6bd352f31eaf9355d923f01b0fd901346b20ad848c83c7d36f2",
+        "copied_snapshot_sha256": "9b18e1a83060f6bd352f31eaf9355d923f01b0fd901346b20ad848c83c7d36f2",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "Apply exactly five signature blocks.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_4df2329b9cf542e99883043ffe4d9599:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=190:318] verify the manifest checksum; apply exactly five signature blocks; preserve the upload fingerprint; record the final generation.\n\nREFERENCES:\n[P1] HANDLE=\"verify the manifest checksum\" -> E1\n[P2] HANDLE=\"apply exactly five signature blocks\" -> E1\n[P3] HANDLE=\"preserve the upload fingerprint\" -> E1\n[P4] HANDLE=\"record the final generation\" -> E1"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 79,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "cedarworks-storage-finalization-212"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "paired": {
+        "task_rescue": false,
+        "task_harm": false,
+        "visibility_rescue": false,
+        "visibility_harm": false,
+        "task_delta": 0,
+        "visibility_delta": 0,
+        "wrong_family_clause_delta": 0,
+        "candidate_count_delta": 0
+      }
+    },
+    {
+      "family_id": "deltaworks-retry-policy-213",
+      "system_name": "DeltaWorks",
+      "code_name": "DW-213",
+      "interference_cluster": "retry-policy",
+      "degradation_mode": "context_only",
+      "semantic_operator": "never",
+      "semantic_dimension": "polarity",
+      "query_prompt": "State the retry rule for the timed-out request.",
+      "query_entities": [
+        "domain:operations",
+        "cluster:retry-policy"
+      ],
+      "current_selection": {
+        "query_identity_anchors": [],
+        "candidate_family_ids": [
+          "alderworks-retry-policy-201",
+          "alderworks-lane-routing-202",
+          "alderworks-channel-session-203",
+          "alderworks-storage-finalization-204",
+          "birchworks-retry-policy-205",
+          "birchworks-lane-routing-206",
+          "birchworks-channel-session-207",
+          "birchworks-storage-finalization-208",
+          "cedarworks-retry-policy-209",
+          "cedarworks-lane-routing-210",
+          "cedarworks-channel-session-211",
+          "cedarworks-storage-finalization-212",
+          "deltaworks-retry-policy-213",
+          "deltaworks-lane-routing-214",
+          "deltaworks-channel-session-215",
+          "deltaworks-storage-finalization-216",
+          "emberworks-retry-policy-217",
+          "emberworks-lane-routing-218",
+          "emberworks-channel-session-219",
+          "emberworks-storage-finalization-220"
+        ],
+        "candidate_count": 20,
+        "matches": {},
+        "fallback_used": true,
+        "selection_mode": "full_pool_rrf_fallback",
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 0.05,
+        "distractor_candidates": 19
+      },
+      "hierarchical_selection": {
+        "selection_tier": "cluster",
+        "candidate_family_ids": [
+          "alderworks-retry-policy-201",
+          "birchworks-retry-policy-205",
+          "cedarworks-retry-policy-209",
+          "deltaworks-retry-policy-213",
+          "emberworks-retry-policy-217"
+        ],
+        "candidate_count": 5,
+        "matched_entities": {
+          "alderworks-retry-policy-201": [
+            "cluster:retry-policy"
+          ],
+          "birchworks-retry-policy-205": [
+            "cluster:retry-policy"
+          ],
+          "cedarworks-retry-policy-209": [
+            "cluster:retry-policy"
+          ],
+          "deltaworks-retry-policy-213": [
+            "cluster:retry-policy"
+          ],
+          "emberworks-retry-policy-217": [
+            "cluster:retry-policy"
+          ]
+        },
+        "fallback_used": false,
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 0.2,
+        "distractor_candidates": 4
+      },
+      "current": {
+        "snapshot_sha256": "0eca39b1db0fdaa075437ac4acfa37c8d7bf3f131d644e8dd758d4bd05ea362a",
+        "copied_snapshot_sha256": "0eca39b1db0fdaa075437ac4acfa37c8d7bf3f131d644e8dd758d4bd05ea362a",
+        "pre_eval_watermark": 80,
+        "post_eval_watermark": 82,
+        "transfer_decision": "The retry rule for the timed-out request is: **never retry the timed-out request.**",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_0052c84903e4428097b80636262345aa:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=196:222] refresh the recovery lease\n[E2 role=authoritative_correction span=224:256] preserve the request fingerprint\n[E3 role=authoritative_correction span=258:277] retry exactly twice\n[E4 role=authoritative_correction span=279:305] close the stale connection\n\nREFERENCES:\n[P1] HANDLE=\"refresh the recovery lease\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry exactly twice\" -> E3\n[P4] HANDLE=\"close the stale connection\" -> E4",
+          "[interpretive:i_5cac018a4c75470ba3e44dc82e44cc75:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=180:206] refresh the recovery lease\n[E2 role=authoritative_correction span=208:240] preserve the request fingerprint\n[E3 role=authoritative_correction span=242:261] retry at most twice\n[E4 role=authoritative_correction span=263:290] close the stale connection.\n\nREFERENCES:\n[P1] HANDLE=\"refresh the recovery lease\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry\" -> E3\n  META scope=\"at most twice\"\n[P4] HANDLE=\"close the stale connection\" -> E4",
+          "[interpretive:i_a523603b1ab14bd58f339975129d2a54:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=191:217] refresh the recovery lease\n[E2 role=authoritative_correction span=219:251] preserve the request fingerprint\n[E3 role=authoritative_correction span=288:314] close the stale connection\n[E4 role=authoritative_correction span=253:286] never retry the timed-out request\n\nREFERENCES:\n[P1] HANDLE=\"refresh the recovery lease\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"close the stale connection\" -> E3\n[G1] UNRESOLVED -> E4"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 255,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "alderworks-retry-policy-201",
+          "birchworks-retry-policy-205",
+          "deltaworks-retry-policy-213"
+        ],
+        "wrong_family_ids": [
+          "alderworks-retry-policy-201",
+          "birchworks-retry-policy-205"
+        ],
+        "wrong_family_clause_count": 2,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "hierarchical": {
+        "snapshot_sha256": "eedb5e89459cfe93105097ca8d503eb98f21232b692b4fecaf7f6a0737be24d3",
+        "copied_snapshot_sha256": "eedb5e89459cfe93105097ca8d503eb98f21232b692b4fecaf7f6a0737be24d3",
+        "pre_eval_watermark": 20,
+        "post_eval_watermark": 22,
+        "transfer_decision": "The retry rule for a timed-out request is to **never retry the timed-out request**. Additionally, you should **refresh the recovery lease**, **preserve the request fingerprint**, and **close the stale connection**.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_b71f4004f79f42e4a3fee58d6817a430:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=191:217] refresh the recovery lease\n[E2 role=authoritative_correction span=219:251] preserve the request fingerprint\n[E3 role=authoritative_correction span=288:314] close the stale connection\n[E4 role=authoritative_correction span=253:286] never retry the timed-out request\n\nREFERENCES:\n[P1] HANDLE=\"refresh the recovery lease\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"close the stale connection\" -> E3\n[G1] UNRESOLVED -> E4",
+          "[interpretive:i_0091aad1691c48f0b50da5dadb7c1a98:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=204:264] refresh the recovery lease; preserve the request fingerprint\n[E2 role=authoritative_correction span=266:338] retry only after renewing the recovery lease; close the stale connection\n\nREFERENCES:\n[P1] HANDLE=\"refresh the recovery lease\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E1\n[P3] HANDLE=\"close the stale connection\" -> E2",
+          "[interpretive:i_082f71285113423c88369cc73a54ed12:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=179:205] refresh the recovery lease\n[E2 role=authoritative_correction span=207:239] preserve the request fingerprint\n[E3 role=authoritative_correction span=241:261] retry at least twice\n[E4 role=authoritative_correction span=263:289] close the stale connection\n\nREFERENCES:\n[P1] HANDLE=\"refresh the recovery lease\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry at least twice\" -> E3\n[P4] HANDLE=\"close the stale connection\" -> E4"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 246,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "cedarworks-retry-policy-209",
+          "deltaworks-retry-policy-213",
+          "emberworks-retry-policy-217"
+        ],
+        "wrong_family_ids": [
+          "cedarworks-retry-policy-209",
+          "emberworks-retry-policy-217"
+        ],
+        "wrong_family_clause_count": 2,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "paired": {
+        "task_rescue": false,
+        "task_harm": false,
+        "visibility_rescue": false,
+        "visibility_harm": false,
+        "task_delta": 0,
+        "visibility_delta": 0,
+        "wrong_family_clause_delta": 0,
+        "candidate_count_delta": -15
+      }
+    },
+    {
+      "family_id": "deltaworks-lane-routing-214",
+      "system_name": "DeltaWorks",
+      "code_name": "DW-214",
+      "interference_cluster": "lane-routing",
+      "degradation_mode": "full_identity",
+      "semantic_operator": "when_if",
+      "semantic_dimension": "condition",
+      "query_prompt": "DeltaWorks reports DW-214. State the condition for moving the task to the white lane.",
+      "query_entities": [
+        "system:DeltaWorks",
+        "code:DW-214",
+        "domain:operations",
+        "cluster:lane-routing"
+      ],
+      "current_selection": {
+        "query_identity_anchors": [
+          "code:DW-214",
+          "system:DeltaWorks"
+        ],
+        "candidate_family_ids": [
+          "deltaworks-retry-policy-213",
+          "deltaworks-lane-routing-214",
+          "deltaworks-channel-session-215",
+          "deltaworks-storage-finalization-216"
+        ],
+        "candidate_count": 4,
+        "matches": {
+          "deltaworks-retry-policy-213": [
+            "system:DeltaWorks"
+          ],
+          "deltaworks-lane-routing-214": [
+            "code:DW-214",
+            "system:DeltaWorks"
+          ],
+          "deltaworks-channel-session-215": [
+            "system:DeltaWorks"
+          ],
+          "deltaworks-storage-finalization-216": [
+            "system:DeltaWorks"
+          ]
+        },
+        "fallback_used": false,
+        "selection_mode": "exact_identity_anchor",
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 0.25,
+        "distractor_candidates": 3
+      },
+      "hierarchical_selection": {
+        "selection_tier": "code",
+        "candidate_family_ids": [
+          "deltaworks-lane-routing-214"
+        ],
+        "candidate_count": 1,
+        "matched_entities": {
+          "deltaworks-lane-routing-214": [
+            "code:DW-214"
+          ]
+        },
+        "fallback_used": false,
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 1.0,
+        "distractor_candidates": 0
+      },
+      "current": {
+        "snapshot_sha256": "7af7343ee8243b7a9c0c550d7e0c097c2a6f6c5c790b21cd93e7930a10a4356f",
+        "copied_snapshot_sha256": "7af7343ee8243b7a9c0c550d7e0c097c2a6f6c5c790b21cd93e7930a10a4356f",
+        "pre_eval_watermark": 16,
+        "post_eval_watermark": 18,
+        "transfer_decision": "The condition for moving the task DW-214 to the white lane is \"if the queue is saturated.\"",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_1a3110b0c90b4b7297660b6716c15c61:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=202:228] request a fresh checkpoint\n[E2 role=authoritative_correction span=230:288] if the queue is saturated, move the task to the white lane\n[E3 role=authoritative_correction span=290:300] retry once\n[E4 role=authoritative_correction span=302:331] preserve the original task ID\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"move the task to the white lane\" -> E2\n  META condition=\"if the queue is saturated\"\n[P3] HANDLE=\"retry once\" -> E3\n[P4] HANDLE=\"preserve the original task ID\" -> E4",
+          "[interpretive:i_771b6581c2a04f91920a2e83b5a79ff4:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=182:210] verify the manifest checksum\n[E2 role=authoritative_correction span=243:274] preserve the upload fingerprint\n[E3 role=authoritative_correction span=276:303] record the final generation\n[E4 role=authoritative_correction span=212:241] retain at least four replicas\n\nREFERENCES:\n[P1] HANDLE=\"verify the manifest checksum\" -> E1\n[P2] HANDLE=\"preserve the upload fingerprint\" -> E2\n[P3] HANDLE=\"record the final generation\" -> E3\n[G1] UNRESOLVED -> E4"
+        ],
+        "memory_segment_count": 2,
+        "memory_word_count": 185,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "deltaworks-lane-routing-214",
+          "deltaworks-storage-finalization-216"
+        ],
+        "wrong_family_ids": [
+          "deltaworks-storage-finalization-216"
+        ],
+        "wrong_family_clause_count": 1,
+        "identifiable_family_clause_count": 2,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 0.5,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "hierarchical": {
+        "snapshot_sha256": "2ade6a3d07269d94935d07d494ed09a165e10c66cd1ba5b56438769ca000d152",
+        "copied_snapshot_sha256": "2ade6a3d07269d94935d07d494ed09a165e10c66cd1ba5b56438769ca000d152",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "Move the task to the white lane if the queue is saturated.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_0d4960e179ee47d186561c40de04b682:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=202:228] request a fresh checkpoint\n[E2 role=authoritative_correction span=230:288] if the queue is saturated, move the task to the white lane\n[E3 role=authoritative_correction span=290:300] retry once\n[E4 role=authoritative_correction span=302:331] preserve the original task ID\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"move the task to the white lane\" -> E2\n  META condition=\"if the queue is saturated\"\n[P3] HANDLE=\"retry once\" -> E3\n[P4] HANDLE=\"preserve the original task ID\" -> E4"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 101,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "deltaworks-lane-routing-214"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "paired": {
+        "task_rescue": false,
+        "task_harm": false,
+        "visibility_rescue": false,
+        "visibility_harm": false,
+        "task_delta": 0,
+        "visibility_delta": 0,
+        "wrong_family_clause_delta": -1,
+        "candidate_count_delta": -3
+      }
+    },
+    {
+      "family_id": "deltaworks-channel-session-215",
+      "system_name": "DeltaWorks",
+      "code_name": "DW-215",
+      "interference_cluster": "channel-session",
+      "degradation_mode": "code_only",
+      "semantic_operator": "at_least",
+      "semantic_dimension": "cardinality",
+      "query_prompt": "The operation reports DW-215. State the minimum wait duration.",
+      "query_entities": [
+        "code:DW-215",
+        "domain:operations",
+        "cluster:channel-session"
+      ],
+      "current_selection": {
+        "query_identity_anchors": [
+          "code:DW-215"
+        ],
+        "candidate_family_ids": [
+          "deltaworks-channel-session-215"
+        ],
+        "candidate_count": 1,
+        "matches": {
+          "deltaworks-channel-session-215": [
+            "code:DW-215"
+          ]
+        },
+        "fallback_used": false,
+        "selection_mode": "exact_identity_anchor",
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 1.0,
+        "distractor_candidates": 0
+      },
+      "hierarchical_selection": {
+        "selection_tier": "code",
+        "candidate_family_ids": [
+          "deltaworks-channel-session-215"
+        ],
+        "candidate_count": 1,
+        "matched_entities": {
+          "deltaworks-channel-session-215": [
+            "code:DW-215"
+          ]
+        },
+        "fallback_used": false,
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 1.0,
+        "distractor_candidates": 0
+      },
+      "current": {
+        "snapshot_sha256": "5de660c47bd25329e301d2fb5de4cd24ee899088442a706c2a28be67d078cbd4",
+        "copied_snapshot_sha256": "5de660c47bd25329e301d2fb5de4cd24ee899088442a706c2a28be67d078cbd4",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "Wait at least 14 seconds before taking further action.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_744ac52e612d4ca5ad65a823b4f2032f:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=185:215] preserve the trace fingerprint\n[E2 role=authoritative_correction span=217:241] wait at least 14 seconds\n[E3 role=authoritative_correction span=243:263] send one probe frame\n[E4 role=authoritative_correction span=265:294] record the channel generation\n\nREFERENCES:\n[P1] HANDLE=\"preserve the trace fingerprint\" -> E1\n[P2] HANDLE=\"wait at least 14 seconds\" -> E2\n[P3] HANDLE=\"send one probe frame\" -> E3\n[P4] HANDLE=\"record the channel generation\" -> E4"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 88,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "deltaworks-channel-session-215"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "hierarchical": {
+        "snapshot_sha256": "ec690c282735fddd170f831396055b456ccdb3eeacdc1ec65ad7d687b531c06d",
+        "copied_snapshot_sha256": "ec690c282735fddd170f831396055b456ccdb3eeacdc1ec65ad7d687b531c06d",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "The minimum wait duration is to wait at least 14 seconds.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_d7912846427a4b86a016231e1c6130e0:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=185:215] preserve the trace fingerprint\n[E2 role=authoritative_correction span=217:241] wait at least 14 seconds\n[E3 role=authoritative_correction span=243:263] send one probe frame\n[E4 role=authoritative_correction span=265:294] record the channel generation\n\nREFERENCES:\n[P1] HANDLE=\"preserve the trace fingerprint\" -> E1\n[P2] HANDLE=\"wait at least 14 seconds\" -> E2\n[P3] HANDLE=\"send one probe frame\" -> E3\n[P4] HANDLE=\"record the channel generation\" -> E4"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 88,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "deltaworks-channel-session-215"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "paired": {
+        "task_rescue": false,
+        "task_harm": false,
+        "visibility_rescue": false,
+        "visibility_harm": false,
+        "task_delta": 0,
+        "visibility_delta": 0,
+        "wrong_family_clause_delta": 0,
+        "candidate_count_delta": 0
+      }
+    },
+    {
+      "family_id": "deltaworks-storage-finalization-216",
+      "system_name": "DeltaWorks",
+      "code_name": "DW-216",
+      "interference_cluster": "storage-finalization",
+      "degradation_mode": "system_only",
+      "semantic_operator": "at_least",
+      "semantic_dimension": "cardinality",
+      "query_prompt": "For DeltaWorks, State the minimum replica count.",
+      "query_entities": [
+        "system:DeltaWorks",
+        "domain:operations",
+        "cluster:storage-finalization"
+      ],
+      "current_selection": {
+        "query_identity_anchors": [
+          "system:DeltaWorks"
+        ],
+        "candidate_family_ids": [
+          "deltaworks-retry-policy-213",
+          "deltaworks-lane-routing-214",
+          "deltaworks-channel-session-215",
+          "deltaworks-storage-finalization-216"
+        ],
+        "candidate_count": 4,
+        "matches": {
+          "deltaworks-retry-policy-213": [
+            "system:DeltaWorks"
+          ],
+          "deltaworks-lane-routing-214": [
+            "system:DeltaWorks"
+          ],
+          "deltaworks-channel-session-215": [
+            "system:DeltaWorks"
+          ],
+          "deltaworks-storage-finalization-216": [
+            "system:DeltaWorks"
+          ]
+        },
+        "fallback_used": false,
+        "selection_mode": "exact_identity_anchor",
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 0.25,
+        "distractor_candidates": 3
+      },
+      "hierarchical_selection": {
+        "selection_tier": "system",
+        "candidate_family_ids": [
+          "deltaworks-retry-policy-213",
+          "deltaworks-lane-routing-214",
+          "deltaworks-channel-session-215",
+          "deltaworks-storage-finalization-216"
+        ],
+        "candidate_count": 4,
+        "matched_entities": {
+          "deltaworks-retry-policy-213": [
+            "system:DeltaWorks"
+          ],
+          "deltaworks-lane-routing-214": [
+            "system:DeltaWorks"
+          ],
+          "deltaworks-channel-session-215": [
+            "system:DeltaWorks"
+          ],
+          "deltaworks-storage-finalization-216": [
+            "system:DeltaWorks"
+          ]
+        },
+        "fallback_used": false,
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 0.25,
+        "distractor_candidates": 3
+      },
+      "current": {
+        "snapshot_sha256": "c6e95c57d18d4f120bfd56433f6ae955b4f6abf8445e61a1f4c6f5d527c74574",
+        "copied_snapshot_sha256": "c6e95c57d18d4f120bfd56433f6ae955b4f6abf8445e61a1f4c6f5d527c74574",
+        "pre_eval_watermark": 16,
+        "post_eval_watermark": 18,
+        "transfer_decision": "The minimum replica count for DeltaWorks is to \"retain at least four replicas.\"",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_5bc1062e52f548a29ee0c9913a16462c:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=191:217] refresh the recovery lease\n[E2 role=authoritative_correction span=219:251] preserve the request fingerprint\n[E3 role=authoritative_correction span=288:314] close the stale connection\n[E4 role=authoritative_correction span=253:286] never retry the timed-out request\n\nREFERENCES:\n[P1] HANDLE=\"refresh the recovery lease\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"close the stale connection\" -> E3\n[G1] UNRESOLVED -> E4",
+          "[interpretive:i_c09815611c844329a3d223ab61044bd5:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=182:210] verify the manifest checksum\n[E2 role=authoritative_correction span=243:274] preserve the upload fingerprint\n[E3 role=authoritative_correction span=276:303] record the final generation\n[E4 role=authoritative_correction span=212:241] retain at least four replicas\n\nREFERENCES:\n[P1] HANDLE=\"verify the manifest checksum\" -> E1\n[P2] HANDLE=\"preserve the upload fingerprint\" -> E2\n[P3] HANDLE=\"record the final generation\" -> E3\n[G1] UNRESOLVED -> E4",
+          "[interpretive:i_c9e8351c32f446ff9333e947571c32d6:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=185:215] preserve the trace fingerprint\n[E2 role=authoritative_correction span=217:241] wait at least 14 seconds\n[E3 role=authoritative_correction span=243:263] send one probe frame\n[E4 role=authoritative_correction span=265:294] record the channel generation\n\nREFERENCES:\n[P1] HANDLE=\"preserve the trace fingerprint\" -> E1\n[P2] HANDLE=\"wait at least 14 seconds\" -> E2\n[P3] HANDLE=\"send one probe frame\" -> E3\n[P4] HANDLE=\"record the channel generation\" -> E4"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 256,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "deltaworks-retry-policy-213",
+          "deltaworks-channel-session-215",
+          "deltaworks-storage-finalization-216"
+        ],
+        "wrong_family_ids": [
+          "deltaworks-retry-policy-213",
+          "deltaworks-channel-session-215"
+        ],
+        "wrong_family_clause_count": 2,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "hierarchical": {
+        "snapshot_sha256": "1c97f836208116fbfd4ba32009b880559e495b447467a3c0463d4d69ad71083d",
+        "copied_snapshot_sha256": "1c97f836208116fbfd4ba32009b880559e495b447467a3c0463d4d69ad71083d",
+        "pre_eval_watermark": 16,
+        "post_eval_watermark": 18,
+        "transfer_decision": "Retain at least four replicas.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_001b318df10141f89876fc3ca61413be:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=182:210] verify the manifest checksum\n[E2 role=authoritative_correction span=243:274] preserve the upload fingerprint\n[E3 role=authoritative_correction span=276:303] record the final generation\n[E4 role=authoritative_correction span=212:241] retain at least four replicas\n\nREFERENCES:\n[P1] HANDLE=\"verify the manifest checksum\" -> E1\n[P2] HANDLE=\"preserve the upload fingerprint\" -> E2\n[P3] HANDLE=\"record the final generation\" -> E3\n[G1] UNRESOLVED -> E4",
+          "[interpretive:i_f826940e280d4426831540dc194d229b:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=191:217] refresh the recovery lease\n[E2 role=authoritative_correction span=219:251] preserve the request fingerprint\n[E3 role=authoritative_correction span=288:314] close the stale connection\n[E4 role=authoritative_correction span=253:286] never retry the timed-out request\n\nREFERENCES:\n[P1] HANDLE=\"refresh the recovery lease\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"close the stale connection\" -> E3\n[G1] UNRESOLVED -> E4",
+          "[interpretive:i_e7f28937da2340bfaa773de1b404e53d:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=185:215] preserve the trace fingerprint\n[E2 role=authoritative_correction span=217:241] wait at least 14 seconds\n[E3 role=authoritative_correction span=243:263] send one probe frame\n[E4 role=authoritative_correction span=265:294] record the channel generation\n\nREFERENCES:\n[P1] HANDLE=\"preserve the trace fingerprint\" -> E1\n[P2] HANDLE=\"wait at least 14 seconds\" -> E2\n[P3] HANDLE=\"send one probe frame\" -> E3\n[P4] HANDLE=\"record the channel generation\" -> E4"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 256,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "deltaworks-retry-policy-213",
+          "deltaworks-channel-session-215",
+          "deltaworks-storage-finalization-216"
+        ],
+        "wrong_family_ids": [
+          "deltaworks-retry-policy-213",
+          "deltaworks-channel-session-215"
+        ],
+        "wrong_family_clause_count": 2,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "paired": {
+        "task_rescue": false,
+        "task_harm": false,
+        "visibility_rescue": false,
+        "visibility_harm": false,
+        "task_delta": 0,
+        "visibility_delta": 0,
+        "wrong_family_clause_delta": 0,
+        "candidate_count_delta": 0
+      }
+    },
+    {
+      "family_id": "emberworks-retry-policy-217",
+      "system_name": "EmberWorks",
+      "code_name": "EW-217",
+      "interference_cluster": "retry-policy",
+      "degradation_mode": "full_identity",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "query_prompt": "EmberWorks reports EW-217. State when retrying is permitted.",
+      "query_entities": [
+        "system:EmberWorks",
+        "code:EW-217",
+        "domain:operations",
+        "cluster:retry-policy"
+      ],
+      "current_selection": {
+        "query_identity_anchors": [
+          "code:EW-217",
+          "system:EmberWorks"
+        ],
+        "candidate_family_ids": [
+          "emberworks-retry-policy-217",
+          "emberworks-lane-routing-218",
+          "emberworks-channel-session-219",
+          "emberworks-storage-finalization-220"
+        ],
+        "candidate_count": 4,
+        "matches": {
+          "emberworks-retry-policy-217": [
+            "code:EW-217",
+            "system:EmberWorks"
+          ],
+          "emberworks-lane-routing-218": [
+            "system:EmberWorks"
+          ],
+          "emberworks-channel-session-219": [
+            "system:EmberWorks"
+          ],
+          "emberworks-storage-finalization-220": [
+            "system:EmberWorks"
+          ]
+        },
+        "fallback_used": false,
+        "selection_mode": "exact_identity_anchor",
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 0.25,
+        "distractor_candidates": 3
+      },
+      "hierarchical_selection": {
+        "selection_tier": "code",
+        "candidate_family_ids": [
+          "emberworks-retry-policy-217"
+        ],
+        "candidate_count": 1,
+        "matched_entities": {
+          "emberworks-retry-policy-217": [
+            "code:EW-217"
+          ]
+        },
+        "fallback_used": false,
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 1.0,
+        "distractor_candidates": 0
+      },
+      "current": {
+        "snapshot_sha256": "9283e4bcbfe150b558eceadaf5d82a5160449ed9421e6771a4493fa6de039859",
+        "copied_snapshot_sha256": "9283e4bcbfe150b558eceadaf5d82a5160449ed9421e6771a4493fa6de039859",
+        "pre_eval_watermark": 16,
+        "post_eval_watermark": 18,
+        "transfer_decision": "Retrying is permitted only after renewing the recovery lease and closing the stale connection.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_5b0044451a854c5ba13ebac62c89ca74:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=204:264] refresh the recovery lease; preserve the request fingerprint\n[E2 role=authoritative_correction span=266:338] retry only after renewing the recovery lease; close the stale connection\n\nREFERENCES:\n[P1] HANDLE=\"refresh the recovery lease\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E1\n[P3] HANDLE=\"close the stale connection\" -> E2",
+          "[interpretive:i_2f66756692474cc5a291e61640f636a9:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=194:344] verify the manifest checksum; do not purge the manifest unless the origin epoch changes; preserve the upload fingerprint; record the final generation.\n[E2 role=authoritative_correction span=283:343] preserve the upload fingerprint; record the final generation\n\nREFERENCES:\n[P1] HANDLE=\"verify the manifest checksum\" -> E1\n[P2] HANDLE=\"do not purge the manifest\" -> E1\n  META condition=\"unless the origin epoch changes\"\n[P3] HANDLE=\"preserve the upload fingerprint; record the final generation\" -> E2"
+        ],
+        "memory_segment_count": 2,
+        "memory_word_count": 174,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "emberworks-retry-policy-217",
+          "emberworks-storage-finalization-220"
+        ],
+        "wrong_family_ids": [
+          "emberworks-storage-finalization-220"
+        ],
+        "wrong_family_clause_count": 1,
+        "identifiable_family_clause_count": 2,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 0.5,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "hierarchical": {
+        "snapshot_sha256": "d84a3f05cbd63d71504bc25bb7d6d74a2d1d8be77ebe2a653ed4cb1d0a52c7ff",
+        "copied_snapshot_sha256": "d84a3f05cbd63d71504bc25bb7d6d74a2d1d8be77ebe2a653ed4cb1d0a52c7ff",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "Retrying is permitted only after renewing the recovery lease and closing the stale connection. Additionally, ensure to preserve the request fingerprint during this process.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_492ca82af0644513aa1b89be67ba4256:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=204:264] refresh the recovery lease; preserve the request fingerprint\n[E2 role=authoritative_correction span=266:338] retry only after renewing the recovery lease; close the stale connection\n\nREFERENCES:\n[P1] HANDLE=\"refresh the recovery lease\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E1\n[P3] HANDLE=\"close the stale connection\" -> E2"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 76,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "emberworks-retry-policy-217"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "paired": {
+        "task_rescue": false,
+        "task_harm": false,
+        "visibility_rescue": false,
+        "visibility_harm": false,
+        "task_delta": 0,
+        "visibility_delta": 0,
+        "wrong_family_clause_delta": -1,
+        "candidate_count_delta": -3
+      }
+    },
+    {
+      "family_id": "emberworks-lane-routing-218",
+      "system_name": "EmberWorks",
+      "code_name": "EW-218",
+      "interference_cluster": "lane-routing",
+      "degradation_mode": "code_only",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "query_prompt": "The operation reports EW-218. State the permitted lane.",
+      "query_entities": [
+        "code:EW-218",
+        "domain:operations",
+        "cluster:lane-routing"
+      ],
+      "current_selection": {
+        "query_identity_anchors": [
+          "code:EW-218"
+        ],
+        "candidate_family_ids": [
+          "emberworks-lane-routing-218"
+        ],
+        "candidate_count": 1,
+        "matches": {
+          "emberworks-lane-routing-218": [
+            "code:EW-218"
+          ]
+        },
+        "fallback_used": false,
+        "selection_mode": "exact_identity_anchor",
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 1.0,
+        "distractor_candidates": 0
+      },
+      "hierarchical_selection": {
+        "selection_tier": "code",
+        "candidate_family_ids": [
+          "emberworks-lane-routing-218"
+        ],
+        "candidate_count": 1,
+        "matched_entities": {
+          "emberworks-lane-routing-218": [
+            "code:EW-218"
+          ]
+        },
+        "fallback_used": false,
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 1.0,
+        "distractor_candidates": 0
+      },
+      "current": {
+        "snapshot_sha256": "a76696ccdd8106acaa75f276913811ade86db464b05160067c0c9e11f1e2fce8",
+        "copied_snapshot_sha256": "a76696ccdd8106acaa75f276913811ade86db464b05160067c0c9e11f1e2fce8",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "Move the task only to the gold lane and preserve the original task ID. Retry once if needed. Additionally, request a fresh checkpoint.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_4a5b57f65c7c4419b88bdfc63815cc64:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=194:220] request a fresh checkpoint\n[E2 role=authoritative_correction span=222:257] move the task only to the gold lane\n[E3 role=authoritative_correction span=259:269] retry once\n[E4 role=authoritative_correction span=271:300] preserve the original task ID\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"move the task\" -> E2\n  META negation=\"only to the gold lane\"\n[P3] HANDLE=\"retry once\" -> E3\n[P4] HANDLE=\"preserve the original task ID\" -> E4"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 93,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "emberworks-lane-routing-218"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "hierarchical": {
+        "snapshot_sha256": "a67a91608dcfcd001250b59130df1179562a85f5179367fd354cd97c008a09ff",
+        "copied_snapshot_sha256": "a67a91608dcfcd001250b59130df1179562a85f5179367fd354cd97c008a09ff",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "Move the task only to the gold lane, request a fresh checkpoint, retry once, and preserve the original task ID.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_6a10cc37d989419a8b62ffa74ffac0c6:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=194:220] request a fresh checkpoint\n[E2 role=authoritative_correction span=222:257] move the task only to the gold lane\n[E3 role=authoritative_correction span=259:269] retry once\n[E4 role=authoritative_correction span=271:300] preserve the original task ID\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"move the task\" -> E2\n  META negation=\"only to the gold lane\"\n[P3] HANDLE=\"retry once\" -> E3\n[P4] HANDLE=\"preserve the original task ID\" -> E4"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 93,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "emberworks-lane-routing-218"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "paired": {
+        "task_rescue": false,
+        "task_harm": false,
+        "visibility_rescue": false,
+        "visibility_harm": false,
+        "task_delta": 0,
+        "visibility_delta": 0,
+        "wrong_family_clause_delta": 0,
+        "candidate_count_delta": 0
+      }
+    },
+    {
+      "family_id": "emberworks-channel-session-219",
+      "system_name": "EmberWorks",
+      "code_name": "EW-219",
+      "interference_cluster": "channel-session",
+      "degradation_mode": "system_only",
+      "semantic_operator": "at_most",
+      "semantic_dimension": "cardinality",
+      "query_prompt": "For EmberWorks, State the maximum pending-channel count.",
+      "query_entities": [
+        "system:EmberWorks",
+        "domain:operations",
+        "cluster:channel-session"
+      ],
+      "current_selection": {
+        "query_identity_anchors": [
+          "system:EmberWorks"
+        ],
+        "candidate_family_ids": [
+          "emberworks-retry-policy-217",
+          "emberworks-lane-routing-218",
+          "emberworks-channel-session-219",
+          "emberworks-storage-finalization-220"
+        ],
+        "candidate_count": 4,
+        "matches": {
+          "emberworks-retry-policy-217": [
+            "system:EmberWorks"
+          ],
+          "emberworks-lane-routing-218": [
+            "system:EmberWorks"
+          ],
+          "emberworks-channel-session-219": [
+            "system:EmberWorks"
+          ],
+          "emberworks-storage-finalization-220": [
+            "system:EmberWorks"
+          ]
+        },
+        "fallback_used": false,
+        "selection_mode": "exact_identity_anchor",
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 0.25,
+        "distractor_candidates": 3
+      },
+      "hierarchical_selection": {
+        "selection_tier": "system",
+        "candidate_family_ids": [
+          "emberworks-retry-policy-217",
+          "emberworks-lane-routing-218",
+          "emberworks-channel-session-219",
+          "emberworks-storage-finalization-220"
+        ],
+        "candidate_count": 4,
+        "matched_entities": {
+          "emberworks-retry-policy-217": [
+            "system:EmberWorks"
+          ],
+          "emberworks-lane-routing-218": [
+            "system:EmberWorks"
+          ],
+          "emberworks-channel-session-219": [
+            "system:EmberWorks"
+          ],
+          "emberworks-storage-finalization-220": [
+            "system:EmberWorks"
+          ]
+        },
+        "fallback_used": false,
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 0.25,
+        "distractor_candidates": 3
+      },
+      "current": {
+        "snapshot_sha256": "bf98e75ac02ab6a59c0b642e7bf0b62106d078023837a23b4012b1fb6fac4e0c",
+        "copied_snapshot_sha256": "bf98e75ac02ab6a59c0b642e7bf0b62106d078023837a23b4012b1fb6fac4e0c",
+        "pre_eval_watermark": 16,
+        "post_eval_watermark": 18,
+        "transfer_decision": "To determine the maximum pending-channel count for EmberWorks, follow these key actions based on the accumulated experience from MNEXA:\n\n1. **Request a fresh checkpoint.** (E1)\n2. **Move the task only to the gold lane.** (E2)\n3. **Retry once** after taking the previous actions. (E3)\n4. **Preserve the original task ID.** (E4)\n\nEnsure to strictly adhere to these actions and maintain the specified constraints.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_b0218e7cff8142d0a0e73d38b9b0e0f9:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=204:264] refresh the recovery lease; preserve the request fingerprint\n[E2 role=authoritative_correction span=266:338] retry only after renewing the recovery lease; close the stale connection\n\nREFERENCES:\n[P1] HANDLE=\"refresh the recovery lease\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E1\n[P3] HANDLE=\"close the stale connection\" -> E2",
+          "[interpretive:i_14b99cdd8d484ff7b1697069f7b34500:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=194:220] request a fresh checkpoint\n[E2 role=authoritative_correction span=222:257] move the task only to the gold lane\n[E3 role=authoritative_correction span=259:269] retry once\n[E4 role=authoritative_correction span=271:300] preserve the original task ID\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"move the task\" -> E2\n  META negation=\"only to the gold lane\"\n[P3] HANDLE=\"retry once\" -> E3\n[P4] HANDLE=\"preserve the original task ID\" -> E4"
+        ],
+        "memory_segment_count": 2,
+        "memory_word_count": 169,
+        "target_clause_visible": false,
+        "visible_family_ids": [
+          "emberworks-retry-policy-217",
+          "emberworks-lane-routing-218"
+        ],
+        "wrong_family_ids": [
+          "emberworks-retry-policy-217",
+          "emberworks-lane-routing-218"
+        ],
+        "wrong_family_clause_count": 2,
+        "identifiable_family_clause_count": 2,
+        "retrieval_recall": 0.0,
+        "retrieval_precision": 0.0,
+        "wrong_rule_contamination": true,
+        "wrong_rule_family_ids": [
+          "emberworks-lane-routing-218"
+        ],
+        "wrong_rule_clause_count": 1
+      },
+      "hierarchical": {
+        "snapshot_sha256": "179375bea1f30eda366df8008f0b73b709ea6492d5a4193d0807d9e59355409f",
+        "copied_snapshot_sha256": "179375bea1f30eda366df8008f0b73b709ea6492d5a4193d0807d9e59355409f",
+        "pre_eval_watermark": 16,
+        "post_eval_watermark": 18,
+        "transfer_decision": "To determine the maximum pending-channel count for EmberWorks, the following actions must be taken based on the accumulated experience from MNEXA:\n\n1. **Refresh the recovery lease.**\n2. **Preserve the request fingerprint.**\n3. **Retry only after renewing the recovery lease.**\n4. **Close the stale connection.**\n5. **Request a fresh checkpoint.**\n6. **Move the task only to the gold lane.**\n7. **Retry once.**\n8. **Preserve the original task ID.**\n\nNo actions contradict each other, so the maximum pending-channel count is directly informed by these activities concerning resource management and task handling. \n\nTake the identified actions to maintain system integrity and adhere to operational requirements.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_1b7affc89f7243fd90762c763a02f0b8:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=204:264] refresh the recovery lease; preserve the request fingerprint\n[E2 role=authoritative_correction span=266:338] retry only after renewing the recovery lease; close the stale connection\n\nREFERENCES:\n[P1] HANDLE=\"refresh the recovery lease\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E1\n[P3] HANDLE=\"close the stale connection\" -> E2",
+          "[interpretive:i_2edbf8ee05f4459ebd6642c230388a2e:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=194:220] request a fresh checkpoint\n[E2 role=authoritative_correction span=222:257] move the task only to the gold lane\n[E3 role=authoritative_correction span=259:269] retry once\n[E4 role=authoritative_correction span=271:300] preserve the original task ID\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"move the task\" -> E2\n  META negation=\"only to the gold lane\"\n[P3] HANDLE=\"retry once\" -> E3\n[P4] HANDLE=\"preserve the original task ID\" -> E4"
+        ],
+        "memory_segment_count": 2,
+        "memory_word_count": 169,
+        "target_clause_visible": false,
+        "visible_family_ids": [
+          "emberworks-retry-policy-217",
+          "emberworks-lane-routing-218"
+        ],
+        "wrong_family_ids": [
+          "emberworks-retry-policy-217",
+          "emberworks-lane-routing-218"
+        ],
+        "wrong_family_clause_count": 2,
+        "identifiable_family_clause_count": 2,
+        "retrieval_recall": 0.0,
+        "retrieval_precision": 0.0,
+        "wrong_rule_contamination": true,
+        "wrong_rule_family_ids": [
+          "emberworks-retry-policy-217",
+          "emberworks-lane-routing-218"
+        ],
+        "wrong_rule_clause_count": 2
+      },
+      "paired": {
+        "task_rescue": false,
+        "task_harm": false,
+        "visibility_rescue": false,
+        "visibility_harm": false,
+        "task_delta": 0,
+        "visibility_delta": 0,
+        "wrong_family_clause_delta": 0,
+        "candidate_count_delta": 0
+      }
+    },
+    {
+      "family_id": "emberworks-storage-finalization-220",
+      "system_name": "EmberWorks",
+      "code_name": "EW-220",
+      "interference_cluster": "storage-finalization",
+      "degradation_mode": "context_only",
+      "semantic_operator": "unless",
+      "semantic_dimension": "condition",
+      "query_prompt": "State the condition under which the manifest may be purged.",
+      "query_entities": [
+        "domain:operations",
+        "cluster:storage-finalization"
+      ],
+      "current_selection": {
+        "query_identity_anchors": [],
+        "candidate_family_ids": [
+          "alderworks-retry-policy-201",
+          "alderworks-lane-routing-202",
+          "alderworks-channel-session-203",
+          "alderworks-storage-finalization-204",
+          "birchworks-retry-policy-205",
+          "birchworks-lane-routing-206",
+          "birchworks-channel-session-207",
+          "birchworks-storage-finalization-208",
+          "cedarworks-retry-policy-209",
+          "cedarworks-lane-routing-210",
+          "cedarworks-channel-session-211",
+          "cedarworks-storage-finalization-212",
+          "deltaworks-retry-policy-213",
+          "deltaworks-lane-routing-214",
+          "deltaworks-channel-session-215",
+          "deltaworks-storage-finalization-216",
+          "emberworks-retry-policy-217",
+          "emberworks-lane-routing-218",
+          "emberworks-channel-session-219",
+          "emberworks-storage-finalization-220"
+        ],
+        "candidate_count": 20,
+        "matches": {},
+        "fallback_used": true,
+        "selection_mode": "full_pool_rrf_fallback",
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 0.05,
+        "distractor_candidates": 19
+      },
+      "hierarchical_selection": {
+        "selection_tier": "cluster",
+        "candidate_family_ids": [
+          "alderworks-storage-finalization-204",
+          "birchworks-storage-finalization-208",
+          "cedarworks-storage-finalization-212",
+          "deltaworks-storage-finalization-216",
+          "emberworks-storage-finalization-220"
+        ],
+        "candidate_count": 5,
+        "matched_entities": {
+          "alderworks-storage-finalization-204": [
+            "cluster:storage-finalization"
+          ],
+          "birchworks-storage-finalization-208": [
+            "cluster:storage-finalization"
+          ],
+          "cedarworks-storage-finalization-212": [
+            "cluster:storage-finalization"
+          ],
+          "deltaworks-storage-finalization-216": [
+            "cluster:storage-finalization"
+          ],
+          "emberworks-storage-finalization-220": [
+            "cluster:storage-finalization"
+          ]
+        },
+        "fallback_used": false,
+        "target_selected": true,
+        "candidate_recall": 1.0,
+        "candidate_precision": 0.2,
+        "distractor_candidates": 4
+      },
+      "current": {
+        "snapshot_sha256": "802216f1a5af487914b8e52e09ba39389a930bfa30578bbc74716ed64fed7e14",
+        "copied_snapshot_sha256": "802216f1a5af487914b8e52e09ba39389a930bfa30578bbc74716ed64fed7e14",
+        "pre_eval_watermark": 80,
+        "post_eval_watermark": 82,
+        "transfer_decision": "The manifest may only be purged after the following conditions have been met:\n\n1. **Verify the manifest checksum.**\n2. **Preserve the upload fingerprint.**\n3. **Record the final generation.**\n4. **Finalize only with X-Alder-Final: locked.**\n\nDo not finalize the manifest before verification.",
+        "semantic_task_pass": false,
+        "semantic_violation": true,
+        "semantic_required_ok": false,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_19b9c220bdfd410cb9af1cfdc65a1f12:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=201:229] verify the manifest checksum\n[E2 role=authoritative_correction span=277:308] preserve the upload fingerprint\n[E3 role=authoritative_correction span=310:337] record the final generation\n[E4 role=authoritative_correction span=231:275] do not finalize before manifest verification\n\nREFERENCES:\n[P1] HANDLE=\"verify the manifest checksum\" -> E1\n[P2] HANDLE=\"preserve the upload fingerprint\" -> E2\n[P3] HANDLE=\"record the final generation\" -> E3\n[G1] UNRESOLVED -> E4",
+          "[interpretive:i_176a728262f5479aa4794a8cb9d4c6e7:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=204:264] refresh the recovery lease; preserve the request fingerprint\n[E2 role=authoritative_correction span=266:338] retry only after renewing the recovery lease; close the stale connection\n\nREFERENCES:\n[P1] HANDLE=\"refresh the recovery lease\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E1\n[P3] HANDLE=\"close the stale connection\" -> E2",
+          "[interpretive:i_50dc9706ca404eb2807e17cd3d25abf3:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=199:227] verify the manifest checksum\n[E2 role=authoritative_correction span=271:302] preserve the upload fingerprint\n[E3 role=authoritative_correction span=304:331] record the final generation\n[E4 role=authoritative_correction span=229:269] finalize only with X-Alder-Final: locked\n\nREFERENCES:\n[P1] HANDLE=\"verify the manifest checksum\" -> E1\n[P2] HANDLE=\"preserve the upload fingerprint\" -> E2\n[P3] HANDLE=\"record the final generation\" -> E3\n[G1] UNRESOLVED -> E4"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 245,
+        "target_clause_visible": false,
+        "visible_family_ids": [
+          "alderworks-storage-finalization-204",
+          "birchworks-storage-finalization-208",
+          "emberworks-retry-policy-217"
+        ],
+        "wrong_family_ids": [
+          "alderworks-storage-finalization-204",
+          "birchworks-storage-finalization-208",
+          "emberworks-retry-policy-217"
+        ],
+        "wrong_family_clause_count": 3,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 0.0,
+        "retrieval_precision": 0.0,
+        "wrong_rule_contamination": true,
+        "wrong_rule_family_ids": [
+          "alderworks-storage-finalization-204"
+        ],
+        "wrong_rule_clause_count": 1
+      },
+      "hierarchical": {
+        "snapshot_sha256": "4e424af3c0512a70d2c125d3a9555b319a00167c311360c081e9bc756d8556f3",
+        "copied_snapshot_sha256": "4e424af3c0512a70d2c125d3a9555b319a00167c311360c081e9bc756d8556f3",
+        "pre_eval_watermark": 20,
+        "post_eval_watermark": 22,
+        "transfer_decision": "The manifest may be purged only if the origin epoch changes; do not purge the manifest under any other circumstances.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_88cec355a69647418ad0825f023652a9:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=194:344] verify the manifest checksum; do not purge the manifest unless the origin epoch changes; preserve the upload fingerprint; record the final generation.\n[E2 role=authoritative_correction span=283:343] preserve the upload fingerprint; record the final generation\n\nREFERENCES:\n[P1] HANDLE=\"verify the manifest checksum\" -> E1\n[P2] HANDLE=\"do not purge the manifest\" -> E1\n  META condition=\"unless the origin epoch changes\"\n[P3] HANDLE=\"preserve the upload fingerprint; record the final generation\" -> E2",
+          "[interpretive:i_1a9f0a04eca348eca4895e504dce1ee7:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=190:318] verify the manifest checksum; apply exactly five signature blocks; preserve the upload fingerprint; record the final generation.\n\nREFERENCES:\n[P1] HANDLE=\"verify the manifest checksum\" -> E1\n[P2] HANDLE=\"apply exactly five signature blocks\" -> E1\n[P3] HANDLE=\"preserve the upload fingerprint\" -> E1\n[P4] HANDLE=\"record the final generation\" -> E1"
+        ],
+        "memory_segment_count": 2,
+        "memory_word_count": 177,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "cedarworks-storage-finalization-212",
+          "emberworks-storage-finalization-220"
+        ],
+        "wrong_family_ids": [
+          "cedarworks-storage-finalization-212"
+        ],
+        "wrong_family_clause_count": 1,
+        "identifiable_family_clause_count": 2,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 0.5,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "paired": {
+        "task_rescue": true,
+        "task_harm": false,
+        "visibility_rescue": true,
+        "visibility_harm": false,
+        "task_delta": 1,
+        "visibility_delta": 1,
+        "wrong_family_clause_delta": -2,
+        "candidate_count_delta": -15
+      }
+    }
+  ]
+}

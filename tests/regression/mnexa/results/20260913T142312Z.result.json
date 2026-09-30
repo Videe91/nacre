@@ -1,0 +1,948 @@
+{
+  "experiment": "seed-growth-005",
+  "classification": "exploratory-fresh-consolidation-ablation",
+  "run_id": "20260913T142312Z",
+  "taskset_sha256": "dd2ea1adb52be99b5f1b9e9b7260b284b7b405f49ca58a013d3a3172761c9db7",
+  "model": "gpt-4o-mini",
+  "embedder": "sentence-transformers/all-MiniLM-L6-v2",
+  "meter": "word-meter-v1",
+  "task_count": 20,
+  "conditions": {
+    "A": "baseline_no_memory",
+    "B": "mnexa_current_lossless_consolidation",
+    "C": "mnexa_evidence_disciplined_consolidation"
+  },
+  "baseline_task_passes": 0,
+  "current_task_passes": 17,
+  "disciplined_task_passes": 20,
+  "current_lessons_with_correct_knowledge": 20,
+  "disciplined_lessons_with_correct_knowledge": 20,
+  "current_contaminated_lessons": 12,
+  "disciplined_contaminated_lessons": 0,
+  "current_contaminated_transfer_decisions": 2,
+  "disciplined_contaminated_transfer_decisions": 0,
+  "all_source_evidence_equal": true,
+  "evidence_discipline_instruction": "EPISTEMICALLY DISCIPLINED CONSOLIDATION\n\nThe evidence contains two importantly different things:\n\n1. DECISION\n   This records what was attempted or believed.\n   A failed decision is NOT evidence of truth.\n\n2. OUTCOME\n   When the outcome contains an\n   AUTHORITATIVE CORRECTION, that correction is\n   the evidence basis for reusable operational knowledge.\n\nYour job is to learn from the evidence without converting\nunsupported content from the failed decision into knowledge.\n\nRules:\n\n- Treat the failed DECISION as historical evidence of what\n  was attempted, not as a source of truth.\n\n- Treat the AUTHORITATIVE CORRECTION as the grounding source\n  for the reusable rule in this experiment.\n\n- Promote a proposition only when it is supported by the\n  authoritative correction.\n\n- Do not preserve an assumption merely because it appeared\n  in the failed decision.\n\n- If a statement appears in the decision but is unsupported\n  by the correction, omit it from the reusable lesson.\n\n- If the correction contradicts the decision, prefer the\n  correction for the reusable operational lesson.\n\n- Preserve all decision-critical constraints that ARE\n  supported by the correction: numbers, units, exact counts,\n  ordering, identifiers, headers, modes, limits, and\n  explicit prohibitions.\n\n- Do not invent new facts.\n\n- Do not infer causality beyond the supplied evidence.\n\n- Do not include private reasoning.\n\nHistorical preservation of the failed decision is handled\nelsewhere by MNEXA. The reusable lesson does not need to\nrepeat unsupported failed assumptions.",
+  "families": [
+    {
+      "family_id": "asterpay-px77",
+      "baseline": {
+        "decision": "When AsterPay returns PX-77 while cancelling a subscription charge, the operator must not proceed with the cancellation until the cause of the error PX-77 is identified and resolved. After addressing the issue, the operator may attempt the cancellation again.",
+        "correct_knowledge": false,
+        "contaminated": false,
+        "task_success": false
+      },
+      "mnexa_current_consolidation": {
+        "candidate_decision": "Restart the payment service, clear the local cache, and then retry the request.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nPX-77 requires refreshing the recovery lease, waiting 4 seconds, retrying exactly once, and including X-Aster-Recover: blue.",
+        "outcome_id": "r_9a29aff6bc354d05b7dfb9cb3c62bfd5",
+        "source_evidence_sha256": "844fc9d6da6eb8205feb90db2d6a419ba22471aaa9a365320fbd936a3fd8eb6c",
+        "lesson": "TRIGGER:\nFailure in restoring service when using improper recovery steps.\n\nREUSABLE RULE:\nRefresh the recovery lease, wait 4 seconds, retry exactly once, and include X-Aster-Recover: blue.\n\nCRITICAL CONSTRAINTS:\n- Wait exactly 4 seconds before retrying.\n- Retry exactly once.\n- Include header \"X-Aster-Recover: blue\".",
+        "lesson_id": "i_543c6149580e4c7584773ae1567d5ea3",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "Refresh the recovery lease, wait exactly 4 seconds, retry exactly once, and include the header \"X-Aster-Recover: blue.\"",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_543c6149580e4c7584773ae1567d5ea3:v1] TRIGGER:\nFailure in restoring service when using improper recovery steps.\n\nREUSABLE RULE:\nRefresh the recovery lease, wait 4 seconds, retry exactly once, and include X-Aster-Recover: blue.\n\nCRITICAL CONSTRAINTS:\n- Wait exactly 4 seconds before retrying.\n- Retry exactly once.\n- Include header \"X-Aster-Recover: blue\"."
+        ]
+      },
+      "mnexa_disciplined_consolidation": {
+        "candidate_decision": "Restart the payment service, clear the local cache, and then retry the request.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nPX-77 requires refreshing the recovery lease, waiting 4 seconds, retrying exactly once, and including X-Aster-Recover: blue.",
+        "outcome_id": "r_a68b928e93de4ba4b1d96e1afe0ea765",
+        "source_evidence_sha256": "844fc9d6da6eb8205feb90db2d6a419ba22471aaa9a365320fbd936a3fd8eb6c",
+        "lesson": "TRIGGER:\nWhen attempting to recover the payment service.\n\nREUSABLE RULE:\nRefresh the recovery lease, wait 4 seconds, retry exactly once, and include X-Aster-Recover: blue.\n\nCRITICAL CONSTRAINTS:\n- Wait 4 seconds before retrying.\n- Retry exactly once.",
+        "lesson_id": "i_98d4114695154820b5353a236b0ba818",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "Refresh the recovery lease, wait 4 seconds, retry exactly once, and include X-Aster-Recover: blue.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_98d4114695154820b5353a236b0ba818:v1] TRIGGER:\nWhen attempting to recover the payment service.\n\nREUSABLE RULE:\nRefresh the recovery lease, wait 4 seconds, retry exactly once, and include X-Aster-Recover: blue.\n\nCRITICAL CONSTRAINTS:\n- Wait 4 seconds before retrying.\n- Retry exactly once."
+        ]
+      },
+      "same_source_evidence": true,
+      "current_to_disciplined_task_lift": 0,
+      "current_to_disciplined_lesson_contamination_delta": 0
+    },
+    {
+      "family_id": "granitequeue-l13",
+      "baseline": {
+        "decision": "The operator should check the GraniteQueue logs for errors associated with L13 while processing the thumbnail job. If the issue persists, the operator must escalate the situation to the technical support team for further investigation.",
+        "correct_knowledge": false,
+        "contaminated": false,
+        "task_success": false
+      },
+      "mnexa_current_consolidation": {
+        "candidate_decision": "Delete the original message and restart the worker.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nL13 requires requesting a fresh checkpoint, moving the job to the amber lane, replaying exactly once from that checkpoint, and using Replay-Class: granite.",
+        "outcome_id": "r_67dbbd54997340869cbbe71ca14ab27d",
+        "source_evidence_sha256": "472084975fc65e2a6fb8ed36bcf02426a856e46fe15c51fbee59dd0270b9930b",
+        "lesson": "TRIGGER:\nWhen facing a disruption in processing due to an error.\n\nREUSABLE RULE:\nRequest a fresh checkpoint, move the job to the amber lane, replay exactly once from that checkpoint, and use Replay-Class: granite.\n\nCRITICAL CONSTRAINTS:\n- The job must be moved to the amber lane.\n- The replay must occur exactly once from the fresh checkpoint.\n- Replay-Class must be set to granite.",
+        "lesson_id": "i_80117fd8533844d883a8657ecf06527d",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "Request a fresh checkpoint, move the job to the amber lane, replay exactly once from that checkpoint, and use Replay-Class: granite.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_80117fd8533844d883a8657ecf06527d:v1] TRIGGER:\nWhen facing a disruption in processing due to an error.\n\nREUSABLE RULE:\nRequest a fresh checkpoint, move the job to the amber lane, replay exactly once from that checkpoint, and use Replay-Class: granite.\n\nCRITICAL CONSTRAINTS:\n- The job must be moved to the amber lane.\n- The replay must occur exactly once from the fresh checkpoint.\n- Replay-Class must be set to granite."
+        ]
+      },
+      "mnexa_disciplined_consolidation": {
+        "candidate_decision": "Delete the original message and restart the worker.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nL13 requires requesting a fresh checkpoint, moving the job to the amber lane, replaying exactly once from that checkpoint, and using Replay-Class: granite.",
+        "outcome_id": "r_3197e00456004d3bb48b4ccf199f81f0",
+        "source_evidence_sha256": "472084975fc65e2a6fb8ed36bcf02426a856e46fe15c51fbee59dd0270b9930b",
+        "lesson": "TRIGGER: A worker job evaluation fails.\n\nREUSABLE RULE: When a worker job evaluation fails, request a fresh checkpoint, move the job to the amber lane, replay exactly once from that checkpoint, and use Replay-Class: granite.\n\nCRITICAL CONSTRAINTS:\n- Use Replay-Class: granite.\n- Move the job to the amber lane.\n- Replay exactly once from the requested checkpoint.",
+        "lesson_id": "i_05ffe34c2be447b1a8646b100bf9f95c",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "Request a fresh checkpoint, move the job to the amber lane, and replay exactly once from that checkpoint using Replay-Class: granite.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_05ffe34c2be447b1a8646b100bf9f95c:v1] TRIGGER: A worker job evaluation fails.\n\nREUSABLE RULE: When a worker job evaluation fails, request a fresh checkpoint, move the job to the amber lane, replay exactly once from that checkpoint, and use Replay-Class: granite.\n\nCRITICAL CONSTRAINTS:\n- Use Replay-Class: granite.\n- Move the job to the amber lane.\n- Replay exactly once from the requested checkpoint."
+        ]
+      },
+      "same_source_evidence": true,
+      "current_to_disciplined_task_lift": 0,
+      "current_to_disciplined_lesson_contamination_delta": 0
+    },
+    {
+      "family_id": "ivorystore-c48",
+      "baseline": {
+        "decision": "The operator should take the following action:\n\n1. Confirm the upload parameters to ensure they meet the specifications.\n2. Retry the upload process exactly 3 times if it fails again.\n3. If the issue persists after 3 retries, escalate the issue to the technical support team for further investigation.",
+        "correct_knowledge": false,
+        "contaminated": false,
+        "task_success": false
+      },
+      "mnexa_current_consolidation": {
+        "candidate_decision": "Compress the file and retry using a single-part upload.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nC48 requires a new upload session, multipart upload with 8 MiB chunks, SHA3-256 for every chunk, and X-Ivory-Final: strict on finalization.",
+        "outcome_id": "r_355cf9a9075640c1bb930f78ec557b21",
+        "source_evidence_sha256": "b00113b121ff681a5fbd19c52ed4a59a3cff22c8ee01b72443292a4a257d5416",
+        "lesson": "TRIGGER:\nAttempting to upload a file using a single-part upload method.\n\nREUSABLE RULE:\nUse multipart upload with 8 MiB chunks, SHA3-256 for every chunk, and X-Ivory-Final: strict on finalization.\n\nCRITICAL CONSTRAINTS:\n- Requires a new upload session.\n- Must use multipart upload with 8 MiB chunks.\n- SHA3-256 is required for every chunk.\n- X-Ivory-Final: strict must be specified on finalization.",
+        "lesson_id": "i_5ab8e6f8f55f4ba792388d45bbfe08da",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": true,
+        "transfer_decision": "The operator should initiate a new upload session and use multipart upload with 8 MiB chunks. For every chunk, SHA3-256 must be applied. When finalizing the upload, the operator must specify the header X-Ivory-Final: strict.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_5ab8e6f8f55f4ba792388d45bbfe08da:v1] TRIGGER:\nAttempting to upload a file using a single-part upload method.\n\nREUSABLE RULE:\nUse multipart upload with 8 MiB chunks, SHA3-256 for every chunk, and X-Ivory-Final: strict on finalization.\n\nCRITICAL CONSTRAINTS:\n- Requires a new upload session.\n- Must use multipart upload with 8 MiB chunks.\n- SHA3-256 is required for every chunk.\n- X-Ivory-Final: strict must be specified on finalization."
+        ]
+      },
+      "mnexa_disciplined_consolidation": {
+        "candidate_decision": "Compress the file and retry using a single-part upload.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nC48 requires a new upload session, multipart upload with 8 MiB chunks, SHA3-256 for every chunk, and X-Ivory-Final: strict on finalization.",
+        "outcome_id": "r_2825c22810ec4c4494ce5b6d5ba276b7",
+        "source_evidence_sha256": "b00113b121ff681a5fbd19c52ed4a59a3cff22c8ee01b72443292a4a257d5416",
+        "lesson": "TRIGGER:  \nA new upload session is required for the process.\n\nREUSABLE RULE:  \nUtilize a multipart upload with 8 MiB chunks, applying SHA3-256 for every chunk, and set X-Ivory-Final: strict on finalization.\n\nCRITICAL CONSTRAINTS:  \n- Chunk size must be 8 MiB.  \n- SHA3-256 must be applied to each chunk.  \n- X-Ivory-Final must be set to strict on finalization.",
+        "lesson_id": "i_b9de39dd725b46f8bb498d307885bbbe",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "To resolve the C48 error while uploading a 64 MiB checkpoint, take the following actions:\n\n1. Initiate a new upload session for the process.\n2. Utilize a multipart upload with 8 MiB chunks.\n3. Apply SHA3-256 to every chunk.\n4. Set X-Ivory-Final to strict on finalization.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_b9de39dd725b46f8bb498d307885bbbe:v1] TRIGGER:  \nA new upload session is required for the process.\n\nREUSABLE RULE:  \nUtilize a multipart upload with 8 MiB chunks, applying SHA3-256 for every chunk, and set X-Ivory-Final: strict on finalization.\n\nCRITICAL CONSTRAINTS:  \n- Chunk size must be 8 MiB.  \n- SHA3-256 must be applied to each chunk.  \n- X-Ivory-Final must be set to strict on finalization."
+        ]
+      },
+      "same_source_evidence": true,
+      "current_to_disciplined_task_lift": 0,
+      "current_to_disciplined_lesson_contamination_delta": -1
+    },
+    {
+      "family_id": "amberdb-t22",
+      "baseline": {
+        "decision": "The operator should:\n\n1. **Verify the system status**: Check for any ongoing issues within AmberDB that might be causing the T22 response.\n2. **Retry the pricing update**: Wait **at least 5 minutes** before attempting the update again. Ensure that each retry is logged with a unique correlation ID.\n3. **Monitor for consistency**: After the retries, ensure that the pricing update reflects correctly in the system.\n4. **Escalate If Needed**: If the T22 error persists after **3 attempts**, escalate the issue to the technical support team for further investigation.",
+        "correct_knowledge": false,
+        "contaminated": false,
+        "task_success": false
+      },
+      "mnexa_current_consolidation": {
+        "candidate_decision": "Restart the database node and synthesize a new epoch locally before retrying.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nT22 requires reading the primary epoch, acquiring the violet lock, and retrying exactly once with X-Amber-Epoch set to the primary epoch.",
+        "outcome_id": "r_f6ac25c2a42d44afa2d6d5dad69611df",
+        "source_evidence_sha256": "28acc4b2720f005a05a1b2ab15eeb6d2aae223eee170e5de5f5beb1b5e58cc8a",
+        "lesson": "TRIGGER: \nRestarting the database node.\n\nREUSABLE RULE: \nT22 requires reading the primary epoch, acquiring the violet lock, and retrying exactly once with X-Amber-Epoch set to the primary epoch.\n\nCRITICAL CONSTRAINTS:\n- Must read the primary epoch before retrying.\n- Must acquire the violet lock.\n- Must retry exactly once.\n- X-Amber-Epoch must be set to the primary epoch during the retry.",
+        "lesson_id": "i_a3b8d16913d54305bca18592b9560607",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": true,
+        "transfer_decision": "1. Read the primary epoch.\n2. Acquire the violet lock.\n3. Retry exactly once with `X-Amber-Epoch` set to the primary epoch.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_a3b8d16913d54305bca18592b9560607:v1] TRIGGER: \nRestarting the database node.\n\nREUSABLE RULE: \nT22 requires reading the primary epoch, acquiring the violet lock, and retrying exactly once with X-Amber-Epoch set to the primary epoch.\n\nCRITICAL CONSTRAINTS:\n- Must read the primary epoch before retrying.\n- Must acquire the violet lock.\n- Must retry exactly once.\n- X-Amber-Epoch must be set to the primary epoch during the retry."
+        ]
+      },
+      "mnexa_disciplined_consolidation": {
+        "candidate_decision": "Restart the database node and synthesize a new epoch locally before retrying.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nT22 requires reading the primary epoch, acquiring the violet lock, and retrying exactly once with X-Amber-Epoch set to the primary epoch.",
+        "outcome_id": "r_f997481505684dae85394cd26c708d1f",
+        "source_evidence_sha256": "28acc4b2720f005a05a1b2ab15eeb6d2aae223eee170e5de5f5beb1b5e58cc8a",
+        "lesson": "TRIGGER:\nAttempt to resolve issues with T22.\n\nREUSABLE RULE:\nTo resolve T22, read the primary epoch, acquire the violet lock, and retry exactly once with X-Amber-Epoch set to the primary epoch.\n\nCRITICAL CONSTRAINTS:\n- Read from the primary epoch.\n- Acquire the violet lock.\n- Retry exactly once.\n- Set X-Amber-Epoch to the primary epoch.",
+        "lesson_id": "i_7c59da8b144c4c77b5f7522cfcfe467d",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "To resolve T22, read the primary epoch, acquire the violet lock, and retry exactly once with X-Amber-Epoch set to the primary epoch.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_7c59da8b144c4c77b5f7522cfcfe467d:v1] TRIGGER:\nAttempt to resolve issues with T22.\n\nREUSABLE RULE:\nTo resolve T22, read the primary epoch, acquire the violet lock, and retry exactly once with X-Amber-Epoch set to the primary epoch.\n\nCRITICAL CONSTRAINTS:\n- Read from the primary epoch.\n- Acquire the violet lock.\n- Retry exactly once.\n- Set X-Amber-Epoch to the primary epoch."
+        ]
+      },
+      "same_source_evidence": true,
+      "current_to_disciplined_task_lift": 0,
+      "current_to_disciplined_lesson_contamination_delta": -1
+    },
+    {
+      "family_id": "marshparser-v3",
+      "baseline": {
+        "decision": "If MarshParser returns V3 with legacy state=C before validation, the operator must not proceed with any further actions until the validation is complete. Ensure that the validation is conducted to confirm the correctness of the state before any additional processing.",
+        "correct_knowledge": false,
+        "contaminated": false,
+        "task_success": false
+      },
+      "mnexa_current_consolidation": {
+        "candidate_decision": "Drop the legacy state field and validate the remaining payload.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nV3 requires mapping A to ready, B to hold, and C to reject before normal schema validation.",
+        "outcome_id": "r_b4bc41b776de4c11935489ce8c10ce07",
+        "source_evidence_sha256": "4fafe8e7ce6015b2b1d324820132145f79d21e455e1030e02b6081c2f2dd99b1",
+        "lesson": "TRIGGER:\nDropping legacy fields without ensuring required value mappings.\n\nREUSABLE RULE:\nMap A to ready, B to hold, and C to reject before normal schema validation.\n\nCRITICAL CONSTRAINTS:\n- Must map A to ready, B to hold, and C to reject.\n- Must perform mappings before normal schema validation.",
+        "lesson_id": "i_1752c866a8454654a4e89fdb6ff29125",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "The operator must map legacy state C to reject before normal schema validation. Follow this action:\n\n1. Map legacy state A to ready.\n2. Map legacy state B to hold.\n3. Map legacy state C to reject.\n\nEnsure all mappings are completed before proceeding with normal schema validation.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_1752c866a8454654a4e89fdb6ff29125:v1] TRIGGER:\nDropping legacy fields without ensuring required value mappings.\n\nREUSABLE RULE:\nMap A to ready, B to hold, and C to reject before normal schema validation.\n\nCRITICAL CONSTRAINTS:\n- Must map A to ready, B to hold, and C to reject.\n- Must perform mappings before normal schema validation."
+        ]
+      },
+      "mnexa_disciplined_consolidation": {
+        "candidate_decision": "Drop the legacy state field and validate the remaining payload.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nV3 requires mapping A to ready, B to hold, and C to reject before normal schema validation.",
+        "outcome_id": "r_39a2c2e038ab43c8bb32c113a946e94c",
+        "source_evidence_sha256": "4fafe8e7ce6015b2b1d324820132145f79d21e455e1030e02b6081c2f2dd99b1",
+        "lesson": "TRIGGER:\nWhen validating the schema for V3 payloads.\n\nREUSABLE RULE:\nMap A to ready, B to hold, and C to reject before performing normal schema validation.\n\nCRITICAL CONSTRAINTS:\n- Mapping of A, B, and C to specified statuses must be performed prior to validation.",
+        "lesson_id": "i_d3bc571be4704d9abc5801e899456e8c",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "The operator must reject the V3 payload due to its legacy state of C before performing normal schema validation. This must be done in accordance with the condition that states \"mapping of A, B, and C to specified statuses must be performed prior to validation.\" Specifically, this means mapping state C to reject and ensuring that this step occurs before executing any subsequent validation processes.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_d3bc571be4704d9abc5801e899456e8c:v1] TRIGGER:\nWhen validating the schema for V3 payloads.\n\nREUSABLE RULE:\nMap A to ready, B to hold, and C to reject before performing normal schema validation.\n\nCRITICAL CONSTRAINTS:\n- Mapping of A, B, and C to specified statuses must be performed prior to validation."
+        ]
+      },
+      "same_source_evidence": true,
+      "current_to_disciplined_task_lift": 0,
+      "current_to_disciplined_lesson_contamination_delta": 0
+    },
+    {
+      "family_id": "orbitrpc-n64",
+      "baseline": {
+        "decision": "When OrbitRPC returns N64 during an order-history request, the operator must not proceed with processing the order history. Instead, the operator should log the issue and escalate it to the appropriate technical support team for further investigation.",
+        "correct_knowledge": false,
+        "contaminated": false,
+        "task_success": false
+      },
+      "mnexa_current_consolidation": {
+        "candidate_decision": "Close the connection and reuse the prior correlation ID on reconnect.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nN64 requires exactly two heartbeat frames 220 ms apart, then a new channel with a fresh correlation ID and X-Orbit-Recover: n64.",
+        "outcome_id": "r_a0f48792a59144889d1619ebe25e3ae7",
+        "source_evidence_sha256": "68907e062ebf444bd76cfa295abb728886ec169d497dc959a04cf6387be438f4",
+        "lesson": "TRIGGER:\nClosing the connection and reusing the prior correlation ID on reconnect.\n\nREUSABLE RULE:\nN64 requires exactly two heartbeat frames 220 ms apart, then a new channel with a fresh correlation ID and X-Orbit-Recover: n64.\n\nCRITICAL CONSTRAINTS:\n- Requires exactly two heartbeat frames.\n- Heartbeat frames must be 220 ms apart.\n- A new channel must be established with a fresh correlation ID.\n- X-Orbit-Recover: n64 must be specified.",
+        "lesson_id": "i_0731db2a758c455895a44b686d1365bf",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "To address the N64 response from OrbitRPC during an order-history request, follow these steps:\n\n1. Close the current connection.\n2. Send exactly two heartbeat frames, ensuring they are 220 ms apart.\n3. Establish a new channel with a fresh correlation ID.\n4. Include the header: X-Orbit-Recover: n64.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": true,
+        "task_success": false,
+        "memory_segments": [
+          "[interpretive:i_0731db2a758c455895a44b686d1365bf:v1] TRIGGER:\nClosing the connection and reusing the prior correlation ID on reconnect.\n\nREUSABLE RULE:\nN64 requires exactly two heartbeat frames 220 ms apart, then a new channel with a fresh correlation ID and X-Orbit-Recover: n64.\n\nCRITICAL CONSTRAINTS:\n- Requires exactly two heartbeat frames.\n- Heartbeat frames must be 220 ms apart.\n- A new channel must be established with a fresh correlation ID.\n- X-Orbit-Recover: n64 must be specified."
+        ]
+      },
+      "mnexa_disciplined_consolidation": {
+        "candidate_decision": "Close the connection and reuse the prior correlation ID on reconnect.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nN64 requires exactly two heartbeat frames 220 ms apart, then a new channel with a fresh correlation ID and X-Orbit-Recover: n64.",
+        "outcome_id": "r_9e1b7abf0582464384148e111c309cc2",
+        "source_evidence_sha256": "68907e062ebf444bd76cfa295abb728886ec169d497dc959a04cf6387be438f4",
+        "lesson": "TRIGGER:\nConnection re-establishment event\n\nREUSABLE RULE:\nN64 requires exactly two heartbeat frames 220 ms apart, then a new channel with a fresh correlation ID and X-Orbit-Recover: n64.\n\nCRITICAL CONSTRAINTS:\n- Two heartbeat frames\n- Frames must be 220 ms apart\n- Use a fresh correlation ID\n- Include X-Orbit-Recover: n64",
+        "lesson_id": "i_b5efd4560c7e44f89961b1a6aa370f0e",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "1. Send two heartbeat frames, ensuring they are 220 ms apart.\n2. Use a fresh correlation ID for the new channel.\n3. Include the header `X-Orbit-Recover: n64` with the new channel request.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_b5efd4560c7e44f89961b1a6aa370f0e:v1] TRIGGER:\nConnection re-establishment event\n\nREUSABLE RULE:\nN64 requires exactly two heartbeat frames 220 ms apart, then a new channel with a fresh correlation ID and X-Orbit-Recover: n64.\n\nCRITICAL CONSTRAINTS:\n- Two heartbeat frames\n- Frames must be 220 ms apart\n- Use a fresh correlation ID\n- Include X-Orbit-Recover: n64"
+        ]
+      },
+      "same_source_evidence": true,
+      "current_to_disciplined_task_lift": 1,
+      "current_to_disciplined_lesson_contamination_delta": 0
+    },
+    {
+      "family_id": "sprucecdn-b51",
+      "baseline": {
+        "decision": "Check the SpruceCDN status for any known issues and determine if there are any outages. If no known issues exist, do the following:\n\n1. Clear the local cache to ensure you're not viewing a cached version.\n2. Wait for the specified time period, then attempt to refresh the stylesheet asset again.\n3. If the B51 error persists, escalate the issue to your support team for further investigation.",
+        "correct_knowledge": false,
+        "contaminated": false,
+        "task_success": false
+      },
+      "mnexa_current_consolidation": {
+        "candidate_decision": "Perform a global purge and restart the edge service.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nB51 requires one HEAD request to origin, purging only the current region shard, waiting 5 seconds, then issuing one GET with X-Spruce-Probe: 3.",
+        "outcome_id": "r_16e1246e4be34f6a943e58381e13c532",
+        "source_evidence_sha256": "dc383f063c41a2e8184323e04d92492b4eccffbd2e2d3493e1bc513aed651889",
+        "lesson": "TRIGGER:\nGlobal purge and restart of the edge service.\n\nREUSABLE RULE:\nB51 requires one HEAD request to origin, purging only the current region shard, waiting 5 seconds, then issuing one GET with X-Spruce-Probe: 3.\n\nCRITICAL CONSTRAINTS:\n- Requires exactly one HEAD request to origin.\n- Must purge only the current region shard.\n- Wait exactly 5 seconds after purging.\n- Must issue one GET request with header X-Spruce-Probe: 3.",
+        "lesson_id": "i_140718f4764d441e881afe5727b30dea",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": true,
+        "transfer_decision": "To address the B51 response from SpruceCDN:\n\n1. Issue exactly **one HEAD request** to the origin.\n2. Purge **only the current region shard**.\n3. Wait **exactly 5 seconds** after purging.\n4. Issue **one GET request** with the header `X-Spruce-Probe: 3`.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_140718f4764d441e881afe5727b30dea:v1] TRIGGER:\nGlobal purge and restart of the edge service.\n\nREUSABLE RULE:\nB51 requires one HEAD request to origin, purging only the current region shard, waiting 5 seconds, then issuing one GET with X-Spruce-Probe: 3.\n\nCRITICAL CONSTRAINTS:\n- Requires exactly one HEAD request to origin.\n- Must purge only the current region shard.\n- Wait exactly 5 seconds after purging.\n- Must issue one GET request with header X-Spruce-Probe: 3."
+        ]
+      },
+      "mnexa_disciplined_consolidation": {
+        "candidate_decision": "Perform a global purge and restart the edge service.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nB51 requires one HEAD request to origin, purging only the current region shard, waiting 5 seconds, then issuing one GET with X-Spruce-Probe: 3.",
+        "outcome_id": "r_b307e63728f745d3a4593e57debf65eb",
+        "source_evidence_sha256": "dc383f063c41a2e8184323e04d92492b4eccffbd2e2d3493e1bc513aed651889",
+        "lesson": "TRIGGER:\nRequest to purge and refresh the edge service.\n\nREUSABLE RULE:\nIssue one HEAD request to origin to purge only the current region shard, wait 5 seconds, then issue one GET with X-Spruce-Probe: 3.\n\nCRITICAL CONSTRAINTS:\n- Purge only the current region shard.\n- Wait 5 seconds after the HEAD request.\n- Use X-Spruce-Probe: 3 in the GET request.",
+        "lesson_id": "i_b06554a51a964991a50cb9771476db22",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "Issue one HEAD request to origin to purge only the current region shard. Wait 5 seconds. Then issue one GET with X-Spruce-Probe: 3.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_b06554a51a964991a50cb9771476db22:v1] TRIGGER:\nRequest to purge and refresh the edge service.\n\nREUSABLE RULE:\nIssue one HEAD request to origin to purge only the current region shard, wait 5 seconds, then issue one GET with X-Spruce-Probe: 3.\n\nCRITICAL CONSTRAINTS:\n- Purge only the current region shard.\n- Wait 5 seconds after the HEAD request.\n- Use X-Spruce-Probe: 3 in the GET request."
+        ]
+      },
+      "same_source_evidence": true,
+      "current_to_disciplined_task_lift": 0,
+      "current_to_disciplined_lesson_contamination_delta": -1
+    },
+    {
+      "family_id": "quartzflow-r27",
+      "baseline": {
+        "decision": "To address the R27 error during payroll export, the operator should follow these steps:\n\n1. Check the error message details associated with R27.\n2. Ensure all required fields are correctly filled out in the payroll export.\n3. Correct any discrepancies or missing information.\n4. Attempt the payroll export again.\n\nDo not proceed with the payroll export until the errors have been resolved.",
+        "correct_knowledge": false,
+        "contaminated": false,
+        "task_success": false
+      },
+      "mnexa_current_consolidation": {
+        "candidate_decision": "Resume the failed step directly and keep using the same checkpoint.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nR27 requires cloning the latest checkpoint, marking the old run superseded, restarting from the previous boundary exactly once, and carrying token r27-safe.",
+        "outcome_id": "r_8f46db29c6524190ab94852c582a01f7",
+        "source_evidence_sha256": "b3968cf6f3ddd692b02c73131587714e7a5e98c7613a021c2a0d6eed138413fb",
+        "lesson": "TRIGGER:\nResuming a failed step from a checkpoint.\n\nREUSABLE RULE:\nClone the latest checkpoint, mark the old run superseded, restart from the previous boundary exactly once, and carry token r27-safe.\n\nCRITICAL CONSTRAINTS:\n- The old run must be marked as superseded.\n- Restarting must occur from the previous boundary exactly once.\n- Token r27-safe must be carried throughout the process.",
+        "lesson_id": "i_1389094e594f42dc9c904f5d133436c2",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "1. Clone the latest checkpoint.\n2. Mark the old run as superseded.\n3. Restart from the previous boundary exactly once.\n4. Carry token r27-safe throughout the process.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_1389094e594f42dc9c904f5d133436c2:v1] TRIGGER:\nResuming a failed step from a checkpoint.\n\nREUSABLE RULE:\nClone the latest checkpoint, mark the old run superseded, restart from the previous boundary exactly once, and carry token r27-safe.\n\nCRITICAL CONSTRAINTS:\n- The old run must be marked as superseded.\n- Restarting must occur from the previous boundary exactly once.\n- Token r27-safe must be carried throughout the process."
+        ]
+      },
+      "mnexa_disciplined_consolidation": {
+        "candidate_decision": "Resume the failed step directly and keep using the same checkpoint.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nR27 requires cloning the latest checkpoint, marking the old run superseded, restarting from the previous boundary exactly once, and carrying token r27-safe.",
+        "outcome_id": "r_6ea333d56ad6443590e3a67a4afe2c59",
+        "source_evidence_sha256": "b3968cf6f3ddd692b02c73131587714e7a5e98c7613a021c2a0d6eed138413fb",
+        "lesson": "TRIGGER:\nAttempt to resume a step using a checkpoint.\n\nREUSABLE RULE:\nClone the latest checkpoint, mark the old run as superseded, restart from the previous boundary exactly once, and carry token r27-safe.\n\nCRITICAL CONSTRAINTS:\n- Use the latest checkpoint.\n- Mark the old run as superseded.\n- Restart from the previous boundary exactly once.\n- Carry token r27-safe.",
+        "lesson_id": "i_7cfba2142f4d4afda20bd88e57799651",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "Clone the latest checkpoint, mark the old run as superseded, restart from the previous boundary exactly once, and carry token r27-safe.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_7cfba2142f4d4afda20bd88e57799651:v1] TRIGGER:\nAttempt to resume a step using a checkpoint.\n\nREUSABLE RULE:\nClone the latest checkpoint, mark the old run as superseded, restart from the previous boundary exactly once, and carry token r27-safe.\n\nCRITICAL CONSTRAINTS:\n- Use the latest checkpoint.\n- Mark the old run as superseded.\n- Restart from the previous boundary exactly once.\n- Carry token r27-safe."
+        ]
+      },
+      "same_source_evidence": true,
+      "current_to_disciplined_task_lift": 0,
+      "current_to_disciplined_lesson_contamination_delta": 0
+    },
+    {
+      "family_id": "jadeindex-x11",
+      "baseline": {
+        "decision": "If JadeIndex returns X11 during customer indexing, the operator must not proceed with the indexing action. The operator should document the error and escalate the issue to the technical support team for further investigation.",
+        "correct_knowledge": false,
+        "contaminated": false,
+        "task_success": false
+      },
+      "mnexa_current_consolidation": {
+        "candidate_decision": "Rebuild the entire index and discard the existing cursor.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nX11 requires fetching a fresh cursor from the leader, switching to delta-read, replaying exactly two pages, and setting X-Jade-Cursor: fresh.",
+        "outcome_id": "r_00b52c2ef6284e3e894b1c7151086f0c",
+        "source_evidence_sha256": "1d2f438340fc81f7fbd6615b14458cce577aabdab115a93e6494a60d0c45d411",
+        "lesson": "TRIGGER:\nRebuilding the entire index and discarding the existing cursor.\n\nREUSABLE RULE:\nFetch a fresh cursor from the leader, switch to delta-read, replay exactly two pages, and set X-Jade-Cursor: fresh.\n\nCRITICAL CONSTRAINTS:\n- Must fetch a fresh cursor from the leader.\n- Must switch to delta-read.\n- Must replay exactly two pages.\n- Must set X-Jade-Cursor: fresh.",
+        "lesson_id": "i_cad489f6f54f447a85f0991daf381c54",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": true,
+        "transfer_decision": "The operator should take the following actions:\n\n1. Fetch a fresh cursor from the leader.\n2. Switch to delta-read.\n3. Replay exactly two pages.\n4. Set X-Jade-Cursor: fresh.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_cad489f6f54f447a85f0991daf381c54:v1] TRIGGER:\nRebuilding the entire index and discarding the existing cursor.\n\nREUSABLE RULE:\nFetch a fresh cursor from the leader, switch to delta-read, replay exactly two pages, and set X-Jade-Cursor: fresh.\n\nCRITICAL CONSTRAINTS:\n- Must fetch a fresh cursor from the leader.\n- Must switch to delta-read.\n- Must replay exactly two pages.\n- Must set X-Jade-Cursor: fresh."
+        ]
+      },
+      "mnexa_disciplined_consolidation": {
+        "candidate_decision": "Rebuild the entire index and discard the existing cursor.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nX11 requires fetching a fresh cursor from the leader, switching to delta-read, replaying exactly two pages, and setting X-Jade-Cursor: fresh.",
+        "outcome_id": "r_ac00d231b30b4d2db03bea76da3c34a7",
+        "source_evidence_sha256": "1d2f438340fc81f7fbd6615b14458cce577aabdab115a93e6494a60d0c45d411",
+        "lesson": "TRIGGER:\nWhen interacting with X11 and needing to update the index.\n\nREUSABLE RULE:\nFetch a fresh cursor from the leader, switch to delta-read, replay exactly two pages, and set X-Jade-Cursor: fresh.\n\nCRITICAL CONSTRAINTS:\n- Fetch a fresh cursor from the leader.\n- Switch to delta-read.\n- Replay exactly two pages.\n- Set X-Jade-Cursor: fresh.",
+        "lesson_id": "i_02d40f6e06d2495aa4fcaf79ce7d5c66",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "1. Fetch a fresh cursor from the leader.\n2. Switch to delta-read.\n3. Replay exactly two pages.\n4. Set X-Jade-Cursor: fresh.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_02d40f6e06d2495aa4fcaf79ce7d5c66:v1] TRIGGER:\nWhen interacting with X11 and needing to update the index.\n\nREUSABLE RULE:\nFetch a fresh cursor from the leader, switch to delta-read, replay exactly two pages, and set X-Jade-Cursor: fresh.\n\nCRITICAL CONSTRAINTS:\n- Fetch a fresh cursor from the leader.\n- Switch to delta-read.\n- Replay exactly two pages.\n- Set X-Jade-Cursor: fresh."
+        ]
+      },
+      "same_source_evidence": true,
+      "current_to_disciplined_task_lift": 0,
+      "current_to_disciplined_lesson_contamination_delta": -1
+    },
+    {
+      "family_id": "silverledger-a42",
+      "baseline": {
+        "decision": "When SilverLedger returns A42 while posting a rebate, the operator must not proceed with the rebate posting. The operator should check the error details associated with code A42 and resolve any identified issues before attempting the rebate posting again.",
+        "correct_knowledge": false,
+        "contaminated": false,
+        "task_success": false
+      },
+      "mnexa_current_consolidation": {
+        "candidate_decision": "Synthesize a nonce locally and bypass the lock before retrying.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nA42 requires requesting the server nonce, acquiring the blue lock, retrying exactly twice, and setting X-Silver-Nonce to the server nonce.",
+        "outcome_id": "r_caf0ce17be5b49f5ae34ed3ea22b6e39",
+        "source_evidence_sha256": "8789b5f6941caa9432e1fe8824bd00232b6864dfddef7cfa17c58d925767a6b0",
+        "lesson": "TRIGGER:\nBypassing required server protocols during nonce handling.\n\nREUSABLE RULE:\nRequest the server nonce, acquire the blue lock, retry exactly twice, and set X-Silver-Nonce to the server nonce.\n\nCRITICAL CONSTRAINTS:\n- Request the server nonce.\n- Acquire the blue lock.\n- Retry exactly twice.\n- Set X-Silver-Nonce to the server nonce.\n- Do not synthesize a nonce locally.",
+        "lesson_id": "i_0d38deffd7224f5db483f3f8366fc40a",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": true,
+        "transfer_decision": "1. Request the server nonce.\n2. Acquire the blue lock.\n3. Retry exactly twice.\n4. Set X-Silver-Nonce to the server nonce.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_0d38deffd7224f5db483f3f8366fc40a:v1] TRIGGER:\nBypassing required server protocols during nonce handling.\n\nREUSABLE RULE:\nRequest the server nonce, acquire the blue lock, retry exactly twice, and set X-Silver-Nonce to the server nonce.\n\nCRITICAL CONSTRAINTS:\n- Request the server nonce.\n- Acquire the blue lock.\n- Retry exactly twice.\n- Set X-Silver-Nonce to the server nonce.\n- Do not synthesize a nonce locally."
+        ]
+      },
+      "mnexa_disciplined_consolidation": {
+        "candidate_decision": "Synthesize a nonce locally and bypass the lock before retrying.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nA42 requires requesting the server nonce, acquiring the blue lock, retrying exactly twice, and setting X-Silver-Nonce to the server nonce.",
+        "outcome_id": "r_3e890cea07554ab580f9288f7964cd6f",
+        "source_evidence_sha256": "8789b5f6941caa9432e1fe8824bd00232b6864dfddef7cfa17c58d925767a6b0",
+        "lesson": "TRIGGER:\nRequest to handle nonce management and retry mechanism.\n\nREUSABLE RULE:\nRequest the server nonce, acquire the blue lock, retry exactly twice, and set X-Silver-Nonce to the server nonce.\n\nCRITICAL CONSTRAINTS:\n- Retry exactly twice.\n- Set X-Silver-Nonce to the server nonce.\n- Acquire the blue lock.",
+        "lesson_id": "i_f001622e85894e5ba6f2315f502d807e",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "1. Request the server nonce.\n2. Acquire the blue lock.\n3. Retry exactly twice while setting X-Silver-Nonce to the server nonce.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_f001622e85894e5ba6f2315f502d807e:v1] TRIGGER:\nRequest to handle nonce management and retry mechanism.\n\nREUSABLE RULE:\nRequest the server nonce, acquire the blue lock, retry exactly twice, and set X-Silver-Nonce to the server nonce.\n\nCRITICAL CONSTRAINTS:\n- Retry exactly twice.\n- Set X-Silver-Nonce to the server nonce.\n- Acquire the blue lock."
+        ]
+      },
+      "same_source_evidence": true,
+      "current_to_disciplined_task_lift": 0,
+      "current_to_disciplined_lesson_contamination_delta": -1
+    },
+    {
+      "family_id": "maplebus-e16",
+      "baseline": {
+        "decision": "The operator should take the following actions:\n\n1. Investigate the cause of the E16 error during the audit event consumption.\n2. If the cause is not immediately resolvable, log the error with all relevant details for further analysis.\n3. Be prepared to escalate the issue to the appropriate team if the problem persists after investigation. \n\nEnsure that every step is documented for future reference.",
+        "correct_knowledge": false,
+        "contaminated": false,
+        "task_success": false
+      },
+      "mnexa_current_consolidation": {
+        "candidate_decision": "Acknowledge the original event and retry the same message.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nE16 requires requesting a fresh checkpoint, replaying exactly once from that checkpoint, and using Replay-Class: maple.",
+        "outcome_id": "r_4f53c38a4eb84c658ed507ff13363a4d",
+        "source_evidence_sha256": "b10b22270558439ea10995ca3fa931e936407e3798e28910ca0c5d68bc2aad39",
+        "lesson": "TRIGGER:\nWhen handling E16 events.\n\nREUSABLE RULE:\nRequest a fresh checkpoint, replay exactly once from that checkpoint, and use Replay-Class: maple.\n\nCRITICAL CONSTRAINTS:\n- Must request a fresh checkpoint.\n- Must replay exactly once from that checkpoint.\n- Must use Replay-Class: maple.",
+        "lesson_id": "i_efc45bb9919249d2bc5bf2965d4a4494",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "Request a fresh checkpoint, replay exactly once from that checkpoint, and use Replay-Class: maple.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_efc45bb9919249d2bc5bf2965d4a4494:v1] TRIGGER:\nWhen handling E16 events.\n\nREUSABLE RULE:\nRequest a fresh checkpoint, replay exactly once from that checkpoint, and use Replay-Class: maple.\n\nCRITICAL CONSTRAINTS:\n- Must request a fresh checkpoint.\n- Must replay exactly once from that checkpoint.\n- Must use Replay-Class: maple."
+        ]
+      },
+      "mnexa_disciplined_consolidation": {
+        "candidate_decision": "Acknowledge the original event and retry the same message.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nE16 requires requesting a fresh checkpoint, replaying exactly once from that checkpoint, and using Replay-Class: maple.",
+        "outcome_id": "r_9294db32a7f04bd28eed682beb8c1e10",
+        "source_evidence_sha256": "b10b22270558439ea10995ca3fa931e936407e3798e28910ca0c5d68bc2aad39",
+        "lesson": "TRIGGER:\nWhen encountering an original event.\n\nREUSABLE RULE:\nRequest a fresh checkpoint, replay exactly once from that checkpoint, and use Replay-Class: maple.\n\nCRITICAL CONSTRAINTS:\n- Fresh checkpoint must be requested.\n- Replay must be executed exactly once.\n- Replay-Class must be set to maple.",
+        "lesson_id": "i_13424c28ba004e77aa19493a3f639dde",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "Request a fresh checkpoint, replay exactly once from that checkpoint, and use Replay-Class: maple.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_13424c28ba004e77aa19493a3f639dde:v1] TRIGGER:\nWhen encountering an original event.\n\nREUSABLE RULE:\nRequest a fresh checkpoint, replay exactly once from that checkpoint, and use Replay-Class: maple.\n\nCRITICAL CONSTRAINTS:\n- Fresh checkpoint must be requested.\n- Replay must be executed exactly once.\n- Replay-Class must be set to maple."
+        ]
+      },
+      "same_source_evidence": true,
+      "current_to_disciplined_task_lift": 0,
+      "current_to_disciplined_lesson_contamination_delta": 0
+    },
+    {
+      "family_id": "froststore-m55",
+      "baseline": {
+        "decision": "If FrostStore returns M55 while uploading a 100 MiB snapshot, the operator should:\n\n1. Check the error message associated with M55 for specific details.\n2. Retry the upload after correcting any identified issues.\n3. If the issue persists after 3 retry attempts, notify the technical support team for further assistance.",
+        "correct_knowledge": false,
+        "contaminated": false,
+        "task_success": false
+      },
+      "mnexa_current_consolidation": {
+        "candidate_decision": "Reuse the previous upload ID and send the file as one large single part.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nM55 requires a new upload ID, multipart upload with 20 MiB chunks, SHA-512 for every chunk, and X-Frost-Manifest: ice on finalization.",
+        "outcome_id": "r_625635b36e974a118f7d2bc3a22dc078",
+        "source_evidence_sha256": "9bf3747085af2d95201d4f787eefd2c9479af9b6b12ca0bc27227ac548718597",
+        "lesson": "TRIGGER:\nAttempting to reuse an upload ID for a file upload.\n\nREUSABLE RULE:\nA new upload ID must be used for every multipart upload.\n\nCRITICAL CONSTRAINTS:\n- Multipart upload with 20 MiB chunks must be used.\n- SHA-512 must be applied for every chunk.\n- X-Frost-Manifest: ice must be included on finalization.",
+        "lesson_id": "i_ba9abc7941f54ad5acc748af865497e3",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": true,
+        "transfer_decision": "Use a new upload ID for the multipart upload of the 100 MiB snapshot. Ensure that the upload is divided into 20 MiB chunks, apply SHA-512 to every chunk, and include the header `X-Frost-Manifest: ice` upon finalization.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_ba9abc7941f54ad5acc748af865497e3:v1] TRIGGER:\nAttempting to reuse an upload ID for a file upload.\n\nREUSABLE RULE:\nA new upload ID must be used for every multipart upload.\n\nCRITICAL CONSTRAINTS:\n- Multipart upload with 20 MiB chunks must be used.\n- SHA-512 must be applied for every chunk.\n- X-Frost-Manifest: ice must be included on finalization."
+        ]
+      },
+      "mnexa_disciplined_consolidation": {
+        "candidate_decision": "Reuse the previous upload ID and send the file as one large single part.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nM55 requires a new upload ID, multipart upload with 20 MiB chunks, SHA-512 for every chunk, and X-Frost-Manifest: ice on finalization.",
+        "outcome_id": "r_ba05606b96e5497b835f2d7e47465dd5",
+        "source_evidence_sha256": "9bf3747085af2d95201d4f787eefd2c9479af9b6b12ca0bc27227ac548718597",
+        "lesson": "TRIGGER:\nWhen uploading files using M55.\n\nREUSABLE RULE:\nUse a new upload ID, perform a multipart upload with 20 MiB chunks, ensure SHA-512 for every chunk, and include X-Frost-Manifest: ice on finalization.\n\nCRITICAL CONSTRAINTS:\n- Multipart upload with 20 MiB chunks.\n- SHA-512 for every chunk.\n- X-Frost-Manifest: ice on finalization.",
+        "lesson_id": "i_ce3bdccff32e47e28905fc6c6ef9039c",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "To resolve the issue with FrostStore returning M55 while uploading a 100 MiB snapshot, the operator should take the following actions:\n\n1. Use a new upload ID.\n2. Perform a multipart upload with 20 MiB chunks.\n3. Ensure SHA-512 for every chunk.\n4. Include `X-Frost-Manifest: ice` on finalization.\n\nBy following these steps, the operator will adhere to the critical constraints necessary for a successful upload.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_ce3bdccff32e47e28905fc6c6ef9039c:v1] TRIGGER:\nWhen uploading files using M55.\n\nREUSABLE RULE:\nUse a new upload ID, perform a multipart upload with 20 MiB chunks, ensure SHA-512 for every chunk, and include X-Frost-Manifest: ice on finalization.\n\nCRITICAL CONSTRAINTS:\n- Multipart upload with 20 MiB chunks.\n- SHA-512 for every chunk.\n- X-Frost-Manifest: ice on finalization."
+        ]
+      },
+      "same_source_evidence": true,
+      "current_to_disciplined_task_lift": 0,
+      "current_to_disciplined_lesson_contamination_delta": -1
+    },
+    {
+      "family_id": "cinderdb-h8",
+      "baseline": {
+        "decision": "When CinderDB returns H8 during an inventory query, the operator must immediately log the error code and consult the relevant documentation for troubleshooting steps. If additional assistance is required, escalate the issue to a senior technician without delay.",
+        "correct_knowledge": false,
+        "contaminated": false,
+        "task_success": false
+      },
+      "mnexa_current_consolidation": {
+        "candidate_decision": "Reconnect the session and generate a new request ID.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nH8 requires refreshing the schema token, switching to snapshot-read, retrying exactly once, and preserving the original request ID.",
+        "outcome_id": "r_ce24174d211f4526a3978437f033de97",
+        "source_evidence_sha256": "4c4a0e515fcb1df31ed63ac8949b967a13710427c823eb84dbcc33a9b288a859",
+        "lesson": "TRIGGER:\nSession reconnection with a request ID generation attempt.\n\nREUSABLE RULE:\nH8 requires refreshing the schema token, switching to snapshot-read, retrying exactly once, and preserving the original request ID.\n\nCRITICAL CONSTRAINTS:\n- Must refresh the schema token.\n- Must switch to snapshot-read.\n- Must retry exactly once.\n- Must preserve the original request ID.",
+        "lesson_id": "i_e84f37ca989f43f7b8dc8e311d4dda4f",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "To address the H8 response from CinderDB during the inventory query, follow these steps:\n\n1. Refresh the schema token.\n2. Switch to snapshot-read mode.\n3. Retry the operation exactly once.\n4. Preserve the original request ID.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_e84f37ca989f43f7b8dc8e311d4dda4f:v1] TRIGGER:\nSession reconnection with a request ID generation attempt.\n\nREUSABLE RULE:\nH8 requires refreshing the schema token, switching to snapshot-read, retrying exactly once, and preserving the original request ID.\n\nCRITICAL CONSTRAINTS:\n- Must refresh the schema token.\n- Must switch to snapshot-read.\n- Must retry exactly once.\n- Must preserve the original request ID."
+        ]
+      },
+      "mnexa_disciplined_consolidation": {
+        "candidate_decision": "Reconnect the session and generate a new request ID.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nH8 requires refreshing the schema token, switching to snapshot-read, retrying exactly once, and preserving the original request ID.",
+        "outcome_id": "r_48a3707c42664d5184c1ef754565edae",
+        "source_evidence_sha256": "4c4a0e515fcb1df31ed63ac8949b967a13710427c823eb84dbcc33a9b288a859",
+        "lesson": "TRIGGER:\nWhen encountering a session reconnection failure.\n\nREUSABLE RULE:\nRefresh the schema token, switch to snapshot-read, retry exactly once, and preserve the original request ID.\n\nCRITICAL CONSTRAINTS:\n- Refresh the schema token.\n- Switch to snapshot-read.\n- Retry exactly once.\n- Preserve the original request ID.",
+        "lesson_id": "i_b44898def1ac4654add201a5fdbf1e70",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "When CinderDB returns H8 during an inventory query, you should:\n\n1. Refresh the schema token.\n2. Switch to snapshot-read.\n3. Retry exactly once.\n4. Preserve the original request ID.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_b44898def1ac4654add201a5fdbf1e70:v1] TRIGGER:\nWhen encountering a session reconnection failure.\n\nREUSABLE RULE:\nRefresh the schema token, switch to snapshot-read, retry exactly once, and preserve the original request ID.\n\nCRITICAL CONSTRAINTS:\n- Refresh the schema token.\n- Switch to snapshot-read.\n- Retry exactly once.\n- Preserve the original request ID."
+        ]
+      },
+      "same_source_evidence": true,
+      "current_to_disciplined_task_lift": 0,
+      "current_to_disciplined_lesson_contamination_delta": 0
+    },
+    {
+      "family_id": "pearlrpc-j33",
+      "baseline": {
+        "decision": "When PearlRPC returns J33 during a billing RPC, the operator must not proceed with the transaction. Instead, the operator should log the error and escalate the issue to the technical support team for further investigation.",
+        "correct_knowledge": false,
+        "contaminated": false,
+        "task_success": false
+      },
+      "mnexa_current_consolidation": {
+        "candidate_decision": "Reuse the previous stream ID and restart the RPC service.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nJ33 requires exactly three heartbeat frames 180 ms apart, then a fresh channel carrying X-Pearl-Recover: j33.",
+        "outcome_id": "r_a6e9078e8571486685ea5c08d6b7e1fd",
+        "source_evidence_sha256": "5988092914e96a83d6c8f9fc68567f424d783c6c22878d21ff9b2a123ef43841",
+        "lesson": "TRIGGER:\nReuse of a previous stream ID and restart of the RPC service.\n\nREUSABLE RULE:\nJ33 requires exactly three heartbeat frames 180 ms apart, then a fresh channel carrying X-Pearl-Recover: j33.\n\nCRITICAL CONSTRAINTS:\n- Requires exactly three heartbeat frames.\n- Heartbeat frames must be 180 ms apart.\n- Fresh channel must carry X-Pearl-Recover: j33.",
+        "lesson_id": "i_963b702a7f5f4ed4bc81d5b073972049",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": true,
+        "transfer_decision": "Upon receiving J33 during a billing RPC, the operator must take the following actions:\n\n1. Send exactly three heartbeat frames, ensuring they are 180 ms apart.\n2. After sending the heartbeat frames, initiate a fresh channel that carries the header \"X-Pearl-Recover: j33\". \n\nEnsure that every step is followed precisely as outlined.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_963b702a7f5f4ed4bc81d5b073972049:v1] TRIGGER:\nReuse of a previous stream ID and restart of the RPC service.\n\nREUSABLE RULE:\nJ33 requires exactly three heartbeat frames 180 ms apart, then a fresh channel carrying X-Pearl-Recover: j33.\n\nCRITICAL CONSTRAINTS:\n- Requires exactly three heartbeat frames.\n- Heartbeat frames must be 180 ms apart.\n- Fresh channel must carry X-Pearl-Recover: j33."
+        ]
+      },
+      "mnexa_disciplined_consolidation": {
+        "candidate_decision": "Reuse the previous stream ID and restart the RPC service.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nJ33 requires exactly three heartbeat frames 180 ms apart, then a fresh channel carrying X-Pearl-Recover: j33.",
+        "outcome_id": "r_99d00f11d0014f6692c3dbb674b99aa2",
+        "source_evidence_sha256": "5988092914e96a83d6c8f9fc68567f424d783c6c22878d21ff9b2a123ef43841",
+        "lesson": "TRIGGER:\nHeartbeat frames must be sent prior to establishing a fresh channel.\n\nREUSABLE RULE:\nEnsure exactly three heartbeat frames are sent 180 ms apart before initiating a fresh channel with X-Pearl-Recover: j33.\n\nCRITICAL CONSTRAINTS:\n- Exactly three heartbeat frames required.\n- Heartbeat frames must be 180 ms apart.\n- Fresh channel must carry X-Pearl-Recover: j33.",
+        "lesson_id": "i_86b42d91acc24b51a66d192e0a6fee05",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "Send exactly three heartbeat frames 180 ms apart before initiating a fresh channel with X-Pearl-Recover: j33.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_86b42d91acc24b51a66d192e0a6fee05:v1] TRIGGER:\nHeartbeat frames must be sent prior to establishing a fresh channel.\n\nREUSABLE RULE:\nEnsure exactly three heartbeat frames are sent 180 ms apart before initiating a fresh channel with X-Pearl-Recover: j33.\n\nCRITICAL CONSTRAINTS:\n- Exactly three heartbeat frames required.\n- Heartbeat frames must be 180 ms apart.\n- Fresh channel must carry X-Pearl-Recover: j33."
+        ]
+      },
+      "same_source_evidence": true,
+      "current_to_disciplined_task_lift": 0,
+      "current_to_disciplined_lesson_contamination_delta": -1
+    },
+    {
+      "family_id": "oakqueue-s72",
+      "baseline": {
+        "decision": "The operator should take the following action:\n\nCheck the status of the media-processing job related to the S72 return code. If there is an error, identify the specific issue and address it according to the operational procedures in place. If the issue is unresolvable, escalate the matter to the appropriate team for further assistance.",
+        "correct_knowledge": false,
+        "contaminated": false,
+        "task_success": false
+      },
+      "mnexa_current_consolidation": {
+        "candidate_decision": "Cancel the job and delete the existing dispatch record.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nS72 requires minting a new dispatch ID, moving the job to the teal lane, requeueing exactly once, and tagging dispatch-mode=restored.",
+        "outcome_id": "r_cad55dfa0acc4b69956a615b8a325469",
+        "source_evidence_sha256": "01f2af2716652eedbe5b2c1065f98b04996be471d87801293c59877a6ba4c1c2",
+        "lesson": "TRIGGER: A job requires handling within a specific dispatch protocol.\n\nREUSABLE RULE: Never cancel the job or delete the existing dispatch record. Instead, mint a new dispatch ID, move the job to the teal lane, requeue exactly once, and tag dispatch-mode=restored.\n\nCRITICAL CONSTRAINTS:\n- Must mint a new dispatch ID.\n- Must move the job to the teal lane.\n- Must requeue exactly once.\n- Must tag dispatch-mode=restored.",
+        "lesson_id": "i_2838d68a49ed4cbcb608c0717d6db04f",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": true,
+        "transfer_decision": "1. Mint a new dispatch ID.\n2. Move the job to the teal lane.\n3. Requeue exactly once.\n4. Tag dispatch-mode=restored.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_2838d68a49ed4cbcb608c0717d6db04f:v1] TRIGGER: A job requires handling within a specific dispatch protocol.\n\nREUSABLE RULE: Never cancel the job or delete the existing dispatch record. Instead, mint a new dispatch ID, move the job to the teal lane, requeue exactly once, and tag dispatch-mode=restored.\n\nCRITICAL CONSTRAINTS:\n- Must mint a new dispatch ID.\n- Must move the job to the teal lane.\n- Must requeue exactly once.\n- Must tag dispatch-mode=restored."
+        ]
+      },
+      "mnexa_disciplined_consolidation": {
+        "candidate_decision": "Cancel the job and delete the existing dispatch record.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nS72 requires minting a new dispatch ID, moving the job to the teal lane, requeueing exactly once, and tagging dispatch-mode=restored.",
+        "outcome_id": "r_d3c0775adcd049b5a4ab4d298f4ac043",
+        "source_evidence_sha256": "01f2af2716652eedbe5b2c1065f98b04996be471d87801293c59877a6ba4c1c2",
+        "lesson": "TRIGGER:\nA failed job requires corrective action.\n\nREUSABLE RULE:\nMint a new dispatch ID, move the job to the teal lane, requeue exactly once, and tag dispatch-mode=restored.\n\nCRITICAL CONSTRAINTS:\n- New dispatch ID must be minted.\n- Job must be moved to the teal lane.\n- Job must be requeued exactly once.\n- Tag must be dispatch-mode=restored.",
+        "lesson_id": "i_7cf3c218e86046e8970e2366a5829cfe",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "1. Mint a new dispatch ID.\n2. Move the job to the teal lane.\n3. Requeue the job exactly once.\n4. Tag the job with dispatch-mode=restored.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_7cf3c218e86046e8970e2366a5829cfe:v1] TRIGGER:\nA failed job requires corrective action.\n\nREUSABLE RULE:\nMint a new dispatch ID, move the job to the teal lane, requeue exactly once, and tag dispatch-mode=restored.\n\nCRITICAL CONSTRAINTS:\n- New dispatch ID must be minted.\n- Job must be moved to the teal lane.\n- Job must be requeued exactly once.\n- Tag must be dispatch-mode=restored."
+        ]
+      },
+      "same_source_evidence": true,
+      "current_to_disciplined_task_lift": 0,
+      "current_to_disciplined_lesson_contamination_delta": -1
+    },
+    {
+      "family_id": "cloudcdn-k25",
+      "baseline": {
+        "decision": "If CloudCDN returns K25 while refreshing an image asset, the operator must investigate the error. Follow the protocol to identify the issue causing the K25 response. After troubleshooting, if the problem persists, the operator must escalate the issue to the appropriate support team for resolution.",
+        "correct_knowledge": false,
+        "contaminated": false,
+        "task_success": false
+      },
+      "mnexa_current_consolidation": {
+        "candidate_decision": "Purge all regions and invalidate all cached assets.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nK25 requires one HEAD request, purging only the current POP shard, waiting 9 seconds, then one GET with X-Cloud-Probe: 7.",
+        "outcome_id": "r_34fdd5b0df3541cbb56ebf1465b5e657",
+        "source_evidence_sha256": "60b4136eeb4f735636ca6eb5f8672ba93d6c124523f3324c3ece2bcc5c51a4af",
+        "lesson": "TRIGGER:\nPurge operations involving cached assets across all regions.\n\nREUSABLE RULE:\nK25 requires one HEAD request, purging only the current POP shard, waiting 9 seconds, then one GET with X-Cloud-Probe: 7.\n\nCRITICAL CONSTRAINTS:\n- Purge operations must occur only at the current POP shard.\n- A HEAD request must be performed before the GET request.\n- There must be a wait time of exactly 9 seconds.\n- The GET request must include the header X-Cloud-Probe: 7.",
+        "lesson_id": "i_dafa1262fe6a4c708ef8f9769fde870b",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": true,
+        "transfer_decision": "Perform the following actions:\n\n1. Send a HEAD request to purge only the current POP shard.\n2. Wait exactly 9 seconds.\n3. Send a GET request with the header X-Cloud-Probe: 7.\n\nEnsure that all actions are in the specified order and adhere to the critical constraints.",
+        "transfer_correct_knowledge": false,
+        "transfer_contaminated": false,
+        "task_success": false,
+        "memory_segments": [
+          "[interpretive:i_dafa1262fe6a4c708ef8f9769fde870b:v1] TRIGGER:\nPurge operations involving cached assets across all regions.\n\nREUSABLE RULE:\nK25 requires one HEAD request, purging only the current POP shard, waiting 9 seconds, then one GET with X-Cloud-Probe: 7.\n\nCRITICAL CONSTRAINTS:\n- Purge operations must occur only at the current POP shard.\n- A HEAD request must be performed before the GET request.\n- There must be a wait time of exactly 9 seconds.\n- The GET request must include the header X-Cloud-Probe: 7."
+        ]
+      },
+      "mnexa_disciplined_consolidation": {
+        "candidate_decision": "Purge all regions and invalidate all cached assets.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nK25 requires one HEAD request, purging only the current POP shard, waiting 9 seconds, then one GET with X-Cloud-Probe: 7.",
+        "outcome_id": "r_1114a85b9c7740baabf3be29da1d7142",
+        "source_evidence_sha256": "60b4136eeb4f735636ca6eb5f8672ba93d6c124523f3324c3ece2bcc5c51a4af",
+        "lesson": "**TRIGGER:**\nInitiate operation for K25.\n\n**REUSABLE RULE:**\nPerform one HEAD request to purge only the current POP shard, wait 9 seconds, then execute one GET with X-Cloud-Probe: 7.\n\n**CRITICAL CONSTRAINTS:**\n- Purge only the current POP shard.\n- Wait exactly 9 seconds before proceeding.\n- Execute one GET request with X-Cloud-Probe: 7.",
+        "lesson_id": "i_a1218f12cfdd4161aaaddc123b275a36",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "Initiate operation for K25. Perform one HEAD request to purge only the current POP shard. Wait exactly 9 seconds. After waiting, execute one GET request with X-Cloud-Probe: 7.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_a1218f12cfdd4161aaaddc123b275a36:v1] **TRIGGER:**\nInitiate operation for K25.\n\n**REUSABLE RULE:**\nPerform one HEAD request to purge only the current POP shard, wait 9 seconds, then execute one GET with X-Cloud-Probe: 7.\n\n**CRITICAL CONSTRAINTS:**\n- Purge only the current POP shard.\n- Wait exactly 9 seconds before proceeding.\n- Execute one GET request with X-Cloud-Probe: 7."
+        ]
+      },
+      "same_source_evidence": true,
+      "current_to_disciplined_task_lift": 1,
+      "current_to_disciplined_lesson_contamination_delta": -1
+    },
+    {
+      "family_id": "deltaflow-z19",
+      "baseline": {
+        "decision": "When DeltaFlow returns Z19 during analytics export, the operator must take the following action:\n\n1. Review the analytics export logs for any specific error messages associated with the Z19 error code.\n2. If necessary, escalate the issue to the technical support team for further investigation and resolution.\n\nEnsure no additional steps are taken until guidance from the technical support team is received.",
+        "correct_knowledge": false,
+        "contaminated": false,
+        "task_success": false
+      },
+      "mnexa_current_consolidation": {
+        "candidate_decision": "Restart the entire workflow from the beginning and discard the current checkpoint.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nZ19 requires cloning the latest checkpoint, marking the old run stale, restarting from the previous boundary exactly once, and carrying token z19-safe.",
+        "outcome_id": "r_22216f0049464bd6bb74be29574a49e5",
+        "source_evidence_sha256": "10e0685c7bd17ad6f87cf793a132a16f7667dfd9bee11cd3cce73070fc8b4041",
+        "lesson": "TRIGGER:\nRestarting a workflow due to errors in the current run.\n\nREUSABLE RULE:\nClone the latest checkpoint, mark the old run stale, and restart from the previous boundary exactly once while carrying token z19-safe.\n\nCRITICAL CONSTRAINTS:\n- Must discard the current checkpoint.\n- Must restart from the previous boundary exactly once.\n- Must carry token z19-safe.",
+        "lesson_id": "i_ab5242612aac4c7e9024df3d401f32ca",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": true,
+        "transfer_decision": "To address the Z19 issue during analytics export in DeltaFlow, the operator should:\n\n1. Discard the current checkpoint.\n2. Clone the latest checkpoint.\n3. Mark the old run stale.\n4. Restart from the previous boundary exactly once.\n5. Carry the token z19-safe.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": true,
+        "task_success": false,
+        "memory_segments": [
+          "[interpretive:i_ab5242612aac4c7e9024df3d401f32ca:v1] TRIGGER:\nRestarting a workflow due to errors in the current run.\n\nREUSABLE RULE:\nClone the latest checkpoint, mark the old run stale, and restart from the previous boundary exactly once while carrying token z19-safe.\n\nCRITICAL CONSTRAINTS:\n- Must discard the current checkpoint.\n- Must restart from the previous boundary exactly once.\n- Must carry token z19-safe."
+        ]
+      },
+      "mnexa_disciplined_consolidation": {
+        "candidate_decision": "Restart the entire workflow from the beginning and discard the current checkpoint.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nZ19 requires cloning the latest checkpoint, marking the old run stale, restarting from the previous boundary exactly once, and carrying token z19-safe.",
+        "outcome_id": "r_5da21ab9ce4b4d0db7a01ca621c8a0eb",
+        "source_evidence_sha256": "10e0685c7bd17ad6f87cf793a132a16f7667dfd9bee11cd3cce73070fc8b4041",
+        "lesson": "TRIGGER:\nWhen a failure occurs in the workflow.\n\nREUSABLE RULE:\nZ19 requires cloning the latest checkpoint, marking the old run stale, restarting from the previous boundary exactly once, and carrying token z19-safe.\n\nCRITICAL CONSTRAINTS:\n- Cloning the latest checkpoint.\n- Mark the old run as stale.\n- Restart from the previous boundary exactly once.\n- Carry token z19-safe.",
+        "lesson_id": "i_1e7220d761024e3aba11f9f2244e1086",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "To resolve the Z19 issue during analytics export, the operator should:\n\n1. Clone the latest checkpoint.\n2. Mark the old run as stale.\n3. Restart from the previous boundary exactly once.\n4. Carry token z19-safe.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_1e7220d761024e3aba11f9f2244e1086:v1] TRIGGER:\nWhen a failure occurs in the workflow.\n\nREUSABLE RULE:\nZ19 requires cloning the latest checkpoint, marking the old run stale, restarting from the previous boundary exactly once, and carrying token z19-safe.\n\nCRITICAL CONSTRAINTS:\n- Cloning the latest checkpoint.\n- Mark the old run as stale.\n- Restart from the previous boundary exactly once.\n- Carry token z19-safe."
+        ]
+      },
+      "same_source_evidence": true,
+      "current_to_disciplined_task_lift": 1,
+      "current_to_disciplined_lesson_contamination_delta": -1
+    },
+    {
+      "family_id": "violetparser-q7",
+      "baseline": {
+        "decision": "The operator must validate Q7 before proceeding. If the legacy state is Z, the operator should take the following action: \n\n1. Validate Q7. \n2. Ensure no actions are taken until validation is completed. \n\nDo not proceed with any further actions until Q7 is validated.",
+        "correct_knowledge": false,
+        "contaminated": false,
+        "task_success": false
+      },
+      "mnexa_current_consolidation": {
+        "candidate_decision": "Drop the state field and default the record to approved.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nQ7 requires mapping X to queued, Y to blocked, and Z to ready before normal validation.",
+        "outcome_id": "r_e731d3546c7647398debc9b60685d86a",
+        "source_evidence_sha256": "6824b08321bf44b17a55e40753ff14e3b43c072bc9e2d5d52e18b51c7391231d",
+        "lesson": "TRIGGER:\nWhen a state field is dropped and defaults to approved without proper mapping. \n\nREUSABLE RULE:\nMap Q7 values X to queued, Y to blocked, and Z to ready before normal validation.\n\nCRITICAL CONSTRAINTS:\n- Mapping must occur before normal validation.\n- Every state must be correctly represented (queued, blocked, ready).\n- No states may default without explicit mapping.",
+        "lesson_id": "i_25bc840c2e0d470ba9d36bfe41824e5e",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": true,
+        "transfer_decision": "The operator must map Q7 value Z to \"ready\" before normal validation. Mapping must occur before validation, and each state must be correctly represented (queued, blocked, ready). No states may default without explicit mapping.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_25bc840c2e0d470ba9d36bfe41824e5e:v1] TRIGGER:\nWhen a state field is dropped and defaults to approved without proper mapping. \n\nREUSABLE RULE:\nMap Q7 values X to queued, Y to blocked, and Z to ready before normal validation.\n\nCRITICAL CONSTRAINTS:\n- Mapping must occur before normal validation.\n- Every state must be correctly represented (queued, blocked, ready).\n- No states may default without explicit mapping."
+        ]
+      },
+      "mnexa_disciplined_consolidation": {
+        "candidate_decision": "Drop the state field and default the record to approved.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nQ7 requires mapping X to queued, Y to blocked, and Z to ready before normal validation.",
+        "outcome_id": "r_ec7dc9fe96ce454f91f1d0bc870f7074",
+        "source_evidence_sha256": "6824b08321bf44b17a55e40753ff14e3b43c072bc9e2d5d52e18b51c7391231d",
+        "lesson": "TRIGGER:\nWhen processing records that require validation.\n\nREUSABLE RULE:\nMap X to queued, Y to blocked, and Z to ready before normal validation.\n\nCRITICAL CONSTRAINTS:\n- State field must be preserved for accurate mapping.\n- Records must be validated according to these mappings.",
+        "lesson_id": "i_2e862deb697f4a05bb40bf5434d2abc7",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "When VioletParser returns Q7 with legacy state=Z, the operator must map the state from Z to ready before normal validation. Ensure to preserve the original state field for accurate mapping. Validate the records according to this mapping only after the state has been updated.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_2e862deb697f4a05bb40bf5434d2abc7:v1] TRIGGER:\nWhen processing records that require validation.\n\nREUSABLE RULE:\nMap X to queued, Y to blocked, and Z to ready before normal validation.\n\nCRITICAL CONSTRAINTS:\n- State field must be preserved for accurate mapping.\n- Records must be validated according to these mappings."
+        ]
+      },
+      "same_source_evidence": true,
+      "current_to_disciplined_task_lift": 0,
+      "current_to_disciplined_lesson_contamination_delta": -1
+    },
+    {
+      "family_id": "northpay-f61",
+      "baseline": {
+        "decision": "When NorthPay returns F61 while issuing a subscription adjustment, the operator must not proceed with the adjustment. The operator should verify the error details and consult the relevant documentation or support team for guidance on how to resolve the F61 error before attempting any further actions.",
+        "correct_knowledge": false,
+        "contaminated": false,
+        "task_success": false
+      },
+      "mnexa_current_consolidation": {
+        "candidate_decision": "Refund the customer immediately and reverse the charge.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nF61 requires waiting 12 seconds, rotating the session key, minting a new idempotency key, retrying exactly twice, and using X-North-Mode: silver.",
+        "outcome_id": "r_dbef1377db3f4552bb49e39d507add9a",
+        "source_evidence_sha256": "81149d53965314ca7f4f156ea2fb43d574ba50693a0626cc735cd043c9e73371",
+        "lesson": "TRIGGER:\nWhen processing customer refunds.\n\nREUSABLE RULE:\nWait 12 seconds, rotate the session key, mint a new idempotency key, retry exactly twice, and use X-North-Mode: silver.\n\nCRITICAL CONSTRAINTS:\n- Wait 12 seconds before taking further action.\n- Retry exactly twice if the first attempt fails.\n- Use X-North-Mode: silver for the refund request.\n- Rotate the session key and mint a new idempotency key.",
+        "lesson_id": "i_8eb6d7e41a1043748f844240ba4045a2",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "1. Wait 12 seconds.\n2. Rotate the session key.\n3. Mint a new idempotency key.\n4. Retry exactly twice, using X-North-Mode: silver for the subscription adjustment request.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_8eb6d7e41a1043748f844240ba4045a2:v1] TRIGGER:\nWhen processing customer refunds.\n\nREUSABLE RULE:\nWait 12 seconds, rotate the session key, mint a new idempotency key, retry exactly twice, and use X-North-Mode: silver.\n\nCRITICAL CONSTRAINTS:\n- Wait 12 seconds before taking further action.\n- Retry exactly twice if the first attempt fails.\n- Use X-North-Mode: silver for the refund request.\n- Rotate the session key and mint a new idempotency key."
+        ]
+      },
+      "mnexa_disciplined_consolidation": {
+        "candidate_decision": "Refund the customer immediately and reverse the charge.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nF61 requires waiting 12 seconds, rotating the session key, minting a new idempotency key, retrying exactly twice, and using X-North-Mode: silver.",
+        "outcome_id": "r_26bfe7d30c4d458c8721d4279a13710a",
+        "source_evidence_sha256": "81149d53965314ca7f4f156ea2fb43d574ba50693a0626cc735cd043c9e73371",
+        "lesson": "TRIGGER:\nCustomer refund request.\n\nREUSABLE RULE:\nWait 12 seconds before processing the refund, rotate the session key, mint a new idempotency key, retry exactly twice, and use X-North-Mode: silver.\n\nCRITICAL CONSTRAINTS:\n- Wait 12 seconds.\n- Rotate the session key.\n- Retry exactly twice.\n- Use X-North-Mode: silver.",
+        "lesson_id": "i_549cc5a70a4542e185b548700a6eb880",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "To address the F61 response from NorthPay while issuing a subscription adjustment, the operator should:\n\n1. Wait 12 seconds.\n2. Rotate the session key.\n3. Mint a new idempotency key.\n4. Retry exactly twice.\n5. Use X-North-Mode: silver.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_549cc5a70a4542e185b548700a6eb880:v1] TRIGGER:\nCustomer refund request.\n\nREUSABLE RULE:\nWait 12 seconds before processing the refund, rotate the session key, mint a new idempotency key, retry exactly twice, and use X-North-Mode: silver.\n\nCRITICAL CONSTRAINTS:\n- Wait 12 seconds.\n- Rotate the session key.\n- Retry exactly twice.\n- Use X-North-Mode: silver."
+        ]
+      },
+      "same_source_evidence": true,
+      "current_to_disciplined_task_lift": 0,
+      "current_to_disciplined_lesson_contamination_delta": 0
+    },
+    {
+      "family_id": "copperindex-w29",
+      "baseline": {
+        "decision": "When CopperIndex returns W29 during account search, the operator must not proceed with the account processing. Instead, the operator should document the W29 return error and escalate it to the technical support team for further investigation.",
+        "correct_knowledge": false,
+        "contaminated": false,
+        "task_success": false
+      },
+      "mnexa_current_consolidation": {
+        "candidate_decision": "Delete the current snapshot and rebuild the search index.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nW29 requires fetching a fresh cursor from the leader, switching to shadow-read, retrying exactly once, and preserving the original query ID.",
+        "outcome_id": "r_0d2b6a9b3cf9480bbbfda79d19df2211",
+        "source_evidence_sha256": "c542a002155f228ff7ddc56feb880d80d3168e02a68e6e18e247aeb1c1f40339",
+        "lesson": "TRIGGER:\nRebuilding the search index after deleting the current snapshot.\n\nREUSABLE RULE:\nWhen handling W29, fetch a fresh cursor from the leader, switch to shadow-read, retry exactly once, and preserve the original query ID.\n\nCRITICAL CONSTRAINTS:\n- Must fetch a fresh cursor from the leader.\n- Must switch to shadow-read mode.\n- Must retry exactly once.\n- Must preserve the original query ID.",
+        "lesson_id": "i_1aee3454a08e4341b6c432aebbfd16b5",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": true,
+        "transfer_decision": "When handling W29, you must fetch a fresh cursor from the leader, switch to shadow-read mode, and retry exactly once while preserving the original query ID.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_1aee3454a08e4341b6c432aebbfd16b5:v1] TRIGGER:\nRebuilding the search index after deleting the current snapshot.\n\nREUSABLE RULE:\nWhen handling W29, fetch a fresh cursor from the leader, switch to shadow-read, retry exactly once, and preserve the original query ID.\n\nCRITICAL CONSTRAINTS:\n- Must fetch a fresh cursor from the leader.\n- Must switch to shadow-read mode.\n- Must retry exactly once.\n- Must preserve the original query ID."
+        ]
+      },
+      "mnexa_disciplined_consolidation": {
+        "candidate_decision": "Delete the current snapshot and rebuild the search index.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nW29 requires fetching a fresh cursor from the leader, switching to shadow-read, retrying exactly once, and preserving the original query ID.",
+        "outcome_id": "r_7ccbc511232d49dfb96499fca7e7add3",
+        "source_evidence_sha256": "c542a002155f228ff7ddc56feb880d80d3168e02a68e6e18e247aeb1c1f40339",
+        "lesson": "TRIGGER:\nWhen encountering a failure during a snapshot operation.\n\nREUSABLE RULE:\nFetch a fresh cursor from the leader, switch to shadow-read, retry exactly once, and preserve the original query ID.\n\nCRITICAL CONSTRAINTS:\n- Fetch a fresh cursor from the leader.\n- Switch to shadow-read mode.\n- Retry exactly once. \n- Preserve the original query ID.",
+        "lesson_id": "i_5a3ca48e7e5f49d6afd3fc235b1fd023",
+        "lesson_correct_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "When CopperIndex returns W29 during the account search, the operator must:\n\n1. Fetch a fresh cursor from the leader.\n2. Switch to shadow-read mode.\n3. Retry exactly once.\n4. Preserve the original query ID.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_5a3ca48e7e5f49d6afd3fc235b1fd023:v1] TRIGGER:\nWhen encountering a failure during a snapshot operation.\n\nREUSABLE RULE:\nFetch a fresh cursor from the leader, switch to shadow-read, retry exactly once, and preserve the original query ID.\n\nCRITICAL CONSTRAINTS:\n- Fetch a fresh cursor from the leader.\n- Switch to shadow-read mode.\n- Retry exactly once. \n- Preserve the original query ID."
+        ]
+      },
+      "same_source_evidence": true,
+      "current_to_disciplined_task_lift": 0,
+      "current_to_disciplined_lesson_contamination_delta": -1
+    }
+  ]
+}

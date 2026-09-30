@@ -1,0 +1,1980 @@
+{
+  "experiment": "seed-growth-017",
+  "classification": "exploratory-fresh-pooled-memory-interference-ablation",
+  "run_id": "20260914T030444Z",
+  "taskset_sha256": "6927a52bc41a02828971b8f736583d2d39a06c295e5583628f28b4d7737441c8",
+  "model": "gpt-4o-mini",
+  "embedder": "sentence-transformers/all-MiniLM-L6-v2",
+  "meter": "word-meter-v1",
+  "task_count": 20,
+  "pool_size": 20,
+  "distractors_per_target": 19,
+  "near_neighbors_per_target": 4,
+  "conditions": {
+    "A": "isolated_compact_memory_target_only",
+    "B": "pooled_compact_memory_target_plus_nineteen_distractors"
+  },
+  "isolated_task_passes": 19,
+  "pooled_task_passes": 10,
+  "isolated_task_pass_rate": 0.95,
+  "pooled_task_pass_rate": 0.5,
+  "isolated_semantic_violations": 1,
+  "pooled_semantic_violations": 10,
+  "isolated_target_clause_visible_families": 20,
+  "pooled_target_clause_visible_families": 10,
+  "isolated_families_with_wrong_memory_presented": 0,
+  "pooled_families_with_wrong_memory_presented": 20,
+  "isolated_wrong_family_clause_occurrences": 0,
+  "pooled_wrong_family_clause_occurrences": 50,
+  "mean_isolated_retrieval_precision": 1.0,
+  "mean_pooled_retrieval_precision": 0.16666666666666666,
+  "mean_isolated_retrieval_recall": 1.0,
+  "mean_pooled_retrieval_recall": 0.5,
+  "isolated_wrong_rule_contamination_families": 0,
+  "pooled_wrong_rule_contamination_families": 8,
+  "paired_retrieval_regret_families": 9,
+  "paired_target_omission_regret_families": 9,
+  "paired_contamination_regret_families": 9,
+  "mean_isolated_memory_words": 85.85,
+  "mean_pooled_memory_words": 243.4,
+  "mean_isolated_memory_segments": 1.0,
+  "mean_pooled_memory_segments": 3.0,
+  "isolated_cluster_metrics": {
+    "channel-session": {
+      "families": 5,
+      "task_passes": 5,
+      "task_pass_rate": 1.0,
+      "target_visible_families": 5,
+      "wrong_family_clause_occurrences": 0,
+      "families_with_wrong_memory": 0,
+      "mean_retrieval_precision": 1.0,
+      "mean_retrieval_recall": 1.0
+    },
+    "lane-routing": {
+      "families": 5,
+      "task_passes": 5,
+      "task_pass_rate": 1.0,
+      "target_visible_families": 5,
+      "wrong_family_clause_occurrences": 0,
+      "families_with_wrong_memory": 0,
+      "mean_retrieval_precision": 1.0,
+      "mean_retrieval_recall": 1.0
+    },
+    "retry-policy": {
+      "families": 5,
+      "task_passes": 5,
+      "task_pass_rate": 1.0,
+      "target_visible_families": 5,
+      "wrong_family_clause_occurrences": 0,
+      "families_with_wrong_memory": 0,
+      "mean_retrieval_precision": 1.0,
+      "mean_retrieval_recall": 1.0
+    },
+    "storage-finalization": {
+      "families": 5,
+      "task_passes": 4,
+      "task_pass_rate": 0.8,
+      "target_visible_families": 5,
+      "wrong_family_clause_occurrences": 0,
+      "families_with_wrong_memory": 0,
+      "mean_retrieval_precision": 1.0,
+      "mean_retrieval_recall": 1.0
+    }
+  },
+  "pooled_cluster_metrics": {
+    "channel-session": {
+      "families": 5,
+      "task_passes": 3,
+      "task_pass_rate": 0.6,
+      "target_visible_families": 3,
+      "wrong_family_clause_occurrences": 12,
+      "families_with_wrong_memory": 5,
+      "mean_retrieval_precision": 0.2,
+      "mean_retrieval_recall": 0.6
+    },
+    "lane-routing": {
+      "families": 5,
+      "task_passes": 2,
+      "task_pass_rate": 0.4,
+      "target_visible_families": 2,
+      "wrong_family_clause_occurrences": 13,
+      "families_with_wrong_memory": 5,
+      "mean_retrieval_precision": 0.13333333333333333,
+      "mean_retrieval_recall": 0.4
+    },
+    "retry-policy": {
+      "families": 5,
+      "task_passes": 2,
+      "task_pass_rate": 0.4,
+      "target_visible_families": 2,
+      "wrong_family_clause_occurrences": 13,
+      "families_with_wrong_memory": 5,
+      "mean_retrieval_precision": 0.13333333333333333,
+      "mean_retrieval_recall": 0.4
+    },
+    "storage-finalization": {
+      "families": 5,
+      "task_passes": 3,
+      "task_pass_rate": 0.6,
+      "target_visible_families": 3,
+      "wrong_family_clause_occurrences": 12,
+      "families_with_wrong_memory": 5,
+      "mean_retrieval_precision": 0.2,
+      "mean_retrieval_recall": 0.6
+    }
+  },
+  "compact_memory_bundles": 20,
+  "bundles_with_exact_semantic_clause_visible": 20,
+  "bundle_unsupported_claims_admitted": 0,
+  "initial_extraction_model_calls": 20,
+  "repair_model_calls": 20,
+  "isolated_transfer_model_calls": 20,
+  "pooled_transfer_model_calls": 20,
+  "snapshot_construction_model_calls": 0,
+  "all_target_lessons_identical_between_conditions": true,
+  "all_target_source_evidence_equal": true,
+  "all_transfer_queries_equal": true,
+  "all_compact_renderers_equal": true,
+  "all_context_budget_configuration_equal": true,
+  "all_pooled_evaluations_from_same_snapshot": true,
+  "all_isolated_evaluations_from_frozen_snapshots": true,
+  "all_snapshot_copies_byte_identical_before_evaluation": true,
+  "pooled_snapshot": {
+    "db_path": "experiments/results/20260914T030444Z/state/snapshots/pooled_base.sqlite3",
+    "snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+    "watermark": 80,
+    "memory_count": 20,
+    "learned": [
+      {
+        "family_id": "aster-api-aa-41",
+        "decision_id": "r_139ab2b3985c437ea6b33ba9e1833a45",
+        "outcome_id": "r_615010ceb1fa4c4bbad44fa0edf3a55c",
+        "lesson_id": "i_6ab46ac6c93d4076a89c3ca2aea04ecf",
+        "lesson_sha256": "96a099b9877991b336379b928f66a6063fd70a38128a64bb75939aafc38938f3",
+        "source_evidence_sha256": "6f925b1afc87c908250060995f9fcec0051e543fa339fa75b8cf46765c5c2a02"
+      },
+      {
+        "family_id": "beryl-api-ba-42",
+        "decision_id": "r_1008847c7bd242659bf2e4b7ecab0e06",
+        "outcome_id": "r_ef80e00037bb4f7b83b2a187b5db4aac",
+        "lesson_id": "i_c6ee424581ef432fa41d6429811a6cea",
+        "lesson_sha256": "6964e2a25956626406ba8304e8899b02aba262c506f711b354baa9a39475515b",
+        "source_evidence_sha256": "871847c5f18f49d1a5cd9a66b0301e7e48346cda0412929564d236d20e2d58a8"
+      },
+      {
+        "family_id": "cinder-api-ca-43",
+        "decision_id": "r_699a326821544d2799e02fc5edaa4e96",
+        "outcome_id": "r_671733237d7b4acfafb4f84669f73c35",
+        "lesson_id": "i_a7ce8ad7f5d24acd832ddfc81d454348",
+        "lesson_sha256": "0057bedbd41f52212b5a81cb6eba82b19d12e1aa27b23c5ba3d4f076eb9ab4c0",
+        "source_evidence_sha256": "9ac71b36666850272e8cf86b28f377e2e803446accee1cfcd18ee232c7f3a554"
+      },
+      {
+        "family_id": "drift-api-da-44",
+        "decision_id": "r_8e23b00aa86641099cb22b8a18276681",
+        "outcome_id": "r_454ec8316432464d80b4acaf97c425e6",
+        "lesson_id": "i_77fc61075c1c47e9846bc2062c532fb0",
+        "lesson_sha256": "27e44669ec00d693676bf35c4c457a9317025dc64c92927d7204defc5beea5dc",
+        "source_evidence_sha256": "abc7d6747262a6991d79bc56c86ddbeb2e7c2f7f9bba912e86fb7e1df9566616"
+      },
+      {
+        "family_id": "ember-api-ea-45",
+        "decision_id": "r_1bdfde1af4714c94aff72f9e8679e210",
+        "outcome_id": "r_728fb9406ecd4862959c208f4562a0df",
+        "lesson_id": "i_9a7ca1fdecae42d0a040a7bf56f17ba3",
+        "lesson_sha256": "2fb5fbbaf0972295e5e6f9a0d65d20f6e071aca01f2daeb8a71d781be896a097",
+        "source_evidence_sha256": "a511c8727b5d9e98a90653eed3b965b0a25250b6a6c5ddbdf79cfb0e228fdddc"
+      },
+      {
+        "family_id": "frost-queue-fq-51",
+        "decision_id": "r_f7fe44e3fd4e4d68af7fe723a4699165",
+        "outcome_id": "r_efdf232579bd4083ac8ebe9f89e66aed",
+        "lesson_id": "i_454e07e988404156af0c1c16f2f09053",
+        "lesson_sha256": "42b5d4435937383e2bb73a3787baa29a59541c926ca087cd66e0176d5d2e7534",
+        "source_evidence_sha256": "74aa67b5a94ea405ae8aa5ea6337e4ecb333fe11ccbe79c5659c335383d3d809"
+      },
+      {
+        "family_id": "grove-queue-gq-52",
+        "decision_id": "r_fa1b3868b2e549faadde142966829295",
+        "outcome_id": "r_6c16cdac7e7344df925d2cfb45204f1d",
+        "lesson_id": "i_0b7b4e9abc0e4e6c80832d6c95fba028",
+        "lesson_sha256": "fc71fff9b80671a9a1e4e34d0b7fbcb4cd3fe1e38501f38d96073514f205b7fc",
+        "source_evidence_sha256": "daa37c744d22b50ee133be85b353b5c4439853cb0171649a207fceb4c9886a28"
+      },
+      {
+        "family_id": "harbor-queue-hq-53",
+        "decision_id": "r_5ea2782ac8684b4ab7748c6d67441703",
+        "outcome_id": "r_e6a796a8adde4d639a660b578850832f",
+        "lesson_id": "i_ab04a69e589c44cc86e80ca3a3ea9071",
+        "lesson_sha256": "e11c12e47a9b236d852d21d28b4bdeda28aee38ce9a6b46d413b5efc74b15d28",
+        "source_evidence_sha256": "4933a287e078989f0562a6026eb15d235ba84fd06f44ccfb4a535e807b77d90d"
+      },
+      {
+        "family_id": "iris-queue-iq-54",
+        "decision_id": "r_ba573028534743adb93fca669fb938c3",
+        "outcome_id": "r_ceada734ffa84290a25a62057ccc1acf",
+        "lesson_id": "i_c5c3f4f82c1343cdbd85d7dd3cb483b9",
+        "lesson_sha256": "b778418540313e65280c3fb7acd1902812a160f24145d014ab6f2645003c31e9",
+        "source_evidence_sha256": "517dc9786ff6d2083e4a5d4aaba06ef7c9bda977dd51f5111585651b92323b77"
+      },
+      {
+        "family_id": "juniper-queue-jq-55",
+        "decision_id": "r_afc30f8beba144beba196827acf48c21",
+        "outcome_id": "r_25460c688c2f47be9c177abfaf291398",
+        "lesson_id": "i_bf091f9072ba40d496b31e644d1e6551",
+        "lesson_sha256": "b7617198883705eefc430c2e6990f1c7c27ca038a318a0ca73dee9c8bccb1795",
+        "source_evidence_sha256": "309dae0f75349d0cc72af60efefffa3dea024788ed65e96eaf7b049a3401bf62"
+      },
+      {
+        "family_id": "kelp-rpc-kr-61",
+        "decision_id": "r_131b70f6ef674b8b9ab979ac4f040cd8",
+        "outcome_id": "r_974d90806f284bf6b7e78d090865c764",
+        "lesson_id": "i_df1c69b25ce74f4eb734d36c2aeaf456",
+        "lesson_sha256": "35681e93852c66520a4081de3ed1c34b5636bb5bf86e078075e13d115d0eecf1",
+        "source_evidence_sha256": "ef5db270346451881f2724c5918b50a522c7e8da684056502bb47d982c414c87"
+      },
+      {
+        "family_id": "laurel-rpc-lr-62",
+        "decision_id": "r_9ddc084168884715aaf1cc163952e9e0",
+        "outcome_id": "r_0de127633b5e42c69ff24fd364da0d79",
+        "lesson_id": "i_585cb5061eea44d0b3d453b88e84acf9",
+        "lesson_sha256": "bd18cb0c0948e5b4f5baef12268fca1c50223449b1bd32257e28f39691372476",
+        "source_evidence_sha256": "a502ba2742d40e6720ff29de1bdd1eed2ea03031f659181fb51f01f5910c83ac"
+      },
+      {
+        "family_id": "maple-rpc-mr-63",
+        "decision_id": "r_6857ce64420c4ffaa994f79bb0ea2795",
+        "outcome_id": "r_129ed63d59bd4de692adf6ebf5ff72a8",
+        "lesson_id": "i_e4c4b71cfe034f3bae506b3b36735a10",
+        "lesson_sha256": "fc6fe0b218ea720e8cc8f4dcf2acc6c5235a3ebdc23d25feca44d755b9915a9d",
+        "source_evidence_sha256": "3e60a806f63cefdaa3fc19f958ad05ad902d0345eb63073c40d4192da0d2d9ee"
+      },
+      {
+        "family_id": "north-rpc-nr-64",
+        "decision_id": "r_680a3874450a48f1bcf667a406edaf8f",
+        "outcome_id": "r_2676ea882286474b8522d26b9ff415d0",
+        "lesson_id": "i_8e29a7852526457a8dcc0a3064b58fbd",
+        "lesson_sha256": "4c5136707d4bc4f8010dbf8b6545d2f6c5b9874c1e0462d6b528252d2f85ee7d",
+        "source_evidence_sha256": "e8fcf0f877d02872917b3a5868480b199d167c849a0a65846260a3dd50b8bf4a"
+      },
+      {
+        "family_id": "opal-rpc-or-65",
+        "decision_id": "r_5678ce0f1d1f4871ac62f8f02c08f97d",
+        "outcome_id": "r_da3dee7a015b44fd9227fa5e1e3bba63",
+        "lesson_id": "i_9a87216867da4db78727cca676ed660c",
+        "lesson_sha256": "0377ad4aa6492b093996dd28b1b7961c434e3d3ff640e40901c87e8ddec31a5f",
+        "source_evidence_sha256": "dd9f3d2d9dbbc519bb83e07c1564c1d9e5fd29ec7c19896bbe6ef7fb629b0d34"
+      },
+      {
+        "family_id": "pine-store-ps-71",
+        "decision_id": "r_9839eef7c2574899ae521e314364ca61",
+        "outcome_id": "r_2b1052bac7fd4c56a9d6eba00c4c9a5d",
+        "lesson_id": "i_d24069e3afa047f49817b0250e11b448",
+        "lesson_sha256": "ddcb1242020f1cd8b76c3a60a251bb7fb8b8f166f0fbd6124347fb4215b80fcc",
+        "source_evidence_sha256": "1baf56123f5eb3b5146821d2fc92d54995857f0600b23feb4a1999d861472e83"
+      },
+      {
+        "family_id": "quill-store-qs-72",
+        "decision_id": "r_7832b1b7cd4d4b0b90158eea77e6406f",
+        "outcome_id": "r_6dc4f72fcf9844769e67b92aab5f1bfa",
+        "lesson_id": "i_6c3a6cdd02074109ae534d7e5f98b96c",
+        "lesson_sha256": "bbedf5e7115365f5d7f66e561591f39d7bc9622ddef13e96ec17b23fc07cc35a",
+        "source_evidence_sha256": "0d9bf0a32d97e999abf639713f2a3a3d28cbeafe55dcd1702cd5d1114a8ebb13"
+      },
+      {
+        "family_id": "raven-store-rs-73",
+        "decision_id": "r_d16e3674b94a4e23b08d8d8cb25ca1f5",
+        "outcome_id": "r_301ae1c475a643729109ba2e5a36e4de",
+        "lesson_id": "i_864e26bad3d2401f811e558f17aad505",
+        "lesson_sha256": "0c6244a9e575c492070291dc997a660ab40274c3df5dee04ce40fc8535608553",
+        "source_evidence_sha256": "83c4da7b0dc0d2b3ee276410e7a9c8276a7cb89943194d1b4c580d8261c439f8"
+      },
+      {
+        "family_id": "spruce-store-ss-74",
+        "decision_id": "r_409088e5a82b439da3afc3e1f342fed7",
+        "outcome_id": "r_5979b4aa7a2b44918333cf62b279dcc9",
+        "lesson_id": "i_fb987987c4514c958bed0efa7a962eb9",
+        "lesson_sha256": "2e3f7393f042bfc074ed862c04506613c9d0e4b572ede545e72429f5930c7ec6",
+        "source_evidence_sha256": "1d2c0b13b03f64bf16814eed73636aa3efc7a1dae6f5926eff3ad31f7d0c1794"
+      },
+      {
+        "family_id": "thistle-store-ts-75",
+        "decision_id": "r_e60691891c4e463ba6bba9312fea9896",
+        "outcome_id": "r_7a823cd555b34e46909e33cb9b423b98",
+        "lesson_id": "i_2a98b72e053449c9ba726d4dd9881c93",
+        "lesson_sha256": "670cd25e0ff0c1d5b859bc82f52c48357ccf8734638ff0b2f8ca5428325bfd0e",
+        "source_evidence_sha256": "0ecc61c04c5bd598565123528a538540740df8982a4055f0ed99b120cb572b3b"
+      }
+    ]
+  },
+  "families": [
+    {
+      "family_id": "aster-api-aa-41",
+      "interference_cluster": "retry-policy",
+      "semantic_operator": "exactly",
+      "semantic_dimension": "cardinality",
+      "semantic_clause": "retry exactly twice",
+      "pool_position": 1,
+      "distractor_count": 19,
+      "near_neighbor_count": 4,
+      "isolated": {
+        "snapshot_sha256": "60ee543cb2d70c7b57372ec4864196a3be4bd183dcce4cdd802dc72e8ea424ba",
+        "copied_snapshot_sha256": "60ee543cb2d70c7b57372ec4864196a3be4bd183dcce4cdd802dc72e8ea424ba",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "To address the AsterAPI returning AA-41, you must take the following actions:\n\n1. Refresh the session token.\n2. Preserve the request fingerprint.\n3. Retry exactly twice.\n\nDo not exceed the specified retry count of exactly two times.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_94115cb4415d40b8b3dca16f6b58b580:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=195:220] refresh the session token\n[E2 role=authoritative_correction span=222:254] preserve the request fingerprint\n[E3 role=authoritative_correction span=256:275] retry exactly twice\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry exactly twice\" -> E3"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 70,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "aster-api-aa-41"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "pooled": {
+        "snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "copied_snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "pre_eval_watermark": 80,
+        "post_eval_watermark": 82,
+        "transfer_decision": "The retry-count rule states to \"retry exactly twice.\"",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_6ab46ac6c93d4076a89c3ca2aea04ecf:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=195:220] refresh the session token\n[E2 role=authoritative_correction span=222:254] preserve the request fingerprint\n[E3 role=authoritative_correction span=256:275] retry exactly twice\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry exactly twice\" -> E3",
+          "[interpretive:i_77fc61075c1c47e9846bc2062c532fb0:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=187:212] refresh the session token\n[E2 role=authoritative_correction span=214:246] preserve the request fingerprint\n[E3 role=authoritative_correction span=280:306] close the stale connection\n[E4 role=authoritative_correction span=248:278] never retry the failed request\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"close the stale connection\" -> E3\n[G1] UNRESOLVED -> E4",
+          "[interpretive:i_0b7b4e9abc0e4e6c80832d6c95fba028:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=194:220] request a fresh checkpoint\n[E2 role=authoritative_correction span=260:270] retry once\n[E3 role=authoritative_correction span=272:300] preserve the original job ID\n[E4 role=authoritative_correction span=222:258] move the job only to the violet lane\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"retry once\" -> E2\n[P3] HANDLE=\"preserve the original job ID\" -> E3\n[G1] UNRESOLVED -> E4"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 239,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "aster-api-aa-41",
+          "drift-api-da-44",
+          "grove-queue-gq-52"
+        ],
+        "wrong_family_ids": [
+          "drift-api-da-44",
+          "grove-queue-gq-52"
+        ],
+        "wrong_family_clause_count": 2,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "paired": {
+        "retrieval_regret": false,
+        "target_omission_regret": false,
+        "contamination_regret": false,
+        "task_delta": 0,
+        "retrieval_precision_delta": -0.6666666666666667,
+        "retrieval_recall_delta": 0.0,
+        "memory_word_delta": 169
+      }
+    },
+    {
+      "family_id": "beryl-api-ba-42",
+      "interference_cluster": "retry-policy",
+      "semantic_operator": "at_most",
+      "semantic_dimension": "cardinality",
+      "semantic_clause": "retry at most twice",
+      "pool_position": 2,
+      "distractor_count": 19,
+      "near_neighbor_count": 4,
+      "isolated": {
+        "snapshot_sha256": "ed00e8b3c4f34b7e6c4c3dec6883ed89111c7f9cc8988f7a96e3f847cdee2b20",
+        "copied_snapshot_sha256": "ed00e8b3c4f34b7e6c4c3dec6883ed89111c7f9cc8988f7a96e3f847cdee2b20",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "Retry at most twice when BerylAPI returns BA-42.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_319fb10242384005942adacb1426016c:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=179:204] refresh the session token\n[E2 role=authoritative_correction span=206:238] preserve the request fingerprint\n[E3 role=authoritative_correction span=240:259] retry at most twice\n[E4 role=authoritative_correction span=261:287] close the stale connection\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry at most twice\" -> E3\n[P4] HANDLE=\"close the stale connection\" -> E4"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 86,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "beryl-api-ba-42"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "pooled": {
+        "snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "copied_snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "pre_eval_watermark": 80,
+        "post_eval_watermark": 82,
+        "transfer_decision": "Retry exactly twice and preserve the request fingerprint.",
+        "semantic_task_pass": false,
+        "semantic_violation": true,
+        "semantic_required_ok": false,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_6ab46ac6c93d4076a89c3ca2aea04ecf:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=195:220] refresh the session token\n[E2 role=authoritative_correction span=222:254] preserve the request fingerprint\n[E3 role=authoritative_correction span=256:275] retry exactly twice\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry exactly twice\" -> E3",
+          "[interpretive:i_77fc61075c1c47e9846bc2062c532fb0:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=187:212] refresh the session token\n[E2 role=authoritative_correction span=214:246] preserve the request fingerprint\n[E3 role=authoritative_correction span=280:306] close the stale connection\n[E4 role=authoritative_correction span=248:278] never retry the failed request\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"close the stale connection\" -> E3\n[G1] UNRESOLVED -> E4",
+          "[interpretive:i_0b7b4e9abc0e4e6c80832d6c95fba028:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=194:220] request a fresh checkpoint\n[E2 role=authoritative_correction span=260:270] retry once\n[E3 role=authoritative_correction span=272:300] preserve the original job ID\n[E4 role=authoritative_correction span=222:258] move the job only to the violet lane\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"retry once\" -> E2\n[P3] HANDLE=\"preserve the original job ID\" -> E3\n[G1] UNRESOLVED -> E4"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 239,
+        "target_clause_visible": false,
+        "visible_family_ids": [
+          "aster-api-aa-41",
+          "drift-api-da-44",
+          "grove-queue-gq-52"
+        ],
+        "wrong_family_ids": [
+          "aster-api-aa-41",
+          "drift-api-da-44",
+          "grove-queue-gq-52"
+        ],
+        "wrong_family_clause_count": 3,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 0.0,
+        "retrieval_precision": 0.0,
+        "wrong_rule_contamination": true,
+        "wrong_rule_family_ids": [
+          "aster-api-aa-41"
+        ],
+        "wrong_rule_clause_count": 1
+      },
+      "paired": {
+        "retrieval_regret": true,
+        "target_omission_regret": true,
+        "contamination_regret": true,
+        "task_delta": -1,
+        "retrieval_precision_delta": -1.0,
+        "retrieval_recall_delta": -1.0,
+        "memory_word_delta": 153
+      }
+    },
+    {
+      "family_id": "cinder-api-ca-43",
+      "interference_cluster": "retry-policy",
+      "semantic_operator": "at_least",
+      "semantic_dimension": "cardinality",
+      "semantic_clause": "retry at least twice",
+      "pool_position": 3,
+      "distractor_count": 19,
+      "near_neighbor_count": 4,
+      "isolated": {
+        "snapshot_sha256": "a61a6721eea6921548985418756f93afb2e75569b63c16d26e0da1eb1930c8a2",
+        "copied_snapshot_sha256": "a61a6721eea6921548985418756f93afb2e75569b63c16d26e0da1eb1930c8a2",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "Retry at least twice.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_5a92d50293444701848df741fa5a6d43:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=178:203] refresh the session token\n[E2 role=authoritative_correction span=205:237] preserve the request fingerprint\n[E3 role=authoritative_correction span=239:259] retry at least twice\n[E4 role=authoritative_correction span=261:287] close the stale connection\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry at least twice\" -> E3\n[P4] HANDLE=\"close the stale connection\" -> E4"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 86,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "cinder-api-ca-43"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "pooled": {
+        "snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "copied_snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "pre_eval_watermark": 80,
+        "post_eval_watermark": 82,
+        "transfer_decision": "You must retry exactly twice when CinderAPI returns CA-43. Ensure to refresh the session token and preserve the request fingerprint.",
+        "semantic_task_pass": false,
+        "semantic_violation": true,
+        "semantic_required_ok": false,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_6ab46ac6c93d4076a89c3ca2aea04ecf:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=195:220] refresh the session token\n[E2 role=authoritative_correction span=222:254] preserve the request fingerprint\n[E3 role=authoritative_correction span=256:275] retry exactly twice\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry exactly twice\" -> E3",
+          "[interpretive:i_77fc61075c1c47e9846bc2062c532fb0:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=187:212] refresh the session token\n[E2 role=authoritative_correction span=214:246] preserve the request fingerprint\n[E3 role=authoritative_correction span=280:306] close the stale connection\n[E4 role=authoritative_correction span=248:278] never retry the failed request\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"close the stale connection\" -> E3\n[G1] UNRESOLVED -> E4",
+          "[interpretive:i_0b7b4e9abc0e4e6c80832d6c95fba028:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=194:220] request a fresh checkpoint\n[E2 role=authoritative_correction span=260:270] retry once\n[E3 role=authoritative_correction span=272:300] preserve the original job ID\n[E4 role=authoritative_correction span=222:258] move the job only to the violet lane\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"retry once\" -> E2\n[P3] HANDLE=\"preserve the original job ID\" -> E3\n[G1] UNRESOLVED -> E4"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 239,
+        "target_clause_visible": false,
+        "visible_family_ids": [
+          "aster-api-aa-41",
+          "drift-api-da-44",
+          "grove-queue-gq-52"
+        ],
+        "wrong_family_ids": [
+          "aster-api-aa-41",
+          "drift-api-da-44",
+          "grove-queue-gq-52"
+        ],
+        "wrong_family_clause_count": 3,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 0.0,
+        "retrieval_precision": 0.0,
+        "wrong_rule_contamination": true,
+        "wrong_rule_family_ids": [
+          "aster-api-aa-41"
+        ],
+        "wrong_rule_clause_count": 1
+      },
+      "paired": {
+        "retrieval_regret": true,
+        "target_omission_regret": true,
+        "contamination_regret": true,
+        "task_delta": -1,
+        "retrieval_precision_delta": -1.0,
+        "retrieval_recall_delta": -1.0,
+        "memory_word_delta": 153
+      }
+    },
+    {
+      "family_id": "drift-api-da-44",
+      "interference_cluster": "retry-policy",
+      "semantic_operator": "never",
+      "semantic_dimension": "polarity",
+      "semantic_clause": "never retry the failed request",
+      "pool_position": 4,
+      "distractor_count": 19,
+      "near_neighbor_count": 4,
+      "isolated": {
+        "snapshot_sha256": "9e481ecaed1356473dc1b7d83e8ccc152b6cb39ef9517ad747f34fb511e0d7e9",
+        "copied_snapshot_sha256": "9e481ecaed1356473dc1b7d83e8ccc152b6cb39ef9517ad747f34fb511e0d7e9",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "The retry rule for the failed request is: **never retry the failed request**. Additionally, you must **refresh the session token**, **preserve the request fingerprint**, and **close the stale connection**.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_ec03330f43504ece8f0f68173fb4f8d3:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=187:212] refresh the session token\n[E2 role=authoritative_correction span=214:246] preserve the request fingerprint\n[E3 role=authoritative_correction span=280:306] close the stale connection\n[E4 role=authoritative_correction span=248:278] never retry the failed request\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"close the stale connection\" -> E3\n[G1] UNRESOLVED -> E4"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 84,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "drift-api-da-44"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "pooled": {
+        "snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "copied_snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "pre_eval_watermark": 80,
+        "post_eval_watermark": 82,
+        "transfer_decision": "The retry rule for the failed request is: \"never retry the failed request.\"",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_77fc61075c1c47e9846bc2062c532fb0:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=187:212] refresh the session token\n[E2 role=authoritative_correction span=214:246] preserve the request fingerprint\n[E3 role=authoritative_correction span=280:306] close the stale connection\n[E4 role=authoritative_correction span=248:278] never retry the failed request\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"close the stale connection\" -> E3\n[G1] UNRESOLVED -> E4",
+          "[interpretive:i_6ab46ac6c93d4076a89c3ca2aea04ecf:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=195:220] refresh the session token\n[E2 role=authoritative_correction span=222:254] preserve the request fingerprint\n[E3 role=authoritative_correction span=256:275] retry exactly twice\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry exactly twice\" -> E3",
+          "[interpretive:i_0b7b4e9abc0e4e6c80832d6c95fba028:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=194:220] request a fresh checkpoint\n[E2 role=authoritative_correction span=260:270] retry once\n[E3 role=authoritative_correction span=272:300] preserve the original job ID\n[E4 role=authoritative_correction span=222:258] move the job only to the violet lane\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"retry once\" -> E2\n[P3] HANDLE=\"preserve the original job ID\" -> E3\n[G1] UNRESOLVED -> E4"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 239,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "aster-api-aa-41",
+          "drift-api-da-44",
+          "grove-queue-gq-52"
+        ],
+        "wrong_family_ids": [
+          "aster-api-aa-41",
+          "grove-queue-gq-52"
+        ],
+        "wrong_family_clause_count": 2,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "paired": {
+        "retrieval_regret": false,
+        "target_omission_regret": false,
+        "contamination_regret": false,
+        "task_delta": 0,
+        "retrieval_precision_delta": -0.6666666666666667,
+        "retrieval_recall_delta": 0.0,
+        "memory_word_delta": 155
+      }
+    },
+    {
+      "family_id": "ember-api-ea-45",
+      "interference_cluster": "retry-policy",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "semantic_clause": "retry only after refreshing the session token",
+      "pool_position": 5,
+      "distractor_count": 19,
+      "near_neighbor_count": 4,
+      "isolated": {
+        "snapshot_sha256": "6da31e525ec5502770878c99e45aff77cc73b3854d231594ab043e22c3b37568",
+        "copied_snapshot_sha256": "6da31e525ec5502770878c99e45aff77cc73b3854d231594ab043e22c3b37568",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "To address the EA-45 error from EmberAPI, the following actions must be taken:\n\n1. **Preserve the request fingerprint.**\n2. **Close the stale connection.**\n3. **Refresh the session token.**\n4. **Retry only after refreshing the session token.**\n5. **Record the retry generation.**\n\nBe sure to follow this order strictly before attempting to retry.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_da0f0a9cf9634f9690d0a6472fd2dd29:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=196:228] preserve the request fingerprint\n[E2 role=authoritative_correction span=230:275] retry only after refreshing the session token\n[E3 role=authoritative_correction span=277:303] close the stale connection\n[E4 role=authoritative_correction span=305:332] record the retry generation\n\nREFERENCES:\n[P1] HANDLE=\"preserve the request fingerprint\" -> E1\n[P2] HANDLE=\"retry\" -> E2\n  META ordering=\"only after refreshing the session token\"\n[P3] HANDLE=\"close the stale connection\" -> E3\n[P4] HANDLE=\"record the retry generation\" -> E4"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 93,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "ember-api-ea-45"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "pooled": {
+        "snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "copied_snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "pre_eval_watermark": 80,
+        "post_eval_watermark": 82,
+        "transfer_decision": "To handle the EA-45 response from EmberAPI, take the following actions:\n\n1. **Refresh the session token.** \n2. **Preserve the request fingerprint.**\n3. **Retry exactly twice.** \n\nEnsure that you follow these steps strictly and do not attempt to retry beyond the specified limit.",
+        "semantic_task_pass": false,
+        "semantic_violation": true,
+        "semantic_required_ok": false,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_6ab46ac6c93d4076a89c3ca2aea04ecf:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=195:220] refresh the session token\n[E2 role=authoritative_correction span=222:254] preserve the request fingerprint\n[E3 role=authoritative_correction span=256:275] retry exactly twice\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry exactly twice\" -> E3",
+          "[interpretive:i_77fc61075c1c47e9846bc2062c532fb0:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=187:212] refresh the session token\n[E2 role=authoritative_correction span=214:246] preserve the request fingerprint\n[E3 role=authoritative_correction span=280:306] close the stale connection\n[E4 role=authoritative_correction span=248:278] never retry the failed request\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"close the stale connection\" -> E3\n[G1] UNRESOLVED -> E4",
+          "[interpretive:i_0b7b4e9abc0e4e6c80832d6c95fba028:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=194:220] request a fresh checkpoint\n[E2 role=authoritative_correction span=260:270] retry once\n[E3 role=authoritative_correction span=272:300] preserve the original job ID\n[E4 role=authoritative_correction span=222:258] move the job only to the violet lane\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"retry once\" -> E2\n[P3] HANDLE=\"preserve the original job ID\" -> E3\n[G1] UNRESOLVED -> E4"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 239,
+        "target_clause_visible": false,
+        "visible_family_ids": [
+          "aster-api-aa-41",
+          "drift-api-da-44",
+          "grove-queue-gq-52"
+        ],
+        "wrong_family_ids": [
+          "aster-api-aa-41",
+          "drift-api-da-44",
+          "grove-queue-gq-52"
+        ],
+        "wrong_family_clause_count": 3,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 0.0,
+        "retrieval_precision": 0.0,
+        "wrong_rule_contamination": true,
+        "wrong_rule_family_ids": [
+          "aster-api-aa-41"
+        ],
+        "wrong_rule_clause_count": 1
+      },
+      "paired": {
+        "retrieval_regret": true,
+        "target_omission_regret": true,
+        "contamination_regret": true,
+        "task_delta": -1,
+        "retrieval_precision_delta": -1.0,
+        "retrieval_recall_delta": -1.0,
+        "memory_word_delta": 146
+      }
+    },
+    {
+      "family_id": "frost-queue-fq-51",
+      "interference_cluster": "lane-routing",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "semantic_clause": "move the job only to the cobalt lane",
+      "pool_position": 6,
+      "distractor_count": 19,
+      "near_neighbor_count": 4,
+      "isolated": {
+        "snapshot_sha256": "d2c6ba5f2784cf9560b332645327489a7085f0bc4fcf0ee6ef6a08d0e2feb81b",
+        "copied_snapshot_sha256": "d2c6ba5f2784cf9560b332645327489a7085f0bc4fcf0ee6ef6a08d0e2feb81b",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "Move the job only to the cobalt lane.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_dc936981dd524eecb7bcf783925b613e:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=194:220] request a fresh checkpoint\n[E2 role=authoritative_correction span=260:270] retry once\n[E3 role=authoritative_correction span=272:300] preserve the original job ID\n[E4 role=authoritative_correction span=222:258] move the job only to the cobalt lane\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"retry once\" -> E2\n[P3] HANDLE=\"preserve the original job ID\" -> E3\n[G1] UNRESOLVED -> E4"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 85,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "frost-queue-fq-51"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "pooled": {
+        "snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "copied_snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "pre_eval_watermark": 80,
+        "post_eval_watermark": 82,
+        "transfer_decision": "Move the job only to the violet lane.",
+        "semantic_task_pass": false,
+        "semantic_violation": true,
+        "semantic_required_ok": false,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_6ab46ac6c93d4076a89c3ca2aea04ecf:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=195:220] refresh the session token\n[E2 role=authoritative_correction span=222:254] preserve the request fingerprint\n[E3 role=authoritative_correction span=256:275] retry exactly twice\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry exactly twice\" -> E3",
+          "[interpretive:i_77fc61075c1c47e9846bc2062c532fb0:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=187:212] refresh the session token\n[E2 role=authoritative_correction span=214:246] preserve the request fingerprint\n[E3 role=authoritative_correction span=280:306] close the stale connection\n[E4 role=authoritative_correction span=248:278] never retry the failed request\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"close the stale connection\" -> E3\n[G1] UNRESOLVED -> E4",
+          "[interpretive:i_0b7b4e9abc0e4e6c80832d6c95fba028:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=194:220] request a fresh checkpoint\n[E2 role=authoritative_correction span=260:270] retry once\n[E3 role=authoritative_correction span=272:300] preserve the original job ID\n[E4 role=authoritative_correction span=222:258] move the job only to the violet lane\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"retry once\" -> E2\n[P3] HANDLE=\"preserve the original job ID\" -> E3\n[G1] UNRESOLVED -> E4"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 239,
+        "target_clause_visible": false,
+        "visible_family_ids": [
+          "aster-api-aa-41",
+          "drift-api-da-44",
+          "grove-queue-gq-52"
+        ],
+        "wrong_family_ids": [
+          "aster-api-aa-41",
+          "drift-api-da-44",
+          "grove-queue-gq-52"
+        ],
+        "wrong_family_clause_count": 3,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 0.0,
+        "retrieval_precision": 0.0,
+        "wrong_rule_contamination": true,
+        "wrong_rule_family_ids": [
+          "grove-queue-gq-52"
+        ],
+        "wrong_rule_clause_count": 1
+      },
+      "paired": {
+        "retrieval_regret": true,
+        "target_omission_regret": true,
+        "contamination_regret": true,
+        "task_delta": -1,
+        "retrieval_precision_delta": -1.0,
+        "retrieval_recall_delta": -1.0,
+        "memory_word_delta": 154
+      }
+    },
+    {
+      "family_id": "grove-queue-gq-52",
+      "interference_cluster": "lane-routing",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "semantic_clause": "move the job only to the violet lane",
+      "pool_position": 7,
+      "distractor_count": 19,
+      "near_neighbor_count": 4,
+      "isolated": {
+        "snapshot_sha256": "8a1c2d6f8a7e5ae73263f53e70543b3070bf2ac5e4badff2c6650d401cfcab6f",
+        "copied_snapshot_sha256": "8a1c2d6f8a7e5ae73263f53e70543b3070bf2ac5e4badff2c6650d401cfcab6f",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "Move the job only to the violet lane.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_f9a688339c3b4f5293ea76710e06cc11:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=194:220] request a fresh checkpoint\n[E2 role=authoritative_correction span=260:270] retry once\n[E3 role=authoritative_correction span=272:300] preserve the original job ID\n[E4 role=authoritative_correction span=222:258] move the job only to the violet lane\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"retry once\" -> E2\n[P3] HANDLE=\"preserve the original job ID\" -> E3\n[G1] UNRESOLVED -> E4"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 85,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "grove-queue-gq-52"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "pooled": {
+        "snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "copied_snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "pre_eval_watermark": 80,
+        "post_eval_watermark": 82,
+        "transfer_decision": "Move the job only to the violet lane.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_77fc61075c1c47e9846bc2062c532fb0:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=187:212] refresh the session token\n[E2 role=authoritative_correction span=214:246] preserve the request fingerprint\n[E3 role=authoritative_correction span=280:306] close the stale connection\n[E4 role=authoritative_correction span=248:278] never retry the failed request\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"close the stale connection\" -> E3\n[G1] UNRESOLVED -> E4",
+          "[interpretive:i_0b7b4e9abc0e4e6c80832d6c95fba028:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=194:220] request a fresh checkpoint\n[E2 role=authoritative_correction span=260:270] retry once\n[E3 role=authoritative_correction span=272:300] preserve the original job ID\n[E4 role=authoritative_correction span=222:258] move the job only to the violet lane\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"retry once\" -> E2\n[P3] HANDLE=\"preserve the original job ID\" -> E3\n[G1] UNRESOLVED -> E4",
+          "[interpretive:i_6ab46ac6c93d4076a89c3ca2aea04ecf:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=195:220] refresh the session token\n[E2 role=authoritative_correction span=222:254] preserve the request fingerprint\n[E3 role=authoritative_correction span=256:275] retry exactly twice\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry exactly twice\" -> E3"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 239,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "aster-api-aa-41",
+          "drift-api-da-44",
+          "grove-queue-gq-52"
+        ],
+        "wrong_family_ids": [
+          "aster-api-aa-41",
+          "drift-api-da-44"
+        ],
+        "wrong_family_clause_count": 2,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "paired": {
+        "retrieval_regret": false,
+        "target_omission_regret": false,
+        "contamination_regret": false,
+        "task_delta": 0,
+        "retrieval_precision_delta": -0.6666666666666667,
+        "retrieval_recall_delta": 0.0,
+        "memory_word_delta": 154
+      }
+    },
+    {
+      "family_id": "harbor-queue-hq-53",
+      "interference_cluster": "lane-routing",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "semantic_clause": "move the job only to the silver lane",
+      "pool_position": 8,
+      "distractor_count": 19,
+      "near_neighbor_count": 4,
+      "isolated": {
+        "snapshot_sha256": "1b532fbcb9235972c89e1c611689b6befbbd292c0b55281198c70d1a29aab6a7",
+        "copied_snapshot_sha256": "1b532fbcb9235972c89e1c611689b6befbbd292c0b55281198c70d1a29aab6a7",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "To address the returned HQ-53, you should move the job **only** to the silver lane, **retry once**, and **preserve the original job ID**. \n\nAdditionally, ensure to request a fresh checkpoint.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_075cad0a62a3473194905d119dc6a0e5:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=194:220] request a fresh checkpoint\n[E2 role=authoritative_correction span=222:258] move the job only to the silver lane\n[E3 role=authoritative_correction span=260:270] retry once\n[E4 role=authoritative_correction span=272:300] preserve the original job ID\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"move the job\" -> E2\n  META negation=\"only\"\n[P3] HANDLE=\"retry once\" -> E3\n[P4] HANDLE=\"preserve the original job ID\" -> E4"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 89,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "harbor-queue-hq-53"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "pooled": {
+        "snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "copied_snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "pre_eval_watermark": 80,
+        "post_eval_watermark": 82,
+        "transfer_decision": "Move the job only to the violet lane.",
+        "semantic_task_pass": false,
+        "semantic_violation": true,
+        "semantic_required_ok": false,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_6ab46ac6c93d4076a89c3ca2aea04ecf:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=195:220] refresh the session token\n[E2 role=authoritative_correction span=222:254] preserve the request fingerprint\n[E3 role=authoritative_correction span=256:275] retry exactly twice\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry exactly twice\" -> E3",
+          "[interpretive:i_77fc61075c1c47e9846bc2062c532fb0:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=187:212] refresh the session token\n[E2 role=authoritative_correction span=214:246] preserve the request fingerprint\n[E3 role=authoritative_correction span=280:306] close the stale connection\n[E4 role=authoritative_correction span=248:278] never retry the failed request\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"close the stale connection\" -> E3\n[G1] UNRESOLVED -> E4",
+          "[interpretive:i_0b7b4e9abc0e4e6c80832d6c95fba028:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=194:220] request a fresh checkpoint\n[E2 role=authoritative_correction span=260:270] retry once\n[E3 role=authoritative_correction span=272:300] preserve the original job ID\n[E4 role=authoritative_correction span=222:258] move the job only to the violet lane\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"retry once\" -> E2\n[P3] HANDLE=\"preserve the original job ID\" -> E3\n[G1] UNRESOLVED -> E4"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 239,
+        "target_clause_visible": false,
+        "visible_family_ids": [
+          "aster-api-aa-41",
+          "drift-api-da-44",
+          "grove-queue-gq-52"
+        ],
+        "wrong_family_ids": [
+          "aster-api-aa-41",
+          "drift-api-da-44",
+          "grove-queue-gq-52"
+        ],
+        "wrong_family_clause_count": 3,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 0.0,
+        "retrieval_precision": 0.0,
+        "wrong_rule_contamination": true,
+        "wrong_rule_family_ids": [
+          "grove-queue-gq-52"
+        ],
+        "wrong_rule_clause_count": 1
+      },
+      "paired": {
+        "retrieval_regret": true,
+        "target_omission_regret": true,
+        "contamination_regret": true,
+        "task_delta": -1,
+        "retrieval_precision_delta": -1.0,
+        "retrieval_recall_delta": -1.0,
+        "memory_word_delta": 150
+      }
+    },
+    {
+      "family_id": "iris-queue-iq-54",
+      "interference_cluster": "lane-routing",
+      "semantic_operator": "do_not",
+      "semantic_dimension": "polarity",
+      "semantic_clause": "do not move the job to the amber lane",
+      "pool_position": 9,
+      "distractor_count": 19,
+      "near_neighbor_count": 4,
+      "isolated": {
+        "snapshot_sha256": "1f589acfba6c0d567e90b7d4ecbfb1662eeac5eff8481cefae64e2b96ca50894",
+        "copied_snapshot_sha256": "1f589acfba6c0d567e90b7d4ecbfb1662eeac5eff8481cefae64e2b96ca50894",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "Request a fresh checkpoint and retry once, while preserving the original job ID. Do not move the job to the amber lane.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_b07d18101ab343948eea217d463aafa9:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=193:219] request a fresh checkpoint\n[E2 role=authoritative_correction span=260:270] retry once\n[E3 role=authoritative_correction span=272:300] preserve the original job ID\n[E4 role=authoritative_correction span=221:258] do not move the job to the amber lane\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"retry once\" -> E2\n[P3] HANDLE=\"preserve the original job ID\" -> E3\n[G1] UNRESOLVED -> E4"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 86,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "iris-queue-iq-54"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "pooled": {
+        "snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "copied_snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "pre_eval_watermark": 80,
+        "post_eval_watermark": 82,
+        "transfer_decision": "To address the task of dealing with the amber lane concerning IrisQueue returning IQ-54, the action to take is:\n\n\"Do not move the job to the amber lane.\"",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_6ab46ac6c93d4076a89c3ca2aea04ecf:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=195:220] refresh the session token\n[E2 role=authoritative_correction span=222:254] preserve the request fingerprint\n[E3 role=authoritative_correction span=256:275] retry exactly twice\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry exactly twice\" -> E3",
+          "[interpretive:i_8e29a7852526457a8dcc0a3064b58fbd:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=191:221] preserve the trace fingerprint\n[E2 role=authoritative_correction span=223:247] wait at least 12 seconds\n[E3 role=authoritative_correction span=249:269] open a fresh channel\n[E4 role=authoritative_correction span=271:300] record the channel generation\n\nREFERENCES:\n[P1] HANDLE=\"preserve the trace fingerprint\" -> E1\n[P2] HANDLE=\"wait at least 12 seconds\" -> E2\n[P3] HANDLE=\"open a fresh channel\" -> E3\n[P4] HANDLE=\"record the channel generation\" -> E4",
+          "[interpretive:i_c5c3f4f82c1343cdbd85d7dd3cb483b9:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=193:219] request a fresh checkpoint\n[E2 role=authoritative_correction span=260:270] retry once\n[E3 role=authoritative_correction span=272:300] preserve the original job ID\n[E4 role=authoritative_correction span=221:258] do not move the job to the amber lane\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"retry once\" -> E2\n[P3] HANDLE=\"preserve the original job ID\" -> E3\n[G1] UNRESOLVED -> E4"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 244,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "aster-api-aa-41",
+          "iris-queue-iq-54",
+          "north-rpc-nr-64"
+        ],
+        "wrong_family_ids": [
+          "aster-api-aa-41",
+          "north-rpc-nr-64"
+        ],
+        "wrong_family_clause_count": 2,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "paired": {
+        "retrieval_regret": false,
+        "target_omission_regret": false,
+        "contamination_regret": false,
+        "task_delta": 0,
+        "retrieval_precision_delta": -0.6666666666666667,
+        "retrieval_recall_delta": 0.0,
+        "memory_word_delta": 158
+      }
+    },
+    {
+      "family_id": "juniper-queue-jq-55",
+      "interference_cluster": "lane-routing",
+      "semantic_operator": "when_if",
+      "semantic_dimension": "condition",
+      "semantic_clause": "if the queue is degraded, move the job to the bronze lane",
+      "pool_position": 10,
+      "distractor_count": 19,
+      "near_neighbor_count": 4,
+      "isolated": {
+        "snapshot_sha256": "39ed20d969aa08ac20a5be52ce3623fb5824105483d6ebef6767ab99d5170f63",
+        "copied_snapshot_sha256": "39ed20d969aa08ac20a5be52ce3623fb5824105483d6ebef6767ab99d5170f63",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "Move the job JQ-55 to the bronze lane if the queue is degraded. Retry once and preserve the original job ID.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_6f3505546b9b47768f686c3488be48b9:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=201:329] request a fresh checkpoint; if the queue is degraded, move the job to the bronze lane; retry once; preserve the original job ID.\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"move the job to the bronze lane\" -> E1\n  META condition=\"if the queue is degraded\"\n[P3] HANDLE=\"retry once\" -> E1\n[P4] HANDLE=\"preserve the original job ID\" -> E1"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 92,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "juniper-queue-jq-55"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "pooled": {
+        "snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "copied_snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "pre_eval_watermark": 80,
+        "post_eval_watermark": 82,
+        "transfer_decision": "The job with identifier JQ-55 must not be moved to the bronze lane under any circumstances, as the authoritative evidence indicates that jobs should only be moved to the violet lane or cobalt lane and specifically prohibits movement to the amber lane. Therefore, the condition for moving the job to the bronze lane is never satisfied.",
+        "semantic_task_pass": false,
+        "semantic_violation": true,
+        "semantic_required_ok": false,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_0b7b4e9abc0e4e6c80832d6c95fba028:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=194:220] request a fresh checkpoint\n[E2 role=authoritative_correction span=260:270] retry once\n[E3 role=authoritative_correction span=272:300] preserve the original job ID\n[E4 role=authoritative_correction span=222:258] move the job only to the violet lane\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"retry once\" -> E2\n[P3] HANDLE=\"preserve the original job ID\" -> E3\n[G1] UNRESOLVED -> E4",
+          "[interpretive:i_454e07e988404156af0c1c16f2f09053:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=194:220] request a fresh checkpoint\n[E2 role=authoritative_correction span=260:270] retry once\n[E3 role=authoritative_correction span=272:300] preserve the original job ID\n[E4 role=authoritative_correction span=222:258] move the job only to the cobalt lane\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"retry once\" -> E2\n[P3] HANDLE=\"preserve the original job ID\" -> E3\n[G1] UNRESOLVED -> E4",
+          "[interpretive:i_c5c3f4f82c1343cdbd85d7dd3cb483b9:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=193:219] request a fresh checkpoint\n[E2 role=authoritative_correction span=260:270] retry once\n[E3 role=authoritative_correction span=272:300] preserve the original job ID\n[E4 role=authoritative_correction span=221:258] do not move the job to the amber lane\n\nREFERENCES:\n[P1] HANDLE=\"request a fresh checkpoint\" -> E1\n[P2] HANDLE=\"retry once\" -> E2\n[P3] HANDLE=\"preserve the original job ID\" -> E3\n[G1] UNRESOLVED -> E4"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 256,
+        "target_clause_visible": false,
+        "visible_family_ids": [
+          "frost-queue-fq-51",
+          "grove-queue-gq-52",
+          "iris-queue-iq-54"
+        ],
+        "wrong_family_ids": [
+          "frost-queue-fq-51",
+          "grove-queue-gq-52",
+          "iris-queue-iq-54"
+        ],
+        "wrong_family_clause_count": 3,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 0.0,
+        "retrieval_precision": 0.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "paired": {
+        "retrieval_regret": true,
+        "target_omission_regret": true,
+        "contamination_regret": true,
+        "task_delta": -1,
+        "retrieval_precision_delta": -1.0,
+        "retrieval_recall_delta": -1.0,
+        "memory_word_delta": 164
+      }
+    },
+    {
+      "family_id": "kelp-rpc-kr-61",
+      "interference_cluster": "channel-session",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "semantic_clause": "open only a fresh channel",
+      "pool_position": 11,
+      "distractor_count": 19,
+      "near_neighbor_count": 4,
+      "isolated": {
+        "snapshot_sha256": "d5b5c33d6ae00a541bcdb8cb687c3e60363b9f0272c87c27ca573b913c2ccfc0",
+        "copied_snapshot_sha256": "d5b5c33d6ae00a541bcdb8cb687c3e60363b9f0272c87c27ca573b913c2ccfc0",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "To establish the channel rule for KelpRPC returning KR-61, you must:\n\n1. Open only a fresh channel.\n2. Send one probe frame.\n3. Record the channel generation.\n4. Preserve the trace fingerprint.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_7308b145935a428693a206c62e3a4782:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=189:219] preserve the trace fingerprint\n[E2 role=authoritative_correction span=248:268] send one probe frame\n[E3 role=authoritative_correction span=270:299] record the channel generation\n[E4 role=authoritative_correction span=221:246] open only a fresh channel\n\nREFERENCES:\n[P1] HANDLE=\"preserve the trace fingerprint\" -> E1\n[P2] HANDLE=\"send one probe frame\" -> E2\n[P3] HANDLE=\"record the channel generation\" -> E3\n[G1] UNRESOLVED -> E4"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 84,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "kelp-rpc-kr-61"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "pooled": {
+        "snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "copied_snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "pre_eval_watermark": 80,
+        "post_eval_watermark": 82,
+        "transfer_decision": "To state the channel rule for KelpRPC returning KR-61, follow these actions:\n\n1. Open a fresh channel.\n2. Never reuse the previous correlation token.\n3. Send one probe frame.\n4. Preserve the trace fingerprint.\n5. Wait at least 12 seconds.\n6. Record the channel generation.\n7. Keep at most two pending channels.\n8. Expire stale channels.\n9. Preserve the newest channel token.",
+        "semantic_task_pass": false,
+        "semantic_violation": true,
+        "semantic_required_ok": false,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_585cb5061eea44d0b3d453b88e84acf9:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=199:219] open a fresh channel\n[E2 role=authoritative_correction span=221:263] never reuse the previous correlation token\n[E3 role=authoritative_correction span=265:285] send one probe frame\n[E4 role=authoritative_correction span=287:317] preserve the trace fingerprint\n\nREFERENCES:\n[P1] HANDLE=\"open a fresh channel\" -> E1\n[P2] HANDLE=\"reuse the previous correlation token\" -> E2\n  META negation=\"never\"\n[P3] HANDLE=\"send one probe frame\" -> E3\n[P4] HANDLE=\"preserve the trace fingerprint\" -> E4",
+          "[interpretive:i_8e29a7852526457a8dcc0a3064b58fbd:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=191:221] preserve the trace fingerprint\n[E2 role=authoritative_correction span=223:247] wait at least 12 seconds\n[E3 role=authoritative_correction span=249:269] open a fresh channel\n[E4 role=authoritative_correction span=271:300] record the channel generation\n\nREFERENCES:\n[P1] HANDLE=\"preserve the trace fingerprint\" -> E1\n[P2] HANDLE=\"wait at least 12 seconds\" -> E2\n[P3] HANDLE=\"open a fresh channel\" -> E3\n[P4] HANDLE=\"record the channel generation\" -> E4",
+          "[interpretive:i_9a87216867da4db78727cca676ed660c:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=215:248] keep at most two pending channels\n[E2 role=authoritative_correction span=250:271] expire stale channels\n[E3 role=authoritative_correction span=273:306] preserve the newest channel token\n\nREFERENCES:\n[P1] HANDLE=\"keep at most two pending channels\" -> E1\n[P2] HANDLE=\"expire stale channels\" -> E2\n[P3] HANDLE=\"preserve the newest channel token\" -> E3"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 255,
+        "target_clause_visible": false,
+        "visible_family_ids": [
+          "laurel-rpc-lr-62",
+          "north-rpc-nr-64",
+          "opal-rpc-or-65"
+        ],
+        "wrong_family_ids": [
+          "laurel-rpc-lr-62",
+          "north-rpc-nr-64",
+          "opal-rpc-or-65"
+        ],
+        "wrong_family_clause_count": 3,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 0.0,
+        "retrieval_precision": 0.0,
+        "wrong_rule_contamination": true,
+        "wrong_rule_family_ids": [
+          "laurel-rpc-lr-62",
+          "north-rpc-nr-64",
+          "opal-rpc-or-65"
+        ],
+        "wrong_rule_clause_count": 3
+      },
+      "paired": {
+        "retrieval_regret": true,
+        "target_omission_regret": true,
+        "contamination_regret": true,
+        "task_delta": -1,
+        "retrieval_precision_delta": -1.0,
+        "retrieval_recall_delta": -1.0,
+        "memory_word_delta": 171
+      }
+    },
+    {
+      "family_id": "laurel-rpc-lr-62",
+      "interference_cluster": "channel-session",
+      "semantic_operator": "never",
+      "semantic_dimension": "polarity",
+      "semantic_clause": "never reuse the previous correlation token",
+      "pool_position": 12,
+      "distractor_count": 19,
+      "near_neighbor_count": 4,
+      "isolated": {
+        "snapshot_sha256": "339a5c1f4f567134ff7bb5e107b4aa7148d9260a0eff838b303fdc91af76e4de",
+        "copied_snapshot_sha256": "339a5c1f4f567134ff7bb5e107b4aa7148d9260a0eff838b303fdc91af76e4de",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "To comply with the correlation-token rule based on the provided evidence, the action to take is:\n\n\"Open a fresh channel and never reuse the previous correlation token. Send one probe frame and preserve the trace fingerprint.\"",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_108cb15974604521910726010e726106:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=199:219] open a fresh channel\n[E2 role=authoritative_correction span=221:263] never reuse the previous correlation token\n[E3 role=authoritative_correction span=265:285] send one probe frame\n[E4 role=authoritative_correction span=287:317] preserve the trace fingerprint\n\nREFERENCES:\n[P1] HANDLE=\"open a fresh channel\" -> E1\n[P2] HANDLE=\"reuse the previous correlation token\" -> E2\n  META negation=\"never\"\n[P3] HANDLE=\"send one probe frame\" -> E3\n[P4] HANDLE=\"preserve the trace fingerprint\" -> E4"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 91,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "laurel-rpc-lr-62"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "pooled": {
+        "snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "copied_snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "pre_eval_watermark": 80,
+        "post_eval_watermark": 82,
+        "transfer_decision": "To comply with the correlation-token rule for LaurelRPC returning LR-62, you must ensure to:\n\n- Open a fresh channel.\n- Never reuse the previous correlation token.\n- Send one probe frame.\n- Preserve the trace fingerprint.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_77fc61075c1c47e9846bc2062c532fb0:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=187:212] refresh the session token\n[E2 role=authoritative_correction span=214:246] preserve the request fingerprint\n[E3 role=authoritative_correction span=280:306] close the stale connection\n[E4 role=authoritative_correction span=248:278] never retry the failed request\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"close the stale connection\" -> E3\n[G1] UNRESOLVED -> E4",
+          "[interpretive:i_585cb5061eea44d0b3d453b88e84acf9:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=199:219] open a fresh channel\n[E2 role=authoritative_correction span=221:263] never reuse the previous correlation token\n[E3 role=authoritative_correction span=265:285] send one probe frame\n[E4 role=authoritative_correction span=287:317] preserve the trace fingerprint\n\nREFERENCES:\n[P1] HANDLE=\"open a fresh channel\" -> E1\n[P2] HANDLE=\"reuse the previous correlation token\" -> E2\n  META negation=\"never\"\n[P3] HANDLE=\"send one probe frame\" -> E3\n[P4] HANDLE=\"preserve the trace fingerprint\" -> E4",
+          "[interpretive:i_9a87216867da4db78727cca676ed660c:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=215:248] keep at most two pending channels\n[E2 role=authoritative_correction span=250:271] expire stale channels\n[E3 role=authoritative_correction span=273:306] preserve the newest channel token\n\nREFERENCES:\n[P1] HANDLE=\"keep at most two pending channels\" -> E1\n[P2] HANDLE=\"expire stale channels\" -> E2\n[P3] HANDLE=\"preserve the newest channel token\" -> E3"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 251,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "drift-api-da-44",
+          "laurel-rpc-lr-62",
+          "opal-rpc-or-65"
+        ],
+        "wrong_family_ids": [
+          "drift-api-da-44",
+          "opal-rpc-or-65"
+        ],
+        "wrong_family_clause_count": 2,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "paired": {
+        "retrieval_regret": false,
+        "target_omission_regret": false,
+        "contamination_regret": false,
+        "task_delta": 0,
+        "retrieval_precision_delta": -0.6666666666666667,
+        "retrieval_recall_delta": 0.0,
+        "memory_word_delta": 160
+      }
+    },
+    {
+      "family_id": "maple-rpc-mr-63",
+      "interference_cluster": "channel-session",
+      "semantic_operator": "exactly",
+      "semantic_dimension": "cardinality",
+      "semantic_clause": "send exactly three heartbeat frames",
+      "pool_position": 13,
+      "distractor_count": 19,
+      "near_neighbor_count": 4,
+      "isolated": {
+        "snapshot_sha256": "85b209a443c8d88ba2e4584793a0536bbcb9249fb5bc551df19a851a05f16fa2",
+        "copied_snapshot_sha256": "85b209a443c8d88ba2e4584793a0536bbcb9249fb5bc551df19a851a05f16fa2",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "Send exactly three heartbeat frames.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_5772603e95774111ba4feb716caa6a2e:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=189:310] open a fresh channel; send exactly three heartbeat frames; preserve the trace fingerprint; record the channel generation.\n\nREFERENCES:\n[P1] HANDLE=\"open a fresh channel\" -> E1\n[P2] HANDLE=\"preserve the trace fingerprint\" -> E1\n[P3] HANDLE=\"record the channel generation\" -> E1"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 71,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "maple-rpc-mr-63"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "pooled": {
+        "snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "copied_snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "pre_eval_watermark": 80,
+        "post_eval_watermark": 82,
+        "transfer_decision": "Send exactly three heartbeat frames after opening a fresh channel, preserving the trace fingerprint and recording the channel generation.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_8e29a7852526457a8dcc0a3064b58fbd:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=191:221] preserve the trace fingerprint\n[E2 role=authoritative_correction span=223:247] wait at least 12 seconds\n[E3 role=authoritative_correction span=249:269] open a fresh channel\n[E4 role=authoritative_correction span=271:300] record the channel generation\n\nREFERENCES:\n[P1] HANDLE=\"preserve the trace fingerprint\" -> E1\n[P2] HANDLE=\"wait at least 12 seconds\" -> E2\n[P3] HANDLE=\"open a fresh channel\" -> E3\n[P4] HANDLE=\"record the channel generation\" -> E4",
+          "[interpretive:i_e4c4b71cfe034f3bae506b3b36735a10:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=189:310] open a fresh channel; send exactly three heartbeat frames; preserve the trace fingerprint; record the channel generation.\n\nREFERENCES:\n[P1] HANDLE=\"open a fresh channel\" -> E1\n[P2] HANDLE=\"preserve the trace fingerprint\" -> E1\n[P3] HANDLE=\"record the channel generation\" -> E1",
+          "[interpretive:i_6ab46ac6c93d4076a89c3ca2aea04ecf:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=195:220] refresh the session token\n[E2 role=authoritative_correction span=222:254] preserve the request fingerprint\n[E3 role=authoritative_correction span=256:275] retry exactly twice\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry exactly twice\" -> E3"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 229,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "aster-api-aa-41",
+          "maple-rpc-mr-63",
+          "north-rpc-nr-64"
+        ],
+        "wrong_family_ids": [
+          "aster-api-aa-41",
+          "north-rpc-nr-64"
+        ],
+        "wrong_family_clause_count": 2,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "paired": {
+        "retrieval_regret": false,
+        "target_omission_regret": false,
+        "contamination_regret": false,
+        "task_delta": 0,
+        "retrieval_precision_delta": -0.6666666666666667,
+        "retrieval_recall_delta": 0.0,
+        "memory_word_delta": 158
+      }
+    },
+    {
+      "family_id": "north-rpc-nr-64",
+      "interference_cluster": "channel-session",
+      "semantic_operator": "at_least",
+      "semantic_dimension": "cardinality",
+      "semantic_clause": "wait at least 12 seconds",
+      "pool_position": 14,
+      "distractor_count": 19,
+      "near_neighbor_count": 4,
+      "isolated": {
+        "snapshot_sha256": "85512e85c702071178e3c2b23a8177f03bd31a8f0dfb42e3ca3e4ffa52ddff6c",
+        "copied_snapshot_sha256": "85512e85c702071178e3c2b23a8177f03bd31a8f0dfb42e3ca3e4ffa52ddff6c",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "Wait at least 12 seconds before proceeding with any further actions regarding NR-64.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_0c4b0a1fae514a78939584d288a1a2a3:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=191:221] preserve the trace fingerprint\n[E2 role=authoritative_correction span=223:247] wait at least 12 seconds\n[E3 role=authoritative_correction span=249:269] open a fresh channel\n[E4 role=authoritative_correction span=271:300] record the channel generation\n\nREFERENCES:\n[P1] HANDLE=\"preserve the trace fingerprint\" -> E1\n[P2] HANDLE=\"wait at least 12 seconds\" -> E2\n[P3] HANDLE=\"open a fresh channel\" -> E3\n[P4] HANDLE=\"record the channel generation\" -> E4"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 88,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "north-rpc-nr-64"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "pooled": {
+        "snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "copied_snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "pre_eval_watermark": 80,
+        "post_eval_watermark": 82,
+        "transfer_decision": "Wait at least 12 seconds before proceeding with the next action.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_8e29a7852526457a8dcc0a3064b58fbd:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=191:221] preserve the trace fingerprint\n[E2 role=authoritative_correction span=223:247] wait at least 12 seconds\n[E3 role=authoritative_correction span=249:269] open a fresh channel\n[E4 role=authoritative_correction span=271:300] record the channel generation\n\nREFERENCES:\n[P1] HANDLE=\"preserve the trace fingerprint\" -> E1\n[P2] HANDLE=\"wait at least 12 seconds\" -> E2\n[P3] HANDLE=\"open a fresh channel\" -> E3\n[P4] HANDLE=\"record the channel generation\" -> E4",
+          "[interpretive:i_77fc61075c1c47e9846bc2062c532fb0:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=187:212] refresh the session token\n[E2 role=authoritative_correction span=214:246] preserve the request fingerprint\n[E3 role=authoritative_correction span=280:306] close the stale connection\n[E4 role=authoritative_correction span=248:278] never retry the failed request\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"close the stale connection\" -> E3\n[G1] UNRESOLVED -> E4",
+          "[interpretive:i_6ab46ac6c93d4076a89c3ca2aea04ecf:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=195:220] refresh the session token\n[E2 role=authoritative_correction span=222:254] preserve the request fingerprint\n[E3 role=authoritative_correction span=256:275] retry exactly twice\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry exactly twice\" -> E3"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 242,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "aster-api-aa-41",
+          "drift-api-da-44",
+          "north-rpc-nr-64"
+        ],
+        "wrong_family_ids": [
+          "aster-api-aa-41",
+          "drift-api-da-44"
+        ],
+        "wrong_family_clause_count": 2,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "paired": {
+        "retrieval_regret": false,
+        "target_omission_regret": false,
+        "contamination_regret": false,
+        "task_delta": 0,
+        "retrieval_precision_delta": -0.6666666666666667,
+        "retrieval_recall_delta": 0.0,
+        "memory_word_delta": 154
+      }
+    },
+    {
+      "family_id": "opal-rpc-or-65",
+      "interference_cluster": "channel-session",
+      "semantic_operator": "at_most",
+      "semantic_dimension": "cardinality",
+      "semantic_clause": "keep at most two pending channels",
+      "pool_position": 15,
+      "distractor_count": 19,
+      "near_neighbor_count": 4,
+      "isolated": {
+        "snapshot_sha256": "29bd3c41e1229cf4b7429f345306500b2714b02b7afcf75ca05cdf7beabefcaf",
+        "copied_snapshot_sha256": "29bd3c41e1229cf4b7429f345306500b2714b02b7afcf75ca05cdf7beabefcaf",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "Keep at most two pending channels.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_87af270e30e241cdb8e3b86deaae3c66:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=215:248] keep at most two pending channels\n[E2 role=authoritative_correction span=250:271] expire stale channels\n[E3 role=authoritative_correction span=273:306] preserve the newest channel token\n\nREFERENCES:\n[P1] HANDLE=\"keep at most two pending channels\" -> E1\n[P2] HANDLE=\"expire stale channels\" -> E2\n[P3] HANDLE=\"preserve the newest channel token\" -> E3"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 76,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "opal-rpc-or-65"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "pooled": {
+        "snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "copied_snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "pre_eval_watermark": 80,
+        "post_eval_watermark": 82,
+        "transfer_decision": "The maximum pending-channel count is not specified in the provided evidence. As there are no references or explicit prohibitions regarding the pending-channel count in the operational task or accumulated experience from MNEXA, I cannot determine the value. \n\nPlease refer to the relevant documentation or operational guidelines for the maximum pending-channel count associated with OpalRPC OR-65.",
+        "semantic_task_pass": false,
+        "semantic_violation": true,
+        "semantic_required_ok": false,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_6ab46ac6c93d4076a89c3ca2aea04ecf:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=195:220] refresh the session token\n[E2 role=authoritative_correction span=222:254] preserve the request fingerprint\n[E3 role=authoritative_correction span=256:275] retry exactly twice\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry exactly twice\" -> E3",
+          "[interpretive:i_8e29a7852526457a8dcc0a3064b58fbd:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=191:221] preserve the trace fingerprint\n[E2 role=authoritative_correction span=223:247] wait at least 12 seconds\n[E3 role=authoritative_correction span=249:269] open a fresh channel\n[E4 role=authoritative_correction span=271:300] record the channel generation\n\nREFERENCES:\n[P1] HANDLE=\"preserve the trace fingerprint\" -> E1\n[P2] HANDLE=\"wait at least 12 seconds\" -> E2\n[P3] HANDLE=\"open a fresh channel\" -> E3\n[P4] HANDLE=\"record the channel generation\" -> E4",
+          "[interpretive:i_77fc61075c1c47e9846bc2062c532fb0:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=187:212] refresh the session token\n[E2 role=authoritative_correction span=214:246] preserve the request fingerprint\n[E3 role=authoritative_correction span=280:306] close the stale connection\n[E4 role=authoritative_correction span=248:278] never retry the failed request\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"close the stale connection\" -> E3\n[G1] UNRESOLVED -> E4"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 242,
+        "target_clause_visible": false,
+        "visible_family_ids": [
+          "aster-api-aa-41",
+          "drift-api-da-44",
+          "north-rpc-nr-64"
+        ],
+        "wrong_family_ids": [
+          "aster-api-aa-41",
+          "drift-api-da-44",
+          "north-rpc-nr-64"
+        ],
+        "wrong_family_clause_count": 3,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 0.0,
+        "retrieval_precision": 0.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "paired": {
+        "retrieval_regret": true,
+        "target_omission_regret": true,
+        "contamination_regret": true,
+        "task_delta": -1,
+        "retrieval_precision_delta": -1.0,
+        "retrieval_recall_delta": -1.0,
+        "memory_word_delta": 166
+      }
+    },
+    {
+      "family_id": "pine-store-ps-71",
+      "interference_cluster": "storage-finalization",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "semantic_clause": "finalize only with X-Pine-Final: sealed",
+      "pool_position": 16,
+      "distractor_count": 19,
+      "near_neighbor_count": 4,
+      "isolated": {
+        "snapshot_sha256": "9220f67fd5a18f7b1e38f397795a16486dda35bbb3f786e3640700dafcc8a2fc",
+        "copied_snapshot_sha256": "9220f67fd5a18f7b1e38f397795a16486dda35bbb3f786e3640700dafcc8a2fc",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "Finalize the operation with the header: **X-Pine-Final: sealed**. \n\nEnsure to verify the manifest checksum, preserve the upload fingerprint, and record the final generation before finalization.",
+        "semantic_task_pass": false,
+        "semantic_violation": true,
+        "semantic_required_ok": false,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_758beb79a2474721a785bd770da1cd04:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=198:226] verify the manifest checksum\n[E2 role=authoritative_correction span=228:259] preserve the upload fingerprint\n[E3 role=authoritative_correction span=302:329] record the final generation\n[E4 role=authoritative_correction span=261:300] finalize only with X-Pine-Final: sealed\n\nREFERENCES:\n[P1] HANDLE=\"verify the manifest checksum\" -> E1\n[P2] HANDLE=\"preserve the upload fingerprint\" -> E2\n[P3] HANDLE=\"record the final generation\" -> E3\n[G1] UNRESOLVED -> E4"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 84,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "pine-store-ps-71"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "pooled": {
+        "snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "copied_snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "pre_eval_watermark": 80,
+        "post_eval_watermark": 82,
+        "transfer_decision": "To finalize the task related to PineStore returning PS-71, the permitted finalization header is as follows:\n\n- Apply exactly four signature blocks.\n- Preserve the upload fingerprint.\n- Record the final generation.",
+        "semantic_task_pass": false,
+        "semantic_violation": true,
+        "semantic_required_ok": false,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_864e26bad3d2401f811e558f17aad505:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=189:317] verify the manifest checksum; apply exactly four signature blocks; preserve the upload fingerprint; record the final generation.\n[E2 role=authoritative_correction span=256:316] preserve the upload fingerprint; record the final generation\n\nREFERENCES:\n[P1] HANDLE=\"apply exactly four signature blocks\" -> E1\n[P2] HANDLE=\"preserve the upload fingerprint\" -> E2\n[P3] HANDLE=\"record the final generation\" -> E2",
+          "[interpretive:i_77fc61075c1c47e9846bc2062c532fb0:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=187:212] refresh the session token\n[E2 role=authoritative_correction span=214:246] preserve the request fingerprint\n[E3 role=authoritative_correction span=280:306] close the stale connection\n[E4 role=authoritative_correction span=248:278] never retry the failed request\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"close the stale connection\" -> E3\n[G1] UNRESOLVED -> E4",
+          "[interpretive:i_8e29a7852526457a8dcc0a3064b58fbd:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=191:221] preserve the trace fingerprint\n[E2 role=authoritative_correction span=223:247] wait at least 12 seconds\n[E3 role=authoritative_correction span=249:269] open a fresh channel\n[E4 role=authoritative_correction span=271:300] record the channel generation\n\nREFERENCES:\n[P1] HANDLE=\"preserve the trace fingerprint\" -> E1\n[P2] HANDLE=\"wait at least 12 seconds\" -> E2\n[P3] HANDLE=\"open a fresh channel\" -> E3\n[P4] HANDLE=\"record the channel generation\" -> E4"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 255,
+        "target_clause_visible": false,
+        "visible_family_ids": [
+          "drift-api-da-44",
+          "north-rpc-nr-64",
+          "raven-store-rs-73"
+        ],
+        "wrong_family_ids": [
+          "drift-api-da-44",
+          "north-rpc-nr-64",
+          "raven-store-rs-73"
+        ],
+        "wrong_family_clause_count": 3,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 0.0,
+        "retrieval_precision": 0.0,
+        "wrong_rule_contamination": true,
+        "wrong_rule_family_ids": [
+          "raven-store-rs-73"
+        ],
+        "wrong_rule_clause_count": 1
+      },
+      "paired": {
+        "retrieval_regret": false,
+        "target_omission_regret": false,
+        "contamination_regret": false,
+        "task_delta": 0,
+        "retrieval_precision_delta": -1.0,
+        "retrieval_recall_delta": -1.0,
+        "memory_word_delta": 171
+      }
+    },
+    {
+      "family_id": "quill-store-qs-72",
+      "interference_cluster": "storage-finalization",
+      "semantic_operator": "do_not",
+      "semantic_dimension": "polarity",
+      "semantic_clause": "do not finalize before checksum verification",
+      "pool_position": 17,
+      "distractor_count": 19,
+      "near_neighbor_count": 4,
+      "isolated": {
+        "snapshot_sha256": "2fc922a553978be1ed7ae04f2e9e442c0f0de24d39df735ea20c073e4bb3151d",
+        "copied_snapshot_sha256": "2fc922a553978be1ed7ae04f2e9e442c0f0de24d39df735ea20c073e4bb3151d",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "To finalize the QS-72 return at QuillStore, follow these actions:\n\n1. **Preserve the upload fingerprint.**\n2. **Do not finalize before checksum verification.**\n3. **Record the final generation.**\n4. **Seal the upload session.**",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_cc58d1c1e91b4b17bee58941c3dd1a45:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=200:231] preserve the upload fingerprint\n[E2 role=authoritative_correction span=233:277] do not finalize before checksum verification\n[E3 role=authoritative_correction span=279:306] record the final generation\n[E4 role=authoritative_correction span=308:331] seal the upload session\n\nREFERENCES:\n[P1] HANDLE=\"preserve the upload fingerprint\" -> E1\n[P2] HANDLE=\"do not finalize\" -> E2\n  META condition=\"before checksum verification\"\n[P3] HANDLE=\"record the final generation\" -> E3\n[P4] HANDLE=\"seal the upload session\" -> E4"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 91,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "quill-store-qs-72"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "pooled": {
+        "snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "copied_snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "pre_eval_watermark": 80,
+        "post_eval_watermark": 82,
+        "transfer_decision": "To finalize the QuillStore return QS-72, follow these actions:\n\n1. Verify the manifest checksum.\n2. Apply exactly four signature blocks.\n3. Preserve the upload fingerprint.\n4. Record the final generation.\n5. Do not finalize before checksum verification.\n6. Seal the upload session.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_6c3a6cdd02074109ae534d7e5f98b96c:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=200:231] preserve the upload fingerprint\n[E2 role=authoritative_correction span=233:277] do not finalize before checksum verification\n[E3 role=authoritative_correction span=279:306] record the final generation\n[E4 role=authoritative_correction span=308:331] seal the upload session\n\nREFERENCES:\n[P1] HANDLE=\"preserve the upload fingerprint\" -> E1\n[P2] HANDLE=\"do not finalize\" -> E2\n  META condition=\"before checksum verification\"\n[P3] HANDLE=\"record the final generation\" -> E3\n[P4] HANDLE=\"seal the upload session\" -> E4",
+          "[interpretive:i_864e26bad3d2401f811e558f17aad505:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=189:317] verify the manifest checksum; apply exactly four signature blocks; preserve the upload fingerprint; record the final generation.\n[E2 role=authoritative_correction span=256:316] preserve the upload fingerprint; record the final generation\n\nREFERENCES:\n[P1] HANDLE=\"apply exactly four signature blocks\" -> E1\n[P2] HANDLE=\"preserve the upload fingerprint\" -> E2\n[P3] HANDLE=\"record the final generation\" -> E2",
+          "[interpretive:i_6ab46ac6c93d4076a89c3ca2aea04ecf:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=195:220] refresh the session token\n[E2 role=authoritative_correction span=222:254] preserve the request fingerprint\n[E3 role=authoritative_correction span=256:275] retry exactly twice\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry exactly twice\" -> E3"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 244,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "aster-api-aa-41",
+          "quill-store-qs-72",
+          "raven-store-rs-73"
+        ],
+        "wrong_family_ids": [
+          "aster-api-aa-41",
+          "raven-store-rs-73"
+        ],
+        "wrong_family_clause_count": 2,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "wrong_rule_contamination": true,
+        "wrong_rule_family_ids": [
+          "raven-store-rs-73"
+        ],
+        "wrong_rule_clause_count": 1
+      },
+      "paired": {
+        "retrieval_regret": false,
+        "target_omission_regret": false,
+        "contamination_regret": false,
+        "task_delta": 0,
+        "retrieval_precision_delta": -0.6666666666666667,
+        "retrieval_recall_delta": 0.0,
+        "memory_word_delta": 153
+      }
+    },
+    {
+      "family_id": "raven-store-rs-73",
+      "interference_cluster": "storage-finalization",
+      "semantic_operator": "exactly",
+      "semantic_dimension": "cardinality",
+      "semantic_clause": "apply exactly four signature blocks",
+      "pool_position": 18,
+      "distractor_count": 19,
+      "near_neighbor_count": 4,
+      "isolated": {
+        "snapshot_sha256": "ca4fd72ee42de06e22dacb94f836cf4d93e7d5e5cac7b2b243c616bd68eadd83",
+        "copied_snapshot_sha256": "ca4fd72ee42de06e22dacb94f836cf4d93e7d5e5cac7b2b243c616bd68eadd83",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "Apply exactly four signature blocks.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_e0ad0d0c10404d789c3875284824f487:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=189:317] verify the manifest checksum; apply exactly four signature blocks; preserve the upload fingerprint; record the final generation.\n[E2 role=authoritative_correction span=256:316] preserve the upload fingerprint; record the final generation\n\nREFERENCES:\n[P1] HANDLE=\"apply exactly four signature blocks\" -> E1\n[P2] HANDLE=\"preserve the upload fingerprint\" -> E2\n[P3] HANDLE=\"record the final generation\" -> E2"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 83,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "raven-store-rs-73"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "pooled": {
+        "snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "copied_snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "pre_eval_watermark": 80,
+        "post_eval_watermark": 82,
+        "transfer_decision": "Apply exactly four signature blocks.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_864e26bad3d2401f811e558f17aad505:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=189:317] verify the manifest checksum; apply exactly four signature blocks; preserve the upload fingerprint; record the final generation.\n[E2 role=authoritative_correction span=256:316] preserve the upload fingerprint; record the final generation\n\nREFERENCES:\n[P1] HANDLE=\"apply exactly four signature blocks\" -> E1\n[P2] HANDLE=\"preserve the upload fingerprint\" -> E2\n[P3] HANDLE=\"record the final generation\" -> E2",
+          "[interpretive:i_6ab46ac6c93d4076a89c3ca2aea04ecf:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=195:220] refresh the session token\n[E2 role=authoritative_correction span=222:254] preserve the request fingerprint\n[E3 role=authoritative_correction span=256:275] retry exactly twice\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry exactly twice\" -> E3",
+          "[interpretive:i_8e29a7852526457a8dcc0a3064b58fbd:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=191:221] preserve the trace fingerprint\n[E2 role=authoritative_correction span=223:247] wait at least 12 seconds\n[E3 role=authoritative_correction span=249:269] open a fresh channel\n[E4 role=authoritative_correction span=271:300] record the channel generation\n\nREFERENCES:\n[P1] HANDLE=\"preserve the trace fingerprint\" -> E1\n[P2] HANDLE=\"wait at least 12 seconds\" -> E2\n[P3] HANDLE=\"open a fresh channel\" -> E3\n[P4] HANDLE=\"record the channel generation\" -> E4"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 241,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "aster-api-aa-41",
+          "north-rpc-nr-64",
+          "raven-store-rs-73"
+        ],
+        "wrong_family_ids": [
+          "aster-api-aa-41",
+          "north-rpc-nr-64"
+        ],
+        "wrong_family_clause_count": 2,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "paired": {
+        "retrieval_regret": false,
+        "target_omission_regret": false,
+        "contamination_regret": false,
+        "task_delta": 0,
+        "retrieval_precision_delta": -0.6666666666666667,
+        "retrieval_recall_delta": 0.0,
+        "memory_word_delta": 158
+      }
+    },
+    {
+      "family_id": "spruce-store-ss-74",
+      "interference_cluster": "storage-finalization",
+      "semantic_operator": "at_least",
+      "semantic_dimension": "cardinality",
+      "semantic_clause": "retain at least three replicas",
+      "pool_position": 19,
+      "distractor_count": 19,
+      "near_neighbor_count": 4,
+      "isolated": {
+        "snapshot_sha256": "34b9f6ce602e6a30357b2bf8f61639ae056ce5c5f2e71293781088e8aef381db",
+        "copied_snapshot_sha256": "34b9f6ce602e6a30357b2bf8f61639ae056ce5c5f2e71293781088e8aef381db",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "To handle the return of SpruceStore SS-74, you must retain at least three replicas.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_dfba7491fc0f43d8b7e9340a371c93ba:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=181:306] verify the manifest checksum; retain at least three replicas; preserve the upload fingerprint; record the replica generation.\n[E2 role=authoritative_correction span=243:305] preserve the upload fingerprint; record the replica generation\n\nREFERENCES:\n[P1] HANDLE=\"verify the manifest checksum\" -> E1\n[P2] HANDLE=\"retain at least three replicas\" -> E1\n[P3] HANDLE=\"preserve the upload fingerprint\" -> E2\n[P4] HANDLE=\"record the replica generation\" -> E2"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 90,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "spruce-store-ss-74"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "pooled": {
+        "snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "copied_snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "pre_eval_watermark": 80,
+        "post_eval_watermark": 82,
+        "transfer_decision": "To determine the minimum replica count for SpruceStore returning SS-74, the relevant MNEXA experience does not directly provide specific insights on replica counts or associated operational metrics. Therefore, based on the provided information, no explicit decision or action can be made regarding the minimum replica count.\n\nIn conclusion, the task remains unaddressed due to a lack of relevant constraints or guidance within the given accumulated experience.",
+        "semantic_task_pass": false,
+        "semantic_violation": true,
+        "semantic_required_ok": false,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_6ab46ac6c93d4076a89c3ca2aea04ecf:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=195:220] refresh the session token\n[E2 role=authoritative_correction span=222:254] preserve the request fingerprint\n[E3 role=authoritative_correction span=256:275] retry exactly twice\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry exactly twice\" -> E3",
+          "[interpretive:i_864e26bad3d2401f811e558f17aad505:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=189:317] verify the manifest checksum; apply exactly four signature blocks; preserve the upload fingerprint; record the final generation.\n[E2 role=authoritative_correction span=256:316] preserve the upload fingerprint; record the final generation\n\nREFERENCES:\n[P1] HANDLE=\"apply exactly four signature blocks\" -> E1\n[P2] HANDLE=\"preserve the upload fingerprint\" -> E2\n[P3] HANDLE=\"record the final generation\" -> E2",
+          "[interpretive:i_8e29a7852526457a8dcc0a3064b58fbd:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=191:221] preserve the trace fingerprint\n[E2 role=authoritative_correction span=223:247] wait at least 12 seconds\n[E3 role=authoritative_correction span=249:269] open a fresh channel\n[E4 role=authoritative_correction span=271:300] record the channel generation\n\nREFERENCES:\n[P1] HANDLE=\"preserve the trace fingerprint\" -> E1\n[P2] HANDLE=\"wait at least 12 seconds\" -> E2\n[P3] HANDLE=\"open a fresh channel\" -> E3\n[P4] HANDLE=\"record the channel generation\" -> E4"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 241,
+        "target_clause_visible": false,
+        "visible_family_ids": [
+          "aster-api-aa-41",
+          "north-rpc-nr-64",
+          "raven-store-rs-73"
+        ],
+        "wrong_family_ids": [
+          "aster-api-aa-41",
+          "north-rpc-nr-64",
+          "raven-store-rs-73"
+        ],
+        "wrong_family_clause_count": 3,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 0.0,
+        "retrieval_precision": 0.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "paired": {
+        "retrieval_regret": true,
+        "target_omission_regret": true,
+        "contamination_regret": true,
+        "task_delta": -1,
+        "retrieval_precision_delta": -1.0,
+        "retrieval_recall_delta": -1.0,
+        "memory_word_delta": 151
+      }
+    },
+    {
+      "family_id": "thistle-store-ts-75",
+      "interference_cluster": "storage-finalization",
+      "semantic_operator": "unless",
+      "semantic_dimension": "condition",
+      "semantic_clause": "do not purge the manifest unless the origin generation changes",
+      "pool_position": 20,
+      "distractor_count": 19,
+      "near_neighbor_count": 4,
+      "isolated": {
+        "snapshot_sha256": "2161306c96a3e58547ed42a9790196b51e99307bf7f164ca10ed72b0af97b631",
+        "copied_snapshot_sha256": "2161306c96a3e58547ed42a9790196b51e99307bf7f164ca10ed72b0af97b631",
+        "pre_eval_watermark": 4,
+        "post_eval_watermark": 6,
+        "transfer_decision": "The manifest may be purged only if the origin generation changes. Do not purge the manifest unless this condition is met.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_ba5330301cbc4a23bf684f8c4c558769:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=193:219] read the origin generation\n[E2 role=authoritative_correction span=285:316] preserve the upload fingerprint\n[E3 role=authoritative_correction span=318:350] record the new origin generation\n[E4 role=authoritative_correction span=221:246] do not purge the manifest\n[E5 role=authoritative_correction span=221:283] do not purge the manifest unless the origin generation changes\n\nREFERENCES:\n[P1] HANDLE=\"read the origin generation\" -> E1\n[P2] HANDLE=\"preserve the upload fingerprint\" -> E2\n[P3] HANDLE=\"record the new origin generation\" -> E3\n[G1] UNRESOLVED -> E4\n[G2] UNRESOLVED -> E5"
+        ],
+        "memory_segment_count": 1,
+        "memory_word_count": 103,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "thistle-store-ts-75"
+        ],
+        "wrong_family_ids": [],
+        "wrong_family_clause_count": 0,
+        "identifiable_family_clause_count": 1,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 1.0,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "pooled": {
+        "snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "copied_snapshot_sha256": "bb71587356d9a6445b14c10109fa6743d53774f89da3f18f83371db11d288c74",
+        "pre_eval_watermark": 80,
+        "post_eval_watermark": 82,
+        "transfer_decision": "The manifest may be purged only if the origin generation changes. Do not purge the manifest in any other condition.",
+        "semantic_task_pass": true,
+        "semantic_violation": false,
+        "semantic_required_ok": true,
+        "semantic_forbidden_hits": [],
+        "memory_segments": [
+          "[interpretive:i_2a98b72e053449c9ba726d4dd9881c93:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=193:219] read the origin generation\n[E2 role=authoritative_correction span=285:316] preserve the upload fingerprint\n[E3 role=authoritative_correction span=318:350] record the new origin generation\n[E4 role=authoritative_correction span=221:246] do not purge the manifest\n[E5 role=authoritative_correction span=221:283] do not purge the manifest unless the origin generation changes\n\nREFERENCES:\n[P1] HANDLE=\"read the origin generation\" -> E1\n[P2] HANDLE=\"preserve the upload fingerprint\" -> E2\n[P3] HANDLE=\"record the new origin generation\" -> E3\n[G1] UNRESOLVED -> E4\n[G2] UNRESOLVED -> E5",
+          "[interpretive:i_864e26bad3d2401f811e558f17aad505:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=189:317] verify the manifest checksum; apply exactly four signature blocks; preserve the upload fingerprint; record the final generation.\n[E2 role=authoritative_correction span=256:316] preserve the upload fingerprint; record the final generation\n\nREFERENCES:\n[P1] HANDLE=\"apply exactly four signature blocks\" -> E1\n[P2] HANDLE=\"preserve the upload fingerprint\" -> E2\n[P3] HANDLE=\"record the final generation\" -> E2",
+          "[interpretive:i_6ab46ac6c93d4076a89c3ca2aea04ecf:v1] COMPACT SEMANTIC MEMORY\n\nExact EVIDENCE text is authoritative.\nRetrieval handles are not standalone claims.\nPreserve negation, scope, cardinality, conditions, exceptions,\nordering, and other decision-relevant meaning from EVIDENCE.\n\nEVIDENCE:\n[E1 role=authoritative_correction span=195:220] refresh the session token\n[E2 role=authoritative_correction span=222:254] preserve the request fingerprint\n[E3 role=authoritative_correction span=256:275] retry exactly twice\n\nREFERENCES:\n[P1] HANDLE=\"refresh the session token\" -> E1\n[P2] HANDLE=\"preserve the request fingerprint\" -> E2\n[P3] HANDLE=\"retry exactly twice\" -> E3"
+        ],
+        "memory_segment_count": 3,
+        "memory_word_count": 256,
+        "target_clause_visible": true,
+        "visible_family_ids": [
+          "aster-api-aa-41",
+          "raven-store-rs-73",
+          "thistle-store-ts-75"
+        ],
+        "wrong_family_ids": [
+          "aster-api-aa-41",
+          "raven-store-rs-73"
+        ],
+        "wrong_family_clause_count": 2,
+        "identifiable_family_clause_count": 3,
+        "retrieval_recall": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "wrong_rule_contamination": false,
+        "wrong_rule_family_ids": [],
+        "wrong_rule_clause_count": 0
+      },
+      "paired": {
+        "retrieval_regret": false,
+        "target_omission_regret": false,
+        "contamination_regret": false,
+        "task_delta": 0,
+        "retrieval_precision_delta": -0.6666666666666667,
+        "retrieval_recall_delta": 0.0,
+        "memory_word_delta": 153
+      }
+    }
+  ]
+}

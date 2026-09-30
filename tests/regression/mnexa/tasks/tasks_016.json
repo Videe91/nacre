@@ -1,0 +1,2775 @@
+{
+  "experiment": "seed-growth-016",
+  "classification": "exploratory-fresh-compact-semantic-stability-ablation",
+  "transfer_attempts_per_condition": 3,
+  "hypothesis": "The semantic difference observed in Seed 015 is primarily stochastic rather than a systematic failure of compact semantic memory. Across repeated independent transfer calls, compact memory should retain comparable per-call, majority-family, and operator-level semantic stability while preserving its context reduction.",
+  "conditions": {
+    "A": "verbose Seed 014 lossless semantic memory",
+    "B": "compact Seed 015 evidence-index memory"
+  },
+  "primary_metrics": [
+    "per-call semantic pass rate",
+    "majority-family semantic success",
+    "unanimous-family semantic success",
+    "operator-specific semantic stability"
+  ],
+  "secondary_metrics": [
+    "semantic violations",
+    "exact semantic clause visibility",
+    "complete lessons",
+    "memory words",
+    "unsupported claims"
+  ],
+  "control_invariants": [
+    "all_source_evidence_equal",
+    "all_initial_structured_proposals_equal",
+    "all_repair_proposals_equal",
+    "all_structured_admissions_equal",
+    "all_fallback_records_equal",
+    "replicate lesson equality",
+    "replicate memory-size equality"
+  ],
+  "families": [
+    {
+      "id": "lunar-pay-lp-88",
+      "system": "LunarPay",
+      "code": "LP-88",
+      "entities": [
+        "system:lunarpay",
+        "code:lp-88"
+      ],
+      "experience": {
+        "prompt": "LunarPay returns LP-88. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "LunarPay returns LP-88. State the rule governing reuse of the previous authorization nonce."
+      },
+      "candidate_decision": "Reuse the previous authorization nonce.",
+      "authoritative_text": "refresh the recovery lease; wait 21 seconds; retry exactly once; never reuse the previous authorization nonce.",
+      "raw_source": "<<<ROLE:status>>>\nLP-88 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nReuse the previous authorization nonce.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrefresh the recovery lease; wait 21 seconds; retry exactly once; never reuse the previous authorization nonce.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\ngateway pressure may be temporary\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 204 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "refresh the recovery lease",
+          "task_pattern": "refresh\\s+the\\s+recovery\\s+lease"
+        },
+        {
+          "id": "A2",
+          "text": "wait 21 seconds",
+          "task_pattern": "wait\\s+21\\s+seconds"
+        },
+        {
+          "id": "A3",
+          "text": "retry exactly once",
+          "task_pattern": "retry\\s+exactly\\s+once"
+        },
+        {
+          "id": "A4",
+          "text": "never reuse the previous authorization nonce",
+          "task_pattern": "never\\s+reuse\\s+the\\s+previous\\s+authorization\\s+nonce"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "refresh the recovery lease; wait 21 seconds",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "retry exactly once; never reuse the previous authorization nonce",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A4",
+      "semantic_clause": "never reuse the previous authorization nonce",
+      "semantic_operator": "never",
+      "semantic_dimension": "polarity",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bnever\\b",
+            "\\bdo\\s+not\\b",
+            "\\bmust\\s+not\\b"
+          ],
+          [
+            "\\breuse\\b"
+          ],
+          [
+            "\\bauthorization\\b"
+          ],
+          [
+            "\\bnonce\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "refresh\\s+the\\s+recovery\\s+lease"
+          ],
+          [
+            "wait\\s+21\\s+seconds"
+          ],
+          [
+            "retry\\s+exactly\\s+once"
+          ],
+          [
+            "never\\s+reuse\\s+the\\s+previous\\s+authorization\\s+nonce"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "lunar-pay-lp-88-R1",
+            "kind": "recoverable",
+            "source_quote": "never reuse the previous authorization nonce",
+            "candidate": {
+              "source_quote": "never reuse the previous authorization nonce",
+              "nucleus_quote": "never reuse the previous authorization nonce",
+              "qualifiers": [
+                {
+                  "type": "negation",
+                  "source_quote": "never"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "lunar-pay-lp-88-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction LP-88",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction LP-88",
+              "nucleus_quote": "fabricated fallback instruction LP-88",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "lunar-pay-lp-88-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Reuse the previous authorization nonce.",
+            "candidate": {
+              "source_quote": "Reuse the previous authorization nonce.",
+              "nucleus_quote": "Reuse the previous authorization nonce.",
+              "qualifiers": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "meridian-rpc-mr-47",
+      "system": "MeridianRPC",
+      "code": "MR-47",
+      "entities": [
+        "system:meridianrpc",
+        "code:mr-47"
+      ],
+      "experience": {
+        "prompt": "MeridianRPC returns MR-47. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "MeridianRPC returns MR-47. State the rule for the retired correlation token."
+      },
+      "candidate_decision": "Reuse the retired correlation token.",
+      "authoritative_text": "open a fresh transport channel; send three probe frames; never reuse the retired correlation token; preserve the trace fingerprint.",
+      "raw_source": "<<<ROLE:status>>>\nMR-47 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nReuse the retired correlation token.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nopen a fresh transport channel; send three probe frames; never reuse the retired correlation token; preserve the trace fingerprint.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nnetwork jitter may exist\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 233 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "open a fresh transport channel",
+          "task_pattern": "open\\s+a\\s+fresh\\s+transport\\s+channel"
+        },
+        {
+          "id": "A2",
+          "text": "send three probe frames",
+          "task_pattern": "send\\s+three\\s+probe\\s+frames"
+        },
+        {
+          "id": "A3",
+          "text": "never reuse the retired correlation token",
+          "task_pattern": "never\\s+reuse\\s+the\\s+retired\\s+correlation\\s+token"
+        },
+        {
+          "id": "A4",
+          "text": "preserve the trace fingerprint",
+          "task_pattern": "preserve\\s+the\\s+trace\\s+fingerprint"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "open a fresh transport channel; send three probe frames",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "never reuse the retired correlation token; preserve the trace fingerprint",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A3",
+      "semantic_clause": "never reuse the retired correlation token",
+      "semantic_operator": "never",
+      "semantic_dimension": "polarity",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bnever\\b",
+            "\\bdo\\s+not\\b"
+          ],
+          [
+            "\\breuse\\b"
+          ],
+          [
+            "\\bcorrelation\\b"
+          ],
+          [
+            "\\btoken\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "open\\s+a\\s+fresh\\s+transport\\s+channel"
+          ],
+          [
+            "send\\s+three\\s+probe\\s+frames"
+          ],
+          [
+            "never\\s+reuse\\s+the\\s+retired\\s+correlation\\s+token"
+          ],
+          [
+            "preserve\\s+the\\s+trace\\s+fingerprint"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "meridian-rpc-mr-47-R1",
+            "kind": "recoverable",
+            "source_quote": "never reuse the retired correlation token",
+            "candidate": {
+              "source_quote": "never reuse the retired correlation token",
+              "nucleus_quote": "never reuse the retired correlation token",
+              "qualifiers": [
+                {
+                  "type": "negation",
+                  "source_quote": "never"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "meridian-rpc-mr-47-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction MR-47",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction MR-47",
+              "nucleus_quote": "fabricated fallback instruction MR-47",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "meridian-rpc-mr-47-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Reuse the retired correlation token.",
+            "candidate": {
+              "source_quote": "Reuse the retired correlation token.",
+              "nucleus_quote": "Reuse the retired correlation token.",
+              "qualifiers": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "nova-auth-na-62",
+      "system": "NovaAuth",
+      "code": "NA-62",
+      "entities": [
+        "system:novaauth",
+        "code:na-62"
+      ],
+      "experience": {
+        "prompt": "NovaAuth returns NA-62. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "NovaAuth returns NA-62. State the rule for a superseded credential."
+      },
+      "candidate_decision": "Accept the superseded credential.",
+      "authoritative_text": "refresh the trust snapshot; preserve the request fingerprint; never accept the superseded credential; issue one fresh challenge.",
+      "raw_source": "<<<ROLE:status>>>\nNA-62 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nAccept the superseded credential.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrefresh the trust snapshot; preserve the request fingerprint; never accept the superseded credential; issue one fresh challenge.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\ntrust propagation may be delayed\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 183 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "refresh the trust snapshot",
+          "task_pattern": "refresh\\s+the\\s+trust\\s+snapshot"
+        },
+        {
+          "id": "A2",
+          "text": "preserve the request fingerprint",
+          "task_pattern": "preserve\\s+the\\s+request\\s+fingerprint"
+        },
+        {
+          "id": "A3",
+          "text": "never accept the superseded credential",
+          "task_pattern": "never\\s+accept\\s+the\\s+superseded\\s+credential"
+        },
+        {
+          "id": "A4",
+          "text": "issue one fresh challenge",
+          "task_pattern": "issue\\s+one\\s+fresh\\s+challenge"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "refresh the trust snapshot; preserve the request fingerprint",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "never accept the superseded credential; issue one fresh challenge",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A3",
+      "semantic_clause": "never accept the superseded credential",
+      "semantic_operator": "never",
+      "semantic_dimension": "polarity",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bnever\\b",
+            "\\bdo\\s+not\\b"
+          ],
+          [
+            "\\baccept\\b"
+          ],
+          [
+            "\\bsuperseded\\b"
+          ],
+          [
+            "\\bcredential\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "refresh\\s+the\\s+trust\\s+snapshot"
+          ],
+          [
+            "preserve\\s+the\\s+request\\s+fingerprint"
+          ],
+          [
+            "never\\s+accept\\s+the\\s+superseded\\s+credential"
+          ],
+          [
+            "issue\\s+one\\s+fresh\\s+challenge"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "nova-auth-na-62-R1",
+            "kind": "recoverable",
+            "source_quote": "never accept the superseded credential",
+            "candidate": {
+              "source_quote": "never accept the superseded credential",
+              "nucleus_quote": "never accept the superseded credential",
+              "qualifiers": [
+                {
+                  "type": "negation",
+                  "source_quote": "never"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "nova-auth-na-62-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction NA-62",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction NA-62",
+              "nucleus_quote": "fabricated fallback instruction NA-62",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "nova-auth-na-62-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Accept the superseded credential.",
+            "candidate": {
+              "source_quote": "Accept the superseded credential.",
+              "nucleus_quote": "Accept the superseded credential.",
+              "qualifiers": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "onyx-bus-ob-35",
+      "system": "OnyxBus",
+      "code": "OB-35",
+      "entities": [
+        "system:onyxbus",
+        "code:ob-35"
+      ],
+      "experience": {
+        "prompt": "OnyxBus returns OB-35. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "OnyxBus returns OB-35. State the acknowledgement rule for the rejected envelope."
+      },
+      "candidate_decision": "Acknowledge the rejected envelope.",
+      "authoritative_text": "clone the newest checkpoint; mark the rejected delivery stale; do not acknowledge the rejected envelope; restart from the cloned checkpoint.",
+      "raw_source": "<<<ROLE:status>>>\nOB-35 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nAcknowledge the rejected envelope.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nclone the newest checkpoint; mark the rejected delivery stale; do not acknowledge the rejected envelope; restart from the cloned checkpoint.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nconsumer backlog may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 216 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "clone the newest checkpoint",
+          "task_pattern": "clone\\s+the\\s+newest\\s+checkpoint"
+        },
+        {
+          "id": "A2",
+          "text": "mark the rejected delivery stale",
+          "task_pattern": "mark\\s+the\\s+rejected\\s+delivery\\s+stale"
+        },
+        {
+          "id": "A3",
+          "text": "do not acknowledge the rejected envelope",
+          "task_pattern": "do\\s+not\\s+acknowledge\\s+the\\s+rejected\\s+envelope"
+        },
+        {
+          "id": "A4",
+          "text": "restart from the cloned checkpoint",
+          "task_pattern": "restart\\s+from\\s+the\\s+cloned\\s+checkpoint"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "clone the newest checkpoint; mark the rejected delivery stale",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "do not acknowledge the rejected envelope; restart from the cloned checkpoint",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A3",
+      "semantic_clause": "do not acknowledge the rejected envelope",
+      "semantic_operator": "do_not",
+      "semantic_dimension": "polarity",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bdo\\s+not\\b",
+            "\\bnever\\b",
+            "\\bmust\\s+not\\b"
+          ],
+          [
+            "\\backnowledg"
+          ],
+          [
+            "\\brejected\\b"
+          ],
+          [
+            "\\benvelope\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "clone\\s+the\\s+newest\\s+checkpoint"
+          ],
+          [
+            "mark\\s+the\\s+rejected\\s+delivery\\s+stale"
+          ],
+          [
+            "do\\s+not\\s+acknowledge\\s+the\\s+rejected\\s+envelope"
+          ],
+          [
+            "restart\\s+from\\s+the\\s+cloned\\s+checkpoint"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "onyx-bus-ob-35-R1",
+            "kind": "recoverable",
+            "source_quote": "do not acknowledge the rejected envelope",
+            "candidate": {
+              "source_quote": "do not acknowledge the rejected envelope",
+              "nucleus_quote": "do not acknowledge the rejected envelope",
+              "qualifiers": [
+                {
+                  "type": "negation",
+                  "source_quote": "do not"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "onyx-bus-ob-35-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction OB-35",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction OB-35",
+              "nucleus_quote": "fabricated fallback instruction OB-35",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "onyx-bus-ob-35-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Acknowledge the rejected envelope.",
+            "candidate": {
+              "source_quote": "Acknowledge the rejected envelope.",
+              "nucleus_quote": "Acknowledge the rejected envelope.",
+              "qualifiers": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "prairie-db-pd-81",
+      "system": "PrairieDB",
+      "code": "PD-81",
+      "entities": [
+        "system:prairiedb",
+        "code:pd-81"
+      ],
+      "experience": {
+        "prompt": "PrairieDB returns PD-81. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "PrairieDB returns PD-81. State the write rule for the passive shard."
+      },
+      "candidate_decision": "Write directly to the passive shard.",
+      "authoritative_text": "read the active leader generation; acquire the silver lock; do not write to the passive shard; release the lock after commit.",
+      "raw_source": "<<<ROLE:status>>>\nPD-81 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nWrite directly to the passive shard.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nread the active leader generation; acquire the silver lock; do not write to the passive shard; release the lock after commit.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nreplication lag may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 242 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "read the active leader generation",
+          "task_pattern": "read\\s+the\\s+active\\s+leader\\s+generation"
+        },
+        {
+          "id": "A2",
+          "text": "acquire the silver lock",
+          "task_pattern": "acquire\\s+the\\s+silver\\s+lock"
+        },
+        {
+          "id": "A3",
+          "text": "do not write to the passive shard",
+          "task_pattern": "do\\s+not\\s+write\\s+to\\s+the\\s+passive\\s+shard"
+        },
+        {
+          "id": "A4",
+          "text": "release the lock after commit",
+          "task_pattern": "release\\s+the\\s+lock\\s+after\\s+commit"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "read the active leader generation; acquire the silver lock",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "do not write to the passive shard; release the lock after commit",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A3",
+      "semantic_clause": "do not write to the passive shard",
+      "semantic_operator": "do_not",
+      "semantic_dimension": "polarity",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bdo\\s+not\\b",
+            "\\bnever\\b"
+          ],
+          [
+            "\\bwrite\\b"
+          ],
+          [
+            "\\bpassive\\b"
+          ],
+          [
+            "\\bshard\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "read\\s+the\\s+active\\s+leader\\s+generation"
+          ],
+          [
+            "acquire\\s+the\\s+silver\\s+lock"
+          ],
+          [
+            "do\\s+not\\s+write\\s+to\\s+the\\s+passive\\s+shard"
+          ],
+          [
+            "release\\s+the\\s+lock\\s+after\\s+commit"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "prairie-db-pd-81-R1",
+            "kind": "recoverable",
+            "source_quote": "do not write to the passive shard",
+            "candidate": {
+              "source_quote": "do not write to the passive shard",
+              "nucleus_quote": "do not write to the passive shard",
+              "qualifiers": [
+                {
+                  "type": "negation",
+                  "source_quote": "do not"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "prairie-db-pd-81-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction PD-81",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction PD-81",
+              "nucleus_quote": "fabricated fallback instruction PD-81",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "prairie-db-pd-81-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Write directly to the passive shard.",
+            "candidate": {
+              "source_quote": "Write directly to the passive shard.",
+              "nucleus_quote": "Write directly to the passive shard.",
+              "qualifiers": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "quartz-queue-qq-60",
+      "system": "QuartzQueue",
+      "code": "QQ-60",
+      "entities": [
+        "system:quartzqueue",
+        "code:qq-60"
+      ],
+      "experience": {
+        "prompt": "QuartzQueue returns QQ-60. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "QuartzQueue returns QQ-60. State the permitted lane restriction."
+      },
+      "candidate_decision": "Move the task to any available lane.",
+      "authoritative_text": "request a fresh checkpoint; move the task only to the indigo lane; retry exactly twice; preserve the original task ID.",
+      "raw_source": "<<<ROLE:status>>>\nQQ-60 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nMove the task to any available lane.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrequest a fresh checkpoint; move the task only to the indigo lane; retry exactly twice; preserve the original task ID.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nworker saturation may exist\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 251 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "request a fresh checkpoint",
+          "task_pattern": "request\\s+a\\s+fresh\\s+checkpoint"
+        },
+        {
+          "id": "A2",
+          "text": "move the task only to the indigo lane",
+          "task_pattern": "move\\s+the\\s+task\\s+only\\s+to\\s+the\\s+indigo\\s+lane"
+        },
+        {
+          "id": "A3",
+          "text": "retry exactly twice",
+          "task_pattern": "retry\\s+exactly\\s+twice"
+        },
+        {
+          "id": "A4",
+          "text": "preserve the original task ID",
+          "task_pattern": "preserve\\s+the\\s+original\\s+task\\s+ID"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "request a fresh checkpoint; move the task only to the indigo lane",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "retry exactly twice; preserve the original task ID",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "move the task only to the indigo lane",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bonly\\b"
+          ],
+          [
+            "\\bindigo\\b"
+          ],
+          [
+            "\\blane\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "request\\s+a\\s+fresh\\s+checkpoint"
+          ],
+          [
+            "move\\s+the\\s+task\\s+only\\s+to\\s+the\\s+indigo\\s+lane"
+          ],
+          [
+            "retry\\s+exactly\\s+twice"
+          ],
+          [
+            "preserve\\s+the\\s+original\\s+task\\s+ID"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "quartz-queue-qq-60-R1",
+            "kind": "recoverable",
+            "source_quote": "move the task only to the indigo lane",
+            "candidate": {
+              "source_quote": "move the task only to the indigo lane",
+              "nucleus_quote": "move the task only to the indigo lane",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "only"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "quartz-queue-qq-60-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction QQ-60",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction QQ-60",
+              "nucleus_quote": "fabricated fallback instruction QQ-60",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "quartz-queue-qq-60-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Move the task to any available lane.",
+            "candidate": {
+              "source_quote": "Move the task to any available lane.",
+              "nucleus_quote": "Move the task to any available lane.",
+              "qualifiers": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "river-store-rs-90",
+      "system": "RiverStore",
+      "code": "RS-90",
+      "entities": [
+        "system:riverstore",
+        "code:rs-90"
+      ],
+      "experience": {
+        "prompt": "RiverStore returns RS-90. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "RiverStore returns RS-90. State the permitted finalization header rule."
+      },
+      "candidate_decision": "Finalize with any completion header.",
+      "authoritative_text": "start a fresh upload session; use 33 MiB chunks; apply SHA-512 to every chunk; finalize only with X-River-Final: sealed.",
+      "raw_source": "<<<ROLE:status>>>\nRS-90 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nFinalize with any completion header.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nstart a fresh upload session; use 33 MiB chunks; apply SHA-512 to every chunk; finalize only with X-River-Final: sealed.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nstorage pressure may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 283 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "start a fresh upload session",
+          "task_pattern": "start\\s+a\\s+fresh\\s+upload\\s+session"
+        },
+        {
+          "id": "A2",
+          "text": "use 33 MiB chunks",
+          "task_pattern": "use\\s+33\\s+MiB\\s+chunks"
+        },
+        {
+          "id": "A3",
+          "text": "apply SHA-512 to every chunk",
+          "task_pattern": "apply\\s+SHA\\-512\\s+to\\s+every\\s+chunk"
+        },
+        {
+          "id": "A4",
+          "text": "finalize only with X-River-Final: sealed",
+          "task_pattern": "finalize\\s+only\\s+with\\s+X\\-River\\-Final:\\s+sealed"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "start a fresh upload session; use 33 MiB chunks",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "apply SHA-512 to every chunk; finalize only with X-River-Final: sealed",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A4",
+      "semantic_clause": "finalize only with X-River-Final: sealed",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bonly\\b"
+          ],
+          [
+            "X-River-Final"
+          ],
+          [
+            "\\bsealed\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "start\\s+a\\s+fresh\\s+upload\\s+session"
+          ],
+          [
+            "use\\s+33\\s+MiB\\s+chunks"
+          ],
+          [
+            "apply\\s+SHA\\-512\\s+to\\s+every\\s+chunk"
+          ],
+          [
+            "finalize\\s+only\\s+with\\s+X\\-River\\-Final:\\s+sealed"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "river-store-rs-90-R1",
+            "kind": "recoverable",
+            "source_quote": "finalize only with X-River-Final: sealed",
+            "candidate": {
+              "source_quote": "finalize only with X-River-Final: sealed",
+              "nucleus_quote": "finalize only with X-River-Final: sealed",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "only"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "river-store-rs-90-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction RS-90",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction RS-90",
+              "nucleus_quote": "fabricated fallback instruction RS-90",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "river-store-rs-90-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Finalize with any completion header.",
+            "candidate": {
+              "source_quote": "Finalize with any completion header.",
+              "nucleus_quote": "Finalize with any completion header.",
+              "qualifiers": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "solstice-rpc-sr-28",
+      "system": "SolsticeRPC",
+      "code": "SR-28",
+      "entities": [
+        "system:solsticerpc",
+        "code:sr-28"
+      ],
+      "experience": {
+        "prompt": "SolsticeRPC returns SR-28. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "SolsticeRPC returns SR-28. State the transport-channel restriction."
+      },
+      "candidate_decision": "Reuse the current transport channel.",
+      "authoritative_text": "send four heartbeat frames; space them 195 ms apart; open only a fresh transport channel; preserve the request fingerprint.",
+      "raw_source": "<<<ROLE:status>>>\nSR-28 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nReuse the current transport channel.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nsend four heartbeat frames; space them 195 ms apart; open only a fresh transport channel; preserve the request fingerprint.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nstream scheduling may be unstable\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 306 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "send four heartbeat frames",
+          "task_pattern": "send\\s+four\\s+heartbeat\\s+frames"
+        },
+        {
+          "id": "A2",
+          "text": "space them 195 ms apart",
+          "task_pattern": "space\\s+them\\s+195\\s+ms\\s+apart"
+        },
+        {
+          "id": "A3",
+          "text": "open only a fresh transport channel",
+          "task_pattern": "open\\s+only\\s+a\\s+fresh\\s+transport\\s+channel"
+        },
+        {
+          "id": "A4",
+          "text": "preserve the request fingerprint",
+          "task_pattern": "preserve\\s+the\\s+request\\s+fingerprint"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "send four heartbeat frames; space them 195 ms apart",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "open only a fresh transport channel; preserve the request fingerprint",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A3",
+      "semantic_clause": "open only a fresh transport channel",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bonly\\b"
+          ],
+          [
+            "\\bfresh\\b"
+          ],
+          [
+            "\\bchannel\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "send\\s+four\\s+heartbeat\\s+frames"
+          ],
+          [
+            "space\\s+them\\s+195\\s+ms\\s+apart"
+          ],
+          [
+            "open\\s+only\\s+a\\s+fresh\\s+transport\\s+channel"
+          ],
+          [
+            "preserve\\s+the\\s+request\\s+fingerprint"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "solstice-rpc-sr-28-R1",
+            "kind": "recoverable",
+            "source_quote": "open only a fresh transport channel",
+            "candidate": {
+              "source_quote": "open only a fresh transport channel",
+              "nucleus_quote": "open only a fresh transport channel",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "only"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "solstice-rpc-sr-28-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction SR-28",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction SR-28",
+              "nucleus_quote": "fabricated fallback instruction SR-28",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "solstice-rpc-sr-28-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Reuse the current transport channel.",
+            "candidate": {
+              "source_quote": "Reuse the current transport channel.",
+              "nucleus_quote": "Reuse the current transport channel.",
+              "qualifiers": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "tundra-rpc-tr-56",
+      "system": "TundraRPC",
+      "code": "TR-56",
+      "entities": [
+        "system:tundrarpc",
+        "code:tr-56"
+      ],
+      "experience": {
+        "prompt": "TundraRPC returns TR-56. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "TundraRPC returns TR-56. State the exact heartbeat-frame requirement."
+      },
+      "candidate_decision": "Send seven heartbeat frames.",
+      "authoritative_text": "send exactly six heartbeat frames; space them 225 ms apart; open a new channel; preserve the correlation fingerprint.",
+      "raw_source": "<<<ROLE:status>>>\nTR-56 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nSend seven heartbeat frames.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nsend exactly six heartbeat frames; space them 225 ms apart; open a new channel; preserve the correlation fingerprint.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\ntransport jitter may be present\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 315 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "send exactly six heartbeat frames",
+          "task_pattern": "send\\s+exactly\\s+six\\s+heartbeat\\s+frames"
+        },
+        {
+          "id": "A2",
+          "text": "space them 225 ms apart",
+          "task_pattern": "space\\s+them\\s+225\\s+ms\\s+apart"
+        },
+        {
+          "id": "A3",
+          "text": "open a new channel",
+          "task_pattern": "open\\s+a\\s+new\\s+channel"
+        },
+        {
+          "id": "A4",
+          "text": "preserve the correlation fingerprint",
+          "task_pattern": "preserve\\s+the\\s+correlation\\s+fingerprint"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "send exactly six heartbeat frames; space them 225 ms apart",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "open a new channel; preserve the correlation fingerprint",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A1",
+      "semantic_clause": "send exactly six heartbeat frames",
+      "semantic_operator": "exactly",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bexactly\\b"
+          ],
+          [
+            "\\bsix\\b",
+            "\\b6\\b"
+          ],
+          [
+            "\\bheartbeat\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "send\\s+exactly\\s+six\\s+heartbeat\\s+frames"
+          ],
+          [
+            "space\\s+them\\s+225\\s+ms\\s+apart"
+          ],
+          [
+            "open\\s+a\\s+new\\s+channel"
+          ],
+          [
+            "preserve\\s+the\\s+correlation\\s+fingerprint"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "tundra-rpc-tr-56-R1",
+            "kind": "recoverable",
+            "source_quote": "send exactly six heartbeat frames",
+            "candidate": {
+              "source_quote": "send exactly six heartbeat frames",
+              "nucleus_quote": "send exactly six heartbeat frames",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "exactly"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "tundra-rpc-tr-56-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction TR-56",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction TR-56",
+              "nucleus_quote": "fabricated fallback instruction TR-56",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "tundra-rpc-tr-56-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Send seven heartbeat frames.",
+            "candidate": {
+              "source_quote": "Send seven heartbeat frames.",
+              "nucleus_quote": "Send seven heartbeat frames.",
+              "qualifiers": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "ultraviolet-queue-uq-67",
+      "system": "UltravioletQueue",
+      "code": "UQ-67",
+      "entities": [
+        "system:ultravioletqueue",
+        "code:uq-67"
+      ],
+      "experience": {
+        "prompt": "UltravioletQueue returns UQ-67. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "UltravioletQueue returns UQ-67. State the exact retry count."
+      },
+      "candidate_decision": "Retry until the operation succeeds.",
+      "authoritative_text": "request a new checkpoint; move the task to the amber lane; retry exactly five times; preserve the original dispatch ID.",
+      "raw_source": "<<<ROLE:status>>>\nUQ-67 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRetry until the operation succeeds.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrequest a new checkpoint; move the task to the amber lane; retry exactly five times; preserve the original dispatch ID.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nqueue pressure may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 258 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "request a new checkpoint",
+          "task_pattern": "request\\s+a\\s+new\\s+checkpoint"
+        },
+        {
+          "id": "A2",
+          "text": "move the task to the amber lane",
+          "task_pattern": "move\\s+the\\s+task\\s+to\\s+the\\s+amber\\s+lane"
+        },
+        {
+          "id": "A3",
+          "text": "retry exactly five times",
+          "task_pattern": "retry\\s+exactly\\s+five\\s+times"
+        },
+        {
+          "id": "A4",
+          "text": "preserve the original dispatch ID",
+          "task_pattern": "preserve\\s+the\\s+original\\s+dispatch\\s+ID"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "request a new checkpoint; move the task to the amber lane",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "retry exactly five times; preserve the original dispatch ID",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A3",
+      "semantic_clause": "retry exactly five times",
+      "semantic_operator": "exactly",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bexactly\\b"
+          ],
+          [
+            "\\bfive\\b",
+            "\\b5\\b"
+          ],
+          [
+            "\\bretr"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "request\\s+a\\s+new\\s+checkpoint"
+          ],
+          [
+            "move\\s+the\\s+task\\s+to\\s+the\\s+amber\\s+lane"
+          ],
+          [
+            "retry\\s+exactly\\s+five\\s+times"
+          ],
+          [
+            "preserve\\s+the\\s+original\\s+dispatch\\s+ID"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "ultraviolet-queue-uq-67-R1",
+            "kind": "recoverable",
+            "source_quote": "retry exactly five times",
+            "candidate": {
+              "source_quote": "retry exactly five times",
+              "nucleus_quote": "retry exactly five times",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "exactly"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "ultraviolet-queue-uq-67-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction UQ-67",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction UQ-67",
+              "nucleus_quote": "fabricated fallback instruction UQ-67",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "ultraviolet-queue-uq-67-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Retry until the operation succeeds.",
+            "candidate": {
+              "source_quote": "Retry until the operation succeeds.",
+              "nucleus_quote": "Retry until the operation succeeds.",
+              "qualifiers": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "vale-store-vs-42",
+      "system": "ValeStore",
+      "code": "VS-42",
+      "entities": [
+        "system:valestore",
+        "code:vs-42"
+      ],
+      "experience": {
+        "prompt": "ValeStore returns VS-42. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "ValeStore returns VS-42. State the minimum replica requirement."
+      },
+      "candidate_decision": "Retain two replicas.",
+      "authoritative_text": "verify the manifest digest; retain at least six replicas; seal the newest replica; record the replica generation.",
+      "raw_source": "<<<ROLE:status>>>\nVS-42 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRetain two replicas.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nverify the manifest digest; retain at least six replicas; seal the newest replica; record the replica generation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nreplica synchronization may lag\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 291 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "verify the manifest digest",
+          "task_pattern": "verify\\s+the\\s+manifest\\s+digest"
+        },
+        {
+          "id": "A2",
+          "text": "retain at least six replicas",
+          "task_pattern": "retain\\s+at\\s+least\\s+six\\s+replicas"
+        },
+        {
+          "id": "A3",
+          "text": "seal the newest replica",
+          "task_pattern": "seal\\s+the\\s+newest\\s+replica"
+        },
+        {
+          "id": "A4",
+          "text": "record the replica generation",
+          "task_pattern": "record\\s+the\\s+replica\\s+generation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "verify the manifest digest; retain at least six replicas",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "seal the newest replica; record the replica generation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "retain at least six replicas",
+      "semantic_operator": "at_least",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bat\\s+least\\b",
+            "\\bminimum\\b"
+          ],
+          [
+            "\\bsix\\b",
+            "\\b6\\b"
+          ],
+          [
+            "\\breplica"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "verify\\s+the\\s+manifest\\s+digest"
+          ],
+          [
+            "retain\\s+at\\s+least\\s+six\\s+replicas"
+          ],
+          [
+            "seal\\s+the\\s+newest\\s+replica"
+          ],
+          [
+            "record\\s+the\\s+replica\\s+generation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "vale-store-vs-42-R1",
+            "kind": "recoverable",
+            "source_quote": "retain at least six replicas",
+            "candidate": {
+              "source_quote": "retain at least six replicas",
+              "nucleus_quote": "retain at least six replicas",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "at least"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "vale-store-vs-42-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction VS-42",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction VS-42",
+              "nucleus_quote": "fabricated fallback instruction VS-42",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "vale-store-vs-42-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Retain two replicas.",
+            "candidate": {
+              "source_quote": "Retain two replicas.",
+              "nucleus_quote": "Retain two replicas.",
+              "qualifiers": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "wren-pay-wp-73",
+      "system": "WrenPay",
+      "code": "WP-73",
+      "entities": [
+        "system:wrenpay",
+        "code:wp-73"
+      ],
+      "experience": {
+        "prompt": "WrenPay returns WP-73. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "WrenPay returns WP-73. State the minimum wait duration."
+      },
+      "candidate_decision": "Retry immediately.",
+      "authoritative_text": "refresh the recovery lease; wait at least 22 seconds; retry once; preserve the settlement fingerprint.",
+      "raw_source": "<<<ROLE:status>>>\nWP-73 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRetry immediately.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrefresh the recovery lease; wait at least 22 seconds; retry once; preserve the settlement fingerprint.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\ngateway congestion may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 198 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "refresh the recovery lease",
+          "task_pattern": "refresh\\s+the\\s+recovery\\s+lease"
+        },
+        {
+          "id": "A2",
+          "text": "wait at least 22 seconds",
+          "task_pattern": "wait\\s+at\\s+least\\s+22\\s+seconds"
+        },
+        {
+          "id": "A3",
+          "text": "retry once",
+          "task_pattern": "retry\\s+once"
+        },
+        {
+          "id": "A4",
+          "text": "preserve the settlement fingerprint",
+          "task_pattern": "preserve\\s+the\\s+settlement\\s+fingerprint"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "refresh the recovery lease; wait at least 22 seconds",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "retry once; preserve the settlement fingerprint",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "wait at least 22 seconds",
+      "semantic_operator": "at_least",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bat\\s+least\\b",
+            "\\bminimum\\b"
+          ],
+          [
+            "\\b22\\b",
+            "\\btwenty[- ]two\\b"
+          ],
+          [
+            "\\bseconds?\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "refresh\\s+the\\s+recovery\\s+lease"
+          ],
+          [
+            "wait\\s+at\\s+least\\s+22\\s+seconds"
+          ],
+          [
+            "retry\\s+once"
+          ],
+          [
+            "preserve\\s+the\\s+settlement\\s+fingerprint"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "wren-pay-wp-73-R1",
+            "kind": "recoverable",
+            "source_quote": "wait at least 22 seconds",
+            "candidate": {
+              "source_quote": "wait at least 22 seconds",
+              "nucleus_quote": "wait at least 22 seconds",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "at least"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "wren-pay-wp-73-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction WP-73",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction WP-73",
+              "nucleus_quote": "fabricated fallback instruction WP-73",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "wren-pay-wp-73-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Retry immediately.",
+            "candidate": {
+              "source_quote": "Retry immediately.",
+              "nucleus_quote": "Retry immediately.",
+              "qualifiers": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "xenial-api-xa-84",
+      "system": "XenialAPI",
+      "code": "XA-84",
+      "entities": [
+        "system:xenialapi",
+        "code:xa-84"
+      ],
+      "experience": {
+        "prompt": "XenialAPI returns XA-84. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "XenialAPI returns XA-84. State the maximum retry count."
+      },
+      "candidate_decision": "Retry eight times.",
+      "authoritative_text": "refresh the session token; retry at most five times; preserve the request fingerprint; close the stale connection.",
+      "raw_source": "<<<ROLE:status>>>\nXA-84 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRetry eight times.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrefresh the session token; retry at most five times; preserve the request fingerprint; close the stale connection.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nupstream pressure may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 246 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "refresh the session token",
+          "task_pattern": "refresh\\s+the\\s+session\\s+token"
+        },
+        {
+          "id": "A2",
+          "text": "retry at most five times",
+          "task_pattern": "retry\\s+at\\s+most\\s+five\\s+times"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the request fingerprint",
+          "task_pattern": "preserve\\s+the\\s+request\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "close the stale connection",
+          "task_pattern": "close\\s+the\\s+stale\\s+connection"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "refresh the session token; retry at most five times",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the request fingerprint; close the stale connection",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "retry at most five times",
+      "semantic_operator": "at_most",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bat\\s+most\\b",
+            "\\bmaximum\\b",
+            "\\bno\\s+more\\s+than\\b"
+          ],
+          [
+            "\\bfive\\b",
+            "\\b5\\b"
+          ],
+          [
+            "\\bretr"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "refresh\\s+the\\s+session\\s+token"
+          ],
+          [
+            "retry\\s+at\\s+most\\s+five\\s+times"
+          ],
+          [
+            "preserve\\s+the\\s+request\\s+fingerprint"
+          ],
+          [
+            "close\\s+the\\s+stale\\s+connection"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "xenial-api-xa-84-R1",
+            "kind": "recoverable",
+            "source_quote": "retry at most five times",
+            "candidate": {
+              "source_quote": "retry at most five times",
+              "nucleus_quote": "retry at most five times",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "at most"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "xenial-api-xa-84-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction XA-84",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction XA-84",
+              "nucleus_quote": "fabricated fallback instruction XA-84",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "xenial-api-xa-84-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Retry eight times.",
+            "candidate": {
+              "source_quote": "Retry eight times.",
+              "nucleus_quote": "Retry eight times.",
+              "qualifiers": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "yew-lock-yl-49",
+      "system": "YewLock",
+      "code": "YL-49",
+      "entities": [
+        "system:yewlock",
+        "code:yl-49"
+      ],
+      "experience": {
+        "prompt": "YewLock returns YL-49. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "YewLock returns YL-49. State the maximum pending-lease count."
+      },
+      "candidate_decision": "Keep sixteen pending leases.",
+      "authoritative_text": "refresh the lock table; keep at most eight pending leases; expire stale leases; preserve the newest owner token.",
+      "raw_source": "<<<ROLE:status>>>\nYL-49 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nKeep sixteen pending leases.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrefresh the lock table; keep at most eight pending leases; expire stale leases; preserve the newest owner token.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nlock contention may exist\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 231 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "refresh the lock table",
+          "task_pattern": "refresh\\s+the\\s+lock\\s+table"
+        },
+        {
+          "id": "A2",
+          "text": "keep at most eight pending leases",
+          "task_pattern": "keep\\s+at\\s+most\\s+eight\\s+pending\\s+leases"
+        },
+        {
+          "id": "A3",
+          "text": "expire stale leases",
+          "task_pattern": "expire\\s+stale\\s+leases"
+        },
+        {
+          "id": "A4",
+          "text": "preserve the newest owner token",
+          "task_pattern": "preserve\\s+the\\s+newest\\s+owner\\s+token"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "refresh the lock table; keep at most eight pending leases",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "expire stale leases; preserve the newest owner token",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "keep at most eight pending leases",
+      "semantic_operator": "at_most",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bat\\s+most\\b",
+            "\\bmaximum\\b",
+            "\\bno\\s+more\\s+than\\b"
+          ],
+          [
+            "\\beight\\b",
+            "\\b8\\b"
+          ],
+          [
+            "\\blease"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "refresh\\s+the\\s+lock\\s+table"
+          ],
+          [
+            "keep\\s+at\\s+most\\s+eight\\s+pending\\s+leases"
+          ],
+          [
+            "expire\\s+stale\\s+leases"
+          ],
+          [
+            "preserve\\s+the\\s+newest\\s+owner\\s+token"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "yew-lock-yl-49-R1",
+            "kind": "recoverable",
+            "source_quote": "keep at most eight pending leases",
+            "candidate": {
+              "source_quote": "keep at most eight pending leases",
+              "nucleus_quote": "keep at most eight pending leases",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "at most"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "yew-lock-yl-49-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction YL-49",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction YL-49",
+              "nucleus_quote": "fabricated fallback instruction YL-49",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "yew-lock-yl-49-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Keep sixteen pending leases.",
+            "candidate": {
+              "source_quote": "Keep sixteen pending leases.",
+              "nucleus_quote": "Keep sixteen pending leases.",
+              "qualifiers": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "zinnia-cdn-zc-70",
+      "system": "ZinniaCDN",
+      "code": "ZC-70",
+      "entities": [
+        "system:zinniacdn",
+        "code:zc-70"
+      ],
+      "experience": {
+        "prompt": "ZinniaCDN returns ZC-70. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "ZinniaCDN returns ZC-70. State the condition under which the edge partition may be purged."
+      },
+      "candidate_decision": "Purge the edge partition immediately.",
+      "authoritative_text": "read the origin generation; do not purge the edge partition unless the origin generation changes; issue one HEAD request; preserve the edge generation ID.",
+      "raw_source": "<<<ROLE:status>>>\nZC-70 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nPurge the edge partition immediately.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nread the origin generation; do not purge the edge partition unless the origin generation changes; issue one HEAD request; preserve the edge generation ID.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\norigin latency may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 268 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "read the origin generation",
+          "task_pattern": "read\\s+the\\s+origin\\s+generation"
+        },
+        {
+          "id": "A2",
+          "text": "do not purge the edge partition unless the origin generation changes",
+          "task_pattern": "do\\s+not\\s+purge\\s+the\\s+edge\\s+partition\\s+unless\\s+the\\s+origin\\s+generation\\s+changes"
+        },
+        {
+          "id": "A3",
+          "text": "issue one HEAD request",
+          "task_pattern": "issue\\s+one\\s+HEAD\\s+request"
+        },
+        {
+          "id": "A4",
+          "text": "preserve the edge generation ID",
+          "task_pattern": "preserve\\s+the\\s+edge\\s+generation\\s+ID"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "read the origin generation; do not purge the edge partition unless the origin generation changes",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "issue one HEAD request; preserve the edge generation ID",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "do not purge the edge partition unless the origin generation changes",
+      "semantic_operator": "unless",
+      "semantic_dimension": "condition",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bunless\\b",
+            "\\bonly\\s+if\\b"
+          ],
+          [
+            "\\bgeneration\\b"
+          ],
+          [
+            "\\bchang"
+          ],
+          [
+            "\\bpurge\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "read\\s+the\\s+origin\\s+generation"
+          ],
+          [
+            "do\\s+not\\s+purge\\s+the\\s+edge\\s+partition\\s+unless\\s+the\\s+origin\\s+generation\\s+changes"
+          ],
+          [
+            "issue\\s+one\\s+HEAD\\s+request"
+          ],
+          [
+            "preserve\\s+the\\s+edge\\s+generation\\s+ID"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "zinnia-cdn-zc-70-R1",
+            "kind": "recoverable",
+            "source_quote": "do not purge the edge partition unless the origin generation changes",
+            "candidate": {
+              "source_quote": "do not purge the edge partition unless the origin generation changes",
+              "nucleus_quote": "do not purge the edge partition unless the origin generation changes",
+              "qualifiers": [
+                {
+                  "type": "condition",
+                  "source_quote": "unless"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "zinnia-cdn-zc-70-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction ZC-70",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction ZC-70",
+              "nucleus_quote": "fabricated fallback instruction ZC-70",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "zinnia-cdn-zc-70-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Purge the edge partition immediately.",
+            "candidate": {
+              "source_quote": "Purge the edge partition immediately.",
+              "nucleus_quote": "Purge the edge partition immediately.",
+              "qualifiers": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "alpine-sign-as-57",
+      "system": "AlpineSign",
+      "code": "AS-57",
+      "entities": [
+        "system:alpinesign",
+        "code:as-57"
+      ],
+      "experience": {
+        "prompt": "AlpineSign returns AS-57. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "AlpineSign returns AS-57. State the condition required before key rotation."
+      },
+      "candidate_decision": "Rotate the signing key immediately.",
+      "authoritative_text": "read the active generation; do not rotate the signing key unless the active generation advances; preserve the signing fingerprint; record the new generation after rotation.",
+      "raw_source": "<<<ROLE:status>>>\nAS-57 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRotate the signing key immediately.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nread the active generation; do not rotate the signing key unless the active generation advances; preserve the signing fingerprint; record the new generation after rotation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nkey-service latency may exist\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 281 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "read the active generation",
+          "task_pattern": "read\\s+the\\s+active\\s+generation"
+        },
+        {
+          "id": "A2",
+          "text": "do not rotate the signing key unless the active generation advances",
+          "task_pattern": "do\\s+not\\s+rotate\\s+the\\s+signing\\s+key\\s+unless\\s+the\\s+active\\s+generation\\s+advances"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the signing fingerprint",
+          "task_pattern": "preserve\\s+the\\s+signing\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "record the new generation after rotation",
+          "task_pattern": "record\\s+the\\s+new\\s+generation\\s+after\\s+rotation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "read the active generation; do not rotate the signing key unless the active generation advances",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the signing fingerprint; record the new generation after rotation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "do not rotate the signing key unless the active generation advances",
+      "semantic_operator": "unless",
+      "semantic_dimension": "condition",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bunless\\b",
+            "\\bonly\\s+if\\b"
+          ],
+          [
+            "\\bgeneration\\b"
+          ],
+          [
+            "\\badvance"
+          ],
+          [
+            "\\brotat"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "read\\s+the\\s+active\\s+generation"
+          ],
+          [
+            "do\\s+not\\s+rotate\\s+the\\s+signing\\s+key\\s+unless\\s+the\\s+active\\s+generation\\s+advances"
+          ],
+          [
+            "preserve\\s+the\\s+signing\\s+fingerprint"
+          ],
+          [
+            "record\\s+the\\s+new\\s+generation\\s+after\\s+rotation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "alpine-sign-as-57-R1",
+            "kind": "recoverable",
+            "source_quote": "do not rotate the signing key unless the active generation advances",
+            "candidate": {
+              "source_quote": "do not rotate the signing key unless the active generation advances",
+              "nucleus_quote": "do not rotate the signing key unless the active generation advances",
+              "qualifiers": [
+                {
+                  "type": "condition",
+                  "source_quote": "unless"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "alpine-sign-as-57-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction AS-57",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction AS-57",
+              "nucleus_quote": "fabricated fallback instruction AS-57",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "alpine-sign-as-57-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Rotate the signing key immediately.",
+            "candidate": {
+              "source_quote": "Rotate the signing key immediately.",
+              "nucleus_quote": "Rotate the signing key immediately.",
+              "qualifiers": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "beacon-pay-bp-98",
+      "system": "BeaconPay",
+      "code": "BP-98",
+      "entities": [
+        "system:beaconpay",
+        "code:bp-98"
+      ],
+      "experience": {
+        "prompt": "BeaconPay returns BP-98. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the applicability rule for refreshing the BeaconPay recovery lease."
+      },
+      "candidate_decision": "Refresh the recovery lease unconditionally.",
+      "authoritative_text": "when BP-98 occurs, refresh the recovery lease; wait 23 seconds; retry once; preserve the settlement fingerprint.",
+      "raw_source": "<<<ROLE:status>>>\nBP-98 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRefresh the recovery lease unconditionally.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nwhen BP-98 occurs, refresh the recovery lease; wait 23 seconds; retry once; preserve the settlement fingerprint.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\ngateway pressure may exist\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 209 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "when BP-98 occurs, refresh the recovery lease",
+          "task_pattern": "when\\s+BP\\-98\\s+occurs,\\s+refresh\\s+the\\s+recovery\\s+lease"
+        },
+        {
+          "id": "A2",
+          "text": "wait 23 seconds",
+          "task_pattern": "wait\\s+23\\s+seconds"
+        },
+        {
+          "id": "A3",
+          "text": "retry once",
+          "task_pattern": "retry\\s+once"
+        },
+        {
+          "id": "A4",
+          "text": "preserve the settlement fingerprint",
+          "task_pattern": "preserve\\s+the\\s+settlement\\s+fingerprint"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "when BP-98 occurs, refresh the recovery lease; wait 23 seconds",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "retry once; preserve the settlement fingerprint",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A1",
+      "semantic_clause": "when BP-98 occurs, refresh the recovery lease",
+      "semantic_operator": "when_if",
+      "semantic_dimension": "condition",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bwhen\\b",
+            "\\bif\\b"
+          ],
+          [
+            "\\bBP-98\\b"
+          ],
+          [
+            "\\brefresh\\b"
+          ],
+          [
+            "\\blease\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "when\\s+BP\\-98\\s+occurs,\\s+refresh\\s+the\\s+recovery\\s+lease"
+          ],
+          [
+            "wait\\s+23\\s+seconds"
+          ],
+          [
+            "retry\\s+once"
+          ],
+          [
+            "preserve\\s+the\\s+settlement\\s+fingerprint"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "beacon-pay-bp-98-R1",
+            "kind": "recoverable",
+            "source_quote": "when BP-98 occurs, refresh the recovery lease",
+            "candidate": {
+              "source_quote": "when BP-98 occurs, refresh the recovery lease",
+              "nucleus_quote": "when BP-98 occurs, refresh the recovery lease",
+              "qualifiers": [
+                {
+                  "type": "condition",
+                  "source_quote": "when"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "beacon-pay-bp-98-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction BP-98",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction BP-98",
+              "nucleus_quote": "fabricated fallback instruction BP-98",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "beacon-pay-bp-98-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Refresh the recovery lease unconditionally.",
+            "candidate": {
+              "source_quote": "Refresh the recovery lease unconditionally.",
+              "nucleus_quote": "Refresh the recovery lease unconditionally.",
+              "qualifiers": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "cascade-db-cd-76",
+      "system": "CascadeDB",
+      "code": "CD-76",
+      "entities": [
+        "system:cascadedb",
+        "code:cd-76"
+      ],
+      "experience": {
+        "prompt": "CascadeDB returns CD-76. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the applicability rule for routing writes to the CascadeDB leader."
+      },
+      "candidate_decision": "Route every write to the leader.",
+      "authoritative_text": "read the shard state; if the shard is quarantined, route writes to the leader; preserve the transaction fingerprint; record the leader generation.",
+      "raw_source": "<<<ROLE:status>>>\nCD-76 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRoute every write to the leader.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nread the shard state; if the shard is quarantined, route writes to the leader; preserve the transaction fingerprint; record the leader generation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nreplication lag may exist\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 223 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "read the shard state",
+          "task_pattern": "read\\s+the\\s+shard\\s+state"
+        },
+        {
+          "id": "A2",
+          "text": "if the shard is quarantined, route writes to the leader",
+          "task_pattern": "if\\s+the\\s+shard\\s+is\\s+quarantined,\\s+route\\s+writes\\s+to\\s+the\\s+leader"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the transaction fingerprint",
+          "task_pattern": "preserve\\s+the\\s+transaction\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "record the leader generation",
+          "task_pattern": "record\\s+the\\s+leader\\s+generation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "read the shard state; if the shard is quarantined, route writes to the leader",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the transaction fingerprint; record the leader generation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "if the shard is quarantined, route writes to the leader",
+      "semantic_operator": "when_if",
+      "semantic_dimension": "condition",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bif\\b",
+            "\\bwhen\\b"
+          ],
+          [
+            "\\bquarantined\\b"
+          ],
+          [
+            "\\broute\\b"
+          ],
+          [
+            "\\bleader\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "read\\s+the\\s+shard\\s+state"
+          ],
+          [
+            "if\\s+the\\s+shard\\s+is\\s+quarantined,\\s+route\\s+writes\\s+to\\s+the\\s+leader"
+          ],
+          [
+            "preserve\\s+the\\s+transaction\\s+fingerprint"
+          ],
+          [
+            "record\\s+the\\s+leader\\s+generation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "cascade-db-cd-76-R1",
+            "kind": "recoverable",
+            "source_quote": "if the shard is quarantined, route writes to the leader",
+            "candidate": {
+              "source_quote": "if the shard is quarantined, route writes to the leader",
+              "nucleus_quote": "if the shard is quarantined, route writes to the leader",
+              "qualifiers": [
+                {
+                  "type": "condition",
+                  "source_quote": "if"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "cascade-db-cd-76-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction CD-76",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction CD-76",
+              "nucleus_quote": "fabricated fallback instruction CD-76",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "cascade-db-cd-76-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Route every write to the leader.",
+            "candidate": {
+              "source_quote": "Route every write to the leader.",
+              "nucleus_quote": "Route every write to the leader.",
+              "qualifiers": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "delta-parser-dp-68",
+      "system": "DeltaParser",
+      "code": "DP-68",
+      "entities": [
+        "system:deltaparser",
+        "code:dp-68"
+      ],
+      "experience": {
+        "prompt": "DeltaParser returns DP-68. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the condition governing when state T should be mapped to blocked."
+      },
+      "candidate_decision": "Always map state T to blocked.",
+      "authoritative_text": "read the schema generation; when schema generation 13 appears, map state T to blocked; preserve the original payload; validate after the mapping step.",
+      "raw_source": "<<<ROLE:status>>>\nDP-68 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nAlways map state T to blocked.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nread the schema generation; when schema generation 13 appears, map state T to blocked; preserve the original payload; validate after the mapping step.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\na legacy producer may remain active\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 161 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "read the schema generation",
+          "task_pattern": "read\\s+the\\s+schema\\s+generation"
+        },
+        {
+          "id": "A2",
+          "text": "when schema generation 13 appears, map state T to blocked",
+          "task_pattern": "when\\s+schema\\s+generation\\s+13\\s+appears,\\s+map\\s+state\\s+T\\s+to\\s+blocked"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the original payload",
+          "task_pattern": "preserve\\s+the\\s+original\\s+payload"
+        },
+        {
+          "id": "A4",
+          "text": "validate after the mapping step",
+          "task_pattern": "validate\\s+after\\s+the\\s+mapping\\s+step"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "read the schema generation; when schema generation 13 appears, map state T to blocked",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the original payload; validate after the mapping step",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "when schema generation 13 appears, map state T to blocked",
+      "semantic_operator": "when_if",
+      "semantic_dimension": "condition",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bwhen\\b",
+            "\\bif\\b"
+          ],
+          [
+            "\\bgeneration\\s+13\\b"
+          ],
+          [
+            "\\bT\\b"
+          ],
+          [
+            "\\bblocked\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "read\\s+the\\s+schema\\s+generation"
+          ],
+          [
+            "when\\s+schema\\s+generation\\s+13\\s+appears,\\s+map\\s+state\\s+T\\s+to\\s+blocked"
+          ],
+          [
+            "preserve\\s+the\\s+original\\s+payload"
+          ],
+          [
+            "validate\\s+after\\s+the\\s+mapping\\s+step"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "delta-parser-dp-68-R1",
+            "kind": "recoverable",
+            "source_quote": "when schema generation 13 appears, map state T to blocked",
+            "candidate": {
+              "source_quote": "when schema generation 13 appears, map state T to blocked",
+              "nucleus_quote": "when schema generation 13 appears, map state T to blocked",
+              "qualifiers": [
+                {
+                  "type": "condition",
+                  "source_quote": "when"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "delta-parser-dp-68-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction DP-68",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction DP-68",
+              "nucleus_quote": "fabricated fallback instruction DP-68",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "delta-parser-dp-68-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Always map state T to blocked.",
+            "candidate": {
+              "source_quote": "Always map state T to blocked.",
+              "nucleus_quote": "Always map state T to blocked.",
+              "qualifiers": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "ember-cache-ec-39",
+      "system": "EmberCache",
+      "code": "EC-39",
+      "entities": [
+        "system:embercache",
+        "code:ec-39"
+      ],
+      "experience": {
+        "prompt": "EmberCache returns EC-39. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the condition governing when EmberCache should rebuild its local index."
+      },
+      "candidate_decision": "Always rebuild the local index.",
+      "authoritative_text": "read the manifest generation; if the manifest generation changes, rebuild the local index; preserve the active cursor; record the new manifest generation.",
+      "raw_source": "<<<ROLE:status>>>\nEC-39 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nAlways rebuild the local index.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nread the manifest generation; if the manifest generation changes, rebuild the local index; preserve the active cursor; record the new manifest generation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nmanifest propagation may be delayed\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 211 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "read the manifest generation",
+          "task_pattern": "read\\s+the\\s+manifest\\s+generation"
+        },
+        {
+          "id": "A2",
+          "text": "if the manifest generation changes, rebuild the local index",
+          "task_pattern": "if\\s+the\\s+manifest\\s+generation\\s+changes,\\s+rebuild\\s+the\\s+local\\s+index"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the active cursor",
+          "task_pattern": "preserve\\s+the\\s+active\\s+cursor"
+        },
+        {
+          "id": "A4",
+          "text": "record the new manifest generation",
+          "task_pattern": "record\\s+the\\s+new\\s+manifest\\s+generation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "read the manifest generation; if the manifest generation changes, rebuild the local index",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the active cursor; record the new manifest generation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "if the manifest generation changes, rebuild the local index",
+      "semantic_operator": "when_if",
+      "semantic_dimension": "condition",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bif\\b",
+            "\\bwhen\\b"
+          ],
+          [
+            "\\bmanifest\\b"
+          ],
+          [
+            "\\bgeneration\\b"
+          ],
+          [
+            "\\bchang"
+          ],
+          [
+            "\\brebuild\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "read\\s+the\\s+manifest\\s+generation"
+          ],
+          [
+            "if\\s+the\\s+manifest\\s+generation\\s+changes,\\s+rebuild\\s+the\\s+local\\s+index"
+          ],
+          [
+            "preserve\\s+the\\s+active\\s+cursor"
+          ],
+          [
+            "record\\s+the\\s+new\\s+manifest\\s+generation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "ember-cache-ec-39-R1",
+            "kind": "recoverable",
+            "source_quote": "if the manifest generation changes, rebuild the local index",
+            "candidate": {
+              "source_quote": "if the manifest generation changes, rebuild the local index",
+              "nucleus_quote": "if the manifest generation changes, rebuild the local index",
+              "qualifiers": [
+                {
+                  "type": "condition",
+                  "source_quote": "if"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "ember-cache-ec-39-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction EC-39",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction EC-39",
+              "nucleus_quote": "fabricated fallback instruction EC-39",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "ember-cache-ec-39-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Always rebuild the local index.",
+            "candidate": {
+              "source_quote": "Always rebuild the local index.",
+              "nucleus_quote": "Always rebuild the local index.",
+              "qualifiers": []
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

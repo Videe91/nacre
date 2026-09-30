@@ -1,0 +1,333 @@
+{
+  "experiment": "seed-growth-003",
+  "classification": "exploratory-fresh-taskset",
+  "note": "Ten synthetic opaque rule-transfer families frozen before the first Seed Growth 003 run.",
+  "families": [
+    {
+      "id": "quartzpay-vx91",
+      "entities": ["system:quartzpay", "code:vx-91"],
+      "experience": {
+        "prompt": "QuartzPay returns VX-91 while capturing an invoice payment. What should the operator do?",
+        "feedback": "QuartzPay runbook rule: VX-91 means wait 7 seconds, rotate the session token, retry exactly twice, and include the header Zeta-Mode: amber on the retry requests.",
+        "grader": {
+          "all_regex": [
+            ["\\b7\\s*(?:seconds?|s)\\b"],
+            ["\\b(?:rotate|refresh|replace)\\b.*\\bsession\\s+token\\b"],
+            ["\\bretry\\b.*\\b(?:exactly\\s+)?(?:twice|2\\s+times?)\\b"],
+            ["zeta-mode.*amber"]
+          ]
+        }
+      },
+      "transfer": {
+        "prompt": "QuartzPay returns VX-91 while cancelling a subscription charge. What should the operator do?",
+        "grader": {
+          "all_regex": [
+            ["\\b7\\s*(?:seconds?|s)\\b"],
+            ["\\b(?:rotate|refresh|replace)\\b.*\\bsession\\s+token\\b"],
+            ["\\bretry\\b.*\\b(?:exactly\\s+)?(?:twice|2\\s+times?)\\b"],
+            ["zeta-mode.*amber"]
+          ]
+        }
+      }
+    },
+    {
+      "id": "mistralbus-k4",
+      "entities": ["system:mistralbus", "code:k4"],
+      "experience": {
+        "prompt": "MistralBus returns K4 while consuming an invoice-created message. What should the worker do?",
+        "feedback": "MistralBus runbook rule: for K4, do not acknowledge the original message, request a fresh checkpoint, replay exactly once from that checkpoint, and attach Replay-Class: delta to the replay.",
+        "grader": {
+          "all_regex": [
+            ["(?:do\\s+not|don.t|never)\\b.*\\b(?:ack|acknowledge)\\b"],
+            [
+              "\\bfresh\\s+checkpoint\\b",
+              "\\brequest\\b.*\\bnew\\s+checkpoint\\b"
+            ],
+            ["\\breplay\\b.*\\b(?:exactly\\s+)?once\\b"],
+            ["replay-class.*delta"]
+          ]
+        }
+      },
+      "transfer": {
+        "prompt": "MistralBus returns K4 while consuming an audit-export message. What should the worker do?",
+        "grader": {
+          "all_regex": [
+            ["(?:do\\s+not|don.t|never)\\b.*\\b(?:ack|acknowledge)\\b"],
+            [
+              "\\bfresh\\s+checkpoint\\b",
+              "\\brequest\\b.*\\bnew\\s+checkpoint\\b"
+            ],
+            ["\\breplay\\b.*\\b(?:exactly\\s+)?once\\b"],
+            ["replay-class.*delta"]
+          ]
+        }
+      }
+    },
+    {
+      "id": "opalstore-n73",
+      "entities": ["system:opalstore", "code:n73"],
+      "experience": {
+        "prompt": "OpalStore returns N73 while uploading a 144 MiB archive. What should the uploader do?",
+        "feedback": "OpalStore runbook rule: N73 requires multipart upload with 12 MiB chunks, a BLAKE3 digest for every chunk, and the header X-Opal-Manifest: strict on the finalization request.",
+        "grader": {
+          "all_regex": [
+            ["\\bmultipart\\b"],
+            ["\\b12\\s*(?:mib|mb)\\b"],
+            ["\\bblake3\\b"],
+            [
+              "\\b(?:every|each|per)\\b(?:\\s+of\\s+the\\s+\\w+)?\\s+chunks?\\b"
+            ],
+            ["x-opal-manifest.*strict"]
+          ]
+        }
+      },
+      "transfer": {
+        "prompt": "OpalStore returns N73 while uploading a 72 MiB model snapshot. What should the uploader do?",
+        "grader": {
+          "all_regex": [
+            ["\\bmultipart\\b"],
+            ["\\b12\\s*(?:mib|mb)\\b"],
+            ["\\bblake3\\b"],
+            [
+              "\\b(?:every|each|per)\\b(?:\\s+of\\s+the\\s+\\w+)?\\s+chunks?\\b"
+            ],
+            ["x-opal-manifest.*strict"]
+          ]
+        }
+      }
+    },
+    {
+      "id": "cedarledger-p8",
+      "entities": ["system:cedarledger", "code:p8"],
+      "experience": {
+        "prompt": "CedarLedger returns P8 while posting a settlement entry. What should the operator do?",
+        "feedback": "CedarLedger runbook rule: P8 means read the server epoch, never increment the epoch locally, acquire the violet lease, and retry the write exactly once with X-Cedar-Epoch set to the server epoch.",
+        "grader": {
+          "all_regex": [
+            ["\\b(?:read|fetch|get)\\b.*\\bserver\\s+epoch\\b"],
+            ["(?:do\\s+not|don.t|never)\\b.*\\bincrement\\b.*\\bepoch\\b"],
+            ["\\bviolet\\s+lease\\b"],
+            ["\\bretry\\b.*\\b(?:exactly\\s+)?once\\b"],
+            ["x-cedar-epoch"]
+          ]
+        }
+      },
+      "transfer": {
+        "prompt": "CedarLedger returns P8 while posting a rebate entry. What should the operator do?",
+        "grader": {
+          "all_regex": [
+            ["\\b(?:read|fetch|get)\\b.*\\bserver\\s+epoch\\b"],
+            ["(?:do\\s+not|don.t|never)\\b.*\\bincrement\\b.*\\bepoch\\b"],
+            ["\\bviolet\\s+lease\\b"],
+            ["\\bretry\\b.*\\b(?:exactly\\s+)?once\\b"],
+            ["x-cedar-epoch"]
+          ]
+        }
+      }
+    },
+    {
+      "id": "latticeparser-zq4",
+      "entities": ["system:latticeparser", "code:zq4"],
+      "experience": {
+        "prompt": "LatticeParser receives ZQ4 with state=G before schema validation. What should happen?",
+        "feedback": "LatticeParser ZQ4 compatibility rule: before schema validation map R to approved, G to rejected, and B to pending. Then run the normal validator.",
+        "grader": {
+          "all_regex": [
+            ["\\bg\\b.*\\brejected\\b"],
+            [
+              "\\bbefore\\b.*\\b(?:schema\\s+)?validation\\b",
+              "\\bthen\\b.*\\bvalidat"
+            ]
+          ]
+        }
+      },
+      "transfer": {
+        "prompt": "LatticeParser receives ZQ4 with state=B before schema validation. What should happen?",
+        "grader": {
+          "all_regex": [
+            ["\\bb\\b.*\\bpending\\b"],
+            [
+              "\\bbefore\\b.*\\b(?:schema\\s+)?validation\\b",
+              "\\bthen\\b.*\\bvalidat"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "aurorarpc-m31",
+      "entities": ["system:aurorarpc", "code:m31"],
+      "experience": {
+        "prompt": "AuroraRPC returns M31 during a customer-profile RPC. What should the client do?",
+        "feedback": "AuroraRPC runbook rule: M31 requires exactly two heartbeat frames 250 ms apart, then open a new channel, never reuse the prior correlation ID, and include X-Aurora-Recover: m31 on the new channel request.",
+        "grader": {
+          "all_regex": [
+            ["(?:exactly\\s+)?(?:two|2)\\s+heartbeat"],
+            ["\\b250\\s*(?:ms|milliseconds?)\\b"],
+            ["\\b(?:open|create)\\b.*\\bnew\\s+channel\\b"],
+            ["(?:do\\s+not|don.t|never)\\b.*\\breuse\\b.*\\bcorrelation\\s+id\\b"],
+            ["x-aurora-recover.*m31"]
+          ]
+        }
+      },
+      "transfer": {
+        "prompt": "AuroraRPC returns M31 during an order-history RPC. What should the client do?",
+        "grader": {
+          "all_regex": [
+            ["(?:exactly\\s+)?(?:two|2)\\s+heartbeat"],
+            ["\\b250\\s*(?:ms|milliseconds?)\\b"],
+            ["\\b(?:open|create)\\b.*\\bnew\\s+channel\\b"],
+            ["(?:do\\s+not|don.t|never)\\b.*\\breuse\\b.*\\bcorrelation\\s+id\\b"],
+            ["x-aurora-recover.*m31"]
+          ]
+        }
+      }
+    },
+    {
+      "id": "emberqueue-h9",
+      "entities": ["system:emberqueue", "code:h9"],
+      "experience": {
+        "prompt": "EmberQueue returns H9 for a document-rendering job. What should the worker do?",
+        "feedback": "EmberQueue runbook rule: H9 means do not acknowledge the original dispatch, mint a new dispatch ID, move the job to the amber lane, requeue exactly once, and tag the new dispatch with dispatch-mode=recovered.",
+        "grader": {
+          "all_regex": [
+            ["(?:do\\s+not|don.t|never)\\b.*\\b(?:ack|acknowledge)\\b.*\\boriginal\\s+dispatch\\b"],
+            ["\\b(?:mint|create|generate)\\b.*\\bnew\\s+dispatch\\s+id\\b"],
+            ["\\bamber\\s+lane\\b"],
+            ["\\bre-?queue\\b.*\\b(?:exactly\\s+)?once\\b"],
+            ["dispatch-mode\\s*=\\s*recovered"]
+          ]
+        }
+      },
+      "transfer": {
+        "prompt": "EmberQueue returns H9 for a video-transcoding job. What should the worker do?",
+        "grader": {
+          "all_regex": [
+            ["(?:do\\s+not|don.t|never)\\b.*\\b(?:ack|acknowledge)\\b.*\\boriginal\\s+dispatch\\b"],
+            ["\\b(?:mint|create|generate)\\b.*\\bnew\\s+dispatch\\s+id\\b"],
+            ["\\bamber\\s+lane\\b"],
+            ["\\bre-?queue\\b.*\\b(?:exactly\\s+)?once\\b"],
+            ["dispatch-mode\\s*=\\s*recovered"]
+          ]
+        }
+      }
+    },
+    {
+      "id": "polarisdb-c17",
+      "entities": ["system:polarisdb", "code:c17"],
+      "experience": {
+        "prompt": "PolarisDB returns C17 during a customer-balance query. What should the client do?",
+        "feedback": "PolarisDB runbook rule: C17 requires refreshing the cursor from the primary, switching isolation to snapshot-read, retrying exactly once, preserving the original request ID, and not reopening the session.",
+        "grader": {
+          "all_regex": [
+            ["\\brefresh(?:ing)?\\b.*\\bcursor\\b.*\\bprimary\\b"],
+            ["\\bsnapshot-read\\b", "\\bsnapshot\\s+read\\b"],
+            ["\\bretry(?:ing)?\\b.*\\b(?:exactly\\s+)?once\\b"],
+            [
+              "\\bpreserv(?:e|ing)\\b.*\\boriginal\\s+request\\s+id\\b",
+              "\\bkeep\\b.*\\boriginal\\s+request\\s+id\\b"
+            ],
+            [
+              "(?:do\\s+not|don.t|not|without|never)\\b.*\\breopen(?:ing)?\\b.*\\bsession\\b"
+            ]
+          ]
+        }
+      },
+      "transfer": {
+        "prompt": "PolarisDB returns C17 during an inventory-level query. What should the client do?",
+        "grader": {
+          "all_regex": [
+            ["\\brefresh(?:ing)?\\b.*\\bcursor\\b.*\\bprimary\\b"],
+            ["\\bsnapshot-read\\b", "\\bsnapshot\\s+read\\b"],
+            ["\\bretry(?:ing)?\\b.*\\b(?:exactly\\s+)?once\\b"],
+            [
+              "\\bpreserv(?:e|ing)\\b.*\\boriginal\\s+request\\s+id\\b",
+              "\\bkeep\\b.*\\boriginal\\s+request\\s+id\\b"
+            ],
+            [
+              "(?:do\\s+not|don.t|not|without|never)\\b.*\\breopen(?:ing)?\\b.*\\bsession\\b"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "vortexcdn-x52",
+      "entities": ["system:vortexcdn", "code:x52"],
+      "experience": {
+        "prompt": "VortexCDN returns X52 while refreshing a JavaScript asset. What should the operator do?",
+        "feedback": "VortexCDN runbook rule: X52 requires one HEAD request to origin, purge only the current region shard, wait 4 seconds, then issue one GET with X-Vortex-Probe: 1. Never perform a global purge for X52.",
+        "grader": {
+          "all_regex": [
+            [
+              "(?:one|1)\\s+head\\s+request",
+              "\\bhead\\b.*\\b(?:once|one)\\b"
+            ],
+            ["\\bpurge\\b.*\\b(?:only\\s+)?(?:the\\s+)?current\\s+region\\s+shard\\b"],
+            ["\\b4\\s*(?:seconds?|s)\\b"],
+            [
+              "(?:one|1)\\s+get\\b",
+              "\\bget\\b.*\\b(?:once|one)\\b"
+            ],
+            ["x-vortex-probe.*1"],
+            ["(?:do\\s+not|don.t|never)\\b.*\\bglobal\\s+purge\\b"]
+          ]
+        }
+      },
+      "transfer": {
+        "prompt": "VortexCDN returns X52 while refreshing a CSS asset. What should the operator do?",
+        "grader": {
+          "all_regex": [
+            [
+              "(?:one|1)\\s+head\\s+request",
+              "\\bhead\\b.*\\b(?:once|one)\\b"
+            ],
+            ["\\bpurge\\b.*\\b(?:only\\s+)?(?:the\\s+)?current\\s+region\\s+shard\\b"],
+            ["\\b4\\s*(?:seconds?|s)\\b"],
+            [
+              "(?:one|1)\\s+get\\b",
+              "\\bget\\b.*\\b(?:once|one)\\b"
+            ],
+            ["x-vortex-probe.*1"],
+            ["(?:do\\s+not|don.t|never)\\b.*\\bglobal\\s+purge\\b"]
+          ]
+        }
+      }
+    },
+    {
+      "id": "siloflow-j11",
+      "entities": ["system:siloflow", "code:j11"],
+      "experience": {
+        "prompt": "SiloFlow returns J11 during an invoice-reconciliation workflow. What should the worker do?",
+        "feedback": "SiloFlow runbook rule: J11 requires cloning the latest checkpoint, marking the old run superseded, restarting from the previous boundary exactly once, carrying the token j11-safe, and not resuming the failed step directly.",
+        "grader": {
+          "all_regex": [
+            ["\\bclon(?:e|ing)\\b.*\\blatest\\s+checkpoint\\b"],
+            ["\\bmark(?:ing)?\\b.*\\bold\\s+run\\b.*\\bsuperseded\\b"],
+            [
+              "\\brestart(?:ing)?\\b.*\\bprevious\\s+boundary\\b.*\\b(?:exactly\\s+)?once\\b",
+              "\\brestart(?:ing)?\\b.*\\b(?:exactly\\s+)?once\\b.*\\bprevious\\s+boundary\\b"
+            ],
+            ["j11-safe"],
+            ["(?:do\\s+not|don.t|not|never)\\b.*\\bresum(?:e|ing)\\b.*\\bfailed\\s+step\\b"]
+          ]
+        }
+      },
+      "transfer": {
+        "prompt": "SiloFlow returns J11 during a payroll-export workflow. What should the worker do?",
+        "grader": {
+          "all_regex": [
+            ["\\bclon(?:e|ing)\\b.*\\blatest\\s+checkpoint\\b"],
+            ["\\bmark(?:ing)?\\b.*\\bold\\s+run\\b.*\\bsuperseded\\b"],
+            [
+              "\\brestart(?:ing)?\\b.*\\bprevious\\s+boundary\\b.*\\b(?:exactly\\s+)?once\\b",
+              "\\brestart(?:ing)?\\b.*\\b(?:exactly\\s+)?once\\b.*\\bprevious\\s+boundary\\b"
+            ],
+            ["j11-safe"],
+            ["(?:do\\s+not|don.t|not|never)\\b.*\\bresum(?:e|ing)\\b.*\\bfailed\\s+step\\b"]
+          ]
+        }
+      }
+    }
+  ]
+}

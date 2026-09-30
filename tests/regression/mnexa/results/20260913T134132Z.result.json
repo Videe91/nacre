@@ -1,0 +1,144 @@
+{
+  "experiment": "seed-growth-001",
+  "classification": "exploratory",
+  "run_id": "20260913T134132Z",
+  "model": "gpt-4o-mini",
+  "embedder": "sentence-transformers/all-MiniLM-L6-v2",
+  "meter": "word-meter-v1",
+  "task_count": 5,
+  "baseline_passes": 0,
+  "mnexa_passes": 0,
+  "net_improvement": 0,
+  "families": [
+    {
+      "family_id": "nebulapay-r17",
+      "experience": {
+        "passed": false,
+        "decision": "The operator should verify the invoice payment details and ensure the amount matches the expected payment. If discrepancies are found or if there's uncertainty, they should consult with a supervisor or escalate the issue to the appropriate team for further investigation.",
+        "outcome": "EVALUATION: FAIL. NebulaPay runbook rule: for R17, wait 3 seconds, retry exactly once, and include the header X-Nebula-Replay: safe on the retry."
+      },
+      "baseline": {
+        "passed": false,
+        "decision": "The operator should verify the refund transaction and ensure that R17 is the correct amount to be refunded. If confirmed, proceed with the refund process. If the amount appears incorrect or there are discrepancies, consult the relevant support team or documentation for further guidance.",
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa": {
+        "passed": false,
+        "decision": "The operator should wait for 3 seconds, then retry the refund request exactly once, including the header `X-Nebula-Replay: safe`.",
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_f00cccdb5da94578aba08453ea0c5e7f:v1] Always adhere to the NebulaPay runbook rules by implementing the specified wait time of 3 seconds, retrying exactly once, and including the header X-Nebula-Replay: safe on the retry when discrepancies or uncertainties arise."
+        ],
+        "lesson": "Always adhere to the NebulaPay runbook rules by implementing the specified wait time of 3 seconds, retrying exactly once, and including the header X-Nebula-Replay: safe on the retry when discrepancies or uncertainties arise.",
+        "lesson_id": "i_f00cccdb5da94578aba08453ea0c5e7f",
+        "outcome_id": "r_71a26adb7fb4484c8edbf0c1026467b0"
+      },
+      "delta": 0
+    },
+    {
+      "family_id": "orchiddb-l42",
+      "experience": {
+        "passed": false,
+        "decision": "The operator should refer to the OrchidDB documentation or support resources to understand the meaning of L42 and follow the appropriate protocol for handling this specific code during an inventory reservation transaction.",
+        "outcome": "EVALUATION: FAIL. OrchidDB runbook rule: L42 means the lease token is stale. Refresh the lease token, retry the transaction exactly once, and do not reconnect the database session."
+      },
+      "baseline": {
+        "passed": false,
+        "decision": "The operator should check the OrchidDB documentation for error L42 to understand its cause and recommended resolution. Following that, they should troubleshoot the issue as indicated by the documentation or escalate to a senior team member if necessary.",
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa": {
+        "passed": false,
+        "decision": "The operator should refer to the documentation for error code L42, refresh any stale lease tokens, and then retry the pricing update transaction once without reconnecting to the database session.",
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_b173f4185bae4c9d80be950771c829e5:v1] Always refer to the documentation for specific error codes and follow the outlined protocols precisely, including refreshing stale lease tokens and retrying transactions once without reconnecting the database session."
+        ],
+        "lesson": "Always refer to the documentation for specific error codes and follow the outlined protocols precisely, including refreshing stale lease tokens and retrying transactions once without reconnecting the database session.",
+        "lesson_id": "i_b173f4185bae4c9d80be950771c829e5",
+        "outcome_id": "r_9a4d33abf0854f67b81751b9ce6dacdb"
+      },
+      "delta": 0
+    },
+    {
+      "family_id": "atlasparser-qn",
+      "experience": {
+        "passed": false,
+        "decision": "Before schema validation, implement a preprocessing step in the AtlasParser that converts the legacy record with `enabled=Q` into a format that complies with the JSON schema (e.g., replacing `Q` with a boolean value, such as `true` or `false`). This ensures that the record passes validation without altering the original data structure in subsequent processing stages.",
+        "outcome": "EVALUATION: FAIL. AtlasParser compatibility rule: normalize legacy Q/N booleans before schema validation. Q becomes true and N becomes false, then run the normal schema validator."
+      },
+      "baseline": {
+        "passed": false,
+        "decision": "Before schema validation, the AtlasParser should preprocess the legacy record to convert the `archived=N` field into a format compatible with the normal JSON schema, ensuring it aligns with the expected standards.",
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa": {
+        "passed": false,
+        "decision": "Normalize the legacy boolean value for \"archived\" from \"N\" to `false` before performing schema validation.",
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_abb7c972e49245bcbefc4bf61e494219:v1] Normalize legacy boolean values before schema validation to ensure compliance with the expected data format, preventing validation failures."
+        ],
+        "lesson": "Normalize legacy boolean values before schema validation to ensure compliance with the expected data format, preventing validation failures.",
+        "lesson_id": "i_abb7c972e49245bcbefc4bf61e494219",
+        "outcome_id": "r_c7de779f628b4880882459055b360882"
+      },
+      "delta": 0
+    },
+    {
+      "family_id": "heliosstore-e62",
+      "experience": {
+        "passed": false,
+        "decision": "The uploader should check the documentation for error E62 to understand its meaning and possible solutions. Common steps include verifying file integrity, checking upload limits or restrictions, and attempting to re-upload the archive. If the issue persists, contact technical support for further assistance.",
+        "outcome": "EVALUATION: FAIL. HeliosStore runbook rule: E62 requires switching to multipart upload with 16 MiB parts and attaching a SHA-256 digest for every part before retrying the upload."
+      },
+      "baseline": {
+        "passed": false,
+        "decision": "The uploader should check for any upload size limits or restrictions in the HeliosStore documentation. If the size exceeds the allowed limit, consider splitting the model checkpoint into smaller parts or compressing the file before retrying the upload.",
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa": {
+        "passed": false,
+        "decision": "Check the specific error documentation for E62 and ensure that the model checkpoint is uploaded using multipart uploads with defined part sizes (16 MiB). Validate the upload with SHA-256 digests before retrying the upload.",
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_eaef1521f6914544accfde022d62a107:v1] Check specific error documentation for required protocols, such as multipart uploads with defined part sizes (e.g., 16 MiB) and necessary validations (e.g., SHA-256 digests) before attempting a resolution."
+        ],
+        "lesson": "Check specific error documentation for required protocols, such as multipart uploads with defined part sizes (e.g., 16 MiB) and necessary validations (e.g., SHA-256 digests) before attempting a resolution.",
+        "lesson_id": "i_eaef1521f6914544accfde022d62a107",
+        "outcome_id": "r_217057476a034199a114875641261706"
+      },
+      "delta": 0
+    },
+    {
+      "family_id": "saffronqueue-amber7",
+      "experience": {
+        "passed": false,
+        "decision": "The worker should check the status of the job AMBER-7 and address any issues that are causing it to be marked as AMBER. This may involve reviewing logs, monitoring system performance, or consulting with a team member for assistance. Once the issue is identified and resolved, update the job status accordingly.",
+        "outcome": "EVALUATION: FAIL. SaffronQueue runbook rule: AMBER-7 means the current correlation lease is invalid. Do not retry the same leased job. Request a new correlation lease, then requeue the job once under the new lease."
+      },
+      "baseline": {
+        "passed": false,
+        "decision": "The worker should review the job AMBER-7 for any requirements or issues, then prioritize it according to standard operational protocols for amber-marked jobs. Proceed to generate the thumbnail for AMBER-7.",
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa": {
+        "passed": false,
+        "decision": "Request a new correlation lease and requeue the AMBER-7 job under that lease.",
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_d8266b1e6f5b4a139c7788c172bd731e:v1] In situations involving job statuses like AMBER, it is crucial to follow protocol guidelines explicitly: when encountering an AMBER-7 status, do not attempt to resolve it by checking logs or system performance directly. Instead, request a new correlation lease and requeue the job under that lease to ensure compliance with the SaffronQueue runbook rules."
+        ],
+        "lesson": "In situations involving job statuses like AMBER, it is crucial to follow protocol guidelines explicitly: when encountering an AMBER-7 status, do not attempt to resolve it by checking logs or system performance directly. Instead, request a new correlation lease and requeue the job under that lease to ensure compliance with the SaffronQueue runbook rules.",
+        "lesson_id": "i_d8266b1e6f5b4a139c7788c172bd731e",
+        "outcome_id": "r_f3df40c8c45e485c81921d229eb2ebf4"
+      },
+      "delta": 0
+    }
+  ]
+}

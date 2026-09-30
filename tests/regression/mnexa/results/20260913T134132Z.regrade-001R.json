@@ -1,0 +1,59 @@
+{
+  "experiment": "seed-growth-001R",
+  "classification": "post-hoc-diagnostic-regrade",
+  "source_experiment": "seed-growth-001",
+  "source_run_id": "20260913T134132Z",
+  "source_model": "gpt-4o-mini",
+  "grader_profile": "seed-growth-001r-diagnostic",
+  "baseline_passes": 0,
+  "mnexa_passes": 3,
+  "net_improvement": 3,
+  "families": [
+    {
+      "family_id": "nebulapay-r17",
+      "original_baseline_passed": false,
+      "original_mnexa_passed": false,
+      "regraded_baseline_passed": false,
+      "regraded_mnexa_passed": true,
+      "baseline_decision": "The operator should verify the refund transaction and ensure that R17 is the correct amount to be refunded. If confirmed, proceed with the refund process. If the amount appears incorrect or there are discrepancies, consult the relevant support team or documentation for further guidance.",
+      "mnexa_decision": "The operator should wait for 3 seconds, then retry the refund request exactly once, including the header `X-Nebula-Replay: safe`."
+    },
+    {
+      "family_id": "orchiddb-l42",
+      "original_baseline_passed": false,
+      "original_mnexa_passed": false,
+      "regraded_baseline_passed": false,
+      "regraded_mnexa_passed": true,
+      "baseline_decision": "The operator should check the OrchidDB documentation for error L42 to understand its cause and recommended resolution. Following that, they should troubleshoot the issue as indicated by the documentation or escalate to a senior team member if necessary.",
+      "mnexa_decision": "The operator should refer to the documentation for error code L42, refresh any stale lease tokens, and then retry the pricing update transaction once without reconnecting to the database session."
+    },
+    {
+      "family_id": "atlasparser-qn",
+      "original_baseline_passed": false,
+      "original_mnexa_passed": false,
+      "regraded_baseline_passed": false,
+      "regraded_mnexa_passed": true,
+      "baseline_decision": "Before schema validation, the AtlasParser should preprocess the legacy record to convert the `archived=N` field into a format compatible with the normal JSON schema, ensuring it aligns with the expected standards.",
+      "mnexa_decision": "Normalize the legacy boolean value for \"archived\" from \"N\" to `false` before performing schema validation."
+    },
+    {
+      "family_id": "heliosstore-e62",
+      "original_baseline_passed": false,
+      "original_mnexa_passed": false,
+      "regraded_baseline_passed": false,
+      "regraded_mnexa_passed": false,
+      "baseline_decision": "The uploader should check for any upload size limits or restrictions in the HeliosStore documentation. If the size exceeds the allowed limit, consider splitting the model checkpoint into smaller parts or compressing the file before retrying the upload.",
+      "mnexa_decision": "Check the specific error documentation for E62 and ensure that the model checkpoint is uploaded using multipart uploads with defined part sizes (16 MiB). Validate the upload with SHA-256 digests before retrying the upload."
+    },
+    {
+      "family_id": "saffronqueue-amber7",
+      "original_baseline_passed": false,
+      "original_mnexa_passed": false,
+      "regraded_baseline_passed": false,
+      "regraded_mnexa_passed": false,
+      "baseline_decision": "The worker should review the job AMBER-7 for any requirements or issues, then prioritize it according to standard operational protocols for amber-marked jobs. Proceed to generate the thumbnail for AMBER-7.",
+      "mnexa_decision": "Request a new correlation lease and requeue the AMBER-7 job under that lease."
+    }
+  ],
+  "scientific_warning": "This is a post-hoc diagnostic regrade. It does not replace or rewrite the original Seed Growth 001 score."
+}

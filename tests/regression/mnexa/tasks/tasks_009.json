@@ -1,0 +1,1718 @@
+{
+  "experiment": "seed-growth-009",
+  "classification": "exploratory-fresh-evidence-atomicity-ablation",
+  "hypothesis": "Source grounding and evidence-role eligibility are insufficient to define a reusable evidence atom. A deterministic atomic-boundary admission gate should reject compound and partial spans while retaining individually reusable authoritative propositions.",
+  "primary_metrics": [
+    "atomic_recall",
+    "atomic_precision",
+    "compound_atoms_admitted",
+    "atomicity_challenge_rejections"
+  ],
+  "secondary_metrics": [
+    "knowledge_completeness",
+    "task_sufficiency",
+    "memory_word_count"
+  ],
+  "families": [
+    {
+      "id": "vectorpay-vp62",
+      "entities": [
+        "system:vectorpay",
+        "code:vp-62"
+      ],
+      "experience": {
+        "prompt": "VectorPay returns VP-62 while capturing an invoice payment. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "VectorPay returns VP-62 while adjusting a subscription. What wait duration and recovery header are required?"
+      },
+      "candidate_decision": "Restart the payment service and clear the cache.",
+      "raw_source": "<<<ROLE:status>>>\nVP-62 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRestart the payment service and clear the cache.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nRefresh the recovery lease. Wait 9 seconds. Retry exactly once. Include X-Vector-Recover: copper.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nOperator suspects gateway congestion may be involved.\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 184 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "Refresh the recovery lease.",
+          "task_pattern": "refresh.*recovery\\s+lease"
+        },
+        {
+          "id": "A2",
+          "text": "Wait 9 seconds.",
+          "task_pattern": "\\b9\\s*seconds?\\b"
+        },
+        {
+          "id": "A3",
+          "text": "Retry exactly once.",
+          "task_pattern": "retry.*exactly\\s+once"
+        },
+        {
+          "id": "A4",
+          "text": "Include X-Vector-Recover: copper.",
+          "task_pattern": "x-vector-recover.*copper"
+        }
+      ],
+      "atomicity_challenges": [
+        {
+          "id": "C1",
+          "text": "Refresh the recovery lease. Wait 9 seconds.",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "Retry exactly once. Include X-Vector-Recover: copper.",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "transfer_required_atom_ids": [
+        "A2",
+        "A4"
+      ],
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "refresh.*recovery\\s+lease"
+          ],
+          [
+            "\\b9\\s*seconds?\\b"
+          ],
+          [
+            "retry.*exactly\\s+once"
+          ],
+          [
+            "x-vector-recover.*copper"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "\\b9\\s*seconds?\\b"
+          ],
+          [
+            "x-vector-recover.*copper"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "maplequeue-mq27",
+      "entities": [
+        "system:maplequeue",
+        "code:mq-27"
+      ],
+      "experience": {
+        "prompt": "MapleQueue returns MQ-27 while rendering a document job. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "MapleQueue returns MQ-27 while processing an image job. Which lane and replay count are required?"
+      },
+      "candidate_decision": "Delete the message and restart all workers.",
+      "raw_source": "<<<ROLE:status>>>\nMQ-27 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nDelete the message and restart all workers.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nRequest a fresh checkpoint. Move the job to the amber lane. Replay exactly once from the checkpoint. Use Replay-Class: maple.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nOperator suspects worker saturation may have occurred.\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 208 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "Request a fresh checkpoint.",
+          "task_pattern": "fresh\\s+checkpoint"
+        },
+        {
+          "id": "A2",
+          "text": "Move the job to the amber lane.",
+          "task_pattern": "amber\\s+lane"
+        },
+        {
+          "id": "A3",
+          "text": "Replay exactly once from the checkpoint.",
+          "task_pattern": "replay.*exactly\\s+once"
+        },
+        {
+          "id": "A4",
+          "text": "Use Replay-Class: maple.",
+          "task_pattern": "replay-class.*maple"
+        }
+      ],
+      "atomicity_challenges": [
+        {
+          "id": "C1",
+          "text": "Request a fresh checkpoint. Move the job to the amber lane.",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "Replay exactly once from the checkpoint. Use Replay-Class: maple.",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "transfer_required_atom_ids": [
+        "A2",
+        "A3"
+      ],
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "fresh\\s+checkpoint"
+          ],
+          [
+            "amber\\s+lane"
+          ],
+          [
+            "replay.*exactly\\s+once"
+          ],
+          [
+            "replay-class.*maple"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "amber\\s+lane"
+          ],
+          [
+            "replay.*exactly\\s+once"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "cobaltstore-cs91",
+      "entities": [
+        "system:cobaltstore",
+        "code:cs-91"
+      ],
+      "experience": {
+        "prompt": "CobaltStore returns CS-91 while uploading a 160 MiB archive. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "CobaltStore returns CS-91 while uploading an 80 MiB snapshot. What chunk size and digest are required?"
+      },
+      "candidate_decision": "Compress the file and send one large part.",
+      "raw_source": "<<<ROLE:status>>>\nCS-91 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nCompress the file and send one large part.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nStart a new upload session. Use multipart upload with 16 MiB chunks. Attach SHA-512 to every chunk. Include X-Cobalt-Final: strict on finalization.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nOperator suspects compression overhead may have contributed.\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 249 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "Start a new upload session.",
+          "task_pattern": "new\\s+upload\\s+session"
+        },
+        {
+          "id": "A2",
+          "text": "Use multipart upload with 16 MiB chunks.",
+          "task_pattern": "multipart.*16\\s*(?:mib|mb)"
+        },
+        {
+          "id": "A3",
+          "text": "Attach SHA-512 to every chunk.",
+          "task_pattern": "sha-?512.*(?:every|each|per).*chunk"
+        },
+        {
+          "id": "A4",
+          "text": "Include X-Cobalt-Final: strict on finalization.",
+          "task_pattern": "x-cobalt-final.*strict"
+        }
+      ],
+      "atomicity_challenges": [
+        {
+          "id": "C1",
+          "text": "Start a new upload session. Use multipart upload with 16 MiB chunks.",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "Attach SHA-512 to every chunk. Include X-Cobalt-Final: strict on finalization.",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "transfer_required_atom_ids": [
+        "A2",
+        "A3"
+      ],
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "new\\s+upload\\s+session"
+          ],
+          [
+            "multipart.*16\\s*(?:mib|mb)"
+          ],
+          [
+            "sha-?512.*(?:every|each|per).*chunk"
+          ],
+          [
+            "x-cobalt-final.*strict"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "multipart.*16\\s*(?:mib|mb)"
+          ],
+          [
+            "sha-?512.*(?:every|each|per).*chunk"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "brambledb-bd38",
+      "entities": [
+        "system:brambledb",
+        "code:bd-38"
+      ],
+      "experience": {
+        "prompt": "BrambleDB returns BD-38 while writing an inventory mutation. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "BrambleDB returns BD-38 while writing a pricing mutation. Which epoch and lock are required?"
+      },
+      "candidate_decision": "Restart the node and increment the epoch locally.",
+      "raw_source": "<<<ROLE:status>>>\nBD-38 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRestart the node and increment the epoch locally.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nRead the primary epoch. Acquire the bronze lock. Retry exactly once. Set X-Bramble-Epoch to the primary epoch.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nOperator suspects leader churn may have occurred.\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 197 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "Read the primary epoch.",
+          "task_pattern": "read.*primary\\s+epoch"
+        },
+        {
+          "id": "A2",
+          "text": "Acquire the bronze lock.",
+          "task_pattern": "bronze\\s+lock"
+        },
+        {
+          "id": "A3",
+          "text": "Retry exactly once.",
+          "task_pattern": "retry.*exactly\\s+once"
+        },
+        {
+          "id": "A4",
+          "text": "Set X-Bramble-Epoch to the primary epoch.",
+          "task_pattern": "x-bramble-epoch.*primary\\s+epoch"
+        }
+      ],
+      "atomicity_challenges": [
+        {
+          "id": "C1",
+          "text": "Read the primary epoch. Acquire the bronze lock.",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "Retry exactly once. Set X-Bramble-Epoch to the primary epoch.",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "transfer_required_atom_ids": [
+        "A1",
+        "A2"
+      ],
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "read.*primary\\s+epoch"
+          ],
+          [
+            "bronze\\s+lock"
+          ],
+          [
+            "retry.*exactly\\s+once"
+          ],
+          [
+            "x-bramble-epoch.*primary\\s+epoch"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "read.*primary\\s+epoch"
+          ],
+          [
+            "bronze\\s+lock"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "irisparser-ip14",
+      "entities": [
+        "system:irisparser",
+        "code:ip-14"
+      ],
+      "experience": {
+        "prompt": "IrisParser returns IP-14 with legacy state=D before validation. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "IrisParser returns IP-14 with legacy state=F before validation. What should F map to and when?"
+      },
+      "candidate_decision": "Drop the state field and default to valid.",
+      "raw_source": "<<<ROLE:status>>>\nIP-14 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nDrop the state field and default to valid.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nMap D to queued. Map E to blocked. Map F to review. Perform the mapping before normal validation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nOperator suspects a legacy producer may still be active.\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 131 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "Map D to queued.",
+          "task_pattern": "\\bd\\b.*\\bqueued\\b"
+        },
+        {
+          "id": "A2",
+          "text": "Map E to blocked.",
+          "task_pattern": "\\be\\b.*\\bblocked\\b"
+        },
+        {
+          "id": "A3",
+          "text": "Map F to review.",
+          "task_pattern": "\\bf\\b.*\\breview\\b"
+        },
+        {
+          "id": "A4",
+          "text": "Perform the mapping before normal validation.",
+          "task_pattern": "before.*normal\\s+validation"
+        }
+      ],
+      "atomicity_challenges": [
+        {
+          "id": "C1",
+          "text": "Map D to queued. Map E to blocked.",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "Map F to review. Perform the mapping before normal validation.",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "transfer_required_atom_ids": [
+        "A3",
+        "A4"
+      ],
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "\\bd\\b.*\\bqueued\\b"
+          ],
+          [
+            "\\be\\b.*\\bblocked\\b"
+          ],
+          [
+            "\\bf\\b.*\\breview\\b"
+          ],
+          [
+            "before.*normal\\s+validation"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "\\bf\\b.*\\breview\\b"
+          ],
+          [
+            "before.*normal\\s+validation"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "zenithrpc-zr73",
+      "entities": [
+        "system:zenithrpc",
+        "code:zr-73"
+      ],
+      "experience": {
+        "prompt": "ZenithRPC returns ZR-73 during a profile request. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "ZenithRPC returns ZR-73 during a billing request. How many heartbeats and which recovery header are required?"
+      },
+      "candidate_decision": "Close the connection and reuse the old correlation ID.",
+      "raw_source": "<<<ROLE:status>>>\nZR-73 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nClose the connection and reuse the old correlation ID.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nSend exactly four heartbeat frames. Space the heartbeat frames 210 ms apart. Open a new channel with a fresh correlation ID. Include X-Zenith-Recover: zr73.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nOperator suspects stream jitter may have occurred.\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 304 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "Send exactly four heartbeat frames.",
+          "task_pattern": "(?:four|4)\\s+heartbeat"
+        },
+        {
+          "id": "A2",
+          "text": "Space the heartbeat frames 210 ms apart.",
+          "task_pattern": "\\b210\\s*(?:ms|milliseconds?)\\b"
+        },
+        {
+          "id": "A3",
+          "text": "Open a new channel with a fresh correlation ID.",
+          "task_pattern": "new\\s+channel.*fresh\\s+correlation\\s+id"
+        },
+        {
+          "id": "A4",
+          "text": "Include X-Zenith-Recover: zr73.",
+          "task_pattern": "x-zenith-recover.*zr73"
+        }
+      ],
+      "atomicity_challenges": [
+        {
+          "id": "C1",
+          "text": "Send exactly four heartbeat frames. Space the heartbeat frames 210 ms apart.",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "Open a new channel with a fresh correlation ID. Include X-Zenith-Recover: zr73.",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "transfer_required_atom_ids": [
+        "A1",
+        "A4"
+      ],
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "(?:four|4)\\s+heartbeat"
+          ],
+          [
+            "\\b210\\s*(?:ms|milliseconds?)\\b"
+          ],
+          [
+            "new\\s+channel.*fresh\\s+correlation\\s+id"
+          ],
+          [
+            "x-zenith-recover.*zr73"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "(?:four|4)\\s+heartbeat"
+          ],
+          [
+            "x-zenith-recover.*zr73"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "glaciercdn-gc25",
+      "entities": [
+        "system:glaciercdn",
+        "code:gc-25"
+      ],
+      "experience": {
+        "prompt": "GlacierCDN returns GC-25 while refreshing a JavaScript asset. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "GlacierCDN returns GC-25 while refreshing an image asset. Which shard may be purged and how long should you wait?"
+      },
+      "candidate_decision": "Perform a global purge and restart every edge worker.",
+      "raw_source": "<<<ROLE:status>>>\nGC-25 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nPerform a global purge and restart every edge worker.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nIssue one HEAD request to origin. Purge only the current POP shard. Wait 7 seconds. Issue one GET with X-Glacier-Probe: 6.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nOperator suspects regional cache skew may exist.\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 176 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "Issue one HEAD request to origin.",
+          "task_pattern": "(?:one|1)\\s+head\\s+request"
+        },
+        {
+          "id": "A2",
+          "text": "Purge only the current POP shard.",
+          "task_pattern": "purge.*only.*current\\s+pop\\s+shard"
+        },
+        {
+          "id": "A3",
+          "text": "Wait 7 seconds.",
+          "task_pattern": "\\b7\\s*seconds?\\b"
+        },
+        {
+          "id": "A4",
+          "text": "Issue one GET with X-Glacier-Probe: 6.",
+          "task_pattern": "(?:one|1)\\s+get.*x-glacier-probe.*6"
+        }
+      ],
+      "atomicity_challenges": [
+        {
+          "id": "C1",
+          "text": "Issue one HEAD request to origin. Purge only the current POP shard.",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "Wait 7 seconds. Issue one GET with X-Glacier-Probe: 6.",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "transfer_required_atom_ids": [
+        "A2",
+        "A3"
+      ],
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "(?:one|1)\\s+head\\s+request"
+          ],
+          [
+            "purge.*only.*current\\s+pop\\s+shard"
+          ],
+          [
+            "\\b7\\s*seconds?\\b"
+          ],
+          [
+            "(?:one|1)\\s+get.*x-glacier-probe.*6"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "purge.*only.*current\\s+pop\\s+shard"
+          ],
+          [
+            "\\b7\\s*seconds?\\b"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "meadowflow-mf44",
+      "entities": [
+        "system:meadowflow",
+        "code:mf-44"
+      ],
+      "experience": {
+        "prompt": "MeadowFlow returns MF-44 during invoice reconciliation. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "MeadowFlow returns MF-44 during payroll export. Where should execution restart and which token must be carried?"
+      },
+      "candidate_decision": "Resume the failed node using the same checkpoint.",
+      "raw_source": "<<<ROLE:status>>>\nMF-44 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nResume the failed node using the same checkpoint.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nClone the latest checkpoint. Mark the old run superseded. Restart from the previous boundary exactly once. Carry token mf44-safe.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nOperator suspects checkpoint replication may have lagged.\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 235 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "Clone the latest checkpoint.",
+          "task_pattern": "clone.*latest\\s+checkpoint"
+        },
+        {
+          "id": "A2",
+          "text": "Mark the old run superseded.",
+          "task_pattern": "old\\s+run.*superseded"
+        },
+        {
+          "id": "A3",
+          "text": "Restart from the previous boundary exactly once.",
+          "task_pattern": "restart.*previous\\s+boundary.*exactly\\s+once"
+        },
+        {
+          "id": "A4",
+          "text": "Carry token mf44-safe.",
+          "task_pattern": "mf44-safe"
+        }
+      ],
+      "atomicity_challenges": [
+        {
+          "id": "C1",
+          "text": "Clone the latest checkpoint. Mark the old run superseded.",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "Restart from the previous boundary exactly once. Carry token mf44-safe.",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "transfer_required_atom_ids": [
+        "A3",
+        "A4"
+      ],
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "clone.*latest\\s+checkpoint"
+          ],
+          [
+            "old\\s+run.*superseded"
+          ],
+          [
+            "restart.*previous\\s+boundary.*exactly\\s+once"
+          ],
+          [
+            "mf44-safe"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "restart.*previous\\s+boundary.*exactly\\s+once"
+          ],
+          [
+            "mf44-safe"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "opalindex-oi57",
+      "entities": [
+        "system:opalindex",
+        "code:oi-57"
+      ],
+      "experience": {
+        "prompt": "OpalIndex returns OI-57 during catalog indexing. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "OpalIndex returns OI-57 during account indexing. Which read mode and replay count are required?"
+      },
+      "candidate_decision": "Rebuild the index and discard the current cursor.",
+      "raw_source": "<<<ROLE:status>>>\nOI-57 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRebuild the index and discard the current cursor.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nFetch a fresh cursor from the leader. Switch to delta-read. Replay exactly three pages. Set X-Opal-Cursor: fresh.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nOperator suspects segment compaction may be incomplete.\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 223 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "Fetch a fresh cursor from the leader.",
+          "task_pattern": "fresh\\s+cursor.*leader"
+        },
+        {
+          "id": "A2",
+          "text": "Switch to delta-read.",
+          "task_pattern": "delta[-\\s]read"
+        },
+        {
+          "id": "A3",
+          "text": "Replay exactly three pages.",
+          "task_pattern": "replay.*exactly\\s+(?:three|3)\\s+pages"
+        },
+        {
+          "id": "A4",
+          "text": "Set X-Opal-Cursor: fresh.",
+          "task_pattern": "x-opal-cursor.*fresh"
+        }
+      ],
+      "atomicity_challenges": [
+        {
+          "id": "C1",
+          "text": "Fetch a fresh cursor from the leader. Switch to delta-read.",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "Replay exactly three pages. Set X-Opal-Cursor: fresh.",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "transfer_required_atom_ids": [
+        "A2",
+        "A3"
+      ],
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "fresh\\s+cursor.*leader"
+          ],
+          [
+            "delta[-\\s]read"
+          ],
+          [
+            "replay.*exactly\\s+(?:three|3)\\s+pages"
+          ],
+          [
+            "x-opal-cursor.*fresh"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "delta[-\\s]read"
+          ],
+          [
+            "replay.*exactly\\s+(?:three|3)\\s+pages"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "birchledger-bl32",
+      "entities": [
+        "system:birchledger",
+        "code:bl-32"
+      ],
+      "experience": {
+        "prompt": "BirchLedger returns BL-32 while posting a settlement. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "BirchLedger returns BL-32 while posting a rebate. Where should the nonce come from and how many retries are allowed?"
+      },
+      "candidate_decision": "Synthesize a nonce locally and bypass the lock.",
+      "raw_source": "<<<ROLE:status>>>\nBL-32 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nSynthesize a nonce locally and bypass the lock.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nRequest the server nonce. Acquire the teal lock. Retry exactly twice. Set X-Birch-Nonce to the server nonce.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nOperator suspects nonce-service latency may be involved.\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 282 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "Request the server nonce.",
+          "task_pattern": "(?:request|fetch|get).*server\\s+nonce"
+        },
+        {
+          "id": "A2",
+          "text": "Acquire the teal lock.",
+          "task_pattern": "teal\\s+lock"
+        },
+        {
+          "id": "A3",
+          "text": "Retry exactly twice.",
+          "task_pattern": "retry.*exactly\\s+twice"
+        },
+        {
+          "id": "A4",
+          "text": "Set X-Birch-Nonce to the server nonce.",
+          "task_pattern": "x-birch-nonce.*server\\s+nonce"
+        }
+      ],
+      "atomicity_challenges": [
+        {
+          "id": "C1",
+          "text": "Request the server nonce. Acquire the teal lock.",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "Retry exactly twice. Set X-Birch-Nonce to the server nonce.",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "transfer_required_atom_ids": [
+        "A1",
+        "A3"
+      ],
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "(?:request|fetch|get).*server\\s+nonce"
+          ],
+          [
+            "teal\\s+lock"
+          ],
+          [
+            "retry.*exactly\\s+twice"
+          ],
+          [
+            "x-birch-nonce.*server\\s+nonce"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "(?:request|fetch|get).*server\\s+nonce"
+          ],
+          [
+            "retry.*exactly\\s+twice"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "quartzbus-qb19",
+      "entities": [
+        "system:quartzbus",
+        "code:qb-19"
+      ],
+      "experience": {
+        "prompt": "QuartzBus returns QB-19 while consuming an invoice event. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "QuartzBus returns QB-19 while consuming an audit event. Which checkpoint and replay class should be used?"
+      },
+      "candidate_decision": "Acknowledge the original message and retry it directly.",
+      "raw_source": "<<<ROLE:status>>>\nQB-19 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nAcknowledge the original message and retry it directly.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nRequest a fresh checkpoint. Replay exactly once from the checkpoint. Use Replay-Class: quartz. Leave the original message unacknowledged.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nOperator suspects consumer rebalance may have occurred.\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 196 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "Request a fresh checkpoint.",
+          "task_pattern": "fresh\\s+checkpoint"
+        },
+        {
+          "id": "A2",
+          "text": "Replay exactly once from the checkpoint.",
+          "task_pattern": "replay.*exactly\\s+once"
+        },
+        {
+          "id": "A3",
+          "text": "Use Replay-Class: quartz.",
+          "task_pattern": "replay-class.*quartz"
+        },
+        {
+          "id": "A4",
+          "text": "Leave the original message unacknowledged.",
+          "task_pattern": "original\\s+message.*unacknowledged"
+        }
+      ],
+      "atomicity_challenges": [
+        {
+          "id": "C1",
+          "text": "Request a fresh checkpoint. Replay exactly once from the checkpoint.",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "Use Replay-Class: quartz. Leave the original message unacknowledged.",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "transfer_required_atom_ids": [
+        "A1",
+        "A3"
+      ],
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "fresh\\s+checkpoint"
+          ],
+          [
+            "replay.*exactly\\s+once"
+          ],
+          [
+            "replay-class.*quartz"
+          ],
+          [
+            "original\\s+message.*unacknowledged"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "fresh\\s+checkpoint"
+          ],
+          [
+            "replay-class.*quartz"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "aurorastore-as68",
+      "entities": [
+        "system:aurorastore",
+        "code:as-68"
+      ],
+      "experience": {
+        "prompt": "AuroraStore returns AS-68 while uploading a 240 MiB backup. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "AuroraStore returns AS-68 while uploading a 120 MiB snapshot. What chunk size and checksum are required?"
+      },
+      "candidate_decision": "Reuse the old upload ID and send a single part.",
+      "raw_source": "<<<ROLE:status>>>\nAS-68 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nReuse the old upload ID and send a single part.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nUse a new upload ID. Use multipart upload with 24 MiB chunks. Apply BLAKE3 to every chunk. Include X-Aurora-Manifest: polar on finalization.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nOperator suspects gateway load may be elevated.\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 317 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "Use a new upload ID.",
+          "task_pattern": "new\\s+upload\\s+id"
+        },
+        {
+          "id": "A2",
+          "text": "Use multipart upload with 24 MiB chunks.",
+          "task_pattern": "multipart.*24\\s*(?:mib|mb)"
+        },
+        {
+          "id": "A3",
+          "text": "Apply BLAKE3 to every chunk.",
+          "task_pattern": "blake3.*(?:every|each|per).*chunk"
+        },
+        {
+          "id": "A4",
+          "text": "Include X-Aurora-Manifest: polar on finalization.",
+          "task_pattern": "x-aurora-manifest.*polar"
+        }
+      ],
+      "atomicity_challenges": [
+        {
+          "id": "C1",
+          "text": "Use a new upload ID. Use multipart upload with 24 MiB chunks.",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "Apply BLAKE3 to every chunk. Include X-Aurora-Manifest: polar on finalization.",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "transfer_required_atom_ids": [
+        "A2",
+        "A3"
+      ],
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "new\\s+upload\\s+id"
+          ],
+          [
+            "multipart.*24\\s*(?:mib|mb)"
+          ],
+          [
+            "blake3.*(?:every|each|per).*chunk"
+          ],
+          [
+            "x-aurora-manifest.*polar"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "multipart.*24\\s*(?:mib|mb)"
+          ],
+          [
+            "blake3.*(?:every|each|per).*chunk"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "cedarsearch-ce26",
+      "entities": [
+        "system:cedarsearch",
+        "code:ce-26"
+      ],
+      "experience": {
+        "prompt": "CedarSearch returns CE-26 during a customer search. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "CedarSearch returns CE-26 during an inventory search. Which read mode and request-ID rule should be used?"
+      },
+      "candidate_decision": "Reconnect the session and generate a new request ID.",
+      "raw_source": "<<<ROLE:status>>>\nCE-26 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nReconnect the session and generate a new request ID.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nRefresh the schema token. Switch to snapshot-read. Retry exactly once. Preserve the original request ID.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nOperator suspects schema propagation may be delayed.\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 166 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "Refresh the schema token.",
+          "task_pattern": "refresh.*schema\\s+token"
+        },
+        {
+          "id": "A2",
+          "text": "Switch to snapshot-read.",
+          "task_pattern": "snapshot[-\\s]read"
+        },
+        {
+          "id": "A3",
+          "text": "Retry exactly once.",
+          "task_pattern": "retry.*exactly\\s+once"
+        },
+        {
+          "id": "A4",
+          "text": "Preserve the original request ID.",
+          "task_pattern": "preserv.*original\\s+request\\s+id"
+        }
+      ],
+      "atomicity_challenges": [
+        {
+          "id": "C1",
+          "text": "Refresh the schema token. Switch to snapshot-read.",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "Retry exactly once. Preserve the original request ID.",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "transfer_required_atom_ids": [
+        "A2",
+        "A4"
+      ],
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "refresh.*schema\\s+token"
+          ],
+          [
+            "snapshot[-\\s]read"
+          ],
+          [
+            "retry.*exactly\\s+once"
+          ],
+          [
+            "preserv.*original\\s+request\\s+id"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "snapshot[-\\s]read"
+          ],
+          [
+            "preserv.*original\\s+request\\s+id"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "prismrpc-pr47",
+      "entities": [
+        "system:prismrpc",
+        "code:pr-47"
+      ],
+      "experience": {
+        "prompt": "PrismRPC returns PR-47 during a profile RPC. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "PrismRPC returns PR-47 during a payment RPC. What heartbeat spacing and recovery header are required?"
+      },
+      "candidate_decision": "Reuse the prior stream ID and restart the RPC service.",
+      "raw_source": "<<<ROLE:status>>>\nPR-47 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nReuse the prior stream ID and restart the RPC service.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nSend exactly two heartbeat frames. Space the heartbeat frames 175 ms apart. Open a fresh channel. Include X-Prism-Recover: pr47.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nOperator suspects stream scheduling jitter may be present.\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 228 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "Send exactly two heartbeat frames.",
+          "task_pattern": "(?:two|2)\\s+heartbeat"
+        },
+        {
+          "id": "A2",
+          "text": "Space the heartbeat frames 175 ms apart.",
+          "task_pattern": "\\b175\\s*(?:ms|milliseconds?)\\b"
+        },
+        {
+          "id": "A3",
+          "text": "Open a fresh channel.",
+          "task_pattern": "fresh\\s+channel"
+        },
+        {
+          "id": "A4",
+          "text": "Include X-Prism-Recover: pr47.",
+          "task_pattern": "x-prism-recover.*pr47"
+        }
+      ],
+      "atomicity_challenges": [
+        {
+          "id": "C1",
+          "text": "Send exactly two heartbeat frames. Space the heartbeat frames 175 ms apart.",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "Open a fresh channel. Include X-Prism-Recover: pr47.",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "transfer_required_atom_ids": [
+        "A2",
+        "A4"
+      ],
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "(?:two|2)\\s+heartbeat"
+          ],
+          [
+            "\\b175\\s*(?:ms|milliseconds?)\\b"
+          ],
+          [
+            "fresh\\s+channel"
+          ],
+          [
+            "x-prism-recover.*pr47"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "\\b175\\s*(?:ms|milliseconds?)\\b"
+          ],
+          [
+            "x-prism-recover.*pr47"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "emberqueue-eq83",
+      "entities": [
+        "system:emberqueue",
+        "code:eq-83"
+      ],
+      "experience": {
+        "prompt": "EmberQueue returns EQ-83 for a report-generation job. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "EmberQueue returns EQ-83 for a media-processing job. Which lane and dispatch mode are required?"
+      },
+      "candidate_decision": "Cancel the job and delete the dispatch record.",
+      "raw_source": "<<<ROLE:status>>>\nEQ-83 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nCancel the job and delete the dispatch record.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nMint a new dispatch ID. Move the job to the silver lane. Requeue exactly once. Tag dispatch-mode=restored.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nOperator suspects dispatch fanout may have stalled.\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 204 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "Mint a new dispatch ID.",
+          "task_pattern": "(?:mint|create|generate).*new\\s+dispatch\\s+id"
+        },
+        {
+          "id": "A2",
+          "text": "Move the job to the silver lane.",
+          "task_pattern": "silver\\s+lane"
+        },
+        {
+          "id": "A3",
+          "text": "Requeue exactly once.",
+          "task_pattern": "re-?queue.*exactly\\s+once"
+        },
+        {
+          "id": "A4",
+          "text": "Tag dispatch-mode=restored.",
+          "task_pattern": "dispatch-mode\\s*=\\s*restored"
+        }
+      ],
+      "atomicity_challenges": [
+        {
+          "id": "C1",
+          "text": "Mint a new dispatch ID. Move the job to the silver lane.",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "Requeue exactly once. Tag dispatch-mode=restored.",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "transfer_required_atom_ids": [
+        "A2",
+        "A4"
+      ],
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "(?:mint|create|generate).*new\\s+dispatch\\s+id"
+          ],
+          [
+            "silver\\s+lane"
+          ],
+          [
+            "re-?queue.*exactly\\s+once"
+          ],
+          [
+            "dispatch-mode\\s*=\\s*restored"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "silver\\s+lane"
+          ],
+          [
+            "dispatch-mode\\s*=\\s*restored"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "mistcdn-mc54",
+      "entities": [
+        "system:mistcdn",
+        "code:mc-54"
+      ],
+      "experience": {
+        "prompt": "MistCDN returns MC-54 while refreshing a CSS asset. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "MistCDN returns MC-54 while refreshing an image asset. What request is issued first and which shard may be purged?"
+      },
+      "candidate_decision": "Purge every region and invalidate all cached assets.",
+      "raw_source": "<<<ROLE:status>>>\nMC-54 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nPurge every region and invalidate all cached assets.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nIssue one HEAD request to origin. Purge only the current region shard. Wait 12 seconds. Issue one GET with X-Mist-Probe: 7.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nOperator suspects one edge cluster may be lagging.\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 241 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "Issue one HEAD request to origin.",
+          "task_pattern": "(?:one|1)\\s+head\\s+request"
+        },
+        {
+          "id": "A2",
+          "text": "Purge only the current region shard.",
+          "task_pattern": "purge.*only.*current\\s+region\\s+shard"
+        },
+        {
+          "id": "A3",
+          "text": "Wait 12 seconds.",
+          "task_pattern": "\\b12\\s*seconds?\\b"
+        },
+        {
+          "id": "A4",
+          "text": "Issue one GET with X-Mist-Probe: 7.",
+          "task_pattern": "(?:one|1)\\s+get.*x-mist-probe.*7"
+        }
+      ],
+      "atomicity_challenges": [
+        {
+          "id": "C1",
+          "text": "Issue one HEAD request to origin. Purge only the current region shard.",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "Wait 12 seconds. Issue one GET with X-Mist-Probe: 7.",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "transfer_required_atom_ids": [
+        "A1",
+        "A2"
+      ],
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "(?:one|1)\\s+head\\s+request"
+          ],
+          [
+            "purge.*only.*current\\s+region\\s+shard"
+          ],
+          [
+            "\\b12\\s*seconds?\\b"
+          ],
+          [
+            "(?:one|1)\\s+get.*x-mist-probe.*7"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "(?:one|1)\\s+head\\s+request"
+          ],
+          [
+            "purge.*only.*current\\s+region\\s+shard"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "solsticeflow-sf39",
+      "entities": [
+        "system:solsticeflow",
+        "code:sf-39"
+      ],
+      "experience": {
+        "prompt": "SolsticeFlow returns SF-39 during invoice export. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "SolsticeFlow returns SF-39 during analytics export. Which checkpoint action and restart boundary are required?"
+      },
+      "candidate_decision": "Restart the full workflow and discard the checkpoint.",
+      "raw_source": "<<<ROLE:status>>>\nSF-39 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRestart the full workflow and discard the checkpoint.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nClone the latest checkpoint. Mark the old run stale. Restart from the previous boundary exactly once. Carry token sf39-safe.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nOperator suspects workflow-state replication may have lagged.\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 264 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "Clone the latest checkpoint.",
+          "task_pattern": "clone.*latest\\s+checkpoint"
+        },
+        {
+          "id": "A2",
+          "text": "Mark the old run stale.",
+          "task_pattern": "old\\s+run.*stale"
+        },
+        {
+          "id": "A3",
+          "text": "Restart from the previous boundary exactly once.",
+          "task_pattern": "restart.*previous\\s+boundary.*exactly\\s+once"
+        },
+        {
+          "id": "A4",
+          "text": "Carry token sf39-safe.",
+          "task_pattern": "sf39-safe"
+        }
+      ],
+      "atomicity_challenges": [
+        {
+          "id": "C1",
+          "text": "Clone the latest checkpoint. Mark the old run stale.",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "Restart from the previous boundary exactly once. Carry token sf39-safe.",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "transfer_required_atom_ids": [
+        "A1",
+        "A3"
+      ],
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "clone.*latest\\s+checkpoint"
+          ],
+          [
+            "old\\s+run.*stale"
+          ],
+          [
+            "restart.*previous\\s+boundary.*exactly\\s+once"
+          ],
+          [
+            "sf39-safe"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "clone.*latest\\s+checkpoint"
+          ],
+          [
+            "restart.*previous\\s+boundary.*exactly\\s+once"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "coralparser-cp12",
+      "entities": [
+        "system:coralparser",
+        "code:cp-12"
+      ],
+      "experience": {
+        "prompt": "CoralParser returns CP-12 with legacy state=U before validation. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "CoralParser returns CP-12 with legacy state=W before validation. What should W map to and when?"
+      },
+      "candidate_decision": "Drop the legacy field and default the record to valid.",
+      "raw_source": "<<<ROLE:status>>>\nCP-12 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nDrop the legacy field and default the record to valid.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nMap U to queued. Map V to blocked. Map W to ready. Perform the mapping before normal validation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nOperator suspects an old producer may still emit legacy states.\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 139 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "Map U to queued.",
+          "task_pattern": "\\bu\\b.*\\bqueued\\b"
+        },
+        {
+          "id": "A2",
+          "text": "Map V to blocked.",
+          "task_pattern": "\\bv\\b.*\\bblocked\\b"
+        },
+        {
+          "id": "A3",
+          "text": "Map W to ready.",
+          "task_pattern": "\\bw\\b.*\\bready\\b"
+        },
+        {
+          "id": "A4",
+          "text": "Perform the mapping before normal validation.",
+          "task_pattern": "before.*normal\\s+validation"
+        }
+      ],
+      "atomicity_challenges": [
+        {
+          "id": "C1",
+          "text": "Map U to queued. Map V to blocked.",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "Map W to ready. Perform the mapping before normal validation.",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "transfer_required_atom_ids": [
+        "A3",
+        "A4"
+      ],
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "\\bu\\b.*\\bqueued\\b"
+          ],
+          [
+            "\\bv\\b.*\\bblocked\\b"
+          ],
+          [
+            "\\bw\\b.*\\bready\\b"
+          ],
+          [
+            "before.*normal\\s+validation"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "\\bw\\b.*\\bready\\b"
+          ],
+          [
+            "before.*normal\\s+validation"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "northpay-np76",
+      "entities": [
+        "system:northpay",
+        "code:np-76"
+      ],
+      "experience": {
+        "prompt": "NorthPay returns NP-76 while capturing an order payment. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "NorthPay returns NP-76 while issuing a subscription adjustment. How long should the operator wait and how many retries are allowed?"
+      },
+      "candidate_decision": "Refund the customer immediately and reverse the charge.",
+      "raw_source": "<<<ROLE:status>>>\nNP-76 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRefund the customer immediately and reverse the charge.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nWait 15 seconds. Rotate the session key. Mint a new idempotency key. Retry exactly twice with X-North-Mode: black.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nOperator suspects acquirer congestion may be transient.\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 294 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "Wait 15 seconds.",
+          "task_pattern": "\\b15\\s*seconds?\\b"
+        },
+        {
+          "id": "A2",
+          "text": "Rotate the session key.",
+          "task_pattern": "rotat.*session\\s+key"
+        },
+        {
+          "id": "A3",
+          "text": "Mint a new idempotency key.",
+          "task_pattern": "(?:mint|create|generate).*new\\s+idempotency\\s+key"
+        },
+        {
+          "id": "A4",
+          "text": "Retry exactly twice with X-North-Mode: black.",
+          "task_pattern": "retry.*exactly\\s+twice.*x-north-mode.*black"
+        }
+      ],
+      "atomicity_challenges": [
+        {
+          "id": "C1",
+          "text": "Wait 15 seconds. Rotate the session key.",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "Mint a new idempotency key. Retry exactly twice with X-North-Mode: black.",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "transfer_required_atom_ids": [
+        "A1",
+        "A4"
+      ],
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "\\b15\\s*seconds?\\b"
+          ],
+          [
+            "rotat.*session\\s+key"
+          ],
+          [
+            "(?:mint|create|generate).*new\\s+idempotency\\s+key"
+          ],
+          [
+            "retry.*exactly\\s+twice.*x-north-mode.*black"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "\\b15\\s*seconds?\\b"
+          ],
+          [
+            "retry.*exactly\\s+twice.*x-north-mode.*black"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "velvetindex-vi43",
+      "entities": [
+        "system:velvetindex",
+        "code:vi-43"
+      ],
+      "experience": {
+        "prompt": "VelvetIndex returns VI-43 during product search. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "VelvetIndex returns VI-43 during account search. Which cursor source and query-ID rule are required?"
+      },
+      "candidate_decision": "Delete the snapshot and rebuild the index.",
+      "raw_source": "<<<ROLE:status>>>\nVI-43 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nDelete the snapshot and rebuild the index.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nFetch a fresh cursor from the leader. Switch to shadow-read. Retry exactly once. Preserve the original query ID.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nOperator suspects snapshot compaction may have overlapped the query.\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 219 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "Fetch a fresh cursor from the leader.",
+          "task_pattern": "fresh\\s+cursor.*leader"
+        },
+        {
+          "id": "A2",
+          "text": "Switch to shadow-read.",
+          "task_pattern": "shadow[-\\s]read"
+        },
+        {
+          "id": "A3",
+          "text": "Retry exactly once.",
+          "task_pattern": "retry.*exactly\\s+once"
+        },
+        {
+          "id": "A4",
+          "text": "Preserve the original query ID.",
+          "task_pattern": "preserv.*original\\s+query\\s+id"
+        }
+      ],
+      "atomicity_challenges": [
+        {
+          "id": "C1",
+          "text": "Fetch a fresh cursor from the leader. Switch to shadow-read.",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "Retry exactly once. Preserve the original query ID.",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "transfer_required_atom_ids": [
+        "A1",
+        "A4"
+      ],
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "fresh\\s+cursor.*leader"
+          ],
+          [
+            "shadow[-\\s]read"
+          ],
+          [
+            "retry.*exactly\\s+once"
+          ],
+          [
+            "preserv.*original\\s+query\\s+id"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "fresh\\s+cursor.*leader"
+          ],
+          [
+            "preserv.*original\\s+query\\s+id"
+          ]
+        ]
+      }
+    }
+  ]
+}

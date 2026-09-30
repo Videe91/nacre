@@ -1,0 +1,1022 @@
+{
+  "experiment": "seed-growth-004",
+  "classification": "exploratory-fresh-ablation",
+  "hypothesis": "Persistent experience improves task performance, and a targeted constraint-fidelity instruction reduces loss between recalled memory and decisions.",
+  "families": [
+    {
+      "id": "xenonpay-a19",
+      "entities": [
+        "system:xenonpay",
+        "code:a19"
+      ],
+      "experience": {
+        "prompt": "XenonPay returns A19 while capturing an invoice. What should the operator do?",
+        "feedback": "XenonPay runbook rule: A19 means wait 5 seconds, mint a new nonce, rotate the session token, retry exactly once with X-Xenon-Path: cobalt, and never reuse the prior nonce."
+      },
+      "transfer": {
+        "prompt": "XenonPay returns A19 while cancelling a subscription charge. What should the operator do?"
+      },
+      "task_grader": {
+        "all_regex": [
+          [
+            "\\b5\\s*(?:seconds?|s)\\b"
+          ],
+          [
+            "\\b(?:mint|minting|create|creating|generate|generating)\\b.*\\bnew\\s+nonce\\b"
+          ],
+          [
+            "\\b(?:rotate|rotating|refresh|refreshing)\\b.*\\bsession\\s+token\\b"
+          ],
+          [
+            "\\bretry\\b.*\\b(?:exactly\\s+)?once\\b"
+          ],
+          [
+            "x-xenon-path.*cobalt"
+          ]
+        ]
+      },
+      "fidelity_grader": {
+        "all_regex": [
+          [
+            "\\b5\\s*(?:seconds?|s)\\b"
+          ],
+          [
+            "\\b(?:mint|minting|create|creating|generate|generating)\\b.*\\bnew\\s+nonce\\b"
+          ],
+          [
+            "\\b(?:rotate|rotating|refresh|refreshing)\\b.*\\bsession\\s+token\\b"
+          ],
+          [
+            "\\bretry\\b.*\\b(?:exactly\\s+)?once\\b"
+          ],
+          [
+            "x-xenon-path.*cobalt"
+          ],
+          [
+            "(?:never|do\\s+not|don.t).*\\breus(?:e|ing)?\\b.*\\b(?:prior|old)\\s+nonce\\b"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "birchqueue-r6",
+      "entities": [
+        "system:birchqueue",
+        "code:r6"
+      ],
+      "experience": {
+        "prompt": "BirchQueue returns R6 while processing a document job. What should the operator do?",
+        "feedback": "BirchQueue runbook rule: R6 means obtain a new lease, move the job to the silver lane, requeue exactly twice, tag queue-mode=echo, and do not acknowledge the original dispatch."
+      },
+      "transfer": {
+        "prompt": "BirchQueue returns R6 while processing a thumbnail job. What should the operator do?"
+      },
+      "task_grader": {
+        "all_regex": [
+          [
+            "\\b(?:new|fresh)\\s+lease\\b"
+          ],
+          [
+            "\\bsilver\\s+lane\\b"
+          ],
+          [
+            "\\bre-?queue\\b.*\\b(?:twice|2\\s+times?)\\b"
+          ],
+          [
+            "queue-mode\\s*=\\s*echo"
+          ]
+        ]
+      },
+      "fidelity_grader": {
+        "all_regex": [
+          [
+            "\\b(?:new|fresh)\\s+lease\\b"
+          ],
+          [
+            "\\bsilver\\s+lane\\b"
+          ],
+          [
+            "\\bre-?queue\\b.*\\b(?:twice|2\\s+times?)\\b"
+          ],
+          [
+            "queue-mode\\s*=\\s*echo"
+          ],
+          [
+            "(?:do\\s+not|don.t|never).*\\b(?:ack|acknowledge)\\b.*\\boriginal\\s+dispatch\\b"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "prismstore-k27",
+      "entities": [
+        "system:prismstore",
+        "code:k27"
+      ],
+      "experience": {
+        "prompt": "PrismStore returns K27 while uploading a 120 MiB archive. What should the operator do?",
+        "feedback": "PrismStore runbook rule: K27 requires a new upload session, multipart upload with 10 MiB chunks, CRC32C for every chunk, X-Prism-Final: jade on finalization, and never append to the previous upload session."
+      },
+      "transfer": {
+        "prompt": "PrismStore returns K27 while uploading a 60 MiB checkpoint. What should the operator do?"
+      },
+      "task_grader": {
+        "all_regex": [
+          [
+            "\\b(?:new|fresh)\\s+upload\\s+session\\b"
+          ],
+          [
+            "\\bmultipart\\b"
+          ],
+          [
+            "\\b10\\s*(?:mib|mb)\\b"
+          ],
+          [
+            "\\bcrc32c\\b"
+          ],
+          [
+            "\\b(?:every|each|per)\\b.*\\bchunks?\\b"
+          ],
+          [
+            "x-prism-final.*jade"
+          ]
+        ]
+      },
+      "fidelity_grader": {
+        "all_regex": [
+          [
+            "\\b(?:new|fresh)\\s+upload\\s+session\\b"
+          ],
+          [
+            "\\bmultipart\\b"
+          ],
+          [
+            "\\b10\\s*(?:mib|mb)\\b"
+          ],
+          [
+            "\\bcrc32c\\b"
+          ],
+          [
+            "\\b(?:every|each|per)\\b.*\\bchunks?\\b"
+          ],
+          [
+            "x-prism-final.*jade"
+          ],
+          [
+            "(?:never|do\\s+not|don.t).*\\bappend(?:ing)?\\b.*\\b(?:previous|old)\\s+upload\\s+session\\b"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "meadowdb-q44",
+      "entities": [
+        "system:meadowdb",
+        "code:q44"
+      ],
+      "experience": {
+        "prompt": "MeadowDB returns Q44 while writing an inventory update. What should the operator do?",
+        "feedback": "MeadowDB runbook rule: Q44 means read the primary epoch, acquire the bronze lock, retry exactly once with X-Meadow-Epoch set to the primary epoch, and never increment the epoch locally."
+      },
+      "transfer": {
+        "prompt": "MeadowDB returns Q44 while writing a pricing update. What should the operator do?"
+      },
+      "task_grader": {
+        "all_regex": [
+          [
+            "\\b(?:read|reading|fetch|fetching|get|getting)\\b.*\\bprimary\\s+epoch\\b"
+          ],
+          [
+            "\\bbronze\\s+lock\\b"
+          ],
+          [
+            "\\bretry\\b.*\\b(?:exactly\\s+)?once\\b"
+          ],
+          [
+            "x-meadow-epoch"
+          ]
+        ]
+      },
+      "fidelity_grader": {
+        "all_regex": [
+          [
+            "\\b(?:read|reading|fetch|fetching|get|getting)\\b.*\\bprimary\\s+epoch\\b"
+          ],
+          [
+            "\\bbronze\\s+lock\\b"
+          ],
+          [
+            "\\bretry\\b.*\\b(?:exactly\\s+)?once\\b"
+          ],
+          [
+            "x-meadow-epoch"
+          ],
+          [
+            "(?:never|do\\s+not|don.t).*\\bincrement(?:ing)?\\b.*\\bepoch\\b.*\\blocally\\b"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "cobaltparser-u8",
+      "entities": [
+        "system:cobaltparser",
+        "code:u8"
+      ],
+      "experience": {
+        "prompt": "CobaltParser returns U8 with legacy state=J before schema validation. What should the operator do?",
+        "feedback": "CobaltParser runbook rule: U8 requires mapping J to hold, K to release, and L to review before normal schema validation, and the raw legacy state must never be validated."
+      },
+      "transfer": {
+        "prompt": "CobaltParser returns U8 with legacy state=L before schema validation. What should the operator do?"
+      },
+      "task_grader": {
+        "all_regex": [
+          [
+            "\\bl\\b.*\\breview\\b"
+          ],
+          [
+            "\\bbefore\\b.*\\b(?:schema\\s+)?validation\\b",
+            "\\bthen\\b.*\\bvalidat"
+          ]
+        ]
+      },
+      "fidelity_grader": {
+        "all_regex": [
+          [
+            "\\bl\\b.*\\breview\\b"
+          ],
+          [
+            "\\bbefore\\b.*\\b(?:schema\\s+)?validation\\b",
+            "\\bthen\\b.*\\bvalidat"
+          ],
+          [
+            "(?:never|do\\s+not|must\\s+not).*\\bvalidat.*\\braw\\s+legacy\\s+state\\b",
+            "\\braw\\s+legacy\\s+state\\b.*(?:never|do\\s+not|must\\s+not).*\\bvalidat"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "solarrpc-d63",
+      "entities": [
+        "system:solarrpc",
+        "code:d63"
+      ],
+      "experience": {
+        "prompt": "SolarRPC returns D63 during a customer-profile request. What should the operator do?",
+        "feedback": "SolarRPC runbook rule: D63 requires exactly three heartbeat frames 300 ms apart, then a new channel with a fresh correlation ID and X-Solar-Recover: d63; never reuse the prior correlation ID."
+      },
+      "transfer": {
+        "prompt": "SolarRPC returns D63 during an order-history request. What should the operator do?"
+      },
+      "task_grader": {
+        "all_regex": [
+          [
+            "(?:exactly\\s+)?(?:three|3)\\s+heartbeat"
+          ],
+          [
+            "\\b300\\s*(?:ms|milliseconds?)\\b"
+          ],
+          [
+            "\\b(?:new|fresh)\\s+channel\\b"
+          ],
+          [
+            "\\b(?:fresh|new)\\s+correlation\\s+id\\b"
+          ],
+          [
+            "x-solar-recover.*d63"
+          ]
+        ]
+      },
+      "fidelity_grader": {
+        "all_regex": [
+          [
+            "(?:exactly\\s+)?(?:three|3)\\s+heartbeat"
+          ],
+          [
+            "\\b300\\s*(?:ms|milliseconds?)\\b"
+          ],
+          [
+            "\\b(?:new|fresh)\\s+channel\\b"
+          ],
+          [
+            "\\b(?:fresh|new)\\s+correlation\\s+id\\b"
+          ],
+          [
+            "x-solar-recover.*d63"
+          ],
+          [
+            "(?:never|do\\s+not|don.t).*\\breus(?:e|ing)?\\b.*\\b(?:prior|old)\\s+correlation\\s+id\\b"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "willowcache-t5",
+      "entities": [
+        "system:willowcache",
+        "code:t5"
+      ],
+      "experience": {
+        "prompt": "WillowCache returns T5 while refreshing a script asset. What should the operator do?",
+        "feedback": "WillowCache runbook rule: T5 requires one HEAD request to origin, purge only the current zone shard, wait 6 seconds, issue one GET with X-Willow-Probe: 4, and never perform a global purge."
+      },
+      "transfer": {
+        "prompt": "WillowCache returns T5 while refreshing a stylesheet asset. What should the operator do?"
+      },
+      "task_grader": {
+        "all_regex": [
+          [
+            "\\b(?:one|1)\\s+head\\s+request\\b"
+          ],
+          [
+            "\\bpurge\\b.*\\bonly\\b.*\\bcurrent\\s+zone\\s+shard\\b"
+          ],
+          [
+            "\\b6\\s*(?:seconds?|s)\\b"
+          ],
+          [
+            "\\b(?:one|1)\\s+get\\b"
+          ],
+          [
+            "x-willow-probe.*4"
+          ]
+        ]
+      },
+      "fidelity_grader": {
+        "all_regex": [
+          [
+            "\\b(?:one|1)\\s+head\\s+request\\b"
+          ],
+          [
+            "\\bpurge\\b.*\\bonly\\b.*\\bcurrent\\s+zone\\s+shard\\b"
+          ],
+          [
+            "\\b6\\s*(?:seconds?|s)\\b"
+          ],
+          [
+            "\\b(?:one|1)\\s+get\\b"
+          ],
+          [
+            "x-willow-probe.*4"
+          ],
+          [
+            "(?:never|do\\s+not|don.t).*\\bglobal\\s+purge\\b"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "ironflow-p21",
+      "entities": [
+        "system:ironflow",
+        "code:p21"
+      ],
+      "experience": {
+        "prompt": "IronFlow returns P21 during invoice reconciliation. What should the operator do?",
+        "feedback": "IronFlow runbook rule: P21 requires cloning the latest checkpoint, marking the old run stale, restarting from the previous boundary exactly once with token p21-safe, and never resuming the failed step directly."
+      },
+      "transfer": {
+        "prompt": "IronFlow returns P21 during payroll export. What should the operator do?"
+      },
+      "task_grader": {
+        "all_regex": [
+          [
+            "\\bclon(?:e|ing).*\\blatest\\s+checkpoint\\b"
+          ],
+          [
+            "\\bmark(?:ing)?\\b.*\\bold\\s+run\\b.*\\bstale\\b"
+          ],
+          [
+            "\\brestart.*\\bprevious\\s+boundary\\b.*\\b(?:exactly\\s+)?once\\b"
+          ],
+          [
+            "p21-safe"
+          ]
+        ]
+      },
+      "fidelity_grader": {
+        "all_regex": [
+          [
+            "\\bclon(?:e|ing).*\\blatest\\s+checkpoint\\b"
+          ],
+          [
+            "\\bmark(?:ing)?\\b.*\\bold\\s+run\\b.*\\bstale\\b"
+          ],
+          [
+            "\\brestart.*\\bprevious\\s+boundary\\b.*\\b(?:exactly\\s+)?once\\b"
+          ],
+          [
+            "p21-safe"
+          ],
+          [
+            "(?:never|do\\s+not|don.t).*\\bresum.*\\bfailed\\s+step\\b"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "novaindex-b14",
+      "entities": [
+        "system:novaindex",
+        "code:b14"
+      ],
+      "experience": {
+        "prompt": "NovaIndex returns B14 during catalog indexing. What should the operator do?",
+        "feedback": "NovaIndex runbook rule: B14 requires fetching a new cursor, switching to delta-read mode, replaying exactly two pages, setting X-Nova-Cursor: fresh, and never rewinding the old cursor."
+      },
+      "transfer": {
+        "prompt": "NovaIndex returns B14 during customer indexing. What should the operator do?"
+      },
+      "task_grader": {
+        "all_regex": [
+          [
+            "\\b(?:new|fresh)\\s+cursor\\b"
+          ],
+          [
+            "\\bdelta-read\\b",
+            "\\bdelta\\s+read\\b"
+          ],
+          [
+            "\\breplay.*\\b(?:two|2)\\s+pages?\\b"
+          ],
+          [
+            "x-nova-cursor.*fresh"
+          ]
+        ]
+      },
+      "fidelity_grader": {
+        "all_regex": [
+          [
+            "\\b(?:new|fresh)\\s+cursor\\b"
+          ],
+          [
+            "\\bdelta-read\\b",
+            "\\bdelta\\s+read\\b"
+          ],
+          [
+            "\\breplay.*\\b(?:two|2)\\s+pages?\\b"
+          ],
+          [
+            "x-nova-cursor.*fresh"
+          ],
+          [
+            "(?:never|do\\s+not|don.t).*\\brewind(?:ing)?\\b.*\\b(?:old|prior)\\s+cursor\\b"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "mintledger-f32",
+      "entities": [
+        "system:mintledger",
+        "code:f32"
+      ],
+      "experience": {
+        "prompt": "MintLedger returns F32 while writing a settlement. What should the operator do?",
+        "feedback": "MintLedger runbook rule: F32 requires requesting the server nonce, acquiring the blue lock, retrying exactly twice with X-Mint-Nonce set to that server nonce, and never synthesizing a nonce locally."
+      },
+      "transfer": {
+        "prompt": "MintLedger returns F32 while writing a rebate. What should the operator do?"
+      },
+      "task_grader": {
+        "all_regex": [
+          [
+            "\\b(?:request|requesting|get|getting|fetch|fetching)\\b.*\\bserver\\s+nonce\\b"
+          ],
+          [
+            "\\bblue\\s+lock\\b"
+          ],
+          [
+            "\\bretry.*\\b(?:exactly\\s+)?(?:twice|2\\s+times?)\\b"
+          ],
+          [
+            "x-mint-nonce"
+          ]
+        ]
+      },
+      "fidelity_grader": {
+        "all_regex": [
+          [
+            "\\b(?:request|requesting|get|getting|fetch|fetching)\\b.*\\bserver\\s+nonce\\b"
+          ],
+          [
+            "\\bblue\\s+lock\\b"
+          ],
+          [
+            "\\bretry.*\\b(?:exactly\\s+)?(?:twice|2\\s+times?)\\b"
+          ],
+          [
+            "x-mint-nonce"
+          ],
+          [
+            "(?:never|do\\s+not|don.t).*\\bsynthesi[sz].*\\bnonce\\b.*\\blocally\\b"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "coralbus-y7",
+      "entities": [
+        "system:coralbus",
+        "code:y7"
+      ],
+      "experience": {
+        "prompt": "CoralBus returns Y7 while consuming an invoice event. What should the operator do?",
+        "feedback": "CoralBus runbook rule: Y7 requires a fresh checkpoint, replay exactly once from it with Replay-Class: coral, and never acknowledge the original message."
+      },
+      "transfer": {
+        "prompt": "CoralBus returns Y7 while consuming an audit event. What should the operator do?"
+      },
+      "task_grader": {
+        "all_regex": [
+          [
+            "\\b(?:fresh|new)\\s+checkpoint\\b"
+          ],
+          [
+            "\\breplay\\b.*\\b(?:exactly\\s+)?once\\b"
+          ],
+          [
+            "replay-class.*coral"
+          ]
+        ]
+      },
+      "fidelity_grader": {
+        "all_regex": [
+          [
+            "\\b(?:fresh|new)\\s+checkpoint\\b"
+          ],
+          [
+            "\\breplay\\b.*\\b(?:exactly\\s+)?once\\b"
+          ],
+          [
+            "replay-class.*coral"
+          ],
+          [
+            "(?:never|do\\s+not|don.t).*\\b(?:ack|acknowledge).*\\boriginal\\s+message\\b"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "summitstore-w18",
+      "entities": [
+        "system:summitstore",
+        "code:w18"
+      ],
+      "experience": {
+        "prompt": "SummitStore returns W18 while uploading a 200 MiB backup. What should the operator do?",
+        "feedback": "SummitStore runbook rule: W18 requires a new upload ID, multipart upload using 20 MiB chunks, SHA-512 for every chunk, X-Summit-Manifest: frost on finalization, and never reuse the previous upload ID."
+      },
+      "transfer": {
+        "prompt": "SummitStore returns W18 while uploading a 100 MiB snapshot. What should the operator do?"
+      },
+      "task_grader": {
+        "all_regex": [
+          [
+            "\\b(?:new|fresh)\\s+upload\\s+id\\b"
+          ],
+          [
+            "\\bmultipart\\b"
+          ],
+          [
+            "\\b20\\s*(?:mib|mb)\\b"
+          ],
+          [
+            "\\bsha-?512\\b"
+          ],
+          [
+            "\\b(?:every|each|per).*\\bchunks?\\b"
+          ],
+          [
+            "x-summit-manifest.*frost"
+          ]
+        ]
+      },
+      "fidelity_grader": {
+        "all_regex": [
+          [
+            "\\b(?:new|fresh)\\s+upload\\s+id\\b"
+          ],
+          [
+            "\\bmultipart\\b"
+          ],
+          [
+            "\\b20\\s*(?:mib|mb)\\b"
+          ],
+          [
+            "\\bsha-?512\\b"
+          ],
+          [
+            "\\b(?:every|each|per).*\\bchunks?\\b"
+          ],
+          [
+            "x-summit-manifest.*frost"
+          ],
+          [
+            "(?:never|do\\s+not|don.t).*\\breus(?:e|ing)?\\b.*\\b(?:previous|old)\\s+upload\\s+id\\b"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "emberdb-s29",
+      "entities": [
+        "system:emberdb",
+        "code:s29"
+      ],
+      "experience": {
+        "prompt": "EmberDB returns S29 during a balance query. What should the operator do?",
+        "feedback": "EmberDB runbook rule: S29 requires refreshing the schema token, switching to snapshot mode, retrying exactly once while preserving the original request ID, and never reconnecting the session."
+      },
+      "transfer": {
+        "prompt": "EmberDB returns S29 during an inventory query. What should the operator do?"
+      },
+      "task_grader": {
+        "all_regex": [
+          [
+            "\\brefresh(?:ing)?\\b.*\\bschema\\s+token\\b"
+          ],
+          [
+            "\\bsnapshot\\b"
+          ],
+          [
+            "\\bretry(?:ing)?\\b.*\\b(?:exactly\\s+)?once\\b"
+          ],
+          [
+            "\\bpreserv.*\\boriginal\\s+request\\s+id\\b"
+          ]
+        ]
+      },
+      "fidelity_grader": {
+        "all_regex": [
+          [
+            "\\brefresh(?:ing)?\\b.*\\bschema\\s+token\\b"
+          ],
+          [
+            "\\bsnapshot\\b"
+          ],
+          [
+            "\\bretry(?:ing)?\\b.*\\b(?:exactly\\s+)?once\\b"
+          ],
+          [
+            "\\bpreserv.*\\boriginal\\s+request\\s+id\\b"
+          ],
+          [
+            "(?:never|do\\s+not|don.t).*\\breconnect(?:ing)?\\b.*\\bsession\\b"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "quillrpc-g12",
+      "entities": [
+        "system:quillrpc",
+        "code:g12"
+      ],
+      "experience": {
+        "prompt": "QuillRPC returns G12 during a profile RPC. What should the operator do?",
+        "feedback": "QuillRPC runbook rule: G12 requires exactly two heartbeat frames 175 ms apart, then a fresh channel carrying X-Quill-Recover: g12, and never reuse the previous stream ID."
+      },
+      "transfer": {
+        "prompt": "QuillRPC returns G12 during a billing RPC. What should the operator do?"
+      },
+      "task_grader": {
+        "all_regex": [
+          [
+            "(?:exactly\\s+)?(?:two|2)\\s+heartbeat"
+          ],
+          [
+            "\\b175\\s*(?:ms|milliseconds?)\\b"
+          ],
+          [
+            "\\b(?:fresh|new)\\s+channel\\b"
+          ],
+          [
+            "x-quill-recover.*g12"
+          ]
+        ]
+      },
+      "fidelity_grader": {
+        "all_regex": [
+          [
+            "(?:exactly\\s+)?(?:two|2)\\s+heartbeat"
+          ],
+          [
+            "\\b175\\s*(?:ms|milliseconds?)\\b"
+          ],
+          [
+            "\\b(?:fresh|new)\\s+channel\\b"
+          ],
+          [
+            "x-quill-recover.*g12"
+          ],
+          [
+            "(?:never|do\\s+not|don.t).*\\breus(?:e|ing)?\\b.*\\b(?:previous|old)\\s+stream\\s+id\\b"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "harborqueue-n41",
+      "entities": [
+        "system:harborqueue",
+        "code:n41"
+      ],
+      "experience": {
+        "prompt": "HarborQueue returns N41 for a report-generation job. What should the operator do?",
+        "feedback": "HarborQueue runbook rule: N41 requires minting a new dispatch ID, moving the job to the teal lane, requeueing exactly once, tagging dispatch-mode=restored, and never acknowledging the original dispatch."
+      },
+      "transfer": {
+        "prompt": "HarborQueue returns N41 for a media-processing job. What should the operator do?"
+      },
+      "task_grader": {
+        "all_regex": [
+          [
+            "\\b(?:mint|minting|create|creating|generate|generating).*\\bnew\\s+dispatch\\s+id\\b"
+          ],
+          [
+            "\\bteal\\s+lane\\b"
+          ],
+          [
+            "\\bre-?queue.*\\b(?:exactly\\s+)?once\\b"
+          ],
+          [
+            "dispatch-mode\\s*=\\s*restored"
+          ]
+        ]
+      },
+      "fidelity_grader": {
+        "all_regex": [
+          [
+            "\\b(?:mint|minting|create|creating|generate|generating).*\\bnew\\s+dispatch\\s+id\\b"
+          ],
+          [
+            "\\bteal\\s+lane\\b"
+          ],
+          [
+            "\\bre-?queue.*\\b(?:exactly\\s+)?once\\b"
+          ],
+          [
+            "dispatch-mode\\s*=\\s*restored"
+          ],
+          [
+            "(?:never|do\\s+not|don.t).*\\b(?:ack|acknowledge).*\\boriginal\\s+dispatch\\b"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "pinecdn-c26",
+      "entities": [
+        "system:pinecdn",
+        "code:c26"
+      ],
+      "experience": {
+        "prompt": "PineCDN returns C26 while refreshing a JavaScript asset. What should the operator do?",
+        "feedback": "PineCDN runbook rule: C26 requires one HEAD request, purging only the current POP shard, waiting 8 seconds, then one GET carrying X-Pine-Probe: 2, and never issuing a global purge."
+      },
+      "transfer": {
+        "prompt": "PineCDN returns C26 while refreshing an image asset. What should the operator do?"
+      },
+      "task_grader": {
+        "all_regex": [
+          [
+            "\\b(?:one|1)\\s+head\\s+request\\b"
+          ],
+          [
+            "\\bpurg(?:e|ing).*\\bonly\\b.*\\bcurrent\\s+pop\\s+shard\\b"
+          ],
+          [
+            "\\b8\\s*(?:seconds?|s)\\b"
+          ],
+          [
+            "\\b(?:one|1)\\s+get\\b"
+          ],
+          [
+            "x-pine-probe.*2"
+          ]
+        ]
+      },
+      "fidelity_grader": {
+        "all_regex": [
+          [
+            "\\b(?:one|1)\\s+head\\s+request\\b"
+          ],
+          [
+            "\\bpurg(?:e|ing).*\\bonly\\b.*\\bcurrent\\s+pop\\s+shard\\b"
+          ],
+          [
+            "\\b8\\s*(?:seconds?|s)\\b"
+          ],
+          [
+            "\\b(?:one|1)\\s+get\\b"
+          ],
+          [
+            "x-pine-probe.*2"
+          ],
+          [
+            "(?:never|do\\s+not|don.t).*\\bglobal\\s+purge\\b"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "orbitflow-v15",
+      "entities": [
+        "system:orbitflow",
+        "code:v15"
+      ],
+      "experience": {
+        "prompt": "OrbitFlow returns V15 during invoice export. What should the operator do?",
+        "feedback": "OrbitFlow runbook rule: V15 requires cloning the latest checkpoint, marking the old run superseded, restarting from the prior boundary exactly once with token v15-safe, and never resuming the failed node directly."
+      },
+      "transfer": {
+        "prompt": "OrbitFlow returns V15 during analytics export. What should the operator do?"
+      },
+      "task_grader": {
+        "all_regex": [
+          [
+            "\\bclon(?:e|ing).*\\blatest\\s+checkpoint\\b"
+          ],
+          [
+            "\\bmark.*\\bold\\s+run\\b.*\\bsuperseded\\b"
+          ],
+          [
+            "\\brestart.*\\b(?:prior|previous)\\s+boundary\\b.*\\b(?:exactly\\s+)?once\\b"
+          ],
+          [
+            "v15-safe"
+          ]
+        ]
+      },
+      "fidelity_grader": {
+        "all_regex": [
+          [
+            "\\bclon(?:e|ing).*\\blatest\\s+checkpoint\\b"
+          ],
+          [
+            "\\bmark.*\\bold\\s+run\\b.*\\bsuperseded\\b"
+          ],
+          [
+            "\\brestart.*\\b(?:prior|previous)\\s+boundary\\b.*\\b(?:exactly\\s+)?once\\b"
+          ],
+          [
+            "v15-safe"
+          ],
+          [
+            "(?:never|do\\s+not|don.t).*\\bresum.*\\bfailed\\s+node\\b"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "tulipparser-m9",
+      "entities": [
+        "system:tulipparser",
+        "code:m9"
+      ],
+      "experience": {
+        "prompt": "TulipParser returns M9 with legacy state=X before validation. What should the operator do?",
+        "feedback": "TulipParser runbook rule: M9 requires mapping X to queued, Y to blocked, and Z to ready before normal validation; never validate the raw legacy state."
+      },
+      "transfer": {
+        "prompt": "TulipParser returns M9 with legacy state=Z before validation. What should the operator do?"
+      },
+      "task_grader": {
+        "all_regex": [
+          [
+            "\\bz\\b.*\\bready\\b"
+          ],
+          [
+            "\\bbefore\\b.*\\bvalidation\\b",
+            "\\bthen\\b.*\\bvalidat"
+          ]
+        ]
+      },
+      "fidelity_grader": {
+        "all_regex": [
+          [
+            "\\bz\\b.*\\bready\\b"
+          ],
+          [
+            "\\bbefore\\b.*\\bvalidation\\b",
+            "\\bthen\\b.*\\bvalidat"
+          ],
+          [
+            "(?:never|do\\s+not|must\\s+not).*\\bvalidat.*\\braw\\s+legacy\\s+state\\b"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "glacierpay-h34",
+      "entities": [
+        "system:glacierpay",
+        "code:h34"
+      ],
+      "experience": {
+        "prompt": "GlacierPay returns H34 while capturing an order payment. What should the operator do?",
+        "feedback": "GlacierPay runbook rule: H34 means wait 11 seconds, rotate the session key, mint a new idempotency key, retry exactly twice with X-Glacier-Mode: white, and never reuse the old idempotency key."
+      },
+      "transfer": {
+        "prompt": "GlacierPay returns H34 while issuing an order refund. What should the operator do?"
+      },
+      "task_grader": {
+        "all_regex": [
+          [
+            "\\b11\\s*(?:seconds?|s)\\b"
+          ],
+          [
+            "\\b(?:rotate|rotating|refresh|refreshing).*\\bsession\\s+key\\b"
+          ],
+          [
+            "\\b(?:mint|minting|create|creating|generate|generating).*\\bnew\\s+idempotency\\s+key\\b"
+          ],
+          [
+            "\\bretry.*\\b(?:exactly\\s+)?(?:twice|2\\s+times?)\\b"
+          ],
+          [
+            "x-glacier-mode.*white"
+          ]
+        ]
+      },
+      "fidelity_grader": {
+        "all_regex": [
+          [
+            "\\b11\\s*(?:seconds?|s)\\b"
+          ],
+          [
+            "\\b(?:rotate|rotating|refresh|refreshing).*\\bsession\\s+key\\b"
+          ],
+          [
+            "\\b(?:mint|minting|create|creating|generate|generating).*\\bnew\\s+idempotency\\s+key\\b"
+          ],
+          [
+            "\\bretry.*\\b(?:exactly\\s+)?(?:twice|2\\s+times?)\\b"
+          ],
+          [
+            "x-glacier-mode.*white"
+          ],
+          [
+            "(?:never|do\\s+not|don.t).*\\breus(?:e|ing)?\\b.*\\b(?:old|prior)\\s+idempotency\\s+key\\b"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "velvetindex-j28",
+      "entities": [
+        "system:velvetindex",
+        "code:j28"
+      ],
+      "experience": {
+        "prompt": "VelvetIndex returns J28 during product search. What should the operator do?",
+        "feedback": "VelvetIndex runbook rule: J28 requires fetching a fresh cursor from the leader, switching to shadow-read, retrying exactly once while preserving the original query ID, and never reopening the old snapshot."
+      },
+      "transfer": {
+        "prompt": "VelvetIndex returns J28 during account search. What should the operator do?"
+      },
+      "task_grader": {
+        "all_regex": [
+          [
+            "\\b(?:fresh|new)\\s+cursor\\b.*\\bleader\\b",
+            "\\bleader\\b.*\\b(?:fresh|new)\\s+cursor\\b"
+          ],
+          [
+            "\\bshadow-read\\b",
+            "\\bshadow\\s+read\\b"
+          ],
+          [
+            "\\bretry(?:ing)?\\b.*\\b(?:exactly\\s+)?once\\b"
+          ],
+          [
+            "\\bpreserv.*\\boriginal\\s+query\\s+id\\b"
+          ]
+        ]
+      },
+      "fidelity_grader": {
+        "all_regex": [
+          [
+            "\\b(?:fresh|new)\\s+cursor\\b.*\\bleader\\b",
+            "\\bleader\\b.*\\b(?:fresh|new)\\s+cursor\\b"
+          ],
+          [
+            "\\bshadow-read\\b",
+            "\\bshadow\\s+read\\b"
+          ],
+          [
+            "\\bretry(?:ing)?\\b.*\\b(?:exactly\\s+)?once\\b"
+          ],
+          [
+            "\\bpreserv.*\\boriginal\\s+query\\s+id\\b"
+          ],
+          [
+            "(?:never|do\\s+not|don.t).*\\breopen(?:ing)?\\b.*\\b(?:old|previous)\\s+snapshot\\b"
+          ]
+        ]
+      }
+    }
+  ]
+}

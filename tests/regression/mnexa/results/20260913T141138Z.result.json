@@ -1,0 +1,825 @@
+{
+  "experiment": "seed-growth-004",
+  "classification": "exploratory-fresh-ablation",
+  "run_id": "20260913T141138Z",
+  "taskset_sha256": "0c37872b598599b3484f5185f70fb77f494705dcffe7367137f6e4b19787b8b1",
+  "model": "gpt-4o-mini",
+  "embedder": "sentence-transformers/all-MiniLM-L6-v2",
+  "meter": "word-meter-v1",
+  "task_count": 20,
+  "conditions": {
+    "A": "baseline_no_persistent_memory",
+    "B": "current_mnexa",
+    "C": "same_mnexa_memory_plus_constraint_fidelity_instruction"
+  },
+  "baseline_task_passes": 0,
+  "current_mnexa_task_passes": 17,
+  "fidelity_mnexa_task_passes": 19,
+  "baseline_constraint_fidelity_passes": 0,
+  "current_mnexa_constraint_fidelity_passes": 2,
+  "fidelity_mnexa_constraint_fidelity_passes": 19,
+  "all_b_c_memory_equal": true,
+  "fidelity_instruction": "DECISION-FIDELITY REQUIREMENT:\n\nWhen accumulated MNEXA experience contains\nCRITICAL CONSTRAINTS, preserve every\ndecision-critical constraint in the final answer.\n\nIn particular:\n\n- explicitly preserve prohibitions such as\n  \"never\", \"do not\", and \"must not\";\n- preserve \"only\", \"every\", \"each\", \"before\",\n  \"after\", and ordering requirements;\n- preserve exact retry limits and counts;\n- preserve numbers and units;\n- preserve identifiers, protocol values,\n  headers, tokens, and modes;\n- do not silently replace an explicit prohibition\n  with an implied positive action.\n\nExample:\n\nMemory:\n\"Use a fresh correlation ID.\nNever reuse the prior correlation ID.\"\n\nInsufficient:\n\"Use a fresh correlation ID.\"\n\nFaithful:\n\"Use a fresh correlation ID and never reuse\nthe prior correlation ID.\"\n\nDo not add constraints that are absent from memory.\nDo not merely repeat irrelevant memory.",
+  "families": [
+    {
+      "family_id": "xenonpay-a19",
+      "experience": {
+        "decision": "The operator should verify the details of the invoice for any discrepancies. If everything appears correct, they should contact XenonPay support for assistance with the A19 error.",
+        "task_success": false,
+        "outcome": "EVALUATION: FAIL. XenonPay runbook rule: A19 means wait 5 seconds, mint a new nonce, rotate the session token, retry exactly once with X-Xenon-Path: cobalt, and never reuse the prior nonce.",
+        "outcome_id": "r_366701ba18614e45840a28dd497e3bf4",
+        "lesson": "TRIGGER:\nEncountering an A19 error with XenonPay.\n\nREUSABLE RULE:\nWait 5 seconds, mint a new nonce, rotate the session token, retry exactly once with X-Xenon-Path: cobalt, and never reuse the prior nonce.\n\nCRITICAL CONSTRAINTS:\n- Wait 5 seconds before taking action.\n- Retry exactly once only.\n- Never reuse the prior nonce.\n- Use the header X-Xenon-Path: cobalt.",
+        "lesson_id": "i_9e773b39972b43c28b2e7626b1e652a0"
+      },
+      "baseline": {
+        "decision": "The operator should check for any specific guidelines related to error code A19 in the XenonPay system. If no guidelines are available, escalate the issue to the technical support team for further assistance.",
+        "task_success": false,
+        "constraint_fidelity": false,
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa_current": {
+        "decision": "1. Wait 5 seconds.\n2. Mint a new nonce.\n3. Rotate the session token.\n4. Retry the subscription cancellation with the header `X-Xenon-Path: cobalt` using the new nonce.",
+        "task_success": false,
+        "constraint_fidelity": false,
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_9e773b39972b43c28b2e7626b1e652a0:v1] TRIGGER:\nEncountering an A19 error with XenonPay.\n\nREUSABLE RULE:\nWait 5 seconds, mint a new nonce, rotate the session token, retry exactly once with X-Xenon-Path: cobalt, and never reuse the prior nonce.\n\nCRITICAL CONSTRAINTS:\n- Wait 5 seconds before taking action.\n- Retry exactly once only.\n- Never reuse the prior nonce.\n- Use the header X-Xenon-Path: cobalt."
+        ]
+      },
+      "mnexa_fidelity": {
+        "decision": "1. Wait 5 seconds.\n2. Mint a new nonce.\n3. Rotate the session token.\n4. Retry exactly once with the header X-Xenon-Path: cobalt.\n5. Never reuse the prior nonce.",
+        "task_success": true,
+        "constraint_fidelity": true,
+        "watermark": 6,
+        "memory_segments": [
+          "[interpretive:i_9e773b39972b43c28b2e7626b1e652a0:v1] TRIGGER:\nEncountering an A19 error with XenonPay.\n\nREUSABLE RULE:\nWait 5 seconds, mint a new nonce, rotate the session token, retry exactly once with X-Xenon-Path: cobalt, and never reuse the prior nonce.\n\nCRITICAL CONSTRAINTS:\n- Wait 5 seconds before taking action.\n- Retry exactly once only.\n- Never reuse the prior nonce.\n- Use the header X-Xenon-Path: cobalt."
+        ]
+      },
+      "same_memory_b_c": true,
+      "memory_lift": 0,
+      "fidelity_instruction_task_lift": 1,
+      "fidelity_instruction_constraint_lift": 1
+    },
+    {
+      "family_id": "birchqueue-r6",
+      "experience": {
+        "decision": "The operator should check the BirchQueue documentation for error code R6 and follow the specified troubleshooting steps. If the issue persists, escalate the problem to the technical support team for further assistance.",
+        "task_success": false,
+        "outcome": "EVALUATION: FAIL. BirchQueue runbook rule: R6 means obtain a new lease, move the job to the silver lane, requeue exactly twice, tag queue-mode=echo, and do not acknowledge the original dispatch.",
+        "outcome_id": "r_af3b53ccb8494544a1e0a1e94d94ddc8",
+        "lesson": "TRIGGER:\nError code R6 in BirchQueue.\n\nREUSABLE RULE:\nObtain a new lease, move the job to the silver lane, requeue exactly twice, tag queue-mode=echo, and do not acknowledge the original dispatch.\n\nCRITICAL CONSTRAINTS:\n- move the job to the silver lane\n- requeue exactly twice\n- tag queue-mode=echo\n- do not acknowledge the original dispatch",
+        "lesson_id": "i_b520545ecc5f42f1945d6a9d7ad186c6"
+      },
+      "baseline": {
+        "decision": "The operator should check the BirchQueue logs for errors or warnings related to the R6 return. If no obvious issue is found, they should retry the thumbnail job. If the problem persists, escalate the issue to the technical support team for further investigation.",
+        "task_success": false,
+        "constraint_fidelity": false,
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa_current": {
+        "decision": "1. Obtain a new lease for the job.\n2. Move the job to the silver lane.\n3. Requeue the job exactly twice.\n4. Tag the job with queue-mode=echo.\n5. Do not acknowledge the original dispatch.",
+        "task_success": true,
+        "constraint_fidelity": true,
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_b520545ecc5f42f1945d6a9d7ad186c6:v1] TRIGGER:\nError code R6 in BirchQueue.\n\nREUSABLE RULE:\nObtain a new lease, move the job to the silver lane, requeue exactly twice, tag queue-mode=echo, and do not acknowledge the original dispatch.\n\nCRITICAL CONSTRAINTS:\n- move the job to the silver lane\n- requeue exactly twice\n- tag queue-mode=echo\n- do not acknowledge the original dispatch"
+        ]
+      },
+      "mnexa_fidelity": {
+        "decision": "Obtain a new lease, move the job to the silver lane, requeue exactly twice, tag queue-mode=echo, and do not acknowledge the original dispatch.",
+        "task_success": true,
+        "constraint_fidelity": true,
+        "watermark": 6,
+        "memory_segments": [
+          "[interpretive:i_b520545ecc5f42f1945d6a9d7ad186c6:v1] TRIGGER:\nError code R6 in BirchQueue.\n\nREUSABLE RULE:\nObtain a new lease, move the job to the silver lane, requeue exactly twice, tag queue-mode=echo, and do not acknowledge the original dispatch.\n\nCRITICAL CONSTRAINTS:\n- move the job to the silver lane\n- requeue exactly twice\n- tag queue-mode=echo\n- do not acknowledge the original dispatch"
+        ]
+      },
+      "same_memory_b_c": true,
+      "memory_lift": 1,
+      "fidelity_instruction_task_lift": 0,
+      "fidelity_instruction_constraint_lift": 0
+    },
+    {
+      "family_id": "prismstore-k27",
+      "experience": {
+        "decision": "The operator should check the upload limits and configuration settings for PrismStore. If the 120 MiB archive exceeds the current limits, consider splitting the file into smaller parts and uploading them individually. If necessary, consult the documentation for further guidance on file size constraints and potential remedies.",
+        "task_success": false,
+        "outcome": "EVALUATION: FAIL. PrismStore runbook rule: K27 requires a new upload session, multipart upload with 10 MiB chunks, CRC32C for every chunk, X-Prism-Final: jade on finalization, and never append to the previous upload session.",
+        "outcome_id": "r_58c85ce9282e45d7858e248f4f4ca113",
+        "lesson": "TRIGGER:\nUploading archives to PrismStore that may exceed limits.\n\nREUSABLE RULE:\nFollow PrismStore runbook rule K27 for uploads.\n\nCRITICAL CONSTRAINTS:\n- Requires a new upload session for every upload.\n- Must use multipart upload with 10 MiB chunks.\n- Each chunk must use CRC32C for validation.\n- Use X-Prism-Final: jade on finalization.\n- Never append to the previous upload session.",
+        "lesson_id": "i_23ac2c9fffae4b888f3486bb9aa0df90"
+      },
+      "baseline": {
+        "decision": "The operator should check the upload logs for any errors or timeouts related to the K27 error. If necessary, retry the upload after ensuring a stable connection and adequate resources are available. If the issue persists, consult the PrismStore documentation for K27 error specifics or contact support for assistance.",
+        "task_success": false,
+        "constraint_fidelity": false,
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa_current": {
+        "decision": "To resolve the K27 issue when uploading a 60 MiB checkpoint to PrismStore, follow these steps:\n\n1. **Create a new upload session** for the file.\n2. **Divide the file** into 10 MiB chunks (total 6 chunks).\n3. **Upload each chunk** using multipart upload, ensuring each chunk is validated with CRC32C.\n4. On the final chunk, **set the header** `X-Prism-Final: jade` before finalizing the upload.\n5. **Do not append** to any previous upload sessions. \n\nFollowing these steps will ensure compliance with PrismStore rules and successful upload of the checkpoint.",
+        "task_success": true,
+        "constraint_fidelity": false,
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_23ac2c9fffae4b888f3486bb9aa0df90:v1] TRIGGER:\nUploading archives to PrismStore that may exceed limits.\n\nREUSABLE RULE:\nFollow PrismStore runbook rule K27 for uploads.\n\nCRITICAL CONSTRAINTS:\n- Requires a new upload session for every upload.\n- Must use multipart upload with 10 MiB chunks.\n- Each chunk must use CRC32C for validation.\n- Use X-Prism-Final: jade on finalization.\n- Never append to the previous upload session."
+        ]
+      },
+      "mnexa_fidelity": {
+        "decision": "To resolve the K27 issue while uploading the 60 MiB checkpoint to PrismStore, follow these actions:\n\n1. Start a new upload session for the checkpoint.\n2. Use multipart upload with 10 MiB chunks.\n3. Validate each chunk using CRC32C.\n4. Set the X-Prism-Final header to \"jade\" on finalization.\n5. Never append to the previous upload session.",
+        "task_success": true,
+        "constraint_fidelity": true,
+        "watermark": 6,
+        "memory_segments": [
+          "[interpretive:i_23ac2c9fffae4b888f3486bb9aa0df90:v1] TRIGGER:\nUploading archives to PrismStore that may exceed limits.\n\nREUSABLE RULE:\nFollow PrismStore runbook rule K27 for uploads.\n\nCRITICAL CONSTRAINTS:\n- Requires a new upload session for every upload.\n- Must use multipart upload with 10 MiB chunks.\n- Each chunk must use CRC32C for validation.\n- Use X-Prism-Final: jade on finalization.\n- Never append to the previous upload session."
+        ]
+      },
+      "same_memory_b_c": true,
+      "memory_lift": 1,
+      "fidelity_instruction_task_lift": 0,
+      "fidelity_instruction_constraint_lift": 1
+    },
+    {
+      "family_id": "meadowdb-q44",
+      "experience": {
+        "decision": "The operator should check the error logs for MeadowDB to understand the cause of the Q44 return code and follow the troubleshooting steps specific to that code. If further assistance is needed, contact technical support for guidance.",
+        "task_success": false,
+        "outcome": "EVALUATION: FAIL. MeadowDB runbook rule: Q44 means read the primary epoch, acquire the bronze lock, retry exactly once with X-Meadow-Epoch set to the primary epoch, and never increment the epoch locally.",
+        "outcome_id": "r_5edd5c70b69b43e393d3d7dbc34e07ec",
+        "lesson": "TRIGGER:\nWhen encountering a Q44 return code in MeadowDB.\n\nREUSABLE RULE:\nThe operator must read the primary epoch, acquire the bronze lock, and retry exactly once with X-Meadow-Epoch set to the primary epoch, while never incrementing the epoch locally.\n\nCRITICAL CONSTRAINTS:\n- Retry exactly once.\n- Only use X-Meadow-Epoch set to the primary epoch.\n- Never increment the epoch locally.",
+        "lesson_id": "i_5d596ce036c844d386495dab2c6ea586"
+      },
+      "baseline": {
+        "decision": "The operator should review the system logs for error details related to Q44. If no immediate resolution is apparent, escalate the issue to technical support for further assistance.",
+        "task_success": false,
+        "constraint_fidelity": false,
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa_current": {
+        "decision": "The operator should:\n\n1. Read the primary epoch.\n2. Acquire the bronze lock.\n3. Retry the pricing update exactly once with the header X-Meadow-Epoch set to the primary epoch, without incrementing the epoch locally.",
+        "task_success": true,
+        "constraint_fidelity": false,
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_5d596ce036c844d386495dab2c6ea586:v1] TRIGGER:\nWhen encountering a Q44 return code in MeadowDB.\n\nREUSABLE RULE:\nThe operator must read the primary epoch, acquire the bronze lock, and retry exactly once with X-Meadow-Epoch set to the primary epoch, while never incrementing the epoch locally.\n\nCRITICAL CONSTRAINTS:\n- Retry exactly once.\n- Only use X-Meadow-Epoch set to the primary epoch.\n- Never increment the epoch locally."
+        ]
+      },
+      "mnexa_fidelity": {
+        "decision": "When encountering a Q44 return code in MeadowDB, the operator must read the primary epoch, acquire the bronze lock, and retry exactly once with X-Meadow-Epoch set to the primary epoch, while never incrementing the epoch locally.",
+        "task_success": true,
+        "constraint_fidelity": true,
+        "watermark": 6,
+        "memory_segments": [
+          "[interpretive:i_5d596ce036c844d386495dab2c6ea586:v1] TRIGGER:\nWhen encountering a Q44 return code in MeadowDB.\n\nREUSABLE RULE:\nThe operator must read the primary epoch, acquire the bronze lock, and retry exactly once with X-Meadow-Epoch set to the primary epoch, while never incrementing the epoch locally.\n\nCRITICAL CONSTRAINTS:\n- Retry exactly once.\n- Only use X-Meadow-Epoch set to the primary epoch.\n- Never increment the epoch locally."
+        ]
+      },
+      "same_memory_b_c": true,
+      "memory_lift": 1,
+      "fidelity_instruction_task_lift": 0,
+      "fidelity_instruction_constraint_lift": 1
+    },
+    {
+      "family_id": "cobaltparser-u8",
+      "experience": {
+        "decision": "The operator should validate the legacy state \"J\" before proceeding with the schema validation to ensure that the data meets the necessary criteria. If the state is not valid for processing, appropriate corrective measures should be taken.",
+        "task_success": false,
+        "outcome": "EVALUATION: FAIL. CobaltParser runbook rule: U8 requires mapping J to hold, K to release, and L to review before normal schema validation, and the raw legacy state must never be validated.",
+        "outcome_id": "r_0efc521f3e1c49b09a05c5910d86080a",
+        "lesson": "TRIGGER:\nThe operator is validating legacy states before schema validation.\n\nREUSABLE RULE:\nMapping must be performed as follows: J to hold, K to release, and L to review before normal schema validation; the raw legacy state must never be validated.\n\nCRITICAL CONSTRAINTS:\n- The raw legacy state must never be validated.\n- Mapping of states J, K, and L must occur before normal schema validation.",
+        "lesson_id": "i_dfc3cfe90d174a128e2b7f2b7edecff1"
+      },
+      "baseline": {
+        "decision": "The operator should initiate schema validation immediately after receiving the U8 from CobaltParser with legacy state=L. Ensure that all relevant data is correctly formatted and compliant with the expected schema. If issues arise during validation, address them according to the established troubleshooting protocols.",
+        "task_success": false,
+        "constraint_fidelity": false,
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa_current": {
+        "decision": "The operator should map the legacy state L to \"review\" before proceeding with normal schema validation.",
+        "task_success": true,
+        "constraint_fidelity": false,
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_dfc3cfe90d174a128e2b7f2b7edecff1:v1] TRIGGER:\nThe operator is validating legacy states before schema validation.\n\nREUSABLE RULE:\nMapping must be performed as follows: J to hold, K to release, and L to review before normal schema validation; the raw legacy state must never be validated.\n\nCRITICAL CONSTRAINTS:\n- The raw legacy state must never be validated.\n- Mapping of states J, K, and L must occur before normal schema validation."
+        ]
+      },
+      "mnexa_fidelity": {
+        "decision": "The operator must take the following action:\n\n1. Map the legacy state L to \"review\" before normal schema validation.\n2. Ensure that the raw legacy state L is never validated.\n3. Confirm that the mapping of states J (to \"hold\") and K (to \"release\") is performed as well, before proceeding with normal schema validation.",
+        "task_success": true,
+        "constraint_fidelity": true,
+        "watermark": 6,
+        "memory_segments": [
+          "[interpretive:i_dfc3cfe90d174a128e2b7f2b7edecff1:v1] TRIGGER:\nThe operator is validating legacy states before schema validation.\n\nREUSABLE RULE:\nMapping must be performed as follows: J to hold, K to release, and L to review before normal schema validation; the raw legacy state must never be validated.\n\nCRITICAL CONSTRAINTS:\n- The raw legacy state must never be validated.\n- Mapping of states J, K, and L must occur before normal schema validation."
+        ]
+      },
+      "same_memory_b_c": true,
+      "memory_lift": 1,
+      "fidelity_instruction_task_lift": 0,
+      "fidelity_instruction_constraint_lift": 1
+    },
+    {
+      "family_id": "solarrpc-d63",
+      "experience": {
+        "decision": "If SolarRPC returns D63 during a customer-profile request, the operator should consult the system documentation or troubleshooting guide for the specific meaning of the D63 code. Follow the outlined steps for resolution based on that documentation. If clarification is needed, escalate the issue to a supervisor or technical support for further assistance.",
+        "task_success": false,
+        "outcome": "EVALUATION: FAIL. SolarRPC runbook rule: D63 requires exactly three heartbeat frames 300 ms apart, then a new channel with a fresh correlation ID and X-Solar-Recover: d63; never reuse the prior correlation ID.",
+        "outcome_id": "r_97b6b2e6c4ea4369ace46b40e0d2097a",
+        "lesson": "TRIGGER:\nSolarRPC returns D63 during a customer-profile request.\n\nREUSABLE RULE:\nConsult the system documentation or troubleshooting guide for the specific meaning of the D63 code. Follow the outlined steps for resolution based on that documentation. If clarification is needed, escalate the issue to a supervisor or technical support for further assistance.\n\nCRITICAL CONSTRAINTS:\n- D63 requires exactly three heartbeat frames 300 ms apart.\n- A new channel must be established with a fresh correlation ID and X-Solar-Recover: d63.\n- Never reuse the prior correlation ID.",
+        "lesson_id": "i_09f958bcecf44ed7af329d4cb050b888"
+      },
+      "baseline": {
+        "decision": "The operator should consult the documentation or support resources for SolarRPC to understand what the D63 response indicates. If no immediate action is clear, escalate the issue to a supervisor or relevant support team for further assistance.",
+        "task_success": false,
+        "constraint_fidelity": false,
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa_current": {
+        "decision": "Consult the system documentation or troubleshooting guide for the D63 code. Then, establish a new channel with a fresh correlation ID and include the header X-Solar-Recover: d63. Ensure to send exactly three heartbeat frames 300 ms apart. Avoid reusing the prior correlation ID. If further assistance is needed, escalate the issue to a supervisor.",
+        "task_success": true,
+        "constraint_fidelity": false,
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_09f958bcecf44ed7af329d4cb050b888:v1] TRIGGER:\nSolarRPC returns D63 during a customer-profile request.\n\nREUSABLE RULE:\nConsult the system documentation or troubleshooting guide for the specific meaning of the D63 code. Follow the outlined steps for resolution based on that documentation. If clarification is needed, escalate the issue to a supervisor or technical support for further assistance.\n\nCRITICAL CONSTRAINTS:\n- D63 requires exactly three heartbeat frames 300 ms apart.\n- A new channel must be established with a fresh correlation ID and X-Solar-Recover: d63.\n- Never reuse the prior correlation ID."
+        ]
+      },
+      "mnexa_fidelity": {
+        "decision": "Upon receiving a D63 code during an order-history request from SolarRPC, the operator should take the following actions:\n\n1. Consult the system documentation or troubleshooting guide for the specific meaning of the D63 code.\n2. Follow the outlined steps for resolution based on that documentation.\n3. Ensure that three heartbeat frames are sent, spaced 300 ms apart.\n4. Establish a new channel with a fresh correlation ID.\n5. Use the header X-Solar-Recover: d63.\n6. Never reuse the prior correlation ID.\n7. If clarification is needed, escalate the issue to a supervisor or technical support for further assistance.",
+        "task_success": true,
+        "constraint_fidelity": true,
+        "watermark": 6,
+        "memory_segments": [
+          "[interpretive:i_09f958bcecf44ed7af329d4cb050b888:v1] TRIGGER:\nSolarRPC returns D63 during a customer-profile request.\n\nREUSABLE RULE:\nConsult the system documentation or troubleshooting guide for the specific meaning of the D63 code. Follow the outlined steps for resolution based on that documentation. If clarification is needed, escalate the issue to a supervisor or technical support for further assistance.\n\nCRITICAL CONSTRAINTS:\n- D63 requires exactly three heartbeat frames 300 ms apart.\n- A new channel must be established with a fresh correlation ID and X-Solar-Recover: d63.\n- Never reuse the prior correlation ID."
+        ]
+      },
+      "same_memory_b_c": true,
+      "memory_lift": 1,
+      "fidelity_instruction_task_lift": 0,
+      "fidelity_instruction_constraint_lift": 1
+    },
+    {
+      "family_id": "willowcache-t5",
+      "experience": {
+        "decision": "The operator should verify the logs for any errors related to the script asset and determine if a manual refresh is needed. If issues persist, escalate to the technical team for further investigation.",
+        "task_success": false,
+        "outcome": "EVALUATION: FAIL. WillowCache runbook rule: T5 requires one HEAD request to origin, purge only the current zone shard, wait 6 seconds, issue one GET with X-Willow-Probe: 4, and never perform a global purge.",
+        "outcome_id": "r_7c55030f84c44bfc8b9ee2f8ef694f6c",
+        "lesson": "TRIGGER:\nErrors related to the script asset requiring verification of logs.\n\nREUSABLE RULE:\nPerform exactly one HEAD request to origin, purge only the current zone shard, wait 6 seconds, and then issue one GET with X-Willow-Probe: 4. Never perform a global purge.\n\nCRITICAL CONSTRAINTS:\n- Must perform exactly one HEAD request to origin.\n- Purge only the current zone shard.\n- Wait exactly 6 seconds before the next step.\n- Issue exactly one GET with X-Willow-Probe: 4.\n- Must never perform a global purge.",
+        "lesson_id": "i_2d261d065c714b7aaff4f6e1f5de6473"
+      },
+      "baseline": {
+        "decision": "The operator should check the system logs for any errors or issues during the stylesheet refresh process. If no issues are found, the operator should clear the cache and attempt to refresh the stylesheet asset again. If T5 persists, escalate the issue to the technical support team for further investigation.",
+        "task_success": false,
+        "constraint_fidelity": false,
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa_current": {
+        "decision": "1. Perform one HEAD request to the origin.\n2. Purge only the current zone shard.\n3. Wait 6 seconds.\n4. Issue one GET request with the header X-Willow-Probe: 4.",
+        "task_success": true,
+        "constraint_fidelity": false,
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_2d261d065c714b7aaff4f6e1f5de6473:v1] TRIGGER:\nErrors related to the script asset requiring verification of logs.\n\nREUSABLE RULE:\nPerform exactly one HEAD request to origin, purge only the current zone shard, wait 6 seconds, and then issue one GET with X-Willow-Probe: 4. Never perform a global purge.\n\nCRITICAL CONSTRAINTS:\n- Must perform exactly one HEAD request to origin.\n- Purge only the current zone shard.\n- Wait exactly 6 seconds before the next step.\n- Issue exactly one GET with X-Willow-Probe: 4.\n- Must never perform a global purge."
+        ]
+      },
+      "mnexa_fidelity": {
+        "decision": "1. Perform exactly one HEAD request to origin.\n2. Purge only the current zone shard.\n3. Wait exactly 6 seconds.\n4. Issue exactly one GET with X-Willow-Probe: 4. \n5. Never perform a global purge.",
+        "task_success": true,
+        "constraint_fidelity": true,
+        "watermark": 6,
+        "memory_segments": [
+          "[interpretive:i_2d261d065c714b7aaff4f6e1f5de6473:v1] TRIGGER:\nErrors related to the script asset requiring verification of logs.\n\nREUSABLE RULE:\nPerform exactly one HEAD request to origin, purge only the current zone shard, wait 6 seconds, and then issue one GET with X-Willow-Probe: 4. Never perform a global purge.\n\nCRITICAL CONSTRAINTS:\n- Must perform exactly one HEAD request to origin.\n- Purge only the current zone shard.\n- Wait exactly 6 seconds before the next step.\n- Issue exactly one GET with X-Willow-Probe: 4.\n- Must never perform a global purge."
+        ]
+      },
+      "same_memory_b_c": true,
+      "memory_lift": 1,
+      "fidelity_instruction_task_lift": 0,
+      "fidelity_instruction_constraint_lift": 1
+    },
+    {
+      "family_id": "ironflow-p21",
+      "experience": {
+        "decision": "The operator should verify the invoice details associated with P21 in IronFlow and cross-check for discrepancies. If issues are found, they should correct the invoice data or follow up with the relevant departments for clarification. If no discrepancies are identified, the operator should escalate the situation to a supervisor for further guidance.",
+        "task_success": false,
+        "outcome": "EVALUATION: FAIL. IronFlow runbook rule: P21 requires cloning the latest checkpoint, marking the old run stale, restarting from the previous boundary exactly once with token p21-safe, and never resuming the failed step directly.",
+        "outcome_id": "r_14f9b932427946d38e6ca295e4fcdbf8",
+        "lesson": "TRIGGER:\nThe operator needs to address discrepancies related to P21 in IronFlow.\n\nREUSABLE RULE:\nP21 requires cloning the latest checkpoint, marking the old run stale, restarting from the previous boundary exactly once with token p21-safe, and never resuming the failed step directly.\n\nCRITICAL CONSTRAINTS:\n- Must clone the latest checkpoint.\n- Must mark the old run stale.\n- Must restart from the previous boundary exactly once.\n- Must use token p21-safe.\n- Must never resume the failed step directly.",
+        "lesson_id": "i_d8a8617398284ff48d836700f5d8ed7f"
+      },
+      "baseline": {
+        "decision": "The operator should check the IronFlow documentation or user guide for the meaning of P21 in payroll export. Then, follow the specified troubleshooting steps for that error code. If needed, escalate the issue to the appropriate technical support team.",
+        "task_success": false,
+        "constraint_fidelity": false,
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa_current": {
+        "decision": "1. Clone the latest checkpoint.\n2. Mark the old run as stale.\n3. Restart from the previous boundary using token p21-safe, ensuring it is done exactly once.\n4. Ensure that the failed step is not resumed directly.",
+        "task_success": true,
+        "constraint_fidelity": false,
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_d8a8617398284ff48d836700f5d8ed7f:v1] TRIGGER:\nThe operator needs to address discrepancies related to P21 in IronFlow.\n\nREUSABLE RULE:\nP21 requires cloning the latest checkpoint, marking the old run stale, restarting from the previous boundary exactly once with token p21-safe, and never resuming the failed step directly.\n\nCRITICAL CONSTRAINTS:\n- Must clone the latest checkpoint.\n- Must mark the old run stale.\n- Must restart from the previous boundary exactly once.\n- Must use token p21-safe.\n- Must never resume the failed step directly."
+        ]
+      },
+      "mnexa_fidelity": {
+        "decision": "To address the P21 issue in IronFlow during payroll export, the operator must:\n\n1. Clone the latest checkpoint.\n2. Mark the old run stale.\n3. Restart from the previous boundary exactly once using the token p21-safe.\n4. Never resume the failed step directly.",
+        "task_success": true,
+        "constraint_fidelity": true,
+        "watermark": 6,
+        "memory_segments": [
+          "[interpretive:i_d8a8617398284ff48d836700f5d8ed7f:v1] TRIGGER:\nThe operator needs to address discrepancies related to P21 in IronFlow.\n\nREUSABLE RULE:\nP21 requires cloning the latest checkpoint, marking the old run stale, restarting from the previous boundary exactly once with token p21-safe, and never resuming the failed step directly.\n\nCRITICAL CONSTRAINTS:\n- Must clone the latest checkpoint.\n- Must mark the old run stale.\n- Must restart from the previous boundary exactly once.\n- Must use token p21-safe.\n- Must never resume the failed step directly."
+        ]
+      },
+      "same_memory_b_c": true,
+      "memory_lift": 1,
+      "fidelity_instruction_task_lift": 0,
+      "fidelity_instruction_constraint_lift": 1
+    },
+    {
+      "family_id": "novaindex-b14",
+      "experience": {
+        "decision": "The operator should check the indexing logs for any errors related to B14 and verify the configuration settings in NovaIndex. If issues persist, escalate the matter to a senior operator or technical support.",
+        "task_success": false,
+        "outcome": "EVALUATION: FAIL. NovaIndex runbook rule: B14 requires fetching a new cursor, switching to delta-read mode, replaying exactly two pages, setting X-Nova-Cursor: fresh, and never rewinding the old cursor.",
+        "outcome_id": "r_42d3c315ee124a48bf75bba5f14a0782",
+        "lesson": "TRIGGER:\nFetching a cursor for B14 configuration issues in NovaIndex.\n\nREUSABLE RULE:\nB14 requires fetching a new cursor, switching to delta-read mode, replaying exactly two pages, setting X-Nova-Cursor: fresh, and never rewinding the old cursor.\n\nCRITICAL CONSTRAINTS:\n- Must fetch a new cursor.\n- Only switch to delta-read mode.\n- Replay exactly two pages.\n- Set X-Nova-Cursor: fresh.\n- Never rewind the old cursor.",
+        "lesson_id": "i_f076a89acd0d47b0975bf6013f9f8fb1"
+      },
+      "baseline": {
+        "decision": "The operator should review the indexing logs for any errors or warnings associated with the B14 return code. If necessary, consult the system documentation for B14 and follow the specified troubleshooting steps. If the issue persists, escalate to a supervisor or technical support for further assistance.",
+        "task_success": false,
+        "constraint_fidelity": false,
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa_current": {
+        "decision": "1. Fetch a new cursor for B14.\n2. Switch to delta-read mode.\n3. Replay exactly two pages.\n4. Set the header `X-Nova-Cursor: fresh`.\n5. Ensure the old cursor is not rewound.",
+        "task_success": true,
+        "constraint_fidelity": false,
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_f076a89acd0d47b0975bf6013f9f8fb1:v1] TRIGGER:\nFetching a cursor for B14 configuration issues in NovaIndex.\n\nREUSABLE RULE:\nB14 requires fetching a new cursor, switching to delta-read mode, replaying exactly two pages, setting X-Nova-Cursor: fresh, and never rewinding the old cursor.\n\nCRITICAL CONSTRAINTS:\n- Must fetch a new cursor.\n- Only switch to delta-read mode.\n- Replay exactly two pages.\n- Set X-Nova-Cursor: fresh.\n- Never rewind the old cursor."
+        ]
+      },
+      "mnexa_fidelity": {
+        "decision": "Fetch a new cursor, switch to delta-read mode, replay exactly two pages, set X-Nova-Cursor to fresh, and never rewind the old cursor.",
+        "task_success": true,
+        "constraint_fidelity": true,
+        "watermark": 6,
+        "memory_segments": [
+          "[interpretive:i_f076a89acd0d47b0975bf6013f9f8fb1:v1] TRIGGER:\nFetching a cursor for B14 configuration issues in NovaIndex.\n\nREUSABLE RULE:\nB14 requires fetching a new cursor, switching to delta-read mode, replaying exactly two pages, setting X-Nova-Cursor: fresh, and never rewinding the old cursor.\n\nCRITICAL CONSTRAINTS:\n- Must fetch a new cursor.\n- Only switch to delta-read mode.\n- Replay exactly two pages.\n- Set X-Nova-Cursor: fresh.\n- Never rewind the old cursor."
+        ]
+      },
+      "same_memory_b_c": true,
+      "memory_lift": 1,
+      "fidelity_instruction_task_lift": 0,
+      "fidelity_instruction_constraint_lift": 1
+    },
+    {
+      "family_id": "mintledger-f32",
+      "experience": {
+        "decision": "The operator should check the MintLedger documentation for any known issues or error codes related to F32. If no further guidance is found, escalate the issue to the support team for assistance.",
+        "task_success": false,
+        "outcome": "EVALUATION: FAIL. MintLedger runbook rule: F32 requires requesting the server nonce, acquiring the blue lock, retrying exactly twice with X-Mint-Nonce set to that server nonce, and never synthesizing a nonce locally.",
+        "outcome_id": "r_809327b4f3974ae3bfeeaf0947766f66",
+        "lesson": "TRIGGER:\nEncountering error code F32 in MintLedger.\n\nREUSABLE RULE:\nFor F32, request the server nonce, acquire the blue lock, and retry exactly twice with X-Mint-Nonce set to that server nonce. Never synthesize a nonce locally.\n\nCRITICAL CONSTRAINTS:\n- Must request the server nonce.\n- Must acquire the blue lock.\n- Must retry exactly twice.\n- Must set X-Mint-Nonce to the server nonce.\n- Must never synthesize a nonce locally.",
+        "lesson_id": "i_4770ec7608484265960c9c5e0a9d5e69"
+      },
+      "baseline": {
+        "decision": "The operator should check for any error codes or logs related to the F32 return from MintLedger. After that, consult with a supervisor or the technical support team for further guidance on how to resolve the issue.",
+        "task_success": false,
+        "constraint_fidelity": false,
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa_current": {
+        "decision": "1. Request the server nonce.\n2. Acquire the blue lock.\n3. Retry the operation exactly twice, setting X-Mint-Nonce to the retrieved server nonce.",
+        "task_success": true,
+        "constraint_fidelity": false,
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_4770ec7608484265960c9c5e0a9d5e69:v1] TRIGGER:\nEncountering error code F32 in MintLedger.\n\nREUSABLE RULE:\nFor F32, request the server nonce, acquire the blue lock, and retry exactly twice with X-Mint-Nonce set to that server nonce. Never synthesize a nonce locally.\n\nCRITICAL CONSTRAINTS:\n- Must request the server nonce.\n- Must acquire the blue lock.\n- Must retry exactly twice.\n- Must set X-Mint-Nonce to the server nonce.\n- Must never synthesize a nonce locally."
+        ]
+      },
+      "mnexa_fidelity": {
+        "decision": "1. Request the server nonce.\n2. Acquire the blue lock.\n3. Retry exactly twice with `X-Mint-Nonce` set to the server nonce.\n4. Never synthesize a nonce locally.",
+        "task_success": true,
+        "constraint_fidelity": true,
+        "watermark": 6,
+        "memory_segments": [
+          "[interpretive:i_4770ec7608484265960c9c5e0a9d5e69:v1] TRIGGER:\nEncountering error code F32 in MintLedger.\n\nREUSABLE RULE:\nFor F32, request the server nonce, acquire the blue lock, and retry exactly twice with X-Mint-Nonce set to that server nonce. Never synthesize a nonce locally.\n\nCRITICAL CONSTRAINTS:\n- Must request the server nonce.\n- Must acquire the blue lock.\n- Must retry exactly twice.\n- Must set X-Mint-Nonce to the server nonce.\n- Must never synthesize a nonce locally."
+        ]
+      },
+      "same_memory_b_c": true,
+      "memory_lift": 1,
+      "fidelity_instruction_task_lift": 0,
+      "fidelity_instruction_constraint_lift": 1
+    },
+    {
+      "family_id": "coralbus-y7",
+      "experience": {
+        "decision": "The operator should investigate the invoice event that triggered Y7 in CoralBus. Check the logs for any errors or anomalies related to the event and resolve any identified issues. If necessary, escalate the issue to the technical support team for further assistance.",
+        "task_success": false,
+        "outcome": "EVALUATION: FAIL. CoralBus runbook rule: Y7 requires a fresh checkpoint, replay exactly once from it with Replay-Class: coral, and never acknowledge the original message.",
+        "outcome_id": "r_144bc9947cc94366b875a5cbe00ccec9",
+        "lesson": "TRIGGER:\nInvoice event that triggers Y7 in CoralBus.\n\nREUSABLE RULE:\nY7 requires a fresh checkpoint, replay exactly once from it with Replay-Class: coral, and never acknowledge the original message.\n\nCRITICAL CONSTRAINTS:\n- Must perform the replay exactly once from the fresh checkpoint.\n- Must use Replay-Class: coral.\n- Must never acknowledge the original message.",
+        "lesson_id": "i_5bb9d325e84342d7bd335fb660afc3c6"
+      },
+      "baseline": {
+        "decision": "The operator should investigate the details of the audit event that CoralBus returned Y7 for any errors or issues. If necessary, consult the relevant documentation or escalate the situation to the technical support team for further assistance.",
+        "task_success": false,
+        "constraint_fidelity": false,
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa_current": {
+        "decision": "To address the Y7 event in CoralBus, the operator should:\n\n1. Create a fresh checkpoint.\n2. Replay the event exactly once from the fresh checkpoint using Replay-Class: coral.\n3. Ensure the original message is never acknowledged.",
+        "task_success": true,
+        "constraint_fidelity": false,
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_5bb9d325e84342d7bd335fb660afc3c6:v1] TRIGGER:\nInvoice event that triggers Y7 in CoralBus.\n\nREUSABLE RULE:\nY7 requires a fresh checkpoint, replay exactly once from it with Replay-Class: coral, and never acknowledge the original message.\n\nCRITICAL CONSTRAINTS:\n- Must perform the replay exactly once from the fresh checkpoint.\n- Must use Replay-Class: coral.\n- Must never acknowledge the original message."
+        ]
+      },
+      "mnexa_fidelity": {
+        "decision": "Perform the following action:\n\n1. Use a fresh checkpoint.\n2. Replay exactly once from the fresh checkpoint with Replay-Class: coral.\n3. Never acknowledge the original message.",
+        "task_success": true,
+        "constraint_fidelity": true,
+        "watermark": 6,
+        "memory_segments": [
+          "[interpretive:i_5bb9d325e84342d7bd335fb660afc3c6:v1] TRIGGER:\nInvoice event that triggers Y7 in CoralBus.\n\nREUSABLE RULE:\nY7 requires a fresh checkpoint, replay exactly once from it with Replay-Class: coral, and never acknowledge the original message.\n\nCRITICAL CONSTRAINTS:\n- Must perform the replay exactly once from the fresh checkpoint.\n- Must use Replay-Class: coral.\n- Must never acknowledge the original message."
+        ]
+      },
+      "same_memory_b_c": true,
+      "memory_lift": 1,
+      "fidelity_instruction_task_lift": 0,
+      "fidelity_instruction_constraint_lift": 1
+    },
+    {
+      "family_id": "summitstore-w18",
+      "experience": {
+        "decision": "The operator should check the system's available storage space and verify if there are any limits on backup file uploads that could contribute to the W18 error. If storage space is low or limits are reached, the operator should either free space or adjust the upload limits, then attempt the upload again.",
+        "task_success": false,
+        "outcome": "EVALUATION: FAIL. SummitStore runbook rule: W18 requires a new upload ID, multipart upload using 20 MiB chunks, SHA-512 for every chunk, X-Summit-Manifest: frost on finalization, and never reuse the previous upload ID.",
+        "outcome_id": "r_98e8be27c1cd44c9b21e399b3b0ec527",
+        "lesson": "TRIGGER:\nThe operator is attempting a multipart upload and encounters the W18 error.\n\nREUSABLE RULE:\nThe operator must use a new upload ID, perform multipart uploads using 20 MiB chunks, apply SHA-512 for every chunk, include X-Summit-Manifest: frost on finalization, and never reuse the previous upload ID.\n\nCRITICAL CONSTRAINTS:\n- Use a new upload ID.\n- Use multipart upload with 20 MiB chunks.\n- Apply SHA-512 for every chunk.\n- Include X-Summit-Manifest: frost on finalization.\n- Never reuse the previous upload ID.",
+        "lesson_id": "i_8e09216d6cd64ef89c07f6a5a701d26e"
+      },
+      "baseline": {
+        "decision": "The operator should check the SummitStore documentation for error W18 to identify the specific issue causing the error during the snapshot upload. After understanding the error, the operator should follow the recommended troubleshooting steps provided in the documentation. If further assistance is needed, contact support for guidance.",
+        "task_success": false,
+        "constraint_fidelity": false,
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa_current": {
+        "decision": "To resolve the W18 error while uploading a 100 MiB snapshot in SummitStore, follow these steps:\n\n1. Generate a new upload ID.\n2. Split the 100 MiB snapshot into 5 chunks of 20 MiB each.\n3. Apply SHA-512 hashing for each of the 20 MiB chunks.\n4. Perform the multipart upload for each chunk using the new upload ID.\n5. Upon finalization, include the header `X-Summit-Manifest: frost`.\n\nEnsure you do not reuse the previous upload ID.",
+        "task_success": true,
+        "constraint_fidelity": true,
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_8e09216d6cd64ef89c07f6a5a701d26e:v1] TRIGGER:\nThe operator is attempting a multipart upload and encounters the W18 error.\n\nREUSABLE RULE:\nThe operator must use a new upload ID, perform multipart uploads using 20 MiB chunks, apply SHA-512 for every chunk, include X-Summit-Manifest: frost on finalization, and never reuse the previous upload ID.\n\nCRITICAL CONSTRAINTS:\n- Use a new upload ID.\n- Use multipart upload with 20 MiB chunks.\n- Apply SHA-512 for every chunk.\n- Include X-Summit-Manifest: frost on finalization.\n- Never reuse the previous upload ID."
+        ]
+      },
+      "mnexa_fidelity": {
+        "decision": "To resolve the W18 error while uploading a 100 MiB snapshot, the operator must take the following actions:\n\n1. Use a new upload ID.\n2. Perform multipart uploads using 20 MiB chunks.\n3. Apply SHA-512 for every chunk.\n4. Include X-Summit-Manifest: frost on finalization.\n5. Never reuse the previous upload ID.",
+        "task_success": true,
+        "constraint_fidelity": true,
+        "watermark": 6,
+        "memory_segments": [
+          "[interpretive:i_8e09216d6cd64ef89c07f6a5a701d26e:v1] TRIGGER:\nThe operator is attempting a multipart upload and encounters the W18 error.\n\nREUSABLE RULE:\nThe operator must use a new upload ID, perform multipart uploads using 20 MiB chunks, apply SHA-512 for every chunk, include X-Summit-Manifest: frost on finalization, and never reuse the previous upload ID.\n\nCRITICAL CONSTRAINTS:\n- Use a new upload ID.\n- Use multipart upload with 20 MiB chunks.\n- Apply SHA-512 for every chunk.\n- Include X-Summit-Manifest: frost on finalization.\n- Never reuse the previous upload ID."
+        ]
+      },
+      "same_memory_b_c": true,
+      "memory_lift": 1,
+      "fidelity_instruction_task_lift": 0,
+      "fidelity_instruction_constraint_lift": 0
+    },
+    {
+      "family_id": "emberdb-s29",
+      "experience": {
+        "decision": "The operator should consult the EmberDB error code documentation to understand the meaning of S29 and follow any recommended steps for resolution.",
+        "task_success": false,
+        "outcome": "EVALUATION: FAIL. EmberDB runbook rule: S29 requires refreshing the schema token, switching to snapshot mode, retrying exactly once while preserving the original request ID, and never reconnecting the session.",
+        "outcome_id": "r_632cc341063b4549911730280c59f49b",
+        "lesson": "TRIGGER:\nWhen encountering EmberDB error code S29.\n\nREUSABLE RULE:\nConsult the EmberDB error code documentation to refresh the schema token, switch to snapshot mode, and retry exactly once while preserving the original request ID; do not reconnect the session.\n\nCRITICAL CONSTRAINTS:\n- Retry exactly once.\n- Never reconnect the session.\n- Follow recommended steps in the exact order specified.",
+        "lesson_id": "i_730edb2f064c402a85e8fa457f20923a"
+      },
+      "baseline": {
+        "decision": "The operator should investigate the S29 error code in the EmberDB documentation to determine its specific meaning and follow the troubleshooting steps provided for that error.",
+        "task_success": false,
+        "constraint_fidelity": false,
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa_current": {
+        "decision": "1. Consult the EmberDB error code documentation to refresh the schema token.\n2. Switch to snapshot mode.\n3. Retry the inventory query exactly once while preserving the original request ID.\n4. Ensure not to reconnect the session.",
+        "task_success": true,
+        "constraint_fidelity": false,
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_730edb2f064c402a85e8fa457f20923a:v1] TRIGGER:\nWhen encountering EmberDB error code S29.\n\nREUSABLE RULE:\nConsult the EmberDB error code documentation to refresh the schema token, switch to snapshot mode, and retry exactly once while preserving the original request ID; do not reconnect the session.\n\nCRITICAL CONSTRAINTS:\n- Retry exactly once.\n- Never reconnect the session.\n- Follow recommended steps in the exact order specified."
+        ]
+      },
+      "mnexa_fidelity": {
+        "decision": "1. Consult the EmberDB error code documentation to refresh the schema token.\n2. Switch to snapshot mode.\n3. Retry exactly once while preserving the original request ID; do not reconnect the session.",
+        "task_success": true,
+        "constraint_fidelity": true,
+        "watermark": 6,
+        "memory_segments": [
+          "[interpretive:i_730edb2f064c402a85e8fa457f20923a:v1] TRIGGER:\nWhen encountering EmberDB error code S29.\n\nREUSABLE RULE:\nConsult the EmberDB error code documentation to refresh the schema token, switch to snapshot mode, and retry exactly once while preserving the original request ID; do not reconnect the session.\n\nCRITICAL CONSTRAINTS:\n- Retry exactly once.\n- Never reconnect the session.\n- Follow recommended steps in the exact order specified."
+        ]
+      },
+      "same_memory_b_c": true,
+      "memory_lift": 1,
+      "fidelity_instruction_task_lift": 0,
+      "fidelity_instruction_constraint_lift": 1
+    },
+    {
+      "family_id": "quillrpc-g12",
+      "experience": {
+        "decision": "The operator should review the system documentation for guidance on handling G12 errors during a profile RPC. If no specific instructions are available, proceed to restart the RPC service and monitor for resolution. If the issue persists, escalate to a technical lead or support team for further investigation.",
+        "task_success": false,
+        "outcome": "EVALUATION: FAIL. QuillRPC runbook rule: G12 requires exactly two heartbeat frames 175 ms apart, then a fresh channel carrying X-Quill-Recover: g12, and never reuse the previous stream ID.",
+        "outcome_id": "r_9b8a5c38312d457baacb84cb419b910f",
+        "lesson": "TRIGGER:\nG12 errors during a profile RPC.\n\nREUSABLE RULE:\nG12 requires exactly two heartbeat frames 175 ms apart, then a fresh channel carrying X-Quill-Recover: g12, and never reuse the previous stream ID.\n\nCRITICAL CONSTRAINTS:\n- Must have exactly two heartbeat frames 175 ms apart.\n- Must carry X-Quill-Recover: g12 in the fresh channel.\n- Must never reuse the previous stream ID.",
+        "lesson_id": "i_8d374de4af124badaafa76aadf812ffe"
+      },
+      "baseline": {
+        "decision": "When QuillRPC returns G12 during a billing RPC, the operator should check for any discrepancies in the billing details and verify user account status. If issues persist or if there is uncertainty, escalate the situation to the technical support team for further assistance.",
+        "task_success": false,
+        "constraint_fidelity": false,
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa_current": {
+        "decision": "1. Send exactly two heartbeat frames, 175 ms apart.\n2. Initiate a fresh channel and include the header X-Quill-Recover: g12.\n3. Ensure that the previous stream ID is not reused.",
+        "task_success": true,
+        "constraint_fidelity": false,
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_8d374de4af124badaafa76aadf812ffe:v1] TRIGGER:\nG12 errors during a profile RPC.\n\nREUSABLE RULE:\nG12 requires exactly two heartbeat frames 175 ms apart, then a fresh channel carrying X-Quill-Recover: g12, and never reuse the previous stream ID.\n\nCRITICAL CONSTRAINTS:\n- Must have exactly two heartbeat frames 175 ms apart.\n- Must carry X-Quill-Recover: g12 in the fresh channel.\n- Must never reuse the previous stream ID."
+        ]
+      },
+      "mnexa_fidelity": {
+        "decision": "To resolve the G12 error during the billing RPC, you should:\n\n1. Send exactly two heartbeat frames 175 ms apart.\n2. Establish a fresh channel carrying the header `X-Quill-Recover: g12`.\n3. Ensure that you never reuse the previous stream ID.",
+        "task_success": true,
+        "constraint_fidelity": true,
+        "watermark": 6,
+        "memory_segments": [
+          "[interpretive:i_8d374de4af124badaafa76aadf812ffe:v1] TRIGGER:\nG12 errors during a profile RPC.\n\nREUSABLE RULE:\nG12 requires exactly two heartbeat frames 175 ms apart, then a fresh channel carrying X-Quill-Recover: g12, and never reuse the previous stream ID.\n\nCRITICAL CONSTRAINTS:\n- Must have exactly two heartbeat frames 175 ms apart.\n- Must carry X-Quill-Recover: g12 in the fresh channel.\n- Must never reuse the previous stream ID."
+        ]
+      },
+      "same_memory_b_c": true,
+      "memory_lift": 1,
+      "fidelity_instruction_task_lift": 0,
+      "fidelity_instruction_constraint_lift": 1
+    },
+    {
+      "family_id": "harborqueue-n41",
+      "experience": {
+        "decision": "The operator should check the status of the report-generation job in the HarborQueue system for any errors or issues. If the status is unclear, consult the technical team for assistance.",
+        "task_success": false,
+        "outcome": "EVALUATION: FAIL. HarborQueue runbook rule: N41 requires minting a new dispatch ID, moving the job to the teal lane, requeueing exactly once, tagging dispatch-mode=restored, and never acknowledging the original dispatch.",
+        "outcome_id": "r_78efc35e711242aba6a26dab365abedb",
+        "lesson": "TRIGGER:\nThe status of the report-generation job in the HarborQueue system is unclear or indicates issues.\n\nREUSABLE RULE:\nFollow HarborQueue runbook rule: N41 requires minting a new dispatch ID, moving the job to the teal lane, requeueing exactly once, tagging dispatch-mode=restored, and never acknowledging the original dispatch.\n\nCRITICAL CONSTRAINTS:\n- Mint a new dispatch ID.\n- Move the job to the teal lane.\n- Requeue exactly once.\n- Tag dispatch-mode=restored.\n- Never acknowledge the original dispatch.",
+        "lesson_id": "i_b87f7e4867a54bd98407db75b21861c5"
+      },
+      "baseline": {
+        "decision": "The operator should check the status of the media-processing job associated with N41 in the HarborQueue system. If there are any errors or issues indicated, follow the troubleshooting procedures specific to that job type. If the job is proceeding as expected, monitor it until completion.",
+        "task_success": false,
+        "constraint_fidelity": false,
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa_current": {
+        "decision": "1. Mint a new dispatch ID for the job.\n2. Move the job to the teal lane.\n3. Requeue the job exactly once.\n4. Tag the job with dispatch-mode=restored.\n5. Ensure the original dispatch is never acknowledged.",
+        "task_success": true,
+        "constraint_fidelity": false,
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_b87f7e4867a54bd98407db75b21861c5:v1] TRIGGER:\nThe status of the report-generation job in the HarborQueue system is unclear or indicates issues.\n\nREUSABLE RULE:\nFollow HarborQueue runbook rule: N41 requires minting a new dispatch ID, moving the job to the teal lane, requeueing exactly once, tagging dispatch-mode=restored, and never acknowledging the original dispatch.\n\nCRITICAL CONSTRAINTS:\n- Mint a new dispatch ID.\n- Move the job to the teal lane.\n- Requeue exactly once.\n- Tag dispatch-mode=restored.\n- Never acknowledge the original dispatch."
+        ]
+      },
+      "mnexa_fidelity": {
+        "decision": "1. Mint a new dispatch ID.\n2. Move the job to the teal lane.\n3. Requeue the job exactly once.\n4. Tag the job with dispatch-mode=restored.\n5. Never acknowledge the original dispatch.",
+        "task_success": true,
+        "constraint_fidelity": true,
+        "watermark": 6,
+        "memory_segments": [
+          "[interpretive:i_b87f7e4867a54bd98407db75b21861c5:v1] TRIGGER:\nThe status of the report-generation job in the HarborQueue system is unclear or indicates issues.\n\nREUSABLE RULE:\nFollow HarborQueue runbook rule: N41 requires minting a new dispatch ID, moving the job to the teal lane, requeueing exactly once, tagging dispatch-mode=restored, and never acknowledging the original dispatch.\n\nCRITICAL CONSTRAINTS:\n- Mint a new dispatch ID.\n- Move the job to the teal lane.\n- Requeue exactly once.\n- Tag dispatch-mode=restored.\n- Never acknowledge the original dispatch."
+        ]
+      },
+      "same_memory_b_c": true,
+      "memory_lift": 1,
+      "fidelity_instruction_task_lift": 0,
+      "fidelity_instruction_constraint_lift": 1
+    },
+    {
+      "family_id": "pinecdn-c26",
+      "experience": {
+        "decision": "The operator should clear the cache for the JavaScript asset in PineCDN. After clearing the cache, refresh the asset again to ensure the latest version is served.",
+        "task_success": false,
+        "outcome": "EVALUATION: FAIL. PineCDN runbook rule: C26 requires one HEAD request, purging only the current POP shard, waiting 8 seconds, then one GET carrying X-Pine-Probe: 2, and never issuing a global purge.",
+        "outcome_id": "r_9ced7c9df7544999a45d8352c5993a0f",
+        "lesson": "TRIGGER:\nClearing the cache for a JavaScript asset in PineCDN.\n\nREUSABLE RULE:\nFollow the PineCDN runbook rule: C26, which requires one HEAD request, purging only the current POP shard, waiting 8 seconds, then one GET carrying X-Pine-Probe: 2, and never issuing a global purge.\n\nCRITICAL CONSTRAINTS:\n- Purge only the current POP shard.\n- Wait 8 seconds before issuing the GET request.\n- Issue one HEAD request before the purge.\n- Carry the header X-Pine-Probe: 2 in the GET request.\n- Never issue a global purge.",
+        "lesson_id": "i_db4fe87c7d6a4b6790632c0a75b0a671"
+      },
+      "baseline": {
+        "decision": "The operator should check the PineCDN status page for any reported issues or outages. If there are no ongoing issues, the operator should clear the cache for the specific asset in PineCDN and attempt the refresh again. If the issue persists, escalate it to the technical support team for further investigation.",
+        "task_success": false,
+        "constraint_fidelity": false,
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa_current": {
+        "decision": "1. Issue a HEAD request for the image asset.\n2. Purge only the current POP shard for the image asset.\n3. Wait 8 seconds.\n4. Issue a GET request for the image asset with the header X-Pine-Probe: 2.",
+        "task_success": false,
+        "constraint_fidelity": false,
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_db4fe87c7d6a4b6790632c0a75b0a671:v1] TRIGGER:\nClearing the cache for a JavaScript asset in PineCDN.\n\nREUSABLE RULE:\nFollow the PineCDN runbook rule: C26, which requires one HEAD request, purging only the current POP shard, waiting 8 seconds, then one GET carrying X-Pine-Probe: 2, and never issuing a global purge.\n\nCRITICAL CONSTRAINTS:\n- Purge only the current POP shard.\n- Wait 8 seconds before issuing the GET request.\n- Issue one HEAD request before the purge.\n- Carry the header X-Pine-Probe: 2 in the GET request.\n- Never issue a global purge."
+        ]
+      },
+      "mnexa_fidelity": {
+        "decision": "1. Send one HEAD request.\n2. Purge only the current POP shard.\n3. Wait 8 seconds.\n4. Send one GET request carrying the header X-Pine-Probe: 2.\n5. Never issue a global purge.",
+        "task_success": true,
+        "constraint_fidelity": true,
+        "watermark": 6,
+        "memory_segments": [
+          "[interpretive:i_db4fe87c7d6a4b6790632c0a75b0a671:v1] TRIGGER:\nClearing the cache for a JavaScript asset in PineCDN.\n\nREUSABLE RULE:\nFollow the PineCDN runbook rule: C26, which requires one HEAD request, purging only the current POP shard, waiting 8 seconds, then one GET carrying X-Pine-Probe: 2, and never issuing a global purge.\n\nCRITICAL CONSTRAINTS:\n- Purge only the current POP shard.\n- Wait 8 seconds before issuing the GET request.\n- Issue one HEAD request before the purge.\n- Carry the header X-Pine-Probe: 2 in the GET request.\n- Never issue a global purge."
+        ]
+      },
+      "same_memory_b_c": true,
+      "memory_lift": 0,
+      "fidelity_instruction_task_lift": 1,
+      "fidelity_instruction_constraint_lift": 1
+    },
+    {
+      "family_id": "orbitflow-v15",
+      "experience": {
+        "decision": "The operator should check the system logs for any error messages related to the V15 return during invoice export. If additional troubleshooting information is needed, consult the relevant documentation or escalate the issue to the technical support team for further assistance.",
+        "task_success": false,
+        "outcome": "EVALUATION: FAIL. OrbitFlow runbook rule: V15 requires cloning the latest checkpoint, marking the old run superseded, restarting from the prior boundary exactly once with token v15-safe, and never resuming the failed node directly.",
+        "outcome_id": "r_74ba44c2783d41b5b1602d2d70a96212",
+        "lesson": "TRIGGER:\nThe V15 return during invoice export encounters an error.\n\nREUSABLE RULE:\nFollow the OrbitFlow runbook rule: V15 requires cloning the latest checkpoint, marking the old run superseded, restarting from the prior boundary exactly once with token v15-safe, and never resuming the failed node directly.\n\nCRITICAL CONSTRAINTS:\n- Clone the latest checkpoint.\n- Mark the old run as superseded.\n- Restart from the prior boundary exactly once.\n- Use token v15-safe.\n- Never resume the failed node directly.",
+        "lesson_id": "i_279610ad7dfc4d9eac781db44c6aeb08"
+      },
+      "baseline": {
+        "decision": "The operator should check the OrbitFlow documentation or support resources for guidance on the meaning of V15 in the context of analytics export. If needed, contact technical support for assistance.",
+        "task_success": false,
+        "constraint_fidelity": false,
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa_current": {
+        "decision": "1. Clone the latest checkpoint.\n2. Mark the old run as superseded.\n3. Restart from the prior boundary exactly once using the token v15-safe. \n4. Ensure not to resume the failed node directly.",
+        "task_success": true,
+        "constraint_fidelity": false,
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_279610ad7dfc4d9eac781db44c6aeb08:v1] TRIGGER:\nThe V15 return during invoice export encounters an error.\n\nREUSABLE RULE:\nFollow the OrbitFlow runbook rule: V15 requires cloning the latest checkpoint, marking the old run superseded, restarting from the prior boundary exactly once with token v15-safe, and never resuming the failed node directly.\n\nCRITICAL CONSTRAINTS:\n- Clone the latest checkpoint.\n- Mark the old run as superseded.\n- Restart from the prior boundary exactly once.\n- Use token v15-safe.\n- Never resume the failed node directly."
+        ]
+      },
+      "mnexa_fidelity": {
+        "decision": "1. Clone the latest checkpoint.\n2. Mark the old run as superseded.\n3. Restart from the prior boundary exactly once.\n4. Use token v15-safe.\n5. Never resume the failed node directly.",
+        "task_success": true,
+        "constraint_fidelity": true,
+        "watermark": 6,
+        "memory_segments": [
+          "[interpretive:i_279610ad7dfc4d9eac781db44c6aeb08:v1] TRIGGER:\nThe V15 return during invoice export encounters an error.\n\nREUSABLE RULE:\nFollow the OrbitFlow runbook rule: V15 requires cloning the latest checkpoint, marking the old run superseded, restarting from the prior boundary exactly once with token v15-safe, and never resuming the failed node directly.\n\nCRITICAL CONSTRAINTS:\n- Clone the latest checkpoint.\n- Mark the old run as superseded.\n- Restart from the prior boundary exactly once.\n- Use token v15-safe.\n- Never resume the failed node directly."
+        ]
+      },
+      "same_memory_b_c": true,
+      "memory_lift": 1,
+      "fidelity_instruction_task_lift": 0,
+      "fidelity_instruction_constraint_lift": 1
+    },
+    {
+      "family_id": "tulipparser-m9",
+      "experience": {
+        "decision": "The operator should check the settings and parameters in the TulipParser configuration to ensure they are correctly specified. If everything appears correct, proceed to validate M9 with legacy state=X before taking further action. If the issue persists, escalate to the appropriate technical support team for further investigation.",
+        "task_success": false,
+        "outcome": "EVALUATION: FAIL. TulipParser runbook rule: M9 requires mapping X to queued, Y to blocked, and Z to ready before normal validation; never validate the raw legacy state.",
+        "outcome_id": "r_3df889fae7174a13849f7a31f25354de",
+        "lesson": "TRIGGER:\nValidation of M9 in TulipParser configuration.\n\nREUSABLE RULE:\nM9 requires mapping X to queued, Y to blocked, and Z to ready before normal validation; never validate the raw legacy state.\n\nCRITICAL CONSTRAINTS:\n- M9 must have mapping X to queued.\n- M9 must have mapping Y to blocked.\n- M9 must have mapping Z to ready.\n- Do not validate the raw legacy state.",
+        "lesson_id": "i_e2b4ab1470074b259847a005b0da7cb7"
+      },
+      "baseline": {
+        "decision": "The operator should validate the M9 return from TulipParser with the legacy state Z. If further issues are identified during validation, escalate to a supervisor for additional guidance.",
+        "task_success": false,
+        "constraint_fidelity": false,
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa_current": {
+        "decision": "The operator should ensure that the mappings for M9 are configured correctly: map X to queued, Y to blocked, and Z to ready. Once these mappings are confirmed, proceed with the validation of M9 in the TulipParser configuration. Do not validate the raw legacy state.",
+        "task_success": false,
+        "constraint_fidelity": false,
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_e2b4ab1470074b259847a005b0da7cb7:v1] TRIGGER:\nValidation of M9 in TulipParser configuration.\n\nREUSABLE RULE:\nM9 requires mapping X to queued, Y to blocked, and Z to ready before normal validation; never validate the raw legacy state.\n\nCRITICAL CONSTRAINTS:\n- M9 must have mapping X to queued.\n- M9 must have mapping Y to blocked.\n- M9 must have mapping Z to ready.\n- Do not validate the raw legacy state."
+        ]
+      },
+      "mnexa_fidelity": {
+        "decision": "The operator must:\n\n1. Ensure that for M9, mapping X is set to queued.\n2. Ensure that for M9, mapping Y is set to blocked.\n3. Ensure that for M9, mapping Z is set to ready.\n\nOnly after these mappings are confirmed should the operator proceed with validation of M9 in TulipParser configuration. The operator must not validate the raw legacy state Z before ensuring the mappings are correct.",
+        "task_success": false,
+        "constraint_fidelity": false,
+        "watermark": 6,
+        "memory_segments": [
+          "[interpretive:i_e2b4ab1470074b259847a005b0da7cb7:v1] TRIGGER:\nValidation of M9 in TulipParser configuration.\n\nREUSABLE RULE:\nM9 requires mapping X to queued, Y to blocked, and Z to ready before normal validation; never validate the raw legacy state.\n\nCRITICAL CONSTRAINTS:\n- M9 must have mapping X to queued.\n- M9 must have mapping Y to blocked.\n- M9 must have mapping Z to ready.\n- Do not validate the raw legacy state."
+        ]
+      },
+      "same_memory_b_c": true,
+      "memory_lift": 0,
+      "fidelity_instruction_task_lift": 0,
+      "fidelity_instruction_constraint_lift": 0
+    },
+    {
+      "family_id": "glacierpay-h34",
+      "experience": {
+        "decision": "The operator should check the GlacierPay error code documentation for H34 and follow the troubleshooting steps outlined for that specific error. If necessary, escalate the issue to the technical support team for further assistance.",
+        "task_success": false,
+        "outcome": "EVALUATION: FAIL. GlacierPay runbook rule: H34 means wait 11 seconds, rotate the session key, mint a new idempotency key, retry exactly twice with X-Glacier-Mode: white, and never reuse the old idempotency key.",
+        "outcome_id": "r_5221faceeb0242449a649fa0d92e2c89",
+        "lesson": "TRIGGER:\nEncountering GlacierPay error code H34.\n\nREUSABLE RULE:\nWait 11 seconds, rotate the session key, mint a new idempotency key, retry exactly twice with X-Glacier-Mode: white, and never reuse the old idempotency key.\n\nCRITICAL CONSTRAINTS:\n- Wait 11 seconds before taking further actions.\n- Retry exactly twice only with X-Glacier-Mode: white.\n- Never reuse the old idempotency key.",
+        "lesson_id": "i_4061c9962fc1487dbe0ec16c09e42f54"
+      },
+      "baseline": {
+        "decision": "The operator should check the GlacierPay system for any specific error code documentation related to H34. If no information is available, the operator should escalate the issue to the technical support team for further investigation.",
+        "task_success": false,
+        "constraint_fidelity": false,
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa_current": {
+        "decision": "1. Wait 11 seconds.\n2. Rotate the session key.\n3. Mint a new idempotency key.\n4. Retry the refund request twice using X-Glacier-Mode: white, ensuring the new idempotency key is used.",
+        "task_success": true,
+        "constraint_fidelity": false,
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_4061c9962fc1487dbe0ec16c09e42f54:v1] TRIGGER:\nEncountering GlacierPay error code H34.\n\nREUSABLE RULE:\nWait 11 seconds, rotate the session key, mint a new idempotency key, retry exactly twice with X-Glacier-Mode: white, and never reuse the old idempotency key.\n\nCRITICAL CONSTRAINTS:\n- Wait 11 seconds before taking further actions.\n- Retry exactly twice only with X-Glacier-Mode: white.\n- Never reuse the old idempotency key."
+        ]
+      },
+      "mnexa_fidelity": {
+        "decision": "1. Wait 11 seconds.\n2. Rotate the session key.\n3. Mint a new idempotency key.\n4. Retry exactly twice with X-Glacier-Mode: white, and never reuse the old idempotency key.",
+        "task_success": true,
+        "constraint_fidelity": true,
+        "watermark": 6,
+        "memory_segments": [
+          "[interpretive:i_4061c9962fc1487dbe0ec16c09e42f54:v1] TRIGGER:\nEncountering GlacierPay error code H34.\n\nREUSABLE RULE:\nWait 11 seconds, rotate the session key, mint a new idempotency key, retry exactly twice with X-Glacier-Mode: white, and never reuse the old idempotency key.\n\nCRITICAL CONSTRAINTS:\n- Wait 11 seconds before taking further actions.\n- Retry exactly twice only with X-Glacier-Mode: white.\n- Never reuse the old idempotency key."
+        ]
+      },
+      "same_memory_b_c": true,
+      "memory_lift": 1,
+      "fidelity_instruction_task_lift": 0,
+      "fidelity_instruction_constraint_lift": 1
+    },
+    {
+      "family_id": "velvetindex-j28",
+      "experience": {
+        "decision": "The operator should verify the product details associated with J28 in the VelvetIndex and ensure that it meets the search criteria. If the product is relevant, proceed with listing or highlighting it for customers. If not, update the search parameters accordingly.",
+        "task_success": false,
+        "outcome": "EVALUATION: FAIL. VelvetIndex runbook rule: J28 requires fetching a fresh cursor from the leader, switching to shadow-read, retrying exactly once while preserving the original query ID, and never reopening the old snapshot.",
+        "outcome_id": "r_31d10cdf296d4354a194630d4825e95a",
+        "lesson": "TRIGGER:\nThe operator must verify product details associated with an identifier in the VelvetIndex.\n\nREUSABLE RULE:\nIf the product is relevant, proceed with listing or highlighting it for customers. If not, update the search parameters accordingly, fetching a fresh cursor from the leader, switching to shadow-read, retrying exactly once while preserving the original query ID, and never reopening the old snapshot.\n\nCRITICAL CONSTRAINTS:\n- Fetch a fresh cursor from the leader.\n- Switch to shadow-read.\n- Retry exactly once.\n- Preserve the original query ID.\n- Never reopen the old snapshot.",
+        "lesson_id": "i_de8aae703701483bb182770b0a2436dd"
+      },
+      "baseline": {
+        "decision": "The operator should investigate the details associated with J28 in VelvetIndex and follow the internal procedures for handling account search results. If further action is unclear, consult with a supervisor or refer to any available documentation for guidance.",
+        "task_success": false,
+        "constraint_fidelity": false,
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa_current": {
+        "decision": "The operator should verify the product details associated with J28 in the VelvetIndex. If the product is relevant, proceed with listing or highlighting it for customers. If not, fetch a fresh cursor from the leader, switch to shadow-read, and retry exactly once while preserving the original query ID, without reopening the old snapshot.",
+        "task_success": true,
+        "constraint_fidelity": false,
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_de8aae703701483bb182770b0a2436dd:v1] TRIGGER:\nThe operator must verify product details associated with an identifier in the VelvetIndex.\n\nREUSABLE RULE:\nIf the product is relevant, proceed with listing or highlighting it for customers. If not, update the search parameters accordingly, fetching a fresh cursor from the leader, switching to shadow-read, retrying exactly once while preserving the original query ID, and never reopening the old snapshot.\n\nCRITICAL CONSTRAINTS:\n- Fetch a fresh cursor from the leader.\n- Switch to shadow-read.\n- Retry exactly once.\n- Preserve the original query ID.\n- Never reopen the old snapshot."
+        ]
+      },
+      "mnexa_fidelity": {
+        "decision": "The operator must verify product details associated with J28 in the VelvetIndex. If the product is relevant, proceed with listing or highlighting it for customers. If it is not, fetch a fresh cursor from the leader, switch to shadow-read, retry exactly once while preserving the original query ID, and never reopen the old snapshot.",
+        "task_success": true,
+        "constraint_fidelity": true,
+        "watermark": 6,
+        "memory_segments": [
+          "[interpretive:i_de8aae703701483bb182770b0a2436dd:v1] TRIGGER:\nThe operator must verify product details associated with an identifier in the VelvetIndex.\n\nREUSABLE RULE:\nIf the product is relevant, proceed with listing or highlighting it for customers. If not, update the search parameters accordingly, fetching a fresh cursor from the leader, switching to shadow-read, retrying exactly once while preserving the original query ID, and never reopening the old snapshot.\n\nCRITICAL CONSTRAINTS:\n- Fetch a fresh cursor from the leader.\n- Switch to shadow-read.\n- Retry exactly once.\n- Preserve the original query ID.\n- Never reopen the old snapshot."
+        ]
+      },
+      "same_memory_b_c": true,
+      "memory_lift": 1,
+      "fidelity_instruction_task_lift": 0,
+      "fidelity_instruction_constraint_lift": 1
+    }
+  ]
+}

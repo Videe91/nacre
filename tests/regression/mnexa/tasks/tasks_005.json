@@ -1,0 +1,717 @@
+{
+  "experiment": "seed-growth-005",
+  "classification": "exploratory-fresh-consolidation-ablation",
+  "hypothesis": "Evidence-disciplined consolidation reduces the propagation of unsupported content from failed decisions while retaining knowledge grounded by authoritative corrections.",
+  "fixture": "Each family contains a controlled failed decision plus an authoritative correction. Conditions B and C receive identical source evidence and differ only in consolidation policy.",
+  "families": [
+    {
+      "id": "asterpay-px77",
+      "entities": [
+        "system:asterpay",
+        "code:px-77"
+      ],
+      "experience": {
+        "prompt": "AsterPay returns PX-77 while capturing an invoice payment. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "AsterPay returns PX-77 while cancelling a subscription charge. What should the operator do?"
+      },
+      "candidate_decision": "Restart the payment service, clear the local cache, and then retry the request.",
+      "correction": "PX-77 requires refreshing the recovery lease, waiting 4 seconds, retrying exactly once, and including X-Aster-Recover: blue.",
+      "correct_grader": {
+        "all_regex": [
+          [
+            "refresh.*recovery\\s+lease"
+          ],
+          [
+            "\\b4\\s*seconds?\\b"
+          ],
+          [
+            "retry.*exactly\\s+once"
+          ],
+          [
+            "x-aster-recover.*blue"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "restart.*payment\\s+service",
+        "clear.*local\\s+cache"
+      ]
+    },
+    {
+      "id": "granitequeue-l13",
+      "entities": [
+        "system:granitequeue",
+        "code:l13"
+      ],
+      "experience": {
+        "prompt": "GraniteQueue returns L13 while processing a document job. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "GraniteQueue returns L13 while processing a thumbnail job. What should the operator do?"
+      },
+      "candidate_decision": "Delete the original message and restart the worker.",
+      "correction": "L13 requires requesting a fresh checkpoint, moving the job to the amber lane, replaying exactly once from that checkpoint, and using Replay-Class: granite.",
+      "correct_grader": {
+        "all_regex": [
+          [
+            "fresh\\s+checkpoint"
+          ],
+          [
+            "amber\\s+lane"
+          ],
+          [
+            "replay.*exactly\\s+once"
+          ],
+          [
+            "replay-class.*granite"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "delete.*original\\s+message",
+        "restart.*worker"
+      ]
+    },
+    {
+      "id": "ivorystore-c48",
+      "entities": [
+        "system:ivorystore",
+        "code:c48"
+      ],
+      "experience": {
+        "prompt": "IvoryStore returns C48 while uploading a 96 MiB archive. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "IvoryStore returns C48 while uploading a 64 MiB checkpoint. What should the operator do?"
+      },
+      "candidate_decision": "Compress the file and retry using a single-part upload.",
+      "correction": "C48 requires a new upload session, multipart upload with 8 MiB chunks, SHA3-256 for every chunk, and X-Ivory-Final: strict on finalization.",
+      "correct_grader": {
+        "all_regex": [
+          [
+            "new\\s+upload\\s+session"
+          ],
+          [
+            "multipart"
+          ],
+          [
+            "\\b8\\s*(?:mib|mb)\\b"
+          ],
+          [
+            "sha3-?256"
+          ],
+          [
+            "(?:every|each|per).*chunk"
+          ],
+          [
+            "x-ivory-final.*strict"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "compress.*file",
+        "single[-\\s]+part"
+      ]
+    },
+    {
+      "id": "amberdb-t22",
+      "entities": [
+        "system:amberdb",
+        "code:t22"
+      ],
+      "experience": {
+        "prompt": "AmberDB returns T22 while writing an inventory update. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "AmberDB returns T22 while writing a pricing update. What should the operator do?"
+      },
+      "candidate_decision": "Restart the database node and synthesize a new epoch locally before retrying.",
+      "correction": "T22 requires reading the primary epoch, acquiring the violet lock, and retrying exactly once with X-Amber-Epoch set to the primary epoch.",
+      "correct_grader": {
+        "all_regex": [
+          [
+            "read.*primary\\s+epoch"
+          ],
+          [
+            "violet\\s+lock"
+          ],
+          [
+            "retry.*exactly\\s+once"
+          ],
+          [
+            "x-amber-epoch.*primary\\s+epoch"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "restart.*database",
+        "synthesi[sz].*epoch"
+      ]
+    },
+    {
+      "id": "marshparser-v3",
+      "entities": [
+        "system:marshparser",
+        "code:v3"
+      ],
+      "experience": {
+        "prompt": "MarshParser returns V3 with legacy state=A before validation. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "MarshParser returns V3 with legacy state=C before validation. What should the operator do?"
+      },
+      "candidate_decision": "Drop the legacy state field and validate the remaining payload.",
+      "correction": "V3 requires mapping A to ready, B to hold, and C to reject before normal schema validation.",
+      "correct_grader": {
+        "all_regex": [
+          [
+            "\\bc\\b.*\\breject"
+          ],
+          [
+            "before.*(?:schema\\s+)?validation"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "drop.*legacy\\s+state",
+        "remove.*state\\s+field"
+      ]
+    },
+    {
+      "id": "orbitrpc-n64",
+      "entities": [
+        "system:orbitrpc",
+        "code:n64"
+      ],
+      "experience": {
+        "prompt": "OrbitRPC returns N64 during a customer-profile request. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "OrbitRPC returns N64 during an order-history request. What should the operator do?"
+      },
+      "candidate_decision": "Close the connection and reuse the prior correlation ID on reconnect.",
+      "correction": "N64 requires exactly two heartbeat frames 220 ms apart, then a new channel with a fresh correlation ID and X-Orbit-Recover: n64.",
+      "correct_grader": {
+        "all_regex": [
+          [
+            "(?:two|2)\\s+heartbeat"
+          ],
+          [
+            "\\b220\\s*(?:ms|milliseconds?)\\b"
+          ],
+          [
+            "new\\s+channel"
+          ],
+          [
+            "fresh\\s+correlation\\s+id"
+          ],
+          [
+            "x-orbit-recover.*n64"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "close.*connection",
+        "reuse.*correlation\\s+id"
+      ]
+    },
+    {
+      "id": "sprucecdn-b51",
+      "entities": [
+        "system:sprucecdn",
+        "code:b51"
+      ],
+      "experience": {
+        "prompt": "SpruceCDN returns B51 while refreshing a script asset. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "SpruceCDN returns B51 while refreshing a stylesheet asset. What should the operator do?"
+      },
+      "candidate_decision": "Perform a global purge and restart the edge service.",
+      "correction": "B51 requires one HEAD request to origin, purging only the current region shard, waiting 5 seconds, then issuing one GET with X-Spruce-Probe: 3.",
+      "correct_grader": {
+        "all_regex": [
+          [
+            "(?:one|1)\\s+head\\s+request"
+          ],
+          [
+            "only.*current\\s+region\\s+shard"
+          ],
+          [
+            "\\b5\\s*seconds?\\b"
+          ],
+          [
+            "(?:one|1)\\s+get"
+          ],
+          [
+            "x-spruce-probe.*3"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "global\\s+purge",
+        "restart.*edge\\s+service"
+      ]
+    },
+    {
+      "id": "quartzflow-r27",
+      "entities": [
+        "system:quartzflow",
+        "code:r27"
+      ],
+      "experience": {
+        "prompt": "QuartzFlow returns R27 during invoice reconciliation. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "QuartzFlow returns R27 during payroll export. What should the operator do?"
+      },
+      "candidate_decision": "Resume the failed step directly and keep using the same checkpoint.",
+      "correction": "R27 requires cloning the latest checkpoint, marking the old run superseded, restarting from the previous boundary exactly once, and carrying token r27-safe.",
+      "correct_grader": {
+        "all_regex": [
+          [
+            "clon(?:e|ing).*latest\\s+checkpoint"
+          ],
+          [
+            "old\\s+run.*superseded"
+          ],
+          [
+            "restart.*previous\\s+boundary.*exactly\\s+once"
+          ],
+          [
+            "r27-safe"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "resume.*failed\\s+step",
+        "keep.*same\\s+checkpoint"
+      ]
+    },
+    {
+      "id": "jadeindex-x11",
+      "entities": [
+        "system:jadeindex",
+        "code:x11"
+      ],
+      "experience": {
+        "prompt": "JadeIndex returns X11 during catalog indexing. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "JadeIndex returns X11 during customer indexing. What should the operator do?"
+      },
+      "candidate_decision": "Rebuild the entire index and discard the existing cursor.",
+      "correction": "X11 requires fetching a fresh cursor from the leader, switching to delta-read, replaying exactly two pages, and setting X-Jade-Cursor: fresh.",
+      "correct_grader": {
+        "all_regex": [
+          [
+            "fresh\\s+cursor.*leader"
+          ],
+          [
+            "delta[-\\s]read"
+          ],
+          [
+            "replay.*(?:two|2)\\s+pages"
+          ],
+          [
+            "x-jade-cursor.*fresh"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "rebuild.*entire\\s+index",
+        "discard.*cursor"
+      ]
+    },
+    {
+      "id": "silverledger-a42",
+      "entities": [
+        "system:silverledger",
+        "code:a42"
+      ],
+      "experience": {
+        "prompt": "SilverLedger returns A42 while posting a settlement. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "SilverLedger returns A42 while posting a rebate. What should the operator do?"
+      },
+      "candidate_decision": "Synthesize a nonce locally and bypass the lock before retrying.",
+      "correction": "A42 requires requesting the server nonce, acquiring the blue lock, retrying exactly twice, and setting X-Silver-Nonce to the server nonce.",
+      "correct_grader": {
+        "all_regex": [
+          [
+            "(?:request|fetch|get).*server\\s+nonce"
+          ],
+          [
+            "blue\\s+lock"
+          ],
+          [
+            "retry.*(?:exactly\\s+)?twice"
+          ],
+          [
+            "x-silver-nonce.*server\\s+nonce"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "synthesi[sz].*nonce",
+        "bypass.*lock"
+      ]
+    },
+    {
+      "id": "maplebus-e16",
+      "entities": [
+        "system:maplebus",
+        "code:e16"
+      ],
+      "experience": {
+        "prompt": "MapleBus returns E16 while consuming an invoice event. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "MapleBus returns E16 while consuming an audit event. What should the operator do?"
+      },
+      "candidate_decision": "Acknowledge the original event and retry the same message.",
+      "correction": "E16 requires requesting a fresh checkpoint, replaying exactly once from that checkpoint, and using Replay-Class: maple.",
+      "correct_grader": {
+        "all_regex": [
+          [
+            "fresh\\s+checkpoint"
+          ],
+          [
+            "replay.*exactly\\s+once"
+          ],
+          [
+            "replay-class.*maple"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "acknowledge.*original",
+        "retry.*same\\s+message"
+      ]
+    },
+    {
+      "id": "froststore-m55",
+      "entities": [
+        "system:froststore",
+        "code:m55"
+      ],
+      "experience": {
+        "prompt": "FrostStore returns M55 while uploading a 200 MiB backup. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "FrostStore returns M55 while uploading a 100 MiB snapshot. What should the operator do?"
+      },
+      "candidate_decision": "Reuse the previous upload ID and send the file as one large single part.",
+      "correction": "M55 requires a new upload ID, multipart upload with 20 MiB chunks, SHA-512 for every chunk, and X-Frost-Manifest: ice on finalization.",
+      "correct_grader": {
+        "all_regex": [
+          [
+            "new\\s+upload\\s+id"
+          ],
+          [
+            "multipart"
+          ],
+          [
+            "\\b20\\s*(?:mib|mb)\\b"
+          ],
+          [
+            "sha-?512"
+          ],
+          [
+            "(?:every|each|per).*chunk"
+          ],
+          [
+            "x-frost-manifest.*ice"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "reuse.*upload\\s+id",
+        "single\\s+part"
+      ]
+    },
+    {
+      "id": "cinderdb-h8",
+      "entities": [
+        "system:cinderdb",
+        "code:h8"
+      ],
+      "experience": {
+        "prompt": "CinderDB returns H8 during a customer-balance query. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "CinderDB returns H8 during an inventory query. What should the operator do?"
+      },
+      "candidate_decision": "Reconnect the session and generate a new request ID.",
+      "correction": "H8 requires refreshing the schema token, switching to snapshot-read, retrying exactly once, and preserving the original request ID.",
+      "correct_grader": {
+        "all_regex": [
+          [
+            "refresh.*schema\\s+token"
+          ],
+          [
+            "snapshot[-\\s]read"
+          ],
+          [
+            "retry.*exactly\\s+once"
+          ],
+          [
+            "preserv.*original\\s+request\\s+id"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "reconnect.*session",
+        "(?:generate|create).*new\\s+request\\s+id"
+      ]
+    },
+    {
+      "id": "pearlrpc-j33",
+      "entities": [
+        "system:pearlrpc",
+        "code:j33"
+      ],
+      "experience": {
+        "prompt": "PearlRPC returns J33 during a profile RPC. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "PearlRPC returns J33 during a billing RPC. What should the operator do?"
+      },
+      "candidate_decision": "Reuse the previous stream ID and restart the RPC service.",
+      "correction": "J33 requires exactly three heartbeat frames 180 ms apart, then a fresh channel carrying X-Pearl-Recover: j33.",
+      "correct_grader": {
+        "all_regex": [
+          [
+            "(?:three|3)\\s+heartbeat"
+          ],
+          [
+            "\\b180\\s*(?:ms|milliseconds?)\\b"
+          ],
+          [
+            "fresh\\s+channel"
+          ],
+          [
+            "x-pearl-recover.*j33"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "reuse.*stream\\s+id",
+        "restart.*rpc\\s+service"
+      ]
+    },
+    {
+      "id": "oakqueue-s72",
+      "entities": [
+        "system:oakqueue",
+        "code:s72"
+      ],
+      "experience": {
+        "prompt": "OakQueue returns S72 for a report-generation job. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "OakQueue returns S72 for a media-processing job. What should the operator do?"
+      },
+      "candidate_decision": "Cancel the job and delete the existing dispatch record.",
+      "correction": "S72 requires minting a new dispatch ID, moving the job to the teal lane, requeueing exactly once, and tagging dispatch-mode=restored.",
+      "correct_grader": {
+        "all_regex": [
+          [
+            "(?:mint|create|generate).*new\\s+dispatch\\s+id"
+          ],
+          [
+            "teal\\s+lane"
+          ],
+          [
+            "re-?queue.*exactly\\s+once"
+          ],
+          [
+            "dispatch-mode\\s*=\\s*restored"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "cancel.*job",
+        "delete.*dispatch\\s+record"
+      ]
+    },
+    {
+      "id": "cloudcdn-k25",
+      "entities": [
+        "system:cloudcdn",
+        "code:k25"
+      ],
+      "experience": {
+        "prompt": "CloudCDN returns K25 while refreshing a JavaScript asset. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "CloudCDN returns K25 while refreshing an image asset. What should the operator do?"
+      },
+      "candidate_decision": "Purge all regions and invalidate all cached assets.",
+      "correction": "K25 requires one HEAD request, purging only the current POP shard, waiting 9 seconds, then one GET with X-Cloud-Probe: 7.",
+      "correct_grader": {
+        "all_regex": [
+          [
+            "(?:one|1)\\s+head\\s+request"
+          ],
+          [
+            "only.*current\\s+pop\\s+shard"
+          ],
+          [
+            "\\b9\\s*seconds?\\b"
+          ],
+          [
+            "(?:one|1)\\s+get"
+          ],
+          [
+            "x-cloud-probe.*7"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "purge.*all\\s+regions",
+        "invalidate.*all.*assets"
+      ]
+    },
+    {
+      "id": "deltaflow-z19",
+      "entities": [
+        "system:deltaflow",
+        "code:z19"
+      ],
+      "experience": {
+        "prompt": "DeltaFlow returns Z19 during invoice export. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "DeltaFlow returns Z19 during analytics export. What should the operator do?"
+      },
+      "candidate_decision": "Restart the entire workflow from the beginning and discard the current checkpoint.",
+      "correction": "Z19 requires cloning the latest checkpoint, marking the old run stale, restarting from the previous boundary exactly once, and carrying token z19-safe.",
+      "correct_grader": {
+        "all_regex": [
+          [
+            "clon(?:e|ing).*latest\\s+checkpoint"
+          ],
+          [
+            "old\\s+run.*stale"
+          ],
+          [
+            "restart.*previous\\s+boundary.*exactly\\s+once"
+          ],
+          [
+            "z19-safe"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "restart.*entire\\s+workflow",
+        "discard.*checkpoint"
+      ]
+    },
+    {
+      "id": "violetparser-q7",
+      "entities": [
+        "system:violetparser",
+        "code:q7"
+      ],
+      "experience": {
+        "prompt": "VioletParser returns Q7 with legacy state=X before validation. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "VioletParser returns Q7 with legacy state=Z before validation. What should the operator do?"
+      },
+      "candidate_decision": "Drop the state field and default the record to approved.",
+      "correction": "Q7 requires mapping X to queued, Y to blocked, and Z to ready before normal validation.",
+      "correct_grader": {
+        "all_regex": [
+          [
+            "\\bz\\b.*\\bready\\b"
+          ],
+          [
+            "before.*validation"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "drop.*state\\s+field",
+        "default.*approved"
+      ]
+    },
+    {
+      "id": "northpay-f61",
+      "entities": [
+        "system:northpay",
+        "code:f61"
+      ],
+      "experience": {
+        "prompt": "NorthPay returns F61 while capturing an order payment. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "NorthPay returns F61 while issuing a subscription adjustment. What should the operator do?"
+      },
+      "candidate_decision": "Refund the customer immediately and reverse the charge.",
+      "correction": "F61 requires waiting 12 seconds, rotating the session key, minting a new idempotency key, retrying exactly twice, and using X-North-Mode: silver.",
+      "correct_grader": {
+        "all_regex": [
+          [
+            "\\b12\\s*seconds?\\b"
+          ],
+          [
+            "rotat.*session\\s+key"
+          ],
+          [
+            "(?:mint|create|generate).*new\\s+idempotency\\s+key"
+          ],
+          [
+            "retry.*(?:exactly\\s+)?twice"
+          ],
+          [
+            "x-north-mode.*silver"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "refund.*customer",
+        "reverse.*charge"
+      ]
+    },
+    {
+      "id": "copperindex-w29",
+      "entities": [
+        "system:copperindex",
+        "code:w29"
+      ],
+      "experience": {
+        "prompt": "CopperIndex returns W29 during product search. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "CopperIndex returns W29 during account search. What should the operator do?"
+      },
+      "candidate_decision": "Delete the current snapshot and rebuild the search index.",
+      "correction": "W29 requires fetching a fresh cursor from the leader, switching to shadow-read, retrying exactly once, and preserving the original query ID.",
+      "correct_grader": {
+        "all_regex": [
+          [
+            "fresh\\s+cursor.*leader"
+          ],
+          [
+            "shadow[-\\s]read"
+          ],
+          [
+            "retry.*exactly\\s+once"
+          ],
+          [
+            "preserv.*original\\s+query\\s+id"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "delete.*snapshot",
+        "rebuild.*search\\s+index"
+      ]
+    }
+  ]
+}

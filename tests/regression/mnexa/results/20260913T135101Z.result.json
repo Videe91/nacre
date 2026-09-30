@@ -1,0 +1,145 @@
+{
+  "experiment": "seed-growth-002",
+  "classification": "exploratory",
+  "run_id": "20260913T135101Z",
+  "grader_profile": "seed-growth-001r-diagnostic",
+  "model": "gpt-4o-mini",
+  "embedder": "sentence-transformers/all-MiniLM-L6-v2",
+  "meter": "word-meter-v1",
+  "task_count": 5,
+  "baseline_passes": 1,
+  "mnexa_passes": 3,
+  "net_improvement": 2,
+  "families": [
+    {
+      "family_id": "nebulapay-r17",
+      "experience": {
+        "passed": false,
+        "decision": "The operator should verify the payment status in the system and confirm the details of the invoice. If everything appears correct, they should proceed to log the R17 return accordingly and notify the relevant team for further investigation if needed.",
+        "outcome": "EVALUATION: FAIL. NebulaPay runbook rule: for R17, wait 3 seconds, retry exactly once, and include the header X-Nebula-Replay: safe on the retry."
+      },
+      "baseline": {
+        "passed": false,
+        "decision": "The operator should confirm the refund amount of R17 and proceed to process the refund as per the standard procedure.",
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa": {
+        "passed": true,
+        "decision": "1. Wait for 3 seconds.\n2. Retry the refund request once, including the header `X-Nebula-Replay: safe`.",
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_b0db9af211a449e79f374bc4a88a2796:v1] TRIGGER:\nWhen processing an R17 return.\n\nREUSABLE RULE:\nFor R17, wait 3 seconds, retry exactly once, and include the header X-Nebula-Replay: safe on the retry.\n\nCRITICAL CONSTRAINTS:\n- The retry must occur exactly once.\n- The wait time must be 3 seconds before the retry.\n- The header X-Nebula-Replay: safe must be included on the retry."
+        ],
+        "lesson": "TRIGGER:\nWhen processing an R17 return.\n\nREUSABLE RULE:\nFor R17, wait 3 seconds, retry exactly once, and include the header X-Nebula-Replay: safe on the retry.\n\nCRITICAL CONSTRAINTS:\n- The retry must occur exactly once.\n- The wait time must be 3 seconds before the retry.\n- The header X-Nebula-Replay: safe must be included on the retry.",
+        "lesson_id": "i_b0db9af211a449e79f374bc4a88a2796",
+        "outcome_id": "r_8b074245418347daa5a4e5ba2a17f01d"
+      },
+      "delta": 1
+    },
+    {
+      "family_id": "orchiddb-l42",
+      "experience": {
+        "passed": false,
+        "decision": "The operator should check the OrchidDB documentation or support resources for the meaning of the L42 code, as it may indicate an error or specific instructional code related to the inventory reservation transaction. Follow any guidance provided for addressing this code.",
+        "outcome": "EVALUATION: FAIL. OrchidDB runbook rule: L42 means the lease token is stale. Refresh the lease token, retry the transaction exactly once, and do not reconnect the database session."
+      },
+      "baseline": {
+        "passed": false,
+        "decision": "The operator should review the OrchidDB logs to identify the reason for the L42 error during the pricing update. After assessing the logs, they should resolve any identified issues and attempt to commit the update again. If the issue persists, consult the database documentation or escalate to a senior team member for further assistance.",
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa": {
+        "passed": true,
+        "decision": "Refresh the lease token and retry the pricing update transaction exactly once without reconnecting the database session.",
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_ee89ca804dcc404db96ba25e1ecf09c4:v1] TRIGGER:\nEncountering the L42 code in the OrchidDB inventory reservation transaction.\n\nREUSABLE RULE:\nThe lease token is stale; refresh the lease token, retry the transaction exactly once, and do not reconnect the database session.\n\nCRITICAL CONSTRAINTS:\n- Retry the transaction exactly once.\n- Do not reconnect the database session."
+        ],
+        "lesson": "TRIGGER:\nEncountering the L42 code in the OrchidDB inventory reservation transaction.\n\nREUSABLE RULE:\nThe lease token is stale; refresh the lease token, retry the transaction exactly once, and do not reconnect the database session.\n\nCRITICAL CONSTRAINTS:\n- Retry the transaction exactly once.\n- Do not reconnect the database session.",
+        "lesson_id": "i_ee89ca804dcc404db96ba25e1ecf09c4",
+        "outcome_id": "r_0fca8d1c051f4872b527440a1f64c323"
+      },
+      "delta": 1
+    },
+    {
+      "family_id": "atlasparser-qn",
+      "experience": {
+        "passed": false,
+        "decision": "Before schema validation, the legacy record with `enabled=Q` should be transformed to be compliant with the expected JSON schema. This can involve converting the value of `enabled` from `Q` to a default or acceptable value (e.g., `true` or `false`).",
+        "outcome": "EVALUATION: FAIL. AtlasParser compatibility rule: normalize legacy Q/N booleans before schema validation. Q becomes true and N becomes false, then run the normal schema validator."
+      },
+      "baseline": {
+        "passed": true,
+        "decision": "Before schema validation, the AtlasParser should preprocess the legacy record to either convert or set the \"archived\" field to a value that conforms to the JSON schema requirements (e.g., changing \"archived=N\" to \"archived=false\").",
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa": {
+        "passed": true,
+        "decision": "Before schema validation, normalize the legacy record by converting `archived=N` to `archived=false`.",
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_0e7384feb68c483db362905d67e79fb2:v1] TRIGGER:\nLegacy records with `enabled=Q` or `enabled=N` before schema validation.\n\nREUSABLE RULE:\nNormalize legacy Q/N booleans (Q to true and N to false) before schema validation.\n\nCRITICAL CONSTRAINTS:\n- Normalization must occur before schema validation.\n- Q must be converted to true; N must be converted to false."
+        ],
+        "lesson": "TRIGGER:\nLegacy records with `enabled=Q` or `enabled=N` before schema validation.\n\nREUSABLE RULE:\nNormalize legacy Q/N booleans (Q to true and N to false) before schema validation.\n\nCRITICAL CONSTRAINTS:\n- Normalization must occur before schema validation.\n- Q must be converted to true; N must be converted to false.",
+        "lesson_id": "i_0e7384feb68c483db362905d67e79fb2",
+        "outcome_id": "r_ce8fe0ec33af46118c40f5273a011415"
+      },
+      "delta": 0
+    },
+    {
+      "family_id": "heliosstore-e62",
+      "experience": {
+        "passed": false,
+        "decision": "Check the HeliosStore documentation for error E62 to diagnose the issue. Verify the upload size limit and any other constraints. If necessary, split the 180 MiB archive into smaller parts and attempt to upload again or consult with technical support for further assistance.",
+        "outcome": "EVALUATION: FAIL. HeliosStore runbook rule: E62 requires switching to multipart upload with 16 MiB parts and attaching a SHA-256 digest for every part before retrying the upload."
+      },
+      "baseline": {
+        "passed": false,
+        "decision": "The uploader should check the HeliosStore documentation for error E62 to identify the specific cause of the error and follow the recommended steps to resolve the issue, such as verifying file integrity or compatibility. If further assistance is needed, they should reach out to technical support for HeliosStore.",
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa": {
+        "passed": false,
+        "decision": "To resolve the E62 error while uploading the 96 MiB model checkpoint, switch to multipart upload with 16 MiB parts. Ensure that a SHA-256 digest is attached for each of the six parts before retrying the upload.",
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_08750c3c250347d3a33edfd4f50becf3:v1] TRIGGER:\nEncountering error E62 during upload processes to HeliosStore.\n\nREUSABLE RULE:\nSwitch to multipart upload with 16 MiB parts and attach a SHA-256 digest for every part before retrying the upload.\n\nCRITICAL CONSTRAINTS:\n- Each part must be 16 MiB.\n- A SHA-256 digest must be attached for every part.\n- Follow HeliosStore runbook rule for error E62."
+        ],
+        "lesson": "TRIGGER:\nEncountering error E62 during upload processes to HeliosStore.\n\nREUSABLE RULE:\nSwitch to multipart upload with 16 MiB parts and attach a SHA-256 digest for every part before retrying the upload.\n\nCRITICAL CONSTRAINTS:\n- Each part must be 16 MiB.\n- A SHA-256 digest must be attached for every part.\n- Follow HeliosStore runbook rule for error E62.",
+        "lesson_id": "i_08750c3c250347d3a33edfd4f50becf3",
+        "outcome_id": "r_70c704082c6945ab8e2ba34af778c7d5"
+      },
+      "delta": 0
+    },
+    {
+      "family_id": "saffronqueue-amber7",
+      "experience": {
+        "passed": false,
+        "decision": "The worker should check the status of job AMBER-7 in SaffronQueue for any pending updates or issues. If necessary, escalate to the appropriate team for resolution.",
+        "outcome": "EVALUATION: FAIL. SaffronQueue runbook rule: AMBER-7 means the current correlation lease is invalid. Do not retry the same leased job. Request a new correlation lease, then requeue the job once under the new lease."
+      },
+      "baseline": {
+        "passed": false,
+        "decision": "The worker should prioritize the thumbnail-generation job AMBER-7 and begin processing it according to the established workflow for such jobs.",
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa": {
+        "passed": false,
+        "decision": "Check the status of job AMBER-7 in SaffronQueue. If the current correlation lease is invalid, request a new correlation lease and requeue the job under the new lease. Do not retry the same leased job.",
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_5f2814f33e9c49d99aeeb61bb1f87d82:v1] TRIGGER:\nThe status of job AMBER-7 is being checked in SaffronQueue.\n\nREUSABLE RULE:\nIf AMBER-7 indicates that the current correlation lease is invalid, request a new correlation lease and then requeue the job once under the new lease.\n\nCRITICAL CONSTRAINTS:\n- Do not retry the same leased job.\n- Follow SaffronQueue runbook rule for AMBER-7."
+        ],
+        "lesson": "TRIGGER:\nThe status of job AMBER-7 is being checked in SaffronQueue.\n\nREUSABLE RULE:\nIf AMBER-7 indicates that the current correlation lease is invalid, request a new correlation lease and then requeue the job once under the new lease.\n\nCRITICAL CONSTRAINTS:\n- Do not retry the same leased job.\n- Follow SaffronQueue runbook rule for AMBER-7.",
+        "lesson_id": "i_5f2814f33e9c49d99aeeb61bb1f87d82",
+        "outcome_id": "r_355987ca29884aa2b0cf5cc3e28d77fb"
+      },
+      "delta": 0
+    }
+  ]
+}

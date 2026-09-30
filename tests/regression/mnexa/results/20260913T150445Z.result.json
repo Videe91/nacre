@@ -1,0 +1,3827 @@
+{
+  "experiment": "seed-growth-007",
+  "classification": "exploratory-fresh-raw-evidence-atomization-ablation",
+  "run_id": "20260913T150445Z",
+  "taskset_sha256": "34990e657a9151e10da763c0aaa65dcc06f4abf71d85d38e060cc8d82e71ea63",
+  "model": "gpt-4o-mini",
+  "embedder": "sentence-transformers/all-MiniLM-L6-v2",
+  "meter": "word-meter-v1",
+  "task_count": 20,
+  "conditions": {
+    "A": "baseline_no_memory",
+    "B": "mnexa_oracle_grounded_claims",
+    "C": "mnexa_raw_span_grounded_claims"
+  },
+  "baseline_task_passes": 0,
+  "oracle_task_passes": 15,
+  "raw_span_task_passes": 15,
+  "oracle_complete_lessons": 20,
+  "raw_span_complete_lessons": 20,
+  "oracle_contaminated_lessons": 1,
+  "raw_span_contaminated_lessons": 1,
+  "raw_span_model_atom_proposals": 86,
+  "raw_span_grounded_atoms": 86,
+  "raw_span_rejected_atoms": 40,
+  "adversarial_atom_challenges": 40,
+  "adversarial_atom_rejections": 40,
+  "ungrounded_atoms_admitted": 0,
+  "mean_source_span_coverage": 1.075,
+  "full_source_span_coverage_families": 14,
+  "unsupported_claims_admitted": 0,
+  "all_source_evidence_equal": true,
+  "raw_atomization_instruction": "RAW EVIDENCE ATOMIZATION\n\nYou are extracting atomic facts from authoritative historical evidence.\n\nThis experiment uses a DETERMINISTIC SPAN GROUNDING admission rule.\n\nRules:\n\n1. Extract distinct, atomic operational propositions.\n2. For each proposition, provide:\n   - \"text\": clean statement of the atomic proposition\n   - \"source_quote\": EXACT substring quote from the raw evidence text\n3. Do not paraphrase or alter the source_quote.\n4. Do not include propositions that do not exist as exact quotes in the evidence.\n5. Do not include private reasoning.\n\nReturn JSON only:\n\n{\n  \"atoms\": [\n    {\n      \"text\": \"<proposition text>\",\n      \"source_quote\": \"<exact source quote>\"\n    }\n  ]\n}",
+  "families": [
+    {
+      "family_id": "lumenpay-kx31-007",
+      "baseline": {
+        "decision": "Upon receiving the KX-31 code while cancelling a subscription charge, the operator should take the following action:\n\n- Refer to the relevant documentation to understand what KX-31 signifies.\n- Follow any specified troubleshooting steps for KX-31.\n- If not resolved, escalate the issue to a supervisor for further assistance. \n\nNo specific constraints or prohibitions were provided in the accumulated experience.",
+        "correct_knowledge": false,
+        "designated_contamination": false,
+        "task_success": false
+      },
+      "mnexa_oracle": {
+        "candidate_decision": "Restart the payment service and clear the local cache.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nKX-31 authoritative correction: Refresh the recovery lease. Wait 6 seconds. Retry exactly once. Include X-Lumen-Recover: amber.",
+        "outcome_id": "r_2884e7d8866749c59eb169fdca16fb29",
+        "source_evidence_sha256": "55c452966a77825b5cf6f1c78fcc9d8a634a3c74318c3029acd69608727532f4",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Refresh the recovery lease.\n- [E2] Wait 6 seconds.\n- [E3] Retry exactly once.\n- [E4] Include X-Lumen-Recover: amber.",
+        "lesson_id": "i_ab97b893812a4b03adb93fae5808aaef",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "Upon receiving KX-31 while cancelling a subscription charge, the operator should:\n\n1. Wait 6 seconds.\n2. Include `X-Lumen-Recover: amber`.\n3. Retry exactly once.",
+        "transfer_correct_knowledge": false,
+        "transfer_contaminated": false,
+        "task_success": false,
+        "memory_segments": [
+          "[interpretive:i_ab97b893812a4b03adb93fae5808aaef:v1] SUPPORTED CLAIMS:\n- [E1] Refresh the recovery lease.\n- [E2] Wait 6 seconds.\n- [E3] Retry exactly once.\n- [E4] Include X-Lumen-Recover: amber."
+        ],
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Refresh the recovery lease.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Wait 6 seconds.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Retry exactly once.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Include X-Lumen-Recover: amber.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Refresh the recovery lease.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Wait 6 seconds.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Retry exactly once.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Include X-Lumen-Recover: amber.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Refresh the recovery lease.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Wait 6 seconds.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Retry exactly once.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Include X-Lumen-Recover: amber.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "mnexa_raw_span": {
+        "candidate_decision": "Restart the payment service and clear the local cache.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nKX-31 authoritative correction: Refresh the recovery lease. Wait 6 seconds. Retry exactly once. Include X-Lumen-Recover: amber.",
+        "outcome_id": "r_b174157ee5fb41d791f60b55a2b2d978",
+        "source_evidence_sha256": "55c452966a77825b5cf6f1c78fcc9d8a634a3c74318c3029acd69608727532f4",
+        "lesson": "SUPPORTED CLAIMS:\n- [E2] Refresh the recovery lease.\n- [E3] Wait 6 seconds.\n- [E4] Retry exactly once.\n- [E5] Include X-Lumen-Recover: amber.",
+        "lesson_id": "i_81afea9993154bdb92b36eacea9a8e67",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "The operator should take the following actions:\n\n1. Wait 6 seconds.\n2. Include X-Lumen-Recover: amber.\n3. Retry exactly once.",
+        "transfer_correct_knowledge": false,
+        "transfer_contaminated": false,
+        "task_success": false,
+        "memory_segments": [
+          "[interpretive:i_81afea9993154bdb92b36eacea9a8e67:v1] SUPPORTED CLAIMS:\n- [E2] Refresh the recovery lease.\n- [E3] Wait 6 seconds.\n- [E4] Retry exactly once.\n- [E5] Include X-Lumen-Recover: amber."
+        ],
+        "raw_atom_model_response": "{\n  \"atoms\": [\n    {\n      \"text\": \"EVALUATION: FAIL.\",\n      \"source_quote\": \"EVALUATION: FAIL.\"\n    },\n    {\n      \"text\": \"Refresh the recovery lease.\",\n      \"source_quote\": \"Refresh the recovery lease.\"\n    },\n    {\n      \"text\": \"Wait 6 seconds.\",\n      \"source_quote\": \"Wait 6 seconds.\"\n    },\n    {\n      \"text\": \"Retry exactly once.\",\n      \"source_quote\": \"Retry exactly once.\"\n    },\n    {\n      \"text\": \"Include X-Lumen-Recover: amber.\",\n      \"source_quote\": \"Include X-Lumen-Recover: amber.\"\n    }\n  ]\n}",
+        "raw_model_atom_proposals_count": 5,
+        "model_atom_proposals": 5,
+        "adversarial_atom_challenges": 2,
+        "adversarial_atom_rejections": 2,
+        "grounded_atoms_count": 5,
+        "rejected_atoms_count": 2,
+        "ungrounded_atoms_admitted": 0,
+        "source_span_coverage": 1.25,
+        "raw_model_proposal": "```json\n{\n  \"claims\": [\n    {\n      \"text\": \"Refresh the recovery lease.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Wait 6 seconds.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Retry exactly once.\",\n      \"evidence_ids\": [\"E4\"]\n    },\n    {\n      \"text\": \"Include X-Lumen-Recover: amber.\",\n      \"evidence_ids\": [\"E5\"]\n    }\n  ]\n}\n```",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Refresh the recovery lease.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Wait 6 seconds.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Retry exactly once.",
+              "evidence_ids": [
+                "E4"
+              ]
+            },
+            {
+              "text": "Include X-Lumen-Recover: amber.",
+              "evidence_ids": [
+                "E5"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Refresh the recovery lease.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Wait 6 seconds.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Retry exactly once.",
+            "evidence_ids": [
+              "E4"
+            ]
+          },
+          {
+            "text": "Include X-Lumen-Recover: amber.",
+            "evidence_ids": [
+              "E5"
+            ]
+          }
+        ],
+        "ancestry_coverage": 0.8,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E2",
+          "E3",
+          "E4",
+          "E5"
+        ]
+      },
+      "same_source_evidence": true
+    },
+    {
+      "family_id": "ashqueue-d14-007",
+      "baseline": {
+        "decision": "If AshQueue returns D14 while processing a thumbnail job, the operator must immediately check the error logs for details. If the issue is not resolved within 30 minutes, the operator must escalate the incident to the technical support team for further assistance.",
+        "correct_knowledge": false,
+        "designated_contamination": false,
+        "task_success": false
+      },
+      "mnexa_oracle": {
+        "candidate_decision": "Delete the original message and restart the worker.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nD14 authoritative correction: Request a fresh checkpoint. Move the job to the gold lane. Replay exactly once from the checkpoint. Use Replay-Class: ash.",
+        "outcome_id": "r_531d2f569ac74816873b4986a114286f",
+        "source_evidence_sha256": "941f0838a15bdaf57d70cf2f72ada65d5dd121cda0d4375524ffe5e890d19ad5",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Request a fresh checkpoint.\n- [E2] Move the job to the gold lane.\n- [E3] Replay exactly once from the checkpoint.\n- [E4] Use Replay-Class: ash.",
+        "lesson_id": "i_5dacc1a8368d4ff695ed05771639e443",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "The operator should \"request a fresh checkpoint\" and \"replay exactly once from the checkpoint\" using \"Replay-Class: ash.\"",
+        "transfer_correct_knowledge": false,
+        "transfer_contaminated": false,
+        "task_success": false,
+        "memory_segments": [
+          "[interpretive:i_5dacc1a8368d4ff695ed05771639e443:v1] SUPPORTED CLAIMS:\n- [E1] Request a fresh checkpoint.\n- [E2] Move the job to the gold lane.\n- [E3] Replay exactly once from the checkpoint.\n- [E4] Use Replay-Class: ash."
+        ],
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Request a fresh checkpoint.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Move the job to the gold lane.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Replay exactly once from the checkpoint.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Use Replay-Class: ash.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Request a fresh checkpoint.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Move the job to the gold lane.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Replay exactly once from the checkpoint.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Use Replay-Class: ash.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Request a fresh checkpoint.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Move the job to the gold lane.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Replay exactly once from the checkpoint.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Use Replay-Class: ash.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "mnexa_raw_span": {
+        "candidate_decision": "Delete the original message and restart the worker.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nD14 authoritative correction: Request a fresh checkpoint. Move the job to the gold lane. Replay exactly once from the checkpoint. Use Replay-Class: ash.",
+        "outcome_id": "r_3f14de9035c847f8ac4c9356176140da",
+        "source_evidence_sha256": "941f0838a15bdaf57d70cf2f72ada65d5dd121cda0d4375524ffe5e890d19ad5",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] EVALUATION: FAIL.\n- [E2] Request a fresh checkpoint.\n- [E3] Move the job to the gold lane.\n- [E4] Replay exactly once from the checkpoint.\n- [E5] Use Replay-Class: ash.",
+        "lesson_id": "i_2841d66fbefe41f3afac8c9bdc9834fd",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "The operator should take the following action:\n\n1. Request a fresh checkpoint.\n2. Replay exactly once from the checkpoint using Replay-Class: ash.",
+        "transfer_correct_knowledge": false,
+        "transfer_contaminated": false,
+        "task_success": false,
+        "memory_segments": [
+          "[interpretive:i_2841d66fbefe41f3afac8c9bdc9834fd:v1] SUPPORTED CLAIMS:\n- [E1] EVALUATION: FAIL.\n- [E2] Request a fresh checkpoint.\n- [E3] Move the job to the gold lane.\n- [E4] Replay exactly once from the checkpoint.\n- [E5] Use Replay-Class: ash."
+        ],
+        "raw_atom_model_response": "{\n  \"atoms\": [\n    {\n      \"text\": \"EVALUATION: FAIL.\",\n      \"source_quote\": \"EVALUATION: FAIL.\"\n    },\n    {\n      \"text\": \"Request a fresh checkpoint.\",\n      \"source_quote\": \"Request a fresh checkpoint.\"\n    },\n    {\n      \"text\": \"Move the job to the gold lane.\",\n      \"source_quote\": \"Move the job to the gold lane.\"\n    },\n    {\n      \"text\": \"Replay exactly once from the checkpoint.\",\n      \"source_quote\": \"Replay exactly once from the checkpoint.\"\n    },\n    {\n      \"text\": \"Use Replay-Class: ash.\",\n      \"source_quote\": \"Use Replay-Class: ash.\"\n    }\n  ]\n}",
+        "raw_model_atom_proposals_count": 5,
+        "model_atom_proposals": 5,
+        "adversarial_atom_challenges": 2,
+        "adversarial_atom_rejections": 2,
+        "grounded_atoms_count": 5,
+        "rejected_atoms_count": 2,
+        "ungrounded_atoms_admitted": 0,
+        "source_span_coverage": 1.25,
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"EVALUATION: FAIL.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Request a fresh checkpoint.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Move the job to the gold lane.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Replay exactly once from the checkpoint.\",\n      \"evidence_ids\": [\"E4\"]\n    },\n    {\n      \"text\": \"Use Replay-Class: ash.\",\n      \"evidence_ids\": [\"E5\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "EVALUATION: FAIL.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Request a fresh checkpoint.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Move the job to the gold lane.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Replay exactly once from the checkpoint.",
+              "evidence_ids": [
+                "E4"
+              ]
+            },
+            {
+              "text": "Use Replay-Class: ash.",
+              "evidence_ids": [
+                "E5"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 5,
+        "admitted_claim_count": 5,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "EVALUATION: FAIL.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Request a fresh checkpoint.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Move the job to the gold lane.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Replay exactly once from the checkpoint.",
+            "evidence_ids": [
+              "E4"
+            ]
+          },
+          {
+            "text": "Use Replay-Class: ash.",
+            "evidence_ids": [
+              "E5"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4",
+          "E5"
+        ]
+      },
+      "same_source_evidence": true
+    },
+    {
+      "family_id": "onyxstore-r62-007",
+      "baseline": {
+        "decision": "The operator should follow these steps:\n\n1. Verify the error code R62 and check if it is related to attachment size limits.\n2. If the upload fails again after ensuring the file is within size limits, retry uploading the checkpoint up to 3 times.\n3. If the error persists after 3 attempts, escalate the issue to a senior operator. \n\nDo not attempt to upload files larger than 72 MiB.",
+        "correct_knowledge": false,
+        "designated_contamination": false,
+        "task_success": false
+      },
+      "mnexa_oracle": {
+        "candidate_decision": "Compress the file and use a single-part upload.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nR62 authoritative correction: Start a new upload session. Use multipart upload with 9 MiB chunks. Attach BLAKE2b to every chunk. Include X-Onyx-Final: strict on finalization.",
+        "outcome_id": "r_0d0b1cf987294ba2b91da8b635a45026",
+        "source_evidence_sha256": "f7105823d422fb829b9f77dcbbca7139f7410843d98e1d9bd6321317d6fc98b2",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Start a new upload session.\n- [E2] Use multipart upload with 9 MiB chunks.\n- [E3] Attach BLAKE2b to every chunk.\n- [E4] Include X-Onyx-Final: strict on finalization.",
+        "lesson_id": "i_da088cfeacf1422f9edde47f6b759bbe",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "Start a new upload session and use multipart upload with 9 MiB chunks. Attach BLAKE2b to every chunk and include X-Onyx-Final: strict on finalization.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_da088cfeacf1422f9edde47f6b759bbe:v1] SUPPORTED CLAIMS:\n- [E1] Start a new upload session.\n- [E2] Use multipart upload with 9 MiB chunks.\n- [E3] Attach BLAKE2b to every chunk.\n- [E4] Include X-Onyx-Final: strict on finalization."
+        ],
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Start a new upload session.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Use multipart upload with 9 MiB chunks.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Attach BLAKE2b to every chunk.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Include X-Onyx-Final: strict on finalization.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Start a new upload session.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Use multipart upload with 9 MiB chunks.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Attach BLAKE2b to every chunk.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Include X-Onyx-Final: strict on finalization.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Start a new upload session.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Use multipart upload with 9 MiB chunks.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Attach BLAKE2b to every chunk.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Include X-Onyx-Final: strict on finalization.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "mnexa_raw_span": {
+        "candidate_decision": "Compress the file and use a single-part upload.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nR62 authoritative correction: Start a new upload session. Use multipart upload with 9 MiB chunks. Attach BLAKE2b to every chunk. Include X-Onyx-Final: strict on finalization.",
+        "outcome_id": "r_b764f9c10d56419f90aa160f27d62565",
+        "source_evidence_sha256": "f7105823d422fb829b9f77dcbbca7139f7410843d98e1d9bd6321317d6fc98b2",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Start a new upload session.\n- [E2] Use multipart upload with 9 MiB chunks.\n- [E3] Attach BLAKE2b to every chunk.\n- [E4] Include X-Onyx-Final: strict on finalization.",
+        "lesson_id": "i_e351d23c4fa743d3b28fbae809cf988b",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "Start a new upload session, use multipart upload with 9 MiB chunks, attach BLAKE2b to every chunk, and include X-Onyx-Final: strict on finalization.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_e351d23c4fa743d3b28fbae809cf988b:v1] SUPPORTED CLAIMS:\n- [E1] Start a new upload session.\n- [E2] Use multipart upload with 9 MiB chunks.\n- [E3] Attach BLAKE2b to every chunk.\n- [E4] Include X-Onyx-Final: strict on finalization."
+        ],
+        "raw_atom_model_response": "{\n  \"atoms\": [\n    {\n      \"text\": \"Start a new upload session.\",\n      \"source_quote\": \"Start a new upload session.\"\n    },\n    {\n      \"text\": \"Use multipart upload with 9 MiB chunks.\",\n      \"source_quote\": \"Use multipart upload with 9 MiB chunks.\"\n    },\n    {\n      \"text\": \"Attach BLAKE2b to every chunk.\",\n      \"source_quote\": \"Attach BLAKE2b to every chunk.\"\n    },\n    {\n      \"text\": \"Include X-Onyx-Final: strict on finalization.\",\n      \"source_quote\": \"Include X-Onyx-Final: strict on finalization.\"\n    }\n  ]\n}",
+        "raw_model_atom_proposals_count": 4,
+        "model_atom_proposals": 4,
+        "adversarial_atom_challenges": 2,
+        "adversarial_atom_rejections": 2,
+        "grounded_atoms_count": 4,
+        "rejected_atoms_count": 2,
+        "ungrounded_atoms_admitted": 0,
+        "source_span_coverage": 1.0,
+        "raw_model_proposal": "```json\n{\n  \"claims\": [\n    {\n      \"text\": \"Start a new upload session.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Use multipart upload with 9 MiB chunks.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Attach BLAKE2b to every chunk.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Include X-Onyx-Final: strict on finalization.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}\n```",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Start a new upload session.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Use multipart upload with 9 MiB chunks.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Attach BLAKE2b to every chunk.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Include X-Onyx-Final: strict on finalization.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Start a new upload session.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Use multipart upload with 9 MiB chunks.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Attach BLAKE2b to every chunk.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Include X-Onyx-Final: strict on finalization.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "same_source_evidence": true
+    },
+    {
+      "family_id": "ferndb-p73-007",
+      "baseline": {
+        "decision": "Upon receiving P73 from FernDB while writing a pricing update, the operator must perform the following actions:\n\n1. **Verify the error**: Check if P73 is indeed the error code returned by FernDB.\n2. **Do not proceed** with the pricing update until the error is resolved.\n3. **Consult the system logs** for additional context on the error P73.\n4. **Report** the error to the technical support team for further investigation. \n5. **Await guidance** from the support team before attempting the pricing update again.\n\nEnsure that these steps are followed precisely and do not attempt any updates without verification or resolution of the P73 error.",
+        "correct_knowledge": false,
+        "designated_contamination": false,
+        "task_success": false
+      },
+      "mnexa_oracle": {
+        "candidate_decision": "Restart the database node and increment the epoch locally.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nP73 authoritative correction: Read the primary epoch. Acquire the copper lock. Retry exactly once. Set X-Fern-Epoch to the primary epoch.",
+        "outcome_id": "r_cc376f86806b4e1c9233dea6e2f9565f",
+        "source_evidence_sha256": "c37a52fb7250b5135488bd6b905ea4a8454f88898feb108ead9602b1225b5f1e",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Read the primary epoch.\n- [E2] Acquire the copper lock.\n- [E3] Retry exactly once.\n- [E4] Set X-Fern-Epoch to the primary epoch.",
+        "lesson_id": "i_e7c7fb86e57749a7aeb82e17eacb9241",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "When FernDB returns P73 while writing a pricing update, the operator should:\n\n1. Read the primary epoch.\n2. Acquire the copper lock.\n3. Retry exactly once.\n4. Set X-Fern-Epoch to the primary epoch.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_e7c7fb86e57749a7aeb82e17eacb9241:v1] SUPPORTED CLAIMS:\n- [E1] Read the primary epoch.\n- [E2] Acquire the copper lock.\n- [E3] Retry exactly once.\n- [E4] Set X-Fern-Epoch to the primary epoch."
+        ],
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Read the primary epoch.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Acquire the copper lock.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Retry exactly once.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Set X-Fern-Epoch to the primary epoch.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Read the primary epoch.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Acquire the copper lock.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Retry exactly once.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Set X-Fern-Epoch to the primary epoch.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Read the primary epoch.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Acquire the copper lock.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Retry exactly once.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Set X-Fern-Epoch to the primary epoch.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "mnexa_raw_span": {
+        "candidate_decision": "Restart the database node and increment the epoch locally.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nP73 authoritative correction: Read the primary epoch. Acquire the copper lock. Retry exactly once. Set X-Fern-Epoch to the primary epoch.",
+        "outcome_id": "r_9ef0e8ded99e4944ad254cb8877656d4",
+        "source_evidence_sha256": "c37a52fb7250b5135488bd6b905ea4a8454f88898feb108ead9602b1225b5f1e",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] EVALUATION: FAIL.\n- [E2] Read the primary epoch.\n- [E3] Acquire the copper lock.\n- [E4] Retry exactly once.\n- [E5] Set X-Fern-Epoch to the primary epoch.",
+        "lesson_id": "i_2559b6667a5344e89a2a8774c4ba8eda",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "Upon receiving a P73 from FernDB while writing a pricing update, the operator should take the following actions:\n\n1. Read the primary epoch.\n2. Acquire the copper lock.\n3. Set X-Fern-Epoch to the primary epoch.\n4. Retry exactly once.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_2559b6667a5344e89a2a8774c4ba8eda:v1] SUPPORTED CLAIMS:\n- [E1] EVALUATION: FAIL.\n- [E2] Read the primary epoch.\n- [E3] Acquire the copper lock.\n- [E4] Retry exactly once.\n- [E5] Set X-Fern-Epoch to the primary epoch."
+        ],
+        "raw_atom_model_response": "{\n  \"atoms\": [\n    {\n      \"text\": \"EVALUATION: FAIL.\",\n      \"source_quote\": \"EVALUATION: FAIL.\"\n    },\n    {\n      \"text\": \"Read the primary epoch.\",\n      \"source_quote\": \"Read the primary epoch.\"\n    },\n    {\n      \"text\": \"Acquire the copper lock.\",\n      \"source_quote\": \"Acquire the copper lock.\"\n    },\n    {\n      \"text\": \"Retry exactly once.\",\n      \"source_quote\": \"Retry exactly once.\"\n    },\n    {\n      \"text\": \"Set X-Fern-Epoch to the primary epoch.\",\n      \"source_quote\": \"Set X-Fern-Epoch to the primary epoch.\"\n    }\n  ]\n}",
+        "raw_model_atom_proposals_count": 5,
+        "model_atom_proposals": 5,
+        "adversarial_atom_challenges": 2,
+        "adversarial_atom_rejections": 2,
+        "grounded_atoms_count": 5,
+        "rejected_atoms_count": 2,
+        "ungrounded_atoms_admitted": 0,
+        "source_span_coverage": 1.25,
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"EVALUATION: FAIL.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Read the primary epoch.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Acquire the copper lock.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Retry exactly once.\",\n      \"evidence_ids\": [\"E4\"]\n    },\n    {\n      \"text\": \"Set X-Fern-Epoch to the primary epoch.\",\n      \"evidence_ids\": [\"E5\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "EVALUATION: FAIL.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Read the primary epoch.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Acquire the copper lock.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Retry exactly once.",
+              "evidence_ids": [
+                "E4"
+              ]
+            },
+            {
+              "text": "Set X-Fern-Epoch to the primary epoch.",
+              "evidence_ids": [
+                "E5"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 5,
+        "admitted_claim_count": 5,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "EVALUATION: FAIL.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Read the primary epoch.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Acquire the copper lock.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Retry exactly once.",
+            "evidence_ids": [
+              "E4"
+            ]
+          },
+          {
+            "text": "Set X-Fern-Epoch to the primary epoch.",
+            "evidence_ids": [
+              "E5"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4",
+          "E5"
+        ]
+      },
+      "same_source_evidence": true
+    },
+    {
+      "family_id": "sableparser-m4-007",
+      "baseline": {
+        "decision": "The operator must validate the state before proceeding. If SableParser returns M4 with legacy state=C, the operator must not act until validation is complete.",
+        "correct_knowledge": false,
+        "designated_contamination": false,
+        "task_success": false
+      },
+      "mnexa_oracle": {
+        "candidate_decision": "Drop the state field and default the record to approved.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nM4 authoritative correction: Map A to hold. Map B to release. Map C to review. Perform the mapping before normal validation.",
+        "outcome_id": "r_72f4fc065d7e4b93adba65b47b4f938b",
+        "source_evidence_sha256": "a13b26e72fc1746b29b48593560faed7aed21651cc0b1c72dd5c7fd91ff89073",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Map A to hold.\n- [E2] Map B to release.\n- [E3] Map C to review.\n- [E4] Perform the mapping before normal validation.",
+        "lesson_id": "i_855515ac297b404989468d50b6336019",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "The operator should:\n\n1. Map A to hold.\n2. Map B to release.\n3. Map C to review.\n4. Perform the mapping before normal validation.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_855515ac297b404989468d50b6336019:v1] SUPPORTED CLAIMS:\n- [E1] Map A to hold.\n- [E2] Map B to release.\n- [E3] Map C to review.\n- [E4] Perform the mapping before normal validation."
+        ],
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Map A to hold.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Map B to release.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Map C to review.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Perform the mapping before normal validation.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Map A to hold.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Map B to release.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Map C to review.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Perform the mapping before normal validation.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Map A to hold.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Map B to release.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Map C to review.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Perform the mapping before normal validation.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "mnexa_raw_span": {
+        "candidate_decision": "Drop the state field and default the record to approved.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nM4 authoritative correction: Map A to hold. Map B to release. Map C to review. Perform the mapping before normal validation.",
+        "outcome_id": "r_7fc4ef60773b4616bd02e7a55b4deb89",
+        "source_evidence_sha256": "a13b26e72fc1746b29b48593560faed7aed21651cc0b1c72dd5c7fd91ff89073",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Map A to hold.\n- [E2] Map B to release.\n- [E3] Map C to review.\n- [E4] Perform the mapping before normal validation.",
+        "lesson_id": "i_0b0e95a5e50a4b94b7da2ac660f818f3",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "The operator should take the following action:\n\n- Map A to hold.\n- Map B to release.\n- Map C to review.\n- Perform the mapping before normal validation. \n\nThis must be done while ensuring that the legacy state remains unchanged.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_0b0e95a5e50a4b94b7da2ac660f818f3:v1] SUPPORTED CLAIMS:\n- [E1] Map A to hold.\n- [E2] Map B to release.\n- [E3] Map C to review.\n- [E4] Perform the mapping before normal validation."
+        ],
+        "raw_atom_model_response": "{\n  \"atoms\": [\n    {\n      \"text\": \"Map A to hold.\",\n      \"source_quote\": \"Map A to hold.\"\n    },\n    {\n      \"text\": \"Map B to release.\",\n      \"source_quote\": \"Map B to release.\"\n    },\n    {\n      \"text\": \"Map C to review.\",\n      \"source_quote\": \"Map C to review.\"\n    },\n    {\n      \"text\": \"Perform the mapping before normal validation.\",\n      \"source_quote\": \"Perform the mapping before normal validation.\"\n    }\n  ]\n}",
+        "raw_model_atom_proposals_count": 4,
+        "model_atom_proposals": 4,
+        "adversarial_atom_challenges": 2,
+        "adversarial_atom_rejections": 2,
+        "grounded_atoms_count": 4,
+        "rejected_atoms_count": 2,
+        "ungrounded_atoms_admitted": 0,
+        "source_span_coverage": 1.0,
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Map A to hold.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Map B to release.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Map C to review.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Perform the mapping before normal validation.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Map A to hold.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Map B to release.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Map C to review.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Perform the mapping before normal validation.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Map A to hold.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Map B to release.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Map C to review.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Perform the mapping before normal validation.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "same_source_evidence": true
+    },
+    {
+      "family_id": "horizonrpc-q28-007",
+      "baseline": {
+        "decision": "Upon receiving a Q28 response from HorizonRPC during an order-history request, the operator must take the following action:\n\n1. **Immediately log the Q28 response.**\n2. **Do not proceed with any further actions until the issue is resolved.**\n3. **Consult with the technical team to investigate the cause of the Q28 response.**\n4. **Only after receiving confirmation from the technical team that the issue is resolved, continue with order-history requests.**",
+        "correct_knowledge": false,
+        "designated_contamination": false,
+        "task_success": false
+      },
+      "mnexa_oracle": {
+        "candidate_decision": "Close the connection and reuse the old correlation ID.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nQ28 authoritative correction: Send exactly two heartbeat frames. Space the heartbeat frames 240 ms apart. Open a new channel with a fresh correlation ID. Include X-Horizon-Recover: q28.",
+        "outcome_id": "r_e217913ae59c45d88bf023b4675517fe",
+        "source_evidence_sha256": "54b98b35706b0e2fd412fa27580ceedfbd7f5b760b1c0a313838699b2f8d0e9d",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Send exactly two heartbeat frames.\n- [E2] Space the heartbeat frames 240 ms apart.\n- [E3] Open a new channel with a fresh correlation ID.\n- [E4] Include X-Horizon-Recover: q28.",
+        "lesson_id": "i_976f1d3ee4e54a1b97b70565cc99c582",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "To handle the Q28 response from HorizonRPC during an order-history request, the operator should:\n\n1. Send exactly two heartbeat frames.\n2. Space the heartbeat frames 240 ms apart.\n3. Open a new channel with a fresh correlation ID.\n4. Include the header X-Horizon-Recover: q28.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_976f1d3ee4e54a1b97b70565cc99c582:v1] SUPPORTED CLAIMS:\n- [E1] Send exactly two heartbeat frames.\n- [E2] Space the heartbeat frames 240 ms apart.\n- [E3] Open a new channel with a fresh correlation ID.\n- [E4] Include X-Horizon-Recover: q28."
+        ],
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Send exactly two heartbeat frames.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Space the heartbeat frames 240 ms apart.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Open a new channel with a fresh correlation ID.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Include X-Horizon-Recover: q28.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Send exactly two heartbeat frames.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Space the heartbeat frames 240 ms apart.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Open a new channel with a fresh correlation ID.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Include X-Horizon-Recover: q28.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Send exactly two heartbeat frames.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Space the heartbeat frames 240 ms apart.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Open a new channel with a fresh correlation ID.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Include X-Horizon-Recover: q28.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "mnexa_raw_span": {
+        "candidate_decision": "Close the connection and reuse the old correlation ID.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nQ28 authoritative correction: Send exactly two heartbeat frames. Space the heartbeat frames 240 ms apart. Open a new channel with a fresh correlation ID. Include X-Horizon-Recover: q28.",
+        "outcome_id": "r_be011cc3580847ec823703f2593d0af6",
+        "source_evidence_sha256": "54b98b35706b0e2fd412fa27580ceedfbd7f5b760b1c0a313838699b2f8d0e9d",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Send exactly two heartbeat frames.\n- [E2] Space the heartbeat frames 240 ms apart.\n- [E3] Open a new channel with a fresh correlation ID.\n- [E4] Include X-Horizon-Recover: q28.",
+        "lesson_id": "i_66a8e348f5a44119a75185f1d1e60caa",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "To respond to the Q28 from HorizonRPC during an order-history request, the operator should:\n\n1. Send exactly two heartbeat frames.\n2. Space the heartbeat frames 240 ms apart.\n3. Open a new channel with a fresh correlation ID.\n4. Include the header X-Horizon-Recover: q28.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_66a8e348f5a44119a75185f1d1e60caa:v1] SUPPORTED CLAIMS:\n- [E1] Send exactly two heartbeat frames.\n- [E2] Space the heartbeat frames 240 ms apart.\n- [E3] Open a new channel with a fresh correlation ID.\n- [E4] Include X-Horizon-Recover: q28."
+        ],
+        "raw_atom_model_response": "{\n  \"atoms\": [\n    {\n      \"text\": \"Send exactly two heartbeat frames.\",\n      \"source_quote\": \"Send exactly two heartbeat frames.\"\n    },\n    {\n      \"text\": \"Space the heartbeat frames 240 ms apart.\",\n      \"source_quote\": \"Space the heartbeat frames 240 ms apart.\"\n    },\n    {\n      \"text\": \"Open a new channel with a fresh correlation ID.\",\n      \"source_quote\": \"Open a new channel with a fresh correlation ID.\"\n    },\n    {\n      \"text\": \"Include X-Horizon-Recover: q28.\",\n      \"source_quote\": \"Include X-Horizon-Recover: q28.\"\n    }\n  ]\n}",
+        "raw_model_atom_proposals_count": 4,
+        "model_atom_proposals": 4,
+        "adversarial_atom_challenges": 2,
+        "adversarial_atom_rejections": 2,
+        "grounded_atoms_count": 4,
+        "rejected_atoms_count": 2,
+        "ungrounded_atoms_admitted": 0,
+        "source_span_coverage": 1.0,
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Send exactly two heartbeat frames.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Space the heartbeat frames 240 ms apart.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Open a new channel with a fresh correlation ID.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Include X-Horizon-Recover: q28.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Send exactly two heartbeat frames.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Space the heartbeat frames 240 ms apart.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Open a new channel with a fresh correlation ID.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Include X-Horizon-Recover: q28.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Send exactly two heartbeat frames.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Space the heartbeat frames 240 ms apart.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Open a new channel with a fresh correlation ID.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Include X-Horizon-Recover: q28.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "same_source_evidence": true
+    },
+    {
+      "family_id": "borealcdn-l52-007",
+      "baseline": {
+        "decision": "When BorealCDN returns L52 while refreshing a stylesheet asset, the operator must take the following action: \n\n1. **Check the asset URL** to ensure it is correct and reachable.\n2. **Verify the cache status** on BorealCDN; if necessary, clear the cache for the affected asset.\n3. **Retry** the refresh action **up to two times** if it fails initially, ensuring each attempt occurs after verifying any changes or corrections made during the prior actions.\n\nDo not proceed further until all steps are completed and results are evaluated.",
+        "correct_knowledge": false,
+        "designated_contamination": false,
+        "task_success": false
+      },
+      "mnexa_oracle": {
+        "candidate_decision": "Perform a global purge and restart the edge service.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nL52 authoritative correction: Issue one HEAD request to origin. Purge only the current zone shard. Wait 7 seconds. Issue one GET with X-Boreal-Probe: 5.",
+        "outcome_id": "r_50a956648b6f43a693a5f90f7e8f17ed",
+        "source_evidence_sha256": "8bb3b017aea38f74b7332d51bd9c606ea3ae6c441d96e3e6048869acb00e6513",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Issue one HEAD request to origin.\n- [E2] Purge only the current zone shard.\n- [E3] Wait 7 seconds.\n- [E4] Issue one GET with X-Boreal-Probe: 5.",
+        "lesson_id": "i_42ffff45d1a140499c5c1e5b0e3dc2de",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "To address the L52 response from BorealCDN while refreshing a stylesheet asset, follow these steps:\n\n1. Issue one HEAD request to the origin.\n2. Purge only the current zone shard.\n3. Wait 7 seconds.\n4. Issue one GET with X-Boreal-Probe: 5.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_42ffff45d1a140499c5c1e5b0e3dc2de:v1] SUPPORTED CLAIMS:\n- [E1] Issue one HEAD request to origin.\n- [E2] Purge only the current zone shard.\n- [E3] Wait 7 seconds.\n- [E4] Issue one GET with X-Boreal-Probe: 5."
+        ],
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Issue one HEAD request to origin.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Purge only the current zone shard.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Wait 7 seconds.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Issue one GET with X-Boreal-Probe: 5.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Issue one HEAD request to origin.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Purge only the current zone shard.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Wait 7 seconds.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Issue one GET with X-Boreal-Probe: 5.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Issue one HEAD request to origin.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Purge only the current zone shard.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Wait 7 seconds.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Issue one GET with X-Boreal-Probe: 5.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "mnexa_raw_span": {
+        "candidate_decision": "Perform a global purge and restart the edge service.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nL52 authoritative correction: Issue one HEAD request to origin. Purge only the current zone shard. Wait 7 seconds. Issue one GET with X-Boreal-Probe: 5.",
+        "outcome_id": "r_cbf435cac7f54e0096b24b3d7c60d519",
+        "source_evidence_sha256": "8bb3b017aea38f74b7332d51bd9c606ea3ae6c441d96e3e6048869acb00e6513",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] EVALUATION: FAIL.\n- [E2] Issue one HEAD request to origin.\n- [E3] Purge only the current zone shard.\n- [E4] Wait 7 seconds.\n- [E5] Issue one GET with X-Boreal-Probe: 5.",
+        "lesson_id": "i_7b589a37ceb340b2bc4fe3fc02b9bac9",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "To address the L52 response while refreshing a stylesheet asset from BorealCDN, the operator should take the following actions:\n\n1. Issue one HEAD request to the origin.\n2. Purge only the current zone shard.\n3. Wait 7 seconds.\n4. Issue one GET with `X-Boreal-Probe: 5`.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_7b589a37ceb340b2bc4fe3fc02b9bac9:v1] SUPPORTED CLAIMS:\n- [E1] EVALUATION: FAIL.\n- [E2] Issue one HEAD request to origin.\n- [E3] Purge only the current zone shard.\n- [E4] Wait 7 seconds.\n- [E5] Issue one GET with X-Boreal-Probe: 5."
+        ],
+        "raw_atom_model_response": "{\n  \"atoms\": [\n    {\n      \"text\": \"EVALUATION: FAIL.\",\n      \"source_quote\": \"EVALUATION: FAIL.\"\n    },\n    {\n      \"text\": \"Issue one HEAD request to origin.\",\n      \"source_quote\": \"Issue one HEAD request to origin.\"\n    },\n    {\n      \"text\": \"Purge only the current zone shard.\",\n      \"source_quote\": \"Purge only the current zone shard.\"\n    },\n    {\n      \"text\": \"Wait 7 seconds.\",\n      \"source_quote\": \"Wait 7 seconds.\"\n    },\n    {\n      \"text\": \"Issue one GET with X-Boreal-Probe: 5.\",\n      \"source_quote\": \"Issue one GET with X-Boreal-Probe: 5.\"\n    }\n  ]\n}",
+        "raw_model_atom_proposals_count": 5,
+        "model_atom_proposals": 5,
+        "adversarial_atom_challenges": 2,
+        "adversarial_atom_rejections": 2,
+        "grounded_atoms_count": 5,
+        "rejected_atoms_count": 2,
+        "ungrounded_atoms_admitted": 0,
+        "source_span_coverage": 1.25,
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"EVALUATION: FAIL.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Issue one HEAD request to origin.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Purge only the current zone shard.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Wait 7 seconds.\",\n      \"evidence_ids\": [\"E4\"]\n    },\n    {\n      \"text\": \"Issue one GET with X-Boreal-Probe: 5.\",\n      \"evidence_ids\": [\"E5\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "EVALUATION: FAIL.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Issue one HEAD request to origin.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Purge only the current zone shard.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Wait 7 seconds.",
+              "evidence_ids": [
+                "E4"
+              ]
+            },
+            {
+              "text": "Issue one GET with X-Boreal-Probe: 5.",
+              "evidence_ids": [
+                "E5"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 5,
+        "admitted_claim_count": 5,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "EVALUATION: FAIL.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Issue one HEAD request to origin.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Purge only the current zone shard.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Wait 7 seconds.",
+            "evidence_ids": [
+              "E4"
+            ]
+          },
+          {
+            "text": "Issue one GET with X-Boreal-Probe: 5.",
+            "evidence_ids": [
+              "E5"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4",
+          "E5"
+        ]
+      },
+      "same_source_evidence": true
+    },
+    {
+      "family_id": "echoflow-t19-007",
+      "baseline": {
+        "decision": "If EchoFlow returns T19 during payroll export, the operator must follow the established protocol for this error. \n\n1. Investigate the specific reason for T19 by checking the error logs or documentation associated with EchoFlow.\n2. Ensure that all required fields in the payroll export are filled correctly, as missing or incorrect data may trigger the T19 error.\n3. If the issue persists, the operator must not attempt to re-export the payroll until the underlying issue causing the T19 error has been resolved. \n4. Document the occurrence of the T19 error and the steps taken to resolve it for future reference.",
+        "correct_knowledge": false,
+        "designated_contamination": false,
+        "task_success": false
+      },
+      "mnexa_oracle": {
+        "candidate_decision": "Resume the failed step directly and keep using the same checkpoint.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nT19 authoritative correction: Clone the latest checkpoint. Mark the old run stale. Restart from the previous boundary exactly once. Carry token t19-safe.",
+        "outcome_id": "r_2d5718a716c9450d8dfe23925556a217",
+        "source_evidence_sha256": "8a0d324e045adbfc0e741c931aa2d5be8fd15938cbc7afb64dbc6787a452e48e",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Clone the latest checkpoint.\n- [E2] Mark the old run stale.\n- [E3] Restart from the previous boundary exactly once.\n- [E4] Carry token t19-safe.",
+        "lesson_id": "i_4f422220b79e4fab86ec0f35f0551c8b",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "To resolve the T19 during payroll export, the operator should take the following actions:\n\n1. Clone the latest checkpoint.\n2. Mark the old run stale.\n3. Restart from the previous boundary exactly once.\n4. Carry token t19-safe.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_4f422220b79e4fab86ec0f35f0551c8b:v1] SUPPORTED CLAIMS:\n- [E1] Clone the latest checkpoint.\n- [E2] Mark the old run stale.\n- [E3] Restart from the previous boundary exactly once.\n- [E4] Carry token t19-safe."
+        ],
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Clone the latest checkpoint.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Mark the old run stale.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Restart from the previous boundary exactly once.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Carry token t19-safe.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Clone the latest checkpoint.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Mark the old run stale.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Restart from the previous boundary exactly once.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Carry token t19-safe.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Clone the latest checkpoint.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Mark the old run stale.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Restart from the previous boundary exactly once.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Carry token t19-safe.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "mnexa_raw_span": {
+        "candidate_decision": "Resume the failed step directly and keep using the same checkpoint.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nT19 authoritative correction: Clone the latest checkpoint. Mark the old run stale. Restart from the previous boundary exactly once. Carry token t19-safe.",
+        "outcome_id": "r_8697dac3e36d4789b525998f42afa383",
+        "source_evidence_sha256": "8a0d324e045adbfc0e741c931aa2d5be8fd15938cbc7afb64dbc6787a452e48e",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Clone the latest checkpoint.\n- [E2] Mark the old run stale.\n- [E3] Restart from the previous boundary exactly once.\n- [E4] Carry token t19-safe.",
+        "lesson_id": "i_c0ac4f2023604be384f3a41908bcf959",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "The operator should carry token t19-safe and restart from the previous boundary exactly once.",
+        "transfer_correct_knowledge": false,
+        "transfer_contaminated": false,
+        "task_success": false,
+        "memory_segments": [
+          "[interpretive:i_c0ac4f2023604be384f3a41908bcf959:v1] SUPPORTED CLAIMS:\n- [E1] Clone the latest checkpoint.\n- [E2] Mark the old run stale.\n- [E3] Restart from the previous boundary exactly once.\n- [E4] Carry token t19-safe."
+        ],
+        "raw_atom_model_response": "{\n  \"atoms\": [\n    {\n      \"text\": \"Clone the latest checkpoint.\",\n      \"source_quote\": \"Clone the latest checkpoint.\"\n    },\n    {\n      \"text\": \"Mark the old run stale.\",\n      \"source_quote\": \"Mark the old run stale.\"\n    },\n    {\n      \"text\": \"Restart from the previous boundary exactly once.\",\n      \"source_quote\": \"Restart from the previous boundary exactly once.\"\n    },\n    {\n      \"text\": \"Carry token t19-safe.\",\n      \"source_quote\": \"Carry token t19-safe.\"\n    }\n  ]\n}",
+        "raw_model_atom_proposals_count": 4,
+        "model_atom_proposals": 4,
+        "adversarial_atom_challenges": 2,
+        "adversarial_atom_rejections": 2,
+        "grounded_atoms_count": 4,
+        "rejected_atoms_count": 2,
+        "ungrounded_atoms_admitted": 0,
+        "source_span_coverage": 1.0,
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Clone the latest checkpoint.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Mark the old run stale.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Restart from the previous boundary exactly once.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Carry token t19-safe.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Clone the latest checkpoint.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Mark the old run stale.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Restart from the previous boundary exactly once.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Carry token t19-safe.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Clone the latest checkpoint.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Mark the old run stale.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Restart from the previous boundary exactly once.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Carry token t19-safe.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "same_source_evidence": true
+    },
+    {
+      "family_id": "garnetindex-v44-007",
+      "baseline": {
+        "decision": "When GarnetIndex returns V44 during customer indexing, the operator must not proceed further without first investigating the reason for the V44 code. Only after resolving the underlying issue should the operator continue with the indexing process. If the problem persists after the investigation, the operator must escalate the issue to a technical support team for further assistance.",
+        "correct_knowledge": false,
+        "designated_contamination": false,
+        "task_success": false
+      },
+      "mnexa_oracle": {
+        "candidate_decision": "Rebuild the entire index and discard the existing cursor.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nV44 authoritative correction: Fetch a fresh cursor from the leader. Switch to delta-read. Replay exactly three pages. Set X-Garnet-Cursor: fresh.",
+        "outcome_id": "r_d419b1cb6cdd4da1bf22abe86a4c55a1",
+        "source_evidence_sha256": "62b2546db8122de65a22eddc6025ea2b66adfaf8a3b9e27a8ec4000a7cead6c6",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Fetch a fresh cursor from the leader.\n- [E2] Switch to delta-read.\n- [E3] Replay exactly three pages.\n- [E4] Set X-Garnet-Cursor: fresh.",
+        "lesson_id": "i_320f6e4e3ff1410b9f36dae0d7b73a90",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "To address the GarnetIndex returning V44 during customer indexing, the operator should:\n\n1. Fetch a fresh cursor from the leader.\n2. Switch to delta-read.\n3. Replay exactly three pages.\n4. Set X-Garnet-Cursor: fresh. \n\nThese steps must be followed in the specified order.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_320f6e4e3ff1410b9f36dae0d7b73a90:v1] SUPPORTED CLAIMS:\n- [E1] Fetch a fresh cursor from the leader.\n- [E2] Switch to delta-read.\n- [E3] Replay exactly three pages.\n- [E4] Set X-Garnet-Cursor: fresh."
+        ],
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Fetch a fresh cursor from the leader.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Switch to delta-read.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Replay exactly three pages.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Set X-Garnet-Cursor: fresh.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Fetch a fresh cursor from the leader.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Switch to delta-read.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Replay exactly three pages.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Set X-Garnet-Cursor: fresh.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Fetch a fresh cursor from the leader.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Switch to delta-read.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Replay exactly three pages.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Set X-Garnet-Cursor: fresh.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "mnexa_raw_span": {
+        "candidate_decision": "Rebuild the entire index and discard the existing cursor.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nV44 authoritative correction: Fetch a fresh cursor from the leader. Switch to delta-read. Replay exactly three pages. Set X-Garnet-Cursor: fresh.",
+        "outcome_id": "r_62eb3de75c834c97a23f9b061cc57a18",
+        "source_evidence_sha256": "62b2546db8122de65a22eddc6025ea2b66adfaf8a3b9e27a8ec4000a7cead6c6",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Fetch a fresh cursor from the leader.\n- [E2] Switch to delta-read.\n- [E3] Replay exactly three pages.\n- [E4] Set X-Garnet-Cursor: fresh.",
+        "lesson_id": "i_c1115c6824fc495892c8a8df024d0854",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "The operator should take the following actions:\n\n1. Fetch a fresh cursor from the leader.\n2. Switch to delta-read.\n3. Replay exactly three pages.\n4. Set X-Garnet-Cursor: fresh.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_c1115c6824fc495892c8a8df024d0854:v1] SUPPORTED CLAIMS:\n- [E1] Fetch a fresh cursor from the leader.\n- [E2] Switch to delta-read.\n- [E3] Replay exactly three pages.\n- [E4] Set X-Garnet-Cursor: fresh."
+        ],
+        "raw_atom_model_response": "{\n  \"atoms\": [\n    {\n      \"text\": \"Fetch a fresh cursor from the leader.\",\n      \"source_quote\": \"Fetch a fresh cursor from the leader.\"\n    },\n    {\n      \"text\": \"Switch to delta-read.\",\n      \"source_quote\": \"Switch to delta-read.\"\n    },\n    {\n      \"text\": \"Replay exactly three pages.\",\n      \"source_quote\": \"Replay exactly three pages.\"\n    },\n    {\n      \"text\": \"Set X-Garnet-Cursor: fresh.\",\n      \"source_quote\": \"Set X-Garnet-Cursor: fresh.\"\n    }\n  ]\n}",
+        "raw_model_atom_proposals_count": 4,
+        "model_atom_proposals": 4,
+        "adversarial_atom_challenges": 2,
+        "adversarial_atom_rejections": 2,
+        "grounded_atoms_count": 4,
+        "rejected_atoms_count": 2,
+        "ungrounded_atoms_admitted": 0,
+        "source_span_coverage": 1.0,
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Fetch a fresh cursor from the leader.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Switch to delta-read.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Replay exactly three pages.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Set X-Garnet-Cursor: fresh.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Fetch a fresh cursor from the leader.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Switch to delta-read.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Replay exactly three pages.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Set X-Garnet-Cursor: fresh.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Fetch a fresh cursor from the leader.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Switch to delta-read.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Replay exactly three pages.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Set X-Garnet-Cursor: fresh.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "same_source_evidence": true
+    },
+    {
+      "family_id": "driftledger-h26-007",
+      "baseline": {
+        "decision": "When DriftLedger returns H26 while posting a rebate, the operator must take the following action:\n\n1. Check the error details associated with the H26 response.\n2. Resolve any issues described in the H26 error message before attempting to post the rebate again.\n3. Ensure that every necessary requirement for posting a rebate is met before retrying.\n\nIf issues remain unresolved, the operator must not attempt to post the rebate again until all conditions are satisfied.",
+        "correct_knowledge": false,
+        "designated_contamination": false,
+        "task_success": false
+      },
+      "mnexa_oracle": {
+        "candidate_decision": "Synthesize a nonce locally and bypass the lock.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nH26 authoritative correction: Request the server nonce. Acquire the indigo lock. Retry exactly twice. Set X-Drift-Nonce to the server nonce.",
+        "outcome_id": "r_2a0eeb1d8cca48038197e83d21bf562b",
+        "source_evidence_sha256": "73906cd632d2e72eba96cbe55f7054b06206ec13566a3c01149c66ca5197b664",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Request the server nonce.\n- [E2] Acquire the indigo lock.\n- [E3] Retry exactly twice.\n- [E4] Set X-Drift-Nonce to the server nonce.",
+        "lesson_id": "i_7c1fa741fd6948c5b7b02f7ede36d27f",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "When DriftLedger returns H26 while posting a rebate, the operator should:\n\n1. Request the server nonce.\n2. Acquire the indigo lock.\n3. Retry exactly twice.\n4. After the retries, if the issue persists, set X-Drift-Nonce to the server nonce.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_7c1fa741fd6948c5b7b02f7ede36d27f:v1] SUPPORTED CLAIMS:\n- [E1] Request the server nonce.\n- [E2] Acquire the indigo lock.\n- [E3] Retry exactly twice.\n- [E4] Set X-Drift-Nonce to the server nonce."
+        ],
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Request the server nonce.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Acquire the indigo lock.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Retry exactly twice.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Set X-Drift-Nonce to the server nonce.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Request the server nonce.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Acquire the indigo lock.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Retry exactly twice.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Set X-Drift-Nonce to the server nonce.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Request the server nonce.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Acquire the indigo lock.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Retry exactly twice.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Set X-Drift-Nonce to the server nonce.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "mnexa_raw_span": {
+        "candidate_decision": "Synthesize a nonce locally and bypass the lock.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nH26 authoritative correction: Request the server nonce. Acquire the indigo lock. Retry exactly twice. Set X-Drift-Nonce to the server nonce.",
+        "outcome_id": "r_6fe1392a7233431d9b0913f0c8078e4b",
+        "source_evidence_sha256": "73906cd632d2e72eba96cbe55f7054b06206ec13566a3c01149c66ca5197b664",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Request the server nonce.\n- [E2] Acquire the indigo lock.\n- [E3] Retry exactly twice.\n- [E4] Set X-Drift-Nonce to the server nonce.",
+        "lesson_id": "i_71f1b75baaf04816be08a61de8ebf891",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "When DriftLedger returns H26 while posting a rebate, the operator should:\n\n1. Request the server nonce.\n2. Acquire the indigo lock.\n3. Retry exactly twice.\n4. Set X-Drift-Nonce to the server nonce.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_71f1b75baaf04816be08a61de8ebf891:v1] SUPPORTED CLAIMS:\n- [E1] Request the server nonce.\n- [E2] Acquire the indigo lock.\n- [E3] Retry exactly twice.\n- [E4] Set X-Drift-Nonce to the server nonce."
+        ],
+        "raw_atom_model_response": "{\n  \"atoms\": [\n    {\n      \"text\": \"Request the server nonce.\",\n      \"source_quote\": \"Request the server nonce.\"\n    },\n    {\n      \"text\": \"Acquire the indigo lock.\",\n      \"source_quote\": \"Acquire the indigo lock.\"\n    },\n    {\n      \"text\": \"Retry exactly twice.\",\n      \"source_quote\": \"Retry exactly twice.\"\n    },\n    {\n      \"text\": \"Set X-Drift-Nonce to the server nonce.\",\n      \"source_quote\": \"Set X-Drift-Nonce to the server nonce.\"\n    }\n  ]\n}",
+        "raw_model_atom_proposals_count": 4,
+        "model_atom_proposals": 4,
+        "adversarial_atom_challenges": 2,
+        "adversarial_atom_rejections": 2,
+        "grounded_atoms_count": 4,
+        "rejected_atoms_count": 2,
+        "ungrounded_atoms_admitted": 0,
+        "source_span_coverage": 1.0,
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Request the server nonce.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Acquire the indigo lock.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Retry exactly twice.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Set X-Drift-Nonce to the server nonce.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Request the server nonce.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Acquire the indigo lock.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Retry exactly twice.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Set X-Drift-Nonce to the server nonce.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Request the server nonce.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Acquire the indigo lock.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Retry exactly twice.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Set X-Drift-Nonce to the server nonce.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "same_source_evidence": true
+    },
+    {
+      "family_id": "mossbus-j8-007",
+      "baseline": {
+        "decision": "The operator should investigate the MossBus returning J8 while consuming an audit event. Documentation or logs should be checked for the specific J8 error code to determine the appropriate resolution steps. Ensure to follow the established procedures for auditing events post any error, and do not bypass any verification requirements that may affect system integrity.",
+        "correct_knowledge": false,
+        "designated_contamination": false,
+        "task_success": false
+      },
+      "mnexa_oracle": {
+        "candidate_decision": "Acknowledge the original message and retry the same event.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nJ8 authoritative correction: Request a fresh checkpoint. Replay exactly once from the checkpoint. Use Replay-Class: moss. Do not acknowledge the original message.",
+        "outcome_id": "r_de6d6ca7e3e04d25ab87d120d9cc6503",
+        "source_evidence_sha256": "b751378a9acd3c3a7e34fbc0f4d65aacdff97dba142c0aa907e144be0107a372",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Request a fresh checkpoint.\n- [E2] Replay exactly once from the checkpoint.\n- [E3] Use Replay-Class: moss.\n- [E4] Do not acknowledge the original message.",
+        "lesson_id": "i_a5d4011d12ab42008a928029e226300b",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": true,
+        "transfer_decision": "Request a fresh checkpoint, then replay exactly once from the checkpoint using Replay-Class: moss. Do not acknowledge the original message.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": true,
+        "task_success": false,
+        "memory_segments": [
+          "[interpretive:i_a5d4011d12ab42008a928029e226300b:v1] SUPPORTED CLAIMS:\n- [E1] Request a fresh checkpoint.\n- [E2] Replay exactly once from the checkpoint.\n- [E3] Use Replay-Class: moss.\n- [E4] Do not acknowledge the original message."
+        ],
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Request a fresh checkpoint.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Replay exactly once from the checkpoint.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Use Replay-Class: moss.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Do not acknowledge the original message.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Request a fresh checkpoint.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Replay exactly once from the checkpoint.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Use Replay-Class: moss.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Do not acknowledge the original message.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Request a fresh checkpoint.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Replay exactly once from the checkpoint.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Use Replay-Class: moss.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Do not acknowledge the original message.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "mnexa_raw_span": {
+        "candidate_decision": "Acknowledge the original message and retry the same event.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nJ8 authoritative correction: Request a fresh checkpoint. Replay exactly once from the checkpoint. Use Replay-Class: moss. Do not acknowledge the original message.",
+        "outcome_id": "r_118949fc32ae4bca8e9febacd579b8e0",
+        "source_evidence_sha256": "b751378a9acd3c3a7e34fbc0f4d65aacdff97dba142c0aa907e144be0107a372",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] EVALUATION: FAIL.\n- [E2] Request a fresh checkpoint.\n- [E3] Replay exactly once from the checkpoint.\n- [E4] Use Replay-Class: moss.\n- [E5] Do not acknowledge the original message.",
+        "lesson_id": "i_eed52da0f23f48249db612c2cc5080b9",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": true,
+        "transfer_decision": "Request a fresh checkpoint. Replay exactly once from the checkpoint using Replay-Class: moss. Do not acknowledge the original message.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": true,
+        "task_success": false,
+        "memory_segments": [
+          "[interpretive:i_eed52da0f23f48249db612c2cc5080b9:v1] SUPPORTED CLAIMS:\n- [E1] EVALUATION: FAIL.\n- [E2] Request a fresh checkpoint.\n- [E3] Replay exactly once from the checkpoint.\n- [E4] Use Replay-Class: moss.\n- [E5] Do not acknowledge the original message."
+        ],
+        "raw_atom_model_response": "{\n  \"atoms\": [\n    {\n      \"text\": \"EVALUATION: FAIL.\",\n      \"source_quote\": \"EVALUATION: FAIL.\"\n    },\n    {\n      \"text\": \"Request a fresh checkpoint.\",\n      \"source_quote\": \"Request a fresh checkpoint.\"\n    },\n    {\n      \"text\": \"Replay exactly once from the checkpoint.\",\n      \"source_quote\": \"Replay exactly once from the checkpoint.\"\n    },\n    {\n      \"text\": \"Use Replay-Class: moss.\",\n      \"source_quote\": \"Use Replay-Class: moss.\"\n    },\n    {\n      \"text\": \"Do not acknowledge the original message.\",\n      \"source_quote\": \"Do not acknowledge the original message.\"\n    }\n  ]\n}",
+        "raw_model_atom_proposals_count": 5,
+        "model_atom_proposals": 5,
+        "adversarial_atom_challenges": 2,
+        "adversarial_atom_rejections": 2,
+        "grounded_atoms_count": 5,
+        "rejected_atoms_count": 2,
+        "ungrounded_atoms_admitted": 0,
+        "source_span_coverage": 1.25,
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"EVALUATION: FAIL.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Request a fresh checkpoint.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Replay exactly once from the checkpoint.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Use Replay-Class: moss.\",\n      \"evidence_ids\": [\"E4\"]\n    },\n    {\n      \"text\": \"Do not acknowledge the original message.\",\n      \"evidence_ids\": [\"E5\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "EVALUATION: FAIL.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Request a fresh checkpoint.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Replay exactly once from the checkpoint.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Use Replay-Class: moss.",
+              "evidence_ids": [
+                "E4"
+              ]
+            },
+            {
+              "text": "Do not acknowledge the original message.",
+              "evidence_ids": [
+                "E5"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 5,
+        "admitted_claim_count": 5,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "EVALUATION: FAIL.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Request a fresh checkpoint.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Replay exactly once from the checkpoint.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Use Replay-Class: moss.",
+            "evidence_ids": [
+              "E4"
+            ]
+          },
+          {
+            "text": "Do not acknowledge the original message.",
+            "evidence_ids": [
+              "E5"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4",
+          "E5"
+        ]
+      },
+      "same_source_evidence": true
+    },
+    {
+      "family_id": "polarstore-c37-007",
+      "baseline": {
+        "decision": "The operator should check the upload process for errors and ensure that the snapshot meets all requirements. If the upload fails again, the operator must not retry the upload before confirming the snapshot's validity. If the issue persists, escalate the issue to the technical support team for further assistance.",
+        "correct_knowledge": false,
+        "designated_contamination": false,
+        "task_success": false
+      },
+      "mnexa_oracle": {
+        "candidate_decision": "Reuse the previous upload ID and send one large part.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nC37 authoritative correction: Use a new upload ID. Use multipart upload with 18 MiB chunks. Apply SHA-384 to every chunk. Include X-Polar-Manifest: frost on finalization.",
+        "outcome_id": "r_3ee73660cd1f482381574438191784b1",
+        "source_evidence_sha256": "9cd1f5818cc832fcb205648303bd90bf16563467ac0e84fe845afe23d878f2a9",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Use a new upload ID.\n- [E2] Use multipart upload with 18 MiB chunks.\n- [E3] Apply SHA-384 to every chunk.\n- [E4] Include X-Polar-Manifest: frost on finalization.",
+        "lesson_id": "i_9670e2a20cc1476fb52f2ba6fcb39f86",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "To resolve the C37 error while uploading a 90 MiB snapshot to PolarStore, the operator should:\n\n1. **Use a new upload ID.**\n2. **Use multipart upload with 18 MiB chunks.**\n3. **Apply SHA-384 to every chunk.**\n4. **Include X-Polar-Manifest: frost on finalization.**",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_9670e2a20cc1476fb52f2ba6fcb39f86:v1] SUPPORTED CLAIMS:\n- [E1] Use a new upload ID.\n- [E2] Use multipart upload with 18 MiB chunks.\n- [E3] Apply SHA-384 to every chunk.\n- [E4] Include X-Polar-Manifest: frost on finalization."
+        ],
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Use a new upload ID.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Use multipart upload with 18 MiB chunks.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Apply SHA-384 to every chunk.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Include X-Polar-Manifest: frost on finalization.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Use a new upload ID.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Use multipart upload with 18 MiB chunks.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Apply SHA-384 to every chunk.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Include X-Polar-Manifest: frost on finalization.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Use a new upload ID.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Use multipart upload with 18 MiB chunks.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Apply SHA-384 to every chunk.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Include X-Polar-Manifest: frost on finalization.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "mnexa_raw_span": {
+        "candidate_decision": "Reuse the previous upload ID and send one large part.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nC37 authoritative correction: Use a new upload ID. Use multipart upload with 18 MiB chunks. Apply SHA-384 to every chunk. Include X-Polar-Manifest: frost on finalization.",
+        "outcome_id": "r_259ac84feffa45b7a00823adcbc866b1",
+        "source_evidence_sha256": "9cd1f5818cc832fcb205648303bd90bf16563467ac0e84fe845afe23d878f2a9",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Use a new upload ID.\n- [E2] Use multipart upload with 18 MiB chunks.\n- [E3] Apply SHA-384 to every chunk.\n- [E4] Include X-Polar-Manifest: frost on finalization.",
+        "lesson_id": "i_b80754135fa54bd19a8ca9aff30b60ba",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "The operator should follow these steps:\n\n1. Use a new upload ID.\n2. Use multipart upload with 18 MiB chunks.\n3. Apply SHA-384 to every chunk.\n4. Include X-Polar-Manifest: frost on finalization.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_b80754135fa54bd19a8ca9aff30b60ba:v1] SUPPORTED CLAIMS:\n- [E1] Use a new upload ID.\n- [E2] Use multipart upload with 18 MiB chunks.\n- [E3] Apply SHA-384 to every chunk.\n- [E4] Include X-Polar-Manifest: frost on finalization."
+        ],
+        "raw_atom_model_response": "{\n  \"atoms\": [\n    {\n      \"text\": \"Use a new upload ID.\",\n      \"source_quote\": \"Use a new upload ID.\"\n    },\n    {\n      \"text\": \"Use multipart upload with 18 MiB chunks.\",\n      \"source_quote\": \"Use multipart upload with 18 MiB chunks.\"\n    },\n    {\n      \"text\": \"Apply SHA-384 to every chunk.\",\n      \"source_quote\": \"Apply SHA-384 to every chunk.\"\n    },\n    {\n      \"text\": \"Include X-Polar-Manifest: frost on finalization.\",\n      \"source_quote\": \"Include X-Polar-Manifest: frost on finalization.\"\n    }\n  ]\n}",
+        "raw_model_atom_proposals_count": 4,
+        "model_atom_proposals": 4,
+        "adversarial_atom_challenges": 2,
+        "adversarial_atom_rejections": 2,
+        "grounded_atoms_count": 4,
+        "rejected_atoms_count": 2,
+        "ungrounded_atoms_admitted": 0,
+        "source_span_coverage": 1.0,
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Use a new upload ID.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Use multipart upload with 18 MiB chunks.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Apply SHA-384 to every chunk.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Include X-Polar-Manifest: frost on finalization.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Use a new upload ID.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Use multipart upload with 18 MiB chunks.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Apply SHA-384 to every chunk.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Include X-Polar-Manifest: frost on finalization.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Use a new upload ID.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Use multipart upload with 18 MiB chunks.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Apply SHA-384 to every chunk.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Include X-Polar-Manifest: frost on finalization.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "same_source_evidence": true
+    },
+    {
+      "family_id": "slatedb-n15-007",
+      "baseline": {
+        "decision": "When SlateDB returns N15 during an inventory query, the operator should take the following action:\n\n1. Verify that the query was executed correctly.\n2. If verification confirms the query is correct, escalate the issue to the technical support team for further investigation. \n\nDo not attempt any further inventory queries until the issue is resolved.",
+        "correct_knowledge": false,
+        "designated_contamination": false,
+        "task_success": false
+      },
+      "mnexa_oracle": {
+        "candidate_decision": "Reconnect the session and generate a new request ID.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nN15 authoritative correction: Refresh the schema token. Switch to snapshot-read. Retry exactly once. Preserve the original request ID.",
+        "outcome_id": "r_c046a4308a7049b79bf7b1f26ffa07ee",
+        "source_evidence_sha256": "2d0733cb4a6a84412ffc67c693b63f46c3ddbaef1463f8557396604e08cebc11",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Refresh the schema token.\n- [E2] Switch to snapshot-read.\n- [E3] Retry exactly once.\n- [E4] Preserve the original request ID.",
+        "lesson_id": "i_b62e2716ef2c4e4198e9d032a69e5224",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "The operator should take the following actions:\n\n1. Refresh the schema token.\n2. Switch to snapshot-read.\n3. Retry exactly once.\n4. Preserve the original request ID.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_b62e2716ef2c4e4198e9d032a69e5224:v1] SUPPORTED CLAIMS:\n- [E1] Refresh the schema token.\n- [E2] Switch to snapshot-read.\n- [E3] Retry exactly once.\n- [E4] Preserve the original request ID."
+        ],
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Refresh the schema token.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Switch to snapshot-read.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Retry exactly once.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Preserve the original request ID.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Refresh the schema token.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Switch to snapshot-read.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Retry exactly once.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Preserve the original request ID.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Refresh the schema token.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Switch to snapshot-read.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Retry exactly once.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Preserve the original request ID.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "mnexa_raw_span": {
+        "candidate_decision": "Reconnect the session and generate a new request ID.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nN15 authoritative correction: Refresh the schema token. Switch to snapshot-read. Retry exactly once. Preserve the original request ID.",
+        "outcome_id": "r_3eb17e0a7de84788aee875f490478d80",
+        "source_evidence_sha256": "2d0733cb4a6a84412ffc67c693b63f46c3ddbaef1463f8557396604e08cebc11",
+        "lesson": "SUPPORTED CLAIMS:\n- [E2] Refresh the schema token.\n- [E3] Switch to snapshot-read.\n- [E4] Retry exactly once.\n- [E5] Preserve the original request ID.",
+        "lesson_id": "i_585ab71f28654d3b89c31128cd0a24a7",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "The operator should:\n\n1. Refresh the schema token.\n2. Switch to snapshot-read.\n3. Retry exactly once.\n4. Preserve the original request ID.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_585ab71f28654d3b89c31128cd0a24a7:v1] SUPPORTED CLAIMS:\n- [E2] Refresh the schema token.\n- [E3] Switch to snapshot-read.\n- [E4] Retry exactly once.\n- [E5] Preserve the original request ID."
+        ],
+        "raw_atom_model_response": "{\n  \"atoms\": [\n    {\n      \"text\": \"EVALUATION: FAIL.\",\n      \"source_quote\": \"EVALUATION: FAIL.\"\n    },\n    {\n      \"text\": \"Refresh the schema token.\",\n      \"source_quote\": \"Refresh the schema token.\"\n    },\n    {\n      \"text\": \"Switch to snapshot-read.\",\n      \"source_quote\": \"Switch to snapshot-read.\"\n    },\n    {\n      \"text\": \"Retry exactly once.\",\n      \"source_quote\": \"Retry exactly once.\"\n    },\n    {\n      \"text\": \"Preserve the original request ID.\",\n      \"source_quote\": \"Preserve the original request ID.\"\n    }\n  ]\n}",
+        "raw_model_atom_proposals_count": 5,
+        "model_atom_proposals": 5,
+        "adversarial_atom_challenges": 2,
+        "adversarial_atom_rejections": 2,
+        "grounded_atoms_count": 5,
+        "rejected_atoms_count": 2,
+        "ungrounded_atoms_admitted": 0,
+        "source_span_coverage": 1.25,
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Refresh the schema token.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Switch to snapshot-read.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Retry exactly once.\",\n      \"evidence_ids\": [\"E4\"]\n    },\n    {\n      \"text\": \"Preserve the original request ID.\",\n      \"evidence_ids\": [\"E5\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Refresh the schema token.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Switch to snapshot-read.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Retry exactly once.",
+              "evidence_ids": [
+                "E4"
+              ]
+            },
+            {
+              "text": "Preserve the original request ID.",
+              "evidence_ids": [
+                "E5"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Refresh the schema token.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Switch to snapshot-read.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Retry exactly once.",
+            "evidence_ids": [
+              "E4"
+            ]
+          },
+          {
+            "text": "Preserve the original request ID.",
+            "evidence_ids": [
+              "E5"
+            ]
+          }
+        ],
+        "ancestry_coverage": 0.8,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E2",
+          "E3",
+          "E4",
+          "E5"
+        ]
+      },
+      "same_source_evidence": true
+    },
+    {
+      "family_id": "crestrpc-b66-007",
+      "baseline": {
+        "decision": "If CrestRPC returns B66 during a billing RPC, the operator must not proceed with billing operations until the issue is resolved. The operator should log the error and contact technical support for further investigation.",
+        "correct_knowledge": false,
+        "designated_contamination": false,
+        "task_success": false
+      },
+      "mnexa_oracle": {
+        "candidate_decision": "Reuse the previous stream ID and restart the RPC service.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nB66 authoritative correction: Send exactly three heartbeat frames. Space the heartbeat frames 160 ms apart. Open a fresh channel. Include X-Crest-Recover: b66.",
+        "outcome_id": "r_128a3c0c5336484cb3e93c6fff7be8e3",
+        "source_evidence_sha256": "24e5fa3b8b8a4a24f9a5e14bb9851ed9789a1e1d4120c174fbe09c01774e26c8",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Send exactly three heartbeat frames.\n- [E2] Space the heartbeat frames 160 ms apart.\n- [E3] Open a fresh channel.\n- [E4] Include X-Crest-Recover: b66.",
+        "lesson_id": "i_f0948329bf1a469295c234feea96c102",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "Send exactly three heartbeat frames, space them 160 ms apart, open a fresh channel, and include `X-Crest-Recover: b66`.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_f0948329bf1a469295c234feea96c102:v1] SUPPORTED CLAIMS:\n- [E1] Send exactly three heartbeat frames.\n- [E2] Space the heartbeat frames 160 ms apart.\n- [E3] Open a fresh channel.\n- [E4] Include X-Crest-Recover: b66."
+        ],
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Send exactly three heartbeat frames.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Space the heartbeat frames 160 ms apart.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Open a fresh channel.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Include X-Crest-Recover: b66.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Send exactly three heartbeat frames.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Space the heartbeat frames 160 ms apart.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Open a fresh channel.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Include X-Crest-Recover: b66.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Send exactly three heartbeat frames.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Space the heartbeat frames 160 ms apart.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Open a fresh channel.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Include X-Crest-Recover: b66.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "mnexa_raw_span": {
+        "candidate_decision": "Reuse the previous stream ID and restart the RPC service.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nB66 authoritative correction: Send exactly three heartbeat frames. Space the heartbeat frames 160 ms apart. Open a fresh channel. Include X-Crest-Recover: b66.",
+        "outcome_id": "r_9b8e44d6fd1c4e0881c27c08e3ef7615",
+        "source_evidence_sha256": "24e5fa3b8b8a4a24f9a5e14bb9851ed9789a1e1d4120c174fbe09c01774e26c8",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Send exactly three heartbeat frames.\n- [E2] Space the heartbeat frames 160 ms apart.\n- [E3] Open a fresh channel.\n- [E4] Include X-Crest-Recover: b66.",
+        "lesson_id": "i_5ff6eae5ddc3446ba3815e2f28d76291",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "Upon receiving B66 during a billing RPC, the operator should:\n\n1. Send exactly three heartbeat frames.\n2. Space the heartbeat frames 160 ms apart.\n3. Open a fresh channel.\n4. Include the header X-Crest-Recover: b66.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_5ff6eae5ddc3446ba3815e2f28d76291:v1] SUPPORTED CLAIMS:\n- [E1] Send exactly three heartbeat frames.\n- [E2] Space the heartbeat frames 160 ms apart.\n- [E3] Open a fresh channel.\n- [E4] Include X-Crest-Recover: b66."
+        ],
+        "raw_atom_model_response": "{\n  \"atoms\": [\n    {\n      \"text\": \"Send exactly three heartbeat frames.\",\n      \"source_quote\": \"Send exactly three heartbeat frames.\"\n    },\n    {\n      \"text\": \"Space the heartbeat frames 160 ms apart.\",\n      \"source_quote\": \"Space the heartbeat frames 160 ms apart.\"\n    },\n    {\n      \"text\": \"Open a fresh channel.\",\n      \"source_quote\": \"Open a fresh channel.\"\n    },\n    {\n      \"text\": \"Include X-Crest-Recover: b66.\",\n      \"source_quote\": \"Include X-Crest-Recover: b66.\"\n    }\n  ]\n}",
+        "raw_model_atom_proposals_count": 4,
+        "model_atom_proposals": 4,
+        "adversarial_atom_challenges": 2,
+        "adversarial_atom_rejections": 2,
+        "grounded_atoms_count": 4,
+        "rejected_atoms_count": 2,
+        "ungrounded_atoms_admitted": 0,
+        "source_span_coverage": 1.0,
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Send exactly three heartbeat frames.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Space the heartbeat frames 160 ms apart.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Open a fresh channel.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Include X-Crest-Recover: b66.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Send exactly three heartbeat frames.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Space the heartbeat frames 160 ms apart.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Open a fresh channel.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Include X-Crest-Recover: b66.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Send exactly three heartbeat frames.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Space the heartbeat frames 160 ms apart.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Open a fresh channel.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Include X-Crest-Recover: b66.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "same_source_evidence": true
+    },
+    {
+      "family_id": "limequeue-g24-007",
+      "baseline": {
+        "decision": "The operator should take the following action:\n\nReview the job associated with G24 in LimeQueue. If there are no critical issues, proceed with processing. If any issues are found, follow up with the appropriate escalation protocol as defined in the operational guidelines.",
+        "correct_knowledge": false,
+        "designated_contamination": false,
+        "task_success": false
+      },
+      "mnexa_oracle": {
+        "candidate_decision": "Cancel the job and delete the existing dispatch record.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nG24 authoritative correction: Mint a new dispatch ID. Move the job to the lilac lane. Requeue exactly once. Tag dispatch-mode=restored.",
+        "outcome_id": "r_bb7ecf76bdf44d5488c867682faacde7",
+        "source_evidence_sha256": "586f3d4b9d8431e1f71e9e636824dd6b6696529085c74134584c116a0b104fcd",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Mint a new dispatch ID.\n- [E2] Move the job to the lilac lane.\n- [E3] Requeue exactly once.\n- [E4] Tag dispatch-mode=restored.",
+        "lesson_id": "i_244c4439c48c46dea569a7a86274aa9d",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "The operator should:\n\n1. Mint a new dispatch ID.\n2. Move the job to the lilac lane.\n3. Requeue exactly once.\n4. Tag dispatch-mode=restored.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_244c4439c48c46dea569a7a86274aa9d:v1] SUPPORTED CLAIMS:\n- [E1] Mint a new dispatch ID.\n- [E2] Move the job to the lilac lane.\n- [E3] Requeue exactly once.\n- [E4] Tag dispatch-mode=restored."
+        ],
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Mint a new dispatch ID.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Move the job to the lilac lane.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Requeue exactly once.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Tag dispatch-mode=restored.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Mint a new dispatch ID.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Move the job to the lilac lane.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Requeue exactly once.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Tag dispatch-mode=restored.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Mint a new dispatch ID.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Move the job to the lilac lane.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Requeue exactly once.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Tag dispatch-mode=restored.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "mnexa_raw_span": {
+        "candidate_decision": "Cancel the job and delete the existing dispatch record.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nG24 authoritative correction: Mint a new dispatch ID. Move the job to the lilac lane. Requeue exactly once. Tag dispatch-mode=restored.",
+        "outcome_id": "r_c34c0bf91e6d44e5a8df138e22fa0909",
+        "source_evidence_sha256": "586f3d4b9d8431e1f71e9e636824dd6b6696529085c74134584c116a0b104fcd",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Mint a new dispatch ID.\n- [E2] Move the job to the lilac lane.\n- [E3] Requeue exactly once.\n- [E4] Tag dispatch-mode=restored.",
+        "lesson_id": "i_e1470b6abdb443b88a506a00605f694e",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "The operator should take the following actions:\n\n1. Mint a new dispatch ID.\n2. Move the job to the lilac lane.\n3. Requeue exactly once.\n4. Tag dispatch-mode=restored.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_e1470b6abdb443b88a506a00605f694e:v1] SUPPORTED CLAIMS:\n- [E1] Mint a new dispatch ID.\n- [E2] Move the job to the lilac lane.\n- [E3] Requeue exactly once.\n- [E4] Tag dispatch-mode=restored."
+        ],
+        "raw_atom_model_response": "{\n  \"atoms\": [\n    {\n      \"text\": \"Mint a new dispatch ID.\",\n      \"source_quote\": \"Mint a new dispatch ID.\"\n    },\n    {\n      \"text\": \"Move the job to the lilac lane.\",\n      \"source_quote\": \"Move the job to the lilac lane.\"\n    },\n    {\n      \"text\": \"Requeue exactly once.\",\n      \"source_quote\": \"Requeue exactly once.\"\n    },\n    {\n      \"text\": \"Tag dispatch-mode=restored.\",\n      \"source_quote\": \"Tag dispatch-mode=restored.\"\n    }\n  ]\n}",
+        "raw_model_atom_proposals_count": 4,
+        "model_atom_proposals": 4,
+        "adversarial_atom_challenges": 2,
+        "adversarial_atom_rejections": 2,
+        "grounded_atoms_count": 4,
+        "rejected_atoms_count": 2,
+        "ungrounded_atoms_admitted": 0,
+        "source_span_coverage": 1.0,
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Mint a new dispatch ID.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Move the job to the lilac lane.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Requeue exactly once.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Tag dispatch-mode=restored.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Mint a new dispatch ID.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Move the job to the lilac lane.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Requeue exactly once.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Tag dispatch-mode=restored.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Mint a new dispatch ID.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Move the job to the lilac lane.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Requeue exactly once.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Tag dispatch-mode=restored.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "same_source_evidence": true
+    },
+    {
+      "family_id": "nimbuscdn-a58-007",
+      "baseline": {
+        "decision": "If NimbusCDN returns A58 while refreshing an image asset, the operator should:\n\n1. Wait 10 minutes.\n2. Retry the refresh action, ensuring all parameters are correct. \n\nIf the A58 error persists after the retry, escalate the issue to the technical support team.",
+        "correct_knowledge": false,
+        "designated_contamination": false,
+        "task_success": false
+      },
+      "mnexa_oracle": {
+        "candidate_decision": "Purge all POPs and invalidate every cached asset.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nA58 authoritative correction: Issue one HEAD request to origin. Purge only the current POP shard. Wait 10 seconds. Issue one GET with X-Nimbus-Probe: 8.",
+        "outcome_id": "r_a691e60d74454a4286dc98707a516575",
+        "source_evidence_sha256": "ab333a1b1cca80f3f843c06b1c55cec1c6e010e2063d12f957e6dc402a251884",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Issue one HEAD request to origin.\n- [E2] Purge only the current POP shard.\n- [E3] Wait 10 seconds.\n- [E4] Issue one GET with X-Nimbus-Probe: 8.",
+        "lesson_id": "i_ed4a79145bd84ce39ee3bcc1cb747de1",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "1. Issue one HEAD request to origin.\n2. Purge only the current POP shard.\n3. Wait 10 seconds.\n4. Issue one GET with X-Nimbus-Probe: 8.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_ed4a79145bd84ce39ee3bcc1cb747de1:v1] SUPPORTED CLAIMS:\n- [E1] Issue one HEAD request to origin.\n- [E2] Purge only the current POP shard.\n- [E3] Wait 10 seconds.\n- [E4] Issue one GET with X-Nimbus-Probe: 8."
+        ],
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Issue one HEAD request to origin.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Purge only the current POP shard.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Wait 10 seconds.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Issue one GET with X-Nimbus-Probe: 8.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Issue one HEAD request to origin.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Purge only the current POP shard.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Wait 10 seconds.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Issue one GET with X-Nimbus-Probe: 8.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Issue one HEAD request to origin.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Purge only the current POP shard.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Wait 10 seconds.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Issue one GET with X-Nimbus-Probe: 8.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "mnexa_raw_span": {
+        "candidate_decision": "Purge all POPs and invalidate every cached asset.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nA58 authoritative correction: Issue one HEAD request to origin. Purge only the current POP shard. Wait 10 seconds. Issue one GET with X-Nimbus-Probe: 8.",
+        "outcome_id": "r_bb39f214746540138a7ef8fea963762f",
+        "source_evidence_sha256": "ab333a1b1cca80f3f843c06b1c55cec1c6e010e2063d12f957e6dc402a251884",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Issue one HEAD request to origin.\n- [E2] Purge only the current POP shard.\n- [E3] Wait 10 seconds.\n- [E4] Issue one GET with X-Nimbus-Probe: 8.",
+        "lesson_id": "i_d7ad2217d37f433a95efa2ab19343b56",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "To resolve the A58 response from NimbusCDN while refreshing an image asset, you should:\n\n1. Issue one HEAD request to origin.\n2. Purge only the current POP shard.\n3. Wait 10 seconds.\n4. Issue one GET with X-Nimbus-Probe: 8.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_d7ad2217d37f433a95efa2ab19343b56:v1] SUPPORTED CLAIMS:\n- [E1] Issue one HEAD request to origin.\n- [E2] Purge only the current POP shard.\n- [E3] Wait 10 seconds.\n- [E4] Issue one GET with X-Nimbus-Probe: 8."
+        ],
+        "raw_atom_model_response": "{\n  \"atoms\": [\n    {\n      \"text\": \"Issue one HEAD request to origin.\",\n      \"source_quote\": \"Issue one HEAD request to origin.\"\n    },\n    {\n      \"text\": \"Purge only the current POP shard.\",\n      \"source_quote\": \"Purge only the current POP shard.\"\n    },\n    {\n      \"text\": \"Wait 10 seconds.\",\n      \"source_quote\": \"Wait 10 seconds.\"\n    },\n    {\n      \"text\": \"Issue one GET with X-Nimbus-Probe: 8.\",\n      \"source_quote\": \"Issue one GET with X-Nimbus-Probe: 8.\"\n    }\n  ]\n}",
+        "raw_model_atom_proposals_count": 4,
+        "model_atom_proposals": 4,
+        "adversarial_atom_challenges": 2,
+        "adversarial_atom_rejections": 2,
+        "grounded_atoms_count": 4,
+        "rejected_atoms_count": 2,
+        "ungrounded_atoms_admitted": 0,
+        "source_span_coverage": 1.0,
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Issue one HEAD request to origin.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Purge only the current POP shard.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Wait 10 seconds.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Issue one GET with X-Nimbus-Probe: 8.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Issue one HEAD request to origin.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Purge only the current POP shard.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Wait 10 seconds.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Issue one GET with X-Nimbus-Probe: 8.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Issue one HEAD request to origin.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Purge only the current POP shard.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Wait 10 seconds.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Issue one GET with X-Nimbus-Probe: 8.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "same_source_evidence": true
+    },
+    {
+      "family_id": "brookflow-w13-007",
+      "baseline": {
+        "decision": "The operator should investigate the cause of the W13 error during the analytics export. Ensure that all required parameters for the export are correctly set. If the issue persists, restart the export process and monitor for reoccurrence. If W13 appears again, escalate the issue to the technical support team for further assistance.",
+        "correct_knowledge": false,
+        "designated_contamination": false,
+        "task_success": false
+      },
+      "mnexa_oracle": {
+        "candidate_decision": "Restart the entire workflow and discard the checkpoint.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nW13 authoritative correction: Clone the latest checkpoint. Mark the old run superseded. Restart from the previous boundary exactly once. Carry token w13-safe.",
+        "outcome_id": "r_9bfbe1ca20694b82828a66ac1b493cb1",
+        "source_evidence_sha256": "b5a634fb022ab73cf9f1f674992a55da3879c9cadbfb67c04f7a44a28558e9a5",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Clone the latest checkpoint.\n- [E2] Mark the old run superseded.\n- [E3] Restart from the previous boundary exactly once.\n- [E4] Carry token w13-safe.",
+        "lesson_id": "i_eeffc1cb1b714fdf8157daf3dbc34e2f",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "Upon receiving W13 during analytics export, the operator should:\n\n1. Clone the latest checkpoint.\n2. Mark the old run superseded.\n3. Restart from the previous boundary exactly once.\n4. Carry token w13-safe.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_eeffc1cb1b714fdf8157daf3dbc34e2f:v1] SUPPORTED CLAIMS:\n- [E1] Clone the latest checkpoint.\n- [E2] Mark the old run superseded.\n- [E3] Restart from the previous boundary exactly once.\n- [E4] Carry token w13-safe."
+        ],
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Clone the latest checkpoint.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Mark the old run superseded.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Restart from the previous boundary exactly once.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Carry token w13-safe.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Clone the latest checkpoint.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Mark the old run superseded.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Restart from the previous boundary exactly once.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Carry token w13-safe.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Clone the latest checkpoint.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Mark the old run superseded.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Restart from the previous boundary exactly once.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Carry token w13-safe.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "mnexa_raw_span": {
+        "candidate_decision": "Restart the entire workflow and discard the checkpoint.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nW13 authoritative correction: Clone the latest checkpoint. Mark the old run superseded. Restart from the previous boundary exactly once. Carry token w13-safe.",
+        "outcome_id": "r_a770343b83ab4280a29d2e2b0f30cd6d",
+        "source_evidence_sha256": "b5a634fb022ab73cf9f1f674992a55da3879c9cadbfb67c04f7a44a28558e9a5",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Clone the latest checkpoint.\n- [E2] Mark the old run superseded.\n- [E3] Restart from the previous boundary exactly once.\n- [E4] Carry token w13-safe.",
+        "lesson_id": "i_c36728b5c35447b4bd1941a2a277c4a6",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "1. Clone the latest checkpoint.\n2. Mark the old run superseded.\n3. Restart from the previous boundary exactly once.\n4. Carry token W13-safe.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_c36728b5c35447b4bd1941a2a277c4a6:v1] SUPPORTED CLAIMS:\n- [E1] Clone the latest checkpoint.\n- [E2] Mark the old run superseded.\n- [E3] Restart from the previous boundary exactly once.\n- [E4] Carry token w13-safe."
+        ],
+        "raw_atom_model_response": "{\n  \"atoms\": [\n    {\n      \"text\": \"Clone the latest checkpoint.\",\n      \"source_quote\": \"Clone the latest checkpoint.\"\n    },\n    {\n      \"text\": \"Mark the old run superseded.\",\n      \"source_quote\": \"Mark the old run superseded.\"\n    },\n    {\n      \"text\": \"Restart from the previous boundary exactly once.\",\n      \"source_quote\": \"Restart from the previous boundary exactly once.\"\n    },\n    {\n      \"text\": \"Carry token w13-safe.\",\n      \"source_quote\": \"Carry token w13-safe.\"\n    }\n  ]\n}",
+        "raw_model_atom_proposals_count": 4,
+        "model_atom_proposals": 4,
+        "adversarial_atom_challenges": 2,
+        "adversarial_atom_rejections": 2,
+        "grounded_atoms_count": 4,
+        "rejected_atoms_count": 2,
+        "ungrounded_atoms_admitted": 0,
+        "source_span_coverage": 1.0,
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Clone the latest checkpoint.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Mark the old run superseded.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Restart from the previous boundary exactly once.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Carry token w13-safe.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Clone the latest checkpoint.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Mark the old run superseded.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Restart from the previous boundary exactly once.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Carry token w13-safe.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Clone the latest checkpoint.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Mark the old run superseded.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Restart from the previous boundary exactly once.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Carry token w13-safe.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "same_source_evidence": true
+    },
+    {
+      "family_id": "reedparser-f5-007",
+      "baseline": {
+        "decision": "The operator must validate the legacy state before proceeding. After validation, if the legacy state remains Z, the operator must take appropriate action as specified in protocol. If the legacy state changes, follow the new guidelines accordingly.",
+        "correct_knowledge": false,
+        "designated_contamination": false,
+        "task_success": false
+      },
+      "mnexa_oracle": {
+        "candidate_decision": "Drop the state field and default the record to approved.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nF5 authoritative correction: Map X to queued. Map Y to blocked. Map Z to ready. Perform the mapping before normal validation.",
+        "outcome_id": "r_7041d50977af4d7081fb8b414a824d87",
+        "source_evidence_sha256": "dd1be19a785afef7132e396118e1e3e8f02c8c99ab2cd031810f03318c72d5b2",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Map X to queued.\n- [E2] Map Y to blocked.\n- [E3] Map Z to ready.\n- [E4] Perform the mapping before normal validation.",
+        "lesson_id": "i_6948defdadeb49f98edad87cd3d9aa3b",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "The operator should perform the following action:\n\nMap state Z to ready before normal validation.",
+        "transfer_correct_knowledge": false,
+        "transfer_contaminated": false,
+        "task_success": false,
+        "memory_segments": [
+          "[interpretive:i_6948defdadeb49f98edad87cd3d9aa3b:v1] SUPPORTED CLAIMS:\n- [E1] Map X to queued.\n- [E2] Map Y to blocked.\n- [E3] Map Z to ready.\n- [E4] Perform the mapping before normal validation."
+        ],
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Map X to queued.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Map Y to blocked.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Map Z to ready.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Perform the mapping before normal validation.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Map X to queued.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Map Y to blocked.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Map Z to ready.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Perform the mapping before normal validation.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Map X to queued.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Map Y to blocked.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Map Z to ready.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Perform the mapping before normal validation.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "mnexa_raw_span": {
+        "candidate_decision": "Drop the state field and default the record to approved.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nF5 authoritative correction: Map X to queued. Map Y to blocked. Map Z to ready. Perform the mapping before normal validation.",
+        "outcome_id": "r_3e37ebe2e77d4c1eb8ff8ae776cd56fb",
+        "source_evidence_sha256": "dd1be19a785afef7132e396118e1e3e8f02c8c99ab2cd031810f03318c72d5b2",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Map X to queued.\n- [E2] Map Y to blocked.\n- [E3] Map Z to ready.\n- [E4] Perform the mapping before normal validation.",
+        "lesson_id": "i_4400cf3061a146fd905c44940248c060",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "The operator should map Z to ready before normal validation, in accordance with the accumulated experience.",
+        "transfer_correct_knowledge": false,
+        "transfer_contaminated": false,
+        "task_success": false,
+        "memory_segments": [
+          "[interpretive:i_4400cf3061a146fd905c44940248c060:v1] SUPPORTED CLAIMS:\n- [E1] Map X to queued.\n- [E2] Map Y to blocked.\n- [E3] Map Z to ready.\n- [E4] Perform the mapping before normal validation."
+        ],
+        "raw_atom_model_response": "{\n  \"atoms\": [\n    {\n      \"text\": \"Map X to queued.\",\n      \"source_quote\": \"Map X to queued.\"\n    },\n    {\n      \"text\": \"Map Y to blocked.\",\n      \"source_quote\": \"Map Y to blocked.\"\n    },\n    {\n      \"text\": \"Map Z to ready.\",\n      \"source_quote\": \"Map Z to ready.\"\n    },\n    {\n      \"text\": \"Perform the mapping before normal validation.\",\n      \"source_quote\": \"Perform the mapping before normal validation.\"\n    }\n  ]\n}",
+        "raw_model_atom_proposals_count": 4,
+        "model_atom_proposals": 4,
+        "adversarial_atom_challenges": 2,
+        "adversarial_atom_rejections": 2,
+        "grounded_atoms_count": 4,
+        "rejected_atoms_count": 2,
+        "ungrounded_atoms_admitted": 0,
+        "source_span_coverage": 1.0,
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Map X to queued.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Map Y to blocked.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Map Z to ready.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Perform the mapping before normal validation.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Map X to queued.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Map Y to blocked.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Map Z to ready.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Perform the mapping before normal validation.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Map X to queued.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Map Y to blocked.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Map Z to ready.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Perform the mapping before normal validation.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "same_source_evidence": true
+    },
+    {
+      "family_id": "alpinepay-s41-007",
+      "baseline": {
+        "decision": "Upon receiving S41 from AlpinePay during the subscription adjustment, the operator must **not proceed with the adjustment**. Instead, the operator should **escalate the issue to the relevant support team** for further investigation.",
+        "correct_knowledge": false,
+        "designated_contamination": false,
+        "task_success": false
+      },
+      "mnexa_oracle": {
+        "candidate_decision": "Refund the customer immediately and reverse the charge.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nS41 authoritative correction: Wait 13 seconds. Rotate the session key. Mint a new idempotency key. Retry exactly twice with X-Alpine-Mode: silver.",
+        "outcome_id": "r_179842ec7da9459d9557e3c7d90a4c6b",
+        "source_evidence_sha256": "e14761346ebddc12747d3093da46472beaffde638b137ce6e21ed12fa57abfa0",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Wait 13 seconds.\n- [E2] Rotate the session key.\n- [E3] Mint a new idempotency key.\n- [E4] Retry exactly twice with X-Alpine-Mode: silver.",
+        "lesson_id": "i_1dc00278976f4b459761a399bf2e3781",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "The operator should wait 13 seconds, then retry exactly twice with X-Alpine-Mode: silver.",
+        "transfer_correct_knowledge": false,
+        "transfer_contaminated": false,
+        "task_success": false,
+        "memory_segments": [
+          "[interpretive:i_1dc00278976f4b459761a399bf2e3781:v1] SUPPORTED CLAIMS:\n- [E1] Wait 13 seconds.\n- [E2] Rotate the session key.\n- [E3] Mint a new idempotency key.\n- [E4] Retry exactly twice with X-Alpine-Mode: silver."
+        ],
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Wait 13 seconds.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Rotate the session key.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Mint a new idempotency key.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Retry exactly twice with X-Alpine-Mode: silver.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Wait 13 seconds.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Rotate the session key.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Mint a new idempotency key.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Retry exactly twice with X-Alpine-Mode: silver.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Wait 13 seconds.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Rotate the session key.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Mint a new idempotency key.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Retry exactly twice with X-Alpine-Mode: silver.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "mnexa_raw_span": {
+        "candidate_decision": "Refund the customer immediately and reverse the charge.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nS41 authoritative correction: Wait 13 seconds. Rotate the session key. Mint a new idempotency key. Retry exactly twice with X-Alpine-Mode: silver.",
+        "outcome_id": "r_a03f1d87d1474dbda46596f0387a3154",
+        "source_evidence_sha256": "e14761346ebddc12747d3093da46472beaffde638b137ce6e21ed12fa57abfa0",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Wait 13 seconds.\n- [E2] Rotate the session key.\n- [E3] Mint a new idempotency key.\n- [E4] Retry exactly twice with X-Alpine-Mode: silver.",
+        "lesson_id": "i_55d35e69a3534d45ac20b129d5fc0b5a",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "Upon receiving S41 while issuing a subscription adjustment, the operator should:\n\n1. Wait 13 seconds.\n2. Rotate the session key.\n3. Mint a new idempotency key.\n4. Retry exactly twice with X-Alpine-Mode: silver.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_55d35e69a3534d45ac20b129d5fc0b5a:v1] SUPPORTED CLAIMS:\n- [E1] Wait 13 seconds.\n- [E2] Rotate the session key.\n- [E3] Mint a new idempotency key.\n- [E4] Retry exactly twice with X-Alpine-Mode: silver."
+        ],
+        "raw_atom_model_response": "{\n  \"atoms\": [\n    {\n      \"text\": \"Wait 13 seconds.\",\n      \"source_quote\": \"Wait 13 seconds.\"\n    },\n    {\n      \"text\": \"Rotate the session key.\",\n      \"source_quote\": \"Rotate the session key.\"\n    },\n    {\n      \"text\": \"Mint a new idempotency key.\",\n      \"source_quote\": \"Mint a new idempotency key.\"\n    },\n    {\n      \"text\": \"Retry exactly twice with X-Alpine-Mode: silver.\",\n      \"source_quote\": \"Retry exactly twice with X-Alpine-Mode: silver.\"\n    }\n  ]\n}",
+        "raw_model_atom_proposals_count": 4,
+        "model_atom_proposals": 4,
+        "adversarial_atom_challenges": 2,
+        "adversarial_atom_rejections": 2,
+        "grounded_atoms_count": 4,
+        "rejected_atoms_count": 2,
+        "ungrounded_atoms_admitted": 0,
+        "source_span_coverage": 1.0,
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Wait 13 seconds.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Rotate the session key.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Mint a new idempotency key.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Retry exactly twice with X-Alpine-Mode: silver.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Wait 13 seconds.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Rotate the session key.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Mint a new idempotency key.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Retry exactly twice with X-Alpine-Mode: silver.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Wait 13 seconds.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Rotate the session key.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Mint a new idempotency key.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Retry exactly twice with X-Alpine-Mode: silver.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "same_source_evidence": true
+    },
+    {
+      "family_id": "indigoindex-z27-007",
+      "baseline": {
+        "decision": "The operator must check for any system alerts or notifications related to the Z27 return from IndigoIndex. If there are no alerts, the operator must escalate the issue to a supervisor for further guidance.",
+        "correct_knowledge": false,
+        "designated_contamination": false,
+        "task_success": false
+      },
+      "mnexa_oracle": {
+        "candidate_decision": "Delete the current snapshot and rebuild the search index.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nZ27 authoritative correction: Fetch a fresh cursor from the leader. Switch to shadow-read. Retry exactly once. Preserve the original query ID.",
+        "outcome_id": "r_cfe56fc883ae4b488c1f3facb53be81f",
+        "source_evidence_sha256": "a72222486afa51b96b27bfd354c164e6d8ec7b8804d7a3fdbb73553959e7ab2d",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Fetch a fresh cursor from the leader.\n- [E2] Switch to shadow-read.\n- [E3] Retry exactly once.\n- [E4] Preserve the original query ID.",
+        "lesson_id": "i_f62ed45de7b74a878f203763341f28ea",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "When IndigoIndex returns Z27 during account search, the operator should:\n\n1. Fetch a fresh cursor from the leader.\n2. Switch to shadow-read.\n3. Retry exactly once while preserving the original query ID.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_f62ed45de7b74a878f203763341f28ea:v1] SUPPORTED CLAIMS:\n- [E1] Fetch a fresh cursor from the leader.\n- [E2] Switch to shadow-read.\n- [E3] Retry exactly once.\n- [E4] Preserve the original query ID."
+        ],
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Fetch a fresh cursor from the leader.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Switch to shadow-read.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Retry exactly once.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Preserve the original query ID.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Fetch a fresh cursor from the leader.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Switch to shadow-read.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Retry exactly once.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Preserve the original query ID.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Fetch a fresh cursor from the leader.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Switch to shadow-read.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Retry exactly once.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Preserve the original query ID.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "mnexa_raw_span": {
+        "candidate_decision": "Delete the current snapshot and rebuild the search index.",
+        "outcome": "EVALUATION: FAIL.\nAUTHORITATIVE CORRECTION:\nZ27 authoritative correction: Fetch a fresh cursor from the leader. Switch to shadow-read. Retry exactly once. Preserve the original query ID.",
+        "outcome_id": "r_f2a75b00d5d54175a59e0f1dc509e641",
+        "source_evidence_sha256": "a72222486afa51b96b27bfd354c164e6d8ec7b8804d7a3fdbb73553959e7ab2d",
+        "lesson": "SUPPORTED CLAIMS:\n- [E1] Fetch a fresh cursor from the leader.\n- [E2] Switch to shadow-read.\n- [E3] Retry exactly once.\n- [E4] Preserve the original query ID.",
+        "lesson_id": "i_be2550ff6ab24a0fa715ba7d46b3741e",
+        "lesson_complete_knowledge": true,
+        "lesson_contaminated": false,
+        "transfer_decision": "The operator should take the following actions:\n\n1. Fetch a fresh cursor from the leader.\n2. Switch to shadow-read.\n3. Retry exactly once.\n4. Preserve the original query ID.",
+        "transfer_correct_knowledge": true,
+        "transfer_contaminated": false,
+        "task_success": true,
+        "memory_segments": [
+          "[interpretive:i_be2550ff6ab24a0fa715ba7d46b3741e:v1] SUPPORTED CLAIMS:\n- [E1] Fetch a fresh cursor from the leader.\n- [E2] Switch to shadow-read.\n- [E3] Retry exactly once.\n- [E4] Preserve the original query ID."
+        ],
+        "raw_atom_model_response": "{\n  \"atoms\": [\n    {\n      \"text\": \"Fetch a fresh cursor from the leader.\",\n      \"source_quote\": \"Fetch a fresh cursor from the leader.\"\n    },\n    {\n      \"text\": \"Switch to shadow-read.\",\n      \"source_quote\": \"Switch to shadow-read.\"\n    },\n    {\n      \"text\": \"Retry exactly once.\",\n      \"source_quote\": \"Retry exactly once.\"\n    },\n    {\n      \"text\": \"Preserve the original query ID.\",\n      \"source_quote\": \"Preserve the original query ID.\"\n    }\n  ]\n}",
+        "raw_model_atom_proposals_count": 4,
+        "model_atom_proposals": 4,
+        "adversarial_atom_challenges": 2,
+        "adversarial_atom_rejections": 2,
+        "grounded_atoms_count": 4,
+        "rejected_atoms_count": 2,
+        "ungrounded_atoms_admitted": 0,
+        "source_span_coverage": 1.0,
+        "raw_model_proposal": "{\n  \"claims\": [\n    {\n      \"text\": \"Fetch a fresh cursor from the leader.\",\n      \"evidence_ids\": [\"E1\"]\n    },\n    {\n      \"text\": \"Switch to shadow-read.\",\n      \"evidence_ids\": [\"E2\"]\n    },\n    {\n      \"text\": \"Retry exactly once.\",\n      \"evidence_ids\": [\"E3\"]\n    },\n    {\n      \"text\": \"Preserve the original query ID.\",\n      \"evidence_ids\": [\"E4\"]\n    }\n  ]\n}",
+        "proposal": {
+          "claims": [
+            {
+              "text": "Fetch a fresh cursor from the leader.",
+              "evidence_ids": [
+                "E1"
+              ]
+            },
+            {
+              "text": "Switch to shadow-read.",
+              "evidence_ids": [
+                "E2"
+              ]
+            },
+            {
+              "text": "Retry exactly once.",
+              "evidence_ids": [
+                "E3"
+              ]
+            },
+            {
+              "text": "Preserve the original query ID.",
+              "evidence_ids": [
+                "E4"
+              ]
+            }
+          ]
+        },
+        "proposed_claim_count": 4,
+        "admitted_claim_count": 4,
+        "rejected_claim_count": 0,
+        "rejected_claims": [],
+        "admitted_claims": [
+          {
+            "text": "Fetch a fresh cursor from the leader.",
+            "evidence_ids": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Switch to shadow-read.",
+            "evidence_ids": [
+              "E2"
+            ]
+          },
+          {
+            "text": "Retry exactly once.",
+            "evidence_ids": [
+              "E3"
+            ]
+          },
+          {
+            "text": "Preserve the original query ID.",
+            "evidence_ids": [
+              "E4"
+            ]
+          }
+        ],
+        "ancestry_coverage": 1.0,
+        "unsupported_claims_admitted": 0,
+        "admitted_evidence_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E4"
+        ]
+      },
+      "same_source_evidence": true
+    }
+  ]
+}

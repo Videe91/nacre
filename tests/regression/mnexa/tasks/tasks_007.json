@@ -1,0 +1,1747 @@
+{
+  "experiment": "seed-growth-007",
+  "classification": "exploratory-fresh-raw-evidence-atomization-ablation",
+  "hypothesis": "Raw evidence atomization via deterministic span grounding enforces span-level ancestry without relying on pre-registered oracle evidence atoms, preventing ungrounded propositions from entering persistent memory while maintaining transfer success.",
+  "families": [
+    {
+      "id": "lumenpay-kx31-007",
+      "entities": [
+        "system:lumenpay",
+        "code:kx-31"
+      ],
+      "experience": {
+        "prompt": "LumenPay returns KX-31 while capturing an invoice payment. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "LumenPay returns KX-31 while cancelling a subscription charge. What should the operator do?"
+      },
+      "candidate_decision": "Restart the payment service and clear the local cache.",
+      "correction": "KX-31 authoritative correction: Refresh the recovery lease. Wait 6 seconds. Retry exactly once. Include X-Lumen-Recover: amber.",
+      "oracle_evidence_atoms": [
+        {
+          "id": "E1",
+          "text": "Refresh the recovery lease.",
+          "source_quote": "Refresh the recovery lease.",
+          "task_pattern": "refresh.*recovery\\s+lease"
+        },
+        {
+          "id": "E2",
+          "text": "Wait 6 seconds.",
+          "source_quote": "Wait 6 seconds.",
+          "task_pattern": "\\b6\\s*seconds?\\b"
+        },
+        {
+          "id": "E3",
+          "text": "Retry exactly once.",
+          "source_quote": "Retry exactly once.",
+          "task_pattern": "retry.*exactly\\s+once"
+        },
+        {
+          "id": "E4",
+          "text": "Include X-Lumen-Recover: amber.",
+          "source_quote": "Include X-Lumen-Recover: amber.",
+          "task_pattern": "x-lumen-recover.*amber"
+        }
+      ],
+      "adversarial_atom_challenges": [
+        {
+          "text": "Restart the payment service and clear the local cache.",
+          "source_quote": "Restart the payment service and clear the local cache."
+        },
+        {
+          "text": "Restart the payment service and clear the local cache.",
+          "source_quote": "Refresh the recovery lease."
+        }
+      ],
+      "correct_grader": {
+        "all_regex": [
+          [
+            "refresh.*recovery\\s+lease"
+          ],
+          [
+            "\\b6\\s*seconds?\\b"
+          ],
+          [
+            "retry.*exactly\\s+once"
+          ],
+          [
+            "x-lumen-recover.*amber"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "refresh.*recovery\\s+lease"
+          ],
+          [
+            "\\b6\\s*seconds?\\b"
+          ],
+          [
+            "retry.*exactly\\s+once"
+          ],
+          [
+            "x-lumen-recover.*amber"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "restart.*payment\\s+service",
+        "clear.*local\\s+cache"
+      ]
+    },
+    {
+      "id": "ashqueue-d14-007",
+      "entities": [
+        "system:ashqueue",
+        "code:d14"
+      ],
+      "experience": {
+        "prompt": "AshQueue returns D14 while processing a document job. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "AshQueue returns D14 while processing a thumbnail job. What should the operator do?"
+      },
+      "candidate_decision": "Delete the original message and restart the worker.",
+      "correction": "D14 authoritative correction: Request a fresh checkpoint. Move the job to the gold lane. Replay exactly once from the checkpoint. Use Replay-Class: ash.",
+      "oracle_evidence_atoms": [
+        {
+          "id": "E1",
+          "text": "Request a fresh checkpoint.",
+          "source_quote": "Request a fresh checkpoint.",
+          "task_pattern": "(?:request|obtain).*fresh\\s+checkpoint"
+        },
+        {
+          "id": "E2",
+          "text": "Move the job to the gold lane.",
+          "source_quote": "Move the job to the gold lane.",
+          "task_pattern": "gold\\s+lane"
+        },
+        {
+          "id": "E3",
+          "text": "Replay exactly once from the checkpoint.",
+          "source_quote": "Replay exactly once from the checkpoint.",
+          "task_pattern": "replay.*exactly\\s+once"
+        },
+        {
+          "id": "E4",
+          "text": "Use Replay-Class: ash.",
+          "source_quote": "Use Replay-Class: ash.",
+          "task_pattern": "replay-class.*ash"
+        }
+      ],
+      "adversarial_atom_challenges": [
+        {
+          "text": "Delete the original message and restart the worker.",
+          "source_quote": "Delete the original message and restart the worker."
+        },
+        {
+          "text": "Delete the original message and restart the worker.",
+          "source_quote": "Request a fresh checkpoint."
+        }
+      ],
+      "correct_grader": {
+        "all_regex": [
+          [
+            "(?:request|obtain).*fresh\\s+checkpoint"
+          ],
+          [
+            "gold\\s+lane"
+          ],
+          [
+            "replay.*exactly\\s+once"
+          ],
+          [
+            "replay-class.*ash"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "(?:request|obtain).*fresh\\s+checkpoint"
+          ],
+          [
+            "gold\\s+lane"
+          ],
+          [
+            "replay.*exactly\\s+once"
+          ],
+          [
+            "replay-class.*ash"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "delete.*original\\s+message",
+        "restart.*worker"
+      ]
+    },
+    {
+      "id": "onyxstore-r62-007",
+      "entities": [
+        "system:onyxstore",
+        "code:r62"
+      ],
+      "experience": {
+        "prompt": "OnyxStore returns R62 while uploading a 108 MiB archive. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "OnyxStore returns R62 while uploading a 72 MiB checkpoint. What should the operator do?"
+      },
+      "candidate_decision": "Compress the file and use a single-part upload.",
+      "correction": "R62 authoritative correction: Start a new upload session. Use multipart upload with 9 MiB chunks. Attach BLAKE2b to every chunk. Include X-Onyx-Final: strict on finalization.",
+      "oracle_evidence_atoms": [
+        {
+          "id": "E1",
+          "text": "Start a new upload session.",
+          "source_quote": "Start a new upload session.",
+          "task_pattern": "new\\s+upload\\s+session"
+        },
+        {
+          "id": "E2",
+          "text": "Use multipart upload with 9 MiB chunks.",
+          "source_quote": "Use multipart upload with 9 MiB chunks.",
+          "task_pattern": "multipart.*9\\s*(?:mib|mb)"
+        },
+        {
+          "id": "E3",
+          "text": "Attach BLAKE2b to every chunk.",
+          "source_quote": "Attach BLAKE2b to every chunk.",
+          "task_pattern": "blake2b.*(?:every|each|per).*chunk"
+        },
+        {
+          "id": "E4",
+          "text": "Include X-Onyx-Final: strict on finalization.",
+          "source_quote": "Include X-Onyx-Final: strict on finalization.",
+          "task_pattern": "x-onyx-final.*strict"
+        }
+      ],
+      "adversarial_atom_challenges": [
+        {
+          "text": "Compress the file and use a single-part upload.",
+          "source_quote": "Compress the file and use a single-part upload."
+        },
+        {
+          "text": "Compress the file and use a single-part upload.",
+          "source_quote": "Start a new upload session."
+        }
+      ],
+      "correct_grader": {
+        "all_regex": [
+          [
+            "new\\s+upload\\s+session"
+          ],
+          [
+            "multipart.*9\\s*(?:mib|mb)"
+          ],
+          [
+            "blake2b.*(?:every|each|per).*chunk"
+          ],
+          [
+            "x-onyx-final.*strict"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "new\\s+upload\\s+session"
+          ],
+          [
+            "multipart.*9\\s*(?:mib|mb)"
+          ],
+          [
+            "blake2b.*(?:every|each|per).*chunk"
+          ],
+          [
+            "x-onyx-final.*strict"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "compress.*file",
+        "single[-\\s]+part"
+      ]
+    },
+    {
+      "id": "ferndb-p73-007",
+      "entities": [
+        "system:ferndb",
+        "code:p73"
+      ],
+      "experience": {
+        "prompt": "FernDB returns P73 while writing an inventory update. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "FernDB returns P73 while writing a pricing update. What should the operator do?"
+      },
+      "candidate_decision": "Restart the database node and increment the epoch locally.",
+      "correction": "P73 authoritative correction: Read the primary epoch. Acquire the copper lock. Retry exactly once. Set X-Fern-Epoch to the primary epoch.",
+      "oracle_evidence_atoms": [
+        {
+          "id": "E1",
+          "text": "Read the primary epoch.",
+          "source_quote": "Read the primary epoch.",
+          "task_pattern": "read.*primary\\s+epoch"
+        },
+        {
+          "id": "E2",
+          "text": "Acquire the copper lock.",
+          "source_quote": "Acquire the copper lock.",
+          "task_pattern": "copper\\s+lock"
+        },
+        {
+          "id": "E3",
+          "text": "Retry exactly once.",
+          "source_quote": "Retry exactly once.",
+          "task_pattern": "retry.*exactly\\s+once"
+        },
+        {
+          "id": "E4",
+          "text": "Set X-Fern-Epoch to the primary epoch.",
+          "source_quote": "Set X-Fern-Epoch to the primary epoch.",
+          "task_pattern": "x-fern-epoch.*primary\\s+epoch"
+        }
+      ],
+      "adversarial_atom_challenges": [
+        {
+          "text": "Restart the database node and increment the epoch locally.",
+          "source_quote": "Restart the database node and increment the epoch locally."
+        },
+        {
+          "text": "Restart the database node and increment the epoch locally.",
+          "source_quote": "Read the primary epoch."
+        }
+      ],
+      "correct_grader": {
+        "all_regex": [
+          [
+            "read.*primary\\s+epoch"
+          ],
+          [
+            "copper\\s+lock"
+          ],
+          [
+            "retry.*exactly\\s+once"
+          ],
+          [
+            "x-fern-epoch.*primary\\s+epoch"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "read.*primary\\s+epoch"
+          ],
+          [
+            "copper\\s+lock"
+          ],
+          [
+            "retry.*exactly\\s+once"
+          ],
+          [
+            "x-fern-epoch.*primary\\s+epoch"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "restart.*database",
+        "increment.*epoch.*locally"
+      ]
+    },
+    {
+      "id": "sableparser-m4-007",
+      "entities": [
+        "system:sableparser",
+        "code:m4"
+      ],
+      "experience": {
+        "prompt": "SableParser returns M4 with legacy state=A before validation. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "SableParser returns M4 with legacy state=C before validation. What should the operator do?"
+      },
+      "candidate_decision": "Drop the state field and default the record to approved.",
+      "correction": "M4 authoritative correction: Map A to hold. Map B to release. Map C to review. Perform the mapping before normal validation.",
+      "oracle_evidence_atoms": [
+        {
+          "id": "E1",
+          "text": "Map A to hold.",
+          "source_quote": "Map A to hold.",
+          "task_pattern": "\\ba\\b.*\\bhold\\b"
+        },
+        {
+          "id": "E2",
+          "text": "Map B to release.",
+          "source_quote": "Map B to release.",
+          "task_pattern": "\\bb\\b.*\\brelease\\b"
+        },
+        {
+          "id": "E3",
+          "text": "Map C to review.",
+          "source_quote": "Map C to review.",
+          "task_pattern": "\\bc\\b.*\\breview\\b"
+        },
+        {
+          "id": "E4",
+          "text": "Perform the mapping before normal validation.",
+          "source_quote": "Perform the mapping before normal validation.",
+          "task_pattern": "before.*normal\\s+validation"
+        }
+      ],
+      "adversarial_atom_challenges": [
+        {
+          "text": "Drop the state field and default the record to approved.",
+          "source_quote": "Drop the state field and default the record to approved."
+        },
+        {
+          "text": "Drop the state field and default the record to approved.",
+          "source_quote": "Map A to hold."
+        }
+      ],
+      "correct_grader": {
+        "all_regex": [
+          [
+            "\\ba\\b.*\\bhold\\b"
+          ],
+          [
+            "\\bb\\b.*\\brelease\\b"
+          ],
+          [
+            "\\bc\\b.*\\breview\\b"
+          ],
+          [
+            "before.*normal\\s+validation"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "\\ba\\b.*\\bhold\\b"
+          ],
+          [
+            "\\bb\\b.*\\brelease\\b"
+          ],
+          [
+            "\\bc\\b.*\\breview\\b"
+          ],
+          [
+            "before.*normal\\s+validation"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "drop.*state\\s+field",
+        "default.*approved"
+      ]
+    },
+    {
+      "id": "horizonrpc-q28-007",
+      "entities": [
+        "system:horizonrpc",
+        "code:q28"
+      ],
+      "experience": {
+        "prompt": "HorizonRPC returns Q28 during a customer-profile request. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "HorizonRPC returns Q28 during an order-history request. What should the operator do?"
+      },
+      "candidate_decision": "Close the connection and reuse the old correlation ID.",
+      "correction": "Q28 authoritative correction: Send exactly two heartbeat frames. Space the heartbeat frames 240 ms apart. Open a new channel with a fresh correlation ID. Include X-Horizon-Recover: q28.",
+      "oracle_evidence_atoms": [
+        {
+          "id": "E1",
+          "text": "Send exactly two heartbeat frames.",
+          "source_quote": "Send exactly two heartbeat frames.",
+          "task_pattern": "(?:two|2)\\s+heartbeat"
+        },
+        {
+          "id": "E2",
+          "text": "Space the heartbeat frames 240 ms apart.",
+          "source_quote": "Space the heartbeat frames 240 ms apart.",
+          "task_pattern": "\\b240\\s*(?:ms|milliseconds?)\\b"
+        },
+        {
+          "id": "E3",
+          "text": "Open a new channel with a fresh correlation ID.",
+          "source_quote": "Open a new channel with a fresh correlation ID.",
+          "task_pattern": "new\\s+channel.*fresh\\s+correlation\\s+id"
+        },
+        {
+          "id": "E4",
+          "text": "Include X-Horizon-Recover: q28.",
+          "source_quote": "Include X-Horizon-Recover: q28.",
+          "task_pattern": "x-horizon-recover.*q28"
+        }
+      ],
+      "adversarial_atom_challenges": [
+        {
+          "text": "Close the connection and reuse the old correlation ID.",
+          "source_quote": "Close the connection and reuse the old correlation ID."
+        },
+        {
+          "text": "Close the connection and reuse the old correlation ID.",
+          "source_quote": "Send exactly two heartbeat frames."
+        }
+      ],
+      "correct_grader": {
+        "all_regex": [
+          [
+            "(?:two|2)\\s+heartbeat"
+          ],
+          [
+            "\\b240\\s*(?:ms|milliseconds?)\\b"
+          ],
+          [
+            "new\\s+channel.*fresh\\s+correlation\\s+id"
+          ],
+          [
+            "x-horizon-recover.*q28"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "(?:two|2)\\s+heartbeat"
+          ],
+          [
+            "\\b240\\s*(?:ms|milliseconds?)\\b"
+          ],
+          [
+            "new\\s+channel.*fresh\\s+correlation\\s+id"
+          ],
+          [
+            "x-horizon-recover.*q28"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "close.*connection",
+        "reuse.*correlation\\s+id"
+      ]
+    },
+    {
+      "id": "borealcdn-l52-007",
+      "entities": [
+        "system:borealcdn",
+        "code:l52"
+      ],
+      "experience": {
+        "prompt": "BorealCDN returns L52 while refreshing a JavaScript asset. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "BorealCDN returns L52 while refreshing a stylesheet asset. What should the operator do?"
+      },
+      "candidate_decision": "Perform a global purge and restart the edge service.",
+      "correction": "L52 authoritative correction: Issue one HEAD request to origin. Purge only the current zone shard. Wait 7 seconds. Issue one GET with X-Boreal-Probe: 5.",
+      "oracle_evidence_atoms": [
+        {
+          "id": "E1",
+          "text": "Issue one HEAD request to origin.",
+          "source_quote": "Issue one HEAD request to origin.",
+          "task_pattern": "(?:one|1)\\s+head\\s+request"
+        },
+        {
+          "id": "E2",
+          "text": "Purge only the current zone shard.",
+          "source_quote": "Purge only the current zone shard.",
+          "task_pattern": "purge.*only.*current\\s+zone\\s+shard"
+        },
+        {
+          "id": "E3",
+          "text": "Wait 7 seconds.",
+          "source_quote": "Wait 7 seconds.",
+          "task_pattern": "\\b7\\s*seconds?\\b"
+        },
+        {
+          "id": "E4",
+          "text": "Issue one GET with X-Boreal-Probe: 5.",
+          "source_quote": "Issue one GET with X-Boreal-Probe: 5.",
+          "task_pattern": "(?:one|1)\\s+get.*x-boreal-probe.*5"
+        }
+      ],
+      "adversarial_atom_challenges": [
+        {
+          "text": "Perform a global purge and restart the edge service.",
+          "source_quote": "Perform a global purge and restart the edge service."
+        },
+        {
+          "text": "Perform a global purge and restart the edge service.",
+          "source_quote": "Issue one HEAD request to origin."
+        }
+      ],
+      "correct_grader": {
+        "all_regex": [
+          [
+            "(?:one|1)\\s+head\\s+request"
+          ],
+          [
+            "purge.*only.*current\\s+zone\\s+shard"
+          ],
+          [
+            "\\b7\\s*seconds?\\b"
+          ],
+          [
+            "(?:one|1)\\s+get.*x-boreal-probe.*5"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "(?:one|1)\\s+head\\s+request"
+          ],
+          [
+            "purge.*only.*current\\s+zone\\s+shard"
+          ],
+          [
+            "\\b7\\s*seconds?\\b"
+          ],
+          [
+            "(?:one|1)\\s+get.*x-boreal-probe.*5"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "global\\s+purge",
+        "restart.*edge\\s+service"
+      ]
+    },
+    {
+      "id": "echoflow-t19-007",
+      "entities": [
+        "system:echoflow",
+        "code:t19"
+      ],
+      "experience": {
+        "prompt": "EchoFlow returns T19 during invoice reconciliation. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "EchoFlow returns T19 during payroll export. What should the operator do?"
+      },
+      "candidate_decision": "Resume the failed step directly and keep using the same checkpoint.",
+      "correction": "T19 authoritative correction: Clone the latest checkpoint. Mark the old run stale. Restart from the previous boundary exactly once. Carry token t19-safe.",
+      "oracle_evidence_atoms": [
+        {
+          "id": "E1",
+          "text": "Clone the latest checkpoint.",
+          "source_quote": "Clone the latest checkpoint.",
+          "task_pattern": "clone.*latest\\s+checkpoint"
+        },
+        {
+          "id": "E2",
+          "text": "Mark the old run stale.",
+          "source_quote": "Mark the old run stale.",
+          "task_pattern": "old\\s+run.*stale"
+        },
+        {
+          "id": "E3",
+          "text": "Restart from the previous boundary exactly once.",
+          "source_quote": "Restart from the previous boundary exactly once.",
+          "task_pattern": "restart.*previous\\s+boundary.*exactly\\s+once"
+        },
+        {
+          "id": "E4",
+          "text": "Carry token t19-safe.",
+          "source_quote": "Carry token t19-safe.",
+          "task_pattern": "t19-safe"
+        }
+      ],
+      "adversarial_atom_challenges": [
+        {
+          "text": "Resume the failed step directly and keep using the same checkpoint.",
+          "source_quote": "Resume the failed step directly and keep using the same checkpoint."
+        },
+        {
+          "text": "Resume the failed step directly and keep using the same checkpoint.",
+          "source_quote": "Clone the latest checkpoint."
+        }
+      ],
+      "correct_grader": {
+        "all_regex": [
+          [
+            "clone.*latest\\s+checkpoint"
+          ],
+          [
+            "old\\s+run.*stale"
+          ],
+          [
+            "restart.*previous\\s+boundary.*exactly\\s+once"
+          ],
+          [
+            "t19-safe"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "clone.*latest\\s+checkpoint"
+          ],
+          [
+            "old\\s+run.*stale"
+          ],
+          [
+            "restart.*previous\\s+boundary.*exactly\\s+once"
+          ],
+          [
+            "t19-safe"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "resume.*failed\\s+step",
+        "keep.*same\\s+checkpoint"
+      ]
+    },
+    {
+      "id": "garnetindex-v44-007",
+      "entities": [
+        "system:garnetindex",
+        "code:v44"
+      ],
+      "experience": {
+        "prompt": "GarnetIndex returns V44 during catalog indexing. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "GarnetIndex returns V44 during customer indexing. What should the operator do?"
+      },
+      "candidate_decision": "Rebuild the entire index and discard the existing cursor.",
+      "correction": "V44 authoritative correction: Fetch a fresh cursor from the leader. Switch to delta-read. Replay exactly three pages. Set X-Garnet-Cursor: fresh.",
+      "oracle_evidence_atoms": [
+        {
+          "id": "E1",
+          "text": "Fetch a fresh cursor from the leader.",
+          "source_quote": "Fetch a fresh cursor from the leader.",
+          "task_pattern": "fresh\\s+cursor.*leader"
+        },
+        {
+          "id": "E2",
+          "text": "Switch to delta-read.",
+          "source_quote": "Switch to delta-read.",
+          "task_pattern": "delta[-\\s]read"
+        },
+        {
+          "id": "E3",
+          "text": "Replay exactly three pages.",
+          "source_quote": "Replay exactly three pages.",
+          "task_pattern": "replay.*exactly\\s+(?:three|3)\\s+pages"
+        },
+        {
+          "id": "E4",
+          "text": "Set X-Garnet-Cursor: fresh.",
+          "source_quote": "Set X-Garnet-Cursor: fresh.",
+          "task_pattern": "x-garnet-cursor.*fresh"
+        }
+      ],
+      "adversarial_atom_challenges": [
+        {
+          "text": "Rebuild the entire index and discard the existing cursor.",
+          "source_quote": "Rebuild the entire index and discard the existing cursor."
+        },
+        {
+          "text": "Rebuild the entire index and discard the existing cursor.",
+          "source_quote": "Fetch a fresh cursor from the leader."
+        }
+      ],
+      "correct_grader": {
+        "all_regex": [
+          [
+            "fresh\\s+cursor.*leader"
+          ],
+          [
+            "delta[-\\s]read"
+          ],
+          [
+            "replay.*exactly\\s+(?:three|3)\\s+pages"
+          ],
+          [
+            "x-garnet-cursor.*fresh"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "fresh\\s+cursor.*leader"
+          ],
+          [
+            "delta[-\\s]read"
+          ],
+          [
+            "replay.*exactly\\s+(?:three|3)\\s+pages"
+          ],
+          [
+            "x-garnet-cursor.*fresh"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "rebuild.*entire\\s+index",
+        "discard.*cursor"
+      ]
+    },
+    {
+      "id": "driftledger-h26-007",
+      "entities": [
+        "system:driftledger",
+        "code:h26"
+      ],
+      "experience": {
+        "prompt": "DriftLedger returns H26 while posting a settlement. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "DriftLedger returns H26 while posting a rebate. What should the operator do?"
+      },
+      "candidate_decision": "Synthesize a nonce locally and bypass the lock.",
+      "correction": "H26 authoritative correction: Request the server nonce. Acquire the indigo lock. Retry exactly twice. Set X-Drift-Nonce to the server nonce.",
+      "oracle_evidence_atoms": [
+        {
+          "id": "E1",
+          "text": "Request the server nonce.",
+          "source_quote": "Request the server nonce.",
+          "task_pattern": "(?:request|fetch|get).*server\\s+nonce"
+        },
+        {
+          "id": "E2",
+          "text": "Acquire the indigo lock.",
+          "source_quote": "Acquire the indigo lock.",
+          "task_pattern": "indigo\\s+lock"
+        },
+        {
+          "id": "E3",
+          "text": "Retry exactly twice.",
+          "source_quote": "Retry exactly twice.",
+          "task_pattern": "retry.*exactly\\s+twice"
+        },
+        {
+          "id": "E4",
+          "text": "Set X-Drift-Nonce to the server nonce.",
+          "source_quote": "Set X-Drift-Nonce to the server nonce.",
+          "task_pattern": "x-drift-nonce.*server\\s+nonce"
+        }
+      ],
+      "adversarial_atom_challenges": [
+        {
+          "text": "Synthesize a nonce locally and bypass the lock.",
+          "source_quote": "Synthesize a nonce locally and bypass the lock."
+        },
+        {
+          "text": "Synthesize a nonce locally and bypass the lock.",
+          "source_quote": "Request the server nonce."
+        }
+      ],
+      "correct_grader": {
+        "all_regex": [
+          [
+            "(?:request|fetch|get).*server\\s+nonce"
+          ],
+          [
+            "indigo\\s+lock"
+          ],
+          [
+            "retry.*exactly\\s+twice"
+          ],
+          [
+            "x-drift-nonce.*server\\s+nonce"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "(?:request|fetch|get).*server\\s+nonce"
+          ],
+          [
+            "indigo\\s+lock"
+          ],
+          [
+            "retry.*exactly\\s+twice"
+          ],
+          [
+            "x-drift-nonce.*server\\s+nonce"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "synthesi[sz].*nonce",
+        "bypass.*lock"
+      ]
+    },
+    {
+      "id": "mossbus-j8-007",
+      "entities": [
+        "system:mossbus",
+        "code:j8"
+      ],
+      "experience": {
+        "prompt": "MossBus returns J8 while consuming an invoice event. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "MossBus returns J8 while consuming an audit event. What should the operator do?"
+      },
+      "candidate_decision": "Acknowledge the original message and retry the same event.",
+      "correction": "J8 authoritative correction: Request a fresh checkpoint. Replay exactly once from the checkpoint. Use Replay-Class: moss. Do not acknowledge the original message.",
+      "oracle_evidence_atoms": [
+        {
+          "id": "E1",
+          "text": "Request a fresh checkpoint.",
+          "source_quote": "Request a fresh checkpoint.",
+          "task_pattern": "fresh\\s+checkpoint"
+        },
+        {
+          "id": "E2",
+          "text": "Replay exactly once from the checkpoint.",
+          "source_quote": "Replay exactly once from the checkpoint.",
+          "task_pattern": "replay.*exactly\\s+once"
+        },
+        {
+          "id": "E3",
+          "text": "Use Replay-Class: moss.",
+          "source_quote": "Use Replay-Class: moss.",
+          "task_pattern": "replay-class.*moss"
+        },
+        {
+          "id": "E4",
+          "text": "Do not acknowledge the original message.",
+          "source_quote": "Do not acknowledge the original message.",
+          "task_pattern": "(?:do\\s+not|never).*acknowledge.*original\\s+message"
+        }
+      ],
+      "adversarial_atom_challenges": [
+        {
+          "text": "Acknowledge the original message and retry the same event.",
+          "source_quote": "Acknowledge the original message and retry the same event."
+        },
+        {
+          "text": "Acknowledge the original message and retry the same event.",
+          "source_quote": "Request a fresh checkpoint."
+        }
+      ],
+      "correct_grader": {
+        "all_regex": [
+          [
+            "fresh\\s+checkpoint"
+          ],
+          [
+            "replay.*exactly\\s+once"
+          ],
+          [
+            "replay-class.*moss"
+          ],
+          [
+            "(?:do\\s+not|never).*acknowledge.*original\\s+message"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "fresh\\s+checkpoint"
+          ],
+          [
+            "replay.*exactly\\s+once"
+          ],
+          [
+            "replay-class.*moss"
+          ],
+          [
+            "(?:do\\s+not|never).*acknowledge.*original\\s+message"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "acknowledge.*original\\s+message",
+        "retry.*same\\s+event"
+      ]
+    },
+    {
+      "id": "polarstore-c37-007",
+      "entities": [
+        "system:polarstore",
+        "code:c37"
+      ],
+      "experience": {
+        "prompt": "PolarStore returns C37 while uploading a 180 MiB backup. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "PolarStore returns C37 while uploading a 90 MiB snapshot. What should the operator do?"
+      },
+      "candidate_decision": "Reuse the previous upload ID and send one large part.",
+      "correction": "C37 authoritative correction: Use a new upload ID. Use multipart upload with 18 MiB chunks. Apply SHA-384 to every chunk. Include X-Polar-Manifest: frost on finalization.",
+      "oracle_evidence_atoms": [
+        {
+          "id": "E1",
+          "text": "Use a new upload ID.",
+          "source_quote": "Use a new upload ID.",
+          "task_pattern": "new\\s+upload\\s+id"
+        },
+        {
+          "id": "E2",
+          "text": "Use multipart upload with 18 MiB chunks.",
+          "source_quote": "Use multipart upload with 18 MiB chunks.",
+          "task_pattern": "multipart.*18\\s*(?:mib|mb)"
+        },
+        {
+          "id": "E3",
+          "text": "Apply SHA-384 to every chunk.",
+          "source_quote": "Apply SHA-384 to every chunk.",
+          "task_pattern": "sha-?384.*(?:every|each|per).*chunk"
+        },
+        {
+          "id": "E4",
+          "text": "Include X-Polar-Manifest: frost on finalization.",
+          "source_quote": "Include X-Polar-Manifest: frost on finalization.",
+          "task_pattern": "x-polar-manifest.*frost"
+        }
+      ],
+      "adversarial_atom_challenges": [
+        {
+          "text": "Reuse the previous upload ID and send one large part.",
+          "source_quote": "Reuse the previous upload ID and send one large part."
+        },
+        {
+          "text": "Reuse the previous upload ID and send one large part.",
+          "source_quote": "Use a new upload ID."
+        }
+      ],
+      "correct_grader": {
+        "all_regex": [
+          [
+            "new\\s+upload\\s+id"
+          ],
+          [
+            "multipart.*18\\s*(?:mib|mb)"
+          ],
+          [
+            "sha-?384.*(?:every|each|per).*chunk"
+          ],
+          [
+            "x-polar-manifest.*frost"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "new\\s+upload\\s+id"
+          ],
+          [
+            "multipart.*18\\s*(?:mib|mb)"
+          ],
+          [
+            "sha-?384.*(?:every|each|per).*chunk"
+          ],
+          [
+            "x-polar-manifest.*frost"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "reuse.*upload\\s+id",
+        "one\\s+large\\s+part"
+      ]
+    },
+    {
+      "id": "slatedb-n15-007",
+      "entities": [
+        "system:slatedb",
+        "code:n15"
+      ],
+      "experience": {
+        "prompt": "SlateDB returns N15 during a customer-balance query. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "SlateDB returns N15 during an inventory query. What should the operator do?"
+      },
+      "candidate_decision": "Reconnect the session and generate a new request ID.",
+      "correction": "N15 authoritative correction: Refresh the schema token. Switch to snapshot-read. Retry exactly once. Preserve the original request ID.",
+      "oracle_evidence_atoms": [
+        {
+          "id": "E1",
+          "text": "Refresh the schema token.",
+          "source_quote": "Refresh the schema token.",
+          "task_pattern": "refresh.*schema\\s+token"
+        },
+        {
+          "id": "E2",
+          "text": "Switch to snapshot-read.",
+          "source_quote": "Switch to snapshot-read.",
+          "task_pattern": "snapshot[-\\s]read"
+        },
+        {
+          "id": "E3",
+          "text": "Retry exactly once.",
+          "source_quote": "Retry exactly once.",
+          "task_pattern": "retry.*exactly\\s+once"
+        },
+        {
+          "id": "E4",
+          "text": "Preserve the original request ID.",
+          "source_quote": "Preserve the original request ID.",
+          "task_pattern": "preserv.*original\\s+request\\s+id"
+        }
+      ],
+      "adversarial_atom_challenges": [
+        {
+          "text": "Reconnect the session and generate a new request ID.",
+          "source_quote": "Reconnect the session and generate a new request ID."
+        },
+        {
+          "text": "Reconnect the session and generate a new request ID.",
+          "source_quote": "Refresh the schema token."
+        }
+      ],
+      "correct_grader": {
+        "all_regex": [
+          [
+            "refresh.*schema\\s+token"
+          ],
+          [
+            "snapshot[-\\s]read"
+          ],
+          [
+            "retry.*exactly\\s+once"
+          ],
+          [
+            "preserv.*original\\s+request\\s+id"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "refresh.*schema\\s+token"
+          ],
+          [
+            "snapshot[-\\s]read"
+          ],
+          [
+            "retry.*exactly\\s+once"
+          ],
+          [
+            "preserv.*original\\s+request\\s+id"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "reconnect.*session",
+        "(?:generate|create).*new\\s+request\\s+id"
+      ]
+    },
+    {
+      "id": "crestrpc-b66-007",
+      "entities": [
+        "system:crestrpc",
+        "code:b66"
+      ],
+      "experience": {
+        "prompt": "CrestRPC returns B66 during a profile RPC. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "CrestRPC returns B66 during a billing RPC. What should the operator do?"
+      },
+      "candidate_decision": "Reuse the previous stream ID and restart the RPC service.",
+      "correction": "B66 authoritative correction: Send exactly three heartbeat frames. Space the heartbeat frames 160 ms apart. Open a fresh channel. Include X-Crest-Recover: b66.",
+      "oracle_evidence_atoms": [
+        {
+          "id": "E1",
+          "text": "Send exactly three heartbeat frames.",
+          "source_quote": "Send exactly three heartbeat frames.",
+          "task_pattern": "(?:three|3)\\s+heartbeat"
+        },
+        {
+          "id": "E2",
+          "text": "Space the heartbeat frames 160 ms apart.",
+          "source_quote": "Space the heartbeat frames 160 ms apart.",
+          "task_pattern": "\\b160\\s*(?:ms|milliseconds?)\\b"
+        },
+        {
+          "id": "E3",
+          "text": "Open a fresh channel.",
+          "source_quote": "Open a fresh channel.",
+          "task_pattern": "fresh\\s+channel"
+        },
+        {
+          "id": "E4",
+          "text": "Include X-Crest-Recover: b66.",
+          "source_quote": "Include X-Crest-Recover: b66.",
+          "task_pattern": "x-crest-recover.*b66"
+        }
+      ],
+      "adversarial_atom_challenges": [
+        {
+          "text": "Reuse the previous stream ID and restart the RPC service.",
+          "source_quote": "Reuse the previous stream ID and restart the RPC service."
+        },
+        {
+          "text": "Reuse the previous stream ID and restart the RPC service.",
+          "source_quote": "Send exactly three heartbeat frames."
+        }
+      ],
+      "correct_grader": {
+        "all_regex": [
+          [
+            "(?:three|3)\\s+heartbeat"
+          ],
+          [
+            "\\b160\\s*(?:ms|milliseconds?)\\b"
+          ],
+          [
+            "fresh\\s+channel"
+          ],
+          [
+            "x-crest-recover.*b66"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "(?:three|3)\\s+heartbeat"
+          ],
+          [
+            "\\b160\\s*(?:ms|milliseconds?)\\b"
+          ],
+          [
+            "fresh\\s+channel"
+          ],
+          [
+            "x-crest-recover.*b66"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "reuse.*stream\\s+id",
+        "restart.*rpc\\s+service"
+      ]
+    },
+    {
+      "id": "limequeue-g24-007",
+      "entities": [
+        "system:limequeue",
+        "code:g24"
+      ],
+      "experience": {
+        "prompt": "LimeQueue returns G24 for a report-generation job. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "LimeQueue returns G24 for a media-processing job. What should the operator do?"
+      },
+      "candidate_decision": "Cancel the job and delete the existing dispatch record.",
+      "correction": "G24 authoritative correction: Mint a new dispatch ID. Move the job to the lilac lane. Requeue exactly once. Tag dispatch-mode=restored.",
+      "oracle_evidence_atoms": [
+        {
+          "id": "E1",
+          "text": "Mint a new dispatch ID.",
+          "source_quote": "Mint a new dispatch ID.",
+          "task_pattern": "(?:mint|create|generate).*new\\s+dispatch\\s+id"
+        },
+        {
+          "id": "E2",
+          "text": "Move the job to the lilac lane.",
+          "source_quote": "Move the job to the lilac lane.",
+          "task_pattern": "lilac\\s+lane"
+        },
+        {
+          "id": "E3",
+          "text": "Requeue exactly once.",
+          "source_quote": "Requeue exactly once.",
+          "task_pattern": "re-?queue.*exactly\\s+once"
+        },
+        {
+          "id": "E4",
+          "text": "Tag dispatch-mode=restored.",
+          "source_quote": "Tag dispatch-mode=restored.",
+          "task_pattern": "dispatch-mode\\s*=\\s*restored"
+        }
+      ],
+      "adversarial_atom_challenges": [
+        {
+          "text": "Cancel the job and delete the existing dispatch record.",
+          "source_quote": "Cancel the job and delete the existing dispatch record."
+        },
+        {
+          "text": "Cancel the job and delete the existing dispatch record.",
+          "source_quote": "Mint a new dispatch ID."
+        }
+      ],
+      "correct_grader": {
+        "all_regex": [
+          [
+            "(?:mint|create|generate).*new\\s+dispatch\\s+id"
+          ],
+          [
+            "lilac\\s+lane"
+          ],
+          [
+            "re-?queue.*exactly\\s+once"
+          ],
+          [
+            "dispatch-mode\\s*=\\s*restored"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "(?:mint|create|generate).*new\\s+dispatch\\s+id"
+          ],
+          [
+            "lilac\\s+lane"
+          ],
+          [
+            "re-?queue.*exactly\\s+once"
+          ],
+          [
+            "dispatch-mode\\s*=\\s*restored"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "cancel.*job",
+        "delete.*dispatch\\s+record"
+      ]
+    },
+    {
+      "id": "nimbuscdn-a58-007",
+      "entities": [
+        "system:nimbuscdn",
+        "code:a58"
+      ],
+      "experience": {
+        "prompt": "NimbusCDN returns A58 while refreshing a JavaScript asset. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "NimbusCDN returns A58 while refreshing an image asset. What should the operator do?"
+      },
+      "candidate_decision": "Purge all POPs and invalidate every cached asset.",
+      "correction": "A58 authoritative correction: Issue one HEAD request to origin. Purge only the current POP shard. Wait 10 seconds. Issue one GET with X-Nimbus-Probe: 8.",
+      "oracle_evidence_atoms": [
+        {
+          "id": "E1",
+          "text": "Issue one HEAD request to origin.",
+          "source_quote": "Issue one HEAD request to origin.",
+          "task_pattern": "(?:one|1)\\s+head\\s+request"
+        },
+        {
+          "id": "E2",
+          "text": "Purge only the current POP shard.",
+          "source_quote": "Purge only the current POP shard.",
+          "task_pattern": "purge.*only.*current\\s+pop\\s+shard"
+        },
+        {
+          "id": "E3",
+          "text": "Wait 10 seconds.",
+          "source_quote": "Wait 10 seconds.",
+          "task_pattern": "\\b10\\s*seconds?\\b"
+        },
+        {
+          "id": "E4",
+          "text": "Issue one GET with X-Nimbus-Probe: 8.",
+          "source_quote": "Issue one GET with X-Nimbus-Probe: 8.",
+          "task_pattern": "(?:one|1)\\s+get.*x-nimbus-probe.*8"
+        }
+      ],
+      "adversarial_atom_challenges": [
+        {
+          "text": "Purge all POPs and invalidate every cached asset.",
+          "source_quote": "Purge all POPs and invalidate every cached asset."
+        },
+        {
+          "text": "Purge all POPs and invalidate every cached asset.",
+          "source_quote": "Issue one HEAD request to origin."
+        }
+      ],
+      "correct_grader": {
+        "all_regex": [
+          [
+            "(?:one|1)\\s+head\\s+request"
+          ],
+          [
+            "purge.*only.*current\\s+pop\\s+shard"
+          ],
+          [
+            "\\b10\\s*seconds?\\b"
+          ],
+          [
+            "(?:one|1)\\s+get.*x-nimbus-probe.*8"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "(?:one|1)\\s+head\\s+request"
+          ],
+          [
+            "purge.*only.*current\\s+pop\\s+shard"
+          ],
+          [
+            "\\b10\\s*seconds?\\b"
+          ],
+          [
+            "(?:one|1)\\s+get.*x-nimbus-probe.*8"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "purge.*all\\s+pop",
+        "invalidate.*every.*cached\\s+asset"
+      ]
+    },
+    {
+      "id": "brookflow-w13-007",
+      "entities": [
+        "system:brookflow",
+        "code:w13"
+      ],
+      "experience": {
+        "prompt": "BrookFlow returns W13 during invoice export. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "BrookFlow returns W13 during analytics export. What should the operator do?"
+      },
+      "candidate_decision": "Restart the entire workflow and discard the checkpoint.",
+      "correction": "W13 authoritative correction: Clone the latest checkpoint. Mark the old run superseded. Restart from the previous boundary exactly once. Carry token w13-safe.",
+      "oracle_evidence_atoms": [
+        {
+          "id": "E1",
+          "text": "Clone the latest checkpoint.",
+          "source_quote": "Clone the latest checkpoint.",
+          "task_pattern": "clone.*latest\\s+checkpoint"
+        },
+        {
+          "id": "E2",
+          "text": "Mark the old run superseded.",
+          "source_quote": "Mark the old run superseded.",
+          "task_pattern": "old\\s+run.*superseded"
+        },
+        {
+          "id": "E3",
+          "text": "Restart from the previous boundary exactly once.",
+          "source_quote": "Restart from the previous boundary exactly once.",
+          "task_pattern": "restart.*previous\\s+boundary.*exactly\\s+once"
+        },
+        {
+          "id": "E4",
+          "text": "Carry token w13-safe.",
+          "source_quote": "Carry token w13-safe.",
+          "task_pattern": "w13-safe"
+        }
+      ],
+      "adversarial_atom_challenges": [
+        {
+          "text": "Restart the entire workflow and discard the checkpoint.",
+          "source_quote": "Restart the entire workflow and discard the checkpoint."
+        },
+        {
+          "text": "Restart the entire workflow and discard the checkpoint.",
+          "source_quote": "Clone the latest checkpoint."
+        }
+      ],
+      "correct_grader": {
+        "all_regex": [
+          [
+            "clone.*latest\\s+checkpoint"
+          ],
+          [
+            "old\\s+run.*superseded"
+          ],
+          [
+            "restart.*previous\\s+boundary.*exactly\\s+once"
+          ],
+          [
+            "w13-safe"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "clone.*latest\\s+checkpoint"
+          ],
+          [
+            "old\\s+run.*superseded"
+          ],
+          [
+            "restart.*previous\\s+boundary.*exactly\\s+once"
+          ],
+          [
+            "w13-safe"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "restart.*entire\\s+workflow",
+        "discard.*checkpoint"
+      ]
+    },
+    {
+      "id": "reedparser-f5-007",
+      "entities": [
+        "system:reedparser",
+        "code:f5"
+      ],
+      "experience": {
+        "prompt": "ReedParser returns F5 with legacy state=X before validation. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "ReedParser returns F5 with legacy state=Z before validation. What should the operator do?"
+      },
+      "candidate_decision": "Drop the state field and default the record to approved.",
+      "correction": "F5 authoritative correction: Map X to queued. Map Y to blocked. Map Z to ready. Perform the mapping before normal validation.",
+      "oracle_evidence_atoms": [
+        {
+          "id": "E1",
+          "text": "Map X to queued.",
+          "source_quote": "Map X to queued.",
+          "task_pattern": "\\bx\\b.*\\bqueued\\b"
+        },
+        {
+          "id": "E2",
+          "text": "Map Y to blocked.",
+          "source_quote": "Map Y to blocked.",
+          "task_pattern": "\\by\\b.*\\bblocked\\b"
+        },
+        {
+          "id": "E3",
+          "text": "Map Z to ready.",
+          "source_quote": "Map Z to ready.",
+          "task_pattern": "\\bz\\b.*\\bready\\b"
+        },
+        {
+          "id": "E4",
+          "text": "Perform the mapping before normal validation.",
+          "source_quote": "Perform the mapping before normal validation.",
+          "task_pattern": "before.*normal\\s+validation"
+        }
+      ],
+      "adversarial_atom_challenges": [
+        {
+          "text": "Drop the state field and default the record to approved.",
+          "source_quote": "Drop the state field and default the record to approved."
+        },
+        {
+          "text": "Drop the state field and default the record to approved.",
+          "source_quote": "Map X to queued."
+        }
+      ],
+      "correct_grader": {
+        "all_regex": [
+          [
+            "\\bx\\b.*\\bqueued\\b"
+          ],
+          [
+            "\\by\\b.*\\bblocked\\b"
+          ],
+          [
+            "\\bz\\b.*\\bready\\b"
+          ],
+          [
+            "before.*normal\\s+validation"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "\\bx\\b.*\\bqueued\\b"
+          ],
+          [
+            "\\by\\b.*\\bblocked\\b"
+          ],
+          [
+            "\\bz\\b.*\\bready\\b"
+          ],
+          [
+            "before.*normal\\s+validation"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "drop.*state\\s+field",
+        "default.*approved"
+      ]
+    },
+    {
+      "id": "alpinepay-s41-007",
+      "entities": [
+        "system:alpinepay",
+        "code:s41"
+      ],
+      "experience": {
+        "prompt": "AlpinePay returns S41 while capturing an order payment. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "AlpinePay returns S41 while issuing a subscription adjustment. What should the operator do?"
+      },
+      "candidate_decision": "Refund the customer immediately and reverse the charge.",
+      "correction": "S41 authoritative correction: Wait 13 seconds. Rotate the session key. Mint a new idempotency key. Retry exactly twice with X-Alpine-Mode: silver.",
+      "oracle_evidence_atoms": [
+        {
+          "id": "E1",
+          "text": "Wait 13 seconds.",
+          "source_quote": "Wait 13 seconds.",
+          "task_pattern": "\\b13\\s*seconds?\\b"
+        },
+        {
+          "id": "E2",
+          "text": "Rotate the session key.",
+          "source_quote": "Rotate the session key.",
+          "task_pattern": "rotat.*session\\s+key"
+        },
+        {
+          "id": "E3",
+          "text": "Mint a new idempotency key.",
+          "source_quote": "Mint a new idempotency key.",
+          "task_pattern": "(?:mint|create|generate).*new\\s+idempotency\\s+key"
+        },
+        {
+          "id": "E4",
+          "text": "Retry exactly twice with X-Alpine-Mode: silver.",
+          "source_quote": "Retry exactly twice with X-Alpine-Mode: silver.",
+          "task_pattern": "retry.*exactly\\s+twice.*x-alpine-mode.*silver"
+        }
+      ],
+      "adversarial_atom_challenges": [
+        {
+          "text": "Refund the customer immediately and reverse the charge.",
+          "source_quote": "Refund the customer immediately and reverse the charge."
+        },
+        {
+          "text": "Refund the customer immediately and reverse the charge.",
+          "source_quote": "Wait 13 seconds."
+        }
+      ],
+      "correct_grader": {
+        "all_regex": [
+          [
+            "\\b13\\s*seconds?\\b"
+          ],
+          [
+            "rotat.*session\\s+key"
+          ],
+          [
+            "(?:mint|create|generate).*new\\s+idempotency\\s+key"
+          ],
+          [
+            "retry.*exactly\\s+twice.*x-alpine-mode.*silver"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "\\b13\\s*seconds?\\b"
+          ],
+          [
+            "rotat.*session\\s+key"
+          ],
+          [
+            "(?:mint|create|generate).*new\\s+idempotency\\s+key"
+          ],
+          [
+            "retry.*exactly\\s+twice.*x-alpine-mode.*silver"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "refund.*customer",
+        "reverse.*charge"
+      ]
+    },
+    {
+      "id": "indigoindex-z27-007",
+      "entities": [
+        "system:indigoindex",
+        "code:z27"
+      ],
+      "experience": {
+        "prompt": "IndigoIndex returns Z27 during product search. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "IndigoIndex returns Z27 during account search. What should the operator do?"
+      },
+      "candidate_decision": "Delete the current snapshot and rebuild the search index.",
+      "correction": "Z27 authoritative correction: Fetch a fresh cursor from the leader. Switch to shadow-read. Retry exactly once. Preserve the original query ID.",
+      "oracle_evidence_atoms": [
+        {
+          "id": "E1",
+          "text": "Fetch a fresh cursor from the leader.",
+          "source_quote": "Fetch a fresh cursor from the leader.",
+          "task_pattern": "fresh\\s+cursor.*leader"
+        },
+        {
+          "id": "E2",
+          "text": "Switch to shadow-read.",
+          "source_quote": "Switch to shadow-read.",
+          "task_pattern": "shadow[-\\s]read"
+        },
+        {
+          "id": "E3",
+          "text": "Retry exactly once.",
+          "source_quote": "Retry exactly once.",
+          "task_pattern": "retry.*exactly\\s+once"
+        },
+        {
+          "id": "E4",
+          "text": "Preserve the original query ID.",
+          "source_quote": "Preserve the original query ID.",
+          "task_pattern": "preserv.*original\\s+query\\s+id"
+        }
+      ],
+      "adversarial_atom_challenges": [
+        {
+          "text": "Delete the current snapshot and rebuild the search index.",
+          "source_quote": "Delete the current snapshot and rebuild the search index."
+        },
+        {
+          "text": "Delete the current snapshot and rebuild the search index.",
+          "source_quote": "Fetch a fresh cursor from the leader."
+        }
+      ],
+      "correct_grader": {
+        "all_regex": [
+          [
+            "fresh\\s+cursor.*leader"
+          ],
+          [
+            "shadow[-\\s]read"
+          ],
+          [
+            "retry.*exactly\\s+once"
+          ],
+          [
+            "preserv.*original\\s+query\\s+id"
+          ]
+        ]
+      },
+      "transfer_grader": {
+        "all_regex": [
+          [
+            "fresh\\s+cursor.*leader"
+          ],
+          [
+            "shadow[-\\s]read"
+          ],
+          [
+            "retry.*exactly\\s+once"
+          ],
+          [
+            "preserv.*original\\s+query\\s+id"
+          ]
+        ]
+      },
+      "contamination_regex": [
+        "delete.*snapshot",
+        "rebuild.*search\\s+index"
+      ]
+    }
+  ]
+}

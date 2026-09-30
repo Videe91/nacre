@@ -1,0 +1,275 @@
+{
+  "experiment": "seed-growth-003",
+  "classification": "exploratory",
+  "run_id": "20260913T140108Z",
+  "grader_profile": "embedded-original",
+  "model": "gpt-4o-mini",
+  "embedder": "sentence-transformers/all-MiniLM-L6-v2",
+  "meter": "word-meter-v1",
+  "task_count": 10,
+  "baseline_passes": 0,
+  "mnexa_passes": 7,
+  "net_improvement": 7,
+  "families": [
+    {
+      "family_id": "quartzpay-vx91",
+      "experience": {
+        "passed": false,
+        "decision": "The operator should check the system logs for details regarding the VX-91 error. If necessary, consult the QuartzPay support documentation or escalate the issue to a senior operator for further assistance.",
+        "outcome": "EVALUATION: FAIL. QuartzPay runbook rule: VX-91 means wait 7 seconds, rotate the session token, retry exactly twice, and include the header Zeta-Mode: amber on the retry requests."
+      },
+      "baseline": {
+        "passed": false,
+        "decision": "The operator should check the QuartzPay documentation for the meaning of VX-91. If it's an error code, follow the indicated troubleshooting steps. If further assistance is needed, contact QuartzPay support for resolution.",
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa": {
+        "passed": true,
+        "decision": "1. Wait 7 seconds.\n2. Rotate the session token.\n3. Retry the subscription charge cancellation request twice, including the header `Zeta-Mode: amber` in each retry.",
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_7c2abbb3e7e044ad8b2ee6b1d5c132b8:v1] TRIGGER:\nEncountering the VX-91 error.\n\nREUSABLE RULE:\nWait 7 seconds, rotate the session token, retry exactly twice, and include the header Zeta-Mode: amber on the retry requests.\n\nCRITICAL CONSTRAINTS:\n- Wait 7 seconds before taking any further action.\n- Rotate the session token before retrying.\n- Retry exactly twice; do not exceed this limit.\n- Include the header Zeta-Mode: amber on each retry request."
+        ],
+        "lesson": "TRIGGER:\nEncountering the VX-91 error.\n\nREUSABLE RULE:\nWait 7 seconds, rotate the session token, retry exactly twice, and include the header Zeta-Mode: amber on the retry requests.\n\nCRITICAL CONSTRAINTS:\n- Wait 7 seconds before taking any further action.\n- Rotate the session token before retrying.\n- Retry exactly twice; do not exceed this limit.\n- Include the header Zeta-Mode: amber on each retry request.",
+        "lesson_id": "i_7c2abbb3e7e044ad8b2ee6b1d5c132b8",
+        "outcome_id": "r_5c30f5f5b8124e54b0806f347c1eb3ef"
+      },
+      "delta": 1
+    },
+    {
+      "family_id": "mistralbus-k4",
+      "experience": {
+        "passed": false,
+        "decision": "The worker should log the K4 response from MistralBus for monitoring and troubleshooting purposes. Then, they should investigate the message that triggered the response to identify any potential issues or anomalies. If necessary, escalate the matter to a senior team member or support for further analysis.",
+        "outcome": "EVALUATION: FAIL. MistralBus runbook rule: for K4, do not acknowledge the original message, request a fresh checkpoint, replay exactly once from that checkpoint, and attach Replay-Class: delta to the replay."
+      },
+      "baseline": {
+        "passed": false,
+        "decision": "The worker should log the K4 error and notify the relevant team to investigate the audit-export message issue. Additionally, the worker should monitor for any further occurrences of this error and report them if necessary.",
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa": {
+        "passed": true,
+        "decision": "1. **Do not acknowledge the original message.**\n2. **Request a fresh checkpoint.**\n3. **Replay exactly once from that checkpoint.**\n4. **Attach `Replay-Class: delta` to the replay.**",
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_54ea354f57a2404e9f14e050047f9a69:v1] TRIGGER:\nK4 response from MistralBus is received.\n\nREUSABLE RULE:\nFor K4, do not acknowledge the original message, request a fresh checkpoint, replay exactly once from that checkpoint, and attach Replay-Class: delta to the replay.\n\nCRITICAL CONSTRAINTS:\n- Do not acknowledge the original message.\n- Request a fresh checkpoint.\n- Replay exactly once from that checkpoint.\n- Attach Replay-Class: delta to the replay."
+        ],
+        "lesson": "TRIGGER:\nK4 response from MistralBus is received.\n\nREUSABLE RULE:\nFor K4, do not acknowledge the original message, request a fresh checkpoint, replay exactly once from that checkpoint, and attach Replay-Class: delta to the replay.\n\nCRITICAL CONSTRAINTS:\n- Do not acknowledge the original message.\n- Request a fresh checkpoint.\n- Replay exactly once from that checkpoint.\n- Attach Replay-Class: delta to the replay.",
+        "lesson_id": "i_54ea354f57a2404e9f14e050047f9a69",
+        "outcome_id": "r_43c7d89ae3374939b53d9ed466342912"
+      },
+      "delta": 1
+    },
+    {
+      "family_id": "opalstore-n73",
+      "experience": {
+        "passed": false,
+        "decision": "The uploader should check the file size limit for uploads on OpalStore. If the 144 MiB archive exceeds the limit, they should compress the file further or split it into smaller parts that are within the acceptable size limit before attempting to upload again.",
+        "outcome": "EVALUATION: FAIL. OpalStore runbook rule: N73 requires multipart upload with 12 MiB chunks, a BLAKE3 digest for every chunk, and the header X-Opal-Manifest: strict on the finalization request."
+      },
+      "baseline": {
+        "passed": false,
+        "decision": "The uploader should check the file size limit for uploads in OpalStore and ensure the model snapshot is within that limit. If the file exceeds the limit, the uploader should reduce the size of the model snapshot accordingly before attempting the upload again.",
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa": {
+        "passed": true,
+        "decision": "To resolve the N73 error while uploading the 72 MiB model snapshot to OpalStore, follow these steps:\n\n1. **Split the Model Snapshot**: Divide the 72 MiB file into smaller chunks of 12 MiB each.\n2. **Calculate BLAKE3 Digests**: Generate a BLAKE3 digest for each 12 MiB chunk.\n3. **Upload Each Chunk**: Sequentially upload each 12 MiB chunk along with its BLAKE3 digest.\n4. **Finalize Upload**: Include the header `X-Opal-Manifest: strict` in the final request after all chunks have been uploaded.\n\nThis approach will comply with the multipart upload requirements and avoid the size limit issue.",
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_ecda4a5d8c7644368bd9f585fee9002e:v1] TRIGGER:\nFile uploading to OpalStore when exceeding the size limit.\n\nREUSABLE RULE:\nCompress the file further or split it into smaller parts before attempting to upload again.\n\nCRITICAL CONSTRAINTS:\n- Multipart upload with 12 MiB chunks is required.\n- A BLAKE3 digest for every chunk must be provided.\n- The header X-Opal-Manifest: strict must be included on the finalization request."
+        ],
+        "lesson": "TRIGGER:\nFile uploading to OpalStore when exceeding the size limit.\n\nREUSABLE RULE:\nCompress the file further or split it into smaller parts before attempting to upload again.\n\nCRITICAL CONSTRAINTS:\n- Multipart upload with 12 MiB chunks is required.\n- A BLAKE3 digest for every chunk must be provided.\n- The header X-Opal-Manifest: strict must be included on the finalization request.",
+        "lesson_id": "i_ecda4a5d8c7644368bd9f585fee9002e",
+        "outcome_id": "r_59637c50d93e4d21bc53bc4a1af5223f"
+      },
+      "delta": 1
+    },
+    {
+      "family_id": "cedarledger-p8",
+      "experience": {
+        "passed": false,
+        "decision": "The operator should check the CedarLedger system for any error messages or logs associated with the P8 return code. If no further information is provided, they should escalate the issue to technical support for further investigation.",
+        "outcome": "EVALUATION: FAIL. CedarLedger runbook rule: P8 means read the server epoch, never increment the epoch locally, acquire the violet lease, and retry the write exactly once with X-Cedar-Epoch set to the server epoch."
+      },
+      "baseline": {
+        "passed": false,
+        "decision": "The operator should refer to the CedarLedger documentation or support resources to determine the meaning of \"P8\" and follow any troubleshooting steps provided. If necessary, contact support for assistance.",
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa": {
+        "passed": false,
+        "decision": "1. Read the server epoch.\n2. Acquire the violet lease.\n3. Retry the write exactly once, setting the X-Cedar-Epoch to the server epoch obtained in step 1.",
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_9b268b6894b04b688c370694ee54d7d9:v1] TRIGGER:\nP8 return code encountered in the CedarLedger system.\n\nREUSABLE RULE:\nWhen encountering a P8 return code, read the server epoch, never increment the epoch locally, acquire the violet lease, and retry the write exactly once with X-Cedar-Epoch set to the server epoch.\n\nCRITICAL CONSTRAINTS:\n- Must read the server epoch.\n- Must never increment the epoch locally.\n- Must acquire the violet lease.\n- Must retry the write exactly once.\n- X-Cedar-Epoch must be set to the server epoch."
+        ],
+        "lesson": "TRIGGER:\nP8 return code encountered in the CedarLedger system.\n\nREUSABLE RULE:\nWhen encountering a P8 return code, read the server epoch, never increment the epoch locally, acquire the violet lease, and retry the write exactly once with X-Cedar-Epoch set to the server epoch.\n\nCRITICAL CONSTRAINTS:\n- Must read the server epoch.\n- Must never increment the epoch locally.\n- Must acquire the violet lease.\n- Must retry the write exactly once.\n- X-Cedar-Epoch must be set to the server epoch.",
+        "lesson_id": "i_9b268b6894b04b688c370694ee54d7d9",
+        "outcome_id": "r_78e25f5f0d8a4397add3f4b0804f4bd2"
+      },
+      "delta": 0
+    },
+    {
+      "family_id": "latticeparser-zq4",
+      "experience": {
+        "passed": false,
+        "decision": "If LatticeParser receives ZQ4 with state=G before schema validation, it should trigger a review of the data payload for compliance with the expected schema and execute the appropriate validation checks. If discrepancies are found, log the error and return a validation failure response to the source. If the schema is valid, proceed to the next processing step.",
+        "outcome": "EVALUATION: FAIL. LatticeParser ZQ4 compatibility rule: before schema validation map R to approved, G to rejected, and B to pending. Then run the normal validator."
+      },
+      "baseline": {
+        "passed": false,
+        "decision": "If LatticeParser receives ZQ4 with state=B before schema validation, the action should be to initiate schema validation for ZQ4 to ensure it conforms to the required standards and specifications. If validation passes, proceed with processing; if it fails, log the error details and halt further processing.",
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa": {
+        "passed": true,
+        "decision": "Upon receiving ZQ4 with state=B before schema validation, I would take the following actions:\n\n1. **Map State**: Map state B to \"pending\" as per the reusable rule.\n2. **Run Normal Validator**: Execute the normal validator on the data payload.\n3. **Check for Errors**: If discrepancies are found during validation, log the error and return a validation failure response to the source.\n\nNo further actions should be taken as the conditions specified do not include triggering a review based on state B.",
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_10b8fec698a04c389ad5f76c544a41b1:v1] TRIGGER:\nIf LatticeParser receives ZQ4 with state=G before schema validation.\n\nREUSABLE RULE:\nMap R to approved, G to rejected, and B to pending before running the normal validator.\n\nCRITICAL CONSTRAINTS:\n- Only trigger a review of the data payload for compliance with the expected schema if the specified conditions are met.\n- Run the normal validator after mapping the states.\n- Log the error and return a validation failure response to the source if discrepancies are found."
+        ],
+        "lesson": "TRIGGER:\nIf LatticeParser receives ZQ4 with state=G before schema validation.\n\nREUSABLE RULE:\nMap R to approved, G to rejected, and B to pending before running the normal validator.\n\nCRITICAL CONSTRAINTS:\n- Only trigger a review of the data payload for compliance with the expected schema if the specified conditions are met.\n- Run the normal validator after mapping the states.\n- Log the error and return a validation failure response to the source if discrepancies are found.",
+        "lesson_id": "i_10b8fec698a04c389ad5f76c544a41b1",
+        "outcome_id": "r_e2cd38c8ef434617b5bd678bf56e1c96"
+      },
+      "delta": 1
+    },
+    {
+      "family_id": "aurorarpc-m31",
+      "experience": {
+        "passed": false,
+        "decision": "The client should escalate the issue to the support team for further investigation on the M31 response from AuroraRPC.",
+        "outcome": "EVALUATION: FAIL. AuroraRPC runbook rule: M31 requires exactly two heartbeat frames 250 ms apart, then open a new channel, never reuse the prior correlation ID, and include X-Aurora-Recover: m31 on the new channel request."
+      },
+      "baseline": {
+        "passed": false,
+        "decision": "The client should log the M31 response and notify the support team to investigate the issue further.",
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa": {
+        "passed": false,
+        "decision": "Upon receiving the M31 response from AuroraRPC, I will:\n\n1. Send two heartbeat frames, ensuring they are separated by 250 ms.\n2. Open a new channel using a fresh correlation ID.\n3. Include the header `X-Aurora-Recover: m31` in the new channel request.",
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_b6db0bf095384f63a8a8235b203a1f03:v1] TRIGGER:\nThe M31 response from AuroraRPC requires specific handling protocols.\n\nREUSABLE RULE:\nFor an M31 response from AuroraRPC, send exactly two heartbeat frames 250 ms apart, then open a new channel, never reuse the prior correlation ID, and include X-Aurora-Recover: m31 on the new channel request.\n\nCRITICAL CONSTRAINTS:\n- Exactly two heartbeat frames 250 ms apart must be sent.\n- The prior correlation ID must never be reused.\n- The header X-Aurora-Recover: m31 must be included in the new channel request."
+        ],
+        "lesson": "TRIGGER:\nThe M31 response from AuroraRPC requires specific handling protocols.\n\nREUSABLE RULE:\nFor an M31 response from AuroraRPC, send exactly two heartbeat frames 250 ms apart, then open a new channel, never reuse the prior correlation ID, and include X-Aurora-Recover: m31 on the new channel request.\n\nCRITICAL CONSTRAINTS:\n- Exactly two heartbeat frames 250 ms apart must be sent.\n- The prior correlation ID must never be reused.\n- The header X-Aurora-Recover: m31 must be included in the new channel request.",
+        "lesson_id": "i_b6db0bf095384f63a8a8235b203a1f03",
+        "outcome_id": "r_66144e750bcc4b1289593f95f6071a14"
+      },
+      "delta": 0
+    },
+    {
+      "family_id": "emberqueue-h9",
+      "experience": {
+        "passed": false,
+        "decision": "The worker should process the document-rendering job associated with H9 status accordingly, following the specific procedures for handling H9 tasks as outlined in the organization's operational protocols. If no specific protocol exists for H9 in the accumulated experience, seek clarification from a supervisor or reference the documentation for further guidance.",
+        "outcome": "EVALUATION: FAIL. EmberQueue runbook rule: H9 means do not acknowledge the original dispatch, mint a new dispatch ID, move the job to the amber lane, requeue exactly once, and tag the new dispatch with dispatch-mode=recovered."
+      },
+      "baseline": {
+        "passed": false,
+        "decision": "The worker should check the EmberQueue documentation for the meaning of H9 and follow any specified steps for handling that status. If no guidance is available, the worker should escalate the issue to a supervisor or team lead for further direction.",
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa": {
+        "passed": true,
+        "decision": "1. Do not acknowledge the original dispatch.\n2. Mint a new dispatch ID.\n3. Move the job to the amber lane.\n4. Requeue the job exactly once.\n5. Tag the new dispatch with `dispatch-mode=recovered`.",
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_fee2e50778b645faab11761c30572c27:v1] TRIGGER:\nProcessing a document-rendering job with H9 status.\n\nREUSABLE RULE:\nIf the job status is H9, do not acknowledge the original dispatch, mint a new dispatch ID, move the job to the amber lane, requeue exactly once, and tag the new dispatch with dispatch-mode=recovered.\n\nCRITICAL CONSTRAINTS:\n- Do not acknowledge the original dispatch.\n- Mint a new dispatch ID.\n- Move the job to the amber lane.\n- Requeue exactly once.\n- Tag the new dispatch with dispatch-mode=recovered."
+        ],
+        "lesson": "TRIGGER:\nProcessing a document-rendering job with H9 status.\n\nREUSABLE RULE:\nIf the job status is H9, do not acknowledge the original dispatch, mint a new dispatch ID, move the job to the amber lane, requeue exactly once, and tag the new dispatch with dispatch-mode=recovered.\n\nCRITICAL CONSTRAINTS:\n- Do not acknowledge the original dispatch.\n- Mint a new dispatch ID.\n- Move the job to the amber lane.\n- Requeue exactly once.\n- Tag the new dispatch with dispatch-mode=recovered.",
+        "lesson_id": "i_fee2e50778b645faab11761c30572c27",
+        "outcome_id": "r_5dba0720f7bc48d9935337fc73a329be"
+      },
+      "delta": 1
+    },
+    {
+      "family_id": "polarisdb-c17",
+      "experience": {
+        "passed": false,
+        "decision": "The client should investigate the meaning of the C17 error code in the PolarisDB documentation to determine the cause and next steps for resolution.",
+        "outcome": "EVALUATION: FAIL. PolarisDB runbook rule: C17 requires refreshing the cursor from the primary, switching isolation to snapshot-read, retrying exactly once, preserving the original request ID, and not reopening the session."
+      },
+      "baseline": {
+        "passed": false,
+        "decision": "The client should investigate the reason for the C17 response from PolarisDB, as it indicates an inventory-level issue. They should check for any discrepancies or issues in the inventory records and address them accordingly.",
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa": {
+        "passed": true,
+        "decision": "1. Refresh the cursor from the primary.\n2. Switch the isolation level to snapshot-read.\n3. Retry the operation exactly once.\n4. Preserve the original request ID.\n5. Do not reopen the session.",
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_c21ee4d9120241d583a545a977b85a3b:v1] TRIGGER:\nC17 error code encountered in PolarisDB.\n\nREUSABLE RULE:\nInvestigate the C17 error code in the PolarisDB documentation and follow the runbook rule: refresh the cursor from the primary, switch isolation to snapshot-read, retry exactly once, preserve the original request ID, and do not reopen the session.\n\nCRITICAL CONSTRAINTS:\n- Refresh the cursor from the primary.\n- Switch isolation to snapshot-read.\n- Retry exactly once.\n- Preserve the original request ID.\n- Do not reopen the session."
+        ],
+        "lesson": "TRIGGER:\nC17 error code encountered in PolarisDB.\n\nREUSABLE RULE:\nInvestigate the C17 error code in the PolarisDB documentation and follow the runbook rule: refresh the cursor from the primary, switch isolation to snapshot-read, retry exactly once, preserve the original request ID, and do not reopen the session.\n\nCRITICAL CONSTRAINTS:\n- Refresh the cursor from the primary.\n- Switch isolation to snapshot-read.\n- Retry exactly once.\n- Preserve the original request ID.\n- Do not reopen the session.",
+        "lesson_id": "i_c21ee4d9120241d583a545a977b85a3b",
+        "outcome_id": "r_fdd31423ad99492f9868955ce42dd6ac"
+      },
+      "delta": 1
+    },
+    {
+      "family_id": "vortexcdn-x52",
+      "experience": {
+        "passed": false,
+        "decision": "The operator should check the cache settings for the JavaScript asset in VortexCDN. If the asset is configured for caching, consider purging the cache for that specific asset to resolve the X52 error.",
+        "outcome": "EVALUATION: FAIL. VortexCDN runbook rule: X52 requires one HEAD request to origin, purge only the current region shard, wait 4 seconds, then issue one GET with X-Vortex-Probe: 1. Never perform a global purge for X52."
+      },
+      "baseline": {
+        "passed": false,
+        "decision": "The operator should check the cache settings for the CSS asset in VortexCDN and ensure that the asset is configured for proper cache management. If necessary, purge the cache for that specific asset to force a refresh. After purging, verify if the asset is being served correctly.",
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa": {
+        "passed": false,
+        "decision": "1. Perform a HEAD request to the origin.\n2. Purge only the current region shard.\n3. Wait 4 seconds.\n4. Issue a GET request with the header `X-Vortex-Probe: 1`.",
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_9f1cc0a2b07f4367bc115796114e8b95:v1] TRIGGER: X52 error in VortexCDN\n\nREUSABLE RULE: For X52, perform one HEAD request to origin, purge only the current region shard, wait 4 seconds, then issue one GET with X-Vortex-Probe: 1. Never perform a global purge for X52.\n\nCRITICAL CONSTRAINTS:\n- Only purge the current region shard.\n- Wait 4 seconds after purging before issuing the GET request.\n- Never perform a global purge for X52."
+        ],
+        "lesson": "TRIGGER: X52 error in VortexCDN\n\nREUSABLE RULE: For X52, perform one HEAD request to origin, purge only the current region shard, wait 4 seconds, then issue one GET with X-Vortex-Probe: 1. Never perform a global purge for X52.\n\nCRITICAL CONSTRAINTS:\n- Only purge the current region shard.\n- Wait 4 seconds after purging before issuing the GET request.\n- Never perform a global purge for X52.",
+        "lesson_id": "i_9f1cc0a2b07f4367bc115796114e8b95",
+        "outcome_id": "r_f80f6f9360cd44238eb8dbacddba21cb"
+      },
+      "delta": 0
+    },
+    {
+      "family_id": "siloflow-j11",
+      "experience": {
+        "passed": false,
+        "decision": "The worker should refer to the SiloFlow documentation or guidelines to understand the significance of J11 in the invoice-reconciliation workflow. Following that, they should take the prescribed steps outlined for handling a J11 return, which may include reviewing the invoice details for discrepancies, verifying related documents, or escalating the issue to a supervisor if necessary.",
+        "outcome": "EVALUATION: FAIL. SiloFlow runbook rule: J11 requires cloning the latest checkpoint, marking the old run superseded, restarting from the previous boundary exactly once, carrying the token j11-safe, and not resuming the failed step directly."
+      },
+      "baseline": {
+        "passed": false,
+        "decision": "The worker should report the J11 return message to the supervisor or system administrator for further investigation into the payroll-export workflow issue.",
+        "watermark": 0,
+        "memory_segments": []
+      },
+      "mnexa": {
+        "passed": true,
+        "decision": "To address the J11 return during the payroll-export workflow, I would take the following actions:\n\n1. Clone the latest checkpoint.\n2. Mark the old run as superseded.\n3. Restart from the previous boundary exactly once.\n4. Carry the token j11-safe throughout the process.\n5. Ensure not to resume the failed step directly.",
+        "watermark": 4,
+        "memory_segments": [
+          "[interpretive:i_184091ebe6544b2f9d19629c842e0977:v1] TRIGGER:\nA J11 return in the invoice-reconciliation workflow.\n\nREUSABLE RULE:\nJ11 requires cloning the latest checkpoint, marking the old run superseded, restarting from the previous boundary exactly once, carrying the token j11-safe, and not resuming the failed step directly.\n\nCRITICAL CONSTRAINTS:\n- Clone the latest checkpoint before proceeding.\n- Mark the old run as superseded.\n- Restart from the previous boundary exactly once.\n- Carry the token j11-safe throughout the process.\n- Do not resume the failed step directly."
+        ],
+        "lesson": "TRIGGER:\nA J11 return in the invoice-reconciliation workflow.\n\nREUSABLE RULE:\nJ11 requires cloning the latest checkpoint, marking the old run superseded, restarting from the previous boundary exactly once, carrying the token j11-safe, and not resuming the failed step directly.\n\nCRITICAL CONSTRAINTS:\n- Clone the latest checkpoint before proceeding.\n- Mark the old run as superseded.\n- Restart from the previous boundary exactly once.\n- Carry the token j11-safe throughout the process.\n- Do not resume the failed step directly.",
+        "lesson_id": "i_184091ebe6544b2f9d19629c842e0977",
+        "outcome_id": "r_8d90a84a0b404098b442c1e9490772b7"
+      },
+      "delta": 1
+    }
+  ]
+}

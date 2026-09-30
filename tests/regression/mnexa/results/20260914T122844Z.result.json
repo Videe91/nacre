@@ -1,0 +1,1128 @@
+{
+  "experiment": "seed-growth-029",
+  "classification": "exploratory-fresh-frozen-context-reasoning-ablation",
+  "run_id": "20260914T122844Z",
+  "taskset_sha256": "d3efd44dd182af8399678ba8f9325f90dd93006667a0d2d7209a6187d23b5a22",
+  "model": "gpt-4o-mini",
+  "task_count": 20,
+  "pool_size": 20,
+  "conditions": {
+    "A": "same_frozen_context_standard_model_reasoning",
+    "B": "same_frozen_context_competing_hypothesis_reasoning"
+  },
+  "context_prepare_calls": 20,
+  "recall_calls": 20,
+  "assemble_calls": 20,
+  "reasoner_calls": 40,
+  "expected_context_prepare_calls": 20,
+  "expected_recall_calls": 20,
+  "expected_reasoner_calls": 40,
+  "context_hash_equal_pairs": 20,
+  "context_hash_mismatch_pairs": 0,
+  "same_context_object_pairs": 20,
+  "context_integrity_valid_families": 20,
+  "adr_0017_boundary_valid": true,
+  "context_k_distribution": {
+    "1": 7,
+    "2": 4,
+    "3": 9
+  },
+  "active_channel_count_distribution": {
+    "1": 4,
+    "2": 16
+  },
+  "multi_memory_context_families": 13,
+  "single_memory_context_families": 7,
+  "condition_a_exclusive_correct_passes": 13,
+  "condition_b_exclusive_correct_passes": 16,
+  "condition_a_target_rule_present_families": 13,
+  "condition_b_target_rule_present_families": 16,
+  "condition_a_competing_rule_mention_families": 3,
+  "condition_b_competing_rule_mention_families": 2,
+  "condition_a_total_competing_rule_hits": 3,
+  "condition_b_total_competing_rule_hits": 2,
+  "exclusive_rescue_families": 4,
+  "exclusive_harm_families": 1,
+  "target_rule_rescue_families": 4,
+  "target_rule_harm_families": 1,
+  "multi_memory_condition_a_exclusive_passes": 8,
+  "multi_memory_condition_b_exclusive_passes": 10,
+  "multi_memory_condition_a_competing_mentions": 2,
+  "multi_memory_condition_b_competing_mentions": 1,
+  "mean_context_k": 2.1,
+  "mean_context_words": 191.45,
+  "compact_memory_bundles": 20,
+  "bundles_with_exact_semantic_clause_visible": 20,
+  "bundle_unsupported_claims_admitted": 0,
+  "same_context_frame_between_conditions": true,
+  "same_context_hash_between_conditions": true,
+  "same_watermark_between_conditions": true,
+  "same_selected_memory_ids_between_conditions": true,
+  "same_context_text_between_conditions": true,
+  "same_task_between_conditions": true,
+  "same_model_between_conditions": true,
+  "only_reasoning_instruction_differs": true,
+  "reasoning_occurs_outside_mnexa": true,
+  "strict_grader_metadata_removed_before_runtime": true,
+  "ranker_model_calls": 0,
+  "assembler_model_calls": 0,
+  "exclusive_grader_model_calls": 0,
+  "condition_a_reasoner_calls": 20,
+  "condition_b_reasoner_calls": 20,
+  "cluster_metrics_a": {
+    "channel-session": {
+      "families": 5,
+      "exclusive_passes": 4,
+      "target_rule_present": 4,
+      "competing_rule_mention_families": 0,
+      "competing_rule_hits": 0,
+      "multi_memory_families": 3,
+      "exclusive_pass_rate": 0.8
+    },
+    "lane-routing": {
+      "families": 5,
+      "exclusive_passes": 3,
+      "target_rule_present": 3,
+      "competing_rule_mention_families": 0,
+      "competing_rule_hits": 0,
+      "multi_memory_families": 2,
+      "exclusive_pass_rate": 0.6
+    },
+    "retry-policy": {
+      "families": 5,
+      "exclusive_passes": 3,
+      "target_rule_present": 3,
+      "competing_rule_mention_families": 2,
+      "competing_rule_hits": 2,
+      "multi_memory_families": 5,
+      "exclusive_pass_rate": 0.6
+    },
+    "storage-finalization": {
+      "families": 5,
+      "exclusive_passes": 3,
+      "target_rule_present": 3,
+      "competing_rule_mention_families": 1,
+      "competing_rule_hits": 1,
+      "multi_memory_families": 3,
+      "exclusive_pass_rate": 0.6
+    }
+  },
+  "cluster_metrics_b": {
+    "channel-session": {
+      "families": 5,
+      "exclusive_passes": 4,
+      "target_rule_present": 4,
+      "competing_rule_mention_families": 0,
+      "competing_rule_hits": 0,
+      "multi_memory_families": 3,
+      "exclusive_pass_rate": 0.8
+    },
+    "lane-routing": {
+      "families": 5,
+      "exclusive_passes": 4,
+      "target_rule_present": 4,
+      "competing_rule_mention_families": 0,
+      "competing_rule_hits": 0,
+      "multi_memory_families": 2,
+      "exclusive_pass_rate": 0.8
+    },
+    "retry-policy": {
+      "families": 5,
+      "exclusive_passes": 4,
+      "target_rule_present": 4,
+      "competing_rule_mention_families": 1,
+      "competing_rule_hits": 1,
+      "multi_memory_families": 5,
+      "exclusive_pass_rate": 0.8
+    },
+    "storage-finalization": {
+      "families": 5,
+      "exclusive_passes": 4,
+      "target_rule_present": 4,
+      "competing_rule_mention_families": 1,
+      "competing_rule_hits": 1,
+      "multi_memory_families": 3,
+      "exclusive_pass_rate": 0.8
+    }
+  },
+  "families": [
+    {
+      "family_id": "kestrelworks-retry-policy-1201",
+      "interference_cluster": "retry-policy",
+      "query_prompt": "State the exact retry-count rule.",
+      "active_channels": [
+        "semantic",
+        "lexical"
+      ],
+      "selected_family_ids": [
+        "meridianworks-retry-policy-1209",
+        "kestrelworks-retry-policy-1201",
+        "onyxworks-retry-policy-1217"
+      ],
+      "context_k": 3,
+      "context_watermark": 0,
+      "context_evidence_sha256": "47ab8085a4810c01c1b850ae3fa00f47aca33ffcbb0ecf32c810ccce2e03471b",
+      "context_integrity_valid": true,
+      "condition_a": {
+        "decision": "Generation(text='The exact retry-count rule is to **retry exactly twenty-one times**.', input_tokens=595, output_tokens=16, response_id='resp_01dad28c637e49e2006aa7e8f2a47887d1bf37e73494b1328b')",
+        "context_evidence_sha256": "47ab8085a4810c01c1b850ae3fa00f47aca33ffcbb0ecf32c810ccce2e03471b"
+      },
+      "condition_b": {
+        "decision": "Generation(text='The exact retry-count rule is to \"retry exactly twenty-one times.\"', input_tokens=685, output_tokens=15, response_id='resp_0dd0fee2fce4959e006aa7e8f40f1c87d1a63b91b1bb9f1411')",
+        "context_evidence_sha256": "47ab8085a4810c01c1b850ae3fa00f47aca33ffcbb0ecf32c810ccce2e03471b"
+      },
+      "condition_a_exclusive": {
+        "target_rule_present": true,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": true
+      },
+      "condition_b_exclusive": {
+        "target_rule_present": true,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": true
+      },
+      "context_hash_equal": true,
+      "same_context_object": true,
+      "paired": {
+        "exclusive_rescue": false,
+        "exclusive_harm": false,
+        "target_rescue": false,
+        "target_harm": false,
+        "competing_hit_delta": 0
+      }
+    },
+    {
+      "family_id": "kestrelworks-lane-routing-1202",
+      "interference_cluster": "lane-routing",
+      "query_prompt": "State the permitted lane for overflow tasks.",
+      "active_channels": [
+        "semantic",
+        "lexical"
+      ],
+      "selected_family_ids": [
+        "kestrelworks-lane-routing-1202",
+        "onyxworks-lane-routing-1218",
+        "novaworks-lane-routing-1214"
+      ],
+      "context_k": 3,
+      "context_watermark": 0,
+      "context_evidence_sha256": "b457873f4a71aed189ad33b887851675b9eff3b9dae5053a8ba7a2437c4c0794",
+      "context_integrity_valid": true,
+      "condition_a": {
+        "decision": "Generation(text='The permitted lane for overflow tasks is the **violet lane**.', input_tokens=660, output_tokens=15, response_id='resp_09915863cc22f40a006aa7e8f57c3087d197ffaa59ef765b6f')",
+        "context_evidence_sha256": "b457873f4a71aed189ad33b887851675b9eff3b9dae5053a8ba7a2437c4c0794"
+      },
+      "condition_b": {
+        "decision": "Generation(text='The permitted lane for overflow tasks is the violet lane. This is supported by the evidence stating to \"route overflow tasks only through the violet lane.\"', input_tokens=750, output_tokens=30, response_id='resp_06cbea305801c56d006aa7e8f6be7087d190d2e56e02583fdd')",
+        "context_evidence_sha256": "b457873f4a71aed189ad33b887851675b9eff3b9dae5053a8ba7a2437c4c0794"
+      },
+      "condition_a_exclusive": {
+        "target_rule_present": false,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": false
+      },
+      "condition_b_exclusive": {
+        "target_rule_present": true,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": true
+      },
+      "context_hash_equal": true,
+      "same_context_object": true,
+      "paired": {
+        "exclusive_rescue": true,
+        "exclusive_harm": false,
+        "target_rescue": true,
+        "target_harm": false,
+        "competing_hit_delta": 0
+      }
+    },
+    {
+      "family_id": "kestrelworks-channel-session-1203",
+      "interference_cluster": "channel-session",
+      "query_prompt": "State the channel rule after a lineage mismatch.",
+      "active_channels": [
+        "semantic",
+        "lexical"
+      ],
+      "selected_family_ids": [
+        "kestrelworks-channel-session-1203"
+      ],
+      "context_k": 1,
+      "context_watermark": 0,
+      "context_evidence_sha256": "bff4490627cc4d37f3cc47808953ceed2ffa90ca0dc07b8b277e3affc03c8a87",
+      "context_integrity_valid": true,
+      "condition_a": {
+        "decision": "Generation(text='After a lineage mismatch, the channel rule is to **open only a fresh session channel**.', input_tokens=223, output_tokens=20, response_id='resp_08839d8c9e76d2c2006aa7e8f8266887d189a4ec9aec5ed85f')",
+        "context_evidence_sha256": "bff4490627cc4d37f3cc47808953ceed2ffa90ca0dc07b8b277e3affc03c8a87"
+      },
+      "condition_b": {
+        "decision": "Generation(text='Open only a fresh session channel after a lineage mismatch.', input_tokens=313, output_tokens=12, response_id='resp_0e9b39dd66b9ee19006aa7e8f985a087d19a066d2baaab5954')",
+        "context_evidence_sha256": "bff4490627cc4d37f3cc47808953ceed2ffa90ca0dc07b8b277e3affc03c8a87"
+      },
+      "condition_a_exclusive": {
+        "target_rule_present": true,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": true
+      },
+      "condition_b_exclusive": {
+        "target_rule_present": true,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": true
+      },
+      "context_hash_equal": true,
+      "same_context_object": true,
+      "paired": {
+        "exclusive_rescue": false,
+        "exclusive_harm": false,
+        "target_rescue": false,
+        "target_harm": false,
+        "competing_hit_delta": 0
+      }
+    },
+    {
+      "family_id": "kestrelworks-storage-finalization-1204",
+      "interference_cluster": "storage-finalization",
+      "query_prompt": "State the permitted durable finalization header.",
+      "active_channels": [
+        "semantic",
+        "lexical"
+      ],
+      "selected_family_ids": [
+        "onyxworks-storage-finalization-1220"
+      ],
+      "context_k": 1,
+      "context_watermark": 0,
+      "context_evidence_sha256": "1821d9bd004fd95340ecd5b986301b6f2e6c6e60710df0047d61968e4a592578",
+      "context_integrity_valid": true,
+      "condition_a": {
+        "decision": "Generation(text='The permitted durable finalization header includes the following:\\n\\n1. Verify the storage checksum.\\n2. Preserve the upload fingerprint.\\n3. Record the committed epoch.\\n4. Do not purge the manifest unless the source epoch advances.', input_tokens=222, output_tokens=45, response_id='resp_074689b03bb517eb006aa7e8fae00887d1abfe754ac4c5879a')",
+        "context_evidence_sha256": "1821d9bd004fd95340ecd5b986301b6f2e6c6e60710df0047d61968e4a592578"
+      },
+      "condition_b": {
+        "decision": "Generation(text='The permitted durable finalization header is to **do not purge the manifest unless the source epoch advances**.', input_tokens=312, output_tokens=22, response_id='resp_0487d8b9d891299a006aa7e8fc202487d19aa7581db49b87a3')",
+        "context_evidence_sha256": "1821d9bd004fd95340ecd5b986301b6f2e6c6e60710df0047d61968e4a592578"
+      },
+      "condition_a_exclusive": {
+        "target_rule_present": false,
+        "competing_rule_hit_count": 1,
+        "competing_family_ids": [
+          "onyxworks-storage-finalization-1220"
+        ],
+        "competing_semantic_clauses": [
+          "do not purge the manifest unless the source epoch advances"
+        ],
+        "exclusive_correct_pass": false
+      },
+      "condition_b_exclusive": {
+        "target_rule_present": false,
+        "competing_rule_hit_count": 1,
+        "competing_family_ids": [
+          "onyxworks-storage-finalization-1220"
+        ],
+        "competing_semantic_clauses": [
+          "do not purge the manifest unless the source epoch advances"
+        ],
+        "exclusive_correct_pass": false
+      },
+      "context_hash_equal": true,
+      "same_context_object": true,
+      "paired": {
+        "exclusive_rescue": false,
+        "exclusive_harm": false,
+        "target_rescue": false,
+        "target_harm": false,
+        "competing_hit_delta": 0
+      }
+    },
+    {
+      "family_id": "lumenworks-retry-policy-1205",
+      "interference_cluster": "retry-policy",
+      "query_prompt": "State the maximum retry-count rule.",
+      "active_channels": [
+        "semantic",
+        "lexical"
+      ],
+      "selected_family_ids": [
+        "meridianworks-retry-policy-1209",
+        "kestrelworks-retry-policy-1201",
+        "onyxworks-retry-policy-1217"
+      ],
+      "context_k": 3,
+      "context_watermark": 0,
+      "context_evidence_sha256": "36e05e17c9398e241faf9acab608e816e06e7263e75112fdbf980922c6c5afe9",
+      "context_integrity_valid": true,
+      "condition_a": {
+        "decision": "Generation(text='The maximum retry-count rule states that you must \"retry exactly twenty-one times.\"', input_tokens=595, output_tokens=17, response_id='resp_00b36b41688ecc78006aa7e8fd84f487d1924ad9c2feef7cc6')",
+        "context_evidence_sha256": "36e05e17c9398e241faf9acab608e816e06e7263e75112fdbf980922c6c5afe9"
+      },
+      "condition_b": {
+        "decision": "Generation(text='The maximum retry-count rule is to \"retry exactly twenty-one times.\"', input_tokens=685, output_tokens=15, response_id='resp_00d9f47bedc29413006aa7e8fe8f2087d18387dc6571f28252')",
+        "context_evidence_sha256": "36e05e17c9398e241faf9acab608e816e06e7263e75112fdbf980922c6c5afe9"
+      },
+      "condition_a_exclusive": {
+        "target_rule_present": false,
+        "competing_rule_hit_count": 1,
+        "competing_family_ids": [
+          "kestrelworks-retry-policy-1201"
+        ],
+        "competing_semantic_clauses": [
+          "retry exactly twenty-one times"
+        ],
+        "exclusive_correct_pass": false
+      },
+      "condition_b_exclusive": {
+        "target_rule_present": false,
+        "competing_rule_hit_count": 1,
+        "competing_family_ids": [
+          "kestrelworks-retry-policy-1201"
+        ],
+        "competing_semantic_clauses": [
+          "retry exactly twenty-one times"
+        ],
+        "exclusive_correct_pass": false
+      },
+      "context_hash_equal": true,
+      "same_context_object": true,
+      "paired": {
+        "exclusive_rescue": false,
+        "exclusive_harm": false,
+        "target_rescue": false,
+        "target_harm": false,
+        "competing_hit_delta": 0
+      }
+    },
+    {
+      "family_id": "lumenworks-lane-routing-1206",
+      "interference_cluster": "lane-routing",
+      "query_prompt": "State the permitted lane for replay tasks.",
+      "active_channels": [
+        "semantic",
+        "lexical"
+      ],
+      "selected_family_ids": [
+        "onyxworks-lane-routing-1218",
+        "lumenworks-lane-routing-1206"
+      ],
+      "context_k": 2,
+      "context_watermark": 0,
+      "context_evidence_sha256": "6a0f8f1c96f3378fccf47d31eb834aa5317d075d5f7df87e65e0c2f2b56a8b2a",
+      "context_integrity_valid": true,
+      "condition_a": {
+        "decision": "Generation(text='The permitted lane for replay tasks is **only through the rust lane**.', input_tokens=436, output_tokens=16, response_id='resp_050cbd2bdbb3e86c006aa7e9000d0487d19cdbd5569624610c')",
+        "context_evidence_sha256": "6a0f8f1c96f3378fccf47d31eb834aa5317d075d5f7df87e65e0c2f2b56a8b2a"
+      },
+      "condition_b": {
+        "decision": "Generation(text='The permitted lane for replay tasks is the rust lane.', input_tokens=526, output_tokens=12, response_id='resp_04b52c1546355812006aa7e9018e8887d1855be160ee297f6a')",
+        "context_evidence_sha256": "6a0f8f1c96f3378fccf47d31eb834aa5317d075d5f7df87e65e0c2f2b56a8b2a"
+      },
+      "condition_a_exclusive": {
+        "target_rule_present": true,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": true
+      },
+      "condition_b_exclusive": {
+        "target_rule_present": false,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": false
+      },
+      "context_hash_equal": true,
+      "same_context_object": true,
+      "paired": {
+        "exclusive_rescue": false,
+        "exclusive_harm": true,
+        "target_rescue": false,
+        "target_harm": true,
+        "competing_hit_delta": 0
+      }
+    },
+    {
+      "family_id": "lumenworks-channel-session-1207",
+      "interference_cluster": "channel-session",
+      "query_prompt": "State the handshake-proof reuse rule.",
+      "active_channels": [
+        "semantic",
+        "lexical"
+      ],
+      "selected_family_ids": [
+        "lumenworks-channel-session-1207"
+      ],
+      "context_k": 1,
+      "context_watermark": 0,
+      "context_evidence_sha256": "112a6b14553611e2f8a60beb399fe8984e56ddafd2430392228ee7adc36b94f6",
+      "context_integrity_valid": true,
+      "condition_a": {
+        "decision": "Generation(text='The handshake-proof reuse rule states: **never reuse the prior handshake proof**.', input_tokens=217, output_tokens=17, response_id='resp_067f0ceb31f1928a006aa7e902cde087d19cad0efb060e33b4')",
+        "context_evidence_sha256": "112a6b14553611e2f8a60beb399fe8984e56ddafd2430392228ee7adc36b94f6"
+      },
+      "condition_b": {
+        "decision": "Generation(text='The handshake-proof reuse rule is: **never reuse the prior handshake proof**.', input_tokens=307, output_tokens=17, response_id='resp_0deae48cb518b1ab006aa7e903ec4c87d1ae5b13e479046704')",
+        "context_evidence_sha256": "112a6b14553611e2f8a60beb399fe8984e56ddafd2430392228ee7adc36b94f6"
+      },
+      "condition_a_exclusive": {
+        "target_rule_present": true,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": true
+      },
+      "condition_b_exclusive": {
+        "target_rule_present": true,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": true
+      },
+      "context_hash_equal": true,
+      "same_context_object": true,
+      "paired": {
+        "exclusive_rescue": false,
+        "exclusive_harm": false,
+        "target_rescue": false,
+        "target_harm": false,
+        "competing_hit_delta": 0
+      }
+    },
+    {
+      "family_id": "lumenworks-storage-finalization-1208",
+      "interference_cluster": "storage-finalization",
+      "query_prompt": "State the lineage-proof finalization rule.",
+      "active_channels": [
+        "semantic",
+        "lexical"
+      ],
+      "selected_family_ids": [
+        "onyxworks-storage-finalization-1220",
+        "lumenworks-storage-finalization-1208"
+      ],
+      "context_k": 2,
+      "context_watermark": 0,
+      "context_evidence_sha256": "ba9231da219de75175ee1498803d162a7241ea2658ebf35475ce792c216a1ecc",
+      "context_integrity_valid": true,
+      "condition_a": {
+        "decision": "Generation(text='The lineage-proof finalization rule is as follows:\\n\\n**Do not finalize before lineage-proof verification.** \\n\\nThis rule indicates that verification of the lineage-proof must be completed before any finalization can occur.', input_tokens=420, output_tokens=41, response_id='resp_0667d5cd00de5305006aa7e90547e087d187fc2de165198016')",
+        "context_evidence_sha256": "ba9231da219de75175ee1498803d162a7241ea2658ebf35475ce792c216a1ecc"
+      },
+      "condition_b": {
+        "decision": "Generation(text='The lineage-proof finalization rule is: do not finalize before lineage-proof verification.', input_tokens=510, output_tokens=17, response_id='resp_0e48d88da6d44ff1006aa7e90693d887d19ce53c2c565a1d1b')",
+        "context_evidence_sha256": "ba9231da219de75175ee1498803d162a7241ea2658ebf35475ce792c216a1ecc"
+      },
+      "condition_a_exclusive": {
+        "target_rule_present": true,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": true
+      },
+      "condition_b_exclusive": {
+        "target_rule_present": true,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": true
+      },
+      "context_hash_equal": true,
+      "same_context_object": true,
+      "paired": {
+        "exclusive_rescue": false,
+        "exclusive_harm": false,
+        "target_rescue": false,
+        "target_harm": false,
+        "competing_hit_delta": 0
+      }
+    },
+    {
+      "family_id": "meridianworks-retry-policy-1209",
+      "interference_cluster": "retry-policy",
+      "query_prompt": "State the minimum retry-count rule.",
+      "active_channels": [
+        "semantic",
+        "lexical"
+      ],
+      "selected_family_ids": [
+        "meridianworks-retry-policy-1209",
+        "kestrelworks-retry-policy-1201",
+        "onyxworks-retry-policy-1217"
+      ],
+      "context_k": 3,
+      "context_watermark": 0,
+      "context_evidence_sha256": "36a6b8aae3614a4449d5d9af61faba13a8fd35f47156b44771e2a97064fb7a80",
+      "context_integrity_valid": true,
+      "condition_a": {
+        "decision": "Generation(text='The minimum retry-count rule states to **retry exactly twenty-one times**.', input_tokens=595, output_tokens=16, response_id='resp_021bf2741b398102006aa7e907dc0c87d1b94d0e60851d6547')",
+        "context_evidence_sha256": "36a6b8aae3614a4449d5d9af61faba13a8fd35f47156b44771e2a97064fb7a80"
+      },
+      "condition_b": {
+        "decision": "Generation(text='The minimum retry-count rule is to \"retry at least eleven times.\"', input_tokens=685, output_tokens=15, response_id='resp_0ce42368a42504bc006aa7e908f2c087d18ed04560650b42d9')",
+        "context_evidence_sha256": "36a6b8aae3614a4449d5d9af61faba13a8fd35f47156b44771e2a97064fb7a80"
+      },
+      "condition_a_exclusive": {
+        "target_rule_present": false,
+        "competing_rule_hit_count": 1,
+        "competing_family_ids": [
+          "kestrelworks-retry-policy-1201"
+        ],
+        "competing_semantic_clauses": [
+          "retry exactly twenty-one times"
+        ],
+        "exclusive_correct_pass": false
+      },
+      "condition_b_exclusive": {
+        "target_rule_present": true,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": true
+      },
+      "context_hash_equal": true,
+      "same_context_object": true,
+      "paired": {
+        "exclusive_rescue": true,
+        "exclusive_harm": false,
+        "target_rescue": true,
+        "target_harm": false,
+        "competing_hit_delta": -1
+      }
+    },
+    {
+      "family_id": "meridianworks-lane-routing-1210",
+      "interference_cluster": "lane-routing",
+      "query_prompt": "State the cobalt-lane rule for poisoned tasks.",
+      "active_channels": [
+        "semantic",
+        "lexical"
+      ],
+      "selected_family_ids": [
+        "meridianworks-lane-routing-1210"
+      ],
+      "context_k": 1,
+      "context_watermark": 0,
+      "context_evidence_sha256": "1df197d6842dd36109ca999ab453858a2535eb34082a4cd54074c0abd5686c6d",
+      "context_integrity_valid": true,
+      "condition_a": {
+        "decision": "Generation(text='The cobalt-lane rule for poisoned tasks is: **do not route poisoned tasks through the cobalt lane**.', input_tokens=235, output_tokens=23, response_id='resp_08d37ceaecb7a254006aa7e90a286087d183a6ef370d86f911')",
+        "context_evidence_sha256": "1df197d6842dd36109ca999ab453858a2535eb34082a4cd54074c0abd5686c6d"
+      },
+      "condition_b": {
+        "decision": "Generation(text='The cobalt-lane rule for poisoned tasks is: **do not route poisoned tasks through the cobalt lane.**', input_tokens=325, output_tokens=23, response_id='resp_033427e2cc7fb39c006aa7e90bae6887d1aad1a19b91be0a58')",
+        "context_evidence_sha256": "1df197d6842dd36109ca999ab453858a2535eb34082a4cd54074c0abd5686c6d"
+      },
+      "condition_a_exclusive": {
+        "target_rule_present": true,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": true
+      },
+      "condition_b_exclusive": {
+        "target_rule_present": true,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": true
+      },
+      "context_hash_equal": true,
+      "same_context_object": true,
+      "paired": {
+        "exclusive_rescue": false,
+        "exclusive_harm": false,
+        "target_rescue": false,
+        "target_harm": false,
+        "competing_hit_delta": 0
+      }
+    },
+    {
+      "family_id": "meridianworks-channel-session-1211",
+      "interference_cluster": "channel-session",
+      "query_prompt": "State the exact heartbeat-frame count.",
+      "active_channels": [
+        "semantic"
+      ],
+      "selected_family_ids": [
+        "meridianworks-channel-session-1211",
+        "onyxworks-channel-session-1219",
+        "kestrelworks-channel-session-1203"
+      ],
+      "context_k": 3,
+      "context_watermark": 0,
+      "context_evidence_sha256": "6ac7484bc7ebf9b9e1eefbe7bcb004b545cb77616b2fc96cba9cb6c6c01af90d",
+      "context_integrity_valid": true,
+      "condition_a": {
+        "decision": "Generation(text='The exact heartbeat-frame count is twenty-one.', input_tokens=627, output_tokens=10, response_id='resp_05e676539f911a45006aa7e90d176c87d1bd02ebe62765aa3c')",
+        "context_evidence_sha256": "6ac7484bc7ebf9b9e1eefbe7bcb004b545cb77616b2fc96cba9cb6c6c01af90d"
+      },
+      "condition_b": {
+        "decision": "Generation(text='The exact heartbeat-frame count is twenty-one heartbeat frames.', input_tokens=717, output_tokens=12, response_id='resp_0f0313b805092436006aa7e90e755c87d1ade26f32fb76336e')",
+        "context_evidence_sha256": "6ac7484bc7ebf9b9e1eefbe7bcb004b545cb77616b2fc96cba9cb6c6c01af90d"
+      },
+      "condition_a_exclusive": {
+        "target_rule_present": false,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": false
+      },
+      "condition_b_exclusive": {
+        "target_rule_present": false,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": false
+      },
+      "context_hash_equal": true,
+      "same_context_object": true,
+      "paired": {
+        "exclusive_rescue": false,
+        "exclusive_harm": false,
+        "target_rescue": false,
+        "target_harm": false,
+        "competing_hit_delta": 0
+      }
+    },
+    {
+      "family_id": "meridianworks-storage-finalization-1212",
+      "interference_cluster": "storage-finalization",
+      "query_prompt": "State the exact signature-block count.",
+      "active_channels": [
+        "semantic",
+        "lexical"
+      ],
+      "selected_family_ids": [
+        "onyxworks-storage-finalization-1220",
+        "meridianworks-storage-finalization-1212"
+      ],
+      "context_k": 2,
+      "context_watermark": 0,
+      "context_evidence_sha256": "b9d428aa9d249af7d617e22c3a33987ad6799adc5d3593c1a4e596a626adc011",
+      "context_integrity_valid": true,
+      "condition_a": {
+        "decision": "Generation(text='The exact signature-block count is twenty-one.', input_tokens=423, output_tokens=10, response_id='resp_02de1051dd4e5b8b006aa7e90fe85c87d1b89aa297d14f8705')",
+        "context_evidence_sha256": "b9d428aa9d249af7d617e22c3a33987ad6799adc5d3593c1a4e596a626adc011"
+      },
+      "condition_b": {
+        "decision": "Generation(text='The chosen rule is:\\n\\n**Apply exactly twenty-one signature blocks.** \\n\\nThis is based on the evidence from MNEXA MEMORY 2, where it specifically refers to the precise count of signature blocks.', input_tokens=513, output_tokens=42, response_id='resp_04058bedf55ad776006aa7e910edbc87d1baf1745396b446e7')",
+        "context_evidence_sha256": "b9d428aa9d249af7d617e22c3a33987ad6799adc5d3593c1a4e596a626adc011"
+      },
+      "condition_a_exclusive": {
+        "target_rule_present": false,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": false
+      },
+      "condition_b_exclusive": {
+        "target_rule_present": true,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": true
+      },
+      "context_hash_equal": true,
+      "same_context_object": true,
+      "paired": {
+        "exclusive_rescue": true,
+        "exclusive_harm": false,
+        "target_rescue": true,
+        "target_harm": false,
+        "competing_hit_delta": 0
+      }
+    },
+    {
+      "family_id": "novaworks-retry-policy-1213",
+      "interference_cluster": "retry-policy",
+      "query_prompt": "State the checksum-rejection retry rule.",
+      "active_channels": [
+        "semantic",
+        "lexical"
+      ],
+      "selected_family_ids": [
+        "novaworks-retry-policy-1213",
+        "meridianworks-retry-policy-1209",
+        "onyxworks-retry-policy-1217"
+      ],
+      "context_k": 3,
+      "context_watermark": 0,
+      "context_evidence_sha256": "61441109428311873ff5b7989bf600f1edeeb79e3a0c0dbf4b2c0cedf25ec987",
+      "context_integrity_valid": true,
+      "condition_a": {
+        "decision": "Generation(text='The checksum-rejection retry rule states that **never retry a checksum-rejected request**.', input_tokens=600, output_tokens=19, response_id='resp_009ae52a2b0be38e006aa7e9126bd087d18a0824a3515e3e46')",
+        "context_evidence_sha256": "61441109428311873ff5b7989bf600f1edeeb79e3a0c0dbf4b2c0cedf25ec987"
+      },
+      "condition_b": {
+        "decision": "Generation(text='The checksum-rejection retry rule is: **never retry a checksum-rejected request**.', input_tokens=690, output_tokens=19, response_id='resp_098aac5d78b21d6c006aa7e9137a6487d1ab373089ee3d4ffe')",
+        "context_evidence_sha256": "61441109428311873ff5b7989bf600f1edeeb79e3a0c0dbf4b2c0cedf25ec987"
+      },
+      "condition_a_exclusive": {
+        "target_rule_present": true,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": true
+      },
+      "condition_b_exclusive": {
+        "target_rule_present": true,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": true
+      },
+      "context_hash_equal": true,
+      "same_context_object": true,
+      "paired": {
+        "exclusive_rescue": false,
+        "exclusive_harm": false,
+        "target_rescue": false,
+        "target_harm": false,
+        "competing_hit_delta": 0
+      }
+    },
+    {
+      "family_id": "novaworks-lane-routing-1214",
+      "interference_cluster": "lane-routing",
+      "query_prompt": "State when the silver lane should be used.",
+      "active_channels": [
+        "semantic",
+        "lexical"
+      ],
+      "selected_family_ids": [
+        "novaworks-lane-routing-1214"
+      ],
+      "context_k": 1,
+      "context_watermark": 0,
+      "context_evidence_sha256": "50cb40d04cdfa523d8242adf764acb3c55ba76f2d5d85d4a1c24bb6361db129d",
+      "context_integrity_valid": true,
+      "condition_a": {
+        "decision": "Generation(text='The silver lane should be used **if the queue is fractured**.', input_tokens=246, output_tokens=15, response_id='resp_07c286a23bae1389006aa7e915383887d1b7768a2343f7f48a')",
+        "context_evidence_sha256": "50cb40d04cdfa523d8242adf764acb3c55ba76f2d5d85d4a1c24bb6361db129d"
+      },
+      "condition_b": {
+        "decision": "Generation(text='The silver lane should be used if the queue is fractured.', input_tokens=336, output_tokens=13, response_id='resp_06bcc187e8d45ced006aa7e916701087d1ac765850351031cb')",
+        "context_evidence_sha256": "50cb40d04cdfa523d8242adf764acb3c55ba76f2d5d85d4a1c24bb6361db129d"
+      },
+      "condition_a_exclusive": {
+        "target_rule_present": true,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": true
+      },
+      "condition_b_exclusive": {
+        "target_rule_present": true,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": true
+      },
+      "context_hash_equal": true,
+      "same_context_object": true,
+      "paired": {
+        "exclusive_rescue": false,
+        "exclusive_harm": false,
+        "target_rescue": false,
+        "target_harm": false,
+        "competing_hit_delta": 0
+      }
+    },
+    {
+      "family_id": "novaworks-channel-session-1215",
+      "interference_cluster": "channel-session",
+      "query_prompt": "State the minimum reconnect wait.",
+      "active_channels": [
+        "semantic"
+      ],
+      "selected_family_ids": [
+        "novaworks-channel-session-1215",
+        "onyxworks-channel-session-1219",
+        "kestrelworks-channel-session-1203"
+      ],
+      "context_k": 3,
+      "context_watermark": 0,
+      "context_evidence_sha256": "6efc18f6ec2c180b67a8989d13d93a2b6fc462764e669406577d24e8a867d415",
+      "context_integrity_valid": true,
+      "condition_a": {
+        "decision": "Generation(text='The minimum reconnect wait is at least 53 seconds before reconnecting.', input_tokens=637, output_tokens=15, response_id='resp_0060e3ce183ae2bd006aa7e917924c87d1815c865f7d3ccbc2')",
+        "context_evidence_sha256": "6efc18f6ec2c180b67a8989d13d93a2b6fc462764e669406577d24e8a867d415"
+      },
+      "condition_b": {
+        "decision": "Generation(text='The minimum reconnect wait is at least 53 seconds before reconnecting.', input_tokens=727, output_tokens=15, response_id='resp_04406618c91365e3006aa7e9198fbc87d1a3df973b9b1e9975')",
+        "context_evidence_sha256": "6efc18f6ec2c180b67a8989d13d93a2b6fc462764e669406577d24e8a867d415"
+      },
+      "condition_a_exclusive": {
+        "target_rule_present": true,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": true
+      },
+      "condition_b_exclusive": {
+        "target_rule_present": true,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": true
+      },
+      "context_hash_equal": true,
+      "same_context_object": true,
+      "paired": {
+        "exclusive_rescue": false,
+        "exclusive_harm": false,
+        "target_rescue": false,
+        "target_harm": false,
+        "competing_hit_delta": 0
+      }
+    },
+    {
+      "family_id": "novaworks-storage-finalization-1216",
+      "interference_cluster": "storage-finalization",
+      "query_prompt": "State the minimum durable-replica count.",
+      "active_channels": [
+        "semantic",
+        "lexical"
+      ],
+      "selected_family_ids": [
+        "novaworks-storage-finalization-1216",
+        "onyxworks-storage-finalization-1220"
+      ],
+      "context_k": 2,
+      "context_watermark": 0,
+      "context_evidence_sha256": "2883bc3cf480bd4792b7c5702d0904837066ee9b85033773cd12a578ab078151",
+      "context_integrity_valid": true,
+      "condition_a": {
+        "decision": "Generation(text='The minimum durable-replica count is at least seventeen.', input_tokens=378, output_tokens=13, response_id='resp_00e48c5d9a31d6de006aa7e91ad2a887d18ba1cf77258cea21')",
+        "context_evidence_sha256": "2883bc3cf480bd4792b7c5702d0904837066ee9b85033773cd12a578ab078151"
+      },
+      "condition_b": {
+        "decision": "Generation(text='The minimum durable-replica count is at least seventeen.', input_tokens=468, output_tokens=13, response_id='resp_051df9d880cf5662006aa7e91cb57087d1a20f02a14850d5ee')",
+        "context_evidence_sha256": "2883bc3cf480bd4792b7c5702d0904837066ee9b85033773cd12a578ab078151"
+      },
+      "condition_a_exclusive": {
+        "target_rule_present": true,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": true
+      },
+      "condition_b_exclusive": {
+        "target_rule_present": true,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": true
+      },
+      "context_hash_equal": true,
+      "same_context_object": true,
+      "paired": {
+        "exclusive_rescue": false,
+        "exclusive_harm": false,
+        "target_rescue": false,
+        "target_harm": false,
+        "competing_hit_delta": 0
+      }
+    },
+    {
+      "family_id": "onyxworks-retry-policy-1217",
+      "interference_cluster": "retry-policy",
+      "query_prompt": "State when retrying is permitted relative to recovery-lease rotation.",
+      "active_channels": [
+        "semantic"
+      ],
+      "selected_family_ids": [
+        "onyxworks-retry-policy-1217",
+        "meridianworks-retry-policy-1209",
+        "kestrelworks-retry-policy-1201"
+      ],
+      "context_k": 3,
+      "context_watermark": 0,
+      "context_evidence_sha256": "d1a75508a8dfd2b816d5c86ed613ac00521f285503b2e80607b08c2b152d3ca4",
+      "context_integrity_valid": true,
+      "condition_a": {
+        "decision": "Generation(text='Retrying is permitted **only after rotating the recovery lease**.', input_tokens=601, output_tokens=14, response_id='resp_0af932aa5d9ae353006aa7e91df00487d18161e11e7c0c30b6')",
+        "context_evidence_sha256": "d1a75508a8dfd2b816d5c86ed613ac00521f285503b2e80607b08c2b152d3ca4"
+      },
+      "condition_b": {
+        "decision": "Generation(text='Retrying is permitted only after rotating the recovery lease.', input_tokens=691, output_tokens=12, response_id='resp_057d3cc96506efba006aa7e91eef2c87d1ab1754711efb48b7')",
+        "context_evidence_sha256": "d1a75508a8dfd2b816d5c86ed613ac00521f285503b2e80607b08c2b152d3ca4"
+      },
+      "condition_a_exclusive": {
+        "target_rule_present": true,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": true
+      },
+      "condition_b_exclusive": {
+        "target_rule_present": true,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": true
+      },
+      "context_hash_equal": true,
+      "same_context_object": true,
+      "paired": {
+        "exclusive_rescue": false,
+        "exclusive_harm": false,
+        "target_rescue": false,
+        "target_harm": false,
+        "competing_hit_delta": 0
+      }
+    },
+    {
+      "family_id": "onyxworks-lane-routing-1218",
+      "interference_cluster": "lane-routing",
+      "query_prompt": "State the permitted lane for quarantine tasks.",
+      "active_channels": [
+        "semantic",
+        "lexical"
+      ],
+      "selected_family_ids": [
+        "onyxworks-lane-routing-1218"
+      ],
+      "context_k": 1,
+      "context_watermark": 0,
+      "context_evidence_sha256": "0237ff72a8a2dd95a599589f4db139f96ccc093facf440b021f0c02ca73f80ae",
+      "context_integrity_valid": true,
+      "condition_a": {
+        "decision": "Generation(text='The permitted lane for quarantine tasks is the fern lane.', input_tokens=224, output_tokens=12, response_id='resp_0c832c25cb9a4517006aa7e9201ccc87d192812f3d1ff599d1')",
+        "context_evidence_sha256": "0237ff72a8a2dd95a599589f4db139f96ccc093facf440b021f0c02ca73f80ae"
+      },
+      "condition_b": {
+        "decision": "Generation(text='Route quarantine tasks only through the fern lane.', input_tokens=314, output_tokens=10, response_id='resp_0082902f5c54e90a006aa7e9223ab487d1beb6a0a0a64fe1ca')",
+        "context_evidence_sha256": "0237ff72a8a2dd95a599589f4db139f96ccc093facf440b021f0c02ca73f80ae"
+      },
+      "condition_a_exclusive": {
+        "target_rule_present": false,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": false
+      },
+      "condition_b_exclusive": {
+        "target_rule_present": true,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": true
+      },
+      "context_hash_equal": true,
+      "same_context_object": true,
+      "paired": {
+        "exclusive_rescue": true,
+        "exclusive_harm": false,
+        "target_rescue": true,
+        "target_harm": false,
+        "competing_hit_delta": 0
+      }
+    },
+    {
+      "family_id": "onyxworks-channel-session-1219",
+      "interference_cluster": "channel-session",
+      "query_prompt": "State the maximum pending-session-channel count.",
+      "active_channels": [
+        "semantic"
+      ],
+      "selected_family_ids": [
+        "onyxworks-channel-session-1219",
+        "kestrelworks-channel-session-1203",
+        "lumenworks-channel-session-1207"
+      ],
+      "context_k": 3,
+      "context_watermark": 0,
+      "context_evidence_sha256": "2240d4b269ca6ca92e8d0d0717e92de48b6103c66893334c34f6473c1834f8a1",
+      "context_integrity_valid": true,
+      "condition_a": {
+        "decision": "Generation(text='The maximum pending-session-channel count is **sixteen**.', input_tokens=623, output_tokens=13, response_id='resp_07cd816de06b2bf5006aa7e924166087d18c247ee3a4842722')",
+        "context_evidence_sha256": "2240d4b269ca6ca92e8d0d0717e92de48b6103c66893334c34f6473c1834f8a1"
+      },
+      "condition_b": {
+        "decision": "Generation(text='The maximum pending-session-channel count is at most sixteen.', input_tokens=713, output_tokens=12, response_id='resp_0796aef793ecbcf4006aa7e92530b487d19a78e44250fa8290')",
+        "context_evidence_sha256": "2240d4b269ca6ca92e8d0d0717e92de48b6103c66893334c34f6473c1834f8a1"
+      },
+      "condition_a_exclusive": {
+        "target_rule_present": true,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": true
+      },
+      "condition_b_exclusive": {
+        "target_rule_present": true,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": true
+      },
+      "context_hash_equal": true,
+      "same_context_object": true,
+      "paired": {
+        "exclusive_rescue": false,
+        "exclusive_harm": false,
+        "target_rescue": false,
+        "target_harm": false,
+        "competing_hit_delta": 0
+      }
+    },
+    {
+      "family_id": "onyxworks-storage-finalization-1220",
+      "interference_cluster": "storage-finalization",
+      "query_prompt": "State the source-epoch condition for manifest purging.",
+      "active_channels": [
+        "semantic",
+        "lexical"
+      ],
+      "selected_family_ids": [
+        "onyxworks-storage-finalization-1220"
+      ],
+      "context_k": 1,
+      "context_watermark": 0,
+      "context_evidence_sha256": "3af15f6384371d2e967e1300923c73483536ea0a05b97c01b10ca23dbe671e78",
+      "context_integrity_valid": true,
+      "condition_a": {
+        "decision": "Generation(text='The source-epoch condition for manifest purging is: **do not purge the manifest unless the source epoch advances**.', input_tokens=225, output_tokens=25, response_id='resp_0fcaa94c65eeda8f006aa7e926736887d1b4ddc020df1f4502')",
+        "context_evidence_sha256": "3af15f6384371d2e967e1300923c73483536ea0a05b97c01b10ca23dbe671e78"
+      },
+      "condition_b": {
+        "decision": "Generation(text='The source-epoch condition for manifest purging is: **do not purge the manifest unless the source epoch advances** (E4).', input_tokens=315, output_tokens=28, response_id='resp_0261c974fabb55b2006aa7e927d1b887d1af53c1d0954cae3e')",
+        "context_evidence_sha256": "3af15f6384371d2e967e1300923c73483536ea0a05b97c01b10ca23dbe671e78"
+      },
+      "condition_a_exclusive": {
+        "target_rule_present": true,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": true
+      },
+      "condition_b_exclusive": {
+        "target_rule_present": true,
+        "competing_rule_hit_count": 0,
+        "competing_family_ids": [],
+        "competing_semantic_clauses": [],
+        "exclusive_correct_pass": true
+      },
+      "context_hash_equal": true,
+      "same_context_object": true,
+      "paired": {
+        "exclusive_rescue": false,
+        "exclusive_harm": false,
+        "target_rescue": false,
+        "target_harm": false,
+        "competing_hit_delta": 0
+      }
+    }
+  ]
+}

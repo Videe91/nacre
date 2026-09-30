@@ -1,0 +1,246 @@
+{
+  "experiment": "seed-growth-001",
+  "note": "Exploratory synthetic transfer tasks. These are not a confirmatory benchmark.",
+  "families": [
+    {
+      "id": "nebulapay-r17",
+      "entities": [
+        "system:nebulapay",
+        "code:r17"
+      ],
+      "experience": {
+        "prompt": "NebulaPay returns R17 while capturing an invoice payment. What should the operator do?",
+        "feedback": "NebulaPay runbook rule: for R17, wait 3 seconds, retry exactly once, and include the header X-Nebula-Replay: safe on the retry.",
+        "grader": {
+          "all_of": [
+            ["3 seconds", "3s"],
+            ["retry exactly once", "retry once"],
+            ["x-nebula-replay"]
+          ],
+          "none_of": [
+            "exponential backoff",
+            "retry indefinitely"
+          ]
+        }
+      },
+      "transfer": {
+        "prompt": "NebulaPay returns R17 while creating a refund. What should the operator do?",
+        "grader": {
+          "all_of": [
+            ["3 seconds", "3s"],
+            ["retry exactly once", "retry once"],
+            ["x-nebula-replay"]
+          ],
+          "none_of": [
+            "exponential backoff",
+            "retry indefinitely"
+          ]
+        }
+      }
+    },
+    {
+      "id": "orchiddb-l42",
+      "entities": [
+        "system:orchiddb",
+        "code:l42"
+      ],
+      "experience": {
+        "prompt": "OrchidDB returns L42 during an inventory reservation transaction. What should the operator do?",
+        "feedback": "OrchidDB runbook rule: L42 means the lease token is stale. Refresh the lease token, retry the transaction exactly once, and do not reconnect the database session.",
+        "grader": {
+          "all_of": [
+            [
+              "refresh the lease token",
+              "refresh lease token"
+            ],
+            [
+              "retry the transaction exactly once",
+              "retry exactly once",
+              "retry once"
+            ],
+            [
+              "do not reconnect",
+              "without reconnecting"
+            ]
+          ],
+          "none_of": [
+            "restart the database",
+            "retry indefinitely"
+          ]
+        }
+      },
+      "transfer": {
+        "prompt": "OrchidDB returns L42 while committing a pricing update. What should the operator do?",
+        "grader": {
+          "all_of": [
+            [
+              "refresh the lease token",
+              "refresh lease token"
+            ],
+            [
+              "retry the transaction exactly once",
+              "retry exactly once",
+              "retry once"
+            ],
+            [
+              "do not reconnect",
+              "without reconnecting"
+            ]
+          ],
+          "none_of": [
+            "restart the database",
+            "retry indefinitely"
+          ]
+        }
+      }
+    },
+    {
+      "id": "atlasparser-qn",
+      "entities": [
+        "system:atlasparser",
+        "format:qn-boolean"
+      ],
+      "experience": {
+        "prompt": "AtlasParser receives a legacy record with enabled=Q. The normal JSON schema rejects it. What should happen before schema validation?",
+        "feedback": "AtlasParser compatibility rule: normalize legacy Q/N booleans before schema validation. Q becomes true and N becomes false, then run the normal schema validator.",
+        "grader": {
+          "all_of": [
+            [
+              "q becomes true",
+              "q to true",
+              "q as true"
+            ],
+            [
+              "before schema validation",
+              "before validation",
+              "then validate"
+            ]
+          ],
+          "none_of": [
+            "reject q",
+            "drop the field"
+          ]
+        }
+      },
+      "transfer": {
+        "prompt": "AtlasParser receives a legacy record with archived=N. The normal JSON schema rejects it. What should happen before schema validation?",
+        "grader": {
+          "all_of": [
+            [
+              "n becomes false",
+              "n to false",
+              "n as false"
+            ],
+            [
+              "before schema validation",
+              "before validation",
+              "then validate"
+            ]
+          ],
+          "none_of": [
+            "reject n",
+            "drop the field"
+          ]
+        }
+      }
+    },
+    {
+      "id": "heliosstore-e62",
+      "entities": [
+        "system:heliosstore",
+        "code:e62"
+      ],
+      "experience": {
+        "prompt": "HeliosStore returns E62 while uploading a 180 MiB archive. What should the uploader do?",
+        "feedback": "HeliosStore runbook rule: E62 requires switching to multipart upload with 16 MiB parts and attaching a SHA-256 digest for every part before retrying the upload.",
+        "grader": {
+          "all_of": [
+            ["multipart"],
+            ["16 mib", "16 mb"],
+            ["sha-256", "sha256"],
+            ["every part", "each part", "per part"]
+          ],
+          "none_of": [
+            "single-part",
+            "single part"
+          ]
+        }
+      },
+      "transfer": {
+        "prompt": "HeliosStore returns E62 while uploading a 96 MiB model checkpoint. What should the uploader do?",
+        "grader": {
+          "all_of": [
+            ["multipart"],
+            ["16 mib", "16 mb"],
+            ["sha-256", "sha256"],
+            ["every part", "each part", "per part"]
+          ],
+          "none_of": [
+            "single-part",
+            "single part"
+          ]
+        }
+      }
+    },
+    {
+      "id": "saffronqueue-amber7",
+      "entities": [
+        "system:saffronqueue",
+        "code:amber-7"
+      ],
+      "experience": {
+        "prompt": "SaffronQueue marks a document-indexing job AMBER-7. What should the worker do?",
+        "feedback": "SaffronQueue runbook rule: AMBER-7 means the current correlation lease is invalid. Do not retry the same leased job. Request a new correlation lease, then requeue the job once under the new lease.",
+        "grader": {
+          "all_of": [
+            [
+              "new correlation lease",
+              "request a new lease",
+              "obtain a new lease"
+            ],
+            [
+              "requeue",
+              "re-queue"
+            ],
+            ["once"],
+            [
+              "do not retry the same",
+              "don't retry the same",
+              "not retry the same"
+            ]
+          ],
+          "none_of": [
+            "retry indefinitely",
+            "keep retrying"
+          ]
+        }
+      },
+      "transfer": {
+        "prompt": "SaffronQueue marks a thumbnail-generation job AMBER-7. What should the worker do?",
+        "grader": {
+          "all_of": [
+            [
+              "new correlation lease",
+              "request a new lease",
+              "obtain a new lease"
+            ],
+            [
+              "requeue",
+              "re-queue"
+            ],
+            ["once"],
+            [
+              "do not retry the same",
+              "don't retry the same",
+              "not retry the same"
+            ]
+          ],
+          "none_of": [
+            "retry indefinitely",
+            "keep retrying"
+          ]
+        }
+      }
+    }
+  ]
+}

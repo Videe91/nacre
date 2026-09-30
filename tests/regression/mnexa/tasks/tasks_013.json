@@ -1,0 +1,1953 @@
+{
+  "experiment": "seed-growth-013",
+  "classification": "exploratory-fresh-semantic-closure-projection-ablation",
+  "hypothesis": "When the structured nucleus is used only as a retrieval handle and the exact authoritative support span is used as the model-visible semantic claim payload, MNEXA will reduce polarity, scope, cardinality, and condition loss without weakening source ancestry or claim support.",
+  "conditions": {
+    "A": "same repaired propositions; nucleus used as claim payload",
+    "B": "same repaired propositions; nucleus used only as retrieval handle; exact support span used as semantic payload"
+  },
+  "primary_metrics": [
+    "semantic task success",
+    "polarity violations",
+    "scope-loss violations",
+    "cardinality-loss violations",
+    "condition-loss violations",
+    "semantic clause visibility"
+  ],
+  "secondary_metrics": [
+    "knowledge completeness",
+    "memory word count",
+    "unsupported claims"
+  ],
+  "control_invariants": [
+    "all_source_evidence_equal",
+    "all_repaired_structured_propositions_equal"
+  ],
+  "families": [
+    {
+      "id": "aurorapay-ap-93",
+      "system": "AuroraPay",
+      "code": "AP-93",
+      "entities": [
+        "system:aurorapay",
+        "code:ap-93"
+      ],
+      "experience": {
+        "prompt": "AuroraPay returns AP-93. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "AuroraPay returns AP-93 again. State the rule governing reuse of the prior nonce."
+      },
+      "candidate_decision": "Reuse the prior nonce.",
+      "authoritative_text": "refresh the recovery lease; wait 11 seconds; retry exactly once; never reuse the prior nonce.",
+      "raw_source": "<<<ROLE:status>>>\nAP-93 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nReuse the prior nonce.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrefresh the recovery lease; wait 11 seconds; retry exactly once; never reuse the prior nonce.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\ngateway congestion may be transient\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 187 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "refresh the recovery lease",
+          "task_pattern": "refresh\\s+the\\s+recovery\\s+lease"
+        },
+        {
+          "id": "A2",
+          "text": "wait 11 seconds",
+          "task_pattern": "wait\\s+11\\s+seconds"
+        },
+        {
+          "id": "A3",
+          "text": "retry exactly once",
+          "task_pattern": "retry\\s+exactly\\s+once"
+        },
+        {
+          "id": "A4",
+          "text": "never reuse the prior nonce",
+          "task_pattern": "never\\s+reuse\\s+the\\s+prior\\s+nonce"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "refresh the recovery lease; wait 11 seconds",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "retry exactly once; never reuse the prior nonce",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A4",
+      "semantic_clause": "never reuse the prior nonce",
+      "semantic_operator": "never",
+      "semantic_dimension": "polarity",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bnever\\b",
+            "\\bdo\\s+not\\b",
+            "\\bmust\\s+not\\b",
+            "\\bshould\\s+not\\b"
+          ],
+          [
+            "\\breuse\\b"
+          ],
+          [
+            "\\bnonce\\b"
+          ]
+        ],
+        "forbidden_regex": [
+          "\\b(?:should|must)\\s+reuse\\b"
+        ]
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "refresh\\s+the\\s+recovery\\s+lease"
+          ],
+          [
+            "wait\\s+11\\s+seconds"
+          ],
+          [
+            "retry\\s+exactly\\s+once"
+          ],
+          [
+            "never\\s+reuse\\s+the\\s+prior\\s+nonce"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "bronzrpc-br-47",
+      "system": "BronzeRPC",
+      "code": "BR-47",
+      "entities": [
+        "system:bronzerpc",
+        "code:br-47"
+      ],
+      "experience": {
+        "prompt": "BronzeRPC returns BR-47. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "BronzeRPC returns BR-47. State the rule for the prior correlation ID."
+      },
+      "candidate_decision": "Reuse the previous correlation ID.",
+      "authoritative_text": "open a fresh channel; send one probe frame; never reuse the prior correlation ID; preserve the trace token.",
+      "raw_source": "<<<ROLE:status>>>\nBR-47 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nReuse the previous correlation ID.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nopen a fresh channel; send one probe frame; never reuse the prior correlation ID; preserve the trace token.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nscheduler jitter may exist\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 216 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "open a fresh channel",
+          "task_pattern": "open\\s+a\\s+fresh\\s+channel"
+        },
+        {
+          "id": "A2",
+          "text": "send one probe frame",
+          "task_pattern": "send\\s+one\\s+probe\\s+frame"
+        },
+        {
+          "id": "A3",
+          "text": "never reuse the prior correlation ID",
+          "task_pattern": "never\\s+reuse\\s+the\\s+prior\\s+correlation\\s+ID"
+        },
+        {
+          "id": "A4",
+          "text": "preserve the trace token",
+          "task_pattern": "preserve\\s+the\\s+trace\\s+token"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "open a fresh channel; send one probe frame",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "never reuse the prior correlation ID; preserve the trace token",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A3",
+      "semantic_clause": "never reuse the prior correlation ID",
+      "semantic_operator": "never",
+      "semantic_dimension": "polarity",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bnever\\b",
+            "\\bdo\\s+not\\b",
+            "\\bmust\\s+not\\b"
+          ],
+          [
+            "\\breuse\\b"
+          ],
+          [
+            "\\bcorrelation\\b"
+          ]
+        ],
+        "forbidden_regex": [
+          "\\b(?:should|must)\\s+reuse\\b"
+        ]
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "open\\s+a\\s+fresh\\s+channel"
+          ],
+          [
+            "send\\s+one\\s+probe\\s+frame"
+          ],
+          [
+            "never\\s+reuse\\s+the\\s+prior\\s+correlation\\s+ID"
+          ],
+          [
+            "preserve\\s+the\\s+trace\\s+token"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "cedarauth-ca-62",
+      "system": "CedarAuth",
+      "code": "CA-62",
+      "entities": [
+        "system:cedarauth",
+        "code:ca-62"
+      ],
+      "experience": {
+        "prompt": "CedarAuth returns CA-62. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "CedarAuth returns CA-62. State the rule for an expired token."
+      },
+      "candidate_decision": "Accept the expired token.",
+      "authoritative_text": "refresh the trust snapshot; preserve the request fingerprint; never accept the expired token; issue one fresh challenge.",
+      "raw_source": "<<<ROLE:status>>>\nCA-62 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nAccept the expired token.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrefresh the trust snapshot; preserve the request fingerprint; never accept the expired token; issue one fresh challenge.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nclock skew may be transient\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 173 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "refresh the trust snapshot",
+          "task_pattern": "refresh\\s+the\\s+trust\\s+snapshot"
+        },
+        {
+          "id": "A2",
+          "text": "preserve the request fingerprint",
+          "task_pattern": "preserve\\s+the\\s+request\\s+fingerprint"
+        },
+        {
+          "id": "A3",
+          "text": "never accept the expired token",
+          "task_pattern": "never\\s+accept\\s+the\\s+expired\\s+token"
+        },
+        {
+          "id": "A4",
+          "text": "issue one fresh challenge",
+          "task_pattern": "issue\\s+one\\s+fresh\\s+challenge"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "refresh the trust snapshot; preserve the request fingerprint",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "never accept the expired token; issue one fresh challenge",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A3",
+      "semantic_clause": "never accept the expired token",
+      "semantic_operator": "never",
+      "semantic_dimension": "polarity",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bnever\\b",
+            "\\bdo\\s+not\\b",
+            "\\bmust\\s+not\\b"
+          ],
+          [
+            "\\baccept\\b"
+          ],
+          [
+            "\\bexpired\\b"
+          ],
+          [
+            "\\btoken\\b"
+          ]
+        ],
+        "forbidden_regex": [
+          "\\b(?:should|must)\\s+accept\\b"
+        ]
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "refresh\\s+the\\s+trust\\s+snapshot"
+          ],
+          [
+            "preserve\\s+the\\s+request\\s+fingerprint"
+          ],
+          [
+            "never\\s+accept\\s+the\\s+expired\\s+token"
+          ],
+          [
+            "issue\\s+one\\s+fresh\\s+challenge"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "deltabus-db-28",
+      "system": "DeltaBus",
+      "code": "DB-28",
+      "entities": [
+        "system:deltabus",
+        "code:db-28"
+      ],
+      "experience": {
+        "prompt": "DeltaBus returns DB-28. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "DeltaBus returns DB-28. State the acknowledgement rule for the original message."
+      },
+      "candidate_decision": "Acknowledge the original message.",
+      "authoritative_text": "clone the latest checkpoint; mark the old delivery stale; do not acknowledge the original message; restart from the cloned checkpoint.",
+      "raw_source": "<<<ROLE:status>>>\nDB-28 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nAcknowledge the original message.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nclone the latest checkpoint; mark the old delivery stale; do not acknowledge the original message; restart from the cloned checkpoint.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nconsumer lag may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 205 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "clone the latest checkpoint",
+          "task_pattern": "clone\\s+the\\s+latest\\s+checkpoint"
+        },
+        {
+          "id": "A2",
+          "text": "mark the old delivery stale",
+          "task_pattern": "mark\\s+the\\s+old\\s+delivery\\s+stale"
+        },
+        {
+          "id": "A3",
+          "text": "do not acknowledge the original message",
+          "task_pattern": "do\\s+not\\s+acknowledge\\s+the\\s+original\\s+message"
+        },
+        {
+          "id": "A4",
+          "text": "restart from the cloned checkpoint",
+          "task_pattern": "restart\\s+from\\s+the\\s+cloned\\s+checkpoint"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "clone the latest checkpoint; mark the old delivery stale",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "do not acknowledge the original message; restart from the cloned checkpoint",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A3",
+      "semantic_clause": "do not acknowledge the original message",
+      "semantic_operator": "do_not",
+      "semantic_dimension": "polarity",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bdo\\s+not\\b",
+            "\\bmust\\s+not\\b",
+            "\\bnever\\b"
+          ],
+          [
+            "\\backnowledg"
+          ],
+          [
+            "\\boriginal\\b"
+          ],
+          [
+            "\\bmessage\\b"
+          ]
+        ],
+        "forbidden_regex": [
+          "\\b(?:should|must)\\s+acknowledge\\b"
+        ]
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "clone\\s+the\\s+latest\\s+checkpoint"
+          ],
+          [
+            "mark\\s+the\\s+old\\s+delivery\\s+stale"
+          ],
+          [
+            "do\\s+not\\s+acknowledge\\s+the\\s+original\\s+message"
+          ],
+          [
+            "restart\\s+from\\s+the\\s+cloned\\s+checkpoint"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "emberdb-ed-81",
+      "system": "EmberDB",
+      "code": "ED-81",
+      "entities": [
+        "system:emberdb",
+        "code:ed-81"
+      ],
+      "experience": {
+        "prompt": "EmberDB returns ED-81. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "EmberDB returns ED-81. State the write rule for the standby shard."
+      },
+      "candidate_decision": "Write directly to the standby shard.",
+      "authoritative_text": "read the current leader epoch; acquire the violet lock; do not write to the standby shard; release the lock after commit.",
+      "raw_source": "<<<ROLE:status>>>\nED-81 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nWrite directly to the standby shard.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nread the current leader epoch; acquire the violet lock; do not write to the standby shard; release the lock after commit.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nreplication delay may exist\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 228 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "read the current leader epoch",
+          "task_pattern": "read\\s+the\\s+current\\s+leader\\s+epoch"
+        },
+        {
+          "id": "A2",
+          "text": "acquire the violet lock",
+          "task_pattern": "acquire\\s+the\\s+violet\\s+lock"
+        },
+        {
+          "id": "A3",
+          "text": "do not write to the standby shard",
+          "task_pattern": "do\\s+not\\s+write\\s+to\\s+the\\s+standby\\s+shard"
+        },
+        {
+          "id": "A4",
+          "text": "release the lock after commit",
+          "task_pattern": "release\\s+the\\s+lock\\s+after\\s+commit"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "read the current leader epoch; acquire the violet lock",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "do not write to the standby shard; release the lock after commit",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A3",
+      "semantic_clause": "do not write to the standby shard",
+      "semantic_operator": "do_not",
+      "semantic_dimension": "polarity",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bdo\\s+not\\b",
+            "\\bmust\\s+not\\b",
+            "\\bnever\\b"
+          ],
+          [
+            "\\bwrite\\b"
+          ],
+          [
+            "\\bstandby\\b"
+          ],
+          [
+            "\\bshard\\b"
+          ]
+        ],
+        "forbidden_regex": [
+          "\\b(?:should|must)\\s+write\\b"
+        ]
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "read\\s+the\\s+current\\s+leader\\s+epoch"
+          ],
+          [
+            "acquire\\s+the\\s+violet\\s+lock"
+          ],
+          [
+            "do\\s+not\\s+write\\s+to\\s+the\\s+standby\\s+shard"
+          ],
+          [
+            "release\\s+the\\s+lock\\s+after\\s+commit"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "frostqueue-fq-56",
+      "system": "FrostQueue",
+      "code": "FQ-56",
+      "entities": [
+        "system:frostqueue",
+        "code:fq-56"
+      ],
+      "experience": {
+        "prompt": "FrostQueue returns FQ-56. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "FrostQueue returns FQ-56. State the lane restriction for moving the job."
+      },
+      "candidate_decision": "Move the job to any available lane.",
+      "authoritative_text": "request a fresh checkpoint; move the job only to the cobalt lane; replay exactly twice; preserve the original job ID.",
+      "raw_source": "<<<ROLE:status>>>\nFQ-56 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nMove the job to any available lane.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrequest a fresh checkpoint; move the job only to the cobalt lane; replay exactly twice; preserve the original job ID.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nworker saturation may exist\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 239 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "request a fresh checkpoint",
+          "task_pattern": "request\\s+a\\s+fresh\\s+checkpoint"
+        },
+        {
+          "id": "A2",
+          "text": "move the job only to the cobalt lane",
+          "task_pattern": "move\\s+the\\s+job\\s+only\\s+to\\s+the\\s+cobalt\\s+lane"
+        },
+        {
+          "id": "A3",
+          "text": "replay exactly twice",
+          "task_pattern": "replay\\s+exactly\\s+twice"
+        },
+        {
+          "id": "A4",
+          "text": "preserve the original job ID",
+          "task_pattern": "preserve\\s+the\\s+original\\s+job\\s+ID"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "request a fresh checkpoint; move the job only to the cobalt lane",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "replay exactly twice; preserve the original job ID",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "move the job only to the cobalt lane",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bonly\\b"
+          ],
+          [
+            "\\bcobalt\\b"
+          ],
+          [
+            "\\blane\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "request\\s+a\\s+fresh\\s+checkpoint"
+          ],
+          [
+            "move\\s+the\\s+job\\s+only\\s+to\\s+the\\s+cobalt\\s+lane"
+          ],
+          [
+            "replay\\s+exactly\\s+twice"
+          ],
+          [
+            "preserve\\s+the\\s+original\\s+job\\s+ID"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "granite-store-gs-72",
+      "system": "GraniteStore",
+      "code": "GS-72",
+      "entities": [
+        "system:granitestore",
+        "code:gs-72"
+      ],
+      "experience": {
+        "prompt": "GraniteStore returns GS-72. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "GraniteStore returns GS-72. State the permitted finalization header rule."
+      },
+      "candidate_decision": "Finalize with any completion header.",
+      "authoritative_text": "start a new upload session; use 19 MiB chunks; apply SHA-384 to every chunk; finalize only with X-Granite-Final: strict.",
+      "raw_source": "<<<ROLE:status>>>\nGS-72 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nFinalize with any completion header.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nstart a new upload session; use 19 MiB chunks; apply SHA-384 to every chunk; finalize only with X-Granite-Final: strict.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nstorage gateway load may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 263 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "start a new upload session",
+          "task_pattern": "start\\s+a\\s+new\\s+upload\\s+session"
+        },
+        {
+          "id": "A2",
+          "text": "use 19 MiB chunks",
+          "task_pattern": "use\\s+19\\s+MiB\\s+chunks"
+        },
+        {
+          "id": "A3",
+          "text": "apply SHA-384 to every chunk",
+          "task_pattern": "apply\\s+SHA\\-384\\s+to\\s+every\\s+chunk"
+        },
+        {
+          "id": "A4",
+          "text": "finalize only with X-Granite-Final: strict",
+          "task_pattern": "finalize\\s+only\\s+with\\s+X\\-Granite\\-Final:\\s+strict"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "start a new upload session; use 19 MiB chunks",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "apply SHA-384 to every chunk; finalize only with X-Granite-Final: strict",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A4",
+      "semantic_clause": "finalize only with X-Granite-Final: strict",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bonly\\b"
+          ],
+          [
+            "X-Granite-Final"
+          ],
+          [
+            "\\bstrict\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "start\\s+a\\s+new\\s+upload\\s+session"
+          ],
+          [
+            "use\\s+19\\s+MiB\\s+chunks"
+          ],
+          [
+            "apply\\s+SHA\\-384\\s+to\\s+every\\s+chunk"
+          ],
+          [
+            "finalize\\s+only\\s+with\\s+X\\-Granite\\-Final:\\s+strict"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "harborrpc-hr-35",
+      "system": "HarborRPC",
+      "code": "HR-35",
+      "entities": [
+        "system:harborrpc",
+        "code:hr-35"
+      ],
+      "experience": {
+        "prompt": "HarborRPC returns HR-35. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "HarborRPC returns HR-35. State the channel restriction."
+      },
+      "candidate_decision": "Reuse the existing channel.",
+      "authoritative_text": "send two heartbeat frames; space them 175 ms apart; open only a fresh channel; preserve the trace ID.",
+      "raw_source": "<<<ROLE:status>>>\nHR-35 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nReuse the existing channel.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nsend two heartbeat frames; space them 175 ms apart; open only a fresh channel; preserve the trace ID.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nstream jitter may exist\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 292 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "send two heartbeat frames",
+          "task_pattern": "send\\s+two\\s+heartbeat\\s+frames"
+        },
+        {
+          "id": "A2",
+          "text": "space them 175 ms apart",
+          "task_pattern": "space\\s+them\\s+175\\s+ms\\s+apart"
+        },
+        {
+          "id": "A3",
+          "text": "open only a fresh channel",
+          "task_pattern": "open\\s+only\\s+a\\s+fresh\\s+channel"
+        },
+        {
+          "id": "A4",
+          "text": "preserve the trace ID",
+          "task_pattern": "preserve\\s+the\\s+trace\\s+ID"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "send two heartbeat frames; space them 175 ms apart",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "open only a fresh channel; preserve the trace ID",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A3",
+      "semantic_clause": "open only a fresh channel",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bonly\\b"
+          ],
+          [
+            "\\bfresh\\b"
+          ],
+          [
+            "\\bchannel\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "send\\s+two\\s+heartbeat\\s+frames"
+          ],
+          [
+            "space\\s+them\\s+175\\s+ms\\s+apart"
+          ],
+          [
+            "open\\s+only\\s+a\\s+fresh\\s+channel"
+          ],
+          [
+            "preserve\\s+the\\s+trace\\s+ID"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "indigorpc-ir-64",
+      "system": "IndigoRPC",
+      "code": "IR-64",
+      "entities": [
+        "system:indigorpc",
+        "code:ir-64"
+      ],
+      "experience": {
+        "prompt": "IndigoRPC returns IR-64. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "IndigoRPC returns IR-64. State the exact heartbeat-frame requirement."
+      },
+      "candidate_decision": "Send four heartbeat frames.",
+      "authoritative_text": "send exactly three heartbeat frames; space them 210 ms apart; open a fresh channel; preserve the request ID.",
+      "raw_source": "<<<ROLE:status>>>\nIR-64 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nSend four heartbeat frames.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nsend exactly three heartbeat frames; space them 210 ms apart; open a fresh channel; preserve the request ID.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nscheduler jitter may exist\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 304 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "send exactly three heartbeat frames",
+          "task_pattern": "send\\s+exactly\\s+three\\s+heartbeat\\s+frames"
+        },
+        {
+          "id": "A2",
+          "text": "space them 210 ms apart",
+          "task_pattern": "space\\s+them\\s+210\\s+ms\\s+apart"
+        },
+        {
+          "id": "A3",
+          "text": "open a fresh channel",
+          "task_pattern": "open\\s+a\\s+fresh\\s+channel"
+        },
+        {
+          "id": "A4",
+          "text": "preserve the request ID",
+          "task_pattern": "preserve\\s+the\\s+request\\s+ID"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "send exactly three heartbeat frames; space them 210 ms apart",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "open a fresh channel; preserve the request ID",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A1",
+      "semantic_clause": "send exactly three heartbeat frames",
+      "semantic_operator": "exactly",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bexactly\\b"
+          ],
+          [
+            "\\bthree\\b",
+            "\\b3\\b"
+          ],
+          [
+            "\\bheartbeat\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "send\\s+exactly\\s+three\\s+heartbeat\\s+frames"
+          ],
+          [
+            "space\\s+them\\s+210\\s+ms\\s+apart"
+          ],
+          [
+            "open\\s+a\\s+fresh\\s+channel"
+          ],
+          [
+            "preserve\\s+the\\s+request\\s+ID"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "jasperqueue-jq-49",
+      "system": "JasperQueue",
+      "code": "JQ-49",
+      "entities": [
+        "system:jasperqueue",
+        "code:jq-49"
+      ],
+      "experience": {
+        "prompt": "JasperQueue returns JQ-49. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "JasperQueue returns JQ-49. State the exact retry count."
+      },
+      "candidate_decision": "Replay until the job succeeds.",
+      "authoritative_text": "request a fresh checkpoint; move the job to the silver lane; retry exactly twice; preserve the original job ID.",
+      "raw_source": "<<<ROLE:status>>>\nJQ-49 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nReplay until the job succeeds.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrequest a fresh checkpoint; move the job to the silver lane; retry exactly twice; preserve the original job ID.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nworker load may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 244 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "request a fresh checkpoint",
+          "task_pattern": "request\\s+a\\s+fresh\\s+checkpoint"
+        },
+        {
+          "id": "A2",
+          "text": "move the job to the silver lane",
+          "task_pattern": "move\\s+the\\s+job\\s+to\\s+the\\s+silver\\s+lane"
+        },
+        {
+          "id": "A3",
+          "text": "retry exactly twice",
+          "task_pattern": "retry\\s+exactly\\s+twice"
+        },
+        {
+          "id": "A4",
+          "text": "preserve the original job ID",
+          "task_pattern": "preserve\\s+the\\s+original\\s+job\\s+ID"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "request a fresh checkpoint; move the job to the silver lane",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "retry exactly twice; preserve the original job ID",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A3",
+      "semantic_clause": "retry exactly twice",
+      "semantic_operator": "exactly",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bexactly\\b"
+          ],
+          [
+            "\\btwice\\b",
+            "\\b2\\b",
+            "\\btwo\\b"
+          ],
+          [
+            "\\bretr"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "request\\s+a\\s+fresh\\s+checkpoint"
+          ],
+          [
+            "move\\s+the\\s+job\\s+to\\s+the\\s+silver\\s+lane"
+          ],
+          [
+            "retry\\s+exactly\\s+twice"
+          ],
+          [
+            "preserve\\s+the\\s+original\\s+job\\s+ID"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "keystonecache-kc-77",
+      "system": "KeystoneCache",
+      "code": "KC-77",
+      "entities": [
+        "system:keystonecache",
+        "code:kc-77"
+      ],
+      "experience": {
+        "prompt": "KeystoneCache returns KC-77. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "KeystoneCache returns KC-77. State the exact checkpoint retention requirement."
+      },
+      "candidate_decision": "Retain two checkpoints.",
+      "authoritative_text": "refresh the manifest; retain exactly four checkpoints; seal the newest checkpoint; drop stale temporary files.",
+      "raw_source": "<<<ROLE:status>>>\nKC-77 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRetain two checkpoints.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrefresh the manifest; retain exactly four checkpoints; seal the newest checkpoint; drop stale temporary files.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\ncache pressure may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 196 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "refresh the manifest",
+          "task_pattern": "refresh\\s+the\\s+manifest"
+        },
+        {
+          "id": "A2",
+          "text": "retain exactly four checkpoints",
+          "task_pattern": "retain\\s+exactly\\s+four\\s+checkpoints"
+        },
+        {
+          "id": "A3",
+          "text": "seal the newest checkpoint",
+          "task_pattern": "seal\\s+the\\s+newest\\s+checkpoint"
+        },
+        {
+          "id": "A4",
+          "text": "drop stale temporary files",
+          "task_pattern": "drop\\s+stale\\s+temporary\\s+files"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "refresh the manifest; retain exactly four checkpoints",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "seal the newest checkpoint; drop stale temporary files",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "retain exactly four checkpoints",
+      "semantic_operator": "exactly",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bexactly\\b"
+          ],
+          [
+            "\\bfour\\b",
+            "\\b4\\b"
+          ],
+          [
+            "\\bcheckpoint"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "refresh\\s+the\\s+manifest"
+          ],
+          [
+            "retain\\s+exactly\\s+four\\s+checkpoints"
+          ],
+          [
+            "seal\\s+the\\s+newest\\s+checkpoint"
+          ],
+          [
+            "drop\\s+stale\\s+temporary\\s+files"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "lattice-store-ls-31",
+      "system": "LatticeStore",
+      "code": "LS-31",
+      "entities": [
+        "system:latticestore",
+        "code:ls-31"
+      ],
+      "experience": {
+        "prompt": "LatticeStore returns LS-31. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "LatticeStore returns LS-31. State the minimum replica requirement."
+      },
+      "candidate_decision": "Retain two replicas.",
+      "authoritative_text": "verify the manifest digest; retain at least three replicas; seal the latest replica; record the replica epoch.",
+      "raw_source": "<<<ROLE:status>>>\nLS-31 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRetain two replicas.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nverify the manifest digest; retain at least three replicas; seal the latest replica; record the replica epoch.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nreplica lag may be transient\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 277 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "verify the manifest digest",
+          "task_pattern": "verify\\s+the\\s+manifest\\s+digest"
+        },
+        {
+          "id": "A2",
+          "text": "retain at least three replicas",
+          "task_pattern": "retain\\s+at\\s+least\\s+three\\s+replicas"
+        },
+        {
+          "id": "A3",
+          "text": "seal the latest replica",
+          "task_pattern": "seal\\s+the\\s+latest\\s+replica"
+        },
+        {
+          "id": "A4",
+          "text": "record the replica epoch",
+          "task_pattern": "record\\s+the\\s+replica\\s+epoch"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "verify the manifest digest; retain at least three replicas",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "seal the latest replica; record the replica epoch",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "retain at least three replicas",
+      "semantic_operator": "at_least",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bat\\s+least\\b",
+            "\\bminimum\\b"
+          ],
+          [
+            "\\bthree\\b",
+            "\\b3\\b"
+          ],
+          [
+            "\\breplica"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "verify\\s+the\\s+manifest\\s+digest"
+          ],
+          [
+            "retain\\s+at\\s+least\\s+three\\s+replicas"
+          ],
+          [
+            "seal\\s+the\\s+latest\\s+replica"
+          ],
+          [
+            "record\\s+the\\s+replica\\s+epoch"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "mistralpay-mp-58",
+      "system": "MistralPay",
+      "code": "MP-58",
+      "entities": [
+        "system:mistralpay",
+        "code:mp-58"
+      ],
+      "experience": {
+        "prompt": "MistralPay returns MP-58. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "MistralPay returns MP-58. State the minimum wait duration."
+      },
+      "candidate_decision": "Retry immediately.",
+      "authoritative_text": "refresh the recovery lease; wait at least 12 seconds; retry once; preserve the payment fingerprint.",
+      "raw_source": "<<<ROLE:status>>>\nMP-58 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRetry immediately.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrefresh the recovery lease; wait at least 12 seconds; retry once; preserve the payment fingerprint.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\ngateway contention may exist\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 184 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "refresh the recovery lease",
+          "task_pattern": "refresh\\s+the\\s+recovery\\s+lease"
+        },
+        {
+          "id": "A2",
+          "text": "wait at least 12 seconds",
+          "task_pattern": "wait\\s+at\\s+least\\s+12\\s+seconds"
+        },
+        {
+          "id": "A3",
+          "text": "retry once",
+          "task_pattern": "retry\\s+once"
+        },
+        {
+          "id": "A4",
+          "text": "preserve the payment fingerprint",
+          "task_pattern": "preserve\\s+the\\s+payment\\s+fingerprint"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "refresh the recovery lease; wait at least 12 seconds",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "retry once; preserve the payment fingerprint",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "wait at least 12 seconds",
+      "semantic_operator": "at_least",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bat\\s+least\\b",
+            "\\bminimum\\b"
+          ],
+          [
+            "\\b12\\b",
+            "\\btwelve\\b"
+          ],
+          [
+            "\\bseconds?\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "refresh\\s+the\\s+recovery\\s+lease"
+          ],
+          [
+            "wait\\s+at\\s+least\\s+12\\s+seconds"
+          ],
+          [
+            "retry\\s+once"
+          ],
+          [
+            "preserve\\s+the\\s+payment\\s+fingerprint"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "nimbusapi-na-86",
+      "system": "NimbusAPI",
+      "code": "NA-86",
+      "entities": [
+        "system:nimbusapi",
+        "code:na-86"
+      ],
+      "experience": {
+        "prompt": "NimbusAPI returns NA-86. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "NimbusAPI returns NA-86. State the maximum retry count."
+      },
+      "candidate_decision": "Retry four times.",
+      "authoritative_text": "refresh the session token; retry at most twice; preserve the request fingerprint; close the stale connection.",
+      "raw_source": "<<<ROLE:status>>>\nNA-86 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRetry four times.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrefresh the session token; retry at most twice; preserve the request fingerprint; close the stale connection.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nupstream load may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 231 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "refresh the session token",
+          "task_pattern": "refresh\\s+the\\s+session\\s+token"
+        },
+        {
+          "id": "A2",
+          "text": "retry at most twice",
+          "task_pattern": "retry\\s+at\\s+most\\s+twice"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the request fingerprint",
+          "task_pattern": "preserve\\s+the\\s+request\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "close the stale connection",
+          "task_pattern": "close\\s+the\\s+stale\\s+connection"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "refresh the session token; retry at most twice",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the request fingerprint; close the stale connection",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "retry at most twice",
+      "semantic_operator": "at_most",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bat\\s+most\\b",
+            "\\bno\\s+more\\s+than\\b",
+            "\\bmaximum\\b"
+          ],
+          [
+            "\\btwice\\b",
+            "\\btwo\\b",
+            "\\b2\\b"
+          ],
+          [
+            "\\bretr"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "refresh\\s+the\\s+session\\s+token"
+          ],
+          [
+            "retry\\s+at\\s+most\\s+twice"
+          ],
+          [
+            "preserve\\s+the\\s+request\\s+fingerprint"
+          ],
+          [
+            "close\\s+the\\s+stale\\s+connection"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "orbitlock-ol-43",
+      "system": "OrbitLock",
+      "code": "OL-43",
+      "entities": [
+        "system:orbitlock",
+        "code:ol-43"
+      ],
+      "experience": {
+        "prompt": "OrbitLock returns OL-43. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "OrbitLock returns OL-43. State the maximum number of pending leases."
+      },
+      "candidate_decision": "Keep ten pending leases.",
+      "authoritative_text": "refresh the lock table; keep at most five pending leases; expire stale leases; preserve the newest owner token.",
+      "raw_source": "<<<ROLE:status>>>\nOL-43 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nKeep ten pending leases.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrefresh the lock table; keep at most five pending leases; expire stale leases; preserve the newest owner token.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nlock contention may exist\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 221 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "refresh the lock table",
+          "task_pattern": "refresh\\s+the\\s+lock\\s+table"
+        },
+        {
+          "id": "A2",
+          "text": "keep at most five pending leases",
+          "task_pattern": "keep\\s+at\\s+most\\s+five\\s+pending\\s+leases"
+        },
+        {
+          "id": "A3",
+          "text": "expire stale leases",
+          "task_pattern": "expire\\s+stale\\s+leases"
+        },
+        {
+          "id": "A4",
+          "text": "preserve the newest owner token",
+          "task_pattern": "preserve\\s+the\\s+newest\\s+owner\\s+token"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "refresh the lock table; keep at most five pending leases",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "expire stale leases; preserve the newest owner token",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "keep at most five pending leases",
+      "semantic_operator": "at_most",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bat\\s+most\\b",
+            "\\bno\\s+more\\s+than\\b",
+            "\\bmaximum\\b"
+          ],
+          [
+            "\\bfive\\b",
+            "\\b5\\b"
+          ],
+          [
+            "\\blease"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "refresh\\s+the\\s+lock\\s+table"
+          ],
+          [
+            "keep\\s+at\\s+most\\s+five\\s+pending\\s+leases"
+          ],
+          [
+            "expire\\s+stale\\s+leases"
+          ],
+          [
+            "preserve\\s+the\\s+newest\\s+owner\\s+token"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "pinecdn-pc-69",
+      "system": "PineCDN",
+      "code": "PC-69",
+      "entities": [
+        "system:pinecdn",
+        "code:pc-69"
+      ],
+      "experience": {
+        "prompt": "PineCDN returns PC-69. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "PineCDN returns PC-69. State the condition under which the cache may be purged."
+      },
+      "candidate_decision": "Purge the cache immediately.",
+      "authoritative_text": "read the origin checksum; do not purge the cache unless the origin checksum changes; issue one HEAD request; preserve the edge generation ID.",
+      "raw_source": "<<<ROLE:status>>>\nPC-69 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nPurge the cache immediately.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nread the origin checksum; do not purge the cache unless the origin checksum changes; issue one HEAD request; preserve the edge generation ID.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\norigin latency may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 255 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "read the origin checksum",
+          "task_pattern": "read\\s+the\\s+origin\\s+checksum"
+        },
+        {
+          "id": "A2",
+          "text": "do not purge the cache unless the origin checksum changes",
+          "task_pattern": "do\\s+not\\s+purge\\s+the\\s+cache\\s+unless\\s+the\\s+origin\\s+checksum\\s+changes"
+        },
+        {
+          "id": "A3",
+          "text": "issue one HEAD request",
+          "task_pattern": "issue\\s+one\\s+HEAD\\s+request"
+        },
+        {
+          "id": "A4",
+          "text": "preserve the edge generation ID",
+          "task_pattern": "preserve\\s+the\\s+edge\\s+generation\\s+ID"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "read the origin checksum; do not purge the cache unless the origin checksum changes",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "issue one HEAD request; preserve the edge generation ID",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "do not purge the cache unless the origin checksum changes",
+      "semantic_operator": "unless",
+      "semantic_dimension": "condition",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bunless\\b",
+            "\\bonly\\s+if\\b"
+          ],
+          [
+            "\\bchecksum\\b"
+          ],
+          [
+            "\\bchang"
+          ],
+          [
+            "\\bpurge\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "read\\s+the\\s+origin\\s+checksum"
+          ],
+          [
+            "do\\s+not\\s+purge\\s+the\\s+cache\\s+unless\\s+the\\s+origin\\s+checksum\\s+changes"
+          ],
+          [
+            "issue\\s+one\\s+HEAD\\s+request"
+          ],
+          [
+            "preserve\\s+the\\s+edge\\s+generation\\s+ID"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "quartzsign-qs-52",
+      "system": "QuartzSign",
+      "code": "QS-52",
+      "entities": [
+        "system:quartzsign",
+        "code:qs-52"
+      ],
+      "experience": {
+        "prompt": "QuartzSign returns QS-52. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "QuartzSign returns QS-52. State the condition required before rotating the signing key."
+      },
+      "candidate_decision": "Rotate the signing key immediately.",
+      "authoritative_text": "read the current epoch; do not rotate the signing key unless the epoch advances; preserve the key fingerprint; record the new epoch after rotation.",
+      "raw_source": "<<<ROLE:status>>>\nQS-52 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRotate the signing key immediately.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nread the current epoch; do not rotate the signing key unless the epoch advances; preserve the key fingerprint; record the new epoch after rotation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nkey service latency may exist\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 269 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "read the current epoch",
+          "task_pattern": "read\\s+the\\s+current\\s+epoch"
+        },
+        {
+          "id": "A2",
+          "text": "do not rotate the signing key unless the epoch advances",
+          "task_pattern": "do\\s+not\\s+rotate\\s+the\\s+signing\\s+key\\s+unless\\s+the\\s+epoch\\s+advances"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the key fingerprint",
+          "task_pattern": "preserve\\s+the\\s+key\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "record the new epoch after rotation",
+          "task_pattern": "record\\s+the\\s+new\\s+epoch\\s+after\\s+rotation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "read the current epoch; do not rotate the signing key unless the epoch advances",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the key fingerprint; record the new epoch after rotation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "do not rotate the signing key unless the epoch advances",
+      "semantic_operator": "unless",
+      "semantic_dimension": "condition",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bunless\\b",
+            "\\bonly\\s+if\\b"
+          ],
+          [
+            "\\bepoch\\b"
+          ],
+          [
+            "\\badvance"
+          ],
+          [
+            "\\brotat"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "read\\s+the\\s+current\\s+epoch"
+          ],
+          [
+            "do\\s+not\\s+rotate\\s+the\\s+signing\\s+key\\s+unless\\s+the\\s+epoch\\s+advances"
+          ],
+          [
+            "preserve\\s+the\\s+key\\s+fingerprint"
+          ],
+          [
+            "record\\s+the\\s+new\\s+epoch\\s+after\\s+rotation"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "ravenpay-rp-91",
+      "system": "RavenPay",
+      "code": "VX-91",
+      "entities": [
+        "system:ravenpay",
+        "code:vx-91"
+      ],
+      "experience": {
+        "prompt": "RavenPay returns VX-91. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the applicability rule for refreshing the recovery lease in RavenPay."
+      },
+      "candidate_decision": "Refresh the recovery lease immediately.",
+      "authoritative_text": "when VX-91 occurs, refresh the recovery lease; wait 13 seconds; retry once; preserve the payment fingerprint.",
+      "raw_source": "<<<ROLE:status>>>\nVX-91 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRefresh the recovery lease immediately.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nwhen VX-91 occurs, refresh the recovery lease; wait 13 seconds; retry once; preserve the payment fingerprint.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\ngateway congestion may exist\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 191 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "when VX-91 occurs, refresh the recovery lease",
+          "task_pattern": "when\\s+VX\\-91\\s+occurs,\\s+refresh\\s+the\\s+recovery\\s+lease"
+        },
+        {
+          "id": "A2",
+          "text": "wait 13 seconds",
+          "task_pattern": "wait\\s+13\\s+seconds"
+        },
+        {
+          "id": "A3",
+          "text": "retry once",
+          "task_pattern": "retry\\s+once"
+        },
+        {
+          "id": "A4",
+          "text": "preserve the payment fingerprint",
+          "task_pattern": "preserve\\s+the\\s+payment\\s+fingerprint"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "when VX-91 occurs, refresh the recovery lease; wait 13 seconds",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "retry once; preserve the payment fingerprint",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A1",
+      "semantic_clause": "when VX-91 occurs, refresh the recovery lease",
+      "semantic_operator": "when_if",
+      "semantic_dimension": "condition",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bwhen\\b",
+            "\\bif\\b"
+          ],
+          [
+            "\\bVX-91\\b"
+          ],
+          [
+            "\\brefresh\\b"
+          ],
+          [
+            "\\blease\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "when\\s+VX\\-91\\s+occurs,\\s+refresh\\s+the\\s+recovery\\s+lease"
+          ],
+          [
+            "wait\\s+13\\s+seconds"
+          ],
+          [
+            "retry\\s+once"
+          ],
+          [
+            "preserve\\s+the\\s+payment\\s+fingerprint"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "saffrondb-sd-74",
+      "system": "SaffronDB",
+      "code": "SD-74",
+      "entities": [
+        "system:saffrondb",
+        "code:sd-74"
+      ],
+      "experience": {
+        "prompt": "SaffronDB returns SD-74. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the applicability rule for routing writes to the leader in SaffronDB."
+      },
+      "candidate_decision": "Route all writes to the leader.",
+      "authoritative_text": "read the shard mode; if the shard is read-only, route writes to the leader; preserve the transaction ID; record the leader epoch.",
+      "raw_source": "<<<ROLE:status>>>\nSD-74 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRoute all writes to the leader.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nread the shard mode; if the shard is read-only, route writes to the leader; preserve the transaction ID; record the leader epoch.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nreplication lag may exist\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 213 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "read the shard mode",
+          "task_pattern": "read\\s+the\\s+shard\\s+mode"
+        },
+        {
+          "id": "A2",
+          "text": "if the shard is read-only, route writes to the leader",
+          "task_pattern": "if\\s+the\\s+shard\\s+is\\s+read\\-only,\\s+route\\s+writes\\s+to\\s+the\\s+leader"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the transaction ID",
+          "task_pattern": "preserve\\s+the\\s+transaction\\s+ID"
+        },
+        {
+          "id": "A4",
+          "text": "record the leader epoch",
+          "task_pattern": "record\\s+the\\s+leader\\s+epoch"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "read the shard mode; if the shard is read-only, route writes to the leader",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the transaction ID; record the leader epoch",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "if the shard is read-only, route writes to the leader",
+      "semantic_operator": "when_if",
+      "semantic_dimension": "condition",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bif\\b",
+            "\\bwhen\\b"
+          ],
+          [
+            "\\bread[- ]only\\b"
+          ],
+          [
+            "\\broute\\b"
+          ],
+          [
+            "\\bleader\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "read\\s+the\\s+shard\\s+mode"
+          ],
+          [
+            "if\\s+the\\s+shard\\s+is\\s+read\\-only,\\s+route\\s+writes\\s+to\\s+the\\s+leader"
+          ],
+          [
+            "preserve\\s+the\\s+transaction\\s+ID"
+          ],
+          [
+            "record\\s+the\\s+leader\\s+epoch"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "thistleparser-tp-67",
+      "system": "ThistleParser",
+      "code": "TP-67",
+      "entities": [
+        "system:thistleparser",
+        "code:tp-67"
+      ],
+      "experience": {
+        "prompt": "ThistleParser returns TP-67. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the condition governing when state Q should be mapped to blocked."
+      },
+      "candidate_decision": "Always map state Q to blocked.",
+      "authoritative_text": "read the schema version; when schema version 7 appears, map state Q to blocked; preserve the original payload; validate after the mapping step.",
+      "raw_source": "<<<ROLE:status>>>\nTP-67 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nAlways map state Q to blocked.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nread the schema version; when schema version 7 appears, map state Q to blocked; preserve the original payload; validate after the mapping step.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\na legacy producer may still be active\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 149 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "read the schema version",
+          "task_pattern": "read\\s+the\\s+schema\\s+version"
+        },
+        {
+          "id": "A2",
+          "text": "when schema version 7 appears, map state Q to blocked",
+          "task_pattern": "when\\s+schema\\s+version\\s+7\\s+appears,\\s+map\\s+state\\s+Q\\s+to\\s+blocked"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the original payload",
+          "task_pattern": "preserve\\s+the\\s+original\\s+payload"
+        },
+        {
+          "id": "A4",
+          "text": "validate after the mapping step",
+          "task_pattern": "validate\\s+after\\s+the\\s+mapping\\s+step"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "read the schema version; when schema version 7 appears, map state Q to blocked",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the original payload; validate after the mapping step",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "when schema version 7 appears, map state Q to blocked",
+      "semantic_operator": "when_if",
+      "semantic_dimension": "condition",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bwhen\\b",
+            "\\bif\\b"
+          ],
+          [
+            "\\bversion\\s+7\\b"
+          ],
+          [
+            "\\bQ\\b"
+          ],
+          [
+            "\\bblocked\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "read\\s+the\\s+schema\\s+version"
+          ],
+          [
+            "when\\s+schema\\s+version\\s+7\\s+appears,\\s+map\\s+state\\s+Q\\s+to\\s+blocked"
+          ],
+          [
+            "preserve\\s+the\\s+original\\s+payload"
+          ],
+          [
+            "validate\\s+after\\s+the\\s+mapping\\s+step"
+          ]
+        ]
+      }
+    }
+  ]
+}
