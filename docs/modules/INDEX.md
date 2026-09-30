@@ -18,7 +18,7 @@ D-0002 … D-0006 accepted 2026-09-30.
 | 3a | schema | DDL: `events`, append-only trigger, linkage trigger, roles/grants | `src/nacre/schema/sql/0001_ledger.sql` | `tests/schema/test_0001_ledger.py` | D-0002, D-0003, D-0005 | A-0013 | done |
 | 3b | schema | DDL: `scopes`, `scope_grants`, RLS policies (FORCE) | `src/nacre/schema/sql/0002_scopes_rls.sql` | `tests/schema/test_0002_scopes_rls.py` | D-0005 | A-0011 | done |
 | 3c | schema | DDL: `keys` schema: stream master keys, data keys (stream, subject, month), encryption counters, RLS | `src/nacre/schema/sql/0003_keys.sql` | `tests/schema/test_0003_keys.py` | D-0004, D-0005 | A-0008, A-0015 | done |
-| 3d | schema | DDL: `checkpoints` table | `src/nacre/schema/sql/0004_checkpoints.sql` | (with #18) | D-0003 | A-0013 | deferred to #18: needs the checkpointer's DB role decided (CURRENT.md) |
+| 3d | schema | DDL: `nacre_checkpointer` role (column-granted head reads), append-only `checkpoints` table | `src/nacre/schema/sql/0004_checkpoints.sql` | `tests/schema/test_0004_checkpoints.py` | D-0003, D-0005 | A-0013 | planned |
 | 4 | ledger | Canonical byte encoding of an envelope (single source for seal + AAD) | `src/nacre/ledger/encode_envelope.py` | `tests/ledger/test_encode_envelope.py` | D-0002 | — | planned |
 | 5 | ledger | Compute an event's seal hash from prev_hash + encoding | `src/nacre/ledger/seal_event.py` | `tests/ledger/test_seal_event.py` | D-0003 | A-0013 | planned |
 | 6 | ledger | Detect and redact secrets before write: vendored gitleaks rules + entropy check | `src/nacre/ledger/strip_secrets.py` (+ data `src/nacre/ledger/data/gitleaks-v8.30.1.toml`, license beside it) | `tests/ledger/test_strip_secrets.py` (+ labeled corpus `tests/ledger/secret_corpus/`) | D-0002, D-0007 | A-0010, A-0017 | planned |
@@ -37,8 +37,8 @@ D-0002 … D-0006 accepted 2026-09-30.
 | 17 | ledger | Replay one cognitive cycle in causal order | `src/nacre/ledger/replay_cycle.py` | `tests/ledger/test_replay_cycle.py` | D-0002 | — | planned |
 | 18 | ledger | Checkpointer: sign stream heads every 1,000 events or hourly (DB table + external file); separate process holding the key | `src/nacre/ledger/write_checkpoint.py` | `tests/ledger/test_write_checkpoint.py` | D-0003 | A-0013 | planned |
 | 19 | ledger | Verify a stream's chain and checkpoints without keys (verifier role) | `src/nacre/ledger/verify_chain.py` | `tests/ledger/test_verify_chain.py` (tamper suite) | D-0003 | A-0013 | planned |
-| 20 | keys | Shred keys: a stream master key, a person's data keys, or chosen months; write deletion marker(s) | `src/nacre/keys/shred_keys.py` | `tests/keys/test_shred_keys.py` | D-0004 | A-0008 | planned |
-| 20a | keys | Rotate the root key: rewrap every live stream master key, record root-key version | `src/nacre/keys/rotate_root_key.py` | `tests/keys/test_rotate_root_key.py` | D-0004 | — | planned |
+| 20 | keys | Shred keys: a stream master key, a person's data keys, or chosen months; write deletion marker(s); built together with #20a (D-0004 amendment 6) | `src/nacre/keys/shred_keys.py` | `tests/keys/test_shred_keys.py` | D-0004 | A-0008 | planned |
+| 20a | keys | Rotate the root key (≥ monthly + on demand): rewrap surviving master keys, destroy the old root version, record the required backup-destruction step | `src/nacre/keys/rotate_root_key.py` | `tests/keys/test_rotate_root_key.py` | D-0004 | — | planned |
 | 21 | scopes | Delete a scope: shred all its keys, mark scope deleted | `src/nacre/scopes/delete_scope.py` | `tests/scopes/test_delete_scope.py` | D-0004, D-0005 | A-0008 | planned |
 
 Notes:

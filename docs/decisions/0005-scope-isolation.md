@@ -10,6 +10,22 @@
 1. Three requirements stated as hard invariants (see "Non-negotiable invariants" below): the app
    role never owns the tables, FORCE ROW LEVEL SECURITY is on, and a test proves cross-scope reads fail.
 
+## Amendments after acceptance (owner-directed, D3; additive, no accepted text changed)
+2. **2026-09-30 — `nacre_checkpointer` role (resolves the D-0003 checkpointer's DB access).**
+   The checkpointer process (D-0003) connects as a new role, `nacre_checkpointer`, with:
+
+   | ID | Requirement | How checked |
+   |---|---|---|
+   | C-1 | It reads **only** `stream_id`, `commit_seq`, `hash` of `ledger.events` (column grants + an RLS policy for this role), never `body_ciphertext` or any other column | Test: selecting each of those three works across all streams; selecting any other column is `permission denied` |
+   | C-2 | It may INSERT into `ledger.checkpoints` and read it; no UPDATE/DELETE/TRUNCATE | Test: privileges on `ledger.checkpoints` for the role |
+   | C-3 | `ledger.checkpoints` is append-only with the same superuser-proof trigger as `events` (`ledger.reject_mutation`) | Test: UPDATE/DELETE/TRUNCATE rejected even for a superuser |
+   | C-4 | The signing key is held only by the checkpointer process, never in the database (no key column; only the public key id and signature are stored) | Test: `ledger.checkpoints` has no private-key column; review of every migration |
+   | C-5 | `nacre_verifier` stays read-only on `events` and `checkpoints` | Test: verifier has SELECT only on both |
+   | C-6 | `nacre_checkpointer` owns nothing and has no `BYPASSRLS` / superuser (as S-1) and no access to `scopes` or `keys` | Same checks as S-1, plus permission-denied checks |
+
+   Option (b), letting the verifier write checkpoints, was rejected: the verifier would then write
+   the evidence it later verifies against.
+
 ## Context
 SPEC Law 5 and Scopes rule 1: "Isolation is enforced by the database (row-level security per
 scope), not by prompts." SPEC names five scope kinds (task, project, user, team/org, agent) and

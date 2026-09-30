@@ -25,6 +25,37 @@
      which root-key version wraps each row. Data keys and ciphertext are untouched.
      Shredded (deleted) master keys are not resurrected by rotation.
 5. **2026-09-30 — monthly rotation for system keys confirmed** (as already stated in the accepted Decision).
+6. **2026-09-30 — shredding is final only at the next root-key rotation.** Deleting a wrapped-key
+   row cannot by itself guarantee deletion: the bytes survive in dead tuples until VACUUM, and in
+   WAL, replicas and backups, which no in-database scrub reaches. Therefore:
+   - A shred (key-row deletion + deletion marker) makes data **unreadable to the running system
+     immediately**, and **unrecoverable at the next root-key rotation**.
+   - Root-key rotation (`keys/rotate_root_key.py`) steps:
+     1. Rewrap every *surviving* stream master key under a new root-key version.
+     2. Then destroy the old root-key version, **including its separate backup** (D-0004
+        amendment 4). The code destroys the local file; destroying the backup copy is an operator
+        step that the rotation run records as a required, confirmed action.
+
+     Any wrapped master key recovered from WAL, a replica or a backup was wrapped under a destroyed
+     root version, so it can never be unwrapped again.
+   - Rotation runs **at least monthly**, and **on demand** for urgent deletions.
+   - `keys/shred_keys.py` (#20) and `keys/rotate_root_key.py` (#20a) implement this together.
+   - A-0008's test is updated accordingly.
+
+   **Open issue raised by the builder (2026-09-30), awaiting owner decision.** Root rotation makes
+   *stream-master-key* shredding (scope deletion) final. It does **not** make *data-key* shredding
+   final: erasing a person or forgetting a month deletes data keys, not master keys. A deleted data
+   key recovered from a backup is wrapped under its stream's master key. That master key
+   *survives*, and is merely rewrapped under the new root, so the recovered data key still unwraps.
+
+   Proposed fix: when a shred deletes data keys in a stream, that stream's master key must also
+   be rotated before the next root rotation:
+   1. Create a new master key.
+   2. Rewrap the stream's surviving data keys under it.
+   3. Delete the old master-key row.
+
+   The old master key then exists only in pre-rotation backups, wrapped under the root version
+   that the root rotation destroys. This is not part of amendment 6 until the owner approves it.
 
 ## Context
 SPEC open decision: "Crypto-shredding key granularity: per user, per project, or per memory."

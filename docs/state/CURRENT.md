@@ -38,11 +38,12 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   comparison to the owner as part of A-0017.
 
 ## Open questions
-- **Checkpointer database role (blocks INDEX #3d / #18).** D-0003 puts the checkpointer in a separate
-  process holding the signing key. It must read every stream head (like `nacre_verifier`) and write
-  `ledger.checkpoints`. D-0005's role table has no role for it. Options: (a) a new `nacre_checkpointer`
-  role with SELECT on events + INSERT on checkpoints; (b) give `nacre_verifier` INSERT on checkpoints
-  (the verifier then writes). This is a security-boundary change to D-0005 (D3), so it needs the owner.
+- **D-0004 open issue (blocks #20/#20a, not before):** root rotation makes master-key shredding
+  final but not data-key shredding (person erasure, forget-month): a recovered data key still
+  unwraps under its surviving, rewrapped master key. Proposed: a data-key shred also rotates that
+  stream's master key before the next root rotation. Owner to decide (D3).
+- Resolved 2026-09-30: checkpointer role = new `nacre_checkpointer` (D-0005 amendment 2).
+- Resolved 2026-09-30: shredding final at root rotation (D-0004 amendment 6; A-0008 test updated).
 - Resolved 2026-09-30: D-0008 accepted (payload_type kept in AAD, flags byte, header in AAD, own
   codec: no floats, separate strict decoder, cbor2 + hypothesis test-only, frozen vectors).
 
@@ -60,9 +61,8 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
 - Enums are `text` + CHECK (not PG enum types); short identifiers limited to `[A-Za-z0-9._:/+-]{1,128}`.
 - UPDATE/DELETE policies for scope status, key shredding and root-key rotation are deliberately
   absent; each arrives as a new migration with the file that needs it (#20, #20a, #21).
-- **Finding for A-0008:** deleting a key row leaves the wrapped bytes in dead tuples until VACUUM.
-  `pg_dump` won't show them, but the data files will. `shred_keys` (#20) must account for this
-  (e.g. VACUUM the keys tables after shredding) and A-0008's test should check the files, not just a dump.
+- **Finding for A-0008:** deleted wrapped-key bytes survive in dead tuples, WAL, replicas and backups.
+  Resolved by the owner via D-0004 amendment 6 (finality at root rotation), not by VACUUM.
 
 ## Blockers
 - None.
@@ -92,3 +92,4 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   they were mutation-checked: dropping the prev_hash check, opening the app read policy, removing the
   append-only trigger, and granting the app UPDATE each made the targeted test fail at its assertion.
   Results: `check_structure.py` → 0 failure(s), 0 warning(s); `pytest` → 82 passed (4.4 s).
+- 2026-09-30: D-0005 amendment 2 (nacre_checkpointer, C-1..C-6), D-0004 amendment 6 (finality at root rotation) + open issue on data-key finality; A-0008 re-specified.
