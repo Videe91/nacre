@@ -43,16 +43,10 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   comparison to the owner as part of A-0017.
 
 ## Open questions
-- **D-0012 PROPOSED (blocks #14 append_event).** Part A (D3): trust by source; proposed git/ci/review/system
-  trusted, chat/web/tool untrusted. Part B (D2): request MAC over the caller's pre-strip request as
-  deterministic CBOR, under the original event's data key. Equal MAC → return the original; different MAC
-  → conflict.
-- **Credential-slot category has no target (proposal).** Random values in credential slots are stripped
-  54–72% on H3 (working 82–83%, flagged as overfitting). The layer that catches them is the entropy
-  layer's cue list and generic rules. H3's slot contexts (Dockerfile ENV, Rust, notebook JSON, Swift,
-  PowerShell, Ansible, nginx) name credentials in ways the cues don't cover. Setting a target, and any
-  change to the entropy cues, is an owner decision; a change would need a fresh holdout (H4) under the
-  same protocol.
+- Resolved 2026-09-30: D-0012 accepted with owner corrections (trust by source + author, trust_basis, key rules, original-erased error); D-0002 amendment 4 (envelope v2).
+- **PHASE 3 GATE ITEM (owner, 2026-09-30): credential-slot target.** Before real agent data flows through the
+  interface, set a target for "random value in a credential slot" (H3: 54–72%) and raise it, measured on a
+  fresh H4 sealed under the same protocol. Not blocking Phase 1.
 - **D-0011 accepted** (holdout; additive only; admission criteria; loosening needs owner approval).
 - **Upstream (not blocking):** once proven on the holdout, prepare as gitleaks contributions (D-0011
   amendment 3): the `ghs_` stateless rule, the password-in-URL rule, and the **gitlab-pat-routable gap**
@@ -353,3 +347,4 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   (flagged). No detector change after H3 was sealed. Evidence: A-0010-measurement-2026-09-30-H3.md.
   H2 FP xfail removed (H2 is record-only; FP invalid by construction per the holdout log).
 - 2026-09-30: #14 started with a design read; two unrecorded choices found; D-0012 proposed (trust mapping D3, request MAC D2). No #14 code written.
+- 2026-09-30: D-0012 accepted with corrections; D-0002 amendment 4 (envelope v2 with trust_basis); credential-slot target recorded as a Phase 3 gate item.

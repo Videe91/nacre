@@ -1,12 +1,28 @@
 # D-0012: Trust by source, and the idempotency request MAC
 
-- **Status:** proposed — awaiting owner approval (part A is D3)
+- **Status:** accepted (owner, 2026-09-30, explicit D3 approval of part A, with corrections below)
 - **Tier:** D3 (part A: security boundary, the injection firewall); D2 (part B: persistence format and
   idempotency semantics)
 - **Date:** 2026-09-30
 - **Relies on assumptions:** A-0012
 - **Related:** D-0002 (`trust` is derived from `source` at intake; `request_mac`), D-0003 (append
   transaction), D-0004 (keys), MNEXA ADR-0018 (idempotent writes)
+
+## Amendment history (owner corrections, before acceptance)
+1. **Part A: trust depends on source AND author, not source alone.**
+   - **Trusted:** content authored by an authorized principal of the scope, or structured result
+     fields from system integrations (CI status, merge status, test counts, exit codes).
+   - **Untrusted:** free text from external authors (outside PRs, issues, commit messages from
+     non-members, dependency code), CI log text, web, and tool output.
+   - **Default:** untrusted.
+2. **`trust_basis`:** `asserted` (by the caller) or `verified`. The interface layer can then upgrade
+   trust later without rewriting events. It is an envelope field (D-0002 amendment 4: envelope v2).
+3. **Part B clarifications:**
+   - Retries are looked up by idempotency key within the stream. The key must be caller-random and
+     never content-derived (intake requires a UUID v4 or v7).
+   - The same key from a **different principal** is a conflict (the writing principal's id is part of
+     the MAC input).
+   - If the original's key is shredded, the retry is rejected with a distinct **"original erased"** error.
 
 ## Context
 `ledger/append_event.py` (INDEX #14) cannot be written without two choices that no ADR makes:
@@ -28,8 +44,25 @@
    for git and CI events, which SPEC treats as trusted outcome signals.
 3. **Caller-supplied trust.** Rejected: D-0002 forbids the caller from setting trust.
 
-### Proposed: option 1
-Mapping: `git`, `ci`, `review`, `system` → trusted; `chat`, `web`, `tool` → untrusted.
+### Decision (as corrected by the owner)
+The caller supplies `authorship`, one of:
+- `scope_principal`: authored by an authorized principal of the scope;
+- `integration_result`: structured result fields from a system integration;
+- `external`: the default.
+
+Intake derives:
+
+| Condition | trust |
+|---|---|
+| `source` is `web` or `tool` | untrusted, whatever the authorship |
+| `authorship = external` | untrusted |
+| `authorship = integration_result`, `source` ∈ {`git`, `ci`, `review`, `system`} **and** `payload_type = structured` | trusted |
+| `authorship = integration_result` otherwise (e.g. CI **log text**) | rejected as an invalid claim, which surfaces caller bugs |
+| `authorship = scope_principal`, `source` ∈ {`chat`, `git`, `review`, `system`} | trusted |
+| `authorship = scope_principal`, `source = ci` | untrusted (CI output text) |
+
+`trust_basis` is always `asserted` in Phase 1: authorship is the caller's claim until the interface layer
+authenticates it (A-0012).
 
 Honest limit: until principal authentication exists (interface layer, A-0012), `source` is asserted by
 the calling app. A-0012 already records that the app is trusted to state who is calling; this extends
@@ -48,7 +81,8 @@ it to what the source is. The authentication ADR must revisit it.
    collide as "the same request".
 3. **Plain hash.** Rejected by D-0002: it survives shredding.
 
-### Proposed: option 1
+### Decision
+- **MAC input:** the caller's pre-strip request **plus the writing principal's id**.
 - **Semantics:**
   - Same `(stream_id, idempotency_key)` and equal MAC → return the original event unchanged, with no
     new row (gate item 1).
@@ -60,8 +94,8 @@ it to what the source is. The authentication ADR must revisit it.
 - The trust mapping becomes part of the injection firewall and is tested per source.
 - A retry must resend the identical request, including `occurred_at`. Intake-assigned times never
   enter the MAC, so they cannot make a retry look different.
-- If the original event's key has been shredded, a retry can't be verified. It is rejected as a
-  conflict, never silently accepted.
+- If the original event's key has been shredded, a retry can't be verified. It is rejected with the
+  distinct "original erased" error, never silently accepted.
 
 ## How we'd know it was wrong
 - A source classified as trusted turns out to carry third-party text (e.g. review comments quoting

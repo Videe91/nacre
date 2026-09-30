@@ -28,6 +28,14 @@
    After her erasure, only the opaque id remains, which is the point.
    *Note:* D-0005's access grants are keyed by opaque principal ids, so they already satisfy this rule.
 
+4. **2026-09-30 — envelope v2: `trust_basis` (D-0012 amendment 2).**
+   - v2 = the v1 field list plus `trust_basis` (`asserted` | `verified`), placed just before `key_id` in
+     the canonical order. The v2 AAD equals the v1 AAD.
+   - v1 stays defined and frozen. No v1 event was ever written, but the rule is fix-forward, never
+     edit a frozen format. Intake writes v2.
+   - Migration 0005 adds the column, with a check that v1 rows have no `trust_basis` and v2 rows
+     always do.
+
 ## Context
 The ledger is the only source of truth, and SPEC says typed payloads go into Phase 1 "because
 changing the ledger later is painful". Every later layer (seal, shredding, RLS, recall, replay)
