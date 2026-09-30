@@ -1,10 +1,14 @@
 # D-0003: Seal chain (tamper evidence and gapless sequencing)
 
-- **Status:** proposed
+- **Status:** accepted (owner, 2026-09-30, with amendments below)
 - **Tier:** D2 (persistence format, invariant). The owner may raise it to D3 as "what counts as proof" of integrity.
 - **Date:** 2026-09-30
 - **Relies on assumptions:** A-0007, A-0013
-- **Related:** D-0002 (what is hashed), D-0004 (why the chain covers ciphertext)
+- **Related:** D-0002 (what is hashed), D-0004 (why the chain covers ciphertext), MNEXA ADR-0010 rule 9 (visibility order)
+
+## Amendment history (owner-directed, before acceptance)
+1. Signing key custody for Phase 1: a local file outside the database.
+2. Checkpoint cadence: every 1,000 events or hourly, whichever comes first (see Decision).
 
 ## Context
 SPEC: "prev_hash / hash, fingerprint chain per stream", "gapless sequence per stream", "a nightly
@@ -51,11 +55,30 @@ Option 4 (per-stream chain + signed checkpoints), hash computed in app with DB-e
 (b), serialization by advisory lock (ii). SHA-256 (stdlib) with a domain-separation prefix.
 
 The hash covers **every** envelope field except `hash` itself, including `body_ciphertext`,
-`key_id`, `commit_seq`, `recorded_at`, `attachment_sha256`. It covers ciphertext, not plaintext.
+`key_id`, `commit_seq`, `recorded_at`, `committed_at`, `attachment_sha256`. It covers ciphertext, not plaintext.
 Shredding therefore never breaks verification, and the verifier needs no keys.
 
-Append transaction (one transaction, in `append_event`): take the advisory lock → check idempotency
-→ read the head → assign `commit_seq`, `recorded_at` → encrypt → compute `hash` → INSERT → commit.
+Append transaction (one transaction, in `append_event`; `recorded_at` was already set at intake):
+take the advisory lock → check idempotency → read the head → assign `commit_seq`, `committed_at`
+→ encrypt → compute `hash` → INSERT → commit.
+
+**Visibility order (MNEXA ADR-0010 rule 9).** The advisory lock is held until commit, so the next
+appender to the same stream can only read the head *after* the previous event is visible. This
+holds **only under READ COMMITTED**. Under REPEATABLE READ or SERIALIZABLE, the snapshot is taken
+before the lock wait, so the head read would miss the just-committed row. The append transaction
+therefore runs at READ COMMITTED, and a test asserts that. A rolled-back append releases its number
+to the next appender, which keeps the sequence gapless. Result: `AS_OF(stream, N)` is immutable
+once N is visible (R-18, R-19).
+
+**Checkpoints.** A separate checkpointer process holds the Ed25519 signing key, which lives in a
+local file outside the database and outside the repo for Phase 1. The app process and the
+`nacre_app` DB role never see it. The checkpointer polls stream heads (interval is a D1 detail,
+default 60 s) and signs a new checkpoint for a stream when **either**:
+- 1,000 events have been committed since that stream's last checkpoint, **or**
+- one hour has passed since that stream's last checkpoint and at least one event has been committed.
+
+Each checkpoint goes to the `checkpoints` table and to an append-only file outside the DB. With
+polling, "every 1,000 events" means "within one poll interval of the 1,000th event".
 
 Append-only enforcement: the app role has only INSERT and SELECT on `events`. A trigger rejects
 UPDATE, DELETE and TRUNCATE for all roles, the owner included, unless a dedicated migration role
@@ -75,14 +98,14 @@ contradicts per-scope deletion. App-side hashing keeps one canonical encoder (D-
 lock avoids a mutable table in the ledger schema.
 
 ## Consequences
-- Needs Ed25519 (from `cryptography`, same dependency as D-0004) and a signing key stored outside
-  the database. Phase 1 uses a local key file; production custody is out of scope for Phase 1.
+- Needs Ed25519 (from `cryptography`, D-0006) and a signing key in a local file outside the DB.
+  Production custody is out of scope for Phase 1.
 - Throughput per stream is bounded by one serialized transaction at a time (A-0007).
   Cross-stream appends run in parallel.
 - `verify_chain` is a pure read with no keys, so the nightly verifier gets a read-only role
   with no access to the key tables (D-0005).
 - A tamper between the last checkpoint and now is detectable only as far as the chain alone
-  can. The checkpoint interval bounds the undetectable-rewrite window.
+  can. The cadence bounds that window to at most 1,000 events or one hour per stream, plus one poll interval.
 
 ## How we'd know it was wrong
 - The concurrency benchmark (A-0007) misses its target. Then consider per-stream sub-sequences

@@ -52,28 +52,28 @@ The ledger records what happened, when, who did it and where it came from, and p
 | Field | What it is | Why |
 | --- | --- | --- |
 | event\_id | Time-sortable unique id | Ordering and lookup |
-| scope | org / user / project / task ids | Isolation |
+| stream\_id + scope ids | One owning stream (D-0005), plus org / user / project / agent / task ids as opaque context | Isolation |
 | commit\_seq | Gapless sequence per stream | AS\_OF(N) snapshots; consumers keep bookmarks |
-| occurred\_at / recorded\_at | Two clocks (plus ADR-0010 concepts) | Late arrivals, correct ordering |
-| actor | Person, agent, model name and version, tool | Which brain did what |
+| occurred\_at (+ basis, precision) / recorded\_at / committed\_at | World time (optional, observed or asserted); intake receipt time; commit wall-clock. Only commit\_seq orders (MNEXA ADR-0010, D-0002) | Late arrivals, anti-hindsight, latency |
+| actor | Kind, opaque id, model name and version, tool in plaintext; a person's identity encrypted (D-0002) | Which brain did what |
 | source + trust | Origin (chat, git, CI, web) and trusted / untrusted | Injection firewall: untrusted content is never an instruction |
 | caused\_by / cycle\_id | Causal parent; cognitive cycle it belongs to | Replay a task as cause and effect |
 | payload\_type | text, image, audio, diff, table, structured, trace | Any-content memory |
-| payload / attachment\_ref | Content, or fingerprint pointer to object storage | Keeps the ledger fast; dedup |
+| payload / attachment\_ref | Encrypted content, or keyed fingerprint pointer to attachment storage (dedup within one data key) | Keeps the ledger fast; dedup |
 | config\_version / mode | Settings and learning mode active at the time | Self-tuning and state-dependent recall |
-| idempotency\_key + request hash | Per logical write | Safe retries (ADR-0018) |
+| idempotency\_key + request MAC | Per logical write; MAC keyed so it is shredded with the data | Safe retries (ADR-0018) |
 | prev\_hash / hash | Fingerprint chain per stream | Tamper evidence |
-| key\_id | Encryption key for this scope | Crypto-shredding |
+| key\_id | Data key for (stream, subject, month) (D-0004) | Crypto-shredding |
 
 **Never edited, enforced by the machine.** The application role can only insert. A nightly job verifies the fingerprint chain. Corrections are new events.
 
-**Deletion without editing.** Payloads are encrypted per scope key. Destroying the key makes the data unreadable while the chain stays valid; a deletion marker records it; derived memories and personal-model adapters are rebuilt without it. Secrets are stripped before any write.
+**Deletion without editing.** Payloads are encrypted with a data key per (stream, subject, calendar month), wrapped by a per-stream master key (D-0004); the subject is a person or the stream's system subject. Destroying a key makes the data unreadable while the chain stays valid; a deletion marker records it; derived memories and personal-model adapters are rebuilt without it. Secrets are stripped before any write.
 
-**Write path:** agent → MCP/API → intake validates, strips secrets, tags trust → assigns sequence and seal → single atomic transaction → attachments to object storage by fingerprint.
+**Write path:** agent → MCP/API → intake validates, strips secrets, tags trust → assigns sequence and seal → single atomic transaction → encrypted attachments to attachment storage by keyed fingerprint. Signed checkpoints of each stream head every 1,000 events or hourly (D-0003).
 
 **Read path:** stream by scope from sequence N; replay one cycle; AS\_OF(N) snapshot for recall; full rebuild of any derived store from sequence 1.
 
-**Storage:** Postgres events table partitioned by month, indexed by (scope, seq), cycle, and (type, time); S3-compatible object storage for attachments; old partitions archived, still replayable.
+**Storage:** Postgres events table indexed by (stream, seq), cycle, and (type, time); not partitioned in phase 1, because partitioning cannot enforce the per-stream unique sequence (D-0003; partitioning gets its own decision when volume requires it). Attachments on local disk behind a storage interface in phase 1; S3-compatible storage later (D-0006).
 
 ## Scopes
 
@@ -81,7 +81,7 @@ Every event and memory carries a scope. Recall merges scopes from narrowest outw
 
 | Scope | Holds | Readable by | Example |
 | --- | --- | --- | --- |
-| Task | Working memory for one cycle | That cycle | "Refactoring the auth module now" |
+| Task | Working memory for one cycle (a task\_id inside its owning stream, not a stream of its own, D-0005) | That cycle | "Refactoring the auth module now" |
 | Project | Beliefs, skills, threats, map for one project or repo | That project's agents and people | "Never hand-edit the migrations folder" |
 | User | Preferences, style, cross-project habits | That user's agents | "Prefers small PRs with plain summaries" |
 | Team / org | Conventions, approved skills, directory | Whole org | "All services log in JSON" |
@@ -90,7 +90,7 @@ Every event and memory carries a scope. Recall merges scopes from narrowest outw
 1. **Isolation is enforced by the database** (row-level security per scope), not by prompts.
 2. **Narrowest wins on conflict;** the conflict itself is logged.
 3. **Promotion upward is explicit:** a pattern seen in 3+ projects becomes a proposal for user or team scope; a person approves it (or auto-approval with human veto, see open decisions).
-4. **One stream per scope,** so deleting a scope removes its stream, its keys and everything derived.
+4. **One stream per durable scope** (org, team, project, user, agent), so deleting a scope destroys its stream master key: its events remain as unreadable ciphertext, the chain stays valid, a deletion marker records it, and everything derived is rebuilt without it (D-0004).
 5. **New projects inherit a starter kit** from user and team scope, never raw memories from other projects.
 
 ## Memory lifecycle
@@ -227,7 +227,7 @@ Python core, Postgres storage, MCP as the plug; Rust only where the benchmark pr
 | --- | --- | --- |
 | Core service (gate, sleep, recall, tuner) | Python | AI and eval ecosystem is Python-first; MNEXA code ports directly |
 | Ledger, interpretations, links, config | Postgres + pgvector | Append-only enforcement, row-level security per scope, versioned records, similarity search in one database |
-| Attachments | S3-compatible object storage | Content-addressed, deduplicated |
+| Attachments | Local disk behind a storage interface (phase 1); S3-compatible later | Encrypted, keyed fingerprints, deduplicated within one data key (D-0004) |
 | Agent interface | MCP server + Python SDK | Any agent or model plugs in without custom code |
 | Coding inputs | Git, CI and review webhooks | Trusted outcome signals |
 | Personal model | Python (PyTorch, adapter training) on open-weights models | Only practical ecosystem |
@@ -279,7 +279,6 @@ Phases 1–3 rebuild and harden what MNEXA has proven; phases 4–6 add what's n
 **Open decisions (need a decision record before building)**
 
 - Cross-scope promotion: always human, or auto after N projects with human veto.
-- Crypto-shredding key granularity: per user, per project, or per memory.
 - Links storage: Postgres tables only, or a graph store beside Postgres (decide from phase 3 query patterns).
 - External side-effect durability (MNEXA D-33): the dual-commit problem when an action reaches outside systems.
 - Credit attribution (MNEXA D-30): how outcome credit is shared across the memories that informed a decision; needed for strength updates.

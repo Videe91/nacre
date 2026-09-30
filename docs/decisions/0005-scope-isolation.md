@@ -1,10 +1,14 @@
 # D-0005: Scope isolation (streams, access resolution, database enforcement)
 
-- **Status:** proposed
-- **Tier:** D3 (scope isolation, privacy boundary). **Owner must approve explicitly.**
+- **Status:** accepted (owner, 2026-09-30, explicit D3 approval, with amendment below)
+- **Tier:** D3 (scope isolation, privacy boundary)
 - **Date:** 2026-09-30
 - **Relies on assumptions:** A-0009, A-0011, A-0012, A-0014
 - **Related:** D-0002 (`stream_id` + context ids), D-0003 (verifier role), D-0004 (key table behind the same wall)
+
+## Amendment history (owner-directed, before acceptance)
+1. Three requirements stated as hard invariants (see "Non-negotiable invariants" below): the app
+   role never owns the tables, FORCE ROW LEVEL SECURITY is on, and a test proves cross-scope reads fail.
 
 ## Context
 SPEC Law 5 and Scopes rule 1: "Isolation is enforced by the database (row-level security per
@@ -71,6 +75,14 @@ scope), not by prompts." SPEC names five scope kinds (task, project, user, team/
   | `nacre_app` | INSERT/SELECT under RLS | UPDATE/DELETE on the ledger |
   | `nacre_verifier` | SELECT on `events` across all streams, for D-0003 | Any access to `keys` |
   | `nacre_migrator` | DDL | Used only by migrations |
+
+- **Non-negotiable invariants (amendment 1), each with its check:**
+
+  | ID | Invariant | How checked |
+  |---|---|---|
+  | S-1 | `nacre_app` owns no table, view, sequence or function in the ledger, scopes or keys schemas, and has no `BYPASSRLS` / superuser | Test queries `pg_class.relowner`, `pg_proc.proowner` and `pg_roles.rolbypassrls` / `rolsuper` for `nacre_app` and asserts none |
+  | S-2 | `FORCE ROW LEVEL SECURITY` is enabled on `events`, `scopes`, `scope_grants` and every `keys` table | Test asserts `relrowsecurity` and `relforcerowsecurity` are true for each |
+  | S-3 | A principal cannot read another scope's events or keys | Adversarial test: principal granted stream A reads stream B, both through the scoped session and with a raw `SELECT` on the `nacre_app` connection, for every scope-kind pair; it must get zero rows. The same holds with the setting missing, after a pooled connection is reused, and inside a savepoint. **Phase 1 gate item** |
 
 - **Defense in depth:** even an RLS mistake on `events` yields ciphertext only, because unwrapping
   keys goes through `keys`, which has its own policy (D-0004).
