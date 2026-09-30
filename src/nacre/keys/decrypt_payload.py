@@ -2,7 +2,7 @@
 Functionality: Decrypt an event body, or report it as shredded when its key no longer exists.
 Owns: ciphertext header parsing and checks, the readability check on the stream, AEAD
   verification, strict body decoding, and the Shredded result.
-Public entry: decrypt_payload(), Shredded
+Public entry: decrypt_payload(), open_bytes(), check_header(), Shredded
 Decisions: D-0004, D-0005, D-0008
 Assumptions: none
 Notes: Returns the body dict, or Shredded(key_id) when the data key or its stream master key is gone
@@ -39,6 +39,26 @@ class DecryptError(ValueError):
     """The ciphertext is malformed, tampered, or not readable in this session."""
 
 
+def open_bytes(material: bytes, aad_prefix: bytes, ciphertext: bytes) -> bytes:
+    """Authenticate and decrypt a D-0008 ciphertext whose header was already checked (shared with attachments)."""
+    try:
+        return AESGCM(material).decrypt(ciphertext[19:31], ciphertext[31:], aad_prefix + ciphertext[:3])
+    except InvalidTag:
+        raise DecryptError("authentication failed: ciphertext or its bound fields were altered") from None
+
+
+def check_header(ciphertext: bytes) -> UUID:
+    """Validate a D-0008 header; return its key_id."""
+    if type(ciphertext) is not bytes or len(ciphertext) < _HEADER + _TAG:
+        raise DecryptError("ciphertext shorter than header + tag")
+    version, algorithm, flags = ciphertext[0], ciphertext[1], ciphertext[2]
+    if (version, algorithm) != (0x01, 0x01):
+        raise DecryptError(f"unknown format version {version} / algorithm {algorithm}")
+    if flags != 0:
+        raise DecryptError(f"flags 0x{flags:02x} set; all flags are reserved in format v1")
+    return UUID(bytes=ciphertext[3:19])
+
+
 def decrypt_payload(conn: psycopg.Connection, provider: RootKeyProvider,
                     aad_fields: Mapping[str, object], ciphertext: bytes) -> dict | Shredded:
     """The decrypted body of one event, or Shredded if its key has been destroyed."""
@@ -58,11 +78,7 @@ def decrypt_payload(conn: psycopg.Connection, provider: RootKeyProvider,
     key = load_key(conn, provider, key_id)
     if key is None:
         return Shredded(key_id)
-    aad = encode_envelope(aad_fields, Purpose.AAD) + ciphertext[:3]
-    try:
-        plaintext = AESGCM(key.material).decrypt(ciphertext[19:31], ciphertext[31:], aad)
-    except InvalidTag:
-        raise DecryptError("authentication failed: ciphertext or its envelope fields were altered") from None
+    plaintext = open_bytes(key.material, encode_envelope(aad_fields, Purpose.AAD), ciphertext)
     try:
         body = decode_cbor(plaintext)
     except CborDecodeError as exc:

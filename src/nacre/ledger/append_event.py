@@ -4,8 +4,8 @@ Owns: request validation, trust derivation from source + authorship, secret stri
   idempotent retries (principal-bound request MAC), subject and key-month choice, sequencing under the
   stream lock, encryption, sealing and the insert.
 Public entry: append_event(), AppendRequest, AppendResult, Authorship
-Decisions: D-0002, D-0003, D-0004, D-0005, D-0007, D-0008, D-0012
-Assumptions: A-0007, A-0009, A-0010, A-0014
+Decisions: D-0002, D-0003, D-0004, D-0005, D-0007, D-0008, D-0012, D-0013
+Assumptions: A-0007, A-0009, A-0010, A-0014, A-0021
 Notes: Runs inside a scoped session (scopes/open_scoped_session.py); RLS admits only the principal's
   streams, and the transaction commits or rolls back with the session.
   Order (D-0003 for the locked part):
@@ -23,6 +23,9 @@ Notes: Runs inside a scoped session (scopes/open_scoped_session.py); RLS admits 
   - occurred_at finer than its stated precision is REJECTED, never silently truncated (it is asserted data).
   - Structured content is stripped string by string; map keys are left as they are.
   - person is not stripped (it is identity, encrypted anyway); source_ref is stripped.
+  - Attachments (D-0013): stored BEFORE the lock, and so before the event commits. Text-like attachments (a
+    textual media type and valid UTF-8) are secret-stripped first; binary ones cannot be stripped by patterns
+    (A-0021). Description and media type go in the encrypted body.
 """
 import hmac
 import re
@@ -37,15 +40,19 @@ import psycopg
 from nacre.core.encode_cbor import encode_cbor
 from nacre.core.event import (ENVELOPE_VERSION, ActorKind, Envelope, EventType, Mode, PayloadType, Source,
                               TimeBasis, TimePrecision, Trust, TrustBasis, new_event_id)
+from nacre.core.blob_store import BlobStore
 from nacre.core.root_key_provider import RootKeyProvider
 from nacre.keys.encrypt_payload import MacPurpose, derive_mac, encrypt_payload
 from nacre.keys.get_or_create_key import get_or_create_key, load_key
 from nacre.ledger.seal_event import GENESIS_PREV_HASH, seal_event
+from nacre.ledger.store_attachment import store_attachment
 from nacre.ledger.strip_secrets import strip_secrets
 from nacre.scopes.open_scoped_session import ScopedSession
 
 _SHORT_ID = re.compile(r"^[A-Za-z0-9._:/+-]{1,128}$")
 _PERSON_KEYS = {"name", "handle", "email"}
+_MEDIA_TYPE = re.compile(r"^[a-z]+/[a-z0-9.+-]{1,100}$")
+_TEXTUAL = re.compile(r"^(text/.*|application/(json|x-ndjson|yaml|x-yaml|xml|toml|x-sh|javascript))$")
 
 
 class Authorship(StrEnum):
@@ -85,6 +92,9 @@ class AppendRequest:
     person: dict | None = None
     source_ref: str | None = None
     subject_id: UUID | None = None
+    attachment: bytes | None = None
+    attachment_media_type: str | None = None
+    attachment_description: str | None = None
 
 
 @dataclass(frozen=True)
@@ -107,7 +117,8 @@ class OriginalErased(IdempotencyConflict):
     """The idempotency key names an event whose key has been shredded, so the retry cannot be verified."""
 
 
-def append_event(session: ScopedSession, provider: RootKeyProvider, request: AppendRequest) -> AppendResult:
+def append_event(session: ScopedSession, provider: RootKeyProvider, request: AppendRequest,
+                 blob_store: BlobStore | None = None) -> AppendResult:
     """Validate, strip, encrypt, seal and insert one event; or return the original on an exact retry."""
     recorded_at = datetime.now(UTC)
     _validate(request)
@@ -126,6 +137,15 @@ def append_event(session: ScopedSession, provider: RootKeyProvider, request: App
                                      and request.event_type in (EventType.STATEMENT, EventType.MESSAGE) else stream)
     body, redactions, public = _body(request)
     key = get_or_create_key(conn, provider, stream, subject, date(recorded_at.year, recorded_at.month, 1))
+    attachment_ref = attachment_sha256 = None
+    if request.attachment is not None:
+        if blob_store is None:
+            raise AppendError("an attachment needs a blob store")
+        data, attachment_redactions = _strip_attachment(request)
+        redactions = redactions + attachment_redactions
+        if attachment_redactions:
+            body["redactions"] = list(redactions)
+        attachment_ref, attachment_sha256 = store_attachment(conn, key, blob_store, data)   # before commit (D-0013)
 
     conn.execute("SELECT pg_advisory_xact_lock(ledger.stream_lock_key(%s))", (stream,))
     existing = _row(conn, "stream_id = %s AND idempotency_key = %s", (stream, request.idempotency_key))
@@ -145,7 +165,7 @@ def append_event(session: ScopedSession, provider: RootKeyProvider, request: App
     values = {name: getattr(request, name, None) for name in (f.name for f in fields(Envelope))}
     values.update(envelope_version=ENVELOPE_VERSION, event_id=new_event_id(), commit_seq=seq, recorded_at=recorded_at,
                   committed_at=datetime.now(UTC), trust=trust, trust_basis=TrustBasis.ASSERTED, key_id=key.key_id,
-                  attachment_ref=None, attachment_sha256=None, prev_hash=prev_hash)
+                  attachment_ref=attachment_ref, attachment_sha256=attachment_sha256, prev_hash=prev_hash)
     aad = {k: values[k] for k in ("envelope_version", "event_id", "stream_id", "key_id", "event_type", "payload_type")}
     values["body_ciphertext"] = encrypt_payload(conn, key, aad, body)
     values["request_mac"] = derive_mac(key, MacPurpose.REQUEST_MAC, mac_input)
@@ -189,6 +209,15 @@ def _validate(r: AppendRequest) -> None:
         raise AppendError(f"person must map text keys from {sorted(_PERSON_KEYS)} to text")
     if r.source_ref is not None and type(r.source_ref) is not str:
         raise AppendError("source_ref must be text")
+    if r.attachment is not None:
+        if type(r.attachment) is not bytes:
+            raise AppendError("attachment must be bytes")
+        if not (type(r.attachment_media_type) is str and _MEDIA_TYPE.match(r.attachment_media_type)):
+            raise AppendError("an attachment needs a media type like 'text/plain' or 'image/png'")
+        if r.attachment_description is not None and type(r.attachment_description) is not str:
+            raise AppendError("attachment_description must be text")
+    elif r.attachment_media_type is not None or r.attachment_description is not None:
+        raise AppendError("attachment metadata without an attachment")
     _validate_time(r)
 
 
@@ -266,11 +295,27 @@ def _body(r: AppendRequest):
         body["person"] = dict(r.person)
     if r.source_ref is not None:
         body["source_ref"] = strip(r.source_ref)
+    if r.attachment is not None:
+        body["attachment"] = {"media_type": r.attachment_media_type}
+        if r.attachment_description is not None:
+            body["attachment"]["description"] = strip(r.attachment_description)
     if redactions:
         body["redactions"] = list(redactions)
     if public:
         body["public_credentials"] = sorted(public)
     return body, tuple(redactions), tuple(sorted(public))
+
+
+def _strip_attachment(r: AppendRequest) -> tuple[bytes, tuple[str, ...]]:
+    """Text-like attachments are secret-stripped before storage; binary ones are stored as given (A-0021)."""
+    if not _TEXTUAL.match(r.attachment_media_type):
+        return r.attachment, ()
+    try:
+        text = r.attachment.decode("utf-8")
+    except UnicodeDecodeError:
+        return r.attachment, ()
+    result = strip_secrets(text)
+    return result.text.encode("utf-8"), result.redactions
 
 
 _ENUMS = {"event_type": EventType, "payload_type": PayloadType, "actor_kind": ActorKind, "source": Source,

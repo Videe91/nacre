@@ -3,7 +3,7 @@ Functionality: Everything the write path does with a data key: encrypt an event 
   D-0008 ciphertext, count the key's uses, and derive the keyed MACs that die with the key.
 Owns: body validation (D-0008 body map v1), the ciphertext header, the AAD, the per-key encryption
   count and its 2^28 cap, and HKDF sub-keys for request_mac / attachment_ref.
-Public entry: encrypt_payload(), derive_mac()
+Public entry: encrypt_payload(), seal_bytes(), derive_mac()
 Decisions: D-0002, D-0004, D-0007, D-0008
 Assumptions: A-0015
 Notes: Ciphertext = version(0x01) | algorithm(0x01, AES-256-GCM) | flags(0x00) | key_id(16) | nonce(12) | ct+tag.
@@ -56,7 +56,12 @@ def encrypt_payload(conn: psycopg.Connection, key: DataKey, aad_fields: Mapping[
     if aad_fields.get("key_id") != key.key_id or aad_fields.get("stream_id") != key.stream_id:
         raise EncryptError("AAD key_id / stream_id do not match the data key")
     _validate_body(body)
-    plaintext = encode_cbor(body)
+    return seal_bytes(conn, key, encode_envelope(aad_fields, Purpose.AAD), encode_cbor(body))
+
+
+def seal_bytes(conn: psycopg.Connection, key: DataKey, aad_prefix: bytes, plaintext: bytes) -> bytes:
+    """The D-0008 ciphertext of raw bytes under `key` (bodies and attachments share it, D-0013).
+    AAD = aad_prefix | header bytes 0-2. Counts the use against the key's 2^28 cap."""
     try:
         conn.execute("SAVEPOINT nacre_count")
         counted = conn.execute("UPDATE keys.data_keys SET encryption_count = encryption_count + 1 "
@@ -69,8 +74,7 @@ def encrypt_payload(conn: psycopg.Connection, key: DataKey, aad_fields: Mapping[
         raise EncryptError(f"data key {key.key_id} is not writable here (shredded or not in the write set)")
     prefix = bytes([FORMAT_VERSION, ALGORITHM_AES_256_GCM, FLAGS_V1])
     nonce = secrets.token_bytes(12)
-    aad = encode_envelope(aad_fields, Purpose.AAD) + prefix
-    return prefix + key.key_id.bytes + nonce + AESGCM(key.material).encrypt(nonce, plaintext, aad)
+    return prefix + key.key_id.bytes + nonce + AESGCM(key.material).encrypt(nonce, plaintext, aad_prefix + prefix)
 
 
 def derive_mac(key: DataKey, purpose: MacPurpose, data: bytes) -> bytes:

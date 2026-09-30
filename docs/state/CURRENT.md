@@ -47,6 +47,9 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   comparison to the owner as part of A-0017.
 
 ## Open questions
+- **For owner review (builder's call under SPEC's "strip before any write"):** text-like attachments (textual media
+  type + valid UTF-8) are secret-stripped before storage; binary attachments are stored as given and recorded as a
+  known gap (A-0021).
 - Resolved 2026-09-30:
   - D-0013 accepted: attachments are written before commit and fingerprint-verified on every read; checkpoints
     carry the key version; A-0020 added.
@@ -417,3 +420,13 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   1 fail; ordered by time instead of commit_seq → 3 fail.
 - 2026-09-30: D-0013 and D-0014 accepted with owner additions; D-0006 amendment 1 (psycopg_pool); D-0004 amendment 8 (weekly root rotation); A-0020.
 - 2026-09-30: psycopg_pool integrated (core.db.open_pool); pooled-scope-leak test added (mutation: session-level setting → fails). A-0007 re-measured pooled: ≤ 4 writers p99 ≤ 24.0 ms, 16-writer stress ≤ 87.8 ms. A-0007 validated for Phase 1.
+- 2026-09-30: INDEX #15 store_attachment, #15a local_disk_blob_store, #15b read_attachment (new); #15c orphan GC planned.
+  Shared crypto factored into keys: seal_bytes / open_bytes / check_header, so bodies and attachments use one format.
+  append_event takes attachments: stored before the lock (and so before commit); text-like attachments are stripped;
+  metadata goes in the encrypted body.
+  Tests: round trip; dedup within a key but not across streams; the file exists before commit, and an aborted
+  append leaves only a harmless orphan; text stripping; flipped / truncated / swapped blobs caught; missing blob is
+  an error; Shredded; limits.
+  Mutations: sha check off → 3 fail. The plaintext-ref check off at first SURVIVED (AEAD already binds blob to ref),
+  so a writer-bug test was added (right ref, wrong plaintext); it now fails.
+  Note: append_event.py is 338 lines (soft limit 300, hard 400); split validation out if it grows further.
