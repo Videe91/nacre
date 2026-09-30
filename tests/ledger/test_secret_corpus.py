@@ -4,17 +4,19 @@ import base64
 import hashlib
 import json
 import random
+import re
+import zlib
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 import pytest
 from cryptography.hazmat.primitives import serialization
 
-from secret_corpus import generic, synthetic_negatives  # noqa: F401  (registers generators)
+from secret_corpus import generic, providers, synthetic_negatives  # noqa: F401  (registers generators)
 from secret_corpus.corpus import GENERATORS, build, digest
 
 # Pinned: changing any generator changes this. Update it deliberately, in the same commit.
-CORPUS_SHA256 = "6a64f679983115dfdb5c7583be94a87587e1b9b47ea887e00e2858b9e4987632"
+CORPUS_SHA256 = "686f675007f4f7920f22f5c335e91841b35aac5679967d2b171f06a2ce64b175"
 
 
 @pytest.fixture(scope="module")
@@ -122,3 +124,93 @@ def test_negatives_are_permissive_attributed_and_reviewed():
 def test_synthetic_negatives_are_negative(corpus):
     negs = [s for s in corpus if s.category == "negative"]
     assert negs and all(s.expected == "negative" and s.secret is None for s in negs)
+
+
+# ---- provider generators, checked against each provider's own rules --------------------------------
+def _b64url_dec(s):
+    return base64.urlsafe_b64decode(s + "=" * (-len(s) % 4))
+
+
+def test_github_classic_shape():
+    for tok in _outputs("provider/GitHub/classic (ghp/gho/ghu/ghs/ghr)", 20):
+        assert re.fullmatch(r"gh[pousr]_[A-Za-z0-9]{36}", tok) and len(tok) == 40
+
+
+def test_github_stateless_ghs_matches_githubs_published_regex():
+    for tok in _outputs("provider/GitHub/ghs stateless installation token"):
+        assert re.fullmatch(r"ghs_[A-Za-z0-9\.\-_]{36,}", tok)          # GitHub changelog 2026-05-15
+        assert tok.count(".") == 2 and 450 <= len(tok) <= 600
+
+
+def test_gitlab_legacy_uses_friendly_token_alphabet():
+    for tok in _outputs("provider/GitLab/glpat legacy", 20):
+        body = tok.removeprefix("glpat-")
+        assert len(body) == 20 and not set(body) & set("lIO0")
+
+
+def test_gitlab_routable_crc_and_payload_as_gitlab_computes_them():
+    for tok in _outputs("provider/GitLab/glpat routable", 20):
+        body, crc = tok[:-7], tok[-7:]
+        assert int(crc, 36) == zlib.crc32(body.encode())
+        prefix_b64, version, length = body.split(".")
+        b64 = prefix_b64.removeprefix("glpat-")
+        assert version == "01" and int(length, 36) == len(b64)
+        raw = _b64url_dec(b64)
+        payload = raw[16:-1]
+        assert raw[-1] == len(payload) and re.fullmatch(rb"o:[0-9a-z]+\nu:[0-9a-z]+", payload)
+
+
+def test_pypi_matches_pypis_published_pattern_and_is_a_v2_macaroon():
+    for tok in _outputs("provider/PyPI/API token (macaroon)"):
+        assert re.fullmatch(r"pypi-[A-Za-z0-9-_]{85,}", tok)            # docs.pypi.org/api/secrets
+        raw = _b64url_dec(tok.removeprefix("pypi-"))
+        assert raw[0] == 2 and b"pypi.org" in raw[:16]
+
+
+def test_heroku_uuid_form():
+    for tok in _outputs("provider/Heroku/HRKU- UUID form"):
+        assert len(tok) == 41 and re.fullmatch(r"HRKU-[0-9a-f-]{36}", tok)
+
+
+@pytest.mark.parametrize("name,prefix,length", [("provider/Supabase/sb_secret", "sb_secret_", 41),
+                                                ("provider/Supabase/sb_publishable", "sb_publishable_", 46)])
+def test_supabase_keys_checksum_as_supabase_computes_it(name, prefix, length):
+    for tok in _outputs(name):
+        # Positional: the base64url checksum may itself contain '_', so never split on it.
+        intermediate, sep, checksum = tok[:-9], tok[-9], tok[-8:]
+        assert len(tok) == length and sep == "_" and intermediate.startswith(prefix)
+        expected = base64.urlsafe_b64encode(hashlib.sha256(f"supabase-self-hosted|{intermediate}".encode()).digest())
+        assert checksum == expected.decode()[:8]
+
+
+@pytest.mark.parametrize("name,role", [("provider/Supabase/legacy service_role JWT", "service_role"),
+                                       ("provider/Supabase/legacy anon JWT", "anon")])
+def test_supabase_legacy_jwts_differ_only_by_role(name, role):
+    for tok in _outputs(name):
+        assert json.loads(_b64url_dec(tok.split(".")[1]))["role"] == role
+
+
+def test_supabase_look_alikes_are_classified_by_role():
+    assert GENERATORS["provider/Supabase/legacy service_role JWT"].expected == "secret"
+    assert GENERATORS["provider/Supabase/legacy anon JWT"].expected == "public"
+    assert GENERATORS["provider/Supabase/sb_publishable"].expected == "public"
+
+
+def test_sentry_tokens_parse_like_sentry():
+    for tok in _outputs("provider/Sentry/sntryu user token"):
+        assert re.fullmatch(r"sntryu_[0-9a-f]{64}", tok)
+    for tok in _outputs("provider/Sentry/sntrys org token"):
+        assert tok.count("_") == 2                                      # Sentry's own parser check
+        _, payload, secret = tok.split("_")
+        assert set(json.loads(base64.b64decode(payload))) == {"iat", "url", "region_url", "org"}
+        assert len(secret) == 43
+
+
+def test_sentry_dsns_public_vs_legacy():
+    for dsn in _outputs("provider/Sentry/DSN (public key only)"):
+        parts = urlsplit(dsn)
+        assert re.fullmatch(r"[0-9a-f]{32}", parts.username) and parts.password is None
+    for dsn in _outputs("provider/Sentry/legacy DSN with secret"):
+        parts = urlsplit(dsn)
+        assert re.fullmatch(r"[0-9a-f]{32}", parts.password)
+        assert GENERATORS["provider/Sentry/legacy DSN with secret"].make.secret_of(dsn) == parts.password
