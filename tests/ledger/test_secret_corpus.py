@@ -13,7 +13,7 @@ import pytest
 from cryptography.hazmat.primitives import serialization
 
 from secret_corpus import generic, providers, synthetic_negatives  # noqa: F401  (registers generators)
-from secret_corpus.corpus import GENERATORS, build, digest
+from secret_corpus.corpus import CONTEXTS, GENERATORS, HOLDOUT_CONTEXTS, HOLDOUT_SEED, build, build_holdout, digest
 
 # Pinned: changing any generator changes this. Update it deliberately, in the same commit.
 CORPUS_SHA256 = "686f675007f4f7920f22f5c335e91841b35aac5679967d2b171f06a2ce64b175"
@@ -36,6 +36,17 @@ def _names(prefix):
 def test_corpus_is_pinned(corpus):
     # A non-deterministic generator would fail this pin on every run, so it also guards determinism.
     assert digest(corpus) == CORPUS_SHA256
+
+
+# Sealed holdout (D-0011 amendment 1): pinned in the commit BEFORE any Nacre rule was written.
+HOLDOUT_SHA256 = "e138000609a639e7456c0adba676a49bf17a111af02d64c94ed01b578feb2345"
+
+
+def test_holdout_is_pinned_and_distinct_from_working():
+    assert digest(build_holdout()) == HOLDOUT_SHA256
+    assert HOLDOUT_SEED != 20260930
+    probe = "PROBE-VALUE-123"
+    assert not {c(probe) for c in CONTEXTS} & {c(probe) for c in HOLDOUT_CONTEXTS}
 
 
 def test_every_secret_occurs_in_its_text(corpus):

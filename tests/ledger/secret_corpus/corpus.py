@@ -67,21 +67,44 @@ CONTEXTS = [
 ]
 
 
+# SEALED HOLDOUT CONTEXTS (D-0011 amendment 1). Committed before any Nacre rule was written. Never
+# consult holdout samples or holdout results while writing or tuning rules; official rates come from here.
+HOLDOUT_SEED = 77_031_117
+HOLDOUT_CONTEXTS = [
+    lambda v: f'[service]\ncredential = "{v}"\n',
+    lambda v: f"<config><credential>{v}</credential></config>\n",
+    lambda v: f"Use this for now:\n```\n{v}\n```\n",
+    lambda v: f'client := api.NewClient("{v}")\n',
+    lambda v: f"const client = new Client({{ auth: '{v}' }});\n",
+    lambda v: f"X-Api-Key: {v}\n",
+    lambda v: f"INSERT INTO settings (k, v) VALUES ('cred', '{v}');\n",
+    lambda v: f"tool login --token={v} --verbose\n",
+    lambda v: f"error: authentication failed for {v}: 401 Unauthorized\n",
+]
+
+
 def _rng(seed: int, name: str) -> random.Random:
     return random.Random(int.from_bytes(hashlib.sha256(f"{seed}|{name}".encode()).digest()[:8], "big"))
 
 
-def build(seed: int = 20260930, per_generator: int = 50) -> list[Sample]:
-    """Every registered generator, `per_generator` samples each, deterministic for a given seed."""
+def build(seed: int = 20260930, per_generator: int = 50, contexts=None) -> list[Sample]:
+    """Every registered generator, `per_generator` samples each, deterministic for a given seed.
+    Default = the WORKING set. The holdout is build_holdout()."""
+    contexts = contexts or CONTEXTS
     samples = []
     for name in sorted(GENERATORS):
         g, rng = GENERATORS[name], _rng(seed, name)
         for i in range(g.count or per_generator):
             value = g.make(rng)
-            text = CONTEXTS[i % len(CONTEXTS)](value) if g.embed else value
+            text = contexts[i % len(contexts)](value) if g.embed else value
             samples.append(Sample(g.category, g.provider, g.kind, g.expected, text,
                                   None if g.expected == "negative" else _secret_of(value, g)))
     return samples
+
+
+def build_holdout(per_generator: int = 50) -> list[Sample]:
+    """The sealed holdout: other seed, other contexts. Official catch rates come from here only."""
+    return build(seed=HOLDOUT_SEED, per_generator=per_generator, contexts=HOLDOUT_CONTEXTS)
 
 
 def _secret_of(value: str, g: Generator) -> str:

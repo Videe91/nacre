@@ -296,3 +296,8 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   Mutations: public layer off → 2 fail; rules pin off → 1 fail.
   Results: pytest (strip_secrets) 22 passed + 8 strict xfail.
 - 2026-09-30: D-0011 accepted with owner conditions (holdout, additive-only, admission criteria, loosening = owner approval).
+- 2026-09-30: SEALED HOLDOUT committed before any Nacre rule (D-0011 amendment 1). It uses its own seed
+  (77031117) and 9 contexts absent from the working set (TOML, XML, Markdown code block, Go, JS, X-Api-Key
+  header, SQL, CLI flag, error message); committed negatives are split by path hash (174 working / 137
+  holdout); holdout digest pinned e13800…2345. Holdout measurement tests are added only after the rules
+  are written, so no holdout result is seen while writing rules.
