@@ -31,6 +31,14 @@
    - **Checks:** the codec is untouched (the frozen CBOR and envelope vectors are unchanged), and a test
      shows a body without the key round-trips byte-identically before and after the amendment.
 
+6. **2026-09-30 — attachment `scan` marker (owner-directed).** The body's `attachment` map gains an optional
+   `scan` key:
+   - `"text-scanned"`: the attachment was valid, mostly printable UTF-8, and was secret-stripped;
+   - `"unscanned"`: binary, stored as given (A-0021).
+
+   Text vs binary is decided by CONTENT, never by the declared media type, so relabelling cannot bypass
+   stripping. An absent key encodes exactly as before (amendment 5 conditions).
+
 ## Context
 D-0002 left the byte format of `body_ciphertext` open. It is a persistence format: every event
 ever written must stay decryptable, and `request_mac` (idempotency) is computed over the plaintext

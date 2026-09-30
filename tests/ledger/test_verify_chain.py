@@ -122,3 +122,28 @@ def test_the_verifier_needs_no_keys(checkpointed, streams, witness):
     with psycopg.connect(streams["dsn"]["verifier"]) as c:
         with pytest.raises(psycopg.errors.InsufficientPrivilege):
             c.execute("SELECT 1 FROM keys.data_keys")
+
+
+def test_hiding_the_db_checkpoint_does_not_hide_a_rewrite(checkpointed, streams, witness):
+    # Owner: a missing DB checkpoint row may be an attacker hiding a rewrite, not crash debris. The chain is
+    # checked against EVERY witness entry, with or without a DB row.
+    with psycopg.connect(streams["dsn"]["admin"]) as c:
+        c.execute("ALTER TABLE ledger.checkpoints DISABLE TRIGGER checkpoints_no_update_delete")
+        c.execute("DELETE FROM ledger.checkpoints")
+        c.execute("ALTER TABLE ledger.checkpoints ENABLE TRIGGER checkpoints_no_update_delete")
+        rows = [envelope_from_row(r) for r in c.execute(
+            f"SELECT {', '.join(COLS)} FROM ledger.events WHERE stream_id = %s ORDER BY commit_seq", (streams["a"],))]
+    prev, forged = GENESIS_PREV_HASH, []
+    for env in rows:
+        values = {k: getattr(env, k) for k in COLS if k != "hash"}
+        values.update(body_ciphertext=env.body_ciphertext + b"\x00", prev_hash=prev)
+        values["hash"] = seal_event(values)
+        prev = values["hash"]
+        forged.append(values)
+    _tamper(streams, ("DELETE FROM ledger.events WHERE stream_id = %s", (streams["a"],)),
+            *[(f"INSERT INTO ledger.events ({', '.join(COLS)}) VALUES ({', '.join(['%s'] * len(COLS))})",
+               [v[c] for c in COLS]) for v in forged])
+    report = _verify(streams, witness, checkpointed)
+    assert not report.ok
+    assert any("no longer passes through this checkpoint" in p for p in report.problems)
+    assert any("no DB row" in w for w in report.warnings)

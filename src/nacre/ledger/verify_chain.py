@@ -12,7 +12,8 @@ Notes: Runs on a `nacre_verifier` connection (reads all events and checkpoints, 
   never taken from the database (migration 0004 note). Findings:
     problem  seal/linkage/gap mismatch; checkpoint not on the chain; bad or unknown-key signature; DB checkpoint
              row missing from the witness or different from it (tampering);
-    warning  a witness entry with no DB row (possible crash between the witness write and the commit).
+    warning  a witness entry with no DB row: crash debris or concealment. Either way the chain is checked against
+             EVERY witness entry, so hiding a DB row cannot hide a rewrite (tested).
   A rewritten stream recomputes cleanly, but its hash at a witnessed commit_seq no longer equals the signed
   head_hash: that is how a full-stream rewrite is caught (gate item 3).
 """
@@ -112,4 +113,5 @@ def _reconcile_db_checkpoints(conn, witnessed, report):
                 rec["stream_id"], rec["commit_seq"], rec["head_hash"], rec["signing_key_id"], rec["signature"]):
             report.problems.append(f"DB checkpoint {cid} differs from its witness entry (tampering)")
     for cid in set(witnessed) - seen:
-        report.warnings.append(f"witness checkpoint {cid} has no DB row (possible crash between witness write and commit)")
+        report.warnings.append(f"witness checkpoint {cid} has no DB row: crash debris OR a concealed row; the chain was "
+                               f"still checked against it")

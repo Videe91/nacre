@@ -48,7 +48,8 @@ def test_round_trip_and_body_metadata(rw, provider, streams, blobs):
     with rw() as s:
         assert read_attachment(s, provider, blobs, env) == PNG
         (e,) = read_stream(s, provider, streams["a"])
-    assert e.body["attachment"] == {"media_type": "image/png", "description": "screenshot of the failing page"}
+    assert e.body["attachment"] == {"media_type": "image/png", "description": "screenshot of the failing page",
+                                    "scan": "unscanned"}
     assert env.attachment_sha256 == hashlib.sha256(blobs.get(env.attachment_ref)).digest()
     assert PNG not in blobs.get(env.attachment_ref)
 
@@ -150,3 +151,23 @@ def test_plaintext_must_match_its_ref_even_if_the_blob_authenticates(rw, provide
     forged = replace(env, attachment_sha256=hashlib.sha256(buggy).digest())
     with rw() as s, pytest.raises(AttachmentReadError, match="attachment_ref"):
         read_attachment(s, provider, blobs, forged)
+
+
+@pytest.mark.parametrize("declared", ["image/png", "application/octet-stream", "text/plain"])
+def test_text_is_detected_by_content_not_by_declared_media_type(rw, provider, streams, blobs, declared):
+    # Owner fix: relabelling text as binary must not bypass stripping.
+    token = _gh()
+    with rw() as s:
+        r = append_event(s, provider, req(streams["a"], payload_type=PayloadType.TEXT, attachment=f"key={token}\n".encode(),
+                                          attachment_media_type=declared), blob_store=blobs)
+        (e,) = [x for x in read_stream(s, provider, streams["a"]) if x.envelope.event_id == r.envelope.event_id]
+        stored = read_attachment(s, provider, blobs, r.envelope)
+    assert token.encode() not in stored and e.body["attachment"]["scan"] == "text-scanned"
+
+
+def test_binary_labelled_as_text_is_stored_unscanned(rw, provider, streams, blobs):
+    with rw() as s:
+        r = append_event(s, provider, req(streams["a"], attachment_media_type="text/plain"), blob_store=blobs)
+        (e,) = read_stream(s, provider, streams["a"])
+        assert read_attachment(s, provider, blobs, r.envelope) == PNG
+    assert e.body["attachment"]["scan"] == "unscanned"

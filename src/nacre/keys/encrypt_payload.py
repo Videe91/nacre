@@ -34,7 +34,7 @@ HEADER_BYTES = 3 + 16 + 12
 _BODY_KEYS = {"content_version", "content", "person", "source_ref", "attachment", "redactions",
               "public_credentials"}  # D-0008 amendment 5: optional
 _PERSON_KEYS = {"name", "handle", "email"}
-_ATTACHMENT_KEYS = {"description", "media_type"}
+_ATTACHMENT_KEYS = {"description", "media_type", "scan"}   # scan: D-0008 amendment 6
 
 
 class MacPurpose(StrEnum):

@@ -50,9 +50,7 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   comparison to the owner as part of A-0017.
 
 ## Open questions
-- **For owner review (builder's call under SPEC's "strip before any write"):** text-like attachments (textual media
-  type + valid UTF-8) are secret-stripped before storage; binary attachments are stored as given and recorded as a
-  known gap (A-0021).
+- Resolved 2026-09-30: text attachments stripped, decided by CONTENT (valid, >= 95% printable UTF-8), not media type; binaries marked unscanned (D-0008 amendment 6).
 - Resolved 2026-09-30:
   - D-0013 accepted: attachments are written before commit and fingerprint-verified on every read; checkpoints
     carry the key version; A-0020 added.
@@ -61,6 +59,9 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   - psycopg_pool adopted (D-0006 amendment 1).
 - Resolved 2026-09-30: A-0007 rescoped (≤ 4 writers p99 < 50 ms; 16-writer stress ceiling 150 ms), met unpooled; A-0019 added (remedy = group commit).
 - Resolved 2026-09-30: D-0012 accepted with owner corrections (trust by source + author, trust_basis, key rules, original-erased error); D-0002 amendment 4 (envelope v2).
+- **PHASE 3 GATE ITEM (owner, 2026-09-30): scan binary attachments.** Extract text from binaries (unpack archives,
+  PDF text, OCR for images) before storage; if a secret is found, reject the attachment with a clear error.
+  Until then, binary attachments are stored as given and marked scan="unscanned" (A-0021, D-0008 amendment 6).
 - **PHASE 3 GATE ITEM (owner, 2026-09-30): credential-slot target.** Before real agent data flows through the
   interface, set a target for "random value in a credential slot" (H3: 54–72%) and raise it, measured on a
   fresh H4 sealed under the same protocol. Not blocking Phase 1.
@@ -443,3 +444,11 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   recomputed seals (caught ONLY by the checkpoint); untrusted key and altered signature caught. A destroyed master
   key still verifies (gate 4, chain side). Mutations: checkpoint-on-chain → 1 fail; seal recompute → 2 fail;
   signature check → 1 fail.
+- 2026-09-30: Owner fixes.
+  - Text vs binary is decided by content (a relabelling test: text declared image/png or octet-stream is still
+    stripped; mutation "decide by media type" → 2 fail).
+  - Attachment `scan` marker (D-0008 amendment 6).
+  - Validation split into ledger/validate_append.py (#14a): append_event.py 339 → 208 lines; request types
+    re-exported.
+  - Verifier: confirmed and tested that a rewrite is caught through the witness even after the DB checkpoint row
+    is deleted; the warning wording no longer assumes a crash.
