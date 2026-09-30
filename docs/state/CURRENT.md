@@ -19,6 +19,8 @@ committing and pushing after each.
   #3 `schema/apply_migrations.py` + SQL 0001–0003, #2c `core/encode_cbor.py`, #2d `core/decode_cbor.py`, #4 `ledger/encode_envelope.py`, #5 `ledger/seal_event.py`, #3d `sql/0004_checkpoints.sql`.
 - Next: #6 `strip_secrets` once D-0009 is decided; #7 onward can proceed meanwhile.
 - To run DB tests: `docker compose up -d --wait`, then `pytest`.
+- **Every clone:** `git config core.hooksPath scripts/hooks` (D-0010 pre-commit secret scan; needs `.venv`
+  with `google-re2`). Temporary scanner `scripts/scan_staged_secrets.py` is replaced by #6.
 
 ## Phase 1 gate (FROZEN by owner 2026-09-30)
 Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`):
@@ -132,3 +134,14 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   it was fixed, rerun, and the flawed output kept. A-0017 marked invalidated; A-0018 and D-0009
   (proposed) added.
 - 2026-09-30: D-0009 accepted, D-0007 amendments 1–2, D-0010 accepted, A-0010 test method updated.
+- 2026-09-30: D-0010 pre-commit hook. Vendored gitleaks v8.30.1 rules + MIT licence
+  (`src/nacre/ledger/data/`, sha256 matches the pin) and THIRD_PARTY_NOTICES.md; google-re2 1.1.20251105
+  pinned in pyproject. Temporary scanner honours keywords, secretGroup, entropy, global and per-rule
+  allowlists. Whole tracked tree: 2 findings, both reviewed and allowlisted with reasons: the vendored
+  rules file itself, and the throwaway Docker test-DB role password in tests/conftest.py. The hook
+  blocked a real commit attempt with a runtime-built GitHub-token probe. On the unredacted A-0017
+  results it flags 6 strings where GitHub flagged 11: GitHub's detectors differ from gitleaks', which
+  is recorded and not treated as equivalence. The hook then blocked this very commit: the new test
+  file held the allowlisted test-password line as a literal; it is now built at runtime.
+  Results: check_structure 0/0; pytest 340 passed (51 s; the machine's load average was ~10–14 from
+  other work, which slowed the hypothesis tests).

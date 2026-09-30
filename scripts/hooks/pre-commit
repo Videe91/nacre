@@ -1,0 +1,10 @@
+#!/bin/sh
+# D-0010: block commits whose staged content matches a secret rule.
+# Install once per clone:  git config core.hooksPath scripts/hooks
+root="$(git rev-parse --show-toplevel)"
+python="$root/.venv/bin/python"
+if [ ! -x "$python" ]; then
+  echo "pre-commit: $python not found; create the venv (see CURRENT.md) before committing." >&2
+  exit 1
+fi
+exec "$python" "$root/scripts/scan_staged_secrets.py"

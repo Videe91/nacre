@@ -5,6 +5,7 @@ requires-python = ">=3.14"
 dependencies = [
     "psycopg[binary]>=3.2,<4",
     "cryptography>=45",
+    "google-re2==1.1.20251105",  # D-0009: exact pin; upgrades re-run scripts/a0017
 ]
 
 [project.optional-dependencies]
