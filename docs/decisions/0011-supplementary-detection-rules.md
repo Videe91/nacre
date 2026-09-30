@@ -47,6 +47,22 @@
    positives stay on exact-value hook allowlists. If a need appears, the only acceptable proposal is
    narrow: placeholders that contain a credential word, measured on the holdout.
 
+8. **2026-09-30 — benchmark method (owner, D2).**
+   - **Negatives:** synthetic negatives are never placed in credential slots.
+   - **A third category, "random value in a credential slot":** random non-secret values (hashes,
+     blobs, ids) placed in contexts that name a credential. The expected behaviour is **strip**, and
+     stripping is scored as correct. It is a separate group, not a false positive.
+   - **Caught:** every character of the secret part is redacted. Documented public prefixes and format
+     markers may remain.
+   - **Longest surviving secret fragment:** reported as a metric.
+   - **Gating:** these definitions gate from **H3** onward. H2 is recomputed under them for the record.
+   - **H2's FP result:** the 3.25% stays in the holdout log, marked *invalid by construction*
+     (synthetic negatives in credential slots). H2 is not altered.
+   - **H3:** sealed like H2 (separate agent, new seed, sealed before any run). The official FP rate
+     comes from H3.
+   - **Test runs:** the holdout measurement is a separate slow test marker (`holdout`). It runs when rules,
+     detector code or the corpus change, not on every commit.
+
 ## Admission criteria for a Nacre rule (written once; every rule entry carries these fields)
 - `source`: provider-owned URL(s) or a standard, never a scanner rule set; `source_date`: when it was checked.
 - `fact_ids`: A-IDs for any owner-measured fact the rule depends on (empty if none).

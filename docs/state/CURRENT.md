@@ -44,19 +44,10 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
 
 ## Open questions
 - **D-0011 accepted** (holdout; additive only; admission criteria; loosening needs owner approval).
-- **Upstream (not blocking):** once proven on the holdout, prepare the `ghs_` stateless and
-  password-in-URL rules as gitleaks contributions (D-0011 amendment 3).
-- **#6 is one decision from closing: the H2 false-positive definition.** On sealed H2 (official) every
-  catch group is 100% in all 16 contexts, and no overfitting is flagged. The FP rate AS SEALED is
-  3.25% (13/400), above target. All 13 are synthetic content-hash negatives that my framework change
-  (`embed_documents=True`, applied to negatives too) embedded into credential-slot contexts, where they
-  read `credential=<hex>`; the 150 real stdlib negatives have 0 FPs. The sealed H2 is not altered.
-  Options: (a) define negatives as never embedded in credential slots (raw synthetic documents + real
-  code) and seal H3 for the FP measurement under that definition; (b) keep counting them as FPs.
-  Recommended: (a). Tracked as a strict xfail.
-- **Proposed benchmark-method change (D2):** make "caught" require that no 16-char fragment of the secret
-  survives (the residue metric), not only that the whole string is gone. Today it is reported only; on H2
-  it is 0% everywhere. It exists because the vendored `gitlab-pat` rule partially redacts routable tokens.
+- **Upstream (not blocking):** once proven on the holdout, prepare as gitleaks contributions (D-0011
+  amendment 3): the `ghs_` stateless rule, the password-in-URL rule, and the **gitlab-pat-routable gap**
+  (gitleaks' rule expects one dot; GitLab's current RoutableToken format has two).
+- Resolved 2026-09-30: FP definition, credential-slot category, per-character "caught" (D-0011 amendment 8). H3 to be sealed; official FP from H3.
 - Resolved 2026-09-30: `[...]`/`{...}` placeholder loosening DECLINED (D-0011 amendment 7).
 - **Pre-commit hook switched to strip_secrets (D-0010).** The temporary gitleaks-only engine is gone;
   the hook keeps the reviewed repo allowlist + manifest-gated negatives skip.
@@ -333,3 +324,4 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   Evidence: A-0010-measurement-2026-09-30-H2.md. The suite now takes about 3.4 min (H2 builds 1,448 samples
   incl. RSA ×16 contexts several times); session caching is a later D1 improvement.
   Results: check_structure 0/0; pytest 536 passed + 1 strict xfail.
+- 2026-09-30: D-0011 amendment 8 (benchmark method); H2 FP marked invalid by construction in the holdout log; upstream note extended.
