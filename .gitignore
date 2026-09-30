@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 .env
 .pytest_cache/
+tests/ledger/secret_corpus/.rsa_cache.pkl

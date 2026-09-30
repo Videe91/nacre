@@ -12,8 +12,9 @@ from urllib.parse import unquote, urlsplit
 import pytest
 from cryptography.hazmat.primitives import serialization
 
-from secret_corpus import generic, providers, synthetic_negatives  # noqa: F401  (registers generators)
-from secret_corpus.corpus import CONTEXTS, GENERATORS, HOLDOUT_CONTEXTS, HOLDOUT_SEED, build, build_holdout, digest
+from secret_corpus import credential_slot, generic, providers, synthetic_negatives  # noqa: F401  (registers generators)
+from secret_corpus.corpus import (CONTEXTS, GENERATORS, HOLDOUT_CONTEXTS, HOLDOUT_SEED, WORKING_CREDENTIAL_SLOTS,
+                                  build, build_holdout, build_working, digest, secret_parts)
 
 # Pinned: changing any generator changes this. Update it deliberately, in the same commit.
 CORPUS_SHA256 = "686f675007f4f7920f22f5c335e91841b35aac5679967d2b171f06a2ce64b175"
@@ -47,6 +48,7 @@ HOLDOUT_SHA256 = "e138000609a639e7456c0adba676a49bf17a111af02d64c94ed01b578feb23
 HOLDOUT2_SHA256 = "7efda5f2b910d564cb120d77d196da1f07b6d44e4bb946594191e258f653df0d"
 
 
+@pytest.mark.holdout
 def test_holdout2_is_pinned_and_distinct():
     from secret_corpus import holdout_2
     assert digest(holdout_2.build_holdout2()) == HOLDOUT2_SHA256
@@ -55,6 +57,7 @@ def test_holdout2_is_pinned_and_distinct():
     assert not {c(probe) for c in holdout_2.HOLDOUT2_CONTEXTS} & earlier
 
 
+@pytest.mark.holdout
 def test_holdout_is_pinned_and_distinct_from_working():
     assert digest(build_holdout()) == HOLDOUT_SHA256
     assert HOLDOUT_SEED != 20260930
@@ -238,3 +241,34 @@ def test_sentry_dsns_public_vs_legacy():
         parts = urlsplit(dsn)
         assert re.fullmatch(r"[0-9a-f]{32}", parts.password)
         assert GENERATORS["provider/Sentry/legacy DSN with secret"].make.secret_of(dsn) == parts.password
+
+
+# ---- D-0011 amendment 8: working data, credential slots, secret parts ------------------------------
+WORKING_DATA_SHA256 = "8132ea8def085d57f579f090ccb2794fe36e8169c44ccb0be5fb2cb72316d209"
+
+
+@pytest.mark.holdout
+def test_working_data_is_pinned_slots_placed_and_negatives_raw():
+    w = build_working()
+    assert digest(w) == WORKING_DATA_SHA256
+    slot_contexts = {c("\x00") for i, c in enumerate(CONTEXTS) if i in WORKING_CREDENTIAL_SLOTS}
+    for s in w:
+        if s.category == "credential-slot" and s.text.startswith("curl"):
+            assert s.text.replace(s.secret, "\x00") in slot_contexts
+        if s.expected == "negative":
+            assert s.secret is None and not s.text.startswith(("VALUE=", "curl", "[service]"))
+
+
+def test_credential_slot_generators_are_skipped_unless_slots_are_given():
+    assert not any(s.category == "credential-slot" for s in build(per_generator=1))
+
+
+def test_secret_parts_exclude_documented_prefixes_and_pem_armor():
+    rng = random.Random(1)
+    tok = GENERATORS["provider/GitHub/classic (ghp/gho/ghu/ghs/ghr)"].make(rng)
+    s = type("S", (), {"category": "provider", "provider": "GitHub", "kind": "classic (ghp/gho/ghu/ghs/ghr)", "secret": tok})
+    assert secret_parts(s) == [(4, 40)]
+    pem = GENERATORS["generic/private-key/sec1-ec"].make(rng)
+    s = type("S", (), {"category": "generic", "provider": "private-key", "kind": "sec1-ec", "secret": pem})
+    (a, b), = secret_parts(s)
+    assert not pem[a:b].startswith("-----") and "-----" not in pem[a:b] and len(pem[a:b]) > 64

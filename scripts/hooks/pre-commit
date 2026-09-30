@@ -7,4 +7,9 @@ if [ ! -x "$python" ]; then
   echo "pre-commit: $python not found; create the venv (see CURRENT.md) before committing." >&2
   exit 1
 fi
-exec "$python" "$root/scripts/scan_staged_secrets.py"
+"$python" "$root/scripts/scan_staged_secrets.py" || exit 1
+# D-0011 amendment 8: when detector code, rules or the corpus change, the holdout measurement must pass.
+if git diff --cached --name-only | grep -Eq '^(src/nacre/ledger/strip_secrets\.py|src/nacre/ledger/data/|tests/ledger/secret_corpus/|tests/ledger/test_strip_secrets\.py|tests/ledger/test_secret_corpus\.py)'; then
+  echo "pre-commit: detector/rules/corpus changed; running holdout measurement (pytest -m holdout)..." >&2
+  (cd "$root" && "$python" -m pytest -q -m holdout -p no:cacheprovider) || { echo "pre-commit: holdout measurement failed" >&2; exit 1; }
+fi

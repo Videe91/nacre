@@ -325,3 +325,15 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   incl. RSA ×16 contexts several times); session caching is a later D1 improvement.
   Results: check_structure 0/0; pytest 536 passed + 1 strict xfail.
 - 2026-09-30: D-0011 amendment 8 (benchmark method); H2 FP marked invalid by construction in the holdout log; upstream note extended.
+- 2026-09-30: Benchmark-method framework (D-0011 amendment 8), opt-in so earlier corpora rebuild
+  byte-identically (working, H1 and H2 digests verified unchanged):
+  - credential-slot category (5 random-value kinds), placed only in labelled credential-slot contexts;
+  - synthetic negatives never embedded;
+  - per-character "caught" over per-generator secret parts (documented prefixes and PEM armor may
+    remain), plus longest surviving fragment;
+  - working data = working set + H1, with slots labelled; pinned 8132ea…d209.
+
+  Slow `holdout` marker: default `pytest` deselects it (45 s). The pre-commit hook runs `pytest -m holdout`
+  when detector/rules/corpus files are staged. RSA keys are memoised on rng state (the post-state is
+  restored, so digests are unchanged) and persisted to a git-ignored cache: H2 rebuild goes from ~60 s
+  cold to 5 s warm.

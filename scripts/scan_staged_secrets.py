@@ -36,7 +36,7 @@ NACRE_ALLOWLIST = [
      "the Base62 alphabet constant, caught by the entropy layer"),
     (r"^tests/ledger/secret_corpus/generic\.py$", r"^\{_password\(rng\)\}$",
      "f-string template in the corpus generator, not a value"),
-    (r"^scripts/scan_staged_secrets\.py$", r"^tests/ledger/secret_corpus/negatives_holdout2/(MANIFEST\.json)?$",
+    (r"^scripts/scan_staged_secrets\.py$", r"^tests/ledger/secret_corpus/negatives_holdout[23]/(MANIFEST\.json)?$",
      "the H2 negatives path in this script's own manifest table, caught by the entropy layer"),
     (r".*", r"^(x25519\.)?X25519PrivateKey$",
      "the pyca/cryptography class name, matched by generic-api-key after `private_key:` (reviewed FP, "
@@ -52,6 +52,7 @@ _NEGATIVE_MANIFESTS = {
     # H2 holdout negatives: skipped by manifest sha256 so committing them does not reveal detector results
     # before the boundary fix (D-0011 amendment 5); pre-scanned for real secrets at measurement time.
     "tests/ledger/secret_corpus/negatives_holdout2/": "tests/ledger/secret_corpus/negatives_holdout2/MANIFEST.json",
+    "tests/ledger/secret_corpus/negatives_holdout3/": "tests/ledger/secret_corpus/negatives_holdout3/MANIFEST.json",
 }
 
 

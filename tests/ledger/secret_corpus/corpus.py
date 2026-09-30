@@ -88,29 +88,69 @@ def _rng(seed: int, name: str) -> random.Random:
 
 
 def build(seed: int = 20260930, per_generator: int = 50, contexts=None,
-          embed_documents: bool = False, cover_all_contexts: bool = False) -> list[Sample]:
+          embed_documents: bool = False, cover_all_contexts: bool = False,
+          credential_slots=None, embed_negatives: bool = True) -> list[Sample]:
     """Every registered generator, `per_generator` samples each, deterministic for a given seed.
     Default = the WORKING set. embed_documents: multi-line documents (PEM, .env) are embedded in the
     contexts too. cover_all_contexts: every generator yields at least one sample per context
-    (D-0011 amendment 5: every covered rule in every embedding context)."""
+    (D-0011 amendment 5: every covered rule in every embedding context).
+    D-0011 amendment 8 (opt-in, so earlier corpora rebuild byte-identically):
+      credential_slots: indices of `contexts` that name a credential. When given, the
+        "credential-slot" generators run, cycling ONLY over those contexts; when None they are skipped.
+      embed_negatives=False: synthetic negatives are never embedded (so never in a credential slot)."""
     contexts = contexts or CONTEXTS
     samples = []
     for name in sorted(GENERATORS):
         g, rng = GENERATORS[name], _rng(seed, name)
+        pool = contexts
+        if g.category == "credential-slot":
+            if credential_slots is None:
+                continue
+            pool = [contexts[i] for i in sorted(credential_slots)]
         n = g.count or per_generator
         if cover_all_contexts:
-            n = max(n, len(contexts))
+            n = max(n, len(pool))
+        embed = g.embed or (embed_documents and (g.expected != "negative" or embed_negatives))
         for i in range(n):
             value = g.make(rng)
-            text = contexts[i % len(contexts)](value) if (g.embed or embed_documents) else value
+            text = pool[i % len(pool)](value) if embed else value
             samples.append(Sample(g.category, g.provider, g.kind, g.expected, text,
                                   None if g.expected == "negative" else _secret_of(value, g)))
     return samples
 
 
+# Credential-slot contexts (D-0011 amendment 8): indices of contexts that name a credential.
+WORKING_CREDENTIAL_SLOTS = frozenset({5})                  # curl Authorization: Bearer
+H1_CREDENTIAL_SLOTS = frozenset({0, 1, 4, 5, 6, 7})       # credential=, <credential>, auth:, X-Api-Key, 'cred', --token=
+
+
+def build_working() -> list[Sample]:
+    """Working data under D-0011 amendment 8: the working set + demoted H1, credential slots labelled,
+    synthetic negatives never embedded."""
+    return (build(credential_slots=WORKING_CREDENTIAL_SLOTS, embed_negatives=False)
+            + build(seed=HOLDOUT_SEED, contexts=HOLDOUT_CONTEXTS, credential_slots=H1_CREDENTIAL_SLOTS,
+                    embed_negatives=False))
+
+
 def build_holdout(per_generator: int = 50) -> list[Sample]:
     """The sealed holdout: other seed, other contexts. Official catch rates come from here only."""
     return build(seed=HOLDOUT_SEED, per_generator=per_generator, contexts=HOLDOUT_CONTEXTS)
+
+
+def secret_parts(sample: Sample) -> list[tuple[int, int]]:
+    """Spans, within sample.secret, that must be fully redacted for "caught" (D-0011 amendment 8).
+    Documented public prefixes and format markers may remain. Default: the whole secret."""
+    g = GENERATORS[f"{sample.category}/{sample.provider}/{sample.kind}"]
+    parts = getattr(g.make, "parts_of", None)
+    return parts(sample.secret) if parts else [(0, len(sample.secret))]
+
+
+def after_prefix(prefix: str):
+    """parts_of helper: everything after a documented public prefix."""
+    def parts(secret: str):
+        assert secret.startswith(prefix), prefix
+        return [(len(prefix), len(secret))]
+    return parts
 
 
 def _secret_of(value: str, g: Generator) -> str:

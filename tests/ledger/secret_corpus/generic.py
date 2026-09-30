@@ -8,11 +8,14 @@ Everything is deterministic from the seeded rng so the corpus sha256 is stable:
     random checkint.
 Encrypted PEM/OpenSSH variants are omitted: every standard encryption draws a random salt or IV.
 """
+import atexit
 import base64
 import hashlib
 import hmac
 import json
+import pickle
 import struct
+from pathlib import Path
 from urllib.parse import quote
 
 from cryptography.hazmat.primitives import serialization
@@ -56,7 +59,37 @@ def _prime(rng, bits):
             return n
 
 
+_RSA_CACHE_FILE = Path(__file__).with_name(".rsa_cache.pkl")   # git-ignored; a speed cache only
+try:
+    _RSA_CACHE: dict = pickle.loads(_RSA_CACHE_FILE.read_bytes())
+except (OSError, ValueError, EOFError, pickle.UnpicklingError):
+    _RSA_CACHE = {}
+
+
+@atexit.register
+def _save_rsa_cache():
+    try:
+        _RSA_CACHE_FILE.write_bytes(pickle.dumps(_RSA_CACHE))
+    except OSError:
+        pass
+
+
 def rsa_key(rng, bits=2048):
+    """Deterministic RSA key. Memoised on the rng state; the post-generation state is restored on a hit,
+    so every later draw (and so every corpus digest) is identical to an uncached run."""
+    key = (bits, hashlib.sha256(pickle.dumps(rng.getstate())).hexdigest())
+    if key in _RSA_CACHE:
+        (p, q, d), state = _RSA_CACHE[key]
+        rng.setstate(state)
+        return rsa.RSAPrivateNumbers(p, q, d, d % (p - 1), d % (q - 1), pow(q, -1, p),
+                                     rsa.RSAPublicNumbers(65537, p * q)).private_key()
+    priv = _rsa_key_uncached(rng, bits)
+    n = priv.private_numbers()
+    _RSA_CACHE[key] = ((n.p, n.q, n.d), rng.getstate())
+    return priv
+
+
+def _rsa_key_uncached(rng, bits):
     e = 65537
     while True:
         p, q = _prime(rng, bits // 2), _prime(rng, bits // 2)
@@ -233,3 +266,14 @@ def _dotenv_secret(document: str) -> str:
 
 
 dotenv.secret_of = _dotenv_secret
+
+
+# ---- secret parts (D-0011 amendment 8): a PEM/OpenSSH key's secret part is its base64 body; the
+# armor lines are format markers and may remain.
+def _pem_body(doc: str):
+    start = doc.index("\n") + 1
+    return [(start, doc.index("\n-----END"))]
+
+
+for _make in (pkcs8_rsa, pkcs8_ec, pkcs1_rsa, sec1_ec, openssh_ed25519, openssh_rsa):
+    _make.parts_of = _pem_body

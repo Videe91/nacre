@@ -213,3 +213,17 @@ def sentry_dsn_legacy(rng):
 
 # The secret in a legacy DSN is its secret-key part; the public key and host stay.
 sentry_dsn_legacy.secret_of = lambda dsn: dsn.split("://", 1)[1].split("@", 1)[0].split(":", 1)[1]
+
+
+# ---- secret parts (D-0011 amendment 8): what must be fully redacted; documented public prefixes may remain.
+from secret_corpus.corpus import after_prefix  # noqa: E402
+
+github_classic.parts_of = lambda s: [(4, len(s))]                    # after ghp_/gho_/ghu_/ghs_/ghr_
+github_ghs_stateless.parts_of = after_prefix("ghs_")
+gitlab_legacy.parts_of = after_prefix("glpat-")
+gitlab_routable.parts_of = after_prefix("glpat-")                   # conservative: markers included
+pypi_token.parts_of = after_prefix("pypi-")
+heroku_uuid.parts_of = after_prefix("HRKU-")
+supabase_secret.parts_of = after_prefix("sb_secret_")
+sentry_user.parts_of = after_prefix("sntryu_")
+sentry_org.parts_of = after_prefix("sntrys_")                       # conservative: payload included

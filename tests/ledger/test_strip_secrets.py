@@ -113,8 +113,10 @@ from secret_corpus.measure import overfitting_flags  # noqa: E402
 
 @pytest.fixture(scope="module")
 def working():
-    # Working data = the working set + the demoted holdout H1 (D-0011 amendment 5), all first-set negatives.
-    return measure(build() + build_holdout(), strip_secrets, split="all")
+    # Working data = working set + demoted H1 (D-0011 amendments 5, 8), all first-set negatives.
+    from secret_corpus import credential_slot  # noqa: F401
+    from secret_corpus.corpus import build_working
+    return measure(build_working(), strip_secrets, split="all")
 
 
 @pytest.fixture(scope="module")
@@ -134,6 +136,7 @@ def _secret_groups():
 HOLDOUT_GAPS: dict[str, str] = {}
 
 
+@pytest.mark.holdout
 # Official (D-0011 amendment 1): catch rates come from the sealed holdout only.
 @pytest.mark.parametrize("group", [
     pytest.param(g, marks=pytest.mark.xfail(strict=True, reason=HOLDOUT_GAPS[g])) if g in HOLDOUT_GAPS else g
@@ -142,12 +145,14 @@ def test_catch_rate_holdout_official(holdout, group):
     assert holdout["groups"][group]["rate"] >= 0.99, holdout["groups"][group]
 
 
+@pytest.mark.holdout
 def test_public_credentials_are_never_stripped(working, holdout):
     for report in (working, holdout):
         public = {k: v for k, v in report["groups"].items() if k.startswith("public:")}
         assert public and all(v["rate"] == 1.0 for v in public.values()), public
 
 
+@pytest.mark.holdout
 @pytest.mark.xfail(strict=True, reason=(
     "H2 FP 3.25% (13/400): all 13 are SYNTHETIC content-hash negatives that the H2 build embedded into "
     "credential-slot contexts (#1 POST form, #5 Terraform, #8 PHP, #11 GET credential=...). The H2 build embedded "
@@ -157,12 +162,14 @@ def test_false_positive_rate_holdout_official(holdout):
     assert holdout["fp_rate"] <= 0.02, holdout["fp_docs"]
 
 
+@pytest.mark.holdout
 def test_false_positive_rate_on_h2_real_code_negatives(holdout):
     # Reported alongside the official FP while its definition is pending: the 150 fresh stdlib files.
     real = [d for d in holdout["fp_docs"] if d[0].startswith("negatives_holdout2/")]
     assert real == []
 
 
+@pytest.mark.holdout
 def test_working_set_reported_and_overfitting_flagged(working, holdout, capsys):
     flags = overfitting_flags(working, holdout)
     with capsys.disabled():

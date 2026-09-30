@@ -8,15 +8,17 @@ A-0010 measurement (D-0007 amendments 3-5). Test code only.
                   least one redaction. Target <= 2%. Findings per MB are reported alongside.
   coverage        gitleaks rules with at least one covered sample that they caught / total rules;
                   the unmeasured rules are listed by name (in the report, not asserted).
-  residue         REPORTED ONLY (proposal pending): among caught secrets, the share where a 16-char
-                  fragment of the secret still survives, i.e. partial redaction that "caught" (whole string
-                  gone) does not see.
+  strict          (D-0011 amendment 8, gates from H3) caught = every character of the secret PART redacted
+                  (documented public prefixes / format markers may remain); longest surviving fragment
+                  is reported per group. `rate` (whole string gone) and `residue` are kept for the record.
   holdout         (D-0011 amendment 1) official rates come from build_holdout() + the holdout half of
                   the committed negatives; the working set is reported alongside, and a gap between
                   them is flagged as overfitting (overfitting_flags()).
 """
 import json
 from collections import defaultdict
+
+from secret_corpus.corpus import secret_parts
 from pathlib import Path
 
 CORPUS_DIR = Path(__file__).resolve().parent
@@ -48,13 +50,15 @@ def negative_documents(split: str = "all"):
 def measure(samples, strip, split: str = "all"):
     """strip(text) -> StripResult. `split` selects the committed negatives ("working"/"holdout"/"all").
     Returns the report dict."""
-    groups = defaultdict(lambda: {"n": 0, "ok": 0, "misses": [], "residue": 0})
+    groups = defaultdict(lambda: {"n": 0, "ok": 0, "misses": [], "residue": 0, "strict": 0, "longest": 0})
     rules_hit = defaultdict(int)
     for s in samples:
         if s.expected == "negative":
             continue
         result = strip(s.text)
-        key = f"{s.category}:{s.provider}" if s.category == "provider" else f"generic:{s.provider}/{s.kind}"
+        key = (f"{s.category}:{s.provider}" if s.category == "provider"
+               else f"credential-slot:{s.kind}" if s.category == "credential-slot"
+               else f"generic:{s.provider}/{s.kind}")
         key = f"public:{s.provider}/{s.kind}" if s.expected == "public" else key
         g = groups[key]
         g["n"] += 1
@@ -62,6 +66,10 @@ def measure(samples, strip, split: str = "all"):
         g["ok"] += ok
         if ok and s.expected == "secret" and len(s.secret) >= 16:
             g["residue"] += any(s.secret[i:i + 16] in result.text for i in range(len(s.secret) - 15))
+        if s.expected == "secret":
+            strict, longest = _per_character(s, result)
+            g["strict"] += strict
+            g["longest"] = max(g["longest"], longest)
         if not ok and len(g["misses"]) < 3:
             g["misses"].append(s.kind + " | context: " + s.text[:40].replace(s.secret, "<SECRET>"))
         for rid in result.redactions:
@@ -76,7 +84,9 @@ def measure(samples, strip, split: str = "all"):
             fp_docs.append((name, sorted(set(r.redactions))))
     return {
         "groups": {k: {"n": v["n"], "rate": v["ok"] / v["n"], "misses": v["misses"],
-                       "residue_rate": v["residue"] / v["ok"] if v["ok"] else 0.0} for k, v in sorted(groups.items())},
+                       "residue_rate": v["residue"] / v["ok"] if v["ok"] else 0.0,
+                       "strict_rate": v["strict"] / v["n"], "longest_fragment": v["longest"]}
+                   for k, v in sorted(groups.items())},
         "fp_rate": len(fp_docs) / len(negatives), "fp_docs": fp_docs, "negatives": len(negatives),
         "fp_findings_per_mb": findings / (total_bytes / 1e6), "rules_hit": dict(rules_hit),
     }
@@ -87,3 +97,19 @@ def overfitting_flags(working, holdout, threshold=0.01):
     return {g: (working["groups"][g]["rate"], holdout["groups"][g]["rate"])
             for g in holdout["groups"] if g in working["groups"]
             and working["groups"][g]["rate"] - holdout["groups"][g]["rate"] > threshold}
+
+
+def _per_character(sample, result):
+    """D-0011 amendment 8: caught iff every character of every secret part is inside a redaction span
+    (StripResult.findings are offsets in the original text). Returns (caught, longest surviving run)."""
+    base = sample.text.find(sample.secret)
+    covered = set()
+    for f in result.findings:
+        covered.update(range(f.start, f.end))
+    longest = run = 0
+    for start, end in secret_parts(sample):
+        for i in range(base + start, base + end):
+            run = 0 if i in covered else run + 1
+            longest = max(longest, run)
+        run = 0
+    return longest == 0, longest
