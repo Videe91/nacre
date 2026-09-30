@@ -21,6 +21,25 @@
      files, drawing on the 1,200-file set used for A-0017. They contain no secrets and measure the
      ≤ 2% false-positive target.
    - The unknown-format set (entropy-only) follows the same generator rule.
+3. **2026-09-30 — coverage and targets (owner-approved).**
+   - **Covered providers** (one generator each, from public format docs; a provider without public
+     docs is substituted, and the substitution is recorded):
+     - AI: OpenAI, Anthropic, Google AI/Gemini, Hugging Face, Groq, Mistral, Replicate.
+     - Cloud: AWS, GCP, Azure, Cloudflare, DigitalOcean.
+     - Code and packages: GitHub (classic + fine-grained), GitLab, Bitbucket, npm, PyPI, Docker Hub.
+     - Hosting and databases: Vercel, Netlify, Heroku, Supabase, Databricks.
+     - Payments and commerce: Stripe, Shopify.
+     - Messaging: Slack, Twilio, SendGrid, Discord.
+     - Work tools and monitoring: Atlassian, Linear, Notion, Datadog, Sentry, Okta.
+   - **Generic category**, with its own targets: private keys (RSA/EC/OpenSSH/PEM), DB connection
+     strings with passwords, credentials in URLs, JWTs, `.env`-style secret assignments.
+   - **Per-provider target:** catch rate is reported per provider, and **≥ 99% applies to each
+     covered provider individually**, not to the average.
+   - **Coverage metric:** covered rules / total rules, reported separately, with every unmeasured
+     rule listed by name. Unmeasured rules are never counted as caught.
+   - **Negatives:** permissively licensed sources only (MIT, BSD, Apache-2.0, PSF), with
+     attribution. Every negative file is scanned with the rules first, and any real secret found
+     is excluded.
 
 ## Context
 D-0002 requires secrets to be stripped before any write. A-0010 sets the bar: at least 99% caught

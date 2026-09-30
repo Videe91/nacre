@@ -17,7 +17,7 @@ Build the Phase 1 files in `docs/modules/INDEX.md` order, one functionality + te
 committing and pushing after each.
 - Done: #1 `core/event.py`, #2 `core/db.py`, #2a `core/blob_store.py`, #2b `core/root_key_provider.py`,
   #3 `schema/apply_migrations.py` + SQL 0001–0003, #2c `core/encode_cbor.py`, #2d `core/decode_cbor.py`, #4 `ledger/encode_envelope.py`, #5 `ledger/seal_event.py`, #3d `sql/0004_checkpoints.sql`.
-- Next: #6 `strip_secrets` (corpus generators first), then 11a, 11, 12, 13, 14, 7, 8. See INDEX build-order note.
+- Next: #11a, #11, #12, #13, then #6 with the corpus, then 14, 7, 8.
 - To run DB tests: `docker compose up -d --wait`, then `pytest`.
 - **Every clone:** `git config core.hooksPath scripts/hooks` (D-0010 pre-commit secret scan; needs `.venv`
   with `google-re2`). Temporary scanner `scripts/scan_staged_secrets.py` is replaced by #6.
@@ -41,10 +41,7 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   comparison to the owner as part of A-0017.
 
 ## Open questions
-- **#6 negatives licensing (to settle when the corpus is built):** the 1,200-file set is third-party
-  code from `.venv` with mixed licences (e.g. psycopg is LGPL-3.0). Committing parts of it needs
-  permissive sources only (MIT/BSD/Apache-2.0/PSF) plus attribution in THIRD_PARTY_NOTICES.md, or
-  synthesised negatives of the same shapes. Will bring the concrete source list with #6.
+- Resolved 2026-09-30: #6 corpus coverage, generic category, per-provider ≥ 99%, coverage metric, negatives licensing + pre-scan (D-0007 amendment 3, A-0010 reworded).
 - Resolved 2026-09-30: D-0009 accepted (re-run Go comparison on every gitleaks version change);
   D-0007 amendments (engine; corpus via provider-format generators, independent of the rules; negatives
   committed); corpus option (c); D-0010 pre-commit secret scan.
@@ -152,3 +149,4 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   (events, master keys, data keys, scopes, cross-scope key insert), no-grant, read-only, connection
   reuse across principals, error rollback, revoke. Mutations: session-level (not LOCAL) setting →
   1 fail; superuser refusal removed → 1 fail. Results: check_structure 0/0; pytest (scopes) 42 passed.
+- 2026-09-30: D-0007 amendment 3 (provider set, generic category, per-provider targets, coverage metric, negatives rules); A-0010 reworded.
