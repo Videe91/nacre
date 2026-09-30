@@ -452,3 +452,4 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
     re-exported.
   - Verifier: confirmed and tested that a rewrite is caught through the witness even after the DB checkpoint row
     is deleted; the warning wording no longer assumes a crash.
+- 2026-09-30: Migration 0007, the nacre_keyadmin role (D-0014). D1: NOINHERIT member of nacre_app, so one transaction can destroy keys AND append the audit event (never half-done); least privilege holds per statement. Tested: owns nothing, no bypass, no inherit, never reads events/checkpoints, privilege table.

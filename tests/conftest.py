@@ -54,13 +54,14 @@ def migrated_db(fresh_db):
     with connect(DbRole.MIGRATOR, dsn=fresh_db) as conn:
         apply_migrations(conn)
     with psycopg.connect(fresh_db, autocommit=True) as admin:
-        for role in ("nacre_app", "nacre_verifier", "nacre_checkpointer"):
+        for role in ("nacre_app", "nacre_verifier", "nacre_checkpointer", "nacre_keyadmin"):
             admin.execute(f"ALTER ROLE {role} LOGIN PASSWORD '{TEST_ROLE_PASSWORD}'")
     return {
         "admin": fresh_db,
         "app": dsn_with(fresh_db, user="nacre_app", password=TEST_ROLE_PASSWORD),
         "verifier": dsn_with(fresh_db, user="nacre_verifier", password=TEST_ROLE_PASSWORD),
         "checkpointer": dsn_with(fresh_db, user="nacre_checkpointer", password=TEST_ROLE_PASSWORD),
+        "keyadmin": dsn_with(fresh_db, user="nacre_keyadmin", password=TEST_ROLE_PASSWORD),
     }
 
 
