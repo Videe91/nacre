@@ -200,3 +200,18 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   Every output is validated by an independent parser (cryptography loads every key; urllib parses
   every URI). Mutation: broken OpenSSH padding → 2 fail. 468 samples, sha256 10be73…bcec.
   Results: pytest (corpus) 15 passed.
+- 2026-09-30: #6 corpus, part 2: negatives.
+  - Committed: 310 files (2.1 MB, each truncated at a line boundary to 16 KiB) from the 12 permissively
+    licensed installed packages. hypothesis (MPL-2.0), psycopg (LGPL-3.0) and pip/_vendor are excluded.
+    Each package's licence files sit beside its files; provenance and sha256 are in negatives/MANIFEST.json;
+    the builder is tests/ledger/secret_corpus/build_negatives.py.
+  - Also committed: lodash 4.17.21 minified (MIT), integrity matched against cdnjs SRI.
+  - Pre-scan: 1 file flagged (cryptography hpke.pyi, generic-api-key on a `private_key: X25519PrivateKey`
+    type annotation). Reviewed as a FALSE POSITIVE and kept, because FPs are what the ≤ 2% rate measures.
+    No real secrets found; nothing excluded.
+  - Synthetic negatives (generated): UUID lists, git logs, lockfile integrity / pip hashes, base64 blobs,
+    content hashes.
+  - The pre-commit scan skips committed negatives only while their bytes match the reviewed manifest
+    sha256 (tested). THIRD_PARTY_NOTICES.md updated.
+  - Corpus sha256 is now 6a64f6…7632. Mutation: editing one negative → the manifest test fails.
+  - Note: 310 files, not the 1,200 of the A-0017 set, because only 12 packages qualify under the licence rule.

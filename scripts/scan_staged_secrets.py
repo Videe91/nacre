@@ -33,8 +33,32 @@ NACRE_ALLOWLIST = [
     (r"^docs/assumptions/evidence/A-0010-provider-formats[a-z-]*\.md$", r"[`|]",
      "PEM armor labels quoted in format docs; the private-key rule spans prose between them. "
      "A real PEM body never contains a backtick or a table pipe"),
+    (r".*", r"^(x25519\.)?X25519PrivateKey$",
+     "the pyca/cryptography class name, matched by generic-api-key after `private_key:` (reviewed FP, "
+     "negatives MANIFEST); exact value only"),
 ]
 _NACRE_ALLOW = [(re2.compile(p), re2.compile(s) if s else None) for p, s, _ in NACRE_ALLOWLIST]
+
+# Committed negative corpus (D-0007 amendment 2): skipped ONLY while a file's bytes match the sha256
+# recorded in its reviewed manifest. Any edit makes it scanned again.
+_NEGATIVE_MANIFESTS = {
+    "tests/ledger/secret_corpus/negatives/": "tests/ledger/secret_corpus/negatives/MANIFEST.json",
+    "tests/ledger/secret_corpus/negatives_external/": "tests/ledger/secret_corpus/negatives_external/MANIFEST.json",
+}
+
+
+def _reviewed_negative(path: str, data: bytes) -> bool:
+    import hashlib
+    import json
+    for prefix, manifest in _NEGATIVE_MANIFESTS.items():
+        if path.startswith(prefix):
+            try:
+                files = json.loads((Path(__file__).resolve().parent.parent / manifest).read_text())["files"]
+            except (OSError, ValueError, KeyError):
+                return False
+            digest = hashlib.sha256(data).hexdigest()
+            return any(prefix + f["path"] == path and f["sha256"] == digest for f in files)
+    return False
 
 
 def load(path=RULES_PATH):
@@ -129,6 +153,8 @@ def main(argv):
     for name, data in files:
         if b"\0" in data[:8192]:
             continue  # binary
+        if _reviewed_negative(name, data):
+            continue
         findings += scan(name, data.decode("utf-8", "replace"), global_allow, rules)
     for path, line, rule_id, secret in findings:
         print(f"SECRET? {path}:{line} [{rule_id}] {secret[:4]}…({len(secret)} chars)", file=sys.stderr)

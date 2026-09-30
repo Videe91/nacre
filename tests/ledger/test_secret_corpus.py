@@ -1,18 +1,20 @@
 """Tests of the secret corpus itself (D-0007 amendments 2-4): determinism, the pinned digest, and that
 every generator's output is a valid instance of its standard, checked by an independent parser."""
 import base64
+import hashlib
 import json
 import random
+from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 import pytest
 from cryptography.hazmat.primitives import serialization
 
-from secret_corpus import generic  # noqa: F401  (registers the generic generators)
+from secret_corpus import generic, synthetic_negatives  # noqa: F401  (registers generators)
 from secret_corpus.corpus import GENERATORS, build, digest
 
 # Pinned: changing any generator changes this. Update it deliberately, in the same commit.
-CORPUS_SHA256 = "10be73d595c4ee30774bbd10b6f4247e8a89f8c749d14c2d4895ed071731bcec"
+CORPUS_SHA256 = "6a64f679983115dfdb5c7583be94a87587e1b9b47ea887e00e2858b9e4987632"
 
 
 @pytest.fixture(scope="module")
@@ -85,3 +87,38 @@ def test_dotenv_documents_hold_exactly_one_secret_assignment():
     for doc in _outputs("generic/dotenv/assignment"):
         secret = GENERATORS["generic/dotenv/assignment"].make.secret_of(doc)
         assert len(secret) >= 24 and doc.count(secret) == 1
+
+
+CORPUS_DIR = Path(__file__).resolve().parent / "secret_corpus"
+PERMISSIVE = {"MIT", "MIT-0", "BSD-2-Clause", "BSD-3-Clause", "Apache-2.0", "PSF-2.0",
+              "Apache-2.0 OR BSD-2-Clause", "Apache-2.0 OR BSD-3-Clause"}
+
+
+@pytest.mark.parametrize("sub", ["negatives", "negatives_external"])
+def test_committed_negatives_match_their_manifest(sub):
+    manifest = json.loads((CORPUS_DIR / sub / "MANIFEST.json").read_text())
+    on_disk = {p.relative_to(CORPUS_DIR / sub).as_posix() for p in (CORPUS_DIR / sub).rglob("*")
+               if p.is_file() and p.name != "MANIFEST.json" and "LICENSE" not in p.name.upper()
+               and "/LICENSES/" not in p.as_posix()}
+    assert on_disk == {f["path"] for f in manifest["files"]}, "unlisted or missing negative files"
+    for f in manifest["files"]:
+        assert hashlib.sha256((CORPUS_DIR / sub / f["path"]).read_bytes()).hexdigest() == f["sha256"], f["path"]
+
+
+def test_negatives_are_permissive_attributed_and_reviewed():
+    manifest = json.loads((CORPUS_DIR / "negatives/MANIFEST.json").read_text())
+    for name, pkg in manifest["packages"].items():
+        assert pkg["licence"] in PERMISSIVE, name
+    used = {f["path"].split("/", 1)[0] for f in manifest["files"]}
+    for name in used:
+        files = manifest["packages"][name]["licence_files"]
+        assert files and all((CORPUS_DIR / "negatives" / lf).is_file() for lf in files), f"{name}: no licence file"
+    flagged = {f["path"] for f in manifest["files"] if f["prescan_findings"]}
+    assert flagged <= set(manifest["reviewed_false_positives"]), "unreviewed pre-scan findings"
+    assert not any(p.startswith(("hypothesis/", "psycopg")) for p in (f["path"] for f in manifest["files"]))
+    assert not any("pip/_vendor/" in f["path"] for f in manifest["files"])
+
+
+def test_synthetic_negatives_are_negative(corpus):
+    negs = [s for s in corpus if s.category == "negative"]
+    assert negs and all(s.expected == "negative" and s.secret is None for s in negs)

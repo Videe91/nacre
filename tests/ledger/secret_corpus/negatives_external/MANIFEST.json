@@ -1,0 +1,14 @@
+{
+ "files": [
+  {
+   "path": "lodash-4.17.21/lodash.min.js",
+   "sha256": "a9705dfc47c0763380d851ab1801be6f76019f6b67e40e9b873f8b4a0603f7a9",
+   "bytes": 73015,
+   "source": "https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js",
+   "integrity_verified": "sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ== (cdnjs SRI, matched 2026-09-30)",
+   "licence": "MIT",
+   "licence_file": "lodash-4.17.21/LICENSE",
+   "prescan_findings": []
+  }
+ ]
+}

@@ -93,3 +93,14 @@ def test_format_doc_allowlist_is_narrow():
     body = base64.b64encode(secrets.token_bytes(600)).decode()
     pem = label + "\n" + "\n".join(body[i:i + 64] for i in range(0, len(body), 64)) + "\n-----END " + "PRIVATE KEY-----\n"
     assert "private-key" in _ids(doc, pem)
+
+
+def test_committed_negatives_are_skipped_only_while_unchanged(tmp_path):
+    import json
+    manifest = json.loads((ROOT / "tests/ledger/secret_corpus/negatives/MANIFEST.json").read_text())
+    entry = next(f for f in manifest["files"] if f["prescan_findings"])      # the reviewed false positive
+    path = "tests/ledger/secret_corpus/negatives/" + entry["path"]
+    data = (ROOT / path).read_bytes()
+    assert scanner._reviewed_negative(path, data)                            # reviewed bytes: skipped
+    assert not scanner._reviewed_negative(path, data + b"\n# edited\n")    # any change: scanned again
+    assert not scanner._reviewed_negative("tests/ledger/secret_corpus/negatives/new.py", b"x = 1\n")
