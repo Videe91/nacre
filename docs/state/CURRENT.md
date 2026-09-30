@@ -17,7 +17,7 @@ Build the Phase 1 files in `docs/modules/INDEX.md` order, one functionality + te
 committing and pushing after each.
 - Done: #1 `core/event.py`, #2 `core/db.py`, #2a `core/blob_store.py`, #2b `core/root_key_provider.py`,
   #3 `schema/apply_migrations.py` + SQL 0001–0003, #2c `core/encode_cbor.py`, #2d `core/decode_cbor.py`, #4 `ledger/encode_envelope.py`, #5 `ledger/seal_event.py`, #3d `sql/0004_checkpoints.sql`.
-- **#6 CLOSED 2026-09-30** (H3 official). **#14 built.** Next: A-0007 measurement (gate item 6), then #7, #8, then #15 onward.
+- **#6 CLOSED 2026-09-30** (H3 official). **#14 built; A-0007 measured.** Next: #7, #8, then #15 onward.
 - To run DB tests: `docker compose up -d --wait`, then `pytest`.
 - **Owner tool:** `scripts/measure_token_format.py` measures real tokens' prefix/length/charset without
   printing them (D-0007 amendment 4). Run locally; paste only its suggested ASSUMPTIONS row back.
@@ -33,6 +33,8 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
 5. The cross-scope read test fails as expected (D-0005 S-3). *Status: suite in place and passing through the
    door (#10: 25 kind pairs + reuse/rollback/revoke); re-run at the gate with real appended events.*
 6. A-0007 throughput is measured and the result recorded (pass/fail against the provisional target is reported, not hidden).
+   *Status: MEASURED 2026-09-30 (unpooled). Throughput met; p99 met at 1 writer, missed at 16 concurrent writers
+   on one stream (≈ 80 ms). See A-0007 evidence.*
 
 ## Standing instructions (owner, 2026-09-30)
 - **A-0007 / gate item 6:** the throughput test must run with the **production connection setup**.
@@ -43,6 +45,10 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   comparison to the owner as part of A-0017.
 
 ## Open questions
+- **A-0007 p99 at 16 concurrent writers on ONE stream is ≈ 80 ms (target < 50 ms); throughput and single-writer
+  latency are met.** Is 16-way contention on one project stream the workload that matters for Phase 1? If yes,
+  D-0003's named remedies (per-stream sub-sequences, batched appends) need a new ADR. Alternatively, keep the
+  provisional target for ≤ N concurrent writers per stream and re-measure with a pool once one is chosen.
 - Resolved 2026-09-30: D-0012 accepted with owner corrections (trust by source + author, trust_basis, key rules, original-erased error); D-0002 amendment 4 (envelope v2).
 - **PHASE 3 GATE ITEM (owner, 2026-09-30): credential-slot target.** Before real agent data flows through the
   interface, set a target for "random value in a credential slot" (H3: 54–72%) and raise it, measured on a
@@ -372,3 +378,7 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   removed → 1 fail. "Tool trusted" at first SURVIVED (a later clause also yields untrusted), so
   distinguishing cases were added (tool/web + integration_result claim) and it is now caught.
   Shared fixtures (provider/streams/session) moved to tests/conftest.py.
+- 2026-09-30: A-0007 measured (gate item 6), UNPOOLED: 1 writer 107/s, p99 12.9 ms; 16 writers 234–239/s,
+  p99 ≈ 80 ms (threads and processes agree, so the stream lock, not the GIL, is the limit). D1 change first:
+  work that needs no sequence number moved before the stream lock (16-writer p99 111.5 → ≈ 80 ms; the
+  first run is kept in the evidence).

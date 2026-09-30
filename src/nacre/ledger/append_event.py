@@ -8,9 +8,10 @@ Decisions: D-0002, D-0003, D-0004, D-0005, D-0007, D-0008, D-0012
 Assumptions: A-0007, A-0009, A-0010, A-0014
 Notes: Runs inside a scoped session (scopes/open_scoped_session.py); RLS admits only the principal's
   streams, and the transaction commits or rolls back with the session.
-  Order (D-0003):
-    validate → trust → take the stream lock → idempotency check → subject/month/key → strip →
-    read the head → assign commit_seq, committed_at → encrypt → MAC → seal → INSERT.
+  Order (D-0003 for the locked part):
+    validate → trust → subject/month/key → strip  [unlocked: needs no sequence number; D1, A-0007]
+    → take the stream lock → idempotency check → read the head → assign commit_seq, committed_at
+    → encrypt → MAC → seal → INSERT.
   recorded_at is set at intake, before the lock.
   Idempotency (D-0012 part B):
   - The key must be a caller-random UUID v4/v7.
@@ -119,6 +120,13 @@ def append_event(session: ScopedSession, provider: RootKeyProvider, request: App
     except ValueError as exc:
         raise AppendError(f"request content is outside the body subset (D-0008): {exc}") from None
 
+    # Work that needs no sequence number happens BEFORE the stream lock (D1), so the serialised section
+    # is only: idempotency check, head, commit_seq/committed_at, encrypt, MAC, seal, insert (D-0003 order).
+    subject = request.subject_id or (request.actor_id if request.actor_kind == ActorKind.PERSON
+                                     and request.event_type in (EventType.STATEMENT, EventType.MESSAGE) else stream)
+    body, redactions, public = _body(request)
+    key = get_or_create_key(conn, provider, stream, subject, date(recorded_at.year, recorded_at.month, 1))
+
     conn.execute("SELECT pg_advisory_xact_lock(ledger.stream_lock_key(%s))", (stream,))
     existing = _row(conn, "stream_id = %s AND idempotency_key = %s", (stream, request.idempotency_key))
     if existing is not None:
@@ -131,11 +139,6 @@ def append_event(session: ScopedSession, provider: RootKeyProvider, request: App
 
     if request.caused_by is not None and _row(conn, "event_id = %s AND stream_id = %s", (request.caused_by, stream)) is None:
         raise AppendError("caused_by must be an earlier event of the same stream (D-0002)")
-    subject = request.subject_id or (request.actor_id if request.actor_kind == ActorKind.PERSON
-                                     and request.event_type in (EventType.STATEMENT, EventType.MESSAGE) else stream)
-    key = get_or_create_key(conn, provider, stream, subject, date(recorded_at.year, recorded_at.month, 1))
-    body, redactions, public = _body(request)
-
     head = conn.execute("SELECT commit_seq, hash FROM ledger.events WHERE stream_id = %s "
                         "ORDER BY commit_seq DESC LIMIT 1", (stream,)).fetchone()
     seq, prev_hash = (head[0] + 1, bytes(head[1])) if head else (1, GENESIS_PREV_HASH)

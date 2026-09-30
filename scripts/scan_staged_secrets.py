@@ -30,7 +30,7 @@ NACRE_ALLOWLIST = [
      "A real PEM body never contains a backtick or a table pipe"),
     (r"^docs/assumptions/evidence/A-0010-provider-formats[a-z-]*\.md$", r"^\[password\]\]?$",
      "documented URI syntax placeholders `user:[password]@`, `[user[:[password]]@]` quoted in the format research"),
-    (r"^tests/conftest\.py$", r"^nacre_dev$",
+    (r"^(tests/conftest|scripts/bench_append_throughput)\.py$", r"^nacre_dev$",
      "password of the ephemeral local Docker test database (docker-compose.yml, D-0006)"),
     (r"^tests/ledger/secret_corpus/corpus\.py$", r"^0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz$",
      "the Base62 alphabet constant, caught by the entropy layer"),
