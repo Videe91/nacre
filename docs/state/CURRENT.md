@@ -16,8 +16,9 @@
 Build the Phase 1 files in `docs/modules/INDEX.md` order, one functionality + test per step,
 committing and pushing after each.
 - Done: #1 `core/event.py`, #2 `core/db.py`, #2a `core/blob_store.py`, #2b `core/root_key_provider.py`,
-  #3 `schema/apply_migrations.py` + SQL 0001–0003, #2c `core/encode_cbor.py`, #2d `core/decode_cbor.py`, #4 `ledger/encode_envelope.py`, #5 `ledger/seal_event.py`.
-- Next: #3d checkpoints (D-0005 amendment 2).
+  #3 `schema/apply_migrations.py` + SQL 0001–0003, #2c `core/encode_cbor.py`, #2d `core/decode_cbor.py`, #4 `ledger/encode_envelope.py`, #5 `ledger/seal_event.py`, #3d `sql/0004_checkpoints.sql`.
+- Next: #6 `strip_secrets` (starts with the A-0017 re vs google-re2 comparison for the owner),
+  then #7 onward. #20/#20a wait on the D-0004 open issue.
 - To run DB tests: `docker compose up -d --wait`, then `pytest`.
 
 ## Phase 1 gate (FROZEN by owner 2026-09-30)
@@ -93,23 +94,30 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   append-only trigger, and granting the app UPDATE each made the targeted test fail at its assertion.
   Results: `check_structure.py` → 0 failure(s), 0 warning(s); `pytest` → 82 passed (4.4 s).
 - 2026-09-30: D-0005 amendment 2 (nacre_checkpointer, C-1..C-6), D-0004 amendment 6 (finality at root rotation) + open issue on data-key finality; A-0008 re-specified.
-- 2026-09-30: INDEX #2c `core/encode_cbor.py`, #2d `core/decode_cbor.py`, #4 `ledger/encode_envelope.py`, #5 `ledger/seal_event.py`. Installed test-only cbor2 6.1.4, hypothesis 6.168.3
+- 2026-09-30: INDEX #2c `core/encode_cbor.py`, #2d `core/decode_cbor.py`, #4 `ledger/encode_envelope.py`, #5 `ledger/seal_event.py`, #3d `sql/0004_checkpoints.sql`. Installed test-only cbor2 6.1.4, hypothesis 6.168.3
   (pyproject `[project.optional-dependencies] test`). Mutation checks: removing key sorting → 4 failures;
   shifting the 2-byte length boundary → caught only by hypothesis at first, so explicit shortest-form
   boundary vectors were added (now 2 deterministic failures). Our bytes match cbor2 canonical on 500
   hypothesis cases. D1: MAX_DEPTH = 64. Results: check_structure 0/0; pytest (encoder file) 76 passed.
-- 2026-09-30: INDEX #2d `core/decode_cbor.py`, #4 `ledger/encode_envelope.py`, #5 `ledger/seal_event.py`. First draft had an unbounded `data[pos]` read in the
+- 2026-09-30: INDEX #2d `core/decode_cbor.py`, #4 `ledger/encode_envelope.py`, #5 `ledger/seal_event.py`, #3d `sql/0004_checkpoints.sql`. First draft had an unbounded `data[pos]` read in the
   map loop (would raise IndexError, not CborDecodeError, on input cut mid-map); fixed before testing,
   covered by the "map cut off mid-entry" vector and a 2000-case fuzz test. The final re-encode guard
   masks individual checks, so each check was mutation-tested with the guard disabled: key order
   (4 fail), shortest form (8 fail), trailing bytes (2 fail), depth limit (2 fail); guard-off alone:
   all pass (guard is redundant by design). Results: check_structure 0/0; pytest 258 passed.
-- 2026-09-30: INDEX #4 `ledger/encode_envelope.py`, #5 `ledger/seal_event.py`. Tag bytes 0x00–0x05 and a uint16 version prefix
+- 2026-09-30: INDEX #4 `ledger/encode_envelope.py`, #5 `ledger/seal_event.py`, #3d `sql/0004_checkpoints.sql`. Tag bytes 0x00–0x05 and a uint16 version prefix
   are D1 details within D-0002 option b (in file header). AAD bytes checked against a hand-written
   layout; seal field set pinned to core.event.Envelope minus hash; seal encoding frozen by sha256
   (bd0978…a5ee, 442 bytes). Mutations: no length prefix → 3 fail; body dropped from seal → 6 fail.
   Results: check_structure 0/0; pytest (file) 19 passed.
-- 2026-09-30: INDEX #5 `ledger/seal_event.py`. Frozen seal 7fb349…59be. Tamper tests (body, header,
+- 2026-09-30: INDEX #5 `ledger/seal_event.py`, #3d `sql/0004_checkpoints.sql`. Frozen seal 7fb349…59be. Tamper tests (body, header,
   reorder, drop) fail recomputation; a test documents that a full rewrite with recomputed hashes is
   self-consistent, which is exactly what checkpoints (#18/#19) must catch. Mutation: prev_hash dropped
   from the formula → 2 fail. Results: check_structure 0/0; pytest (file) 15 passed.
+- 2026-09-30: INDEX #3d `sql/0004_checkpoints.sql`: nacre_checkpointer role, column-granted head reads,
+  append-only checkpoints, verifier read-only (C-1..C-6 tested). Public keys deliberately not stored in
+  the DB (the verifier must trust only configured keys), noted in the migration. First run: 1 failure,
+  a test bug (bytes passed for a uuid param). Mutation checks: full-row SELECT grant → 8 fail; no
+  append-only trigger → 2 fail; verifier granted INSERT → SURVIVED (forced RLS still blocked the
+  insert), so explicit has_table_privilege tests were added; the mutant now fails.
+  Results: check_structure 0/0; pytest 333 passed.
