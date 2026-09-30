@@ -28,15 +28,20 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
 5. The cross-scope read test fails as expected (D-0005 S-3).
 6. A-0007 throughput is measured and the result recorded (pass/fail against the provisional target is reported, not hidden).
 
+## Standing instructions (owner, 2026-09-30)
+- **A-0007 / gate item 6:** the throughput test must run with the **production connection setup**.
+  Decide on `psycopg_pool` (new dependency, needs an ADR) **before** gate item 6 runs; otherwise
+  the result is reported explicitly as **unpooled**.
+- **A-0017 / INDEX #6:** when #6 starts, evaluate `google-re2` against Python `re`: identical
+  semantics to gitleaks' rules, and no catastrophic backtracking on untrusted input. Bring the
+  comparison to the owner as part of A-0017.
+
 ## Open questions
-- **D-0008 (encrypted body format) is PROPOSED — owner approval needed before INDEX #2c, #12, #13.**
-  Four points flagged in the ADR: payload_type dropped from AAD (conflicts with accepted D-0002),
-  added flags byte, header bytes in AAD, own CBOR codec instead of runtime cbor2.
-- Resolved 2026-09-30: root key custody (D-0004 amendment 4), system-key monthly rotation
-  (amendment 5), identity mapping rule (D-0002 amendment 3), secret rule set (D-0007).
+- Resolved 2026-09-30: D-0008 accepted (payload_type kept in AAD, flags byte, header in AAD, own
+  codec: no floats, separate strict decoder, cbor2 + hypothesis test-only, frozen vectors).
 
 ## Blockers
-- INDEX #2c, #12, #13 blocked on D-0008 approval. Nothing else blocked.
+- None.
 
 ## Verification
 - See the latest entry in "Session log" below.
@@ -54,3 +59,4 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   overrides); rewritten to set the hostile default on a scratch role. Mutation check: removing the
   READ COMMITTED line makes that test fail, as intended.
   Results: `check_structure.py` → 0 failure(s), 0 warning(s); `pytest` → 23 passed.
+- 2026-09-30: D-0008 accepted with owner resolutions; A-0017 test widened to google-re2; standing instructions recorded.

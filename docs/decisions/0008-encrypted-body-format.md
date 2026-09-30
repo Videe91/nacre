@@ -1,10 +1,22 @@
 # D-0008: Encrypted body format (ciphertext header, AEAD, deterministic CBOR plaintext)
 
-- **Status:** proposed — awaiting owner approval before INDEX #12 is built
+- **Status:** accepted (owner, 2026-09-30, with resolutions below)
 - **Tier:** D2 (persistence format)
 - **Date:** 2026-09-30
 - **Relies on assumptions:** A-0015
 - **Related:** D-0002 (body contents, AAD), D-0004 (keys, cipher, nonce budget), D-0003 (the ciphertext is sealed)
+
+## Amendment history (owner resolutions, before acceptance)
+1. **`payload_type` stays in the AAD.** Its omission from the brief was a mistake; AAD matches
+   accepted D-0002, so no D-0002 amendment is needed.
+2. **Flags byte:** approved.
+3. **Header bytes authenticated:** approved.
+4. **Own CBOR codec approved, on three conditions:**
+   - **Strict subset only:** text-keyed maps, arrays, text, bytes, integers, booleans, null.
+     **No floats.**
+   - **A matching strict decoder as its own file**, rejecting non-canonical or out-of-subset input.
+   - **Tests:** `cbor2` as a test-only cross-check, `hypothesis` round-trip tests (test-only),
+     and frozen byte vectors.
 
 ## Context
 D-0002 left the byte format of `body_ciphertext` open. It is a persistence format: every event
@@ -59,14 +71,24 @@ Readers reject:
 random-nonce GCM at 2^32 encryptions per key. Nacre enforces a lower hard cap of **2^28 per data
 key** with a counter (A-0015). Monthly data keys (D-0004) keep real use far below it.
 
-**AAD** = the D-0002 canonical encoding of (`event_id`, `stream_id`, `key_id`, `event_type`,
-`envelope_version`), followed by header bytes 0–2 (version, algorithm, flags).
+**AAD** = the D-0002 canonical encoding of (`envelope_version`, `event_id`, `stream_id`, `key_id`,
+`event_type`, `payload_type`), exactly as in D-0002, followed by header bytes 0–2 (version, algorithm, flags).
 
 **Plaintext** = one deterministic-CBOR map (RFC 8949 §4.2.1 core deterministic encoding):
-- **Allowed types:** maps with **text keys only**, arrays, text, byte strings, integers
-  (−2^63…2^64−1), booleans, null, and floats in shortest exact form, with NaN and ±∞ forbidden.
-- **Forbidden:** tags (so timestamps are integer µs), indefinite lengths, duplicate keys, `undefined`.
-- **Strict decoder:** after decoding, it re-encodes and requires byte equality, so non-canonical input is rejected.
+- **Allowed types (amendment 4):** maps with **text keys only**, arrays, text, byte strings,
+  integers (−2^64…2^64−1, CBOR major types 0/1), booleans, null.
+- **Forbidden:** **floats** (all widths), tags (so timestamps are integer µs), simple values other
+  than true/false/null, `undefined`, indefinite lengths, and duplicate map keys. Decimal
+  quantities go in as text or scaled integers, decided by the payload type that needs them.
+- **Strict decoder:** a separate file. It rejects:
+  - out-of-subset items;
+  - non-shortest integer or length arguments;
+  - map keys not in RFC 8949 §4.2.1 bytewise order;
+  - duplicate keys;
+  - trailing bytes;
+  - invalid UTF-8.
+
+  As a final guard, it re-encodes the result and requires byte equality.
 - **Body map v1 keys** (from D-0002's body list):
 
   | Key | Type | Note |
@@ -80,27 +102,27 @@ key** with a counter (A-0015). Monthly data keys (D-0004) keep real use far belo
 
 **Compression:** none in v1. The flag bit is reserved; a future ADR names the algorithm and sets it.
 
-**Implementation:** option **b**. The codec lives in `src/nacre/core/deterministic_cbor.py`,
-because both `keys/encrypt_payload.py` and `ledger/append_event.py` (`request_mac`) need it.
-`cbor2` is added as a dev/test dependency only.
+**Implementation:** option **b**, as two files in `core/`, because both `keys/encrypt_payload.py`
+and `ledger/append_event.py` (`request_mac`) need them:
+- `src/nacre/core/encode_cbor.py`: the encoder;
+- `src/nacre/core/decode_cbor.py`: the strict decoder.
 
-## Points for the owner (differences from the brief)
-1. **`payload_type` is dropped from AAD.** Accepted D-0002 put `payload_type` in the AAD; the
-   brief's list omits it. Proposal: follow the brief and add a post-acceptance amendment to D-0002.
-   Dropping it is safe because `payload_type` is covered by the seal hash (D-0003). Owner to confirm
-   or keep it.
-2. **A flags byte is added** to carry the reserved compression flag. The brief lists four header
-   items plus "a flag reserved".
-3. **Header bytes are in the AAD** (option ii).
-4. **Own codec** (option b) instead of relying on `cbor2` at runtime.
+`cbor2` (pinned exactly) and `hypothesis` are test-only dependencies.
+The tests cover:
+- RFC 8949 Appendix A vectors inside the subset;
+- frozen byte vectors for Nacre bodies;
+- hypothesis round-trips (encode → decode → equal; decode(non-canonical) → rejected);
+- cross-checks that `cbor2` decodes our bytes to the same value, and that `cbor2`'s canonical
+  encoding matches ours on subset inputs.
 
 ## Consequences
 - Every ciphertext is self-describing (version, algorithm, key), so re-encryption or migration
   tools need no side tables.
 - The 31-byte header + 16-byte tag add 47 bytes per event.
-- One more core file, the CBOR codec, owned by us, with RFC vectors as tests.
+- Two more core files (encoder, decoder), owned by us, with RFC and frozen vectors as tests.
+- No floats in bodies: payload types carrying measurements must choose text or scaled integers.
 
 ## How we'd know it was wrong
-- Real payloads need a type outside the allowed subset (e.g. tagged decimals). That needs a v2 format.
+- Real payloads need a type outside the allowed subset (floats, tagged decimals). That needs a v2 format.
 - Cross-language implementations disagree on bytes for the same body (golden-vector test).
 - Body sizes make the missing compression hurt (measure in Phase 3).

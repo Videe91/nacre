@@ -12,7 +12,8 @@ D-0002 … D-0006 accepted 2026-09-30.
 | 2 | core | Open one Postgres connection per DB role: explicit READ COMMITTED, UTC (no pool, no scope logic) | `src/nacre/core/db.py` | `tests/core/test_db.py` | D-0003, D-0005, D-0006 | A-0011 | done |
 | 2a | core | Blob storage interface (Protocol only: put / get / exists by ref) | `src/nacre/core/blob_store.py` | — (via 15a) | D-0006 | — | planned |
 | 2b | core | Root-key provider interface (Protocol only: wrap / unwrap a stream master key, key version) | `src/nacre/core/root_key_provider.py` | — (via 11a) | D-0004 | — | planned |
-| 2c | core | Deterministic CBOR codec, restricted subset (encode + strict decode) | `src/nacre/core/deterministic_cbor.py` | `tests/core/test_deterministic_cbor.py` (RFC 8949 App. A vectors; cbor2 as test oracle) | D-0008 (proposed) | — | blocked on D-0008 |
+| 2c | core | Deterministic CBOR encoder, strict subset (no floats) | `src/nacre/core/encode_cbor.py` | `tests/core/test_encode_cbor.py` (RFC 8949 App. A subset vectors, frozen vectors, cbor2 cross-check, hypothesis) | D-0008 | — | planned |
+| 2d | core | Strict deterministic CBOR decoder: rejects non-canonical / out-of-subset input | `src/nacre/core/decode_cbor.py` | `tests/core/test_decode_cbor.py` (rejection vectors, hypothesis round-trips, cbor2 cross-check) | D-0008 | — | planned |
 | 3 | schema | Apply ordered SQL migrations with the migrator role | `src/nacre/schema/apply_migrations.py` | `tests/schema/test_apply_migrations.py` | D-0003, D-0005 | — | planned |
 | 3a | schema | DDL: `events`, append-only trigger, linkage trigger, roles/grants | `src/nacre/schema/sql/0001_ledger.sql` | (via ledger tests) | D-0002, D-0003 | A-0013 | planned |
 | 3b | schema | DDL: `scopes`, `scope_grants`, RLS policies (FORCE) | `src/nacre/schema/sql/0002_scopes_rls.sql` | (via scopes tests) | D-0005 | A-0011 | planned |
@@ -27,8 +28,8 @@ D-0002 … D-0006 accepted 2026-09-30.
 | 10 | scopes | The one door: open a transaction with `SET LOCAL` scope settings | `src/nacre/scopes/open_scoped_session.py` | `tests/scopes/test_open_scoped_session.py` (adversarial RLS suite) | D-0005 | A-0011, A-0012 | planned |
 | 11a | keys | Local-file implementation of the root-key provider | `src/nacre/keys/local_file_root_key.py` | `tests/keys/test_local_file_root_key.py` | D-0004 | A-0008 | planned |
 | 11 | keys | Get or create the data key for (stream, subject, month), unwrapping via the stream master key (created on first use, wrapped by root KEK) | `src/nacre/keys/get_or_create_key.py` | `tests/keys/test_get_or_create_key.py` | D-0004 | A-0008 | planned |
-| 12 | keys | Encrypt a body with AES-256-GCM + AAD; derive MAC sub-keys; count uses | `src/nacre/keys/encrypt_payload.py` | `tests/keys/test_encrypt_payload.py` | D-0002, D-0004, D-0008 (proposed) | A-0015 | blocked on D-0008 |
-| 13 | keys | Decrypt a body, or return `Shredded` if the key is gone | `src/nacre/keys/decrypt_payload.py` | `tests/keys/test_decrypt_payload.py` | D-0004, D-0008 (proposed) | — | blocked on D-0008 |
+| 12 | keys | Encrypt a body with AES-256-GCM + AAD; derive MAC sub-keys; count uses | `src/nacre/keys/encrypt_payload.py` | `tests/keys/test_encrypt_payload.py` | D-0002, D-0004, D-0008 | A-0015 | planned |
+| 13 | keys | Decrypt a body, or return `Shredded` if the key is gone | `src/nacre/keys/decrypt_payload.py` | `tests/keys/test_decrypt_payload.py` | D-0004, D-0008 | — | planned |
 | 14 | ledger | Append one event end to end (validate, trust, strip, encrypt, idempotency, lock, sequence, seal, insert) | `src/nacre/ledger/append_event.py` | `tests/ledger/test_append_event.py` (+ concurrency benchmark) | D-0002, D-0003, D-0004, D-0005 | A-0007, A-0009, A-0010, A-0014 | planned |
 | 15 | ledger | Store an encrypted attachment by keyed fingerprint through the blob interface | `src/nacre/ledger/store_attachment.py` | `tests/ledger/test_store_attachment.py` | D-0002, D-0004, D-0006 | — | planned |
 | 15a | ledger | Local-disk implementation of the blob interface | `src/nacre/ledger/local_disk_blob_store.py` | `tests/ledger/test_local_disk_blob_store.py` | D-0006 | — | planned |
