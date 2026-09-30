@@ -17,7 +17,7 @@ Build the Phase 1 files in `docs/modules/INDEX.md` order, one functionality + te
 committing and pushing after each.
 - Done: #1 `core/event.py`, #2 `core/db.py`, #2a `core/blob_store.py`, #2b `core/root_key_provider.py`,
   #3 `schema/apply_migrations.py` + SQL 0001–0003, #2c `core/encode_cbor.py`, #2d `core/decode_cbor.py`, #4 `ledger/encode_envelope.py`, #5 `ledger/seal_event.py`, #3d `sql/0004_checkpoints.sql`.
-- **#6 CLOSED 2026-09-30** (H3 official). **#14 built; A-0007 measured; #7, #7a, #8 built.** #15/#15a/#15b, #16, #17, #18, #19 built. Next: #20/#20a/#20b (shredding with grace period, master and root rotation), #21 delete_scope, #15c orphan GC.
+- **#6 CLOSED 2026-09-30** (H3 official). **#14 built; A-0007 measured; #7, #7a, #8 built.** #15/#15a/#15b, #16, #17, #18, #19 built. #20 (requests), #20c (execution), #20d (keyadmin tx) built; #21 folded into them. Next: #20b master rotation, #20a root rotation, A-0008 backup-recovery and crash tests, #15c orphan GC.
 - To run DB tests: `docker compose up -d --wait`, then `pytest`.
 - **Owner tool:** `scripts/measure_token_format.py` measures real tokens' prefix/length/charset without
   printing them (D-0007 amendment 4). Run locally; paste only its suggested ASSUMPTIONS row back.
@@ -33,7 +33,7 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
    *Status: tested (#19): edited ciphertext, edited header, deleted row, reordered rows, and a full rewrite with
    recomputed seals caught only by the signed checkpoint.*
 4. Shredding makes payloads unreadable while the chain still verifies.
-   *Status: chain side tested (#19, master key destroyed → still verifies); full check with #20 shred_keys.*
+   *Status: tested end to end (#20c): after an executed erasure, payloads are Shredded and verify_chain passes.*
 5. The cross-scope read test fails as expected (D-0005 S-3). *Status: suite in place and passing through the
    door (#10: 25 kind pairs + reuse/rollback/revoke); re-run at the gate with real appended events.*
 6. A-0007 throughput is measured and the result recorded (pass/fail against the provisional target is reported, not hidden).
@@ -453,3 +453,14 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   - Verifier: confirmed and tested that a rewrite is caught through the witness even after the DB checkpoint row
     is deleted; the warning wording no longer assumes a crash.
 - 2026-09-30: Migration 0007, the nacre_keyadmin role (D-0014). D1: NOINHERIT member of nacre_app, so one transaction can destroy keys AND append the audit event (never half-done); least privilege holds per statement. Tested: owns nothing, no bypass, no inherit, never reads events/checkpoints, privilege table.
+- 2026-09-30: D-0014 lifecycle built.
+  - #20 manage_shred_requests: request / cancel / legal hold; 7-day grace; authority = org admin or the person
+    themself; state derived from org-stream events.
+  - #20c execute_due_shreds: one transaction per request destroys keys + writes deletion markers (in affected
+    streams) + shred_executed (org stream).
+  - #20d keyadmin_session.
+  - #21 folded into these (delete_scope is a request kind).
+
+  Tests (9): authority, grace, cancel, erase-only-that-person, self-erasure with hold and expiry, hold rules,
+  delete_scope, forget_period, chain still verifies (gate 4 end to end), and execution runs once. Mutations: no
+  grace → 2 fail; holds ignored → 1 fail; erase deletes all keys → 1 fail.
