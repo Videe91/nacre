@@ -1,0 +1,67 @@
+# Nacre supplementary detection rules (D-0011). Additive only: these never disable, override or
+# shadow a vendored gitleaks rule (duplicate ids are refused by the loader). Same TOML shape as gitleaks.
+# Each rule carries the D-0011 admission fields: source, source_date, fact_ids, test, holdout.
+# Tightening changes are local; any loosening (new/wider allowlist, removal, relaxation) needs the
+# owner's explicit approval. Sources are provider-owned documents or standards, never scanner rule sets.
+title = "nacre supplementary rules v1"
+
+[[rules]]
+id = "url-userinfo-password"
+description = "Password in URL userinfo (DB connection strings, credentials in URLs, legacy Sentry DSN secret)"
+regex = '''[a-zA-Z][a-zA-Z0-9+.\-]*://[^\s:/?#@'"<>]+:([^\s/?#@'"<>]+)@'''
+secretGroup = 1
+keywords = ["://"]
+source = "RFC 3986 §3.2.1; PostgreSQL libpq §32.1.1.2; MySQL 8.4 URI syntax; MongoDB connection string formats; Sentry get_dsn (getsentry/sentry@88dcaf3f projectkey.py)"
+source_date = "2026-09-30"
+fact_ids = []
+test = "tests/ledger/test_strip_secrets.py::test_catch_rate_holdout_official"
+holdout = "2026-09-30: 100% on holdout for credentials-in-url, mongodb, mysql, postgresql, Sentry legacy DSN (50 each); holdout FP 0.52% with all rules"
+  # Approved with D-0011 (owner): placeholder allowlist, exactly these kinds and no others.
+  [[rules.allowlists]]
+  description = "placeholders: ${VAR}, $VAR, <password>, ***, password, xxx"
+  regexTarget = "secret"
+  regexes = ['''^\$\{?[A-Za-z_][A-Za-z0-9_]*\}?$''', '''^<[^>]*>$''', '''^\*+$''', '''^(?i:password)$''', '''^(?i:x{3,})$''']
+
+[[rules]]
+id = "github-installation-token-stateless"
+description = "GitHub App installation token, stateless ghs_APPID_JWT format (2026)"
+regex = '''\b(ghs_[A-Za-z0-9.\-_]{36,})'''
+keywords = ["ghs_"]
+source = "https://github.blog/changelog/2026-05-15-github-app-installation-tokens-per-request-override-header (GitHub's recommended regex); https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-authentication-to-github"
+source_date = "2026-09-30"
+fact_ids = []
+test = "tests/ledger/test_strip_secrets.py::test_catch_rate_holdout_official"
+holdout = "2026-09-30: 100% on holdout (ghs stateless, n=50); holdout FP 0.52% with all rules"
+
+[[rules]]
+id = "heroku-oauth-token"
+description = "Heroku OAuth token / API key, HRKU- prefixed (UUID form, or 60 chars after the prefix)"
+regex = '''\b(HRKU-(?:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}|[A-Za-z0-9_\-]{60}))'''
+keywords = ["hrku-"]
+source = "https://devcenter.heroku.com/articles/oauth (65 chars); https://devcenter.heroku.com/changelog-items/2842 (UUID form); https://devcenter.heroku.com/changelog-items/2800"
+source_date = "2026-09-30"
+fact_ids = []   # the 60-char charset is pending an owner-measured fact; only the UUID form is asserted by tests
+test = "tests/ledger/test_strip_secrets.py::test_catch_rate_holdout_official"
+holdout = "2026-09-30: 100% on holdout (HRKU- UUID form, n=50); holdout FP 0.52% with all rules"
+
+[[rules]]
+id = "supabase-secret-key"
+description = "Supabase secret API key (sb_secret_)"
+regex = '''\b(sb_secret_[A-Za-z0-9_\-]{22}_[A-Za-z0-9_\-]{8})'''
+keywords = ["sb_secret_"]
+source = "https://supabase.com/docs/guides/api/api-keys; supabase/supabase@ff80bb14 docker/utils/add-new-auth-keys.sh L125-135"
+source_date = "2026-09-30"
+fact_ids = []
+test = "tests/ledger/test_strip_secrets.py::test_catch_rate_holdout_official"
+holdout = "2026-09-30: 100% on holdout (sb_secret, n=50); holdout FP 0.52% with all rules"
+
+[[rules]]
+id = "sentry-org-token-full"
+description = "Sentry organization auth token (sntrys_), full documented charset including + / ="
+regex = '''\b(sntrys_[A-Za-z0-9+/=]+_[A-Za-z0-9+/]{43})'''
+keywords = ["sntrys_"]
+source = "getsentry/sentry@88dcaf3f src/sentry/utils/security/orgauthtoken_token.py L17-34"
+source_date = "2026-09-30"
+fact_ids = []
+test = "tests/ledger/test_strip_secrets.py::test_catch_rate_holdout_official"
+holdout = "2026-09-30: 100% on holdout (sntrys, n=50); holdout FP 0.52% with all rules"

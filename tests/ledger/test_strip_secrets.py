@@ -106,39 +106,77 @@ def test_a_rule_that_does_not_compile_fails_the_load(fresh_rules, tmp_path):
         strip_secrets("x")
 
 
-# ---- A-0010 measurement (D-0007 amendments 3-5) ------------------------------------------------------
+# ---- A-0010 measurement (D-0007 amendments 3-5; D-0011 holdout) --------------------------------------
+from secret_corpus.corpus import build_holdout  # noqa: E402
+from secret_corpus.measure import overfitting_flags  # noqa: E402
+
+
 @pytest.fixture(scope="module")
-def report():
-    return measure(build(), strip_secrets)
+def working():
+    return measure(build(), strip_secrets, split="working")
 
 
-# Groups below 99% on 2026-09-30, each explained by a gap proposed to close in D-0011 (supplementary
-# rules). strict=True: a group that starts passing fails this suite until it is removed from the list.
-KNOWN_GAPS = {
-    "generic:credentials-in-url/https-userinfo": "no gitleaks rule for URL userinfo passwords (D-0011)",
-    "generic:db-connection-string/mongodb": "no gitleaks rule for URL userinfo passwords (D-0011)",
-    "generic:db-connection-string/mysql": "no gitleaks rule for URL userinfo passwords (D-0011)",
-    "generic:db-connection-string/postgresql": "no gitleaks rule for URL userinfo passwords (D-0011)",
-    "provider:GitHub": "stateless ghs_ (2026) not in gitleaks v8.30.1 (D-0011)",
-    "provider:Heroku": "gitleaks HRKU- rule needs a keyword context (D-0011)",
-    "provider:Sentry": "legacy DSN secret (URL userinfo) and sntrys_ outside Bearer contexts (D-0011)",
-    "provider:Supabase": "sb_secret_ outside Bearer contexts (D-0011)",
-}
+@pytest.fixture(scope="module")
+def holdout():
+    return measure(build_holdout(), strip_secrets, split="holdout")
+
+
 def _secret_groups():
-    return sorted(k for k in measure(build(per_generator=1), lambda t: strip_secrets(t))["groups"] if not k.startswith("public:"))
+    return sorted(k for k in measure(build_holdout(per_generator=1), strip_secrets, split="holdout")["groups"]
+                  if not k.startswith("public:"))
 
 
+# Groups below 99% ON THE HOLDOUT (first holdout run, 2026-09-30). The vendored gitleaks `jwt` and
+# `sentry-user-token` rules require a quote, whitespace or ';' after the token, so they miss the holdout's
+# XML and error-message contexts. The working set showed 100%: this is the overfitting the holdout exists
+# to catch. A fix would need new rules and a RE-SEALED holdout (owner decision, CURRENT.md).
+# strict=True: when a group passes, this suite fails until the entry is removed.
+HOLDOUT_GAPS = {
+    "generic:jwt/hs256": "vendored `jwt` rule terminators miss XML/error-message contexts (holdout 78%)",
+    "provider:Sentry": "vendored `sentry-user-token` terminators miss XML/error-message contexts (sntryu holdout 78%)",
+    "provider:Supabase": "vendored `jwt` rule terminators: service_role JWT holdout 78%",
+}
+
+
+# Official (D-0011 amendment 1): catch rates come from the sealed holdout only.
 @pytest.mark.parametrize("group", [
-    pytest.param(g, marks=pytest.mark.xfail(strict=True, reason=KNOWN_GAPS[g])) if g in KNOWN_GAPS else g
+    pytest.param(g, marks=pytest.mark.xfail(strict=True, reason=HOLDOUT_GAPS[g])) if g in HOLDOUT_GAPS else g
     for g in _secret_groups()])
-def test_catch_rate_at_least_99_percent_per_group(report, group):
-    assert report["groups"][group]["rate"] >= 0.99, report["groups"][group]
+def test_catch_rate_holdout_official(holdout, group):
+    assert holdout["groups"][group]["rate"] >= 0.99, holdout["groups"][group]
 
 
-def test_public_credentials_are_never_stripped(report):
-    public = {k: v for k, v in report["groups"].items() if k.startswith("public:")}
-    assert public and all(v["rate"] == 1.0 for v in public.values()), public
+def test_public_credentials_are_never_stripped(working, holdout):
+    for report in (working, holdout):
+        public = {k: v for k, v in report["groups"].items() if k.startswith("public:")}
+        assert public and all(v["rate"] == 1.0 for v in public.values()), public
 
 
-def test_false_positive_rate_at_most_2_percent(report):
-    assert report["fp_rate"] <= 0.02, report["fp_docs"]
+def test_false_positive_rate_holdout_official(holdout):
+    assert holdout["fp_rate"] <= 0.02, holdout["fp_docs"]
+
+
+def test_working_set_reported_and_overfitting_flagged(working, holdout, capsys):
+    flags = overfitting_flags(working, holdout)
+    with capsys.disabled():
+        print("\nA-0010 working vs holdout (overfitting flags: %s)" % (flags or "none"))
+    assert working["fp_rate"] <= 0.02
+
+
+def test_nacre_rules_cannot_reuse_a_gitleaks_rule_id(fresh_rules, tmp_path):
+    # D-0011 amendment 2: additive only; a clash would shadow or override a vendored rule.
+    clash = ss.NACRE_RULES_FILE.read_text().replace('id = "supabase-secret-key"', 'id = "github-pat"', 1).encode()
+    copy = tmp_path / "nacre.toml"
+    copy.write_bytes(clash)
+    fresh_rules.setattr(ss, "NACRE_RULES_FILE", copy)
+    fresh_rules.setattr(ss, "NACRE_RULES_SHA256", hashlib.sha256(clash).hexdigest())
+    with pytest.raises(RulesError, match="additive only"):
+        strip_secrets("x")
+
+
+def test_a_modified_nacre_rules_file_is_refused(fresh_rules, tmp_path):
+    copy = tmp_path / "nacre.toml"
+    copy.write_bytes(ss.NACRE_RULES_FILE.read_bytes() + b"\n# loosened\n")
+    fresh_rules.setattr(ss, "NACRE_RULES_FILE", copy)
+    with pytest.raises(RulesError, match="pinned sha256"):
+        strip_secrets("x")

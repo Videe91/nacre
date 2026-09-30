@@ -3,7 +3,7 @@ Functionality: Find secrets in text and replace them with redaction markers befo
 Owns: loading and pinning the vendored gitleaks rules, running them under RE2 with gitleaks' semantics,
   the public-credential layer, the entropy layer, merging overlapping findings, and the redaction.
 Public entry: strip_secrets(), StripResult, Finding
-Decisions: D-0002, D-0007, D-0008, D-0009
+Decisions: D-0002, D-0007, D-0008, D-0009, D-0011
 Assumptions: A-0010, A-0018
 Notes: Layers, in order:
   1. Public credentials (D-0007 amendment 4): public-by-design values are recognised, NOT stripped, and
@@ -12,12 +12,15 @@ Notes: Layers, in order:
   2. gitleaks v8.30.1 rules under google-re2 (D-0009), with keywords prefilter, secretGroup / first
      non-empty group, per-rule entropy (drop if <= threshold), global and per-rule allowlists (paths
      only when a path is given; regexTarget secret|match|line; stopwords; condition OR|AND).
+     Then the Nacre supplementary rules (D-0011), same semantics, additive only: duplicate ids are
+     refused, gitleaks' global allowlist does not apply to them, their own allowlists apply only to them.
   3. Entropy layer (D-0007): a high-entropy token right after an assignment or credential cue. D1
      parameters, tuned on the corpus: see ENTROPY_* below. It skips runs longer than 64 (blobs,
      hashes), runs starting "//" (URL tails), and unquoted values after a spaced " = " (code
      expressions such as `X = module.Name`), and requires lower, upper and digits.
   Only the secret part of a match is replaced, as "[REDACTED:<rule id>]", so the surrounding context
-  (e.g. "token = ") survives. Overlapping secret spans are merged under the first rule id.
+  (e.g. "token = ") survives. Overlapping secret spans are merged; the label is the most specific rule
+  (provider rule > generic rule > entropy).
   The rules file is checked against its pinned sha256 before use, and any rule that fails to compile
   fails the load: a rule is never silently skipped (D-0009).
 """
@@ -36,6 +39,8 @@ import re2
 
 RULES_FILE = Path(__file__).resolve().parent / "data" / "gitleaks-v8.30.1.toml"
 RULES_SHA256 = "e163e53b9e7e8a8511e77271e2b323ed057759542a6d988258afe3a1fa329caf"
+NACRE_RULES_FILE = Path(__file__).resolve().parent / "data" / "nacre-rules-v1.toml"
+NACRE_RULES_SHA256 = "b2fbea17503989f1d40c30e7531d3973f9b809d859490012ab8b1818add12b7e"
 
 ENTROPY_MIN_BITS = 4.3        # above hex's 4.0 ceiling
 ENTROPY_MIN_LEN, ENTROPY_MAX_LEN = 20, 64   # longer runs are data (blobs, hashes), not credentials
@@ -105,18 +110,13 @@ def _jwt_claim(token, claim):
 
 
 # ---- layer 2: gitleaks rules ----------------------------------------------------------------------
-@cache
-def _rules():
-    raw = RULES_FILE.read_bytes()
-    if hashlib.sha256(raw).hexdigest() != RULES_SHA256:
-        raise RulesError(f"{RULES_FILE.name} does not match its pinned sha256 (D-0007)")
+def _load(path, pinned, origin):
+    raw = path.read_bytes()
+    if hashlib.sha256(raw).hexdigest() != pinned:
+        raise RulesError(f"{path.name} does not match its pinned sha256 (D-0007, D-0011)")
     cfg = tomllib.loads(raw.decode())
+    rules = []
     try:
-        glob = cfg.get("allowlist", {})
-        global_allow = ([re2.compile(p) for p in glob.get("paths", [])],
-                        [re2.compile(x) for x in glob.get("regexes", [])],
-                        [w.lower() for w in glob.get("stopwords", [])])
-        rules = []
         for r in cfg["rules"]:
             if "regex" not in r:
                 continue                                   # path-only rules do not apply to payloads
@@ -124,19 +124,32 @@ def _rules():
                        [re2.compile(p) for p in a.get("paths", [])], [re2.compile(x) for x in a.get("regexes", [])],
                        [w.lower() for w in a.get("stopwords", [])]) for a in r.get("allowlists", [])]
             rules.append((r["id"], re2.compile(r["regex"]), [k.lower() for k in r.get("keywords", [])],
-                          r.get("entropy"), r.get("secretGroup", 0), allows))
+                          r.get("entropy"), r.get("secretGroup", 0), allows, origin))
+        glob = cfg.get("allowlist", {})
+        global_allow = ([re2.compile(p) for p in glob.get("paths", [])],
+                        [re2.compile(x) for x in glob.get("regexes", [])],
+                        [w.lower() for w in glob.get("stopwords", [])])
     except re2.error as exc:
-        raise RulesError(f"a vendored rule failed to compile under re2: {exc}") from None
+        raise RulesError(f"a rule in {path.name} failed to compile under re2: {exc}") from None
     return global_allow, rules
+
+
+@cache
+def _rules():
+    global_allow, vendored = _load(RULES_FILE, RULES_SHA256, "gitleaks")
+    _, nacre = _load(NACRE_RULES_FILE, NACRE_RULES_SHA256, "nacre")
+    clash = {r[0] for r in vendored} & {r[0] for r in nacre}
+    if clash:
+        raise RulesError(f"Nacre rules may not reuse gitleaks rule ids (additive only, D-0011): {sorted(clash)}")
+    return global_allow, vendored + nacre
 
 
 def _rule_findings(text, path):
     (g_paths, g_regexes, g_stopwords), rules = _rules()
-    if path is not None and any(p.search(path) for p in g_paths):
-        return []
+    skip_vendored = path is not None and any(p.search(path) for p in g_paths)
     lowered, found = text.lower(), []
-    for rule_id, rx, keywords, min_entropy, group, allows in rules:
-        if keywords and not any(k in lowered for k in keywords):
+    for rule_id, rx, keywords, min_entropy, group, allows, origin in rules:
+        if (origin == "gitleaks" and skip_vendored) or (keywords and not any(k in lowered for k in keywords)):
             continue
         for m in rx.finditer(text):
             idx = group or next((i for i in range(1, len(m.groups()) + 1) if m.group(i)), 0)
@@ -146,7 +159,8 @@ def _rule_findings(text, path):
             secret = text[start:end]
             if not secret or (min_entropy and _entropy(secret) <= min_entropy):
                 continue
-            if any(x.search(secret) for x in g_regexes) or any(w in secret.lower() for w in g_stopwords):
+            if origin == "gitleaks" and (any(x.search(secret) for x in g_regexes)
+                                         or any(w in secret.lower() for w in g_stopwords)):
                 continue
             if any(_allowed(a, path, secret, m.group(0), _line(text, m.start(), m.end())) for a in allows):
                 continue
@@ -199,12 +213,20 @@ def _entropy_findings(text):
 
 
 # ---- merge -----------------------------------------------------------------------------------------
+def _label_rank(rule_id):
+    """Which rule names a merged span: provider-specific first, then generic rules, then entropy (D1).
+    Labels only; merging never changes what is redacted."""
+    if rule_id == "entropy":
+        return 2
+    return 1 if rule_id.startswith("generic-") or rule_id == "url-userinfo-password" else 0
+
+
 def _merge(found):
-    merged = []
+    clusters = []
     for f in sorted(found, key=lambda f: (f.start, -f.end)):
-        if merged and f.start < merged[-1].end:
-            last = merged[-1]
-            merged[-1] = Finding(last.rule_id, last.start, max(last.end, f.end))
+        if clusters and f.start < clusters[-1][1]:
+            clusters[-1][1] = max(clusters[-1][1], f.end)
+            clusters[-1][2].append(f.rule_id)
         else:
-            merged.append(f)
-    return merged
+            clusters.append([f.start, f.end, [f.rule_id]])
+    return [Finding(min(ids, key=_label_rank), start, end) for start, end, ids in clusters]

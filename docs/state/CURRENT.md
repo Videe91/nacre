@@ -46,8 +46,19 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
 - **D-0011 accepted** (holdout; additive only; admission criteria; loosening needs owner approval).
 - **Upstream (not blocking):** once proven on the holdout, prepare the `ghs_` stateless and
   password-in-URL rules as gitleaks contributions (D-0011 amendment 3).
-- **The pre-commit hook stays on the temporary scanner** until strip_secrets meets its targets (D-0010).
-- **#6 provider coverage, state after verification (evidence/A-0010-format-verification.md).**
+- **Holdout result needs an owner decision (re-seal).** With the 5 Nacre rules, every Nacre-targeted kind is
+  100% on the sealed holdout (holdout FP 0.52%). But 3 kinds covered by VENDORED gitleaks rules are 78% on
+  the holdout (JWT hs256, Supabase service_role JWT, Sentry sntryu_), while 100% on the working set: an
+  overfitting flag. Cause: those gitleaks rules require quote/whitespace/';' after the token, so they miss
+  the holdout's XML and error-message contexts. Fixing it means new additive Nacre rules written AFTER
+  seeing holdout failures, so this holdout can no longer be the official one. Options: (a) write those
+  rules, demote this holdout to working, seal a new holdout (new seed + new unseen contexts) and measure
+  there; (b) leave the 3 kinds as documented gaps. Recommended: (a). Tracked as 3 strict xfails.
+- **Proposed loosening (needs owner approval):** the url-userinfo-password allowlist could also accept
+  `[...]` (documented URI syntax) and `{...}` (template placeholders) as placeholders. Seen only in repo
+  files so far (hook-allowlisted there); not needed for current targets.
+- **Pre-commit hook switched to strip_secrets (D-0010).** The temporary gitleaks-only engine is gone;
+  the hook keeps the reviewed repo allowlist + manifest-gated negatives skip.
   - **Generated now** (fully documented by the provider): GitHub classic + ghs stateless; GitLab legacy +
     routable (exact CRC); PyPI (V2 macaroon); Heroku HRKU-UUID form; Supabase sb_secret / sb_publishable
     (exact checksum), legacy service_role / anon JWTs; Sentry sntryu_ / sntrys_, DSN public vs legacy.
@@ -301,3 +312,13 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   header, SQL, CLI flag, error message); committed negatives are split by path hash (174 working / 137
   holdout); holdout digest pinned e13800…2345. Holdout measurement tests are added only after the rules
   are written, so no holdout result is seen while writing rules.
+- 2026-09-30: D-0011 implemented: nacre-rules-v1.toml (5 rules, sha256-pinned, additive only: duplicate
+  ids refused, gitleaks global allowlist not applied to Nacre rules). Working set: all 8 former gaps now
+  100%. First HOLDOUT run (rules frozen first): Nacre-targeted kinds 100%; JWT / service_role / sntryu_ 78%
+  (vendored-rule terminators; overfitting flag). Holdout FP 0.52%, working FP 0.24%. Admission fields
+  (holdout results) filled in each rule; nacre pin updated. Evidence: A-0010-measurement-2026-09-30-holdout.md.
+  Hook switched to strip_secrets. The whole-tree scan found 6 false positives, all reviewed and
+  hook-allowlisted exact-value with reasons (bracket and f-string placeholders, dev-DB password, Base62
+  alphabet). D1: merged spans are labelled by the most specific rule (provider > generic > entropy),
+  which changes labels only. Fixed a test bug: the tree-clean test now applies the hook's negatives skip.
+  Results: check_structure 0/0; pytest 531 passed + 3 strict xfail.

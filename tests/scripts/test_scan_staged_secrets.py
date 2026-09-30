@@ -1,5 +1,5 @@
-"""Tests for the TEMPORARY pre-commit scanner (D-0010). Delete with scripts/scan_staged_secrets.py
-when #6 replaces it. Secret-shaped strings are built at runtime so none is ever committed."""
+"""Tests for the pre-commit scan (D-0010), now running strip_secrets. Secret-shaped strings are built
+at runtime so none is ever committed."""
 import importlib.util
 import random
 import string
@@ -12,7 +12,6 @@ ROOT = Path(__file__).resolve().parents[2]
 _spec = importlib.util.spec_from_file_location("scan_staged_secrets", ROOT / "scripts/scan_staged_secrets.py")
 scanner = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(scanner)
-GLOBAL_ALLOW, RULES = scanner.load()
 rng = random.Random(20260930)
 
 
@@ -29,7 +28,7 @@ def aws_access_key_id():
 
 
 def _ids(path, text):
-    return {rule_id for _, _, rule_id, _ in scanner.scan(path, text, GLOBAL_ALLOW, RULES)}
+    return {rule_id for _, _, rule_id, _ in scanner.scan(path, text)}
 
 
 @pytest.mark.parametrize("make,rule", [(github_pat, "github-pat"), (aws_access_key_id, "aws-access-token")])
@@ -52,8 +51,8 @@ def test_repo_tree_is_clean():
     findings = []
     for name in files:
         data = (ROOT / name).read_bytes()
-        if b"\0" not in data[:8192]:
-            findings += scanner.scan(name, data.decode("utf-8", "replace"), GLOBAL_ALLOW, RULES)
+        if b"\0" not in data[:8192] and not scanner._reviewed_negative(name, data):   # as the hook does
+            findings += scanner.scan(name, data.decode("utf-8", "replace"))
     assert findings == []
 
 
