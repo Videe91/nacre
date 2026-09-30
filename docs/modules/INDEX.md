@@ -4,7 +4,11 @@ Paths are repo-relative (checked by `scripts/check_structure.py`).
 Status: `planned` = not written; `done` = written, tested, gate-relevant tests passing.
 D-0002 … D-0006 accepted 2026-09-30.
 
-## Phase 1 — ledger and scopes (planned, build in this order)
+## Phase 1 — ledger and scopes
+
+Build order note (2026-09-30): #7 and #8 write config events into the org stream, so they need #14
+`append_event` (and #6, #11–#13). They are built after #14. Order now: 9, 10, 6, 11a, 11, 12, 13, 14, 7, 8,
+then 15 onward.
 
 | # | Capability | Functionality | File | Test | Decisions | Assumptions | Status |
 |---|---|---|---|---|---|---|---|
@@ -24,7 +28,7 @@ D-0002 … D-0006 accepted 2026-09-30.
 | 6 | ledger | Detect and redact secrets before write: vendored gitleaks rules + entropy check | `src/nacre/ledger/strip_secrets.py` (+ data `src/nacre/ledger/data/gitleaks-v8.30.1.toml`, license beside it) | `tests/ledger/test_strip_secrets.py` (+ labeled corpus `tests/ledger/secret_corpus/`) | D-0002, D-0007, D-0009 (proposed) | A-0010, A-0018 | blocked on D-0009 |
 | 7 | scopes | Register a scope/stream (kind, org, parent) as a config event + row | `src/nacre/scopes/register_scope.py` | `tests/scopes/test_register_scope.py` | D-0005 | A-0014 | planned |
 | 8 | scopes | Grant/revoke principal access as org-stream config events + projection | `src/nacre/scopes/set_access.py` | `tests/scopes/test_set_access.py` | D-0005 | A-0012 | planned |
-| 9 | scopes | Resolve a principal's readable/writable stream sets from grants | `src/nacre/scopes/resolve_access.py` | `tests/scopes/test_resolve_access.py` | D-0005 | A-0012 | planned |
+| 9 | scopes | Resolve a principal's readable/writable stream sets from grants (latest grant wins, no inheritance) | `src/nacre/scopes/resolve_access.py` | `tests/scopes/test_resolve_access.py` | D-0005 | A-0012 | done |
 | 10 | scopes | The one door: open a transaction with `SET LOCAL` scope settings | `src/nacre/scopes/open_scoped_session.py` | `tests/scopes/test_open_scoped_session.py` (adversarial RLS suite) | D-0005 | A-0011, A-0012 | planned |
 | 11a | keys | Local-file implementation of the root-key provider | `src/nacre/keys/local_file_root_key.py` | `tests/keys/test_local_file_root_key.py` | D-0004 | A-0008 | planned |
 | 11 | keys | Get or create the data key for (stream, subject, month), unwrapping via the stream master key (created on first use, wrapped by root KEK) | `src/nacre/keys/get_or_create_key.py` | `tests/keys/test_get_or_create_key.py` | D-0004 | A-0008 | planned |

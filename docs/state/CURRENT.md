@@ -17,7 +17,7 @@ Build the Phase 1 files in `docs/modules/INDEX.md` order, one functionality + te
 committing and pushing after each.
 - Done: #1 `core/event.py`, #2 `core/db.py`, #2a `core/blob_store.py`, #2b `core/root_key_provider.py`,
   #3 `schema/apply_migrations.py` + SQL 0001–0003, #2c `core/encode_cbor.py`, #2d `core/decode_cbor.py`, #4 `ledger/encode_envelope.py`, #5 `ledger/seal_event.py`, #3d `sql/0004_checkpoints.sql`.
-- Next: #6 `strip_secrets` once D-0009 is decided; #7 onward can proceed meanwhile.
+- Next: #10 `open_scoped_session`, then #6. #7/#8 moved after #14 (they append config events; see INDEX).
 - To run DB tests: `docker compose up -d --wait`, then `pytest`.
 - **Every clone:** `git config core.hooksPath scripts/hooks` (D-0010 pre-commit secret scan; needs `.venv`
   with `google-re2`). Temporary scanner `scripts/scan_staged_secrets.py` is replaced by #6.
@@ -145,3 +145,4 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   file held the allowlisted test-password line as a literal; it is now built at runtime.
   Results: check_structure 0/0; pytest 340 passed (51 s; the machine's load average was ~10–14 from
   other work, which slowed the hypothesis tests).
+- 2026-09-30: INDEX #9 `scopes/resolve_access.py`. Mutation: oldest-grant-wins → 1 fail. Build order changed: #7/#8 after #14 (dependency on append_event). Results: pytest (scopes) 7 passed.
