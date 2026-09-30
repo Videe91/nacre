@@ -15,10 +15,9 @@
 ## Next
 Build the Phase 1 files in `docs/modules/INDEX.md` order, one functionality + test per step,
 committing and pushing after each.
-- Done: #1 `src/nacre/core/event.py`.
-- Next: #2 `src/nacre/core/db.py` + #2a `core/blob_store.py`, then #3 migrations. #2 brings in
-  `docker-compose.yml` (postgres:17.11, digest-pinned), `tests/conftest.py`, and installing
-  `psycopg` / `cryptography` into `.venv`.
+- Done: #1 `core/event.py`, #2 `core/db.py`.
+- Next: #2a `core/blob_store.py`, #2b `core/root_key_provider.py`, then #3 migrations (#2c waits on D-0008).
+- To run DB tests: `docker compose up -d --wait`, then `pytest`.
 
 ## Phase 1 gate (FROZEN by owner 2026-09-30)
 Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`):
@@ -49,3 +48,9 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   Results: `check_structure.py` → 0 failure(s), 0 warning(s); `pytest` → 16 passed.
   Also committed: owner's CLAUDE.md line "repo rules take priority over global ones always".
 - 2026-09-30: owner confirmed key custody; D-0002/D-0004 amendments, D-0007 accepted, D-0008 proposed, A-0017 added.
+- 2026-09-30: INDEX #2 `core/db.py` + `tests/core/test_db.py`; `docker-compose.yml`
+  (postgres:17.11@sha256:d74eeac9…), `tests/conftest.py`. Installed psycopg 3.3.6, cryptography 50.0.1.
+  First run: 1 failure, a bug in the test helper (unencoded DSN options, which `connect()` also
+  overrides); rewritten to set the hostile default on a scratch role. Mutation check: removing the
+  READ COMMITTED line makes that test fail, as intended.
+  Results: `check_structure.py` → 0 failure(s), 0 warning(s); `pytest` → 23 passed.

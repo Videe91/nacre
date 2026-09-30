@@ -9,7 +9,7 @@ D-0002 … D-0006 accepted 2026-09-30.
 | # | Capability | Functionality | File | Test | Decisions | Assumptions | Status |
 |---|---|---|---|---|---|---|---|
 | 1 | core | Envelope data type, enums, UUIDv7 id (types only, no logic) | `src/nacre/core/event.py` | `tests/core/test_event.py` | D-0002, D-0006 | A-0009 | done |
-| 2 | core | Open a Postgres connection / pool (no scope logic) | `src/nacre/core/db.py` | — (covered via scopes tests) | D-0005, D-0006 | A-0011 | planned |
+| 2 | core | Open one Postgres connection per DB role: explicit READ COMMITTED, UTC (no pool, no scope logic) | `src/nacre/core/db.py` | `tests/core/test_db.py` | D-0003, D-0005, D-0006 | A-0011 | done |
 | 2a | core | Blob storage interface (Protocol only: put / get / exists by ref) | `src/nacre/core/blob_store.py` | — (via 15a) | D-0006 | — | planned |
 | 2b | core | Root-key provider interface (Protocol only: wrap / unwrap a stream master key, key version) | `src/nacre/core/root_key_provider.py` | — (via 11a) | D-0004 | — | planned |
 | 2c | core | Deterministic CBOR codec, restricted subset (encode + strict decode) | `src/nacre/core/deterministic_cbor.py` | `tests/core/test_deterministic_cbor.py` (RFC 8949 App. A vectors; cbor2 as test oracle) | D-0008 (proposed) | — | blocked on D-0008 |
@@ -44,8 +44,8 @@ Notes:
 - `keys/` is a new capability folder not in the original plan below; it holds crypto-shredding
   (D-0004), which SPEC places under the ledger. Split out so `ledger/` stays about record/seal/replay.
 - `schema/` holds migrations; SQL files are not checked by `check_structure.py` (it scans `*.py`).
-- Test infrastructure (not functionalities): `docker-compose.yml` (`postgres:17.11`, digest-pinned) and
-  `tests/conftest.py` (real-Postgres fixture), added with the first DB-touching file (#2/#3).
+- Test infrastructure (not functionalities): `docker-compose.yml` (`postgres:17.11`, digest-pinned,
+  port 54329, tmpfs data) and `tests/conftest.py` (`pg_dsn` fixture; fails, never skips, if the DB is down).
 - Not in Phase 1 (by SPEC): cross-scope promotion, scope merge for recall, derived-store rebuild
   after shredding, principal authentication, month partitioning (D-0003).
 

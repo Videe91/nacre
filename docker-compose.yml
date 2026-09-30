@@ -1,0 +1,17 @@
+# Dev/test Postgres for Nacre (D-0006). Pinned by tag AND digest; change both together, via ADR.
+# Start: docker compose up -d --wait    Stop: docker compose down
+# Port 54329 avoids clashing with a local Postgres on 5432. Credentials are dev-only.
+services:
+  postgres:
+    image: postgres:17.11@sha256:d74eeac9a635390a49bc21bd49fccd973de707e2a53a76ac49b552b8712ec46f
+    environment:
+      POSTGRES_PASSWORD: nacre_dev
+    ports:
+      - "127.0.0.1:54329:5432"
+    tmpfs:
+      - /var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 1s
+      timeout: 3s
+      retries: 30
