@@ -3,7 +3,7 @@ Functionality: Resolve data keys: get or create the key for (stream, subject, mo
   load a key by id to read, unwrapping through the stream master key and the root key.
 Owns: stream master key creation, data key creation, the data-key wrap format, and the race-safe
   get-or-create under concurrency.
-Public entry: get_or_create_key(), load_key(), DataKey
+Public entry: get_or_create_key(), load_key(), wrap_data_key(), unwrap_data_key(), DataKey
 Decisions: D-0004, D-0005
 Assumptions: A-0008
 Notes: Must run inside a scoped session (scopes/open_scoped_session.py). RLS then admits only the
@@ -100,10 +100,21 @@ def _dek_aad(key_id, stream_id, subject_id, month):
     return _DEK_AAD_PREFIX + key_id.bytes + stream_id.bytes + subject_id.bytes + month.isoformat().encode()
 
 
+def wrap_data_key(master: bytes, key_id: UUID, stream_id: UUID, subject_id: UUID, month: date, dek: bytes) -> bytes:
+    """The stored wrap of a data key under a master key (used by creation and by master rotation, #20b)."""
+    nonce = secrets.token_bytes(_NONCE_BYTES)
+    return nonce + AESGCM(master).encrypt(nonce, dek, _dek_aad(key_id, stream_id, subject_id, month))
+
+
+def unwrap_data_key(master: bytes, key_id: UUID, stream_id: UUID, subject_id: UUID, month: date, wrapped: bytes) -> bytes:
+    """Inverse of wrap_data_key; raises KeyResolutionError on tampering or a moved wrap."""
+    return _unwrap_dek(master, key_id, stream_id, subject_id, month, wrapped)
+
+
 def _new_dek_row(master, stream_id, subject_id, month):
-    key_id, nonce = new_event_id(), secrets.token_bytes(_NONCE_BYTES)
-    sealed = AESGCM(master).encrypt(nonce, secrets.token_bytes(KEY_BYTES), _dek_aad(key_id, stream_id, subject_id, month))
-    return key_id, stream_id, subject_id, month, nonce + sealed
+    key_id = new_event_id()
+    return key_id, stream_id, subject_id, month, wrap_data_key(master, key_id, stream_id, subject_id, month,
+                                                                 secrets.token_bytes(KEY_BYTES))
 
 
 def _unwrap_dek(master, key_id, stream_id, subject_id, month, wrapped):

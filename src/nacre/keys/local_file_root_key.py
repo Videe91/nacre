@@ -80,6 +80,8 @@ class LocalFileRootKeyProvider:
         if version == self.current_version():
             raise ValueError("cannot destroy the current root-key version; create a new one first")
         path = self._key_path(version)
+        if not path.is_file():
+            raise KeyError(f"root-key version {version!r} is not held (already destroyed or never created)")
         with open(path, "r+b") as f:
             f.write(b"\x00" * KEY_BYTES)
             f.flush()

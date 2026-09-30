@@ -17,7 +17,7 @@ Build the Phase 1 files in `docs/modules/INDEX.md` order, one functionality + te
 committing and pushing after each.
 - Done: #1 `core/event.py`, #2 `core/db.py`, #2a `core/blob_store.py`, #2b `core/root_key_provider.py`,
   #3 `schema/apply_migrations.py` + SQL 0001–0003, #2c `core/encode_cbor.py`, #2d `core/decode_cbor.py`, #4 `ledger/encode_envelope.py`, #5 `ledger/seal_event.py`, #3d `sql/0004_checkpoints.sql`.
-- **#6 CLOSED 2026-09-30** (H3 official). **#14 built; A-0007 measured; #7, #7a, #8 built.** #15/#15a/#15b, #16, #17, #18, #19 built. #20 (requests), #20c (execution), #20d (keyadmin tx) built; #21 folded into them. Next: #20b master rotation, #20a root rotation, A-0008 backup-recovery and crash tests, #15c orphan GC.
+- **#6 CLOSED 2026-09-30** (H3 official). **#14 built; A-0007 measured; #7, #7a, #8 built.** #15/#15a/#15b, #16, #17, #18, #19 built. #20 (requests), #20c (execution), #20d (keyadmin tx) built; #21 folded into them. #20b master rotation and #20a root rotation built; **A-0008 validated** (pg_dump backup recovery, crash/resume). Next: #15c orphan GC.
 - To run DB tests: `docker compose up -d --wait`, then `pytest`.
 - **Owner tool:** `scripts/measure_token_format.py` measures real tokens' prefix/length/charset without
   printing them (D-0007 amendment 4). Run locally; paste only its suggested ASSUMPTIONS row back.
@@ -464,3 +464,21 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   Tests (9): authority, grace, cancel, erase-only-that-person, self-erasure with hold and expiry, hold rules,
   delete_scope, forget_period, chain still verifies (gate 4 end to end), and execution runs once. Mutations: no
   grace → 2 fail; holds ignored → 1 fail; erase deletes all keys → 1 fail.
+- 2026-09-30 — **#20b master rotation, #20a root rotation, A-0008 validated.**
+  - `keys/rotate_master_key.py`:
+    - streams needing rotation are derived from the org stream (a data-key shred_executed later than the last
+      master_rotated, for streams that still have a master);
+    - rotation is one transaction per stream: new master, rewrap surviving data keys, then master_rotated.
+  - `keys/rotate_root_key.py`: refuses while master rotations are pending; needs the operator's non-empty
+    confirmation that the separate backup was destroyed; rewraps in batches (resumable with `resume=True`);
+    refuses to destroy if any master is still on an old version; writes root_rotated to every org stream
+    BEFORE destroying (D1: a crash in between leaves recorded-but-undestroyed versions, never an unrecorded
+    destruction).
+  - `get_or_create_key.py`: public wrap_data_key / unwrap_data_key.
+  - `local_file_root_key.destroy_version`: an absent version now raises KeyError (was FileNotFoundError).
+  - Tests (10, `tests/keys/test_rotation_finality.py`): key rows are recovered from a real `pg_dump`; after
+    erase, master rotation and root rotation, neither the old master nor the deleted data key unwraps; scope
+    deletion is final; pending master rotations and a blank confirmation are refused; crashes mid master and
+    mid root rotation, then resume; a leftover old-version row blocks destruction; an unreferenced current
+    version is destroyed; the audit order is correct. Mutations: 9 run, 9 killed (4 survived the first pass;
+    each got a test).
