@@ -15,6 +15,19 @@
    corrects an error in the proposal. The proposal set `recorded_at` at commit. ADR-0010 defines
    `recorded_at` as capture-boundary receipt time and adds a separate `committed_at`.
 
+## Amendments after acceptance (owner-directed; additive, no accepted text changed)
+3. **2026-09-30 — identity mapping only in shreddable events.** Any mapping from `user_id` or
+   `actor_id` to a real person's identity (name, handle, email, account) lives **only inside
+   encrypted, shreddable events**. It must never appear in a plaintext table: not `scopes`, not
+   `scope_grants`, not any future directory or users table. Such a table may hold the opaque id
+   and, at most, a pointer (event id) to the identity event.
+   *How checked:* a schema test lists every column of every non-`events` table and fails on any
+   column whose name suggests identity (`name`, `email`, `handle`, `display`, `login`, …) unless
+   it is allow-listed with an ADR reference. Code review of every new table goes against this rule.
+   *Consequence:* showing "Alice" for an `actor_id` requires decrypting her identity event.
+   After her erasure, only the opaque id remains, which is the point.
+   *Note:* D-0005's access grants are keyed by opaque principal ids, so they already satisfy this rule.
+
 ## Context
 The ledger is the only source of truth, and SPEC says typed payloads go into Phase 1 "because
 changing the ledger later is painful". Every later layer (seal, shredding, RLS, recall, replay)

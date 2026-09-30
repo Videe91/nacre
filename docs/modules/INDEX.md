@@ -11,6 +11,8 @@ D-0002 … D-0006 accepted 2026-09-30.
 | 1 | core | Envelope data type, enums, UUIDv7 id (types only, no logic) | `src/nacre/core/event.py` | `tests/core/test_event.py` | D-0002, D-0006 | A-0009 | done |
 | 2 | core | Open a Postgres connection / pool (no scope logic) | `src/nacre/core/db.py` | — (covered via scopes tests) | D-0005, D-0006 | A-0011 | planned |
 | 2a | core | Blob storage interface (Protocol only: put / get / exists by ref) | `src/nacre/core/blob_store.py` | — (via 15a) | D-0006 | — | planned |
+| 2b | core | Root-key provider interface (Protocol only: wrap / unwrap a stream master key, key version) | `src/nacre/core/root_key_provider.py` | — (via 11a) | D-0004 | — | planned |
+| 2c | core | Deterministic CBOR codec, restricted subset (encode + strict decode) | `src/nacre/core/deterministic_cbor.py` | `tests/core/test_deterministic_cbor.py` (RFC 8949 App. A vectors; cbor2 as test oracle) | D-0008 (proposed) | — | blocked on D-0008 |
 | 3 | schema | Apply ordered SQL migrations with the migrator role | `src/nacre/schema/apply_migrations.py` | `tests/schema/test_apply_migrations.py` | D-0003, D-0005 | — | planned |
 | 3a | schema | DDL: `events`, append-only trigger, linkage trigger, roles/grants | `src/nacre/schema/sql/0001_ledger.sql` | (via ledger tests) | D-0002, D-0003 | A-0013 | planned |
 | 3b | schema | DDL: `scopes`, `scope_grants`, RLS policies (FORCE) | `src/nacre/schema/sql/0002_scopes_rls.sql` | (via scopes tests) | D-0005 | A-0011 | planned |
@@ -18,14 +20,15 @@ D-0002 … D-0006 accepted 2026-09-30.
 | 3d | schema | DDL: `checkpoints` table | `src/nacre/schema/sql/0004_checkpoints.sql` | (via ledger tests) | D-0003 | A-0013 | planned |
 | 4 | ledger | Canonical byte encoding of an envelope (single source for seal + AAD) | `src/nacre/ledger/encode_envelope.py` | `tests/ledger/test_encode_envelope.py` | D-0002 | — | planned |
 | 5 | ledger | Compute an event's seal hash from prev_hash + encoding | `src/nacre/ledger/seal_event.py` | `tests/ledger/test_seal_event.py` | D-0003 | A-0013 | planned |
-| 6 | ledger | Detect and redact secrets in a payload before write | `src/nacre/ledger/strip_secrets.py` | `tests/ledger/test_strip_secrets.py` (+ frozen corpus) | D-0002 | A-0010 | planned |
+| 6 | ledger | Detect and redact secrets before write: vendored gitleaks rules + entropy check | `src/nacre/ledger/strip_secrets.py` (+ data `src/nacre/ledger/data/gitleaks-v8.30.1.toml`, license beside it) | `tests/ledger/test_strip_secrets.py` (+ labeled corpus `tests/ledger/secret_corpus/`) | D-0002, D-0007 | A-0010, A-0017 | planned |
 | 7 | scopes | Register a scope/stream (kind, org, parent) as a config event + row | `src/nacre/scopes/register_scope.py` | `tests/scopes/test_register_scope.py` | D-0005 | A-0014 | planned |
 | 8 | scopes | Grant/revoke principal access as org-stream config events + projection | `src/nacre/scopes/set_access.py` | `tests/scopes/test_set_access.py` | D-0005 | A-0012 | planned |
 | 9 | scopes | Resolve a principal's readable/writable stream sets from grants | `src/nacre/scopes/resolve_access.py` | `tests/scopes/test_resolve_access.py` | D-0005 | A-0012 | planned |
 | 10 | scopes | The one door: open a transaction with `SET LOCAL` scope settings | `src/nacre/scopes/open_scoped_session.py` | `tests/scopes/test_open_scoped_session.py` (adversarial RLS suite) | D-0005 | A-0011, A-0012 | planned |
+| 11a | keys | Local-file implementation of the root-key provider | `src/nacre/keys/local_file_root_key.py` | `tests/keys/test_local_file_root_key.py` | D-0004 | A-0008 | planned |
 | 11 | keys | Get or create the data key for (stream, subject, month), unwrapping via the stream master key (created on first use, wrapped by root KEK) | `src/nacre/keys/get_or_create_key.py` | `tests/keys/test_get_or_create_key.py` | D-0004 | A-0008 | planned |
-| 12 | keys | Encrypt a body with AES-256-GCM + AAD; derive MAC sub-keys; count uses | `src/nacre/keys/encrypt_payload.py` | `tests/keys/test_encrypt_payload.py` | D-0002, D-0004 | A-0015 | planned |
-| 13 | keys | Decrypt a body, or return `Shredded` if the key is gone | `src/nacre/keys/decrypt_payload.py` | `tests/keys/test_decrypt_payload.py` | D-0004 | — | planned |
+| 12 | keys | Encrypt a body with AES-256-GCM + AAD; derive MAC sub-keys; count uses | `src/nacre/keys/encrypt_payload.py` | `tests/keys/test_encrypt_payload.py` | D-0002, D-0004, D-0008 (proposed) | A-0015 | blocked on D-0008 |
+| 13 | keys | Decrypt a body, or return `Shredded` if the key is gone | `src/nacre/keys/decrypt_payload.py` | `tests/keys/test_decrypt_payload.py` | D-0004, D-0008 (proposed) | — | blocked on D-0008 |
 | 14 | ledger | Append one event end to end (validate, trust, strip, encrypt, idempotency, lock, sequence, seal, insert) | `src/nacre/ledger/append_event.py` | `tests/ledger/test_append_event.py` (+ concurrency benchmark) | D-0002, D-0003, D-0004, D-0005 | A-0007, A-0009, A-0010, A-0014 | planned |
 | 15 | ledger | Store an encrypted attachment by keyed fingerprint through the blob interface | `src/nacre/ledger/store_attachment.py` | `tests/ledger/test_store_attachment.py` | D-0002, D-0004, D-0006 | — | planned |
 | 15a | ledger | Local-disk implementation of the blob interface | `src/nacre/ledger/local_disk_blob_store.py` | `tests/ledger/test_local_disk_blob_store.py` | D-0006 | — | planned |
@@ -34,6 +37,7 @@ D-0002 … D-0006 accepted 2026-09-30.
 | 18 | ledger | Checkpointer: sign stream heads every 1,000 events or hourly (DB table + external file); separate process holding the key | `src/nacre/ledger/write_checkpoint.py` | `tests/ledger/test_write_checkpoint.py` | D-0003 | A-0013 | planned |
 | 19 | ledger | Verify a stream's chain and checkpoints without keys (verifier role) | `src/nacre/ledger/verify_chain.py` | `tests/ledger/test_verify_chain.py` (tamper suite) | D-0003 | A-0013 | planned |
 | 20 | keys | Shred keys: a stream master key, a person's data keys, or chosen months; write deletion marker(s) | `src/nacre/keys/shred_keys.py` | `tests/keys/test_shred_keys.py` | D-0004 | A-0008 | planned |
+| 20a | keys | Rotate the root key: rewrap every live stream master key, record root-key version | `src/nacre/keys/rotate_root_key.py` | `tests/keys/test_rotate_root_key.py` | D-0004 | — | planned |
 | 21 | scopes | Delete a scope: shred all its keys, mark scope deleted | `src/nacre/scopes/delete_scope.py` | `tests/scopes/test_delete_scope.py` | D-0004, D-0005 | A-0008 | planned |
 
 Notes:

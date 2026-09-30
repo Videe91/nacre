@@ -12,6 +12,20 @@
    wrapped data keys directly with one global KEK.
 3. **Per-stream system key** for events that are not by or about a person.
 
+## Amendments after acceptance (owner-directed; additive, no accepted text changed)
+4. **2026-09-30 — root key custody confirmed and extended.** The root key lives in a local file and
+   wraps the stream master keys, as recorded in the accepted Decision table. The owner added:
+   - **Separate backup:** the root key is backed up separately from database backups, never
+     inside or next to them. A DB backup alone must never be enough to read anything.
+   - **Behind an interface:** all root-key access (wrap and unwrap a stream master key) goes
+     through one interface, `RootKeyProvider`. Phase 1 ships a local-file implementation, and a
+     cloud key service can replace it later without touching callers.
+   - **Rotation = rewrap:** rotating the root key means unwrapping every stream master key with
+     the old root key and rewrapping it with the new one, in one transaction per batch, recording
+     which root-key version wraps each row. Data keys and ciphertext are untouched.
+     Shredded (deleted) master keys are not resurrected by rotation.
+5. **2026-09-30 — monthly rotation for system keys confirmed** (as already stated in the accepted Decision).
+
 ## Context
 SPEC open decision: "Crypto-shredding key granularity: per user, per project, or per memory."
 The hard case none of those alone covers: erasing **one person's contributions inside a shared

@@ -29,20 +29,15 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
 5. The cross-scope read test fails as expected (D-0005 S-3).
 6. A-0007 throughput is measured and the result recorded (pass/fail against the provisional target is reported, not hidden).
 
-## Open questions (non-blocking now; each blocks the file named)
-- **Secret-detection rule set** (blocks INDEX #6 `strip_secrets`). The owner said "established
-  rules". Which set (e.g. gitleaks' rule set vendored as data vs. the `detect-secrets` library) is a
-  dependency choice to bring to the owner when #6 starts.
-- **Encrypted body serialization** (blocks INDEX #12 `encrypt_payload`). Byte format inside the
-  ciphertext is not yet decided; this is a persistence format (D2), so a short ADR is needed first.
-- **Root KEK and stream master key custody detail.** D-0004 records "stream master keys wrapped by a
-  root KEK in a local file". The owner's amendment named the per-stream master key but not how that
-  key is itself protected; the root-KEK layer carries forward the proposal's custody (b). Owner to confirm.
-- **System-key rotation.** D-0004 applies the monthly epoch to system keys as well as person keys
-  (read from "time period fixed to one calendar month"). Owner to confirm.
+## Open questions
+- **D-0008 (encrypted body format) is PROPOSED — owner approval needed before INDEX #2c, #12, #13.**
+  Four points flagged in the ADR: payload_type dropped from AAD (conflicts with accepted D-0002),
+  added flags byte, header bytes in AAD, own CBOR codec instead of runtime cbor2.
+- Resolved 2026-09-30: root key custody (D-0004 amendment 4), system-key monthly rotation
+  (amendment 5), identity mapping rule (D-0002 amendment 3), secret rule set (D-0007).
 
 ## Blockers
-- None for INDEX #1–#5.
+- INDEX #2c, #12, #13 blocked on D-0008 approval. Nothing else blocked.
 
 ## Verification
 - See the latest entry in "Session log" below.
@@ -53,3 +48,4 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   repo-relative because check_structure.py matches `src/nacre/...` (first run failed: "not registered").
   Results: `check_structure.py` → 0 failure(s), 0 warning(s); `pytest` → 16 passed.
   Also committed: owner's CLAUDE.md line "repo rules take priority over global ones always".
+- 2026-09-30: owner confirmed key custody; D-0002/D-0004 amendments, D-0007 accepted, D-0008 proposed, A-0017 added.

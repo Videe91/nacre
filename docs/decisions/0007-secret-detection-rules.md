@@ -1,0 +1,59 @@
+# D-0007: Secret detection — vendored gitleaks rules + entropy check
+
+- **Status:** accepted (owner decided, 2026-09-30)
+- **Tier:** D2 (dependency: vendored third-party data)
+- **Date:** 2026-09-30
+- **Relies on assumptions:** A-0010, A-0017
+- **Related:** D-0002 (secrets stripped before encryption, inside `append_event`)
+
+## Context
+D-0002 requires secrets to be stripped before any write. A-0010 sets the bar: at least 99% caught
+on known formats, at most 2% false positives, with unknown formats tracked separately. The owner
+chose "established rules" over home-grown patterns.
+
+## Options considered
+1. **Vendor gitleaks' rule set as data + our own entropy check.** gitleaks is widely used, MIT
+   licensed, and has ~200 maintained rules in one TOML file that stdlib `tomllib` can read. No
+   runtime dependency. The catch: the rules are written for Go's RE2 regex engine, not Python `re` (A-0017).
+2. **`detect-secrets` library (Yelp, Apache-2.0).** Python-native plugins and a baseline workflow.
+   It's a runtime dependency with its own release cadence, has fewer provider-specific rules, and
+   is oriented to scanning repos, not individual payloads.
+3. **TruffleHog rules.** Strong detectors, but AGPL-3.0, and many detectors verify secrets over
+   the network, which is unacceptable on an intake path.
+4. **Hand-written patterns.** Full control, but we would have to maintain every provider format ourselves.
+
+## Decision
+Option 1.
+- Vendor **gitleaks v8.30.1** `config/gitleaks.toml`, unmodified, as
+  `src/nacre/ledger/data/gitleaks-v8.30.1.toml`. The MIT license text goes beside it
+  (`LICENSE-gitleaks-v8.30.1`), and a repo-root `THIRD_PARTY_NOTICES.md` records the source URL,
+  version, commit and license. Upgrading means a new file with a new version in its name plus a
+  re-run of the corpus, never an in-place edit.
+- Add a **Shannon-entropy check** for high-entropy tokens that no rule matches. The threshold and
+  minimum length are D1 tuning parameters, set from the corpus and recorded in the `strip_secrets`
+  file header.
+- On a match, replace the secret span with `[REDACTED:<rule_id>]` (or `[REDACTED:entropy]`) before
+  encryption. The list of fired rule ids travels inside the encrypted body, never in plaintext.
+- **Labeled corpus** under `tests/ledger/secret_corpus/`:
+  - known-format positives, one or more per rule, seeded from gitleaks' own per-rule true-positive
+    examples (MIT) and synthetic generated tokens, never real secrets;
+  - negatives: real diffs, logs and code with no secrets;
+  - a separate unknown-format set that only the entropy check can catch.
+
+  A-0010 is measured on the known-format set; unknown formats are reported separately.
+
+## Why this one
+It is the owner's choice. It gets the largest maintained rule set with no runtime dependency and a
+permissive license. Keeping the file pinned and unmodified makes upgrades an explicit, measured
+event.
+
+## Consequences
+- gitleaks features beyond `regex` (keywords prefilter, `secretGroup`, allowlists, `entropy`
+  per rule) must be honoured by our loader or explicitly listed as unsupported in the file header.
+  Unsupported rules count against A-0010.
+- The corpus is a frozen test asset: its sha256 is recorded, and changes are reviewed like code.
+
+## How we'd know it was wrong
+- A-0010 misses 99% / 2% on the corpus after tuning.
+- A-0017 fails, i.e. rules don't behave the same under Python `re`.
+- The redaction marker breaks downstream parsing of diffs or structured payloads.
