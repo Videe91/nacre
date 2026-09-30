@@ -1,5 +1,5 @@
 """A-0007 benchmark tests (owner-rescoped target, 2026-09-30). Timing-sensitive: `pytest -m bench`, quiet machine.
-Unpooled setup, as scripts/bench_append_throughput.py documents. Runs the script as a subprocess, so process mode
+POOLED setup (core.db.open_pool, the production setup), as scripts/bench_append_throughput.py documents. Runs the script as a subprocess, so process mode
 (spawn) imports it normally."""
 import json
 import subprocess

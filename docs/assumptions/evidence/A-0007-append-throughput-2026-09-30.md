@@ -80,3 +80,22 @@
 - 16-writer stress: p99 **≤ 87.8 ms** (ceiling 150 ms, **met**).
 
 The pool adds a few ms against the unpooled runs. Machine load average was about 4.2–5.4.
+
+## Gate run, 2026-09-30 (code at 4934894, with the D-0015 attachment lock), POOLED
+- Same script, same pooled setup as above (`core.db.open_pool`). The benchmark appends text events, so the new
+  per-attachment lock is not on this path.
+
+| Mode | Writers | Appends | Appends/s | p50 | p95 | p99 | max | Gapless | Errors |
+|---|---|---|---|---|---|---|---|---|---|
+| threads | **4** | 800 | 244.8 | 16.0 ms | 19.1 ms | **22.7 ms** | 38.9 ms | yes | 0 |
+| processes | **4** | 800 | 245.5 | 15.6 ms | 18.2 ms | **19.6 ms** | 95.1 ms* | yes | 0 |
+| threads | 16 (stress) | 1,600 | 233.8 | 67.6 ms | 74.9 ms | **93.3 ms** | 114.9 ms | yes | 0 |
+
+\* Cold start, as before.
+
+**Official gate item 6 evidence (owner, 2026-09-30):**
+- The pooled measurement from e3206cf above (≤ 4 writers p99 ≤ 24.0 ms; 16-writer stress p99 ≤ 87.8 ms).
+- This gate run confirms it (≤ 4 writers p99 ≤ 22.7 ms; stress p99 93.3 ms). Both are pooled. The unpooled tables
+  are history only.
+- Correction: the gate-run note in CURRENT.md first called these numbers "unpooled", copying a stale test
+  docstring. The script has been pooled since e3206cf; the note is corrected.

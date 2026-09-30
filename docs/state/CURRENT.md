@@ -1,6 +1,6 @@
 # Current state
 
-**Phase:** 1 — ledger and scopes (BUILDING)
+**Phase:** 1 COMPLETE (tag `phase-1-complete`); Phase 2 — interpretation plane (PLANNING, no code)
 **Last updated:** 2026-09-30
 
 ## Done
@@ -17,7 +17,7 @@ Build the Phase 1 files in `docs/modules/INDEX.md` order, one functionality + te
 committing and pushing after each.
 - Done: #1 `core/event.py`, #2 `core/db.py`, #2a `core/blob_store.py`, #2b `core/root_key_provider.py`,
   #3 `schema/apply_migrations.py` + SQL 0001–0003, #2c `core/encode_cbor.py`, #2d `core/decode_cbor.py`, #4 `ledger/encode_envelope.py`, #5 `ledger/seal_event.py`, #3d `sql/0004_checkpoints.sql`.
-- **#6 CLOSED 2026-09-30** (H3 official). **#14 built; A-0007 measured; #7, #7a, #8 built.** #15/#15a/#15b, #16, #17, #18, #19 built. #20 (requests), #20c (execution), #20d (keyadmin tx) built; #21 folded into them. #20b master rotation and #20a root rotation built; **A-0008 validated** (pg_dump backup recovery, crash/resume). D-0015 accepted; #15c orphan collection built. **Every Phase 1 functionality in INDEX is done, and the Phase 1 gate was run in full on 2026-09-30 (all 6 items pass, below).** Next: owner review of the gate, then Phase 2 planning.
+- **#6 CLOSED 2026-09-30** (H3 official). **#14 built; A-0007 measured; #7, #7a, #8 built.** #15/#15a/#15b, #16, #17, #18, #19 built. #20 (requests), #20c (execution), #20d (keyadmin tx) built; #21 folded into them. #20b master rotation and #20a root rotation built; **A-0008 validated** (pg_dump backup recovery, crash/resume). D-0015 accepted; #15c orphan collection built. **Every Phase 1 functionality in INDEX is done, and the Phase 1 gate was run in full on 2026-09-30 (all 6 items pass, below).** **Phase 1 gate ACCEPTED by the owner (2026-09-30); tagged `phase-1-complete`.** Next: Phase 2 planning (no code) for owner approval.
 - To run DB tests: `docker compose up -d --wait`, then `pytest`.
 - **Owner tool:** `scripts/measure_token_format.py` measures real tokens' prefix/length/charset without
   printing them (D-0007 amendment 4). Run locally; paste only its suggested ASSUMPTIONS row back.
@@ -42,8 +42,9 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
    scope is refused by RLS in the database.*
 6. A-0007 throughput is measured and the result recorded (pass/fail against the provisional target is reported, not hidden).
    *Status: MET, POOLED (psycopg_pool, 2026-09-30): p99 < 50 ms at ≤ 4 writers per stream (worst 24.0 ms);
-   16-writer stress p99 ≤ 150 ms (worst 87.8 ms). Unpooled runs kept for the record. Evidence:
-   A-0007-append-throughput-2026-09-30.md; `pytest -m bench`.*
+   16-writer stress p99 ≤ 150 ms (worst 87.8 ms). **Official evidence = the pooled runs** (production setup): e3206cf,
+   confirmed at the gate run (4 writers p99 ≤ 22.7 ms, stress 93.3 ms). Unpooled tables are history only.
+   Evidence: `docs/assumptions/evidence/A-0007-append-throughput-2026-09-30.md`; `pytest -m bench` (pooled).*
 
 ## Standing instructions (owner, 2026-09-30)
 - **A-0007 / gate item 6:** the throughput test must run with the **production connection setup**.
@@ -524,7 +525,17 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
     3. tamper suite: 11 passed
     4. shredding + chain valid + finality: 30 passed
     5. cross-scope, door + real events: 52 passed
-    6. A-0007 bench: 3 passed. Unpooled script, 4 writers: p99 22.7 ms (threads), 19.6 ms (processes);
+    6. A-0007 bench: 3 passed. POOLED script (the first version of this note said "unpooled", copied from a
+       stale docstring; corrected), 4 writers: p99 22.7 ms (threads), 19.6 ms (processes);
        16-writer stress p99 93.3 ms; 0 errors; gapless.
     Full suite: 690 passed, 28 deselected (the holdout and bench markers); `-m holdout`: 25 passed; `-m bench`:
     3 passed; check_structure: 0 failures, 0 warnings.
+- 2026-09-30 — **Phase 1 gate accepted (owner), with two follow-ups, both done:**
+  - Gate item 6's official evidence = the pooled runs (e3206cf), confirmed by the pooled gate run. The earlier
+    "unpooled" label in this file came from a stale test docstring; corrected in the file, the docstring and the
+    evidence file.
+  - Mutation runs never touch the working tree: `scripts/run_mutants.py` (temporary git worktree, baseline first,
+    byte-for-byte tree check at the end), tested in `tests/scripts/test_run_mutants.py`. D1 note in the new
+    `.claude/rules/testing.md`; CLAUDE.md now has a one-line pointer to it. Re-ran the D-0015 lock, collector and
+    root-rotation mutants through it: 3/3 killed, tree unchanged.
+  - Suite: 692 passed, 28 deselected; check_structure: 0 failures.

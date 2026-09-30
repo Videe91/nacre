@@ -20,6 +20,8 @@ The full design lives in `docs/spec/SPEC.md`. Read it before any design work.
 4. `docs/modules/INDEX.md` — which file owns which functionality
 5. Code and tests
 
+Testing rules (mutation runs, evidence labels): `.claude/rules/testing.md`.
+
 ## Every session
 
 Start: follow `.claude/rules/session.md` (read CURRENT.md first).
