@@ -17,7 +17,7 @@ Build the Phase 1 files in `docs/modules/INDEX.md` order, one functionality + te
 committing and pushing after each.
 - Done: #1 `core/event.py`, #2 `core/db.py`, #2a `core/blob_store.py`, #2b `core/root_key_provider.py`,
   #3 `schema/apply_migrations.py` + SQL 0001–0003, #2c `core/encode_cbor.py`, #2d `core/decode_cbor.py`, #4 `ledger/encode_envelope.py`, #5 `ledger/seal_event.py`, #3d `sql/0004_checkpoints.sql`.
-- **#6 CLOSED 2026-09-30** (H3 official). **#14 built; A-0007 measured; #7, #7a, #8 built.** #15/#15a/#15b, #16, #17, #18, #19 built. #20 (requests), #20c (execution), #20d (keyadmin tx) built; #21 folded into them. #20b master rotation and #20a root rotation built; **A-0008 validated** (pg_dump backup recovery, crash/resume). #15c orphan GC is **blocked on proposed D-0015** (owner review: interface delete, advisory lock, nacre_gc role).
+- **#6 CLOSED 2026-09-30** (H3 official). **#14 built; A-0007 measured; #7, #7a, #8 built.** #15/#15a/#15b, #16, #17, #18, #19 built. #20 (requests), #20c (execution), #20d (keyadmin tx) built; #21 folded into them. #20b master rotation and #20a root rotation built; **A-0008 validated** (pg_dump backup recovery, crash/resume). D-0015 accepted; #15c orphan collection built. **Every Phase 1 functionality in INDEX is done, and the Phase 1 gate was run in full on 2026-09-30 (all 6 items pass, below).** Next: owner review of the gate, then Phase 2 planning.
 - To run DB tests: `docker compose up -d --wait`, then `pytest`.
 - **Owner tool:** `scripts/measure_token_format.py` measures real tokens' prefix/length/charset without
   printing them (D-0007 amendment 4). Run locally; paste only its suggested ASSUMPTIONS row back.
@@ -33,9 +33,13 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
    *Status: tested (#19): edited ciphertext, edited header, deleted row, reordered rows, and a full rewrite with
    recomputed seals caught only by the signed checkpoint.*
 4. Shredding makes payloads unreadable while the chain still verifies.
-   *Status: tested end to end (#20c): after an executed erasure, payloads are Shredded and verify_chain passes.*
+   *Status: tested end to end (#20c): after an executed erasure, payloads are Shredded and verify_chain passes.
+   Finality (A-0008) validated: key rows recovered from a real pg_dump cannot be unwrapped after master and root
+   rotation.*
 5. The cross-scope read test fails as expected (D-0005 S-3). *Status: suite in place and passing through the
-   door (#10: 25 kind pairs + reuse/rollback/revoke); re-run at the gate with real appended events.*
+   door (#10: 25 kind pairs + reuse/rollback/revoke). Re-run at the gate with real appended events (encrypted
+   bodies + attachments via append_event/read_stream/read_attachment): reads refused, and a write into another
+   scope is refused by RLS in the database.*
 6. A-0007 throughput is measured and the result recorded (pass/fail against the provisional target is reported, not hidden).
    *Status: MET, POOLED (psycopg_pool, 2026-09-30): p99 < 50 ms at ≤ 4 writers per stream (worst 24.0 ms);
    16-writer stress p99 ≤ 150 ms (worst 87.8 ms). Unpooled runs kept for the record. Evidence:
@@ -486,3 +490,41 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   a dedup-versus-collector race could leave an event pointing to a missing blob. Recommended: a per-ref advisory lock
   (shared in append, exclusive try-lock in the collector) plus a 1 h minimum age, and a `nacre_gc` role. A-0022 is
   recorded as open.
+- 2026-09-30 — **D-0015 accepted; #15c built; pooled key-admin reset tested; full Phase 1 gate run.**
+  - Owner approved choices 1-4 (NOINHERIT keyadmin, audit-before-destroy, #21 folded into #20/#20c, the shared
+    rotation test file).
+  - `tests/keys/test_keyadmin_session.py` (new, 5 tests): one pooled physical connection returns to
+    nacre_keyadmin with no nacre.* settings after:
+    - a clean transaction;
+    - an error raised in app mode, or after switching back to key-admin mode;
+    - a database error.
+    At the base role it cannot read events (NOINHERIT).
+  - D-0015 accepted with owner amendments: lock before the existence check, held to commit; 24 h minimum age;
+    contract "delete only through the cleanup, only for unreferenced blobs"; blobs of destroyed keys not deleted
+    (a future D3 ADR, only after the finalising root rotation). A-0020 note: a cloud key service would make
+    root-backup destruction verifiable.
+  - Built:
+    - migration 0008 (`nacre_gc`: SELECT(attachment_ref) only; two-integer lock-key functions, app and gc only);
+    - BlobStore list_refs / delete / remove_stale_temp;
+    - store_attachment shared lock;
+    - `ledger/collect_orphan_blobs.py`;
+    - DbRole KEYADMIN and GC.
+  - Tests: 16 collector tests (`test_collect_orphan_blobs.py`) and 11 migration tests (`test_0008_orphan_collection.py`),
+    including races in both orders and an event committed after the pre-filter. A-0022 validated.
+  - Mutations:
+    - collector, lock and keyadmin reset: 11 run. The first pass left 3 survivors; 2 got tests. The third (drop
+      the pre-filter) is equivalent, and is documented in the file header.
+    - Incident: a mutation run piped through `head` was killed before restoring `store_attachment.py`, leaving
+      the lock removed. The two race tests caught it. Restored from the backup and diff-checked; no mutants remain.
+  - Repo secret scan: gitleaks generic-api-key flagged the migration-name list in `test_apply_migrations.py`
+    (`"0007_keyadmin_role.sql", "0008_...` on one line). Fixed by a line break, with no allowlist change.
+  - **Phase 1 gate run** (Docker postgres 17.11):
+    1. idempotency: 8 passed
+    2. AS_OF: 2 passed
+    3. tamper suite: 11 passed
+    4. shredding + chain valid + finality: 30 passed
+    5. cross-scope, door + real events: 52 passed
+    6. A-0007 bench: 3 passed. Unpooled script, 4 writers: p99 22.7 ms (threads), 19.6 ms (processes);
+       16-writer stress p99 93.3 ms; 0 errors; gapless.
+    Full suite: 690 passed, 28 deselected (the holdout and bench markers); `-m holdout`: 25 passed; `-m bench`:
+    3 passed; check_structure: 0 failures, 0 warnings.

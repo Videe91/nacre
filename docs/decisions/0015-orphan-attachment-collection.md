@@ -1,9 +1,20 @@
 # D-0015: Collecting orphan attachment blobs safely
 
-- **Status:** proposed
+- **Status:** accepted (owner, 2026-09-30, with amendments 1-4 below)
 - **Tier:** D2 (changes the BlobStore public interface, adds a DB role and migration, cross-module locking)
 - **Date:** 2026-09-30
 - **Relies on assumptions:** A-0021, A-0022 (new)
+
+## Amendment history (owner, at acceptance)
+1. **Lock order.** The append takes the shared per-blob lock BEFORE the existence check and before writing the
+   file, and holds it until commit or rollback. The cleanup takes the exclusive lock and, in the same transaction,
+   confirms that no committed event references the blob before deleting it.
+2. **Minimum age: 24 hours.** It covers sleeping laptops, debugger pauses and stalled containers, which the lock
+   cannot see.
+3. **Contract.** `nacre_gc` reads only attachment references. The blob store's contract becomes "delete only
+   through the cleanup, only for unreferenced blobs."
+4. **Blobs whose keys were destroyed are not deleted now.** Erasure is already final by crypto-shredding. If storage
+   ever matters, that becomes a separate D3 ADR, running only after the root rotation that makes the erasure final.
 
 ## Context
 D-0013 amendment 1 has two parts:
@@ -47,7 +58,7 @@ Collecting orphans is not free. Three things in the code today stand in the way:
    - Why it is correct: an append whose event has committed has its reference visible to the re-check. An append
      still in flight holds the shared lock, so the collector skips the ref. An append that starts after the
      deletion finds the blob absent and writes it again.
-   - The minimum age (default 1 hour) is a second guard: against writers that bypass `store_attachment`, and for
+   - The minimum age (24 hours, amendment 2) is a second guard: against writers that bypass `store_attachment`, and for
      temp files.
    - Pros: closes the race by construction; cheap.
    - Cons: adds one advisory lock per attachment append; needs a dedicated role.
@@ -100,8 +111,6 @@ audit verifier.
 - An event read reports a missing blob.
 - The shared lock shows up as append latency against A-0007.
 
-## Questions for the owner
-1. Minimum age default: 1 hour?
-2. Should blobs whose data key was destroyed also be reclaimed? They are unreadable, and deleting them only saves
-   space. This is out of scope here unless you want it; it would be a D3 question because it touches erasure
-   semantics.
+## Owner answers
+1. Minimum age: 24 hours (amendment 2).
+2. Blobs whose key was destroyed: not now (amendment 4).

@@ -49,12 +49,12 @@ def fresh_db(pg_dsn):
 
 @pytest.fixture
 def migrated_db(fresh_db):
-    """A fresh database with all migrations applied. DSNs keyed 'admin', 'app', 'verifier', 'checkpointer'.
+    """A fresh database with all migrations applied. DSNs keyed 'admin', 'app', 'verifier', 'checkpointer', 'keyadmin', 'gc'.
     Test-only: enables LOGIN on the cluster-wide NOLOGIN roles with a test password."""
     with connect(DbRole.MIGRATOR, dsn=fresh_db) as conn:
         apply_migrations(conn)
     with psycopg.connect(fresh_db, autocommit=True) as admin:
-        for role in ("nacre_app", "nacre_verifier", "nacre_checkpointer", "nacre_keyadmin"):
+        for role in ("nacre_app", "nacre_verifier", "nacre_checkpointer", "nacre_keyadmin", "nacre_gc"):
             admin.execute(f"ALTER ROLE {role} LOGIN PASSWORD '{TEST_ROLE_PASSWORD}'")
     return {
         "admin": fresh_db,
@@ -62,6 +62,7 @@ def migrated_db(fresh_db):
         "verifier": dsn_with(fresh_db, user="nacre_verifier", password=TEST_ROLE_PASSWORD),
         "checkpointer": dsn_with(fresh_db, user="nacre_checkpointer", password=TEST_ROLE_PASSWORD),
         "keyadmin": dsn_with(fresh_db, user="nacre_keyadmin", password=TEST_ROLE_PASSWORD),
+        "gc": dsn_with(fresh_db, user="nacre_gc", password=TEST_ROLE_PASSWORD),
     }
 
 

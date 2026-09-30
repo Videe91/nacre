@@ -162,3 +162,41 @@ def test_a_pooled_connection_never_carries_scope_between_principals(world, grant
                 pass
         with pool.connection() as conn:
             assert conn.info.backend_pid == backend and seen(conn) == set()
+
+
+# --- gate item 5, re-run at the gate with REAL appended events (encrypted bodies + attachments) -------------------
+
+def test_gate5_real_events_do_not_cross_scopes(session, streams, provider, tmp_path):
+    from nacre.core.event import ActorKind, EventType, PayloadType, Source
+    from nacre.ledger.append_event import AppendRequest, append_event
+    from nacre.ledger.local_disk_blob_store import LocalDiskBlobStore
+    from nacre.ledger.read_attachment import AttachmentReadError, read_attachment
+    from nacre.ledger.read_stream import ReadError, read_stream
+
+    blobs = LocalDiskBlobStore(tmp_path / "blobs")
+    a, b, p, q = streams["a"], streams["b"], uuid.uuid4(), uuid.uuid4()
+
+    def req(stream, text):
+        return AppendRequest(stream_id=stream, event_type=EventType.RESULT, payload_type=PayloadType.TEXT,
+                             actor_kind=ActorKind.TOOL, actor_id=uuid.UUID(int=7), source=Source.TOOL,
+                             idempotency_key=str(uuid.uuid4()), content=text, attachment=text.encode() * 3,
+                             attachment_media_type="text/plain", attachment_description="log")
+    with session(p, read=[a], write=[a]) as s:
+        env_a = append_event(s, provider, req(a, "a's secret plan"), blob_store=blobs).envelope
+    with session(q, read=[b], write=[b]) as s:
+        env_b = append_event(s, provider, req(b, "b's secret plan"), blob_store=blobs).envelope
+
+    with session(p, read=[a], write=[a]) as s:
+        assert [e.envelope.event_id for e in read_stream(s, provider, a)] == [env_a.event_id]
+        assert read_attachment(s, provider, blobs, env_a) == b"a's secret plan" * 3
+        with pytest.raises(ReadError, match="not readable"):
+            read_stream(s, provider, b)
+        with pytest.raises(AttachmentReadError, match="not readable"):
+            read_attachment(s, provider, blobs, env_b)                   # even holding b's envelope and the blob
+        assert _seen(s.conn) == {a}
+        assert _seen(s.conn, "keys.data_keys") == {a} and _seen(s.conn, "keys.stream_master_keys") == {a}
+    with pytest.raises(DENIED, match="row-level security"):              # refused by the database, not by trust
+        with session(p, read=[a], write=[a]) as s:
+            append_event(s, provider, req(b, "p writes into b"), blob_store=blobs)
+    with session(q, read=[b], write=[b]) as s:
+        assert [e.envelope.event_id for e in read_stream(s, provider, b)] == [env_b.event_id]   # nothing from p

@@ -11,7 +11,7 @@ Notes: No scope logic here: scope settings (SET LOCAL) belong to scopes/open_sco
   settings. Scope settings stay transaction-local (SET LOCAL via scopes/open_scoped_session.py), so a
   returned connection carries nothing to the next borrower; the pool also rolls back any open transaction
   on return. Tested in tests/core/test_db.py.
-  DSNs come from NACRE_DSN_APP / NACRE_DSN_VERIFIER / NACRE_DSN_MIGRATOR unless passed in.
+  DSNs come from NACRE_DSN_APP / _VERIFIER / _MIGRATOR / _KEYADMIN / _GC unless passed in.
 """
 import os
 from enum import StrEnum
@@ -25,6 +25,8 @@ class DbRole(StrEnum):
     APP = "app"
     VERIFIER = "verifier"
     MIGRATOR = "migrator"
+    KEYADMIN = "keyadmin"      # D-0014
+    GC = "gc"                  # D-0015
 
 
 def _dsn(role: DbRole, dsn: str | None) -> str:
