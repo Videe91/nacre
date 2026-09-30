@@ -20,6 +20,7 @@ EXPECTED_ENUMS = {
     ev.TimePrecision: ["year", "month", "day", "hour", "minute", "second",
                        "millisecond", "microsecond"],
     ev.Mode: ["normal", "incident", "onboarding", "exploration"],
+    ev.TrustBasis: ["asserted", "verified"],
 }
 
 EXPECTED_FIELDS = [
@@ -29,7 +30,7 @@ EXPECTED_FIELDS = [
     "recorded_at", "committed_at", "event_type", "payload_type",
     "actor_kind", "actor_id", "actor_model", "actor_model_version", "actor_tool",
     "source", "trust", "caused_by", "cycle_id", "config_version", "mode",
-    "key_id", "idempotency_key", "request_mac", "attachment_ref", "attachment_sha256",
+    "trust_basis", "key_id", "idempotency_key", "request_mac", "attachment_ref", "attachment_sha256",
     "body_ciphertext", "prev_hash", "hash",
 ]
 
@@ -64,7 +65,7 @@ def _sample(**overrides):
         payload_type=ev.PayloadType.TEXT, actor_kind=ev.ActorKind.AGENT, actor_id=ev.new_event_id(),
         actor_model="claude-opus-5-5", actor_model_version=None, actor_tool=None,
         source=ev.Source.CHAT, trust=ev.Trust.UNTRUSTED, caused_by=None, cycle_id=None,
-        config_version=None, mode=None, key_id=ev.new_event_id(), idempotency_key="k1",
+        config_version=None, mode=None, trust_basis=ev.TrustBasis.ASSERTED, key_id=ev.new_event_id(), idempotency_key="k1",
         request_mac=b"m", attachment_ref=None, attachment_sha256=None,
         body_ciphertext=b"c", prev_hash=bytes(32), hash=bytes(32),
     )
@@ -83,8 +84,8 @@ def test_envelope_requires_keyword_arguments():
         ev.Envelope(1)  # positional construction would make field order a silent contract
 
 
-def test_envelope_version_is_one():
-    assert ev.ENVELOPE_VERSION == 1
+def test_envelope_version_is_two():
+    assert ev.ENVELOPE_VERSION == 2   # D-0002 amendment 4
 
 
 def test_new_event_id_is_uuid_version_7():

@@ -2,7 +2,7 @@
 Functionality: The ledger event envelope as a data type: its enums, its row shape, and event ids.
 Owns: the persisted enum values, the Envelope field set, ENVELOPE_VERSION, new_event_id().
 Public entry: Envelope, new_event_id()
-Decisions: D-0002, D-0006
+Decisions: D-0002, D-0006, D-0012
 Assumptions: A-0009
 Notes: Types only, no logic. Validation (UUID-only id fields, charset limits, occurred_at
   basis/precision pairing, truncation) belongs to ledger/append_event.py. Canonical byte order
@@ -15,7 +15,7 @@ from datetime import datetime
 from enum import StrEnum
 from uuid import UUID
 
-ENVELOPE_VERSION = 1
+ENVELOPE_VERSION = 2   # v2 = v1 + trust_basis (D-0002 amendment 4); v1 stays defined, never written
 
 
 class EventType(StrEnum):
@@ -63,6 +63,12 @@ class Source(StrEnum):
 class Trust(StrEnum):
     TRUSTED = "trusted"
     UNTRUSTED = "untrusted"
+
+
+class TrustBasis(StrEnum):
+    """D-0012 amendment 2: how `trust` was established. Phase 1 writes only ASSERTED."""
+    ASSERTED = "asserted"
+    VERIFIED = "verified"
 
 
 class TimeBasis(StrEnum):
@@ -119,6 +125,7 @@ class Envelope:
     cycle_id: UUID | None
     config_version: str | None
     mode: Mode | None
+    trust_basis: TrustBasis | None   # None only for envelope_version 1
     key_id: UUID
     idempotency_key: str
     request_mac: bytes

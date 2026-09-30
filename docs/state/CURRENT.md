@@ -348,3 +348,4 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   H2 FP xfail removed (H2 is record-only; FP invalid by construction per the holdout log).
 - 2026-09-30: #14 started with a design read; two unrecorded choices found; D-0012 proposed (trust mapping D3, request MAC D2). No #14 code written.
 - 2026-09-30: D-0012 accepted with corrections; D-0002 amendment 4 (envelope v2 with trust_basis); credential-slot target recorded as a Phase 3 gate item.
+- 2026-09-30: Envelope v2 (D-0002 amendment 4): TrustBasis enum, Envelope.trust_basis, encode_envelope v2 lists (v1 frozen, unchanged), migration 0005 (fix-forward). New frozen v2 seal vector 4b7e2e…546a. Results: pytest 518 passed.

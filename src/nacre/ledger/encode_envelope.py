@@ -2,14 +2,14 @@
 Functionality: Turn envelope fields into canonical bytes: the one encoding the seal and the AAD use.
 Owns: per-version field order, per-field value kinds, the tag-length-value byte format.
 Public entry: encode_envelope()
-Decisions: D-0002, D-0003, D-0008
+Decisions: D-0002, D-0003, D-0008, D-0012
 Assumptions: none
 Notes: Format (D-0002 option b): uint16 envelope_version, then for each field in the fixed order:
   tag(1) | length(4, big-endian) | value bytes. Tags:
     0x00 null (length 0)          0x01 bytes             0x02 text (UTF-8; enums use their value)
     0x03 uuid (16 raw bytes)      0x04 int (int64 BE)    0x05 timestamp (int64 BE microseconds since the Unix epoch, UTC)
   Two purposes, each with an exact field list:
-    SEAL — every Envelope field except `hash` (D-0003).
+    SEAL — every Envelope field of that version except `hash` (D-0003). v2 adds trust_basis before key_id.
     AAD — envelope_version, event_id, stream_id, key_id, event_type, payload_type (D-0002, D-0008).
   The caller passes exactly the purpose's fields, no more and no fewer, so a field added to the
   envelope can never be silently left out of the seal (a test also pins SEAL to core.event.Envelope).
@@ -47,9 +47,21 @@ class Purpose(StrEnum):
     AAD = "aad"
 
 
+# Version 2 (D-0002 amendment 4): v1 plus trust_basis, just before key_id. v1 is frozen and never edited.
+_FIELDS_V2: dict[str, int] = {}
+for _name, _kind in _FIELDS_V1.items():
+    if _name == "key_id":
+        _FIELDS_V2["trust_basis"] = _TEXT
+    _FIELDS_V2[_name] = _kind
+
+_KINDS = {**_FIELDS_V1, **_FIELDS_V2}
+_AAD = ("envelope_version", "event_id", "stream_id", "key_id", "event_type", "payload_type")
+
 FIELDS: dict[tuple[int, Purpose], tuple[str, ...]] = {
     (1, Purpose.SEAL): tuple(_FIELDS_V1),
-    (1, Purpose.AAD): ("envelope_version", "event_id", "stream_id", "key_id", "event_type", "payload_type"),
+    (1, Purpose.AAD): _AAD,
+    (2, Purpose.SEAL): tuple(_FIELDS_V2),
+    (2, Purpose.AAD): _AAD,
 }
 
 
@@ -68,7 +80,7 @@ def encode_envelope(values: Mapping[str, object], purpose: Purpose) -> bytes:
         raise EnvelopeEncodeError(f"{purpose} fields mismatch: missing {sorted(missing)}, extra {sorted(extra)}")
     out = bytearray(version.to_bytes(2, "big"))
     for name in order:
-        tag, raw = _value_bytes(name, _FIELDS_V1[name], values[name])
+        tag, raw = _value_bytes(name, _KINDS[name], values[name])
         if len(raw) > _MAX_LENGTH:
             raise EnvelopeEncodeError(f"{name} is longer than {_MAX_LENGTH} bytes")
         out.append(tag)

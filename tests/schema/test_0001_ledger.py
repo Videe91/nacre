@@ -167,3 +167,16 @@ def test_s1_role_owns_nothing_and_cannot_bypass_rls(migrated_db, role):
               SELECT typowner FROM pg_type) x
             WHERE o = (SELECT oid FROM pg_roles WHERE rolname = %s)""", (role,)).fetchone()[0]
         assert owned == 0
+
+
+# ---- 0005: envelope v2 (D-0002 amendment 4) -------------------------------------------------------
+def test_v2_rows_need_trust_basis_and_v1_rows_must_not_have_one(migrated_db, helpers):
+    s = uuid.uuid4()
+    with _admin(migrated_db) as conn:
+        helpers.insert_event(conn, helpers.event_row(s, 1, helpers.ZERO_HASH, envelope_version=2, trust_basis="asserted"))
+        conn.commit()
+        for bad in ({"envelope_version": 2}, {"envelope_version": 1, "trust_basis": "asserted"},
+                    {"envelope_version": 2, "trust_basis": "trusted"}, {"envelope_version": 3, "trust_basis": "asserted"}):
+            with pytest.raises(psycopg.errors.CheckViolation):
+                helpers.insert_event(conn, helpers.event_row(uuid.uuid4(), 1, helpers.ZERO_HASH, **bad))
+            conn.rollback()

@@ -54,9 +54,21 @@ def test_aad_fields_are_exactly_d0002():
         "envelope_version", "event_id", "stream_id", "key_id", "event_type", "payload_type")
 
 
-def test_seal_covers_every_envelope_field_except_hash_in_envelope_order():
+def test_v2_seal_covers_every_envelope_field_except_hash_in_envelope_order():
     names = [f.name for f in dataclasses.fields(ev.Envelope)]
-    assert FIELDS[(1, Purpose.SEAL)] == tuple(n for n in names if n != "hash")
+    assert FIELDS[(2, Purpose.SEAL)] == tuple(n for n in names if n != "hash")
+
+
+def test_v1_layout_is_unchanged_and_v2_only_adds_trust_basis():
+    v1, v2 = FIELDS[(1, Purpose.SEAL)], FIELDS[(2, Purpose.SEAL)]
+    assert "trust_basis" not in v1 and [f for f in v2 if f != "trust_basis"] == list(v1)
+    assert v2.index("trust_basis") == v2.index("key_id") - 1
+    assert FIELDS[(2, Purpose.AAD)] == FIELDS[(1, Purpose.AAD)]
+
+
+def test_frozen_v2_seal_encoding():
+    fields = {**seal_values(), "envelope_version": 2, "trust_basis": ev.TrustBasis.ASSERTED}
+    assert hashlib.sha256(encode_envelope(fields, Purpose.SEAL)).hexdigest() == FROZEN_V2_SEAL_SHA256
 
 
 def test_frozen_seal_encoding():
@@ -109,11 +121,11 @@ def test_every_field_changes_the_seal_encoding():
 @pytest.mark.parametrize("values,match", [
     ({**aad_values(), "hash": b"x"}, "extra"),
     ({k: v for k, v in aad_values().items() if k != "key_id"}, "missing"),
-    (aad_values(envelope_version=2), "unknown envelope_version"),
+    (aad_values(envelope_version=3), "unknown envelope_version"),
     (aad_values(envelope_version=True), "unknown envelope_version"),
     (aad_values(event_id=str(U1)), "does not fit"),
     (aad_values(event_type=b"message"), "does not fit"),
-], ids=["extra-field", "missing-field", "version-2", "bool-version", "uuid-as-text", "enum-as-bytes"])
+], ids=["extra-field", "missing-field", "version-3", "bool-version", "uuid-as-text", "enum-as-bytes"])
 def test_rejects_bad_aad_inputs(values, match):
     with pytest.raises(EnvelopeEncodeError, match=match):
         encode_envelope(values, Purpose.AAD)
@@ -132,3 +144,5 @@ def test_rejects_bad_seal_values(field, value):
 
 
 FROZEN_SEAL_SHA256 = "bd097850337d9285de0d8fe07b70c89c0ed04816427389169ea7b03df9dda5ee"  # 442 bytes, frozen 2026-09-30
+
+FROZEN_V2_SEAL_SHA256 = "4b7e2e5d59c504b6b0055715025cda92aaf4e4d54460bff98c9dbb492140546a"  # frozen 2026-09-30
