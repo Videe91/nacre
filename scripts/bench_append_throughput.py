@@ -4,9 +4,10 @@ Not product code. Needs the Docker test Postgres (docker compose up -d --wait).
 
     .venv/bin/python scripts/bench_append_throughput.py [writers] [appends_per_writer] [threads|processes]
 
-Connection setup: UNPOOLED (no psycopg_pool, D-0006; the owner requires pooled-vs-unpooled be stated).
-Each writer thread owns one connection, reused. Every append opens its own scoped session (resolve access,
-SET LOCAL, append, COMMIT), i.e. the per-request production path. Latency = session open → commit.
+Connection setup: POOLED (psycopg_pool via core.db.open_pool, D-0006 amendment 1), the production setup. Every
+append borrows a connection from the pool and opens its own scoped session (resolve access, SET LOCAL, append,
+COMMIT): the per-request production path. Latency = borrow → commit. Threads share one pool sized to the writer
+count; each process owns a pool of one. (Earlier unpooled numbers are kept in the evidence file.)
 Prints a JSON result; the caller records it in evidence.
 """
 import json
@@ -25,7 +26,7 @@ from psycopg.conninfo import conninfo_to_dict, make_conninfo
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "src"))
-from nacre.core.db import DbRole, connect  # noqa: E402
+from nacre.core.db import DbRole, connect, open_pool  # noqa: E402
 from nacre.core.event import ActorKind, EventType, PayloadType, Source  # noqa: E402
 from nacre.keys.local_file_root_key import LocalFileRootKeyProvider  # noqa: E402
 from nacre.ledger.append_event import AppendRequest, append_event  # noqa: E402
@@ -44,11 +45,11 @@ def _dsn(**kw):
 def _process_worker(app, provider_dir, stream, principal, per_writer, start_evt, out):
     provider = LocalFileRootKeyProvider(Path(provider_dir))
     mine = []
-    with connect(DbRole.APP, dsn=app) as conn:
+    with open_pool(DbRole.APP, dsn=app, min_size=1, max_size=1) as pool:
         start_evt.wait()
         for _ in range(per_writer):
             t0 = time.perf_counter()
-            with open_scoped_session(conn, principal) as s:
+            with pool.connection() as conn, open_scoped_session(conn, principal) as s:
                 append_event(s, provider, AppendRequest(
                     stream_id=stream, event_type=EventType.ACTION, payload_type=PayloadType.TEXT,
                     actor_kind=ActorKind.AGENT, actor_id=principal, source=Source.TOOL,
@@ -87,16 +88,17 @@ def main(writers=16, per_writer=200, mode="threads"):
 
         latencies, errors, barrier = [], [], threading.Barrier(writers)
 
+        pool = open_pool(DbRole.APP, dsn=app, min_size=writers, max_size=writers) if mode == "threads" else None
+
         def worker():
             mine = []
             try:
-                with connect(DbRole.APP, dsn=app) as conn:
-                    barrier.wait()
-                    for _ in range(per_writer):
-                        t0 = time.perf_counter()
-                        with open_scoped_session(conn, principal) as s:
-                            append_event(s, provider, request())
-                        mine.append(time.perf_counter() - t0)
+                barrier.wait()
+                for _ in range(per_writer):
+                    t0 = time.perf_counter()
+                    with pool.connection() as conn, open_scoped_session(conn, principal) as s:
+                        append_event(s, provider, request())
+                    mine.append(time.perf_counter() - t0)
             except Exception as exc:  # noqa: BLE001 - reported
                 errors.append(repr(exc))
             latencies.extend(mine)
@@ -127,11 +129,13 @@ def main(writers=16, per_writer=200, mode="threads"):
             for t in threads:
                 t.join()
             elapsed = time.perf_counter() - start
+        if pool is not None:
+            pool.close()
         with psycopg.connect(db) as c:
             seqs = [r[0] for r in c.execute("SELECT commit_seq FROM ledger.events WHERE stream_id = %s ORDER BY 1", (stream,))]
         q = statistics.quantiles(latencies, n=100)
         return {
-            "connection_setup": f"UNPOOLED (one reused connection per writer {mode[:-1]}; no psycopg_pool)",
+            "connection_setup": f"POOLED (psycopg_pool; {'one shared pool sized to writers' if mode == 'threads' else 'one pool of 1 per process'})",
             "mode": mode,
             "writers": writers, "appends": len(latencies), "errors": errors[:5], "error_count": len(errors),
             "elapsed_s": round(elapsed, 3), "appends_per_s": round(len(latencies) / elapsed, 1),

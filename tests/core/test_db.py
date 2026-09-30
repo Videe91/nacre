@@ -62,3 +62,14 @@ def test_missing_dsn_names_the_env_var(monkeypatch):
     monkeypatch.delenv("NACRE_DSN_APP", raising=False)
     with pytest.raises(LookupError, match="NACRE_DSN_APP"):
         connect(DbRole.APP)
+
+
+
+# ---- open_pool (D-0006 amendment 1) --------------------------------------------------------------------
+def test_pooled_connections_have_the_same_settings(pg_dsn):
+    from nacre.core.db import open_pool
+    with open_pool(DbRole.MIGRATOR, dsn=pg_dsn, max_size=2) as pool, pool.connection() as conn:
+        assert conn.execute("SHOW transaction_isolation").fetchone()[0] == "read committed"
+        assert conn.execute("SHOW TimeZone").fetchone()[0] == "UTC"
+        assert conn.autocommit is False
+

@@ -53,3 +53,30 @@
 - ≤ 4 writers: **met** (worst p99 21.3 ms).
 - 16-writer stress: **under the 150 ms ceiling** (worst p99 93.6 ms).
 - **Still to do:** re-measure once a connection pool is chosen (owner). Machine load average was about 4.5–6 throughout.
+
+## Re-measurement with the connection pool (D-0006 amendment 1), 2026-09-30
+- **Setup: POOLED.** psycopg_pool via `core.db.open_pool`. Threads share one pool sized to the writer count; each
+  process owns a pool of one. Every append borrows a connection and opens its own scoped session.
+  Latency = borrow → commit.
+- A pooled connection never carries scope between principals: tested in
+  `tests/scopes/test_open_scoped_session.py::test_a_pooled_connection_never_carries_scope_between_principals`
+  (pool size 1, same backend pid across principals, including after an error).
+
+| Mode | Writers | Appends | Appends/s | p50 | p95 | p99 | max | Gapless | Errors |
+|---|---|---|---|---|---|---|---|---|---|
+| threads | 1 | 400 | 95.0 | 9.8 ms | 14.1 ms | 18.9 ms | 20.8 ms | yes | 0 |
+| threads | 2 | 800 | 203.8 | 9.6 ms | 12.1 ms | 17.4 ms | 26.7 ms | yes | 0 |
+| threads | **4** | 1,600 | 243.6 | 15.8 ms | 19.4 ms | **24.0 ms** | 34.7 ms | yes | 0 |
+| threads | 16 (stress) | 3,200 | 253.3 | 61.8 ms | 71.9 ms | **87.8 ms** | 107.1 ms | yes | 0 |
+| processes | 1 | 400 | 86.6 | 10.8 ms | 15.0 ms | 22.0 ms | 109.5 ms* | yes | 0 |
+| processes | 2 | 800 | 198.1 | 9.7 ms | 11.6 ms | 14.0 ms | 100.9 ms* | yes | 0 |
+| processes | **4** | 1,600 | 248.4 | 15.7 ms | 17.8 ms | **19.0 ms** | 123.2 ms* | yes | 0 |
+| processes | 16 (stress) | 3,200 | 235.8 | 67.2 ms | 75.4 ms | **79.4 ms** | 184.1 ms* | yes | 0 |
+
+\* Cold-start maxima, as before (the first append in each fresh process compiles the rules).
+
+**Verdict, pooled (the official gate item 6 result):**
+- ≤ 4 writers: p99 **≤ 24.0 ms** (target < 50 ms, **met**).
+- 16-writer stress: p99 **≤ 87.8 ms** (ceiling 150 ms, **met**).
+
+The pool adds a few ms against the unpooled runs. Machine load average was about 4.2–5.4.

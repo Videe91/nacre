@@ -34,9 +34,9 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
 5. The cross-scope read test fails as expected (D-0005 S-3). *Status: suite in place and passing through the
    door (#10: 25 kind pairs + reuse/rollback/revoke); re-run at the gate with real appended events.*
 6. A-0007 throughput is measured and the result recorded (pass/fail against the provisional target is reported, not hidden).
-   *Status: MEASURED 2026-09-30 (unpooled) against the owner's rescoped target: p99 < 50 ms at ≤ 4 writers per
-   stream — MET (worst 21.3 ms); 16-writer stress p99 ≤ 150 ms — MET (worst 93.6 ms). Re-measure after a
-   connection pool is chosen. Evidence: A-0007-append-throughput-2026-09-30.md; `pytest -m bench`.*
+   *Status: MET, POOLED (psycopg_pool, 2026-09-30): p99 < 50 ms at ≤ 4 writers per stream (worst 24.0 ms);
+   16-writer stress p99 ≤ 150 ms (worst 87.8 ms). Unpooled runs kept for the record. Evidence:
+   A-0007-append-throughput-2026-09-30.md; `pytest -m bench`.*
 
 ## Standing instructions (owner, 2026-09-30)
 - **A-0007 / gate item 6:** the throughput test must run with the **production connection setup**.
@@ -416,3 +416,4 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   Gate item 2 is tested (AS_OF(3) identical after 10 later commits). Mutations: beyond-head check removed →
   1 fail; ordered by time instead of commit_seq → 3 fail.
 - 2026-09-30: D-0013 and D-0014 accepted with owner additions; D-0006 amendment 1 (psycopg_pool); D-0004 amendment 8 (weekly root rotation); A-0020.
+- 2026-09-30: psycopg_pool integrated (core.db.open_pool); pooled-scope-leak test added (mutation: session-level setting → fails). A-0007 re-measured pooled: ≤ 4 writers p99 ≤ 24.0 ms, 16-writer stress ≤ 87.8 ms. A-0007 validated for Phase 1.

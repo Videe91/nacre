@@ -132,3 +132,33 @@ def test_session_commits_on_success(world, grant):
             s.conn.execute("UPDATE keys.data_keys SET encryption_count = encryption_count + 1 WHERE stream_id = %s", (proj,))
     with psycopg.connect(world["dsn"]["admin"]) as admin:
         assert admin.execute("SELECT encryption_count FROM keys.data_keys WHERE stream_id = %s", (proj,)).fetchone()[0] == 1
+
+
+def test_a_pooled_connection_never_carries_scope_between_principals(world, grant):
+    # D-0006 amendment 1 condition: pool size 1 forces the SAME connection to serve every principal in turn.
+    from nacre.core.db import open_pool
+    from nacre.scopes.open_scoped_session import open_scoped_session
+    p1, p2 = uuid.uuid4(), uuid.uuid4()
+    a, b = world["streams"]["project"]
+    grant(p1, a)
+    grant(p2, b)
+    seen = lambda c: {r[0] for r in c.execute("SELECT DISTINCT stream_id FROM ledger.events")}  # noqa: E731
+    with open_pool(DbRole.APP, dsn=world["dsn"]["app"], min_size=1, max_size=1) as pool:
+        with pool.connection() as conn:
+            backend = conn.info.backend_pid
+            with open_scoped_session(conn, p1) as s:
+                assert seen(s.conn) == {a}
+        with pool.connection() as conn:
+            assert conn.info.backend_pid == backend                         # really the same connection
+            assert seen(conn) == set()                                      # nothing left over outside a session
+            conn.rollback()
+            with open_scoped_session(conn, p2) as s:
+                assert seen(s.conn) == {b}                                  # never p1's stream
+        with pool.connection() as conn:                                     # a borrower that errors mid-session
+            try:
+                with open_scoped_session(conn, p1):
+                    raise RuntimeError("boom")
+            except RuntimeError:
+                pass
+        with pool.connection() as conn:
+            assert conn.info.backend_pid == backend and seen(conn) == set()
