@@ -17,7 +17,7 @@ Build the Phase 1 files in `docs/modules/INDEX.md` order, one functionality + te
 committing and pushing after each.
 - Done: #1 `core/event.py`, #2 `core/db.py`, #2a `core/blob_store.py`, #2b `core/root_key_provider.py`,
   #3 `schema/apply_migrations.py` + SQL 0001–0003, #2c `core/encode_cbor.py`, #2d `core/decode_cbor.py`, #4 `ledger/encode_envelope.py`, #5 `ledger/seal_event.py`, #3d `sql/0004_checkpoints.sql`.
-- **#6 CLOSED 2026-09-30** (H3 official). Next: #14 `append_event`, then #7, #8, then #15 onward.
+- **#6 CLOSED 2026-09-30** (H3 official). **#14 built.** Next: A-0007 measurement (gate item 6), then #7, #8, then #15 onward.
 - To run DB tests: `docker compose up -d --wait`, then `pytest`.
 - **Owner tool:** `scripts/measure_token_format.py` measures real tokens' prefix/length/charset without
   printing them (D-0007 amendment 4). Run locally; paste only its suggested ASSUMPTIONS row back.
@@ -349,3 +349,26 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
 - 2026-09-30: #14 started with a design read; two unrecorded choices found; D-0012 proposed (trust mapping D3, request MAC D2). No #14 code written.
 - 2026-09-30: D-0012 accepted with corrections; D-0002 amendment 4 (envelope v2 with trust_basis); credential-slot target recorded as a Phase 3 gate item.
 - 2026-09-30: Envelope v2 (D-0002 amendment 4): TrustBasis enum, Envelope.trust_basis, encode_envelope v2 lists (v1 frozen, unchanged), migration 0005 (fix-forward). New frozen v2 seal vector 4b7e2e…546a. Results: pytest 518 passed.
+- 2026-09-30: INDEX #14 `ledger/append_event.py` (290 lines).
+  Validation choices (D1):
+  - occurred_at finer than its precision is rejected, not truncated;
+  - idempotency keys must be canonical UUID v4/v7;
+  - trust by source + authorship per the D-0012 table;
+  - the subject is the person for person statements/messages, otherwise the stream (or explicit).
+
+  Tests (37) cover:
+  - round trip and seal re-verification;
+  - secrets absent from every stored byte;
+  - public-credential tagging;
+  - the trust table;
+  - exact retry → original, no row; conflict on different content or principal; OriginalErased;
+  - canonical-UUID keys;
+  - validation rejections write nothing;
+  - person erasure shreds only that person's events;
+  - read-only principal refused;
+  - 16 concurrent writers → gapless valid chain.
+
+  Mutations: content not stripped → 1 fail; principal dropped from the MAC → 1 fail; app-level lock
+  removed → 1 fail. "Tool trusted" at first SURVIVED (a later clause also yields untrusted), so
+  distinguishing cases were added (tool/web + integration_result claim) and it is now caught.
+  Shared fixtures (provider/streams/session) moved to tests/conftest.py.
