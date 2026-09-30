@@ -28,6 +28,25 @@
      owner's explicit approval.
    - The placeholder allowlist of `url-userinfo-password` below is approved as part of this ADR.
 
+5. **2026-09-30 — re-seal after an observed holdout failure (owner, post-acceptance).**
+   - A holdout whose failures have been seen by a rule writer is **demoted to working data**.
+   - A **fresh holdout** is sealed (new seed, new embedding contexts), chosen **before any fix is
+     written**, by a **separate session that does not see rule code**.
+   - A **holdout-generation log** (`docs/assumptions/evidence/A-0010-holdout-log.md`) records which holdout
+     produced each official number.
+   - The fresh holdout tests **every covered rule, vendored and Nacre, in every embedding context**,
+     documents included.
+6. **2026-09-30 — boundary principle (owner).** A token ends at the first character outside its format's
+   specified character set, not at a list of known terminators. Boundaries are derived from the
+   specs (RFC 7519/7515 for JWTs, Sentry's source for `sntryu_`, and so on). No special cases for
+   particular surrounding syntax (XML, error messages, …).
+   Vendored rules are not edited (additive only): a spec-bounded Nacre rule is added for each covered
+   format.
+7. **2026-09-30 — loosening declined (owner).** The `[...]` / `{...}` placeholder extension of
+   `url-userinfo-password` is declined: real passwords can contain brackets or braces. Repo false
+   positives stay on exact-value hook allowlists. If a need appears, the only acceptable proposal is
+   narrow: placeholders that contain a credential word, measured on the holdout.
+
 ## Admission criteria for a Nacre rule (written once; every rule entry carries these fields)
 - `source`: provider-owned URL(s) or a standard, never a scanner rule set; `source_date`: when it was checked.
 - `fact_ids`: A-IDs for any owner-measured fact the rule depends on (empty if none).
