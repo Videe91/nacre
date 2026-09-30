@@ -1,11 +1,17 @@
 # D-0009: Regex engine for secret detection — `google-re2`
 
-- **Status:** proposed — awaiting owner approval before INDEX #6 is built
+- **Status:** accepted (owner, 2026-09-30, with amendment below)
 - **Tier:** D2 (runtime dependency)
 - **Date:** 2026-09-30
 - **Relies on assumptions:** A-0018 (A-0017 invalidated)
 - **Related:** D-0007 (vendored gitleaks rules; it named "add google-re2 (new dependency ADR)" as the fallback if A-0017 failed), D-0006 (dependencies)
 - **Evidence:** `docs/assumptions/evidence/A-0017-regex-engines.md`
+
+## Amendment history (owner-directed, before acceptance)
+1. **Re-verify on upgrade:** re-run the Go ground-truth comparison (`scripts/a0017/`) whenever the
+   pinned gitleaks version changes. It does not run on every test run. This keeps A-0018 verified
+   across upgrades. A gitleaks upgrade is not complete until that comparison has been re-run and
+   its evidence committed.
 
 ## Context
 D-0007 vendors gitleaks' rules, which are written for Go's RE2 engine. A-0017 bet that Python `re`
@@ -26,7 +32,7 @@ invalidated A-0017:
 3. **gitleaks binary as a subprocess.** Exact semantics. But it adds a Go toolchain and a process
    boundary on the intake path, with no measured gain over option 1.
 
-## Decision (proposed)
+## Decision
 Option 1:
 - **Pin:** `google-re2 == 1.1.20251105` as a runtime dependency. The pin is exact because match
   semantics are part of intake behaviour; upgrades mean a new pin plus a re-run of the A-0017

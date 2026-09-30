@@ -6,6 +6,22 @@
 - **Relies on assumptions:** A-0010, A-0017
 - **Related:** D-0002 (secrets stripped before encryption, inside `append_event`)
 
+## Amendments after acceptance (owner-directed; additive, no accepted text changed)
+1. **2026-09-30 — engine:** A-0017 was invalidated. The rules run under `google-re2`, never Python
+   `re` (D-0009).
+2. **2026-09-30 — corpus construction** (replaces the corpus bullet's "seeded from gitleaks' own
+   per-rule true-positive examples"):
+   - **Positives are generated at test time**, from seeded generators. The repo holds the
+     generators plus a sha256 of their output, and never a secret-shaped string (GitHub push
+     protection, CURRENT.md).
+   - **Generators are written from each provider's documented token format** (prefix, length,
+     charset, checksum where one exists), **independently of the gitleaks regexes**, so the corpus
+     cannot inherit a rule's mistakes. Each generator cites its source document.
+   - **Negatives are committed normally:** real code, UUIDs, git hashes, base64 blobs, minified
+     files, drawing on the 1,200-file set used for A-0017. They contain no secrets and measure the
+     ≤ 2% false-positive target.
+   - The unknown-format set (entropy-only) follows the same generator rule.
+
 ## Context
 D-0002 requires secrets to be stripped before any write. A-0010 sets the bar: at least 99% caught
 on known formats, at most 2% false positives, with unknown formats tracked separately. The owner
