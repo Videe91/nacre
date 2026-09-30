@@ -11,6 +11,9 @@ Notes: D-0004 amendment 4: the root key wraps stream master keys and is reachabl
   wrapped master key copied onto another stream's row fails to unwrap.
   Rotation = rewrap (keys/rotate_root_key.py): a provider must still unwrap keys wrapped under
   older root-key versions it retains, while wrap() always uses the current version.
+  create_version() / destroy_version() were added with #11a so rotation (D-0004 amendments 6-7) goes
+  through this interface too; destroying a version must make every key wrapped under it unrecoverable
+  from this provider (its separate backup is an operator step, D-0004 amendment 6). (D1)
 """
 from dataclasses import dataclass
 from typing import Protocol, runtime_checkable
@@ -35,4 +38,12 @@ class RootKeyProvider(Protocol):
     def unwrap(self, wrapped: WrappedKey, context: bytes) -> bytes:
         """Recover a master key. Raises KeyError if its root-key version is not held, and
         ValueError if authentication fails (tampered bytes or wrong context)."""
+        ...
+
+    def create_version(self) -> str:
+        """Create a new root-key version and make it current. Returns its version id."""
+        ...
+
+    def destroy_version(self, version: str) -> None:
+        """Destroy a non-current root-key version. Raises ValueError for the current version."""
         ...

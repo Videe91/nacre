@@ -150,3 +150,8 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   reuse across principals, error rollback, revoke. Mutations: session-level (not LOCAL) setting →
   1 fail; superuser refusal removed → 1 fail. Results: check_structure 0/0; pytest (scopes) 42 passed.
 - 2026-09-30: D-0007 amendment 3 (provider set, generic category, per-provider targets, coverage metric, negatives rules); A-0010 reworded.
+- 2026-09-30: INDEX #11a `keys/local_file_root_key.py`; RootKeyProvider protocol gained create_version /
+  destroy_version (D1, needed by #20a rotation). Wrap AAD binds root version + stream context; files 0600,
+  loose permissions refused; destroy = zero + fsync + unlink (local disk only; other copies are the
+  operator step). Mutations: version dropped from AAD → 1 fail; permission check removed → 1 fail.
+  Results: pytest (keys) 22 passed.
