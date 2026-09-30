@@ -29,3 +29,5 @@ End: update `docs/state/CURRENT.md` and run `python scripts/check_structure.py`.
 
 > Claude may write code freely inside recorded decisions. Claude may not make a durable
 > decision, or rely on a new assumption, without writing it down first.
+> repo rules take priority over global ones always
+

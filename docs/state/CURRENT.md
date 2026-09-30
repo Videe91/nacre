@@ -15,6 +15,10 @@
 ## Next
 Build the Phase 1 files in `docs/modules/INDEX.md` order, one functionality + test per step,
 committing and pushing after each.
+- Done: #1 `src/nacre/core/event.py`.
+- Next: #2 `src/nacre/core/db.py` + #2a `core/blob_store.py`, then #3 migrations. #2 brings in
+  `docker-compose.yml` (postgres:17.11, digest-pinned), `tests/conftest.py`, and installing
+  `psycopg` / `cryptography` into `.venv`.
 
 ## Phase 1 gate (FROZEN by owner 2026-09-30)
 Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`):
@@ -44,4 +48,8 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
 - See the latest entry in "Session log" below.
 
 ## Session log
-- 2026-09-30: planning accepted and committed.
+- 2026-09-30: planning accepted and committed (38886e1).
+- 2026-09-30: INDEX #1 `core/event.py` + `tests/core/test_event.py`. INDEX paths switched to
+  repo-relative because check_structure.py matches `src/nacre/...` (first run failed: "not registered").
+  Results: `check_structure.py` → 0 failure(s), 0 warning(s); `pytest` → 16 passed.
+  Also committed: owner's CLAUDE.md line "repo rules take priority over global ones always".
