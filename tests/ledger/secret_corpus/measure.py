@@ -93,11 +93,13 @@ def measure(samples, strip, split: str = "all"):
     }
 
 
-def overfitting_flags(working, holdout, threshold=0.01):
-    """Groups whose working-set rate exceeds the holdout rate by more than `threshold` (1 point)."""
-    return {g: (working["groups"][g]["rate"], holdout["groups"][g]["rate"])
-            for g in holdout["groups"] if g in working["groups"]
-            and working["groups"][g]["rate"] - holdout["groups"][g]["rate"] > threshold}
+def overfitting_flags(working, holdout, threshold=0.01, metric="strict_rate"):
+    """Groups whose working rate exceeds the holdout rate by more than `threshold` (1 point). Public groups
+    have no strict rate and use `rate`."""
+    def value(report, g):
+        return report["groups"][g]["rate"] if g.startswith("public:") else report["groups"][g][metric]
+    return {g: (value(working, g), value(holdout, g)) for g in holdout["groups"] if g in working["groups"]
+            and value(working, g) - value(holdout, g) > threshold}
 
 
 def _per_character(sample, result):

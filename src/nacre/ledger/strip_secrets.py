@@ -40,7 +40,7 @@ import re2
 RULES_FILE = Path(__file__).resolve().parent / "data" / "gitleaks-v8.30.1.toml"
 RULES_SHA256 = "e163e53b9e7e8a8511e77271e2b323ed057759542a6d988258afe3a1fa329caf"
 NACRE_RULES_FILE = Path(__file__).resolve().parent / "data" / "nacre-rules-v1.toml"
-NACRE_RULES_SHA256 = "117853c0909443eace0dcbd85fa52f140d61df11b51ce34ff6b83b1d00f5adcb"
+NACRE_RULES_SHA256 = "58d81de56c5e382ec974ae9bc5a651daba84f31f5e3c623749d20c8257d069f5"
 
 ENTROPY_MIN_BITS = 4.3        # above hex's 4.0 ceiling
 ENTROPY_MIN_LEN, ENTROPY_MAX_LEN = 20, 64   # longer runs are data (blobs, hashes), not credentials

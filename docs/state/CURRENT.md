@@ -17,7 +17,7 @@ Build the Phase 1 files in `docs/modules/INDEX.md` order, one functionality + te
 committing and pushing after each.
 - Done: #1 `core/event.py`, #2 `core/db.py`, #2a `core/blob_store.py`, #2b `core/root_key_provider.py`,
   #3 `schema/apply_migrations.py` + SQL 0001–0003, #2c `core/encode_cbor.py`, #2d `core/decode_cbor.py`, #4 `ledger/encode_envelope.py`, #5 `ledger/seal_event.py`, #3d `sql/0004_checkpoints.sql`.
-- Next: D-0011 decision → supplementary rules → remove xfails → switch the hook (D-0010). Then #14, #7, #8.
+- **#6 CLOSED 2026-09-30** (H3 official). Next: #14 `append_event`, then #7, #8, then #15 onward.
 - To run DB tests: `docker compose up -d --wait`, then `pytest`.
 - **Owner tool:** `scripts/measure_token_format.py` measures real tokens' prefix/length/charset without
   printing them (D-0007 amendment 4). Run locally; paste only its suggested ASSUMPTIONS row back.
@@ -43,6 +43,12 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   comparison to the owner as part of A-0017.
 
 ## Open questions
+- **Credential-slot category has no target (proposal).** Random values in credential slots are stripped
+  54–72% on H3 (working 82–83%, flagged as overfitting). The layer that catches them is the entropy
+  layer's cue list and generic rules. H3's slot contexts (Dockerfile ENV, Rust, notebook JSON, Swift,
+  PowerShell, Ansible, nginx) name credentials in ways the cues don't cover. Setting a target, and any
+  change to the entropy cues, is an owner decision; a change would need a fresh holdout (H4) under the
+  same protocol.
 - **D-0011 accepted** (holdout; additive only; admission criteria; loosening needs owner approval).
 - **Upstream (not blocking):** once proven on the holdout, prepare as gitleaks contributions (D-0011
   amendment 3): the `ghs_` stateless rule, the password-in-URL rule, and the **gitlab-pat-routable gap**
@@ -337,3 +343,8 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   when detector/rules/corpus files are staged. RSA keys are memoised on rng state (the post-state is
   restored, so digests are unchanged) and persisted to a git-ignored cache: H2 rebuild goes from ~60 s
   cold to 5 s warm.
+- 2026-09-30: #6 CLOSED. H3 (sealed 3700f1f, separate session) official results: every provider/generic
+  group 100% per-character (longest surviving fragment 0), FP 0/400, public kept 100%; H2 recomputed
+  per-character 100% for the record. Credential-slot category (ungated) 54–72% on H3 vs 82–83% working
+  (flagged). No detector change after H3 was sealed. Evidence: A-0010-measurement-2026-09-30-H3.md.
+  H2 FP xfail removed (H2 is record-only; FP invalid by construction per the holdout log).

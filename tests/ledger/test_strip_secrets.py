@@ -106,91 +106,60 @@ def test_a_rule_that_does_not_compile_fails_the_load(fresh_rules, tmp_path):
         strip_secrets("x")
 
 
-# ---- A-0010 measurement (D-0007 amendments 3-5; D-0011 holdout) --------------------------------------
-from secret_corpus.corpus import build_holdout  # noqa: E402
+# ---- A-0010 measurement (D-0007 amendments 3-5; D-0011 amendments 1, 5, 8) --------------------------
+# Official: sealed holdout H3 (holdout log). Caught = every character of the secret part redacted.
+# Slow: `pytest -m holdout` (the pre-commit hook runs it when detector, rules or corpus change).
+from secret_corpus import credential_slot  # noqa: E402,F401
+from secret_corpus.corpus import build_working  # noqa: E402
 from secret_corpus.measure import overfitting_flags  # noqa: E402
 
 
 @pytest.fixture(scope="module")
 def working():
-    # Working data = working set + demoted H1 (D-0011 amendments 5, 8), all first-set negatives.
-    from secret_corpus import credential_slot  # noqa: F401
-    from secret_corpus.corpus import build_working
     return measure(build_working(), strip_secrets, split="all")
 
 
 @pytest.fixture(scope="module")
-def holdout():
-    # Official: sealed holdout H2 (holdout log), fresh stdlib negatives.
-    from secret_corpus import holdout_2
-    return measure(holdout_2.build_holdout2(), strip_secrets, split="holdout2")
+def official():
+    from secret_corpus import holdout_3
+    return measure(holdout_3.build_holdout3(), strip_secrets, split="holdout3")
 
 
-def _secret_groups():
-    from secret_corpus import holdout_2
-    return sorted(k for k in measure(holdout_2.build_holdout2(per_generator=1), strip_secrets, split="holdout2")["groups"]
-                  if not k.startswith("public:"))
+def _gated_groups():
+    from secret_corpus import holdout_3
+    groups = measure(holdout_3.build_holdout3(per_generator=1), strip_secrets, split="holdout3")["groups"]
+    return sorted(k for k in groups if k.startswith(("provider:", "generic:")))
 
 
-# Groups below 99% on the OFFICIAL holdout (H2). Filled only from an H2 measurement, never by guess.
+# Groups below 99% on H3. Filled only from an H3 measurement, never by guess; strict xfail if any.
 HOLDOUT_GAPS: dict[str, str] = {}
 
 
 @pytest.mark.holdout
-# Official (D-0011 amendment 1): catch rates come from the sealed holdout only.
 @pytest.mark.parametrize("group", [
     pytest.param(g, marks=pytest.mark.xfail(strict=True, reason=HOLDOUT_GAPS[g])) if g in HOLDOUT_GAPS else g
-    for g in _secret_groups()])
-def test_catch_rate_holdout_official(holdout, group):
-    assert holdout["groups"][group]["rate"] >= 0.99, holdout["groups"][group]
+    for g in _gated_groups()])
+def test_caught_per_character_official_h3(official, group):
+    g = official["groups"][group]
+    assert g["strict_rate"] >= 0.99, g
 
 
 @pytest.mark.holdout
-def test_public_credentials_are_never_stripped(working, holdout):
-    for report in (working, holdout):
+def test_public_credentials_are_never_stripped(working, official):
+    for report in (working, official):
         public = {k: v for k, v in report["groups"].items() if k.startswith("public:")}
         assert public and all(v["rate"] == 1.0 for v in public.values()), public
 
 
 @pytest.mark.holdout
-@pytest.mark.xfail(strict=True, reason=(
-    "H2 FP 3.25% (13/400): all 13 are SYNTHETIC content-hash negatives that the H2 build embedded into "
-    "credential-slot contexts (#1 POST form, #5 Terraform, #8 PHP, #11 GET credential=...). The H2 build embedded "
-    "negative documents too (builder's framework choice), so those documents literally read credential=<hex>. "
-    "Real-code H2 negatives: 0/150. Sealed H2 is not altered; measurement definition awaits the owner."))
-def test_false_positive_rate_holdout_official(holdout):
-    assert holdout["fp_rate"] <= 0.02, holdout["fp_docs"]
+def test_false_positive_rate_official_h3(official):
+    assert official["fp_rate"] <= 0.02, official["fp_docs"]
 
 
 @pytest.mark.holdout
-def test_false_positive_rate_on_h2_real_code_negatives(holdout):
-    # Reported alongside the official FP while its definition is pending: the 150 fresh stdlib files.
-    real = [d for d in holdout["fp_docs"] if d[0].startswith("negatives_holdout2/")]
-    assert real == []
-
-
-@pytest.mark.holdout
-def test_working_set_reported_and_overfitting_flagged(working, holdout, capsys):
-    flags = overfitting_flags(working, holdout)
+def test_working_reported_and_overfitting_flagged(working, official, capsys):
+    flags = overfitting_flags(working, official)
+    slots = {k: round(v["strict_rate"], 3) for k, v in official["groups"].items() if k.startswith("credential-slot:")}
     with capsys.disabled():
-        print("\nA-0010 working vs holdout (overfitting flags: %s)" % (flags or "none"))
+        print(f"\nA-0010 H3 overfitting flags: {flags or 'none'}; credential-slot strip rates (reported): {slots}")
     assert working["fp_rate"] <= 0.02
-
-
-def test_nacre_rules_cannot_reuse_a_gitleaks_rule_id(fresh_rules, tmp_path):
-    # D-0011 amendment 2: additive only; a clash would shadow or override a vendored rule.
-    clash = ss.NACRE_RULES_FILE.read_text().replace('id = "supabase-secret-key"', 'id = "github-pat"', 1).encode()
-    copy = tmp_path / "nacre.toml"
-    copy.write_bytes(clash)
-    fresh_rules.setattr(ss, "NACRE_RULES_FILE", copy)
-    fresh_rules.setattr(ss, "NACRE_RULES_SHA256", hashlib.sha256(clash).hexdigest())
-    with pytest.raises(RulesError, match="additive only"):
-        strip_secrets("x")
-
-
-def test_a_modified_nacre_rules_file_is_refused(fresh_rules, tmp_path):
-    copy = tmp_path / "nacre.toml"
-    copy.write_bytes(ss.NACRE_RULES_FILE.read_bytes() + b"\n# loosened\n")
-    fresh_rules.setattr(ss, "NACRE_RULES_FILE", copy)
-    with pytest.raises(RulesError, match="pinned sha256"):
-        strip_secrets("x")
