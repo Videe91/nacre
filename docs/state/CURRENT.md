@@ -43,6 +43,10 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   comparison to the owner as part of A-0017.
 
 ## Open questions
+- **D-0012 PROPOSED (blocks #14 append_event).** Part A (D3): trust by source; proposed git/ci/review/system
+  trusted, chat/web/tool untrusted. Part B (D2): request MAC over the caller's pre-strip request as
+  deterministic CBOR, under the original event's data key. Equal MAC → return the original; different MAC
+  → conflict.
 - **Credential-slot category has no target (proposal).** Random values in credential slots are stripped
   54–72% on H3 (working 82–83%, flagged as overfitting). The layer that catches them is the entropy
   layer's cue list and generic rules. H3's slot contexts (Dockerfile ENV, Rust, notebook JSON, Swift,
@@ -348,3 +352,4 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   per-character 100% for the record. Credential-slot category (ungated) 54–72% on H3 vs 82–83% working
   (flagged). No detector change after H3 was sealed. Evidence: A-0010-measurement-2026-09-30-H3.md.
   H2 FP xfail removed (H2 is record-only; FP invalid by construction per the holdout log).
+- 2026-09-30: #14 started with a design read; two unrecorded choices found; D-0012 proposed (trust mapping D3, request MAC D2). No #14 code written.
