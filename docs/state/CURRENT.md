@@ -15,7 +15,7 @@
 ## Next
 Build the Phase 1 files in `docs/modules/INDEX.md` order, one functionality + test per step,
 committing and pushing after each.
-- Done: #1 `core/event.py`, #2 `core/db.py`, #2a `core/blob_store.py`.
+- Done: #1 `core/event.py`, #2 `core/db.py`, #2a `core/blob_store.py`, #2b `core/root_key_provider.py`.
 - Next: #2a `core/blob_store.py`, #2b `core/root_key_provider.py`, then #3 migrations (#2c waits on D-0008).
 - To run DB tests: `docker compose up -d --wait`, then `pytest`.
 
@@ -61,3 +61,4 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   Results: `check_structure.py` → 0 failure(s), 0 warning(s); `pytest` → 23 passed.
 - 2026-09-30: D-0008 accepted with owner resolutions; A-0017 test widened to google-re2; standing instructions recorded.
 - 2026-09-30: INDEX #2a `core/blob_store.py` (Protocol only; write-once, no delete). Results: check_structure 0/0; pytest 23 passed. No test file: an interface is exercised through #15a.
+- 2026-09-30: INDEX #2b `core/root_key_provider.py` (Protocol + WrappedKey; wrapping bound to stream_id context, D1). Results: check_structure 0/0; pytest 23 passed. Exercised through #11a.

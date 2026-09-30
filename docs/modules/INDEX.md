@@ -11,7 +11,7 @@ D-0002 … D-0006 accepted 2026-09-30.
 | 1 | core | Envelope data type, enums, UUIDv7 id (types only, no logic) | `src/nacre/core/event.py` | `tests/core/test_event.py` | D-0002, D-0006 | A-0009 | done |
 | 2 | core | Open one Postgres connection per DB role: explicit READ COMMITTED, UTC (no pool, no scope logic) | `src/nacre/core/db.py` | `tests/core/test_db.py` | D-0003, D-0005, D-0006 | A-0011 | done |
 | 2a | core | Blob storage interface (Protocol only: write-once put_if_absent / get / exists by 32-byte ref) | `src/nacre/core/blob_store.py` | — (via 15a) | D-0004, D-0006 | — | done |
-| 2b | core | Root-key provider interface (Protocol only: wrap / unwrap a stream master key, key version) | `src/nacre/core/root_key_provider.py` | — (via 11a) | D-0004 | — | planned |
+| 2b | core | Root-key provider interface (Protocol only: wrap / unwrap a stream master key bound to a context, current version) | `src/nacre/core/root_key_provider.py` | — (via 11a) | D-0004 | A-0008 | done |
 | 2c | core | Deterministic CBOR encoder, strict subset (no floats) | `src/nacre/core/encode_cbor.py` | `tests/core/test_encode_cbor.py` (RFC 8949 App. A subset vectors, frozen vectors, cbor2 cross-check, hypothesis) | D-0008 | — | planned |
 | 2d | core | Strict deterministic CBOR decoder: rejects non-canonical / out-of-subset input | `src/nacre/core/decode_cbor.py` | `tests/core/test_decode_cbor.py` (rejection vectors, hypothesis round-trips, cbor2 cross-check) | D-0008 | — | planned |
 | 3 | schema | Apply ordered SQL migrations with the migrator role | `src/nacre/schema/apply_migrations.py` | `tests/schema/test_apply_migrations.py` | D-0003, D-0005 | — | planned |
