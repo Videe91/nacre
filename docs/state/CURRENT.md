@@ -17,7 +17,7 @@ Build the Phase 1 files in `docs/modules/INDEX.md` order, one functionality + te
 committing and pushing after each.
 - Done: #1 `core/event.py`, #2 `core/db.py`, #2a `core/blob_store.py`, #2b `core/root_key_provider.py`,
   #3 `schema/apply_migrations.py` + SQL 0001–0003, #2c `core/encode_cbor.py`, #2d `core/decode_cbor.py`, #4 `ledger/encode_envelope.py`, #5 `ledger/seal_event.py`, #3d `sql/0004_checkpoints.sql`.
-- Next: #10 `open_scoped_session`, then #6. #7/#8 moved after #14 (they append config events; see INDEX).
+- Next: #6 `strip_secrets` (corpus generators first), then 11a, 11, 12, 13, 14, 7, 8. See INDEX build-order note.
 - To run DB tests: `docker compose up -d --wait`, then `pytest`.
 - **Every clone:** `git config core.hooksPath scripts/hooks` (D-0010 pre-commit secret scan; needs `.venv`
   with `google-re2`). Temporary scanner `scripts/scan_staged_secrets.py` is replaced by #6.
@@ -28,7 +28,8 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
 2. AS_OF(N) snapshots are stable (MNEXA ADR-0010 R-18: byte-identical after later commits).
 3. The chain verifier detects tampering, including a full-stream rewrite (caught by checkpoints).
 4. Shredding makes payloads unreadable while the chain still verifies.
-5. The cross-scope read test fails as expected (D-0005 S-3).
+5. The cross-scope read test fails as expected (D-0005 S-3). *Status: suite in place and passing through the
+   door (#10: 25 kind pairs + reuse/rollback/revoke); re-run at the gate with real appended events.*
 6. A-0007 throughput is measured and the result recorded (pass/fail against the provisional target is reported, not hidden).
 
 ## Standing instructions (owner, 2026-09-30)
@@ -146,3 +147,8 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   Results: check_structure 0/0; pytest 340 passed (51 s; the machine's load average was ~10–14 from
   other work, which slowed the hypothesis tests).
 - 2026-09-30: INDEX #9 `scopes/resolve_access.py`. Mutation: oldest-grant-wins → 1 fail. Build order changed: #7/#8 after #14 (dependency on append_event). Results: pytest (scopes) 7 passed.
+- 2026-09-30: INDEX #10 `scopes/open_scoped_session.py`. Pre-flight refusals (D1): open transaction,
+  superuser/BYPASSRLS role, isolation ≠ READ COMMITTED. Adversarial suite covers all 25 scope-kind pairs
+  (events, master keys, data keys, scopes, cross-scope key insert), no-grant, read-only, connection
+  reuse across principals, error rollback, revoke. Mutations: session-level (not LOCAL) setting →
+  1 fail; superuser refusal removed → 1 fail. Results: check_structure 0/0; pytest (scopes) 42 passed.
