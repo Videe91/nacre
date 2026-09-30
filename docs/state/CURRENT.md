@@ -46,6 +46,8 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   comparison to the owner as part of A-0017.
 
 ## Open questions
+- **D-0013 PROPOSED (blocks #15, #15a, #18, #19):** attachment blob byte format and disk layout; checkpoint signed
+  message, signing-key file, external JSON Lines witness file. #16 read_stream and #17 replay_cycle proceed meanwhile.
 - Resolved 2026-09-30: A-0007 rescoped (≤ 4 writers p99 < 50 ms; 16-writer stress ceiling 150 ms), met unpooled; A-0019 added (remedy = group commit).
 - **Pending (owner):** choose a connection pool (or none); A-0007 is re-measured afterwards.
 - Resolved 2026-09-30: D-0012 accepted with owner corrections (trust by source + author, trust_basis, key rules, original-erased error); D-0002 amendment 4 (envelope v2).
