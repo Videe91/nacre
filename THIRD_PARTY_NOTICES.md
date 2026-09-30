@@ -19,3 +19,8 @@ pycparser (BSD-3-Clause), Pygments (BSD-2-Clause), pytest (MIT), sortedcontainer
 - **File:** `tests/ledger/secret_corpus/negatives_external/lodash-4.17.21/lodash.min.js`, unmodified
 - **Source:** cdnjs, integrity matched against its published SRI hash
 - **License:** MIT, full text beside it (`LICENSE`), © OpenJS Foundation and other contributors
+
+## CPython 3.14.3 standard library excerpts (holdout H2 negatives)
+- **Files:** `tests/ledger/secret_corpus/negatives_holdout2/` — 150 `.py` files truncated at a line boundary to
+  16 KiB, test directories excluded; provenance in its `MANIFEST.json`.
+- **License:** PSF License (PSF-2.0); full text in `negatives_holdout2/LICENSES/LICENSE-PSF.txt`.
