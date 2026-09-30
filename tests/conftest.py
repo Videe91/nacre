@@ -36,6 +36,8 @@ def fresh_db(pg_dsn):
     name = f"nacre_t_{uuid.uuid4().hex[:16]}"
     with psycopg.connect(pg_dsn, autocommit=True) as admin:
         admin.execute(f'CREATE DATABASE "{name}"')
+        # A lock wait in a test is a bug; make it an error instead of a hung run.
+        admin.execute(f"ALTER DATABASE \"{name}\" SET lock_timeout = '10s'")
     yield dsn_with(pg_dsn, dbname=name)
     with psycopg.connect(pg_dsn, autocommit=True) as admin:
         admin.execute(f'DROP DATABASE "{name}" WITH (FORCE)')

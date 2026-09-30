@@ -17,7 +17,7 @@ Build the Phase 1 files in `docs/modules/INDEX.md` order, one functionality + te
 committing and pushing after each.
 - Done: #1 `core/event.py`, #2 `core/db.py`, #2a `core/blob_store.py`, #2b `core/root_key_provider.py`,
   #3 `schema/apply_migrations.py` + SQL 0001–0003, #2c `core/encode_cbor.py`, #2d `core/decode_cbor.py`, #4 `ledger/encode_envelope.py`, #5 `ledger/seal_event.py`, #3d `sql/0004_checkpoints.sql`.
-- Next: #11a, #11, #12, #13, then #6 with the corpus, then 14, 7, 8.
+- Next: #6 with the corpus (provider-format research in hand, see evidence/A-0010-provider-formats.md), then 14, 7, 8.
 - To run DB tests: `docker compose up -d --wait`, then `pytest`.
 - **Every clone:** `git config core.hooksPath scripts/hooks` (D-0010 pre-commit secret scan; needs `.venv`
   with `google-re2`). Temporary scanner `scripts/scan_staged_secrets.py` is replaced by #6.
@@ -160,3 +160,11 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   Tests include 4-thread concurrent creation, shredded data/master key → None, moved wraps fail,
   destroyed root version → unresolvable. Mutations: ON CONFLICT removed → 2 fail; DEK wrap AAD reduced
   → 1 fail. Results: pytest (keys) 36 passed.
+- 2026-09-30: INDEX #12 `keys/encrypt_payload.py` (+ derive_mac) and #13 `keys/decrypt_payload.py`.
+  First test run HUNG (>5 min): a test bug, not a product bug. A fixture held an uncommitted session that
+  had just inserted the stream master key, and a second session inserting the same key waited on it
+  forever. Fixed by creating keys in their own committed session. Guard added: every test database now
+  has lock_timeout = 10s, so a future lock wait fails loudly instead of hanging.
+  Mutations: decrypt readability check removed → 1 fail (an unreadable stream would have been reported
+  as Shredded); flags check removed → 2 fail; use count not incremented → 2 fail.
+  Results: check_structure 0/0; pytest (keys) 71 passed.
