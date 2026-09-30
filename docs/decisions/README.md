@@ -16,3 +16,4 @@
 | D-0012 | Trust by source and author, and the idempotency request MAC | D3/D2 | accepted |
 | D-0013 | Attachment blob format and checkpoint signature format | D2 | accepted |
 | D-0014 | Shredding authority, key-administration roles, and rotation mechanics | D3 | accepted |
+| D-0015 | Collecting orphan attachment blobs safely (per-ref advisory lock, nacre_gc role) | D2 | proposed |

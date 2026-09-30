@@ -17,7 +17,7 @@ Build the Phase 1 files in `docs/modules/INDEX.md` order, one functionality + te
 committing and pushing after each.
 - Done: #1 `core/event.py`, #2 `core/db.py`, #2a `core/blob_store.py`, #2b `core/root_key_provider.py`,
   #3 `schema/apply_migrations.py` + SQL 0001–0003, #2c `core/encode_cbor.py`, #2d `core/decode_cbor.py`, #4 `ledger/encode_envelope.py`, #5 `ledger/seal_event.py`, #3d `sql/0004_checkpoints.sql`.
-- **#6 CLOSED 2026-09-30** (H3 official). **#14 built; A-0007 measured; #7, #7a, #8 built.** #15/#15a/#15b, #16, #17, #18, #19 built. #20 (requests), #20c (execution), #20d (keyadmin tx) built; #21 folded into them. #20b master rotation and #20a root rotation built; **A-0008 validated** (pg_dump backup recovery, crash/resume). Next: #15c orphan GC.
+- **#6 CLOSED 2026-09-30** (H3 official). **#14 built; A-0007 measured; #7, #7a, #8 built.** #15/#15a/#15b, #16, #17, #18, #19 built. #20 (requests), #20c (execution), #20d (keyadmin tx) built; #21 folded into them. #20b master rotation and #20a root rotation built; **A-0008 validated** (pg_dump backup recovery, crash/resume). #15c orphan GC is **blocked on proposed D-0015** (owner review: interface delete, advisory lock, nacre_gc role).
 - To run DB tests: `docker compose up -d --wait`, then `pytest`.
 - **Owner tool:** `scripts/measure_token_format.py` measures real tokens' prefix/length/charset without
   printing them (D-0007 amendment 4). Run locally; paste only its suggested ASSUMPTIONS row back.
@@ -482,3 +482,7 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
     mid root rotation, then resume; a leftover old-version row blocks destruction; an unreferenced current
     version is destroyed; the audit order is correct. Mutations: 9 run, 9 killed (4 survived the first pass;
     each got a test).
+- 2026-09-30: #15c needs a D2 choice, so D-0015 is proposed and nothing is coded. BlobStore promises "no delete", and
+  a dedup-versus-collector race could leave an event pointing to a missing blob. Recommended: a per-ref advisory lock
+  (shared in append, exclusive try-lock in the collector) plus a 1 h minimum age, and a `nacre_gc` role. A-0022 is
+  recorded as open.
