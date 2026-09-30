@@ -40,6 +40,25 @@
    - **Negatives:** permissively licensed sources only (MIT, BSD, Apache-2.0, PSF), with
      attribution. Every negative file is scanned with the rules first, and any real secret found
      is excluded.
+4. **2026-09-30 — measurement rules (owner-approved).**
+   - **No official format doc** (Groq, Mistral, OpenAI project/service-account keys, Azure Entra
+     secrets, Atlassian/Bitbucket, Databricks, Twilio auth tokens, Discord bot tokens, Linear,
+     Datadog application keys, Okta): reported as **"unmeasured by provider; covered only by generic
+     detection"**. The generic layer's catch rate (entropy check + generic rules) is measured
+     separately on realistic examples of these providers' tokens.
+   - **Prefix documented, length not:** facts come from real tokens the owner holds, via a local
+     measuring script (`scripts/measure_token_format.py`). The script prints only prefix confirmation,
+     length and charset, and never the token. Real tokens never enter the repo, chat or agent context.
+     - Each fact is an assumption (A-ID) with sample count and date; **one sample = provisional**.
+     - **Before falling back** to lengths from official examples, check the provider's **official
+       SDKs** for format-validation code (provider-owned source).
+   - **Public-by-design values are neutral:** excluded from both catch and false-positive rates and
+     reported separately. They are **not stripped**, and are tagged "public credential" in
+     metadata. Look-alikes must be told apart:
+     - Supabase `anon` vs `service_role`: same JWT shape, told apart by the `role` claim; only
+       `service_role` is secret.
+     - Stripe `pk_` (public) vs `sk_` / `rk_` (secret).
+     - Modern Sentry DSNs (public key only) vs legacy DSNs carrying a secret part (secret).
 
 ## Context
 D-0002 requires secrets to be stripped before any write. A-0010 sets the bar: at least 99% caught

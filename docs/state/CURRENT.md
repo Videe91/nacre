@@ -41,6 +41,14 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   comparison to the owner as part of A-0017.
 
 ## Open questions
+- **Where the "public credential" tag lives (proposal; needs owner approval, D2).** D-0007 amendment 4 tags
+  public values in metadata, but D-0008 fixes the body map's v1 keys. Proposal: a D-0008 amendment
+  adding one optional body key, `public_credentials`: an array of `{kind, span}`, encrypted like the
+  rest of the body, so which public values an event holds is itself not plaintext. Until approved,
+  strip_secrets reports public credentials in its return value only.
+- **Shape source for "realistic examples" of no-doc providers (proposal).** Use the same owner-run
+  measuring script (facts only, recorded as assumptions); providers never measured stay out of the
+  generic-layer measurement and are listed as such.
 - Resolved 2026-09-30: #6 corpus coverage, generic category, per-provider ≥ 99%, coverage metric, negatives licensing + pre-scan (D-0007 amendment 3, A-0010 reworded).
 - Resolved 2026-09-30: D-0009 accepted (re-run Go comparison on every gitleaks version change);
   D-0007 amendments (engine; corpus via provider-format generators, independent of the rules; negatives
@@ -175,3 +183,4 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   containing a backtick or a pipe, in the format docs only); a test proves a real-shaped PEM in the same
   file is still caught. Finding for #6: the private-key rule redacts docs that merely quote PEM labels,
   so it is an FP source to measure.
+- 2026-09-30: D-0007 amendment 4 (no-doc providers unmeasured + generic-layer measurement; owner-measured facts via local script, SDK check before fallback; public credentials neutral, not stripped, tagged; look-alike rules).
