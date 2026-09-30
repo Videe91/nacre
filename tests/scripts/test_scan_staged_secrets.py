@@ -81,3 +81,15 @@ def test_staged_mode_scans_the_index_not_the_working_tree(tmp_path):
     assert _run_hook_mode(tmp_path) == 0
     _git(tmp_path, "add", "app.py")
     assert _run_hook_mode(tmp_path) == 1
+
+
+def test_format_doc_allowlist_is_narrow():
+    # Quoted PEM labels in the format doc pass, but a real-shaped PEM body there is still caught.
+    import base64, secrets
+    doc = "docs/assumptions/evidence/A-0010-provider-formats-full-unverified.md"
+    label = "-----BEGIN " + "PRIVATE KEY-----"
+    prose = f"| PKCS#8 | `{label}` | " + "x" * 80 + " | `-----END " + "PRIVATE KEY-----` |\n"
+    assert _ids(doc, prose) == set()
+    body = base64.b64encode(secrets.token_bytes(600)).decode()
+    pem = label + "\n" + "\n".join(body[i:i + 64] for i in range(0, len(body), 64)) + "\n-----END " + "PRIVATE KEY-----\n"
+    assert "private-key" in _ids(doc, pem)

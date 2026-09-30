@@ -30,6 +30,9 @@ RULES_PATH = Path(__file__).resolve().parent.parent / "src/nacre/ledger/data/git
 NACRE_ALLOWLIST = [
     (r"^src/nacre/ledger/data/gitleaks-v[0-9.]+\.toml$", None, "the vendored rule set itself"),
     (r"^tests/conftest\.py$", r'^"nacre_test_only"$', "password of throwaway roles in the ephemeral Docker test DB"),
+    (r"^docs/assumptions/evidence/A-0010-provider-formats[a-z-]*\.md$", r"[`|]",
+     "PEM armor labels quoted in format docs; the private-key rule spans prose between them. "
+     "A real PEM body never contains a backtick or a table pipe"),
 ]
 _NACRE_ALLOW = [(re2.compile(p), re2.compile(s) if s else None) for p, s, _ in NACRE_ALLOWLIST]
 

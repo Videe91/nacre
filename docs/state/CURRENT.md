@@ -168,3 +168,10 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   Mutations: decrypt readability check removed → 1 fail (an unreadable stream would have been reported
   as Shredded); flags check removed → 2 fail; use count not incremented → 2 fail.
   Results: check_structure 0/0; pytest (keys) 71 passed.
+- 2026-09-30: Provider-format research (agent; provider-owned sources only, no scanner rules) saved:
+  evidence/A-0010-provider-formats.md (summary) + ...-full-unverified.md (81 rows, sanitized, unverified
+  until each generator is written). The pre-commit hook flagged the appendix: gitleaks' private-key rule
+  spans prose between quoted PEM labels. No key material was present. Added a narrow allowlist (matches
+  containing a backtick or a pipe, in the format docs only); a test proves a real-shaped PEM in the same
+  file is still caught. Finding for #6: the private-key rule redacts docs that merely quote PEM labels,
+  so it is an FP source to measure.
