@@ -16,7 +16,7 @@
 Build the Phase 1 files in `docs/modules/INDEX.md` order, one functionality + test per step,
 committing and pushing after each.
 - Done: #1 `core/event.py`, #2 `core/db.py`, #2a `core/blob_store.py`, #2b `core/root_key_provider.py`,
-  #3 `schema/apply_migrations.py` + SQL 0001–0003.
+  #3 `schema/apply_migrations.py` + SQL 0001–0003, #2c `core/encode_cbor.py`.
 - Next: #2c/#2d CBOR encoder/decoder (D-0008), then #4 `encode_envelope`, #5 `seal_event`.
 - To run DB tests: `docker compose up -d --wait`, then `pytest`.
 
@@ -93,3 +93,8 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   append-only trigger, and granting the app UPDATE each made the targeted test fail at its assertion.
   Results: `check_structure.py` → 0 failure(s), 0 warning(s); `pytest` → 82 passed (4.4 s).
 - 2026-09-30: D-0005 amendment 2 (nacre_checkpointer, C-1..C-6), D-0004 amendment 6 (finality at root rotation) + open issue on data-key finality; A-0008 re-specified.
+- 2026-09-30: INDEX #2c `core/encode_cbor.py`. Installed test-only cbor2 6.1.4, hypothesis 6.168.3
+  (pyproject `[project.optional-dependencies] test`). Mutation checks: removing key sorting → 4 failures;
+  shifting the 2-byte length boundary → caught only by hypothesis at first, so explicit shortest-form
+  boundary vectors were added (now 2 deterministic failures). Our bytes match cbor2 canonical on 500
+  hypothesis cases. D1: MAX_DEPTH = 64. Results: check_structure 0/0; pytest (encoder file) 76 passed.

@@ -7,6 +7,14 @@ dependencies = [
     "cryptography>=45",
 ]
 
+[project.optional-dependencies]
+# Test-only (D-0008): cbor2 is a cross-check oracle, never imported by src/.
+test = [
+    "pytest>=9",
+    "cbor2==6.1.4",
+    "hypothesis>=6",
+]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
