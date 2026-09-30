@@ -16,7 +16,7 @@ def test_applies_all_shipped_migrations_in_order_then_nothing(fresh_db):
         first = apply_migrations(conn)
         second = apply_migrations(conn)
     assert first == ["0001_ledger.sql", "0002_scopes_rls.sql", "0003_keys.sql", "0004_checkpoints.sql",
-                     "0005_envelope_v2_trust_basis.sql"]
+                     "0005_envelope_v2_trust_basis.sql", "0006_scope_org_integrity.sql"]
     assert second == []
     assert _applied(fresh_db) == first
 

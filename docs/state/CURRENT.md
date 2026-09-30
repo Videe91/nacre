@@ -17,7 +17,7 @@ Build the Phase 1 files in `docs/modules/INDEX.md` order, one functionality + te
 committing and pushing after each.
 - Done: #1 `core/event.py`, #2 `core/db.py`, #2a `core/blob_store.py`, #2b `core/root_key_provider.py`,
   #3 `schema/apply_migrations.py` + SQL 0001–0003, #2c `core/encode_cbor.py`, #2d `core/decode_cbor.py`, #4 `ledger/encode_envelope.py`, #5 `ledger/seal_event.py`, #3d `sql/0004_checkpoints.sql`.
-- **#6 CLOSED 2026-09-30** (H3 official). **#14 built; A-0007 measured.** Next: #7, #8, then #15 onward.
+- **#6 CLOSED 2026-09-30** (H3 official). **#14 built; A-0007 measured; #7, #7a, #8 built.** Next: #15 onward (attachments, read_stream, replay_cycle, checkpoints, verify_chain, shredding/rotation, delete_scope).
 - To run DB tests: `docker compose up -d --wait`, then `pytest`.
 - **Owner tool:** `scripts/measure_token_format.py` measures real tokens' prefix/length/charset without
   printing them (D-0007 amendment 4). Run locally; paste only its suggested ASSUMPTIONS row back.
@@ -382,3 +382,17 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
   p99 ≈ 80 ms (threads and processes agree, so the stream lock, not the GIL, is the limit). D1 change first:
   work that needs no sequence number moved before the stream lock (16-writer p99 111.5 → ≈ 80 ms; the
   first run is kept in the evidence).
+- 2026-09-30: INDEX #7 register_scope, #7a bootstrap_org (new file; D-0005's "special bootstrap step"),
+  #8 set_access, migration 0006 (composite same-org FKs).
+  - Each writes its config event through append_event and its projection row in the same transaction,
+    with source_event_id / source_seq pointing back to the event.
+  - Retries are exact (caller-chosen stream id) and write no second row.
+  - Only org-stream appenders can register or grant.
+
+  D1 notes:
+  - bootstrap_org is the one deliberate bypass of open_scoped_session (admin connection, SET LOCAL ROLE
+    nacre_app, settings admitting only the new org).
+  - Revoke = all-false set_access.
+
+  Mutations: retry writes a row anyway → 1 fail; append-implies-read check removed → 1 fail (the DB CHECK
+  raises a different error). Results: pytest (scopes) 55 passed.

@@ -57,3 +57,23 @@ def grant(world):
         with psycopg.connect(world["dsn"]["admin"]) as admin:
             add_grant(admin, principal, stream, org, read, append)
     return _grant
+
+
+@pytest.fixture
+def org(migrated_db, provider):
+    """A bootstrapped org: returns (org_id, owner_principal, open(principal) -> scoped session ctx)."""
+    from contextlib import contextmanager
+
+    from nacre.core.db import DbRole, connect
+    from nacre.scopes.bootstrap_org import bootstrap_org
+    from nacre.scopes.open_scoped_session import open_scoped_session
+
+    owner = uuid.uuid4()
+    with connect(DbRole.MIGRATOR, dsn=migrated_db["admin"]) as admin:
+        org_id = bootstrap_org(admin, provider, owner_principal_id=owner, idempotency_key=str(uuid.uuid4()))
+
+    @contextmanager
+    def open_(principal):
+        with connect(DbRole.APP, dsn=migrated_db["app"]) as conn, open_scoped_session(conn, principal) as s:
+            yield s
+    return org_id, owner, open_

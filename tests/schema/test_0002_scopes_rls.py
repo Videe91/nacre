@@ -131,3 +131,22 @@ def test_append_implies_read_in_grants(migrated_db):
             conn.execute("""INSERT INTO scopes.scope_grants
                             (principal_id, stream_id, org_id, can_read, can_append, source_event_id, source_seq)
                             VALUES (%s, %s, %s, false, true, %s, 1)""", (uuid.uuid4(), org, org, uuid.uuid4()))
+
+
+
+# ---- 0006: org integrity ----------------------------------------------------------------------------------
+def test_grant_must_name_a_stream_of_the_same_org(migrated_db):
+    org_a, org_b, proj_b = uuid.uuid4(), uuid.uuid4(), uuid.uuid4()
+    with psycopg.connect(migrated_db["admin"]) as conn:
+        for s, kind, org in ((org_a, "org", org_a), (org_b, "org", org_b), (proj_b, "project", org_b)):
+            conn.execute("INSERT INTO scopes.scopes (stream_id, kind, org_id, source_event_id) VALUES (%s, %s, %s, %s)",
+                         (s, kind, org, uuid.uuid4()))
+        conn.commit()
+        with pytest.raises(psycopg.errors.ForeignKeyViolation):
+            conn.execute("""INSERT INTO scopes.scope_grants (principal_id, stream_id, org_id, can_read, can_append,
+                            source_event_id, source_seq) VALUES (%s, %s, %s, true, false, %s, 1)""",
+                         (uuid.uuid4(), proj_b, org_a, uuid.uuid4()))
+        conn.rollback()
+        with pytest.raises(psycopg.errors.ForeignKeyViolation):
+            conn.execute("INSERT INTO scopes.scopes (stream_id, kind, org_id, parent_stream_id, source_event_id) "
+                         "VALUES (%s, 'team', %s, %s, %s)", (uuid.uuid4(), org_a, proj_b, uuid.uuid4()))
