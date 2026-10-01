@@ -88,8 +88,8 @@ Notes:
 | P17 | capture | Record a correction (`correction_of`) | `src/nacre/capture/record_correction.py` | `tests/capture/test_record_correction.py` | D-0018 | — | done |
 | P18 | capture | Validate typed refs: known rel, backward-only, same stream, no self-reference | `src/nacre/capture/validate_refs.py` | `tests/capture/test_validate_refs.py` | D-0018 | — | done |
 | P19 | capture | Decide section authority from the envelope (the D3 rule) | `src/nacre/capture/section_authority.py` | `tests/capture/test_section_authority.py` | D-0018 | A-0026 | done |
-| P20 | gate | Score one event: surprise, stakes, statement | `src/nacre/gate/score_event.py` | `tests/gate/test_score_event.py` | D-0019 | A-0028 | planned |
-| P21 | gate | Flag events above the mode threshold (idempotent `flag` memory events) | `src/nacre/gate/flag_events.py` | `tests/gate/test_flag_events.py` (+ 100% flag recall on 003–016) | D-0019 | A-0028 | planned |
+| P20 | gate | Score one event: surprise, stakes, statement | `src/nacre/gate/score_event.py` | `tests/gate/test_score_event.py` | D-0019 | A-0028 | done (A-0028 recall check pending P3) |
+| P21 | gate | Flag events above the mode threshold (idempotent `flag` memory events) | `src/nacre/gate/flag_events.py` | `tests/gate/test_flag_events.py` (+ 100% flag recall on 003–016) | D-0019 | A-0028 | done (A-0028 recall check pending P3) |
 | P22 | sleep | Build the evidence bundle for one flagged episode (decision as history; sections with authority) | `src/nacre/sleep/build_evidence_bundle.py` | `tests/sleep/test_build_evidence_bundle.py` | D-0020 | — | planned |
 | P23 | sleep | Proposer seat: structured-proposition proposal (Nacre's own prompt, frozen by hash in the file) | `src/nacre/sleep/propose_propositions.py` | `tests/sleep/test_propose_propositions.py` (recorded) | D-0020, D-0021 | A-0025 | planned |
 | P24 | sleep | Repair seat: structure repair (Nacre's own prompt, frozen by hash in the file) | `src/nacre/sleep/repair_structure.py` | `tests/sleep/test_repair_structure.py` (recorded) | D-0020, D-0021 | A-0025 | planned |

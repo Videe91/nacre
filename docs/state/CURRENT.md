@@ -777,3 +777,14 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   - **Authority (`section_authority`):** the D-0018 rule from the envelope only. It never reads text.
   - **Stakes tags:** a closed set (D-0019).
   - **Tests:** 45. **Mutations:** 10/10 killed on the authority rule and the reference validator.
+- 2026-10-01 — **P20–P21 done: write gate** (D-0019 with R1).
+  - **`score_event`:** surprise, stakes and statement in per-mille integers. R1: an authoritative correction or
+    failing evaluation always scores 1000. Predicted failure that failed scores 0; predicted failure that succeeded
+    scores 1000. Stakes tags on the outcome or its decision/action count. A trusted person statement or correction
+    counts.
+  - **`flag_events`:** mode thresholds `gate-thresholds-v1` (normal 500, incident 0 = everything). One `flag` memory
+    event per target and version, with caused_by = target. Serialised by the stream lock.
+  - **Tests:** 18, including 4 concurrent flaggers producing exactly 1 flag. **Mutations:** 11/11 killed after 2
+    survivors got tests (statement needs trusted + person).
+  - **Not built (tracked):** the D-0019 config keyword → stakes rules (tags only for now). The A-0028 100%-recall
+    check on 003–016 runs once P3 exists.
