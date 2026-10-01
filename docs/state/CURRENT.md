@@ -842,3 +842,21 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   - **Tests:** 47, including one per amendment-1 safeguard and every Q-n.
   - **Mutations:** 17/17 killed after 2 tests were added (deviation 3 against a contested head; contested replacement
     refused). The dead `upgrade` condition was removed (an equivalent mutant: an upgrade always brings a new decision).
+- 2026-10-01 — **P22–P26 done: sleep pass** (D-0020 with R1, R4–R6; rebuild, not port).
+  - **`build_evidence_bundle`:** decision labelled as history; sections with envelope-computed authority.
+  - **`admit_propositions`:** deterministic admission (no model call):
+    - exact, unique quote in an AUTHORITATIVE section, else a hard reject with a reason (never a fallback);
+    - duplicate spans rejected;
+    - structure check (nucleus and typed qualifiers inside the quote) → support-first fallback when broken, unless
+      already covered;
+    - closed world.
+  - **Seats:** `propose_propositions` and `repair_structure` use Nacre's own prompts, pinned by sha256 in tests
+    (proposer and repair), strict JSON schema, temperature 0.0, model `gpt-4o-mini-2024-07-18`. A parse or provider
+    failure yields no proposals, and the raw response stays recorded.
+  - **`run_sleep_pass`:** start marker plus flags; per episode, each model call committed alone, then one atomic
+    transaction (admission → proposals → promotion → episode → done marker); completion marker.
+  - **Resume:** an existing recording of the same request is replayed, never paid twice.
+  - **Not built (tracked):** belief-version corrections → contradiction proposals.
+  - **Tests:** 27, including guard (iii) end to end (an untrusted outcome teaches nothing), crash mid-episode then
+    resume with 0 live calls, and repair-vs-proposer selection.
+  - **Mutations:** 13/13 killed (one test had a misquote that did not change the quote for some families; fixed).
