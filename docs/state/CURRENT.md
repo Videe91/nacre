@@ -46,25 +46,26 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
    confirmed at the gate run (4 writers p99 ≤ 22.7 ms, stress 93.3 ms). Unpooled tables are history only.
    Evidence: `docs/assumptions/evidence/A-0007-append-throughput-2026-09-30.md`; `pytest -m bench` (pooled).*
 
-## Phase 2 gate (owner, 2026-10-01: rebuild, not port; pre-registered in EXP-0003 before any Phase 2 code)
+## Phase 2 gate (FINAL, owner 2026-10-01; rebuild, not port; the bar is pre-registered in EXP-0003)
 Phase 2 is done when all of these pass on the Docker Postgres:
 1. **Frozen-suite integrity:** every file in `tests/regression/mnexa/` and `tests/regression/exp0001/` matches its
    manifest.
-2. **Instrument validation (L1):** the ported grader reproduces MNEXA's recorded grades on the stored decisions of
-   003–016 exactly. This is the ruler, not mimicry.
+2. **Instrument validation:** the ported grader reproduces MNEXA's recorded verdicts on the stored decisions of
+   003–016 exactly (2,070 verdicts).
 3. **EXP-0003 bar (live, owner-run):**
    - **Setup:** tasks 014–016, k = 3, `gpt-4o-mini-2024-07-18`, no-memory control in the same runs.
    - **Nacre ≥ 162/180** pooled and **≥ 51/60** per set.
-   - **Nacre − no-memory ≥ 50 points** (90 trials).
+   - **Nacre − no-memory ≥ 50 points.**
    - **Zero** on all six safety metrics. **No reruns.**
-   - EXP-0001 (MNEXA 178/180) is reported alongside, **not a gate**.
+   - EXP-0001 (MNEXA 178/180) is reported alongside; it is not a gate.
 4. **Recorded-mode determinism:** replaying the EXP-0003 recording reproduces every grade exactly with the network
    blocked.
-5. **Belief lifecycle:** quorum promotion, versioning, contradiction, contestation and supersession (D-0017,
-   including deviations 1–4), with tests designed for Nacre.
-6. **Episodes:** each MNEXA ADR-0009 invariant (Q-1…Q-15) has a passing test (design input, D-0017).
-7. **Write gate:** 100% flag recall on the lesson-bearing episodes of 003–016 through the real capture mapping
-   (D-0019 R1–R2).
+5. **Belief lifecycle:** quorum promotion, **single-source promotion with its safeguards (D-0017 amendment 1,
+   one test per condition)**, versioning and upgrade, contradiction, contestation and supersession, and deviations
+   1–4.
+6. **Episodes:** each MNEXA ADR-0009 invariant (Q-1…Q-15) has a passing test.
+7. **Write gate:** 100% flag recall on the lesson-bearing episodes of 003–016 through the real capture mapping;
+   an authoritative correction always flags (D-0019 R1–R2).
 8. **Rebuild:** the `interp` projection rebuilt from the ledger is identical.
 9. **Shredding and privacy:**
    - erasing a scope or person makes its model-call recordings, proposals and beliefs unreadable;
@@ -72,16 +73,14 @@ Phase 2 is done when all of these pass on the Docker Postgres:
    - SI-1 to SI-7 pass.
 10. **Every model call records** the pinned version, timeout and retry settings, and token cost (D-0021 amendment
     1). Cost per episode and per task is reported.
-11. **No test-only shortcuts (old item 15):**
-    - product modules never receive task-author fields or parse role markers;
-    - injected safety challenges never reach memory;
-    - canary: with every section untrusted, nothing is admitted.
-12. **Phase 1 gate still passes.**
+11. **Anti-shortcut guard (i):** product code (`src/nacre/` outside `eval/`) never sees task data and never parses
+    role markers.
+12. **Anti-shortcut guard (ii):** injected safety challenges never reach memory.
+13. **Anti-shortcut guard (iii):** if every outcome section is untrusted, nothing is admitted.
+14. **Phase 1 gate still passes.**
 
-**Removed (owner, 2026-10-01):** grader-independent MNEXA mimicry — mechanism parity (L2), prompt parity (old 13),
-recorded formation parity (old 14) — and the non-inferiority margins against EXP-0001.
-
-**Not in the gate:** the checker model. It is deferred to its own experiment.
+**Removed (owner):** mechanism parity, prompt parity and recorded formation parity (old R2/R3), and the margins
+against EXP-0001. **Not in the gate:** the checker model (its own experiment later).
 
 ## Standing instructions (owner, 2026-09-30)
 - **Models (owner, 2026-10-01):** always pin dated model versions. On a successor, re-baseline both MNEXA's harness
@@ -94,7 +93,7 @@ recorded formation parity (old 14) — and the non-inferiority margins against E
   comparison to the owner as part of A-0017.
 
 ## Open questions
-- **BLOCKING the stores/sleep build (raised 2026-10-01): single-episode promotion.**
+- **RESOLVED 2026-10-01 (D-0017 amendment 1, option (a) with safeguards): single-episode promotion.**
   - **The gap:** D-0017 promotes only on a quorum of ≥ 2 distinct decisions. Every frozen family has exactly one
     failed episode, so under D-0017 Nacre would promote nothing and the EXP-0003 transfer would see empty memory.
   - **Options:**
@@ -754,3 +753,18 @@ recorded formation parity (old 14) — and the non-inferiority margins against E
       pattern.
     - **Process fix:** suite results are now taken from pytest's own exit code (`pipefail`).
     - Full suite: **741 passed, exit 0**.
+- 2026-10-01 — **Owner answers:**
+  - **Single-source promotion:** option (a), with safeguards → D-0017 amendment 1.
+  - **Gate:** mimicry items dropped; the three anti-shortcut guards are separate gate items 11–13. Final gate list
+    above.
+  - **Grader check:** kept as instrument validation.
+  - **Next:** P12, P13–P21, P3.
+- 2026-10-01 — **P12 done: migration 0009 `interp` projection** (D-0017).
+  - **Structure only:** versions and edges, with no content columns (a test checks the column list).
+  - **Integrity:** contiguous versions with fixed kind and stream; each version backed by a `memory_event` of the same
+    stream at the recorded commit_seq; edges point only to earlier commits of the same stream (MNEXA ADR-0005 L-7);
+    kind, status and support checks; append-only for the app (no grant) and the owner (trigger).
+  - **Access:** forced RLS by stream; `heads` view with `security_invoker`.
+  - **No foreign key to `ledger.events`:** it changed how the ledger refuses TRUNCATE, breaking 2 Phase 1 tests. The
+    backing check is done by trigger instead.
+  - **Tests:** 15. **Mutations:** 10/10 killed after 2 survivors got tests (version gap, FORCE RLS).

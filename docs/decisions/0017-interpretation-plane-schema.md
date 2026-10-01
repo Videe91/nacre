@@ -1,10 +1,42 @@
 # D-0017: Interpretation-plane schema (proposals, beliefs, statuses, ancestry, episodes)
 
-- **Status:** accepted (owner, 2026-10-01). **D3 part APPROVED by the owner 2026-10-01: no content plaintext in the projection (keyed content MAC).**
+- **Status:** accepted (owner, 2026-10-01), with amendment 1 (single-source promotion). **D3 part APPROVED by the owner 2026-10-01: no content plaintext in the projection (keyed content MAC).**
 - **Tier:** D2 (persistence format, invariants). The privacy part (what the projection may hold in plaintext) is
   **D3**.
 - **Date:** 2026-10-01
 - **Relies on assumptions:** A-0003, A-0014, A-0027
+
+## Amendment 1 (owner, 2026-10-01): single-source promotion, with safeguards
+**Why:** every frozen task holds one failed episode, so a quorum of two never forms and nothing would be learned.
+
+**Rule:** a lesson may promote on **one** episode only when **all** of these hold:
+1. Its support comes from a **trusted correction**: an outcome `correction` section that is authoritative under
+   D-0018. The event is `trust = trusted` by source **and** authorship (D-0012), and its source is ci / review / git,
+   or its actor is a person.
+2. It is **grounded in the correction's exact span**: the proposal's support is an exact, unique span inside that
+   section.
+
+**How such a belief is marked:**
+- Origin `stated` and `support = single_source`, with **lower starting values** than a quorum belief:
+  - confidence 0.5 (quorum: 0.8);
+  - strength 0.5 (quorum: 1.0).
+
+  These are placeholders, tuned in Phase 4. Recorded on the version.
+- **Upgrade:** a second agreeing episode (another decision whose trusted correction or outcome supports the same
+  normalised text) creates a new version with `support = quorum` and the quorum values.
+- It is **contestable exactly like any belief**: contradicting outcomes contest it by the normal quorum (D-0017
+  "Contest") and can supersede it. It gets no protection.
+
+**Unchanged:** lessons inferred from outcomes (anything not grounded in a trusted correction span) still need **two
+agreeing decisions**.
+
+**Tests:** one per condition:
+- untrusted correction: no promotion;
+- trusted but ungrounded: no promotion;
+- trusted and grounded: single-source values;
+- second episode: upgrade;
+- contestable and demoted;
+- an outcome-inferred lesson stays at quorum 2.
 
 ## Context
 - **SPEC:** "Two planes (MNEXA ADR-0002)". Interpretations (beliefs, episodes, …) are versioned and always linked
