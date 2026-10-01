@@ -19,16 +19,30 @@ def k():
 
 
 def episode(s, provider, stream, *, success, sections, who=REVIEW, expected_success="none", decision_stakes=(),
-            outcome_stakes=(), mode=None):
+            outcome_stakes=(), mode=None, check=None, failing=(), action="none", outcome_for_action=False):
+    """action: "none" | "before" (action, then prediction) | "after" (prediction, then action)."""
+    from nacre.capture.record_action import record_action
     d = record_decision(s, provider, stream_id=stream, idempotency_key=k(), decision_text="d", stakes=decision_stakes,
                         mode=mode, **AG).envelope
+    act = None
+
+    def do_action():
+        return record_action(s, provider, stream_id=stream, idempotency_key=k(), decision_id=d.event_id,
+                             action_kind="run", description="ran it", actor_kind=ActorKind.TOOL, actor_id=AGENT,
+                             source=Source.TOOL, authorship=Authorship.EXTERNAL).envelope
+    if action == "before":
+        act = do_action()
     pred = None
     if expected_success != "none":
         pred = record_prediction(s, provider, stream_id=stream, idempotency_key=k(), decision_id=d.event_id,
-                                 expected_outcome="x", expected_success=expected_success, **AG).envelope.event_id
-    return record_outcome(s, provider, stream_id=stream, idempotency_key=k(), outcome_for=d.event_id, success=success,
+                                 expected_outcome="x", expected_success=expected_success, expected_failing_check=check,
+                                 **AG).envelope.event_id
+    if action == "after":
+        act = do_action()
+    target = act.event_id if outcome_for_action and act else d.event_id
+    return record_outcome(s, provider, stream_id=stream, idempotency_key=k(), outcome_for=target, success=success,
                           sections=tuple(Section(r, t) for r, t in sections), evaluates_prediction=pred,
-                          stakes=outcome_stakes, mode=mode, **who).envelope
+                          stakes=outcome_stakes, mode=mode, failing_checks=tuple(failing), **who).envelope
 
 
 def person_correction(s, provider, stream, target):

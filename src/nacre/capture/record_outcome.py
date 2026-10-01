@@ -11,6 +11,8 @@ Notes: Body = deterministic CBOR structured content (D-0008); every string is se
   Sections carry a role, never an authority: authority is computed later from the envelope by
   capture/section_authority.py (D-0018, D3). A missing outcome is simply never recorded; absence is not failure
   (MNEXA ADR-0016), so there is no "unknown" placeholder outcome.
+  D-0018 amendment 1: failing_checks names the tests/checks that actually failed (distinct, non-empty, <= 50), so
+  D-0019 R4 can tell a predicted failure from a different one.
   D1: payload_type = structured. Integration results (CI, review, git) should be appended with
   Authorship.INTEGRATION_RESULT, which D-0012 trusts only for those sources with a structured payload.
 """
@@ -35,8 +37,8 @@ class Section:
 def record_outcome(session: ScopedSession, key_provider: RootKeyProvider, *, stream_id: UUID, actor_kind: ActorKind,
                    actor_id: UUID, source: Source, authorship: Authorship, idempotency_key: str, outcome_for: UUID,
                    success: bool | None, sections: tuple[Section, ...], evaluates_prediction: UUID | None = None,
-                   stakes: tuple[str, ...] = (), cycle_id: UUID | None = None, task_id: UUID | None = None,
-                   mode: Mode | None = None, actor_tool: str | None = None) -> AppendResult:
+                   stakes: tuple[str, ...] = (), failing_checks: tuple[str, ...] = (), cycle_id: UUID | None = None,
+                   task_id: UUID | None = None, mode: Mode | None = None, actor_tool: str | None = None) -> AppendResult:
     """Append one `outcome` event for the decision or action `outcome_for`."""
     if success not in (True, False, None):
         raise CaptureError("success must be true, false or None")
@@ -47,9 +49,13 @@ def record_outcome(session: ScopedSession, key_provider: RootKeyProvider, *, str
             raise CaptureError(f"sections need a role from {sorted(SECTION_ROLES)} and non-empty text")
     if set(stakes) - STAKES or len(set(stakes)) != len(stakes):
         raise CaptureError(f"stakes must be distinct tags from {sorted(STAKES)}")
+    if len(failing_checks) > 50 or len(set(failing_checks)) != len(failing_checks) or any(
+            not isinstance(c, str) or not c.strip() or len(c) > 200 for c in failing_checks):
+        raise CaptureError("failing_checks are distinct non-empty names (<= 50, each <= 200 chars)")
     refs = [Ref("outcome_for", outcome_for)] + ([Ref("evaluates_prediction", evaluates_prediction)] if evaluates_prediction else [])
     body = {"success": success, "sections": [{"role": s.role, "text": s.text} for s in sections],
-            "stakes": sorted(stakes), "refs": validate_refs(session, stream_id, refs)}
+            "stakes": sorted(stakes), "failing_checks": list(failing_checks),
+            "refs": validate_refs(session, stream_id, refs)}
     return append_event(session, key_provider, AppendRequest(
         stream_id=stream_id, event_type=EventType.OUTCOME, payload_type=PayloadType.STRUCTURED, actor_kind=actor_kind,
         actor_id=actor_id, source=source, authorship=authorship, idempotency_key=idempotency_key, content=body,

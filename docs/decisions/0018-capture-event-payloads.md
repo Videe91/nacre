@@ -1,10 +1,21 @@
 # D-0018: Capture event payloads (decision, prediction, action, outcome, correction)
 
-- **Status:** accepted (owner, 2026-10-01). **D3 part APPROVED by the owner 2026-10-01: outcome authority by source and trust.**
+- **Status:** accepted (owner, 2026-10-01), with amendment 1 (named checks, for D-0019 R4). **D3 part APPROVED by the owner 2026-10-01: outcome authority by source and trust.**
 - **Tier:** D2 (persistence format, public interface). The authority rule for outcome sections is **D3**
   (injection boundary).
 - **Date:** 2026-10-01
 - **Relies on assumptions:** A-0012, A-0026
+
+## Amendment 1 (2026-10-01, follows from the owner's D-0019 R4)
+D-0019 R4 must tell a specific predicted failure from a vague one, and a predicted failure from a different one. That
+cannot be judged from free text, so two optional structured fields are added (absent means "not named"):
+- `prediction.expected_failing_check`: the specific test or check expected to fail (non-empty text, at most 200
+  characters). Only meaningful with `expected_success = false`.
+- `outcome.failing_checks`: the tests or checks that actually failed (a list of distinct, non-empty names, at most 50).
+  Allowed on any outcome, and normally present on failures reported by CI or review.
+
+Names are compared after trimming and casefolding. Neither field grants authority; they feed the D-0019 surprise rule
+only.
 
 ## Context
 - **SPEC:** "Each cycle records decision, prediction, action and outcome as separate evidence (ADR-0016). Absence of

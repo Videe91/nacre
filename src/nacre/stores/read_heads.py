@@ -9,6 +9,7 @@ Notes: D-0017 / MNEXA ledger 38: a contested or superseded head is withheld from
   active version is NOT shown instead. `fallback` records are recall-eligible and marked as such (status "fallback").
   as_of=N reads the head among versions committed at or before N, so history is reproducible (MNEXA ADR-0010).
   Content comes from the ledger (decrypted); a shredded head's content is None.
+  D-0017 amendment 2: only the stream's ACTIVE projection generation is read.
 """
 from dataclasses import dataclass
 from uuid import UUID
@@ -36,7 +37,8 @@ def read_heads(session: ScopedSession, key_provider: RootKeyProvider, stream_id:
     """Heads of `stream_id` at watermark `as_of` (default: now), in object_id order."""
     rows = session.conn.execute(
         "SELECT DISTINCT ON (object_id) object_id, version, kind, status, support, commit_seq, event_id "
-        "FROM interp.versions WHERE stream_id = %s AND (%s::bigint IS NULL OR commit_seq <= %s::bigint) "
+        "FROM interp.versions WHERE stream_id = %s AND generation = interp.active_generation(stream_id) "
+        "AND (%s::bigint IS NULL OR commit_seq <= %s::bigint) "
         "ORDER BY object_id, version DESC", (stream_id, as_of, as_of)).fetchall()
     bodies = {e.envelope.event_id: e.body["content"]["content"] for e in read_version_events(session, key_provider, stream_id)}
     out = []

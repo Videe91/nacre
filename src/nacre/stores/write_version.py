@@ -11,6 +11,7 @@ Notes: The ONLY writer of interp.versions / interp.edges. Everything the project
   the event, so the event and its rows commit together (D-0017). MACs use the version event's data key: shredding it
   makes the projection's MACs unverifiable and the content unreadable, while the structure stays (D-0017, D3).
   Spans are verified by the caller (the store that produced them); this file only records them.
+  D-0017 amendment 2: rows go into the stream's ACTIVE generation (interp.active_generation).
 """
 import uuid
 from dataclasses import dataclass, field
@@ -82,18 +83,19 @@ def write_version(session: ScopedSession, key_provider: RootKeyProvider, stream_
         authorship=Authorship.SCOPE_PRINCIPAL, idempotency_key=str(uuid.uuid4()), content=body,
         caused_by=caused_by, cycle_id=cycle_id)).envelope
     key = load_key(session.conn, key_provider, env.key_id)
+    gen = session.conn.execute("SELECT interp.active_generation(%s)", (stream_id,)).fetchone()[0]
     session.conn.execute(
         "INSERT INTO interp.versions (object_id, version, kind, status, support, stream_id, event_id, commit_seq, "
-        "content_mac) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+        "content_mac, generation) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
         (rec.object_id, rec.version, rec.kind, rec.status, rec.support, stream_id, env.event_id, env.commit_seq,
-         derive_mac(key, MacPurpose.INTERP_MAC, b"content|" + encode_cbor(body))))
+         derive_mac(key, MacPurpose.INTERP_MAC, b"content|" + encode_cbor(body)), gen))
     for i, e in enumerate(rec.edges):
         span_mac = derive_mac(key, MacPurpose.INTERP_MAC, b"span|" + e.span_text.encode()) if e.span else None
         session.conn.execute(
             "INSERT INTO interp.edges (object_id, version, ordinal, stream_id, role, target_event_id, target_object_id, "
-            "target_version, span_start, span_end, span_mac) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+            "target_version, span_start, span_end, span_mac, generation) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
             (rec.object_id, rec.version, i, stream_id, e.role, e.target_event_id, e.target_object_id, e.target_version,
-             e.span[0] if e.span else None, e.span[1] if e.span else None, span_mac))
+             e.span[0] if e.span else None, e.span[1] if e.span else None, span_mac, gen))
     return env
 
 

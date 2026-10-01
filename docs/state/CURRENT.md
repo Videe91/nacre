@@ -66,9 +66,11 @@ Phase 2 is done when all of these pass on the Docker Postgres:
 6. **Episodes:** each MNEXA ADR-0009 invariant (Q-1…Q-15) has a passing test.
 7. **Write gate:**
    - **Recall:** 100% flag recall on the lesson-bearing episodes of 003–016 through the real capture mapping; an
-     authoritative correction always flags (D-0019 R1–R2).
-   - **Selectivity (owner, R3):** flag rate ≤ 5% on the frozen routine set (`routine_episodes_v1`, 200 episodes).
-   - **Canary:** a flag-everything gate must fail this item.
+     authoritative correction always flags (D-0019 R1, R4).
+   - **Selectivity (owner, R4):** on the blind frozen set `routine_episodes_v2`: routine flag rate ≤ 5%, and ALL 75
+     adversarial episodes (vague, mismatched, late) flagged. **PASSING: 0/200 routine, 0/75 missed.** v1 is
+     historical.
+   - **Canary:** a flag-everything gate must fail this item (passing).
 8. **Rebuild:** the `interp` projection rebuilt from the ledger is identical.
 9. **Shredding and privacy:**
    - erasing a scope or person makes its model-call recordings, proposals and beliefs unreadable;
@@ -95,12 +97,15 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   semantics to gitleaks' rules, and no catastrophic backtracking on untrusted input. Bring the
   comparison to the owner as part of A-0017.
 
+## Future-phase requirements (owner)
+- **Phase 5: no learning from evaluation epochs.** When evaluation epochs exist, nothing captured inside one may be
+  flagged, consolidated, promoted or formed into an episode (MNEXA ADR-0004 K-4, ADR-0009 Q-9).
+
 ## Open questions
-- **D-0017 text vs its own tables (raised 2026-10-01):** D-0017 says rebuild "drops the scope's projection rows and
+- **RESOLVED 2026-10-01 (D-0017 amendment 2: rebuild into a new generation, switch atomically, keep the old):** D-0017 text vs its own tables: D-0017 says rebuild "drops the scope's projection rows and
   replays", but the same ADR makes them append-only. Implemented as recompute-and-compare (gate item 8 checks
   identity). Owner: confirm, or amend D-0017's wording.
-- **ADR-0009 Q-9, evaluation-epoch half:** Nacre has no evaluation epochs yet, so only "episodes form only inside a
-  sleep pass" is enforced. Revisit when the evaluation harness gets epochs.
+- **ACCEPTED for now (owner 2026-10-01): ADR-0009 Q-9 epoch half.** Recorded as a Phase 5 requirement (below).
 - **RESOLVED 2026-10-01 (D-0017 amendment 1, option (a) with safeguards): single-episode promotion.**
   - **The gap:** D-0017 promotes only on a quorum of ≥ 2 distinct decisions. Every frozen family has exactly one
     failed episode, so under D-0017 Nacre would promote nothing and the EXP-0003 transfer would see empty memory.
@@ -879,3 +884,29 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
     - gate item 7 selectivity R4 decision (item 7 currently FAILS: 32/200);
     - D-0017 rebuild wording;
     - ADR-0009 Q-9 epoch half.
+- 2026-10-01 — **Owner:** R4 approved with anti-gaming rules (D-0019 R4, plus D-0018 amendment 1 for named checks);
+  rebuild into generations (D-0017 amendment 2); the epoch half of Q-9 becomes a Phase 5 requirement.
+  **EXP-0003 waits** until R4 is applied and the full suite passes.
+- 2026-10-01 — **R4 applied and confirmed; D-0017 generations built; EXP-0003 unblocked.**
+  - **D-0018 amendment 1:** `prediction.expected_failing_check` and `outcome.failing_checks` (validated).
+  - **`gate/score_event`:** an authoritative correction always flags. A failure is unflagged only by a VALID
+    prediction (linked, same decision, expected failure, names the check, committed before the first action or the
+    outcome, failing_checks exactly that check). Vague, late, mismatched or extra failures flag. An outcome "for" an
+    action resolves to that action's decision.
+  - **Confirmation set v2:**
+    - built by a SEPARATE agent session blind to the gate code, then verified structurally by this session;
+    - **frozen in b6590c3 before measuring** (sha256 `b1900a51…`): 200 routine + 25 vague + 25 mismatch + 25 late.
+    - The blind session reported changing two phrases after its own checks; this session re-ran every check on the
+      final file (0 problems).
+    - **Measured: 0/200 routine flagged, 0/75 adversarial missed.** Recall recomputed under R4: 100%. **Item 7
+      PASSES.** Canary on v2 fails item 7, as required.
+  - **v1 under R4:** 50/200 flagged (all its expected failures; it names no checks, so they are vague by
+    construction). Historical only. Under R1 it was 32.
+  - **Gate tests:** 12 new R4 cases (valid, case/space-insensitive, outcome-for-action, vague, mismatch, extra
+    failure, unnamed outcome, late, correction overrides, other decision, raw prediction expecting success).
+    **Mutations:** 8/8 killed after one defence-in-depth test was added.
+  - **D-0017 amendment 2 (migration 0010):** generations per stream; readers and writers use the active generation.
+    `rebuild_projection` recomputes in memory, and on a mismatch writes g+1 plus a switch record in one transaction,
+    keeping g. Shredded rows are carried over. Aborts leave nothing. 6 new tests.
+    **Mutations:** 7/8 killed; the "next generation" switch rule is an equivalent mutant (documented).
+  - **Phase 5 requirement recorded:** no learning from evaluation epochs.

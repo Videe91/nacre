@@ -1,10 +1,25 @@
 # D-0017: Interpretation-plane schema (proposals, beliefs, statuses, ancestry, episodes)
 
-- **Status:** accepted (owner, 2026-10-01), with amendment 1 (single-source promotion). **D3 part APPROVED by the owner 2026-10-01: no content plaintext in the projection (keyed content MAC).**
+- **Status:** accepted (owner, 2026-10-01), with amendments 1 (single-source promotion) and 2 (rebuild into generations). **D3 part APPROVED by the owner 2026-10-01: no content plaintext in the projection (keyed content MAC).**
 - **Tier:** D2 (persistence format, invariants). The privacy part (what the projection may hold in plaintext) is
   **D3**.
 - **Date:** 2026-10-01
 - **Relies on assumptions:** A-0003, A-0014, A-0027
+
+## Amendment 2 (owner, 2026-10-01): rebuild into a new generation
+This replaces the "Rebuild" paragraph below ("drops the scope's projection rows and replays"), which contradicted
+the append-only tables.
+
+- **Generations:** the projection is organised in generations per stream. All projection rows carry a `generation`,
+  and readers use only the stream's **active** generation.
+- **Rebuild:**
+  1. recompute the stream's projection from the ledger into a **new** generation, in memory first;
+  2. compare it with the active generation;
+  3. if identical, write nothing and report "identical";
+  4. if not, write the new generation's rows **and** switch the active pointer **in one transaction**.
+- **History:** the old generation is retained, never deleted. Every switch is recorded (append-only), with the
+  differences that caused it.
+- **Writers:** new versions are always written into the active generation.
 
 ## Amendment 1 (owner, 2026-10-01): single-source promotion, with safeguards
 **Why:** every frozen task holds one failed episode, so a quorum of two never forms and nothing would be learned.

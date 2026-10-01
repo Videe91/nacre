@@ -82,6 +82,7 @@ Notes:
 | P10 | models | Replay provider: answer only from recorded `result` events with the same request hash, in recorded order; RecordingMiss otherwise | `src/nacre/models/recorded_provider.py` | `tests/models/test_recorded_provider.py` | D-0022 | A-0025 | done |
 | P11 | models | Load and verify model-call fixture files into a test ledger | `src/nacre/models/load_model_call_fixtures.py` | `tests/eval/test_run_phase2_gate.py` (gate-4 replay test) | D-0022 | — | done |
 | P12 | schema | DDL: `interp` projection (versions, edges, heads view), RLS by stream, append-only | `src/nacre/schema/sql/0009_interpretation_plane.sql` | `tests/schema/test_0009_interpretation_plane.py` | D-0017 | — | done |
+| P12b | schema | DDL: projection generations (generation column, active-generation function, append-only switch log; contiguity/edges per generation) | `src/nacre/schema/sql/0010_projection_generations.sql` | `tests/stores/test_rebuild_projection.py` (+ `tests/schema/test_0009_interpretation_plane.py`) | D-0017 | — | done |
 | P13 | capture | Record a decision | `src/nacre/capture/record_decision.py` | `tests/capture/test_record_decision.py` | D-0018 | — | done |
 | P14 | capture | Record a prediction | `src/nacre/capture/record_prediction.py` | `tests/capture/test_record_prediction.py` | D-0018 | — | done |
 | P15 | capture | Record a dispatched action (`execution_of`) | `src/nacre/capture/record_action.py` | `tests/capture/test_record_action.py` | D-0018 | — | done |

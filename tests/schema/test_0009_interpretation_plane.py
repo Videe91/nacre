@@ -36,7 +36,8 @@ def test_no_content_column_exists(rw):
             "SELECT column_name FROM information_schema.columns WHERE table_schema = 'interp'")}
     assert cols <= {"object_id", "version", "kind", "status", "support", "stream_id", "event_id", "commit_seq",
                     "content_mac", "ordinal", "role", "target_event_id", "target_object_id", "target_version",
-                    "span_start", "span_end", "span_mac"}
+                    "span_start", "span_end", "span_mac", "generation",
+                    "switched_at", "reason", "differences"}   # 0010: generation bookkeeping (reason is a fixed label)
 
 
 def test_a_version_backed_by_its_memory_event_is_accepted_and_the_head_view_works(rw, provider, streams):
@@ -147,7 +148,7 @@ def test_rls_is_forced_even_for_the_owner(streams):
     with psycopg.connect(streams["dsn"]["admin"]) as c:
         rows = dict(c.execute("SELECT relname, relforcerowsecurity FROM pg_class c JOIN pg_namespace n ON n.oid = c.relnamespace "
                               "WHERE n.nspname = 'interp' AND relkind = 'r'").fetchall())
-    assert rows == {"versions": True, "edges": True}
+    assert rows == {"versions": True, "edges": True, "generation_switches": True}
 
 
 @pytest.mark.parametrize("sql", ["ALTER TABLE interp.versions DISABLE TRIGGER versions_check",
