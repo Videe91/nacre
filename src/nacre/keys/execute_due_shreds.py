@@ -2,7 +2,7 @@
 Functionality: Execute every due destructive request: destroy the keys and record it, atomically, per request.
 Owns: what each kind destroys, the scope status change on deletion, and the execution and deletion-marker events.
 Public entry: execute_due_shreds()
-Decisions: D-0004, D-0014, D-0023
+Decisions: D-0004, D-0014, D-0023, D-0024
 Assumptions: A-0008
 Notes: A request is due when its grace period has passed, it is not cancelled, and it is not under an active legal
   hold (manage_shred_requests.list_shred_requests). One keyadmin transaction per request, so the destruction and
@@ -16,6 +16,8 @@ Notes: A request is due when its grace period has passed, it is not cancelled, a
   Destroyed key rows still survive in backups and WAL. Finality comes from master rotation (for data-key kinds)
   and then root rotation (D-0004 amendments 6-7; rotate_master_key, rotate_root_key). Events are written AS
   the original requester (D-0014).
+  D-0024 §3: in the same transaction, keys.shred_epochs is bumped for every stream that lost a key, so every warm
+  recall cache evicts the destroyed keys' entries on its next recall.
 """
 import uuid
 from datetime import UTC, datetime
@@ -73,6 +75,9 @@ def _execute(tx, provider, org: UUID, req: ShredRequest) -> None:
             markers.setdefault(stream, []).append(str(key_id))
         key_ids = [k for ks in markers.values() for k in ks]
         streams = sorted(markers)
+    for stream in streams:
+        db.execute("INSERT INTO keys.shred_epochs (stream_id, epoch) VALUES (%s, 1) "
+                   "ON CONFLICT (stream_id) DO UPDATE SET epoch = keys.shred_epochs.epoch + 1", (stream,))
     alive = {s for (s,) in db.execute("SELECT stream_id FROM keys.stream_master_keys WHERE stream_id = ANY(%s)",
                                       (list(markers),))}
     session = tx.as_app(req.requested_by, {org, *alive}, {org, *alive})

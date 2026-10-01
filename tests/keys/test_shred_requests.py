@@ -150,3 +150,28 @@ def test_the_chain_still_verifies_after_execution(world, provider, migrated_db, 
     with psycopg.connect(migrated_db["verifier"]) as c:
         report = verify_chain(c, tmp_path / "no-witness.jsonl", {})
     assert report.ok and report.events_checked > 0
+
+
+def _epoch(migrated_db, stream):
+    with psycopg.connect(migrated_db["admin"]) as c:
+        row = c.execute("SELECT epoch FROM keys.shred_epochs WHERE stream_id = %s", (stream,)).fetchone()
+    return row[0] if row else 0
+
+
+@pytest.mark.parametrize("kind", [ShredKind.ERASE_PERSON, ShredKind.FORGET_PERIOD, ShredKind.DELETE_SCOPE])
+def test_every_key_destruction_bumps_the_streams_shred_epoch_in_the_same_transaction(world, provider, migrated_db, kind):
+    # D-0024 §3: warm recall caches rely on this to evict destroyed keys by the next recall.
+    kw = {ShredKind.ERASE_PERSON: {"person_id": world["person"]},
+          ShredKind.FORGET_PERIOD: {"stream_id": world["proj"], "months": (date(NOW.year, NOW.month, 1),)},
+          ShredKind.DELETE_SCOPE: {"stream_id": world["proj"]}}[kind]
+    assert _epoch(migrated_db, world["proj"]) == 0
+    _request(world, provider, world["owner"], kind, **kw)
+    execute_due_shreds(world["ka"](), provider, now=NOW + timedelta(days=8))
+    assert _epoch(migrated_db, world["proj"]) == 1
+
+
+def test_a_destruction_that_finds_no_key_does_not_bump_the_epoch(world, provider, migrated_db):
+    _request(world, provider, world["owner"], ShredKind.FORGET_PERIOD, stream_id=world["proj"], months=(date(2020, 1, 1),))
+    execute_due_shreds(world["ka"](), provider, now=NOW + timedelta(days=8))
+    assert _epoch(migrated_db, world["proj"]) == 0
+

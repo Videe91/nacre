@@ -1105,3 +1105,14 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
     gated).
   - **Pillow 12.3.0 test-only** (D-0006 amendment 2); 500 I1 images committed as the truth.
   - **Next:** recall code, R6 onward.
+- 2026-10-01 — **R6 built:** migration `0012_recall_index.sql` and the `shred_epochs` bump in `execute_due_shreds`.
+  - **Contents:**
+    - `recall.index_generations`, with one embedder per generation;
+    - `index_switches`: forward by one only;
+    - `index_entries`: ciphertext plus ids only; the trigger requires a memory event of the same stream under the
+      same key, and the generation's embedder;
+    - all append-only, with stream RLS;
+    - `keys.shred_epochs`: per stream, keyadmin-only.
+  - **D1 refinements of D-0024:** keyed by stream (= scope, D-0005); the epoch is per stream, not per org, so it
+    stays inside RLS.
+  - **Renumbering:** the auth migration becomes `0013`.
