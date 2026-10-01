@@ -1,6 +1,7 @@
 """
 Functionality: Verify the frozen evaluation suite against its manifests, byte for byte.
-Owns: hashing every copied file (MNEXA task sets, graders, results; the EXP-0001 record) against its manifest, and,
+Owns: hashing every copied file (MNEXA task sets, graders, results; the EXP-0001 and EXP-0003 records) against its
+  manifest, and,
   when the external originals are present, every hash-only entry (MNEXA SQLite states, the 031 workspace, the
   EXP-0001 run folder). Reports every mismatch; never repairs.
 Public entry: verify_frozen_suite(), SuiteReport
@@ -82,6 +83,10 @@ def verify_frozen_suite(regression_root: Path, *, mnexa_root: Path | None = None
         rel = Path(*f["path"])
         if f["copied"]:
             _check(report, exp / rel, f["sha256"])
+    exp3 = Path(regression_root) / "exp0003"
+    if (exp3 / "MANIFEST.json").exists():                     # the EXP-0003 gate run (every file copied)
+        for f in json.loads((exp3 / "MANIFEST.json").read_text())["files"]:
+            _check(report, exp3 / Path(*f["path"]), f["sha256"])
     if runs_root is not None and (Path(runs_root) / e["run_dir"]).is_dir():
         report.external_roots_checked.append(str(Path(runs_root) / e["run_dir"]))
         for f in e["files"]:

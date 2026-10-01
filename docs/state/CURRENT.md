@@ -98,10 +98,29 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   comparison to the owner as part of A-0017.
 
 ## Future-phase requirements (owner)
+- **The 014–016 suite is SATURATED (owner, 2026-10-01).** Nacre scored 180/180 in EXP-0003. With one episode and
+  one isolated scope per family, memory is the verbatim authoritative correction, so the suite cannot measure further
+  gains. It stays as a regression guard. **Phase 5 needs harder, real-world tasks:** interference between many
+  memories in one scope, paraphrased or partial corrections, changing facts, and multi-week tracks (SPEC proof
+  tier 3).
 - **Phase 5: no learning from evaluation epochs.** When evaluation epochs exist, nothing captured inside one may be
   flagged, consolidated, promoted or formed into an episode (MNEXA ADR-0004 K-4, ADR-0009 Q-9).
 
 ## Open questions
+- **OPEN, Phase 2 gate item 9 (found 2026-10-01; D3 decision needed): erasing a PERSON does not erase derived
+  copies.**
+  - **What happens:** model-call records, lesson proposals and belief versions are encrypted under the STREAM's
+    (system-subject) key. After a person's data keys are destroyed, their original statement is unreadable, but a
+    model-call record of a prompt built from it still holds their words, readable (proved by a test, then removed;
+    see the log).
+  - **What is fine:** scope erasure (SI-7).
+  - **Options:**
+    - (a) derived records are encrypted under a DERIVED key registered against every contributing subject; erasing
+      any of those subjects destroys it;
+    - (b) cascade on erasure: append replacements and rebuild a projection generation. This fails for the ledger
+      copies, which are append-only;
+    - (c) keep person content out of model prompts and memory.
+  - **Recommendation: (a).**
 - **RESOLVED 2026-10-01 (D-0017 amendment 2: rebuild into a new generation, switch atomically, keep the old):** D-0017 text vs its own tables: D-0017 says rebuild "drops the scope's projection rows and
   replays", but the same ADR makes them append-only. Implemented as recompute-and-compare (gate item 8 checks
   identity). Owner: confirm, or amend D-0017's wording.
@@ -923,3 +942,16 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
     appear one at a time (not buffered bursts).
   - Mutations 3/3 killed (a first flush test did not discriminate; replaced). 5/5 repeat runs stable. No stray
     databases left by the killed test runs.
+- 2026-10-01 — **EXP-0003 PASSED; record frozen; gate item 4 verified; remaining gate items run.**
+  - **Run c07ad2 (code 73c73fe, clean):** Nacre 180/180, control 19/180, bar PASS, safety 0/0/0/0/0/0.
+    Frozen byte-for-byte in `tests/regression/exp0003/` (183 files, manifest; secret scan clean). The frozen-suite
+    checker covers it (gate item 1: 270 repo + 2,741 external files OK).
+  - **Gate item 4 PASS:** an offline recorded replay of the frozen copy reproduced all 180 trials exactly, with 0 live
+    calls and 0 network attempts.
+  - **Ceiling audit:** 0 problems in 180 recorded families. Memory = the verbatim authoritative correction; the
+    control is clean; no answer text outside authoritative correction spans; guards (i)–(iii) 6/6 on 73c73fe.
+  - **Suite saturated** (Future-phase requirements).
+  - **Gate item 9 OPEN:** person erasure does not erase derived copies (proved by a test, then removed: after
+    deleting the person's data key, the statement was unreadable but the model-call record still held the words).
+    D3 options under Open questions.
+  - **Cost:** ≈ $0.00027 per flagged episode; ≈ $0.00037 per task.

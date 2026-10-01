@@ -1,0 +1,39 @@
+{
+ "experiment": "EXP-0003",
+ "mode": "live",
+ "model": "gpt-4o-mini-2024-07-18",
+ "k": 3,
+ "sets": [
+  "014",
+  "015",
+  "016"
+ ],
+ "nacre_head": "73c73fe58f479afcc5d4fff5572d5adb0989838f",
+ "dirty": false,
+ "recorded_from": null,
+ "status": "complete",
+ "runs": [
+  {
+   "rep": 1,
+   "seconds": 634.9,
+   "sleep_cost_usd": "0.0158272500",
+   "sleep_calls_live": 120,
+   "fallback_records": 0
+  },
+  {
+   "rep": 2,
+   "seconds": 669.0,
+   "sleep_cost_usd": "0.0160254000",
+   "sleep_calls_live": 120,
+   "fallback_records": 0
+  },
+  {
+   "rep": 3,
+   "seconds": 672.8,
+   "sleep_cost_usd": "0.0161881500",
+   "sleep_calls_live": 120,
+   "fallback_records": 0
+  }
+ ],
+ "progress": "rep3 016 ember-cache-ec-39"
+}

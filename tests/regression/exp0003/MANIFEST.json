@@ -1,0 +1,1832 @@
+{
+ "experiment": "EXP-0003",
+ "run_dir": "EXP-0003-20261001T135536Z-c07ad2-LIVE",
+ "frozen_at": "2026-10-01",
+ "code_commit": "73c73fe58f479afcc5d4fff5572d5adb0989838f",
+ "preregistration_commit": "2770808",
+ "rule": "Byte copies of the whole run folder; sha256 is the identity.",
+ "path_format": "path = list of components relative to the run dir",
+ "files": [
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "014",
+    "alder-store-as-88.jsonl"
+   ],
+   "sha256": "a41f1d07410ea03216b6694061debc1f158a745d507c8d6c942bbc81a627bd9c",
+   "bytes": 11677
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "014",
+    "birch-rpc-bi-26.jsonl"
+   ],
+   "sha256": "95103171a5a1063209f5a3388a24bed28d7bf4cf9eaf4a48b1a4c422e6914d18",
+   "bytes": 11901
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "014",
+    "cypress-rpc-cr-53.jsonl"
+   ],
+   "sha256": "740b58e6646e929c2a0a20a09318ef1c9507eb4cd27dbb4bfc51009b41666afa",
+   "bytes": 11978
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "014",
+    "dune-queue-dq-64.jsonl"
+   ],
+   "sha256": "7c11ba326674156822152130d4e16d358ccf7beea7601bc31dab402600c4b52c",
+   "bytes": 11690
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "014",
+    "elm-store-es-39.jsonl"
+   ],
+   "sha256": "695d2db98521ccccb176b7cea0311575144a01b6141c677ae1555800b5ec2cde",
+   "bytes": 11762
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "014",
+    "fir-pay-fp-71.jsonl"
+   ],
+   "sha256": "c61e05a208704baa44ea54b88c2fbb3ba4adb998392c85132ce66acd39eaa5f2",
+   "bytes": 11232
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "014",
+    "grove-api-ga-82.jsonl"
+   ],
+   "sha256": "2a8c27fc46ff1cee0a2610b707ddf4dc2ebe5481c626c85fc2257a99c1415c58",
+   "bytes": 10965
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "014",
+    "hazel-lock-hl-45.jsonl"
+   ],
+   "sha256": "48fd0aaceda696d07ed1e61fc2aefc63dfe54987851f4087eb25e20ee8986530",
+   "bytes": 11963
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "014",
+    "iris-cdn-ic-68.jsonl"
+   ],
+   "sha256": "e9e95c58ed719622aa46b279bb7cc75438ecdf9680e2a53d2d27675c42e79113",
+   "bytes": 11816
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "014",
+    "juniper-sign-js-54.jsonl"
+   ],
+   "sha256": "b11ee6885207e0686f1cb468780771f0dc4ff04107469e5916aa04cde6ce5a06",
+   "bytes": 11503
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "014",
+    "kelp-pay-kp-96.jsonl"
+   ],
+   "sha256": "2fc11e0780f0275e784d509ec3dc0ec3c191b0d43e584d35e80b96572c361c79",
+   "bytes": 11803
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "014",
+    "laurel-db-ld-73.jsonl"
+   ],
+   "sha256": "4b836b1cb47753825ea7dd49803faf6cb2a5d2809c92875d57f8a6ebe62e8302",
+   "bytes": 11322
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "014",
+    "maple-parser-mp-65.jsonl"
+   ],
+   "sha256": "f76861609f42caf86a7e90d153ff3cd693f8064ae6a4a38bddfb497791be2807",
+   "bytes": 12185
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "014",
+    "north-cache-nc-37.jsonl"
+   ],
+   "sha256": "f7d3117bddb1510f4d69d3500f6dc37f88db778c407871ce0fdb495cc6c1f4c5",
+   "bytes": 11471
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "014",
+    "umbra-pay-up-84.jsonl"
+   ],
+   "sha256": "5951f04c9519f582762c27b1c3bc8ba033d7a606ded36369d087ae402c610058",
+   "bytes": 11576
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "014",
+    "verdant-rpc-vr-42.jsonl"
+   ],
+   "sha256": "81993cd61059c44222a8fe00855c3b21c75e6c777793e95432f67982b6e0f33e",
+   "bytes": 11092
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "014",
+    "willow-auth-wa-63.jsonl"
+   ],
+   "sha256": "6b40d8f6db9705f1ac3b945399a0aa49058e30e29ddd1e8b44bf795603dc8639",
+   "bytes": 11542
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "014",
+    "xenon-bus-xb-31.jsonl"
+   ],
+   "sha256": "59d3550c865f69dedbfd1820ca29e9bbbf05f1cf298e9910fca22ddb85b49bf9",
+   "bytes": 12006
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "014",
+    "yarrow-db-yd-76.jsonl"
+   ],
+   "sha256": "80cc7b112bbc66afc08be69b5f701d4434b473763228db4800499216f8ac32fc",
+   "bytes": 12174
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "014",
+    "zephyr-queue-zq-57.jsonl"
+   ],
+   "sha256": "63181e961429dc7959e9cdd7e089ebe452ca0593813de7fb2eeb4cec49b36b1f",
+   "bytes": 11947
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "015",
+    "acorn-api-aa-83.jsonl"
+   ],
+   "sha256": "d0ce13070e2184a7095de9beed90e8833d522af510cad7ef8a7c0c52b16a6e1b",
+   "bytes": 11012
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "015",
+    "briar-lock-bl-48.jsonl"
+   ],
+   "sha256": "e1d2ef8b1009381ed17431da37b6820baf0073cd0b9c4b7211e3c7df90f6e1dc",
+   "bytes": 12027
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "015",
+    "coral-cdn-cc-69.jsonl"
+   ],
+   "sha256": "d775f1e368764004a38345c6e2b9bf6a18fc09d2538cc1a61cd6e65808ece871",
+   "bytes": 11678
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "015",
+    "drift-sign-ds-56.jsonl"
+   ],
+   "sha256": "12bbc5e2fe5fe238de391abf06486ba91c3a4196e89d22f253d9abf9e8f74997",
+   "bytes": 12415
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "015",
+    "elm-pay-ep-97.jsonl"
+   ],
+   "sha256": "d597ac716486234eb71ddf8c52a42e747eb1cd9604a94ea2e79464b25b6785ea",
+   "bytes": 12238
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "015",
+    "fjord-db-fd-75.jsonl"
+   ],
+   "sha256": "77c2e14def990b753a4e8b5588a7aa0cc2880e1219329937fdea3fa688ba20b2",
+   "bytes": 11809
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "015",
+    "garnet-parser-gp-67.jsonl"
+   ],
+   "sha256": "30b1ac5c217264ceac959258a08cbc60b51c4cb146b4654631c3c0e04e9f6a5e",
+   "bytes": 11463
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "015",
+    "hemlock-cache-hc-38.jsonl"
+   ],
+   "sha256": "8b885e5a3b2fa9c4b260960d252aca83ac00d357f1eed67880b40997dbdc3e93",
+   "bytes": 11577
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "015",
+    "opal-pay-op-85.jsonl"
+   ],
+   "sha256": "4fe00de2c2bfb2250e931d3220a4131c4b91805a2f0b324cb0b687384f776a4d",
+   "bytes": 11350
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "015",
+    "pearl-rpc-pr-46.jsonl"
+   ],
+   "sha256": "95f0de585cd0e24f1dc697857139508144353676b22687df161331369eea5e4d",
+   "bytes": 11612
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "015",
+    "quince-auth-qa-61.jsonl"
+   ],
+   "sha256": "ba18756e215867f26cf31d9ab49c5d0a43de77391ec9163e48043049b6186ac9",
+   "bytes": 11627
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "015",
+    "reed-bus-rb-34.jsonl"
+   ],
+   "sha256": "2864cb52b79a475f539ca53f870cbe97c84d5f46759ac261b06ac07eaaa2dcbb",
+   "bytes": 11371
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "015",
+    "sable-db-sd-79.jsonl"
+   ],
+   "sha256": "b97f2146ea22d0ac605d18fd445e943a06d1ff7e92eeed36332b4087087377ef",
+   "bytes": 11560
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "015",
+    "topaz-queue-tq-59.jsonl"
+   ],
+   "sha256": "274e461802b024bf363dbd903362ec5c0476d921aeb4fce113fbf714ecac79dc",
+   "bytes": 11724
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "015",
+    "umber-store-us-89.jsonl"
+   ],
+   "sha256": "d521acc8b16a2da951591f50bcf269ccf4f66eb52aebacdaa7457aaa058f36df",
+   "bytes": 11704
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "015",
+    "violet-rpc-vr-27.jsonl"
+   ],
+   "sha256": "832c9c1c5e8cc51c1792e15e6e1aed3336544edc6dfd22454e1b8f532ce87a5d",
+   "bytes": 11947
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "015",
+    "walnut-rpc-wr-55.jsonl"
+   ],
+   "sha256": "db3058f1cdee0b2cdcb92a34e03d5f0d4484d668106ca6a1a877c81552c3d082",
+   "bytes": 11657
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "015",
+    "xylem-queue-xq-66.jsonl"
+   ],
+   "sha256": "cf1f4e3bd2299cbcdbf3b5321f725d5bfde322ac5c53d0beb3426c55b06b10dc",
+   "bytes": 11831
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "015",
+    "yucca-store-ys-41.jsonl"
+   ],
+   "sha256": "ebfe54c1cf489d2ee58200d01b2e74862874d7dcf89f68b691bcbe961194de44",
+   "bytes": 11724
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "015",
+    "zenith-pay-zp-72.jsonl"
+   ],
+   "sha256": "ac7b1578d1559f2726f84f2a83a0a8b95a06dde0cbd9cb54534b20e7ed75543d",
+   "bytes": 11092
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "016",
+    "alpine-sign-as-57.jsonl"
+   ],
+   "sha256": "c9c806092000cc756b27c32b9491a3246e8ee8fb91431e4d5a7f289d598185d2",
+   "bytes": 20685
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "016",
+    "beacon-pay-bp-98.jsonl"
+   ],
+   "sha256": "254c41d1f397b8e5b2f5ef7d5be9b4f349e6f989bea74dc27f1085197163df34",
+   "bytes": 21058
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "016",
+    "cascade-db-cd-76.jsonl"
+   ],
+   "sha256": "def4a5770991a0d2db7f4c03581cd527a845f791aa6a04a979e1e7e4b04b57c2",
+   "bytes": 20697
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "016",
+    "delta-parser-dp-68.jsonl"
+   ],
+   "sha256": "7cbf2aa94bf42ce758255a8269846abb36dd0f3b79361e05868960349c9ac9a1",
+   "bytes": 20483
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "016",
+    "ember-cache-ec-39.jsonl"
+   ],
+   "sha256": "ee8a4053fe17c34cbc837e76c757ab27102a9c841522861e406ee1184e197077",
+   "bytes": 20280
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "016",
+    "lunar-pay-lp-88.jsonl"
+   ],
+   "sha256": "68270dcbe819de43c3692ad4a68f721bc61d10bd54510beabf7f5f832e02b53b",
+   "bytes": 20598
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "016",
+    "meridian-rpc-mr-47.jsonl"
+   ],
+   "sha256": "c473bb13851700f2c849c9225e238b7786e7391640b3b25974c7008d9b97f226",
+   "bytes": 19857
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "016",
+    "nova-auth-na-62.jsonl"
+   ],
+   "sha256": "47507ab66303ba3f027cc987de3601e8340181d038365678601dfd29f47a2461",
+   "bytes": 20358
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "016",
+    "onyx-bus-ob-35.jsonl"
+   ],
+   "sha256": "72080cd6751dcec060340686320fa4bd94121ec74312658aa016b3642f581512",
+   "bytes": 20337
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "016",
+    "prairie-db-pd-81.jsonl"
+   ],
+   "sha256": "f9cc471d8bc489ee33747f2eff9e4b29cbf0c6a10383a12efff22b3bcf89da0e",
+   "bytes": 20046
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "016",
+    "quartz-queue-qq-60.jsonl"
+   ],
+   "sha256": "ba827d4b0fc61a79f9951d6aa22fd49b28c31fd5445eb152fabea19068b51d9f",
+   "bytes": 20418
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "016",
+    "river-store-rs-90.jsonl"
+   ],
+   "sha256": "69aa07b2411577c50abefc3437be6dc7c23359c4fdd426c86e6ed8438f7b8d2b",
+   "bytes": 20575
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "016",
+    "solstice-rpc-sr-28.jsonl"
+   ],
+   "sha256": "40211c6d8ceb97a3b3f5d78c77733fd7f78c1266f16ac271ece75b70fd126ed4",
+   "bytes": 20802
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "016",
+    "tundra-rpc-tr-56.jsonl"
+   ],
+   "sha256": "90b1417e1b345a01658ca43c1e3843b8f68007bba94b7ead1400ddc1c824e93a",
+   "bytes": 21460
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "016",
+    "ultraviolet-queue-uq-67.jsonl"
+   ],
+   "sha256": "1b209227885ef589601491c6362c88e0823cac8fd2ff1434c48ba6ffd3f4d610",
+   "bytes": 20216
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "016",
+    "vale-store-vs-42.jsonl"
+   ],
+   "sha256": "fabe1ec108188d8ebce72f60e554b9031b24882d9f997eae0c91fe50a83d39f2",
+   "bytes": 20356
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "016",
+    "wren-pay-wp-73.jsonl"
+   ],
+   "sha256": "f354b6ee171ed0e9ea71a6dc4b308c3eedb5a928830c3ddca58496aa072ac124",
+   "bytes": 19638
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "016",
+    "xenial-api-xa-84.jsonl"
+   ],
+   "sha256": "0627b25046be0236220608cd2eac6ec73d8029a9c0b77e690ee36a8154b07c8e",
+   "bytes": 19507
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "016",
+    "yew-lock-yl-49.jsonl"
+   ],
+   "sha256": "3aa423f945ceabb1cc4086bb65435df58bc27e155826d1793c3dd77fd3556d75",
+   "bytes": 20679
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep1",
+    "016",
+    "zinnia-cdn-zc-70.jsonl"
+   ],
+   "sha256": "d224d8fa9bc04b12d037e10e8a4e057b48af971f93eb107c1524e45b00bdf2c0",
+   "bytes": 21031
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "014",
+    "alder-store-as-88.jsonl"
+   ],
+   "sha256": "6ac4a38f199c133cdc81f9304de0eada1168c709b902d5270972e499f35e6d29",
+   "bytes": 11941
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "014",
+    "birch-rpc-bi-26.jsonl"
+   ],
+   "sha256": "4cd991230eaf288c9633bc22ce0e78c08bf18466330fafb52ac4ce26b0fd6cf0",
+   "bytes": 11984
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "014",
+    "cypress-rpc-cr-53.jsonl"
+   ],
+   "sha256": "3f0007e5812aee8e8abd0893184910532774571335c52599827c4227c95f0524",
+   "bytes": 11839
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "014",
+    "dune-queue-dq-64.jsonl"
+   ],
+   "sha256": "fb4b58eca9f5f7693643c405a6b840d93ca042944ca993c014a5f3e16d9bd6b0",
+   "bytes": 11709
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "014",
+    "elm-store-es-39.jsonl"
+   ],
+   "sha256": "ec18f74fe0064224a65ad7ecafa4442726adbe85e33cc1b603b6bb8436dbd4c2",
+   "bytes": 11488
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "014",
+    "fir-pay-fp-71.jsonl"
+   ],
+   "sha256": "569057548ee7e756516455a01c8fc1cb17544e254cd2159e9316771755470003",
+   "bytes": 11513
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "014",
+    "grove-api-ga-82.jsonl"
+   ],
+   "sha256": "2e2b238ba818f00a0a0019ca8161a495d41f6d8150ad97bab0d6b62336228c27",
+   "bytes": 10984
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "014",
+    "hazel-lock-hl-45.jsonl"
+   ],
+   "sha256": "425d869311bc9cd728f1e987a9ca3edb12c372833ea6d295c7dd595b6320fcce",
+   "bytes": 11777
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "014",
+    "iris-cdn-ic-68.jsonl"
+   ],
+   "sha256": "ec4f7d8ad08d2d218d02556b8c9eeb8e1919dcb968d4cfb2662b61cee2d39240",
+   "bytes": 11661
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "014",
+    "juniper-sign-js-54.jsonl"
+   ],
+   "sha256": "bb912b9fe2cf017d0e125d1c18eb6dc8749f22aca37bc75523a67817e18223fc",
+   "bytes": 11648
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "014",
+    "kelp-pay-kp-96.jsonl"
+   ],
+   "sha256": "870b292011b551abf5b465bdc7fbc36bdcaa68c48623d30856a44c1ad4fdef7c",
+   "bytes": 11795
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "014",
+    "laurel-db-ld-73.jsonl"
+   ],
+   "sha256": "a59cd23309c80b322848cf020a86bae953c47eec34f9cd19516200bee02841aa",
+   "bytes": 11348
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "014",
+    "maple-parser-mp-65.jsonl"
+   ],
+   "sha256": "cbf8635a8d0fd8a2acb713e988daa5983c31257ad45dca15e552adfff452b7d6",
+   "bytes": 11865
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "014",
+    "north-cache-nc-37.jsonl"
+   ],
+   "sha256": "76d5782861cfa90efbbd096596270bae6d7cf3d0b9ca0bb0c9470ad74d341985",
+   "bytes": 11431
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "014",
+    "umbra-pay-up-84.jsonl"
+   ],
+   "sha256": "f0f35d1976e6d3e7a950b8b2623e1b4c4c0e7beaa9799898242c2dc0373061e7",
+   "bytes": 11656
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "014",
+    "verdant-rpc-vr-42.jsonl"
+   ],
+   "sha256": "0bd479e4ff565cff0f30b94449dd99d0025f350462fb94530321d59985db99bc",
+   "bytes": 11183
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "014",
+    "willow-auth-wa-63.jsonl"
+   ],
+   "sha256": "3542b8839fe1906c9ee4099bcdc2da770403f040943bf5cbfbf18fc6d8afb53b",
+   "bytes": 11581
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "014",
+    "xenon-bus-xb-31.jsonl"
+   ],
+   "sha256": "877e0752be47daf6eebc3e4c7f62e27e7df65983eb38e393574857dda024aaff",
+   "bytes": 12065
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "014",
+    "yarrow-db-yd-76.jsonl"
+   ],
+   "sha256": "2e24581e3325686a5ba872ff296d44ed55178c8ddf6a56b818abdb9b9aece819",
+   "bytes": 11935
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "014",
+    "zephyr-queue-zq-57.jsonl"
+   ],
+   "sha256": "9d6d682e061645cb4cb21663455c5e592b8b5ec2e4db6bedb409eba4c5d30da7",
+   "bytes": 11885
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "015",
+    "acorn-api-aa-83.jsonl"
+   ],
+   "sha256": "81e207e7c79702162d9003a62994b31c5e240f52d37f1af736c78abaa7983eae",
+   "bytes": 10998
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "015",
+    "briar-lock-bl-48.jsonl"
+   ],
+   "sha256": "0108b188cff7f6262177f0fc67991a4e1fcf84fc6a98a696eb8962b11d23c8dd",
+   "bytes": 12097
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "015",
+    "coral-cdn-cc-69.jsonl"
+   ],
+   "sha256": "168f698300b1e414fa4d020342da41256e543488ac45e718d4474c8beda3d215",
+   "bytes": 11636
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "015",
+    "drift-sign-ds-56.jsonl"
+   ],
+   "sha256": "e1c46cc7f40eecd7a33a2f68930e292e3839f5d093c87c93d94afcfc80682c30",
+   "bytes": 11763
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "015",
+    "elm-pay-ep-97.jsonl"
+   ],
+   "sha256": "ed5799ae7d54749a6b24be1545ab7b031ca82c32147af1d09531025fc09c86be",
+   "bytes": 12162
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "015",
+    "fjord-db-fd-75.jsonl"
+   ],
+   "sha256": "46a151175bedca7beae028069833281e94b9ecc05af213b82c9fb6ccf37de88b",
+   "bytes": 11545
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "015",
+    "garnet-parser-gp-67.jsonl"
+   ],
+   "sha256": "1dc77af2ad9d08f7474effaa41acb3676bea0dcef1c412a3e300d9f7da225096",
+   "bytes": 11495
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "015",
+    "hemlock-cache-hc-38.jsonl"
+   ],
+   "sha256": "8c41901e8fd1e820a6c5f645161ab89dd5902f34b91c1a255490b2e725f8f2be",
+   "bytes": 11508
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "015",
+    "opal-pay-op-85.jsonl"
+   ],
+   "sha256": "e21689b7f281e823b2207717f99cf014d8213494ed36327fbb6073b3dd555f30",
+   "bytes": 11557
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "015",
+    "pearl-rpc-pr-46.jsonl"
+   ],
+   "sha256": "f17ff3e34a8bc155b7ed95e3f40ba91a0fc5a5a687f40b1c979151075216dea5",
+   "bytes": 11583
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "015",
+    "quince-auth-qa-61.jsonl"
+   ],
+   "sha256": "fd2c510c8ce60e00c61d594c711d96f2261965472ac522f53aa5eeaa3553b557",
+   "bytes": 11427
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "015",
+    "reed-bus-rb-34.jsonl"
+   ],
+   "sha256": "e06f2a13691ab40486bf6e6a83b4ea5ae40f8c4cf908f90d1652525950472448",
+   "bytes": 11436
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "015",
+    "sable-db-sd-79.jsonl"
+   ],
+   "sha256": "0e4d14596c9047d7119a0af514c0a7a12748aaa5cd90ba169ca3eccfc20c69f1",
+   "bytes": 11379
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "015",
+    "topaz-queue-tq-59.jsonl"
+   ],
+   "sha256": "73e0f82d2bb1ec1d0d0136125f89c12e5ca85b408dcc7fc144f5e4b74922f790",
+   "bytes": 11711
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "015",
+    "umber-store-us-89.jsonl"
+   ],
+   "sha256": "cb9b1220a44a70200da60d0a31b83fecdaf2cdf455a37ca39decdf5f98bb58dd",
+   "bytes": 11706
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "015",
+    "violet-rpc-vr-27.jsonl"
+   ],
+   "sha256": "c60d34bb2a3185df01ef6e89720d4fff3d4b909895a36008594ade203f7a53d9",
+   "bytes": 11921
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "015",
+    "walnut-rpc-wr-55.jsonl"
+   ],
+   "sha256": "d99ee2e4bdaecc96581a9b96e21a547829323ec012e4c91a9a8d316f0dcbec04",
+   "bytes": 11943
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "015",
+    "xylem-queue-xq-66.jsonl"
+   ],
+   "sha256": "5da326d23e2672215a421f435981ca2e4385b1df6afc8d3e9f19613fce8992c1",
+   "bytes": 11148
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "015",
+    "yucca-store-ys-41.jsonl"
+   ],
+   "sha256": "4fd745517c34c7592239ce3d155185c08f8e46df3b142017a101c0cc6ff98d92",
+   "bytes": 11227
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "015",
+    "zenith-pay-zp-72.jsonl"
+   ],
+   "sha256": "229e4fda753e977607d0d627659987e286d93f7956c6ba7d812ed9a37b30cf2b",
+   "bytes": 11249
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "016",
+    "alpine-sign-as-57.jsonl"
+   ],
+   "sha256": "d10cc55690d1d20f60b21b45f0d8331873d85b4be67fa6ca143e9b4767728210",
+   "bytes": 21175
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "016",
+    "beacon-pay-bp-98.jsonl"
+   ],
+   "sha256": "80daaff5be2f0160ca3f8587bfdd79bc1604c9d01444e86250528adc01a097fb",
+   "bytes": 20898
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "016",
+    "cascade-db-cd-76.jsonl"
+   ],
+   "sha256": "21f71d5040163566445a97500e02f4c52fc9e6bb21d4d965924e0e5df5b9aa9e",
+   "bytes": 20385
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "016",
+    "delta-parser-dp-68.jsonl"
+   ],
+   "sha256": "341e26c373a561ac8bfe7c504c2c84bd7c6f264046bdf17f48d0751be854d964",
+   "bytes": 21018
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "016",
+    "ember-cache-ec-39.jsonl"
+   ],
+   "sha256": "eb2b8373a36603702df07d27bf9436587795448f86a5db4a4d0fbad99a460bdf",
+   "bytes": 20640
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "016",
+    "lunar-pay-lp-88.jsonl"
+   ],
+   "sha256": "f57ba71e327d024a9572efe2330831309f5b20d0576339067ed256d97078c59a",
+   "bytes": 20400
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "016",
+    "meridian-rpc-mr-47.jsonl"
+   ],
+   "sha256": "ac1f2d9890e0cfea8662af98a64181cf7f83cd76d7f321020769808b68703265",
+   "bytes": 19820
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "016",
+    "nova-auth-na-62.jsonl"
+   ],
+   "sha256": "202a1deb74c94df1d76f73d2cf749d045fdac3b7d0bd1b5d7969f5bff98a50f2",
+   "bytes": 20124
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "016",
+    "onyx-bus-ob-35.jsonl"
+   ],
+   "sha256": "bbb759b4bc94dfc42264500fb7a20c0cdb7c923f2cacd680bc8a252bf3c8740b",
+   "bytes": 20993
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "016",
+    "prairie-db-pd-81.jsonl"
+   ],
+   "sha256": "73a866bce9b179653278c3e6e0548ef965b40f03ecb512cd07944d556fc1c0b0",
+   "bytes": 20063
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "016",
+    "quartz-queue-qq-60.jsonl"
+   ],
+   "sha256": "bd7c3c7e9c7a92e12c8f7f5df7a865db92c7ee7c280ea0175deed574d2f57630",
+   "bytes": 20416
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "016",
+    "river-store-rs-90.jsonl"
+   ],
+   "sha256": "9481c41c809900d13a79d24470d9cd2fea71e52b40ae9a13a6b2e98a0353fe0f",
+   "bytes": 20517
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "016",
+    "solstice-rpc-sr-28.jsonl"
+   ],
+   "sha256": "26e9b941f36b63f88564016f820e60a4fa45a9528362849a1620642adfa94f83",
+   "bytes": 20986
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "016",
+    "tundra-rpc-tr-56.jsonl"
+   ],
+   "sha256": "ab1e4fb7b507016bb2dc6afb790969115dc5e9b964d09bdebece07990c30bd60",
+   "bytes": 20937
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "016",
+    "ultraviolet-queue-uq-67.jsonl"
+   ],
+   "sha256": "10fcc9154dfa23bb316619b82a3a8b61c5d35c9022cf9e8f96916ae929e54b1d",
+   "bytes": 20208
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "016",
+    "vale-store-vs-42.jsonl"
+   ],
+   "sha256": "efb29d4ccd9f3ca36ad403fda53c6a3dbb7a632f9e607399566f40d44966c4b5",
+   "bytes": 20606
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "016",
+    "wren-pay-wp-73.jsonl"
+   ],
+   "sha256": "4cd4c29b671c86d49da7a9f07dee1a4875a7107c8ad898f5d1285b9844dcda02",
+   "bytes": 20214
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "016",
+    "xenial-api-xa-84.jsonl"
+   ],
+   "sha256": "615cc0d685ade3095b410b92c157a488fced9f451eac261c8d100b160237d4d9",
+   "bytes": 19319
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "016",
+    "yew-lock-yl-49.jsonl"
+   ],
+   "sha256": "8c109ce7cd95b8d0e4a2f60217567d21d3df84ecf5835c6e8897eb81f09ebe15",
+   "bytes": 20614
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep2",
+    "016",
+    "zinnia-cdn-zc-70.jsonl"
+   ],
+   "sha256": "60cd3efe652d5181275aa83795aaa4567fa1722980a262acfdfdac1362650f76",
+   "bytes": 21179
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "014",
+    "alder-store-as-88.jsonl"
+   ],
+   "sha256": "83448399a91ed4b83e7c5f9e31b226ea63c18c8418e7301d663c0cab3f34ec51",
+   "bytes": 11913
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "014",
+    "birch-rpc-bi-26.jsonl"
+   ],
+   "sha256": "a4cf22ca6846c9adb799aa35a8b8818e07585a05240307fb41369a116c684556",
+   "bytes": 11798
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "014",
+    "cypress-rpc-cr-53.jsonl"
+   ],
+   "sha256": "746a1a52b9876e1e38cedeed7f0cd358371514840ea9417882f1f05a589b7825",
+   "bytes": 11516
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "014",
+    "dune-queue-dq-64.jsonl"
+   ],
+   "sha256": "d12370c7002ac192055ee162624f1168c286e6d770d2a16a150634b863afd626",
+   "bytes": 11672
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "014",
+    "elm-store-es-39.jsonl"
+   ],
+   "sha256": "c4849cfa9fd29c92ca6030248bfcfaa8ab5c435a5ff06664f622a4d57a34e268",
+   "bytes": 11243
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "014",
+    "fir-pay-fp-71.jsonl"
+   ],
+   "sha256": "56d1207046992ba89fcfb845ac6dee926a93013ad9c64e08bcc58b362e7cbc67",
+   "bytes": 11484
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "014",
+    "grove-api-ga-82.jsonl"
+   ],
+   "sha256": "3a34c791358df311c21022de369cbefc09b1bf841943d5800fdfb6568b854dc2",
+   "bytes": 11237
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "014",
+    "hazel-lock-hl-45.jsonl"
+   ],
+   "sha256": "f0fda59032de1b2248bc6ee6e20a418dd68034a1a298340cbba22b90c9bf98e8",
+   "bytes": 11732
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "014",
+    "iris-cdn-ic-68.jsonl"
+   ],
+   "sha256": "5f801bb29f8f9936591c50f48882b53cca76aa3b94e0deff5e84c65284210674",
+   "bytes": 11845
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "014",
+    "juniper-sign-js-54.jsonl"
+   ],
+   "sha256": "c0847a0155b701246eda3b9d49fe8cd37dfeef6dc441d49d2a2a2d351e64351b",
+   "bytes": 11568
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "014",
+    "kelp-pay-kp-96.jsonl"
+   ],
+   "sha256": "db1e015aad5a635221071313bd79e5b27eb3103e132c1962dffc63df577f87b4",
+   "bytes": 11935
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "014",
+    "laurel-db-ld-73.jsonl"
+   ],
+   "sha256": "68d8d2b0c47735a6d196c904e78f5911c06dc5b2f6bd870a03db79c236751090",
+   "bytes": 11361
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "014",
+    "maple-parser-mp-65.jsonl"
+   ],
+   "sha256": "8b08027310dac6f3423d90a1b1622afdf4b90deb4e310993c7b3ebf1635a1f89",
+   "bytes": 12055
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "014",
+    "north-cache-nc-37.jsonl"
+   ],
+   "sha256": "4cad2412e04adb0eb91adfaff24ef64543567486897fb52394b82c677110dbe3",
+   "bytes": 11553
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "014",
+    "umbra-pay-up-84.jsonl"
+   ],
+   "sha256": "5a05834e4da5f425bacc0509b069d98cc6a39c3c502f156430b82451c2ea6679",
+   "bytes": 11713
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "014",
+    "verdant-rpc-vr-42.jsonl"
+   ],
+   "sha256": "bb351ff8eb5080bcc24962bd0e92814340758a05a164fe97a01053860dc23392",
+   "bytes": 11057
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "014",
+    "willow-auth-wa-63.jsonl"
+   ],
+   "sha256": "4bfccdcfe205ab9c5c6d874bda6f72a53b41d8d1f757865dcedace712c1f9b41",
+   "bytes": 11433
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "014",
+    "xenon-bus-xb-31.jsonl"
+   ],
+   "sha256": "7cde73c3f9d97aca631a4e2090c4c488f096fff007ff3a272e7c5b19305e474c",
+   "bytes": 12203
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "014",
+    "yarrow-db-yd-76.jsonl"
+   ],
+   "sha256": "6f66bb5e8616675683295dff6fa0146962eff264eb00726ea975721a41ae21b4",
+   "bytes": 11895
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "014",
+    "zephyr-queue-zq-57.jsonl"
+   ],
+   "sha256": "9ba6b9aba062018a4e08bb3faa0bf8a28a11cfbca8ccb83c0f755ed7e3f6aef8",
+   "bytes": 11845
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "015",
+    "acorn-api-aa-83.jsonl"
+   ],
+   "sha256": "aabe57c3510401506c27bcde558b268585769396c4fa4d56ff0534f5a9228c99",
+   "bytes": 11174
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "015",
+    "briar-lock-bl-48.jsonl"
+   ],
+   "sha256": "2e3d6c2a5676a05e0ee09bc2d5a184f71cc352ae80462cbc2cb2c22e25ab7a70",
+   "bytes": 11262
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "015",
+    "coral-cdn-cc-69.jsonl"
+   ],
+   "sha256": "59575b0569064f8e6be7a3f2d9be95f5ba1957db22843fb830adf215af15c739",
+   "bytes": 11667
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "015",
+    "drift-sign-ds-56.jsonl"
+   ],
+   "sha256": "bc526f11e46a3fc1fd7ec1e6a76696fce2294c205b144d731aba62b6d6ff4550",
+   "bytes": 12481
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "015",
+    "elm-pay-ep-97.jsonl"
+   ],
+   "sha256": "d2dc2c5f8f1313d6b261adf7f1f1a7e6c387414f03c43d0ac13cd4994f2ac2bc",
+   "bytes": 12410
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "015",
+    "fjord-db-fd-75.jsonl"
+   ],
+   "sha256": "4ffd738b08f5c7da01cfa780b545115e44f64411f667185210b43c0ae3826e53",
+   "bytes": 11736
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "015",
+    "garnet-parser-gp-67.jsonl"
+   ],
+   "sha256": "b78f66cd8f0176fcfa9a9a0319eb1eb4d3c0e7941d06feaccb136f3516f7ccaa",
+   "bytes": 12139
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "015",
+    "hemlock-cache-hc-38.jsonl"
+   ],
+   "sha256": "382392dac518c4186fb0075d2c5c7f7f141b4db7b2262044d8e7aabf50b94d06",
+   "bytes": 11500
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "015",
+    "opal-pay-op-85.jsonl"
+   ],
+   "sha256": "c1250d81113ca7a8873b4579d8a94175d679d857d36e77659b8381938bf9061b",
+   "bytes": 11643
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "015",
+    "pearl-rpc-pr-46.jsonl"
+   ],
+   "sha256": "05a35a1afdfb15e04b904226e1e9d2ebd218a073958afadd83997bf19c5ccad8",
+   "bytes": 11671
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "015",
+    "quince-auth-qa-61.jsonl"
+   ],
+   "sha256": "2d602771171901828494eb0aa9345f7d04269b12bc1437e35aa1cb16bb57a3c9",
+   "bytes": 11473
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "015",
+    "reed-bus-rb-34.jsonl"
+   ],
+   "sha256": "5827ac8cbe5316d020d7814367360d7987836a20c67c16ea51b3f5c997403007",
+   "bytes": 12157
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "015",
+    "sable-db-sd-79.jsonl"
+   ],
+   "sha256": "4fbb5d01e7b8f970253d9d5f51799e245b829127b1e71f3ca0326f2cbecbf620",
+   "bytes": 11601
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "015",
+    "topaz-queue-tq-59.jsonl"
+   ],
+   "sha256": "a3cf2e579c3c4f2b987ef494e74c124494deee4ea004cdd9f795863eb0a45afa",
+   "bytes": 11733
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "015",
+    "umber-store-us-89.jsonl"
+   ],
+   "sha256": "de6cebb31533664663c8e1a8f1ea719e171f24ba7fd3d977446a22ef430d6729",
+   "bytes": 11713
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "015",
+    "violet-rpc-vr-27.jsonl"
+   ],
+   "sha256": "cb5bdc52f24a6c6809c16fb729d7e1e28870d0b0f4e5831c532079beaeb80e0a",
+   "bytes": 12060
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "015",
+    "walnut-rpc-wr-55.jsonl"
+   ],
+   "sha256": "10a2c62f7afa14a025b4fa1de9f98e321bad5fbd43dc67f1ae303ba350c9729e",
+   "bytes": 11968
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "015",
+    "xylem-queue-xq-66.jsonl"
+   ],
+   "sha256": "7a88beb3d5c6248432594bd31d0d2b413a5c3dc897085266caed65fcebf8b18c",
+   "bytes": 11780
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "015",
+    "yucca-store-ys-41.jsonl"
+   ],
+   "sha256": "489aef0c8b9d909a5c0680927808e179ed571f2110879e18810bba0f930dd491",
+   "bytes": 11503
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "015",
+    "zenith-pay-zp-72.jsonl"
+   ],
+   "sha256": "510822945a8bdd892ed2e019cd4e6377be5dd4e8e4db1fb4d8f16c11a690d826",
+   "bytes": 10959
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "016",
+    "alpine-sign-as-57.jsonl"
+   ],
+   "sha256": "2beab6abc1227a9a1f7d8f4ef277e4547232ebe6d424a5a179882ec47b80e728",
+   "bytes": 20509
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "016",
+    "beacon-pay-bp-98.jsonl"
+   ],
+   "sha256": "40f729f758ba5ea245f45229785377961dac16ca61a38386c4bdcb6e781b9e9f",
+   "bytes": 21065
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "016",
+    "cascade-db-cd-76.jsonl"
+   ],
+   "sha256": "97792bd6a91a31f77aefab7f26bf88496c3075f9d5ff92fef60109d3a9491302",
+   "bytes": 20716
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "016",
+    "delta-parser-dp-68.jsonl"
+   ],
+   "sha256": "d166b90b0d05da1a0df8581ab94a7eafc8d885560c1d94be2a10f14a902cc671",
+   "bytes": 21050
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "016",
+    "ember-cache-ec-39.jsonl"
+   ],
+   "sha256": "e480c63c862bb6e1f1b7b3287fb5daf0c2fc117b89057a7dd56bb82f08eb633e",
+   "bytes": 20520
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "016",
+    "lunar-pay-lp-88.jsonl"
+   ],
+   "sha256": "57d783f0a43f073cc39dc89d2f68bea6df59236eb3c8881ad6303226679feeab",
+   "bytes": 20418
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "016",
+    "meridian-rpc-mr-47.jsonl"
+   ],
+   "sha256": "bb0148f955bdb2e04a527cb6fbcaad2a3428bc3212f526aae6a1fde1b6be4d4b",
+   "bytes": 19873
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "016",
+    "nova-auth-na-62.jsonl"
+   ],
+   "sha256": "36f0865c882ba86bc06a98faca57993b3ce8fd4e60f036116776615be86977e2",
+   "bytes": 20366
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "016",
+    "onyx-bus-ob-35.jsonl"
+   ],
+   "sha256": "0195da1120dbf8b445144bfca282b44de7456119fb4f4fa3e049635f3d07f6e8",
+   "bytes": 20830
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "016",
+    "prairie-db-pd-81.jsonl"
+   ],
+   "sha256": "a921056b21ba585beede3ed3c7022604abeb22c73620cbb795e0059809afdb83",
+   "bytes": 20401
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "016",
+    "quartz-queue-qq-60.jsonl"
+   ],
+   "sha256": "8f3cf074e70c2b6ea66b11a507b2dbe749ab0137b348d9b44f569988213b63b7",
+   "bytes": 20415
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "016",
+    "river-store-rs-90.jsonl"
+   ],
+   "sha256": "55e9765ea85d82f3979c8e95724d9969cfb4ae01118df881b5f1298889ea45b3",
+   "bytes": 20708
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "016",
+    "solstice-rpc-sr-28.jsonl"
+   ],
+   "sha256": "3dbb765568fcad076ce295a798d6acb24b2779569bd0a5e0402ad791de0a2106",
+   "bytes": 21361
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "016",
+    "tundra-rpc-tr-56.jsonl"
+   ],
+   "sha256": "b810ece66c234872d7248433d844e4a7921980f50b78fab5c91d80bf08f5af35",
+   "bytes": 21056
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "016",
+    "ultraviolet-queue-uq-67.jsonl"
+   ],
+   "sha256": "14fedef494f3c02dec28d765ec5fbebf4cb5297ad7c3b12c72b7cbcec4b1f674",
+   "bytes": 20603
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "016",
+    "vale-store-vs-42.jsonl"
+   ],
+   "sha256": "06458a86077be53db83df4d2a78f9c0c89fa2b638ad4b2469274d0955546cbb0",
+   "bytes": 20293
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "016",
+    "wren-pay-wp-73.jsonl"
+   ],
+   "sha256": "9efb8602530d9007c29d6563d5b5b62e75b7dc2cd0041a45db18396820b25f1b",
+   "bytes": 20163
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "016",
+    "xenial-api-xa-84.jsonl"
+   ],
+   "sha256": "e7a3a7ae09419e77b82bd15e3facf58479895bddcce6c204f34790c785a02726",
+   "bytes": 19360
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "016",
+    "yew-lock-yl-49.jsonl"
+   ],
+   "sha256": "d349f4fea601a6a373034a8c2fa94d8fc15ad50cda014e58b3105cb9514c5314",
+   "bytes": 20659
+  },
+  {
+   "path": [
+    "fixtures",
+    "rep3",
+    "016",
+    "zinnia-cdn-zc-70.jsonl"
+   ],
+   "sha256": "aaffe83a41ad7b89a8d8c268b8ad96a4a07292b3a0e0e748ca890e40c7e6d2ac",
+   "bytes": 21047
+  },
+  {
+   "path": [
+    "run.json"
+   ],
+   "sha256": "27b0e7a870c6f1ab1b8bdff93a49179f046619d8fd30d53bc32fa8387578a880",
+   "bytes": 711
+  },
+  {
+   "path": [
+    "summary.json"
+   ],
+   "sha256": "ce1e8748a554b84816dffbf77893cffdba13355c13f291b0b02ee8293e01884a",
+   "bytes": 783
+  },
+  {
+   "path": [
+    "trials.json"
+   ],
+   "sha256": "e60a5063e7c52df1c992d8416323e3f08cb528e363e656ec06e3282181538722",
+   "bytes": 34104
+  }
+ ]
+}

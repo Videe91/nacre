@@ -88,5 +88,39 @@ caffeinate -i nohup .venv/bin/python scripts/run_exp0003.py run > ~/Desktop/nacr
     `tests/scripts/test_run_exp0003_signals.py` (a real nohup run survives SIGHUP and keeps progressing).
   - The same handler pattern in the EXP-0001 runner was fixed too.
 
-## Results
-(Appended after the run.)
+## Results: run `EXP-0003-20261001T135536Z-c07ad2-LIVE` (complete; code 73c73fe, clean; frozen in `tests/regression/exp0003/`)
+| Set | Nacre (N) | No memory (C) |
+|---|---|---|
+| 014 | 60 / 60 | 8 / 60 |
+| 015 | 60 / 60 | 5 / 60 |
+| 016 | 60 / 60 | 6 / 60 |
+| **Pooled** | **180 / 180** | **19 / 180** |
+
+**Bar:** pooled ≥ 162 ✔, per set ≥ 51 ✔, N − C = 161 trials ≥ 90 ✔, all six safety metrics 0 ✔. **PASS.**
+Reference (not a gate): EXP-0001 MNEXA 178/180, no memory 21/180.
+
+**Checks after the run (2026-10-01):**
+- **Recomputed from `trials.json`:** identical to the summary; the 016 majority rule holds on every trial.
+- **Gate item 4:** the frozen recording replayed with every non-loopback connection refused (run
+  `EXP-0003-20261001T143549Z-1143db-RECORDED`) reproduced all 180 trials exactly (verdicts, attempts, memory counts),
+  with 0 live calls and 0 network attempts.
+- **"Too good to be true" audit** of all 180 recorded families (every request the model received):
+  - every Nacre memory line (300/300) lies inside the family's authoritative correction; in fact each is the whole
+    correction, verbatim;
+  - all 300 control prompts carried "(none)" and no correction or answer text;
+  - the answer clause is never in the task text, and never in any non-authoritative section;
+  - the correction was presented only as the AUTHORITATIVE section;
+  - no role marker reached a model;
+  - all 392 proposed quotes lie inside the correction.
+- **Guards (i)–(iii) re-run on 73c73fe:** 6/6 pass.
+- **Why it is a ceiling:** one episode and one isolated scope per family, so memory = the verbatim authoritative
+  correction, which contains the answer by construction. The suite measures faithful consolidation, not retrieval
+  under interference or generalisation.
+- **Cost (price table 2026-10-01):**
+
+  | Item | Value |
+  |---|---|
+  | Sleep pass, 360 calls | $0.0480 (≈ $0.00027 per flagged episode; ≈ 1,060 input / 180 output tokens) |
+  | Nacre transfer, 300 calls | $0.0184 |
+  | Control transfer, 300 calls | $0.0194 |
+  | Per task (consolidation + Nacre transfer) | ≈ $0.00037 |
