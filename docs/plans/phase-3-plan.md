@@ -1,4 +1,15 @@
-# Phase 3 plan: recall and interface (FOR OWNER APPROVAL; no code yet)
+# Phase 3 plan: recall and interface (APPROVED by the owner 2026-10-01, with changes)
+
+**Owner changes at approval (binding; recorded in each ADR):**
+- D-0024: cache entries are tagged by scope and key, and served only after grants are confirmed in the snapshot
+  transaction; the every-pair cross-scope suite runs through the cache; erasure and grant revocation invalidate by the
+  next recall; embedder onnxruntime + tokenizers, pinned by hash, full re-index on model change.
+- D-0026: delegations are explicit, recorded, time-limited, revocable and scoped.
+- D-0027: no opt-out for unscannable binaries (a future D3).
+- D-0028: option (a), Haiku dated snapshot only.
+- EXP-0004: per-category floors (≥ 0.70 and ≥ naive in every category); a fixed stale-fact ceiling.
+- H4: credential-slot catch ≥ 90%, with FP ≤ 2% on the holdout.
+
 
 - **Date:** 2026-10-01. Phase 2 is complete (tag `phase-2-complete`).
 - **Proposed ADRs:**
@@ -34,17 +45,17 @@
 | # | Item | Source | How checked |
 |---|---|---|---|
 | 1 | No plaintext content or embedding in any Postgres table, dump or WAL written during the test | D-0024 test 1 | byte scan of tables, `pg_dump`, WAL segments |
-| 2 | Erasure (person, period, scope) reaches index entries and **warm caches**, including across processes | D-0024 tests 2–3; D-0023 §3 binding | gate tests with a positive control |
+| 2 | Erasure (person, period, scope) **and grant revocation** reach index entries and **warm caches** by the next recall, including across processes; the **every-pair cross-scope suite passes through the cache** (warm and cold) | D-0024 tests 2–3b and owner decision 2; D-0023 §3 binding | gate tests with a positive control |
 | 3 | Recall eligibility: superseded, lost and unpromoted are never in a frame; contested is shown as contested | D-0025 §2 | unit and property tests |
 | 4 | Every frame has a committed ContextAssembled trace before it is returned; trace parts are under contributor-set keys; the header holds no content | D-0025 §8; D-0023 §3 binding | tests, plus a byte scan of header events |
 | 5 | Replay of every trace reproduces its `frame_id` (or `unverifiable` after an erasure) | D-0025 §8; A-0036 | replay over all EXP-0004 frames |
 | 6 | Cross-stream snapshot consistency under concurrent appends | D-0025 §1; A-0037 | concurrency test |
 | 7 | **Latency:** warm p95 ≤ 150 ms end to end and ≤ 50 ms read side, cold ≤ 1 s, at pool 10k; 100k reported | D-0025 §9 | production setup (`core.db.open_pool`), evidence file |
-| 8 | **EXP-0004 passes its pre-registered bar** (N ≥ 0.80; N − V ≥ 15 pp, and ≥ 5 pp per set; N − C ≥ 40 pp; stale ≤ 5% and ≤ ½ V; asks ≥ 0.80; safety 0; no reruns) | EXP-0004 | live run by the owner; recorded replay with 0 network |
+| 8 | **EXP-0004 passes its pre-registered bar** (N ≥ 0.80; N − V ≥ 15 pp, and ≥ 5 pp per set; N − C ≥ 40 pp; N ≥ 0.70 and N ≥ V in every category; stale ≤ 0.05 of T3 and ≤ ½ V; asks ≥ 0.80; safety 0; no reruns) | EXP-0004 | live run by the owner; recorded replay with 0 network |
 | 9 | Interface claims: over-claims rejected; valid claims written `verified`; no agent can plant an authoritative correction | D-0026 tests 1, 3 | tests |
 | 10 | Tokens never stored or logged; typo checksum; expiry and revocation; no admin or erasure tools on MCP; HTTP without TLS refuses non-loopback | D-0026 tests 2, 4, 5 | tests, plus scans |
-| 11 | **Binary attachment scanning:** each carrier rejected on a secret; clean files stored `binary-scanned`; bomb guards; unscannable rejected by default; I1 OCR recall ≥ 95% at ≥ 12 px | D-0027; owner item 2026-09-30 | tests; sealed I1 measurement |
-| 12 | **Credential-slot target (owner item 2026-09-30):** before real agent data flows through the interface, a fresh **H4** holdout is sealed under the H3 protocol (separate session, frozen before measuring). Proposed target: **≥ 90% of credential-slot values caught per secret** (H3: 54–72%), with the official FP rate no worse than H3's. Loosening detection is not a lever; only additive rules (D-0011) | CURRENT.md gate item; D-0011 | H4 measurement evidence; owner sets the final number before H4 is built |
+| 11 | **Binary attachment scanning:** each carrier rejected on a secret; clean files stored `binary-scanned`; bomb guards; unscannable always rejected (no opt-out); I1 OCR recall ≥ 95% at ≥ 12 px | D-0027; owner item 2026-09-30 | tests; sealed I1 measurement |
+| 12 | **Credential-slot target (owner item 2026-09-30):** before real agent data flows through the interface, a fresh **H4** holdout is sealed under the H3 protocol (separate session, frozen before measuring). **Target (owner, fixed): ≥ 90% of credential-slot values caught** (H3: 54–72%), **with false positives ≤ 2% on the H4 holdout**. Loosening detection is not a lever; only additive rules (D-0011) | CURRENT.md gate item; D-0011 | H4 measurement evidence; owner sets the final number before H4 is built |
 | 13 | **Cross-provider frame:** one `frame_id` rendered for OpenAI and Anthropic with byte-identical memory sections; both recorded and replayable offline; a live smoke run | D-0028 §3 | test, plus an owner smoke run |
 | 14 | Embedder pinned: hash mismatch refuses to start; ONNX equivalence vs reference vectors (if D-0024 (ii)) | D-0024 test 5 | test |
 | 15 | Index rebuild is byte-identical and switches atomically | D-0024 test 4 | test |

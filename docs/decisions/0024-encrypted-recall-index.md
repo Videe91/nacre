@@ -1,9 +1,32 @@
 # D-0024: Embeddings and search: an encrypted recall index, decrypted in memory
 
-- **Status:** proposed (2026-10-01). Awaiting owner approval. No code until accepted.
+- **Status:** accepted (owner, 2026-10-01) with the decisions below
 - **Tier:** D3. It sets a privacy boundary: where content-derived vectors may exist, and how erasure reaches them.
 - **Date:** 2026-10-01
 - **Relies on assumptions:** A-0032, A-0033, A-0034, A-0035 (new); A-0008, A-0030, A-0031
+
+## Owner decisions at acceptance (2026-10-01)
+1. **Approved (D3):** the encrypted side index and the decrypted per-process cache; no pgvector.
+2. **The cache is outside Postgres RLS, so it enforces scope itself (binding):**
+   - every cache entry is tagged with its `scope_id` and `key_id`;
+   - an entry is served **only after the caller's grants on that scope are confirmed in the same transaction as the
+     snapshot** (D-0025 §1). No grant check means nothing is served from the cache;
+   - the **full every-pair cross-scope suite** (the D-0005 isolation suite: every ordered pair of scopes, including
+     sibling, parent/child and cross-org) is run against **recall through the cache**, warm and cold;
+   - **erasure and grant revocation both invalidate cached entries by the next recall.** Revocation is covered by
+     re-checking grants inside every recall's snapshot transaction, so a revoked grant serves nothing from the next
+     recall on. Erasure is covered by `shred_epoch` (§3).
+3. **Accepted:** the residual risk of plaintext in process memory. Deployment rule: swap and core dumps off for the
+   service.
+4. **Embedder runtime: `onnxruntime` + `tokenizers`** (option (ii)).
+   - The model file and the tokenizer file are pinned by sha256.
+   - Every index entry carries the embedder version (`embedder_id`).
+   - **A model change triggers a full re-index** into a new index generation, switched atomically. Entries from
+     different embedders are never mixed in one search.
+   - `numpy` is approved as the vector-math dependency.
+5. **Approved (implied by plan approval):**
+   - local-only embeddings in Phase 3 (an API embedder needs its own ADR under D-0021);
+   - exact search with no ANN until A-0032 breaks.
 
 ## Context
 - **What recall needs:** a semantic channel (SPEC "Similarity ranks"), and so embeddings of memory content.
@@ -165,6 +188,10 @@
      - versions without P are still recalled (positive control);
    - the same for forget_period, and for delete_scope.
 3. **Concurrency:** an erasure that commits between two recalls in another process is honoured by the second.
+3a. **Grant revocation:** after a grant is revoked, the next recall by that principal (in an already-warm process)
+    serves nothing from that scope.
+3b. **Cross-scope, through the cache:** the every-pair D-0005 isolation suite, run with recall through a warm cache
+    and a cold one: no frame ever holds an item from an ungranted scope.
 4. **Rebuild:** `rebuild_index` reproduces a generation byte-identically (same embedder) and switches atomically.
 5. **Pinned embedder:** a weights or tokenizer hash mismatch refuses to start. With (ii), the equivalence test
    against the frozen reference vectors passes.

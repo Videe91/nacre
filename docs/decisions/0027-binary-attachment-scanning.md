@@ -1,9 +1,16 @@
 # D-0027: Scanning binary attachments for secrets before storage
 
-- **Status:** proposed (2026-10-01). Awaiting owner approval. No code until accepted.
+- **Status:** accepted (owner, 2026-10-01) with the decisions below
 - **Tier:** D3 (what may be stored; detection behaviour). Amends D-0008 amendment 6. Resolves A-0021.
 - **Date:** 2026-10-01
 - **Relies on assumptions:** A-0021, A-0041, A-0042 (new); A-0010
+
+## Owner decisions at acceptance (2026-10-01)
+1. **Approved (D3): unscannable binaries are rejected by default.**
+   - **There is no opt-out in Phase 3.** The per-scope `allow_unscanned_binaries` proposed in §2 is **removed**.
+   - Any opt-out is a **future, separate D3 ADR**.
+2. **Approved:** the extraction limits; I1 and its target (≥ 95% at ≥ 12 px).
+3. **OCR engine:** RapidOCR on `onnxruntime`, following the D-0024 runtime decision (the §3 recommendation).
 
 ## Context
 - **Owner's Phase 3 gate item (2026-09-30):**
@@ -44,8 +51,8 @@
   (member path, page, or image region). **The matched value is never included.**
 - **Unscannable → reject by default:** an unknown binary format, an encrypted archive or PDF, a corrupt file,
   an extraction limit, or OCR failure. Error `attachment_rejected: unscannable(<reason>)`.
-  - Per scope, an operator may set `allow_unscanned_binaries = true`. Then such files are stored marked
-    `scan = "unscanned"` (today's behaviour), and the setting is a recorded `config_event`.
+  - ~~Per-scope opt-in to store unscannable files as `unscanned`.~~ **Removed by the owner at acceptance:** no
+    opt-out in Phase 3; any opt-out needs a separate D3 ADR.
 - **Clean → stored**, marked `scan = "binary-scanned"` with the extractor versions. A new value of the D-0008 `scan`
   field.
 
@@ -84,8 +91,8 @@
    - The error names rule and location, never the value.
 2. **Clean files of every kind are stored** with `scan = binary-scanned`.
 3. **Every bomb guard rejects:** an expansion-ratio bomb, a member-count bomb, a depth-4 nesting.
-4. **Encrypted zip or PDF, and an unknown format, are rejected as unscannable.** With the scope opt-in, they are
-   stored as `unscanned`, and the config event exists.
+4. **Encrypted zip or PDF, and an unknown format, are rejected as unscannable.** No setting can make the interface
+   store them.
 5. **Relabelling:** a PNG declared as text/plain, or text declared as image/png, is still decided by content
    (existing D-0008 test, extended).
 6. **I1 OCR recall** meets the target. Measured once, frozen; the evidence is recorded.

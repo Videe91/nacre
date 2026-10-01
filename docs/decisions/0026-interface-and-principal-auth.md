@@ -1,9 +1,24 @@
 # D-0026: Interface (MCP server and Python SDK) and principal authentication
 
-- **Status:** proposed (2026-10-01). Awaiting owner approval. No code until accepted.
+- **Status:** accepted (owner, 2026-10-01) with the decisions below
 - **Tier:** D3 (who may write as whom; what `trust_basis = verified` proves) and D2 (public interface).
 - **Date:** 2026-10-01
 - **Relies on assumptions:** A-0006, A-0012 (to be superseded), A-0039, A-0040 (new)
+
+## Owner decisions at acceptance (2026-10-01)
+1. **Approved (D3):** per-principal bearer tokens; source ceilings per principal kind; over-claims are rejected,
+   never downgraded.
+2. **Approved (D3): delegations for `on_behalf_of` are explicit, recorded, time-limited, revocable and scoped.**
+   - **Explicit:** created only by the person, or by an operator on the person's recorded instruction, through the
+     admin CLI. Never inferred.
+   - **Recorded:** every create and revoke is a ledger `config_event` in the org stream (who, which agent, which
+     scopes, expiry).
+   - **Time-limited:** `expires_at` is required, with no open-ended delegations. The maximum is set in config (proposed:
+     90 days, like tokens).
+   - **Revocable:** revocation takes effect for the next write; it is checked in the write's transaction.
+   - **Scoped:** a delegation lists the scopes it covers; a write in any other scope is rejected.
+3. **Approved:** `require_verified` as the default for interface scopes; stdio plus loopback-only HTTP, with OAuth
+   later; the `mcp` dependency (exact pin).
 
 ## Context
 - **Today `trust_basis` is always `asserted`** (D-0012): the app process states the caller, source and actor, and
@@ -36,8 +51,9 @@
     `disabled_at`.
   - **`auth.tokens`:** `token_id`, `principal_id`, `sha256(secret)`, `created_at`, `expires_at` (≤ 90 days),
     `revoked_at`, `last_used_at`. **The secret is never stored.**
-  - **`auth.delegations`:** `(agent_principal, person_principal, scopes, expires_at)`. A person allows an agent to
-    act on their behalf.
+  - **`auth.delegations`:** `(delegation_id, agent_principal, person_principal, scopes, created_at, expires_at NOT
+    NULL, revoked_at, config_event_id)`. A person allows an agent to act on their behalf. Every create and revoke
+    is also a recorded `config_event` (owner decision 2).
 - **Scope access** stays `scope_grants` (D-0005), keyed by principal.
 
 **Source ceilings per principal kind:**

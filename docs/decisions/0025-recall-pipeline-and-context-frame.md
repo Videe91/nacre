@@ -1,10 +1,20 @@
 # D-0025: The recall pipeline, the frozen ContextFrame, and the ContextAssembled trace
 
-- **Status:** proposed (2026-10-01). Awaiting owner approval. No code until accepted.
+- **Status:** accepted (owner, 2026-10-01) with the decisions below
 - **Tier:** D3 for §1 (what a recall may see), §6 (the reasoning boundary) and §7 (traces of content); D2 for the
   rest (cross-module behaviour, the persistence format of frames and traces, the latency target).
 - **Date:** 2026-10-01
 - **Relies on assumptions:** A-0032, A-0034, A-0036, A-0037, A-0038 (new); A-0004, A-0007, A-0030
+
+## Owner decisions at acceptance (2026-10-01)
+1. **Approved (D3):**
+   - the eligibility rule (§2);
+   - the trace split (§8): a header with no content; content parts under contributor-set keys; the query under the
+     requester's key; committed before the frame is returned.
+2. **Approved:** no cross-scope shadowing in Phase 3; the latency targets (§9); τ fixed on the EXP-0004 dev split;
+   `addresses[]` on capture (a D-0018 amendment).
+3. **Binding addition from D-0024:** grants are confirmed inside the snapshot transaction (§1), and nothing is
+   served from the cache for a scope without a confirmed grant.
 
 ## Context
 - **SPEC "Recall and the reasoning boundary"** defines eight steps:
@@ -37,6 +47,9 @@
     consistent cut across tables, so the vector is consistent across streams by construction. This is the
     "watermark vector" Phase 1 deferred (single-stream AS_OF(N) generalised).
   - Also read once: `shred_epoch` (D-0024 §3), the active projection generation, and the active index generation.
+  - **Grants are confirmed in the same transaction** (owner, D-0024 decision 2): the principal's live grants on each
+    requested scope are read in this snapshot. Only confirmed scopes enter the merge, and the in-memory cache serves
+    entries only for them.
 - **Every later step reads only through this snapshot.** Recall is read-only, so nothing is written until §8.
 
 ### 2. Scope merge

@@ -1,6 +1,6 @@
 # Current state
 
-**Phase:** 2 COMPLETE (tag `phase-2-complete`, owner-accepted 2026-10-01); Phase 3 — recall, interface (PLANNING DONE, AWAITING OWNER APPROVAL; no code)
+**Phase:** 2 COMPLETE (tag `phase-2-complete`, owner-accepted 2026-10-01); Phase 3 — recall, interface (PLAN APPROVED 2026-10-01; freezing sets before any recall code)
 **Last updated:** 2026-10-01
 
 **Phase 3 status (2026-10-01):** the plan is ready for owner review in `docs/plans/phase-3-plan.md`.
@@ -9,9 +9,9 @@
 - **Other documents:** the EXP-0004 pre-registration DRAFT; assumptions A-0032 … A-0043; INDEX rows R1–R26
   (planned).
 - **Evidence:** the encrypted index is feasible (A-0032 evidence).
-- **Next:** owner decisions (listed in the plan). Then freeze EXP-0004, H4 and I1 in separate sessions **before any
-  recall code**.
-- **No Phase 3 product code until approval.**
+- **APPROVED by the owner 2026-10-01 with changes** (recorded in D-0024 … D-0028, EXP-0004 and the plan). D-0024 …
+  D-0028 accepted. EXP-0004 pre-registered with every number fixed.
+- **Next, in order:** build and freeze the EXP-0004, H4 and I1 sets in separate sessions; then recall code.
 
 ## Done
 - Repo constitution, rules, registers, structure checker.
@@ -166,6 +166,7 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
 - **PHASE 3 GATE ITEM (owner, 2026-09-30): credential-slot target.** Before real agent data flows through the
   interface, set a target for "random value in a credential slot" (H3: 54–72%) and raise it, measured on a
   fresh H4 sealed under the same protocol. Not blocking Phase 1.
+  **Target fixed by the owner 2026-10-01: credential-slot catch ≥ 90%, with false positives ≤ 2% on the H4 holdout.**
 - **D-0011 accepted** (holdout; additive only; admission criteria; loosening needs owner approval).
 - **Upstream (not blocking):** once proven on the holdout, prepare as gitleaks contributions (D-0011
   amendment 3): the `ghs_` stateless rule, the password-in-URL rule, and the **gitlab-pat-routable gap**
@@ -1061,3 +1062,13 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   - **EXP-0004 draft:** arms C / V / N, k = 3, 1,080 trials per arm, bar N ≥ 0.80, N − V ≥ 15 pp, N − C ≥ 40 pp,
     safety 0.
   - **Phase 3 gate:** 16 items, including H4 (credential-slot target, ≥ 90% proposed) and binary scanning.
+- 2026-10-01 — **Phase 3 plan APPROVED with changes.**
+  - **Accepted:** D-0024 … D-0028, with the owner's decisions recorded in each.
+  - **D-0024:** the cache enforces scope itself (grants confirmed in the snapshot transaction; every-pair suite through
+    the cache; revocation and erasure invalidate by the next recall); onnxruntime + tokenizers.
+  - **D-0026:** delegations are explicit, recorded, time-limited, revocable and scoped.
+  - **D-0027:** no opt-out.
+  - **D-0028:** Haiku dated snapshot only.
+  - **EXP-0004 PRE-REGISTERED** with all numbers fixed: per-category floors ≥ 0.70 and ≥ naive; stale ≤ 0.05 of T3;
+    budget 10 items / 4,000 chars; cap $15.
+  - **H4 target:** ≥ 90% credential-slot catch, FP ≤ 2%.

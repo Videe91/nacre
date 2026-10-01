@@ -1,10 +1,20 @@
 # D-0028: Anthropic adapter, and one ContextFrame across providers
 
-- **Status:** proposed (2026-10-01). Awaiting owner approval. No code until accepted.
+- **Status:** accepted (owner, 2026-10-01) with the decisions below
 - **Tier:** D2 (new provider, dependency, price entries). **Question 1 asks the owner to amend an owner rule**
   (dated pins).
 - **Date:** 2026-10-01
 - **Relies on assumptions:** A-0024, A-0043 (new)
+
+## Owner decisions at acceptance (2026-10-01)
+1. **Pinning: option (a). The Claude seat is `claude-haiku-4-5-20251001` only.**
+   - The dated-pin rule stays as it is.
+   - It may be amended later only with **provider documentation proving that undated IDs are immutable**. Until
+     then option (b) is closed.
+2. **Approved:**
+   - no server-side refusal fallbacks;
+   - the `anthropic` SDK as an optional extra (exact pin);
+   - the transplant run is reported, not gated.
 
 ## Context
 - **D-0021** defines the provider interface. The OpenAI adapter is the only one built.
