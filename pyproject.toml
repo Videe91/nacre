@@ -17,6 +17,7 @@ test = [
     "pytest>=9",
     "cbor2==6.1.4",
     "hypothesis>=6",
+    "Pillow==12.3.0",   # D-0006 amendment 2: test-only, I1 OCR set (D-0027); committed images are the truth
 ]
 
 [tool.pytest.ini_options]

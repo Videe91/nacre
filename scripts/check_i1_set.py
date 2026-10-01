@@ -1,15 +1,19 @@
 """
 Check (or, once, seal) the sealed OCR evaluation set I1 (D-0027 §3, A-0042).
 
-Regenerates every I1 image from tests/ledger/secret_corpus/ocr_i1.py and verifies, against
-tests/ledger/secret_corpus/I1_MANIFEST.json: the seed, the Pillow version, the vendored font sha256s, every case's
-metadata, the sha256 of every PNG and of its raw pixels, and the total sha256. Prints only counts and hashes,
-never a rendered value. Exit 0 = the rendered set is exactly the sealed set; 1 = any mismatch.
+Source of truth (owner, 2026-10-01): the COMMITTED images in tests/ledger/secret_corpus/i1_images/ plus the
+sha256s in tests/ledger/secret_corpus/I1_MANIFEST.json. Every run first checks the committed images (stdlib only,
+any platform): exactly one PNG per case, each matching its sealed sha256, and no extra files. Regeneration from
+tests/ledger/secret_corpus/ocr_i1.py is then checked ONLY on the pinned platform (the manifest's Pillow version and
+platform): the seed, the vendored font sha256s, every case's metadata, every PNG and raw-pixel sha256, and the total.
+Elsewhere it is skipped and says so. Prints only counts and hashes, never a rendered value. Exit 0 = OK; 1 = any
+mismatch.
 
 Pillow is NOT a Nacre dependency. Run with a Python that has the manifest's exact Pillow version, or set
 I1_PYTHON to one and this script re-executes itself with it:
     I1_PYTHON=/path/to/i1-venv/bin/python python scripts/check_i1_set.py
     ... scripts/check_i1_set.py --seal      # writes the manifest; refuses if it already exists
+    ... scripts/check_i1_set.py --dump      # writes the committed images; refuses any image that differs
 """
 import collections
 import hashlib
@@ -28,18 +32,58 @@ STATEMENT = ("sealed by a separate session that did not read detector code; neve
 META = ("font_px", "gated", "dpi_scale", "scene", "theme", "jpeg_quality", "has_secret", "n_secrets", "kinds",
         "wrapped", "size")
 
-try:
-    import PIL
-    from PIL import features
-except ImportError:
-    alt = os.environ.get("I1_PYTHON")
-    if alt and not os.environ.get("I1_REEXEC"):
-        os.environ["I1_REEXEC"] = "1"
-        os.execv(alt, [alt, __file__, *sys.argv[1:]])
-    sys.exit("Pillow is not importable here; set I1_PYTHON to a Python with the manifest's Pillow version")
+IMAGES = CORPUS / "i1_images"
+PIL = features = ocr_i1 = None
 
-sys.path.insert(0, str(CORPUS.parent))
-from secret_corpus import ocr_i1  # noqa: E402
+
+def _load_pillow(required: bool) -> bool:
+    """Import Pillow and the generator. Re-executes under I1_PYTHON if set; else exits (required) or returns False."""
+    global PIL, features, ocr_i1
+    try:
+        import PIL as _pil
+        from PIL import features as _features
+    except ImportError:
+        alt = os.environ.get("I1_PYTHON")
+        if alt and not os.environ.get("I1_REEXEC"):
+            os.environ["I1_REEXEC"] = "1"
+            os.execv(alt, [alt, __file__, *sys.argv[1:]])
+        if required:
+            sys.exit("Pillow is not importable here; set I1_PYTHON to a Python with the manifest's Pillow version")
+        return False
+    PIL, features = _pil, _features
+    sys.path.insert(0, str(CORPUS.parent))
+    from secret_corpus import ocr_i1 as _gen
+    ocr_i1 = _gen
+    return True
+
+
+def verify_committed() -> list[str]:
+    """Stdlib only: the committed images are exactly the sealed set (one PNG per case, sha256 equal, no extras)."""
+    m, errors = json.loads(MANIFEST.read_text()), []
+    want = {f"{c['case_id']}.png": c["png_sha256"] for c in m["cases"]}
+    have = {p.name for p in IMAGES.iterdir()} if IMAGES.is_dir() else set()
+    missing, extra = sorted(set(want) - have), sorted(have - set(want))
+    bad = sum(1 for n in sorted(set(want) & have) if hashlib.sha256((IMAGES / n).read_bytes()).hexdigest() != want[n])
+    print(f"committed images: {len(have & set(want))}/{len(want)}; missing {len(missing)}; extra {len(extra)}; "
+          f"sha256 mismatches {bad}")
+    if missing or extra or bad:
+        errors.append("committed images differ from the sealed manifest")
+    return errors
+
+
+def dump() -> int:
+    """Write every rendered image to i1_images/; refuse any whose sha256 differs from the sealed manifest."""
+    _load_pillow(required=True)
+    sealed = {c["case_id"]: c["png_sha256"] for c in json.loads(MANIFEST.read_text())["cases"]}
+    IMAGES.mkdir(exist_ok=True)
+    for c in ocr_i1.cases():
+        if hashlib.sha256(c.png).hexdigest() != sealed.get(c.case_id):
+            sys.exit(f"{c.case_id}: rendered image differs from the sealed manifest; nothing more written")
+        out = IMAGES / f"{c.case_id}.png"
+        if out.exists() and out.read_bytes() != c.png:
+            sys.exit(f"{c.case_id}: a different committed image exists; refusing to overwrite")
+        out.write_bytes(c.png)
+    return 1 if verify_committed() else 0
 
 
 def environment() -> dict:
@@ -68,7 +112,9 @@ def summary(rs) -> None:
     secrets = [r for r in rs if r["has_secret"]]
     print(f"cases: {len(rs)} (secret-bearing {len(secrets)}, clean {len(rs) - len(secrets)}); "
           f"rendered secrets: {sum(r['n_secrets'] for r in secrets)} "
-          f"(gated >= {ocr_i1.GATED_MIN_PX}px: {sum(r['n_secrets'] for r in secrets if r['gated'])}; "
+          f"(gated, owner 2026-10-01: physical px = font_px x dpi_scale >= 12: "
+          f"{sum(r['n_secrets'] for r in secrets if r['font_px'] * r['dpi_scale'] >= 12)}; "
+          f"sealed 'gated' field, logical px, superseded: {sum(r['n_secrets'] for r in secrets if r['gated'])}; "
           f"wrapped over lines: {sum(sum(r['wrapped']) for r in secrets)})")
     for key in ("scene", "font_px", "dpi_scale", "theme"):
         by = collections.Counter((r[key], r["has_secret"]) for r in rs)
@@ -78,6 +124,7 @@ def summary(rs) -> None:
 
 
 def seal() -> int:
+    _load_pillow(required=True)
     if MANIFEST.exists():
         sys.exit("I1_MANIFEST.json exists: I1 is sealed; never re-seal")
     t0 = time.monotonic()
@@ -93,8 +140,18 @@ def seal() -> int:
 
 
 def check() -> int:
-    m, errors = json.loads(MANIFEST.read_text()), []
+    m = json.loads(MANIFEST.read_text())
+    errors = verify_committed()
+    if not _load_pillow(required=False):
+        print("regeneration check skipped: Pillow not available (checked only on the pinned platform)")
+        print("I1 OK: committed images match the sealed manifest" if not errors else "I1 FAILED")
+        return 1 if errors else 0
     env = environment()
+    if (env["pillow"], env["platform"]) != (m["environment"]["pillow"], m["environment"]["platform"]):
+        print(f"regeneration check skipped: {env['pillow']} on {env['platform']} is not the pinned "
+              f"{m['environment']['pillow']} on {m['environment']['platform']}")
+        print("I1 OK: committed images match the sealed manifest" if not errors else "I1 FAILED")
+        return 1 if errors else 0
     if m["seed"] != ocr_i1.I1_SEED:
         errors.append("seed differs from the manifest")
     if env["pillow"] != m["environment"]["pillow"]:
@@ -129,9 +186,10 @@ def check() -> int:
         errors.append("total sha256 differs")
     for e in errors:
         print("FAIL:", e)
-    print("I1 OK: rendered set is byte-identical to the sealed set" if not errors else "I1 FAILED")
+    print("I1 OK: committed images and the regenerated set match the sealed set" if not errors else "I1 FAILED")
     return 1 if errors else 0
 
 
 if __name__ == "__main__":
-    sys.exit(seal() if sys.argv[1:] == ["--seal"] else check())
+    mode = sys.argv[1:]
+    sys.exit(seal() if mode == ["--seal"] else dump() if mode == ["--dump"] else check())

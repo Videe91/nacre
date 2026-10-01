@@ -10,6 +10,10 @@
    - **Condition:** scope settings stay transaction-local (D-0005).
    - **Test:** a pooled connection must never carry scope between principals.
    - A-0007 is re-measured with the pool.
+2. **2026-10-01: Pillow 12.3.0, test-only** (owner, for D-0027's sealed OCR set I1).
+   - An exact pin in the `test` extra; never imported by `src/`.
+   - The committed I1 images plus the sha256s in `I1_MANIFEST.json` are the source of truth.
+   - Regenerating the images with Pillow is checked only on the pinned platform (Pillow 12.3.0, Darwin-arm64).
 
 ## Context
 D-0002 to D-0005 need a Postgres driver, AES-GCM/HKDF/Ed25519, a Postgres to test RLS against

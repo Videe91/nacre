@@ -12,6 +12,19 @@
 2. **Approved:** the extraction limits; I1 and its target (≥ 95% at ≥ 12 px).
 3. **OCR engine:** RapidOCR on `onnxruntime`, following the D-0024 runtime decision (the §3 recommendation).
 
+## Amendment 1 (owner, 2026-10-01): I1 measurement definitions, fixed before any measurement
+1. **Success per secret = "the secret is not stored":** the attachment is rejected for a detected secret, or
+   rejected as unscannable. A stored attachment that contains the secret is a miss.
+2. **Wrapped secrets count toward the 95% target** (65 of the gated secrets are split across lines).
+3. **The size threshold uses physical pixels:** gated when `font_px × dpi_scale ≥ 12`.
+   - **463 of the 548 secrets are gated** under this definition; the other 85 are reported only.
+   - The manifest's sealed `gated` field (logical px, 361 secrets) is superseded for measurement. The manifest
+     itself is not edited.
+4. **Pillow 12.3.0 is approved as test-only** (D-0006 amendment 2).
+   - The **committed images in `tests/ledger/secret_corpus/i1_images/` plus their manifest sha256s are the source
+     of truth**. The pre-commit hook accepts only those exact bytes there.
+   - Regeneration is checked only on the pinned platform.
+
 ## Context
 - **Owner's Phase 3 gate item (2026-09-30):**
   - extract text from binaries (unpack archives, PDF text, OCR for images) before storage;

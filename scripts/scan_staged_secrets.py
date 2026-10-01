@@ -5,7 +5,12 @@ STAGED content of added/modified files. The temporary gitleaks-only scanner it r
 Repo-level additions (not product behaviour):
   - NACRE_ALLOWLIST: reviewed false positives in this repo, each with a reason (D-0010);
   - frozen MNEXA fixtures: exact-value (hashed) reviewed entries, scoped to 017-029 / 030-035 (owner, 2026-10-01);
-  - committed negative-corpus files are skipped only while their bytes match their reviewed manifest.
+  - committed negative-corpus files are skipped only while their bytes match their reviewed manifest;
+  - FAIL CLOSED on the secret corpus (owner, 2026-10-01): every folder under tests/ledger/secret_corpus/ must be
+    registered here as a holdout/negatives skip (_NEGATIVE_MANIFESTS), a sealed binary set (_SEALED_BINARY_DIRS,
+    each file must match its manifest sha256) or working data (_WORKING_DATA_DIRS, scanned normally). A staged file
+    in any other folder refuses the commit, so a new holdout can never be scanned (revealing detector results) by
+    accident. Why: on 2026-10-01 the H4 negatives were staged before being registered and one result was revealed.
 Findings print redacted; exit 1 if any.
 
 Usage:  python scripts/scan_staged_secrets.py            (staged files; used by the hook)
@@ -37,7 +42,7 @@ NACRE_ALLOWLIST = [
      "the Base62 alphabet constant, caught by the entropy layer"),
     (r"^tests/ledger/secret_corpus/generic\.py$", r"^\{_password\(rng\)\}$",
      "f-string template in the corpus generator, not a value"),
-    (r"^scripts/scan_staged_secrets\.py$", r"^tests/ledger/secret_corpus/negatives_holdout[23]/(MANIFEST\.json)?$",
+    (r"^scripts/scan_staged_secrets\.py$", r"^tests/ledger/secret_corpus/negatives_holdout[234]/(MANIFEST\.json)?$",
      "the H2 negatives path in this script's own manifest table, caught by the entropy layer"),
     (r".*", r"^(x25519\.)?X25519PrivateKey$",
      "the pyca/cryptography class name, matched by generic-api-key after `private_key:` (reviewed FP, "
@@ -75,7 +80,42 @@ _NEGATIVE_MANIFESTS = {
     # before the boundary fix (D-0011 amendment 5); pre-scanned for real secrets at measurement time.
     "tests/ledger/secret_corpus/negatives_holdout2/": "tests/ledger/secret_corpus/negatives_holdout2/MANIFEST.json",
     "tests/ledger/secret_corpus/negatives_holdout3/": "tests/ledger/secret_corpus/negatives_holdout3/MANIFEST.json",
+    # H4 (owner approval 2026-10-01, after its first draw was scanned by accident; see the A-0010 holdout log).
+    "tests/ledger/secret_corpus/negatives_holdout4/": "tests/ledger/secret_corpus/negatives_holdout4/MANIFEST.json",
 }
+
+# Fail-closed registry of the other folders under the secret corpus (owner, 2026-10-01).
+_CORPUS_ROOT = "tests/ledger/secret_corpus/"
+_SEALED_BINARY_DIRS = {   # folder -> manifest whose cases list `case_id` and `png_sha256` (I1, D-0027)
+    _CORPUS_ROOT + "i1_images/": _CORPUS_ROOT + "I1_MANIFEST.json",
+}
+_WORKING_DATA_DIRS = {    # scanned like any other file
+    _CORPUS_ROOT + "fonts/",
+}
+
+
+def corpus_folder_error(path: str, data: bytes) -> str | None:
+    """None if `path` is outside the corpus, a top-level corpus file, or in a registered folder (sealed binaries must
+    match their manifest); otherwise the reason the commit is refused."""
+    import hashlib
+    import json
+    rest = path[len(_CORPUS_ROOT):] if path.startswith(_CORPUS_ROOT) else None
+    if rest is None or "/" not in rest:
+        return None
+    folder = _CORPUS_ROOT + rest.split("/", 1)[0] + "/"
+    if folder in _NEGATIVE_MANIFESTS or folder in _WORKING_DATA_DIRS:
+        return None
+    if folder in _SEALED_BINARY_DIRS:
+        manifest = _SEALED_BINARY_DIRS[folder]
+        try:
+            sealed = {c["case_id"] + ".png": c["png_sha256"] for c in json.loads((ROOT / manifest).read_text())["cases"]}
+        except (OSError, ValueError, KeyError):
+            return f"{path}: cannot read the sealed manifest {manifest}"
+        if sealed.get(path[len(folder):]) == hashlib.sha256(data).hexdigest():
+            return None
+        return f"{path}: not a sealed file of {manifest} (unlisted, or its sha256 differs)"
+    return (f"{path}: folder {folder} is not registered in scripts/scan_staged_secrets.py (holdout skip, sealed "
+            "binary or working data); register it first, with owner approval for any skip")
 
 
 def _reviewed_negative(path: str, data: bytes) -> bool:
@@ -118,8 +158,11 @@ def staged_files():
 
 def main(argv):
     files = ((a, Path(a).read_bytes()) for a in argv) if argv else staged_files()
-    findings = []
+    findings, refusals = [], []
     for name, data in files:
+        if (why := corpus_folder_error(name, data)) is not None:
+            refusals.append(why)
+            continue
         if b"\0" in data[:8192]:
             continue  # binary
         if _reviewed_negative(name, data):
@@ -127,11 +170,16 @@ def main(argv):
         findings += scan(name, data.decode("utf-8", "replace"))
     for path, line, rule_id, secret in findings:
         print(f"SECRET? {path}:{line} [{rule_id}] {secret[:4]}…({len(secret)} chars)", file=sys.stderr)
+    for why in refusals:
+        print(f"REFUSED {why}", file=sys.stderr)
+    if refusals:
+        print(f"\n{len(refusals)} file(s) in unregistered or unsealed secret-corpus folders. Nothing was scanned "
+              "there, so no detector result was revealed.", file=sys.stderr)
     if findings:
         print(f"\n{len(findings)} possible secret(s) staged. Remove them, or if a finding is a false "
               "positive, allowlist it (D-0010). Do not weaken a rule.", file=sys.stderr)
         return 1
-    return 0
+    return 1 if refusals else 0
 
 
 if __name__ == "__main__":

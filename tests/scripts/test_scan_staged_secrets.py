@@ -127,3 +127,42 @@ def test_a_reviewed_entry_outside_the_approved_scope_is_refused(monkeypatch, tmp
     monkeypatch.setattr(scanner, "_FIXTURE_REVIEW_FILE", "r.json")
     with pytest.raises(ValueError, match="outside the approved scope"):
         scanner._fixture_reviews()
+
+
+# Fail-closed secret-corpus folders (owner, 2026-10-01).
+_C = "tests/ledger/secret_corpus/"
+
+
+def test_unregistered_corpus_folder_is_refused():
+    assert "not registered" in scanner.corpus_folder_error(_C + "holdout_5_negatives/a.py", b"x = 1\n")
+    assert "not registered" in scanner.corpus_folder_error(_C + "__pycache__/x.pyc", b"\0\0")
+
+
+def test_registered_folders_and_top_level_files_pass():
+    assert scanner.corpus_folder_error(_C + "corpus.py", b"x = 1\n") is None                 # top-level file
+    assert scanner.corpus_folder_error(_C + "fonts/LICENSE-DejaVu.txt", b"text\n") is None   # working data
+    assert scanner.corpus_folder_error(_C + "negatives_holdout4/new.py", b"x\n") is None    # skip-registered
+    assert scanner.corpus_folder_error("src/nacre/x.py", b"x\n") is None                    # outside the corpus
+
+
+def test_sealed_binary_folder_accepts_only_manifest_bytes():
+    import json
+    case = json.loads((ROOT / _C / "I1_MANIFEST.json").read_text())["cases"][0]
+    path = _C + "i1_images/" + case["case_id"] + ".png"
+    data = (ROOT / path).read_bytes()
+    assert scanner.corpus_folder_error(path, data) is None
+    assert "sha256 differs" in scanner.corpus_folder_error(path, data + b"x")
+    assert "unlisted" in scanner.corpus_folder_error(_C + "i1_images/extra.png", data)
+
+
+def test_staged_mode_refuses_an_unregistered_corpus_folder_without_scanning(tmp_path):
+    _git(tmp_path, "init", "-q")
+    d = tmp_path / _C / "holdout_9_negatives"
+    d.mkdir(parents=True)
+    (d / "a.py").write_text(f'key = "{github_pat()}"\n')   # would be a finding if it were scanned
+    _git(tmp_path, "add", "-A")
+    r = subprocess.run([str(ROOT / ".venv/bin/python"), str(ROOT / "scripts/scan_staged_secrets.py")],
+                       cwd=tmp_path, capture_output=True, text=True)
+    assert r.returncode == 1
+    assert "REFUSED" in r.stderr and "SECRET?" not in r.stderr   # refused before any detector ran
+

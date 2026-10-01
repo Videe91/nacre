@@ -1089,3 +1089,19 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
     - H4 builder notes (slot 4 is a CLI flag; 3-line disjointness window).
   - **Next:** recall code (R6–R20) may start; the interface (R1–R4) waits for the erratum.
 
+- 2026-10-01 — **Owner decisions applied:**
+  - **H4:**
+    - option (b), redraw only the stdlib negatives;
+    - `negatives_holdout4/` added to the hook skip table;
+    - **the hook fails closed** on unregistered secret-corpus folders (4 new tests);
+    - disclosure logged in the holdout log;
+    - **redraw BLOCKED:** only 128 candidates remain. H4 stays uncommitted pending an owner decision.
+  - **D-0026 amendment 1 (D3):**
+    - agents' structured events are verified but never authoritative; they count only under the two-decision rule;
+    - agent free text is untrusted;
+    - authoritative corrections come only from reviewer-granted persons or structured CI / integration results;
+    - the claim table is encoded, with tests listed for R3.
+  - **D-0027 amendment 1:** I1 success = "the secret is not stored"; wrapped secrets count; physical px (463
+    gated).
+  - **Pillow 12.3.0 test-only** (D-0006 amendment 2); 500 I1 images committed as the truth.
+  - **Next:** recall code, R6 onward.

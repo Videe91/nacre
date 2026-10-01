@@ -20,7 +20,47 @@
 3. **Approved:** `require_verified` as the default for interface scopes; stdio plus loopback-only HTTP, with OAuth
    later; the `mcp` dependency (exact pin).
 
-## ERRATUM, open for the owner (found 2026-10-01, before any D-0026 code)
+## Amendment 1 (owner, 2026-10-01, D3): the corrected claim table. It resolves the erratum below
+**The rule:**
+- **Agents:**
+  - an authenticated agent's **structured** decision, prediction, action and outcome events have **verified
+    provenance** (`trust_basis = verified`) but are **never authoritative**;
+  - they cannot act as corrections, and cannot trigger single-source promotion (D-0017 amendment 1);
+  - they count **only as evidence under the two-decision rule** (quorum ≥ 2 distinct decisions, D-0017);
+  - **agent free text is untrusted.**
+- **Authoritative corrections come only from:**
+  - **authenticated persons acting as reviewers**; or
+  - **structured CI / integration results**.
+
+**Encoded as the claims a principal may make**, as (`source`, `authorship`, `actor_kind`). Anything else is
+rejected, never downgraded.
+
+| Principal | Event kinds | Allowed claim | Resulting trust | May carry an authoritative `correction` section / `correction` event |
+|---|---|---|---|---|
+| **agent** | structured decision, prediction, action, outcome | (`chat`, `external`, `agent`) | untrusted, verified | **no**, rejected |
+| **agent** | free text (statement, message), relayed tool output | (`chat`, `external`, `agent`); (`tool`, `external`, `agent`) | untrusted, verified | **no**, rejected |
+| **person**, no reviewer grant | statement, message, decision | (`chat`, `scope_principal`, `person`) | trusted | **no**, rejected |
+| **person with a reviewer grant** on the scope | `correction`; an outcome with a `correction` section | (`review`, `scope_principal`, `person`) | trusted | **yes** |
+| **service** (CI / integration connector) | structured outcome / evaluation results only | (its configured `ci` / `review` / `git`, `integration_result`, `system`), `payload_type = structured` | trusted | **yes** (structured results only) |
+| **operator** (admin CLI only) | config and admin events | (`system`, `scope_principal`, `system`) | trusted | **no**, rejected |
+
+- **Reviewer grant:** a new `auth.reviewer_grants (person_principal, scope, expires_at, revoked_at,
+  config_event_id)`, with the same properties as delegations: explicit, recorded, time-limited, revocable,
+  scoped.
+- **`on_behalf_of`:** an agent acting for a person is still an agent. It never inherits the person's reviewer
+  grant, and its events stay non-authoritative.
+- **Tests (binding; part of R3 and gate item 9):** one test per row, both the allowed claim and every forbidden
+  neighbour. In addition:
+  1. an agent's structured decision is written `verified` + untrusted, and its correction section is rejected;
+  2. **two verified agent decisions with the same lesson DO count toward quorum promotion, and one never promotes**
+     (single-source promotion needs an authoritative correction);
+  3. a person without a reviewer grant cannot write `source = review` or a correction section; with a grant they
+     can, and after revocation or expiry they cannot;
+  4. `on_behalf_of` a reviewer person does not make an agent's correction authoritative;
+  5. the D-0018 / D-0019 authority check (the gate and the sleep-pass admission) agrees with this table on every
+     row. That is a cross-check test against `capture/section_authority.py`.
+
+## ERRATUM (resolved by amendment 1 above; kept for history)
 - **The defect:** the "source ceilings" table in §1 names `source` values `agent` and `person`. D-0012 has no such
   sources.
   - D-0012's sources are `chat | git | ci | review | web | tool | system`.
