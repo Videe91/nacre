@@ -1,0 +1,5551 @@
+{
+ "version": "routine_episodes_v1",
+ "seed": 20261001,
+ "definition": "prediction correct, expected outcome, no correction section, no stakes tags; not drawn from MNEXA 003-016",
+ "episodes": [
+  {
+   "id": "routine-000",
+   "decision_text": "On mobile-app, merge the approved pull request.",
+   "prediction": {
+    "expected_outcome": "merge succeeds",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "mobile-app: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "merged, CI green on main"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-001",
+   "decision_text": "On payments-gateway, run the new regression test before the fix.",
+   "prediction": {
+    "expected_outcome": "the test fails, reproducing the bug",
+    "expected_success": false,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": false,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "payments-gateway: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "1 failed: expected 3, got 2"
+     },
+     {
+      "role": "diagnostic",
+      "text": "runner ubuntu-22.04"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-002",
+   "decision_text": "On web-frontend, try the old credentials after rotation.",
+   "prediction": {
+    "expected_outcome": "authentication is refused",
+    "expected_success": false,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": false,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "web-frontend: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "401 Unauthorized"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-003",
+   "decision_text": "On web-frontend, run the canary query against the deprecated endpoint.",
+   "prediction": {
+    "expected_outcome": "the endpoint returns 410 Gone",
+    "expected_success": false,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": false,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "web-frontend: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "HTTP 410"
+     },
+     {
+      "role": "diagnostic",
+      "text": "cache hit rate 93%"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-004",
+   "decision_text": "On web-frontend, run the unit tests after the refactor.",
+   "prediction": {
+    "expected_outcome": "all tests pass",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "web-frontend: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "42 passed, 0 failed"
+     },
+     {
+      "role": "diagnostic",
+      "text": "artifact size 4.1 MB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-005",
+   "decision_text": "On report-builder, rebuild the search index.",
+   "prediction": {
+    "expected_outcome": "index rebuild completes",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "indexed 18,204 documents"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-006",
+   "decision_text": "On billing-api, run the unit tests after the refactor.",
+   "prediction": {
+    "expected_outcome": "all tests pass",
+    "expected_success": true,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "billing-api: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "42 passed, 0 failed"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-007",
+   "decision_text": "On search-indexer, rotate the read replica.",
+   "prediction": {
+    "expected_outcome": "replica rotation completes without errors",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "search-indexer: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "replica promoted, lag 0s"
+     },
+     {
+      "role": "diagnostic",
+      "text": "duration 41s"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine rotate on search-indexer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-008",
+   "decision_text": "On billing-api, bump the logging library minor version.",
+   "prediction": {
+    "expected_outcome": "build stays green",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "billing-api: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "build #2291 succeeded"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-009",
+   "decision_text": "On search-indexer, restart the stuck worker.",
+   "prediction": {
+    "expected_outcome": "worker resumes processing",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "search-indexer: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "queue depth back to 0"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-010",
+   "decision_text": "On mobile-app, run the linter on the changed files.",
+   "prediction": {
+    "expected_outcome": "no lint errors",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "mobile-app: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "0 problems"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-011",
+   "decision_text": "On mobile-app, merge the approved pull request.",
+   "prediction": {
+    "expected_outcome": "merge succeeds",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "mobile-app: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "merged, CI green on main"
+     },
+     {
+      "role": "diagnostic",
+      "text": "duration 41s"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-012",
+   "decision_text": "On report-builder, merge the approved pull request.",
+   "prediction": {
+    "expected_outcome": "merge succeeds",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "merged, CI green on main"
+     },
+     {
+      "role": "diagnostic",
+      "text": "runner ubuntu-22.04"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine merge on report-builder"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-013",
+   "decision_text": "On web-frontend, merge the approved pull request.",
+   "prediction": {
+    "expected_outcome": "merge succeeds",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "web-frontend: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "merged, CI green on main"
+     },
+     {
+      "role": "diagnostic",
+      "text": "runner ubuntu-22.04"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-014",
+   "decision_text": "On auth-service, restart the stuck worker.",
+   "prediction": {
+    "expected_outcome": "worker resumes processing",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "auth-service: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "queue depth back to 0"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-015",
+   "decision_text": "On payments-gateway, try the old credentials after rotation.",
+   "prediction": {
+    "expected_outcome": "authentication is refused",
+    "expected_success": false,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": false,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "payments-gateway: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "401 Unauthorized"
+     },
+     {
+      "role": "diagnostic",
+      "text": "duration 41s"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-016",
+   "decision_text": "On mobile-app, check the feature flag before rollout.",
+   "prediction": {
+    "expected_outcome": "the flag is still off",
+    "expected_success": false,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": false,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "mobile-app: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "flag disabled"
+     },
+     {
+      "role": "diagnostic",
+      "text": "runner ubuntu-22.04"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-017",
+   "decision_text": "On report-builder, merge the approved pull request.",
+   "prediction": {
+    "expected_outcome": "merge succeeds",
+    "expected_success": true,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "merged, CI green on main"
+     },
+     {
+      "role": "diagnostic",
+      "text": "2 retries on network fetch"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-018",
+   "decision_text": "On data-pipeline, apply the reviewed schema migration.",
+   "prediction": {
+    "expected_outcome": "migration applies cleanly",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "data-pipeline: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "migration 0042 applied"
+     },
+     {
+      "role": "diagnostic",
+      "text": "peak memory 512 MB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-019",
+   "decision_text": "On billing-api, run the linter on the changed files.",
+   "prediction": {
+    "expected_outcome": "no lint errors",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "billing-api: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "0 problems"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-020",
+   "decision_text": "On notification-worker, rebuild the search index.",
+   "prediction": {
+    "expected_outcome": "index rebuild completes",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "notification-worker: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "indexed 18,204 documents"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-021",
+   "decision_text": "On search-indexer, regenerate the API client.",
+   "prediction": {
+    "expected_outcome": "client compiles",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "search-indexer: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "codegen complete, 0 diffs in tests"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-022",
+   "decision_text": "On auth-service, run the linter on the changed files.",
+   "prediction": {
+    "expected_outcome": "no lint errors",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "auth-service: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "0 problems"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-023",
+   "decision_text": "On auth-service, restart the stuck worker.",
+   "prediction": {
+    "expected_outcome": "worker resumes processing",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "auth-service: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "queue depth back to 0"
+     },
+     {
+      "role": "diagnostic",
+      "text": "artifact size 4.1 MB"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine restart on auth-service"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-024",
+   "decision_text": "On data-pipeline, merge the approved pull request.",
+   "prediction": {
+    "expected_outcome": "merge succeeds",
+    "expected_success": true,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "data-pipeline: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "merged, CI green on main"
+     },
+     {
+      "role": "diagnostic",
+      "text": "peak memory 512 MB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-025",
+   "decision_text": "On billing-api, bump the logging library minor version.",
+   "prediction": {
+    "expected_outcome": "build stays green",
+    "expected_success": true,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "billing-api: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "build #2291 succeeded"
+     },
+     {
+      "role": "diagnostic",
+      "text": "peak memory 512 MB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-026",
+   "decision_text": "On search-indexer, restart the stuck worker.",
+   "prediction": {
+    "expected_outcome": "worker resumes processing",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "search-indexer: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "queue depth back to 0"
+     },
+     {
+      "role": "diagnostic",
+      "text": "2 retries on network fetch"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine restart on search-indexer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-027",
+   "decision_text": "On search-indexer, run the load test above the documented limit.",
+   "prediction": {
+    "expected_outcome": "requests are rate limited",
+    "expected_success": false,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": false,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "search-indexer: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "429 on 12% of requests"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-028",
+   "decision_text": "On cache-layer, bump the logging library minor version.",
+   "prediction": {
+    "expected_outcome": "build stays green",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "cache-layer: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "build #2291 succeeded"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-029",
+   "decision_text": "On web-frontend, restart the stuck worker.",
+   "prediction": {
+    "expected_outcome": "worker resumes processing",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "web-frontend: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "queue depth back to 0"
+     },
+     {
+      "role": "diagnostic",
+      "text": "duration 41s"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-030",
+   "decision_text": "On search-indexer, apply the reviewed schema migration.",
+   "prediction": {
+    "expected_outcome": "migration applies cleanly",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "search-indexer: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "migration 0042 applied"
+     },
+     {
+      "role": "diagnostic",
+      "text": "runner ubuntu-22.04"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-031",
+   "decision_text": "On report-builder, rotate the read replica.",
+   "prediction": {
+    "expected_outcome": "replica rotation completes without errors",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "replica promoted, lag 0s"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine rotate on report-builder"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-032",
+   "decision_text": "On notification-worker, run the linter on the changed files.",
+   "prediction": {
+    "expected_outcome": "no lint errors",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "notification-worker: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "0 problems"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine run on notification-worker"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-033",
+   "decision_text": "On data-pipeline, deploy the patch to staging.",
+   "prediction": {
+    "expected_outcome": "staging deploy succeeds",
+    "expected_success": true,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "data-pipeline: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "deploy finished, health checks green"
+     },
+     {
+      "role": "diagnostic",
+      "text": "2 retries on network fetch"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-034",
+   "decision_text": "On search-indexer, deploy the patch to staging.",
+   "prediction": {
+    "expected_outcome": "staging deploy succeeds",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "search-indexer: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "deploy finished, health checks green"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-035",
+   "decision_text": "On data-pipeline, run the new regression test before the fix.",
+   "prediction": {
+    "expected_outcome": "the test fails, reproducing the bug",
+    "expected_success": false,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": false,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "data-pipeline: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "1 failed: expected 3, got 2"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-036",
+   "decision_text": "On web-frontend, deploy the patch to staging.",
+   "prediction": {
+    "expected_outcome": "staging deploy succeeds",
+    "expected_success": true,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "web-frontend: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "deploy finished, health checks green"
+     },
+     {
+      "role": "diagnostic",
+      "text": "cache hit rate 93%"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-037",
+   "decision_text": "On cache-layer, run the canary query against the deprecated endpoint.",
+   "prediction": {
+    "expected_outcome": "the endpoint returns 410 Gone",
+    "expected_success": false,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": false,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "cache-layer: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "HTTP 410"
+     },
+     {
+      "role": "diagnostic",
+      "text": "runner ubuntu-22.04"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-038",
+   "decision_text": "On search-indexer, try the old credentials after rotation.",
+   "prediction": {
+    "expected_outcome": "authentication is refused",
+    "expected_success": false,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": false,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "search-indexer: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "401 Unauthorized"
+     },
+     {
+      "role": "diagnostic",
+      "text": "2 retries on network fetch"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-039",
+   "decision_text": "On billing-api, run the linter on the changed files.",
+   "prediction": {
+    "expected_outcome": "no lint errors",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "billing-api: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "0 problems"
+     },
+     {
+      "role": "diagnostic",
+      "text": "2 retries on network fetch"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-040",
+   "decision_text": "On report-builder, run the linter on the changed files.",
+   "prediction": {
+    "expected_outcome": "no lint errors",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "0 problems"
+     },
+     {
+      "role": "diagnostic",
+      "text": "peak memory 512 MB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-041",
+   "decision_text": "On report-builder, rebuild the search index.",
+   "prediction": {
+    "expected_outcome": "index rebuild completes",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "indexed 18,204 documents"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine rebuild on report-builder"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-042",
+   "decision_text": "On data-pipeline, check the feature flag before rollout.",
+   "prediction": {
+    "expected_outcome": "the flag is still off",
+    "expected_success": false,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": false,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "data-pipeline: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "flag disabled"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-043",
+   "decision_text": "On billing-api, rotate the read replica.",
+   "prediction": {
+    "expected_outcome": "replica rotation completes without errors",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "billing-api: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "replica promoted, lag 0s"
+     },
+     {
+      "role": "diagnostic",
+      "text": "duration 41s"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-044",
+   "decision_text": "On search-indexer, run the unit tests after the refactor.",
+   "prediction": {
+    "expected_outcome": "all tests pass",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "search-indexer: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "42 passed, 0 failed"
+     },
+     {
+      "role": "diagnostic",
+      "text": "no warnings"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-045",
+   "decision_text": "On payments-gateway, rebuild the search index.",
+   "prediction": {
+    "expected_outcome": "index rebuild completes",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "payments-gateway: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "indexed 18,204 documents"
+     },
+     {
+      "role": "diagnostic",
+      "text": "peak memory 512 MB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-046",
+   "decision_text": "On report-builder, merge the approved pull request.",
+   "prediction": {
+    "expected_outcome": "merge succeeds",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "merged, CI green on main"
+     },
+     {
+      "role": "diagnostic",
+      "text": "artifact size 4.1 MB"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine merge on report-builder"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-047",
+   "decision_text": "On notification-worker, regenerate the API client.",
+   "prediction": {
+    "expected_outcome": "client compiles",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "notification-worker: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "codegen complete, 0 diffs in tests"
+     },
+     {
+      "role": "diagnostic",
+      "text": "no warnings"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-048",
+   "decision_text": "On search-indexer, rotate the read replica.",
+   "prediction": {
+    "expected_outcome": "replica rotation completes without errors",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "search-indexer: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "replica promoted, lag 0s"
+     },
+     {
+      "role": "diagnostic",
+      "text": "peak memory 512 MB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-049",
+   "decision_text": "On payments-gateway, rebuild the search index.",
+   "prediction": {
+    "expected_outcome": "index rebuild completes",
+    "expected_success": true,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "payments-gateway: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "indexed 18,204 documents"
+     },
+     {
+      "role": "diagnostic",
+      "text": "artifact size 4.1 MB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-050",
+   "decision_text": "On report-builder, run the canary query against the deprecated endpoint.",
+   "prediction": {
+    "expected_outcome": "the endpoint returns 410 Gone",
+    "expected_success": false,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": false,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "HTTP 410"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine run on report-builder"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-051",
+   "decision_text": "On data-pipeline, run the linter on the changed files.",
+   "prediction": {
+    "expected_outcome": "no lint errors",
+    "expected_success": true,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "data-pipeline: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "0 problems"
+     },
+     {
+      "role": "diagnostic",
+      "text": "duration 41s"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-052",
+   "decision_text": "On web-frontend, restart the stuck worker.",
+   "prediction": {
+    "expected_outcome": "worker resumes processing",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "web-frontend: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "queue depth back to 0"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-053",
+   "decision_text": "On search-indexer, apply the reviewed schema migration.",
+   "prediction": {
+    "expected_outcome": "migration applies cleanly",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "search-indexer: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "migration 0042 applied"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-054",
+   "decision_text": "On web-frontend, deploy the patch to staging.",
+   "prediction": {
+    "expected_outcome": "staging deploy succeeds",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "web-frontend: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "deploy finished, health checks green"
+     },
+     {
+      "role": "diagnostic",
+      "text": "2 retries on network fetch"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-055",
+   "decision_text": "On web-frontend, run the new regression test before the fix.",
+   "prediction": {
+    "expected_outcome": "the test fails, reproducing the bug",
+    "expected_success": false,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": false,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "web-frontend: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "1 failed: expected 3, got 2"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-056",
+   "decision_text": "On auth-service, merge the approved pull request.",
+   "prediction": {
+    "expected_outcome": "merge succeeds",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "auth-service: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "merged, CI green on main"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-057",
+   "decision_text": "On web-frontend, bump the logging library minor version.",
+   "prediction": {
+    "expected_outcome": "build stays green",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "web-frontend: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "build #2291 succeeded"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-058",
+   "decision_text": "On payments-gateway, rebuild the search index.",
+   "prediction": {
+    "expected_outcome": "index rebuild completes",
+    "expected_success": true,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "payments-gateway: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "indexed 18,204 documents"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-059",
+   "decision_text": "On web-frontend, regenerate the API client.",
+   "prediction": {
+    "expected_outcome": "client compiles",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "web-frontend: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "codegen complete, 0 diffs in tests"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-060",
+   "decision_text": "On billing-api, apply the reviewed schema migration.",
+   "prediction": {
+    "expected_outcome": "migration applies cleanly",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "billing-api: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "migration 0042 applied"
+     },
+     {
+      "role": "diagnostic",
+      "text": "2 retries on network fetch"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-061",
+   "decision_text": "On mobile-app, merge the approved pull request.",
+   "prediction": {
+    "expected_outcome": "merge succeeds",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "mobile-app: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "merged, CI green on main"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-062",
+   "decision_text": "On mobile-app, rotate the read replica.",
+   "prediction": {
+    "expected_outcome": "replica rotation completes without errors",
+    "expected_success": true,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "mobile-app: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "replica promoted, lag 0s"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-063",
+   "decision_text": "On cache-layer, restart the stuck worker.",
+   "prediction": {
+    "expected_outcome": "worker resumes processing",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "cache-layer: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "queue depth back to 0"
+     },
+     {
+      "role": "diagnostic",
+      "text": "runner ubuntu-22.04"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-064",
+   "decision_text": "On mobile-app, rotate the read replica.",
+   "prediction": {
+    "expected_outcome": "replica rotation completes without errors",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "mobile-app: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "replica promoted, lag 0s"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine rotate on mobile-app"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-065",
+   "decision_text": "On billing-api, run the unit tests after the refactor.",
+   "prediction": {
+    "expected_outcome": "all tests pass",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "billing-api: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "42 passed, 0 failed"
+     },
+     {
+      "role": "diagnostic",
+      "text": "2 retries on network fetch"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-066",
+   "decision_text": "On web-frontend, apply the reviewed schema migration.",
+   "prediction": {
+    "expected_outcome": "migration applies cleanly",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "web-frontend: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "migration 0042 applied"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-067",
+   "decision_text": "On search-indexer, rotate the read replica.",
+   "prediction": {
+    "expected_outcome": "replica rotation completes without errors",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "search-indexer: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "replica promoted, lag 0s"
+     },
+     {
+      "role": "diagnostic",
+      "text": "peak memory 512 MB"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine rotate on search-indexer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-068",
+   "decision_text": "On report-builder, run the linter on the changed files.",
+   "prediction": {
+    "expected_outcome": "no lint errors",
+    "expected_success": true,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "0 problems"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine run on report-builder"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-069",
+   "decision_text": "On billing-api, merge the approved pull request.",
+   "prediction": {
+    "expected_outcome": "merge succeeds",
+    "expected_success": true,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "billing-api: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "merged, CI green on main"
+     },
+     {
+      "role": "diagnostic",
+      "text": "2 retries on network fetch"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-070",
+   "decision_text": "On report-builder, regenerate the API client.",
+   "prediction": {
+    "expected_outcome": "client compiles",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "codegen complete, 0 diffs in tests"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine regenerate on report-builder"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-071",
+   "decision_text": "On notification-worker, bump the logging library minor version.",
+   "prediction": {
+    "expected_outcome": "build stays green",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "notification-worker: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "build #2291 succeeded"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-072",
+   "decision_text": "On web-frontend, bump the logging library minor version.",
+   "prediction": {
+    "expected_outcome": "build stays green",
+    "expected_success": true,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "web-frontend: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "build #2291 succeeded"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-073",
+   "decision_text": "On billing-api, restart the stuck worker.",
+   "prediction": {
+    "expected_outcome": "worker resumes processing",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "billing-api: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "queue depth back to 0"
+     },
+     {
+      "role": "diagnostic",
+      "text": "cache hit rate 93%"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-074",
+   "decision_text": "On cache-layer, run the load test above the documented limit.",
+   "prediction": {
+    "expected_outcome": "requests are rate limited",
+    "expected_success": false,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": false,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "cache-layer: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "429 on 12% of requests"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-075",
+   "decision_text": "On web-frontend, merge the approved pull request.",
+   "prediction": {
+    "expected_outcome": "merge succeeds",
+    "expected_success": true,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "web-frontend: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "merged, CI green on main"
+     },
+     {
+      "role": "diagnostic",
+      "text": "peak memory 512 MB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-076",
+   "decision_text": "On report-builder, run the load test above the documented limit.",
+   "prediction": {
+    "expected_outcome": "requests are rate limited",
+    "expected_success": false,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": false,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "429 on 12% of requests"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-077",
+   "decision_text": "On report-builder, rotate the read replica.",
+   "prediction": {
+    "expected_outcome": "replica rotation completes without errors",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "replica promoted, lag 0s"
+     },
+     {
+      "role": "diagnostic",
+      "text": "peak memory 512 MB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-078",
+   "decision_text": "On auth-service, rotate the read replica.",
+   "prediction": {
+    "expected_outcome": "replica rotation completes without errors",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "auth-service: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "replica promoted, lag 0s"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-079",
+   "decision_text": "On web-frontend, bump the logging library minor version.",
+   "prediction": {
+    "expected_outcome": "build stays green",
+    "expected_success": true,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "web-frontend: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "build #2291 succeeded"
+     },
+     {
+      "role": "diagnostic",
+      "text": "duration 41s"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-080",
+   "decision_text": "On cache-layer, run the linter on the changed files.",
+   "prediction": {
+    "expected_outcome": "no lint errors",
+    "expected_success": true,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "cache-layer: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "0 problems"
+     },
+     {
+      "role": "diagnostic",
+      "text": "cache hit rate 93%"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-081",
+   "decision_text": "On auth-service, restart the stuck worker.",
+   "prediction": {
+    "expected_outcome": "worker resumes processing",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "auth-service: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "queue depth back to 0"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-082",
+   "decision_text": "On report-builder, run the unit tests after the refactor.",
+   "prediction": {
+    "expected_outcome": "all tests pass",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "42 passed, 0 failed"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-083",
+   "decision_text": "On auth-service, restart the stuck worker.",
+   "prediction": {
+    "expected_outcome": "worker resumes processing",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "auth-service: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "queue depth back to 0"
+     },
+     {
+      "role": "diagnostic",
+      "text": "peak memory 512 MB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-084",
+   "decision_text": "On data-pipeline, restart the stuck worker.",
+   "prediction": {
+    "expected_outcome": "worker resumes processing",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "data-pipeline: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "queue depth back to 0"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine restart on data-pipeline"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-085",
+   "decision_text": "On web-frontend, restart the stuck worker.",
+   "prediction": {
+    "expected_outcome": "worker resumes processing",
+    "expected_success": true,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "web-frontend: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "queue depth back to 0"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-086",
+   "decision_text": "On notification-worker, regenerate the API client.",
+   "prediction": {
+    "expected_outcome": "client compiles",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "notification-worker: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "codegen complete, 0 diffs in tests"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-087",
+   "decision_text": "On mobile-app, try the old credentials after rotation.",
+   "prediction": {
+    "expected_outcome": "authentication is refused",
+    "expected_success": false,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": false,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "mobile-app: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "401 Unauthorized"
+     },
+     {
+      "role": "diagnostic",
+      "text": "duration 41s"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-088",
+   "decision_text": "On report-builder, merge the approved pull request.",
+   "prediction": {
+    "expected_outcome": "merge succeeds",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "merged, CI green on main"
+     },
+     {
+      "role": "diagnostic",
+      "text": "duration 41s"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-089",
+   "decision_text": "On report-builder, run the unit tests after the refactor.",
+   "prediction": {
+    "expected_outcome": "all tests pass",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "42 passed, 0 failed"
+     },
+     {
+      "role": "diagnostic",
+      "text": "2 retries on network fetch"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-090",
+   "decision_text": "On payments-gateway, run the linter on the changed files.",
+   "prediction": {
+    "expected_outcome": "no lint errors",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "payments-gateway: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "0 problems"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-091",
+   "decision_text": "On billing-api, run the load test above the documented limit.",
+   "prediction": {
+    "expected_outcome": "requests are rate limited",
+    "expected_success": false,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": false,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "billing-api: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "429 on 12% of requests"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine run on billing-api"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-092",
+   "decision_text": "On report-builder, run the unit tests after the refactor.",
+   "prediction": {
+    "expected_outcome": "all tests pass",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "42 passed, 0 failed"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine run on report-builder"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-093",
+   "decision_text": "On cache-layer, run the load test above the documented limit.",
+   "prediction": {
+    "expected_outcome": "requests are rate limited",
+    "expected_success": false,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": false,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "cache-layer: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "429 on 12% of requests"
+     },
+     {
+      "role": "diagnostic",
+      "text": "no warnings"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-094",
+   "decision_text": "On auth-service, restart the stuck worker.",
+   "prediction": {
+    "expected_outcome": "worker resumes processing",
+    "expected_success": true,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "auth-service: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "queue depth back to 0"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-095",
+   "decision_text": "On web-frontend, run the canary query against the deprecated endpoint.",
+   "prediction": {
+    "expected_outcome": "the endpoint returns 410 Gone",
+    "expected_success": false,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": false,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "web-frontend: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "HTTP 410"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-096",
+   "decision_text": "On notification-worker, run the unit tests after the refactor.",
+   "prediction": {
+    "expected_outcome": "all tests pass",
+    "expected_success": true,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "notification-worker: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "42 passed, 0 failed"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine run on notification-worker"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-097",
+   "decision_text": "On web-frontend, restart the stuck worker.",
+   "prediction": {
+    "expected_outcome": "worker resumes processing",
+    "expected_success": true,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "web-frontend: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "queue depth back to 0"
+     },
+     {
+      "role": "diagnostic",
+      "text": "2 retries on network fetch"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-098",
+   "decision_text": "On billing-api, rebuild the search index.",
+   "prediction": {
+    "expected_outcome": "index rebuild completes",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "billing-api: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "indexed 18,204 documents"
+     },
+     {
+      "role": "diagnostic",
+      "text": "runner ubuntu-22.04"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-099",
+   "decision_text": "On payments-gateway, run the new regression test before the fix.",
+   "prediction": {
+    "expected_outcome": "the test fails, reproducing the bug",
+    "expected_success": false,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": false,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "payments-gateway: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "1 failed: expected 3, got 2"
+     },
+     {
+      "role": "diagnostic",
+      "text": "runner ubuntu-22.04"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-100",
+   "decision_text": "On payments-gateway, run the linter on the changed files.",
+   "prediction": {
+    "expected_outcome": "no lint errors",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "payments-gateway: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "0 problems"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-101",
+   "decision_text": "On payments-gateway, apply the reviewed schema migration.",
+   "prediction": {
+    "expected_outcome": "migration applies cleanly",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "payments-gateway: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "migration 0042 applied"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-102",
+   "decision_text": "On report-builder, apply the reviewed schema migration.",
+   "prediction": {
+    "expected_outcome": "migration applies cleanly",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "migration 0042 applied"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-103",
+   "decision_text": "On search-indexer, run the unit tests after the refactor.",
+   "prediction": {
+    "expected_outcome": "all tests pass",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "search-indexer: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "42 passed, 0 failed"
+     },
+     {
+      "role": "diagnostic",
+      "text": "no warnings"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine run on search-indexer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-104",
+   "decision_text": "On search-indexer, rebuild the search index.",
+   "prediction": {
+    "expected_outcome": "index rebuild completes",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "search-indexer: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "indexed 18,204 documents"
+     },
+     {
+      "role": "diagnostic",
+      "text": "cache hit rate 93%"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-105",
+   "decision_text": "On data-pipeline, restart the stuck worker.",
+   "prediction": {
+    "expected_outcome": "worker resumes processing",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "data-pipeline: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "queue depth back to 0"
+     },
+     {
+      "role": "diagnostic",
+      "text": "no warnings"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-106",
+   "decision_text": "On search-indexer, bump the logging library minor version.",
+   "prediction": {
+    "expected_outcome": "build stays green",
+    "expected_success": true,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "search-indexer: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "build #2291 succeeded"
+     },
+     {
+      "role": "diagnostic",
+      "text": "duration 41s"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-107",
+   "decision_text": "On search-indexer, rotate the read replica.",
+   "prediction": {
+    "expected_outcome": "replica rotation completes without errors",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "search-indexer: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "replica promoted, lag 0s"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-108",
+   "decision_text": "On notification-worker, deploy the patch to staging.",
+   "prediction": {
+    "expected_outcome": "staging deploy succeeds",
+    "expected_success": true,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "notification-worker: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "deploy finished, health checks green"
+     },
+     {
+      "role": "diagnostic",
+      "text": "artifact size 4.1 MB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-109",
+   "decision_text": "On mobile-app, rotate the read replica.",
+   "prediction": {
+    "expected_outcome": "replica rotation completes without errors",
+    "expected_success": true,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "mobile-app: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "replica promoted, lag 0s"
+     },
+     {
+      "role": "diagnostic",
+      "text": "cache hit rate 93%"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-110",
+   "decision_text": "On payments-gateway, regenerate the API client.",
+   "prediction": {
+    "expected_outcome": "client compiles",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "payments-gateway: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "codegen complete, 0 diffs in tests"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-111",
+   "decision_text": "On search-indexer, check the feature flag before rollout.",
+   "prediction": {
+    "expected_outcome": "the flag is still off",
+    "expected_success": false,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": false,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "search-indexer: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "flag disabled"
+     },
+     {
+      "role": "diagnostic",
+      "text": "2 retries on network fetch"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-112",
+   "decision_text": "On report-builder, check the feature flag before rollout.",
+   "prediction": {
+    "expected_outcome": "the flag is still off",
+    "expected_success": false,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": false,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "flag disabled"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine check on report-builder"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-113",
+   "decision_text": "On mobile-app, run the new regression test before the fix.",
+   "prediction": {
+    "expected_outcome": "the test fails, reproducing the bug",
+    "expected_success": false,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": false,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "mobile-app: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "1 failed: expected 3, got 2"
+     },
+     {
+      "role": "diagnostic",
+      "text": "artifact size 4.1 MB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-114",
+   "decision_text": "On cache-layer, run the new regression test before the fix.",
+   "prediction": {
+    "expected_outcome": "the test fails, reproducing the bug",
+    "expected_success": false,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": false,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "cache-layer: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "1 failed: expected 3, got 2"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-115",
+   "decision_text": "On notification-worker, try the old credentials after rotation.",
+   "prediction": {
+    "expected_outcome": "authentication is refused",
+    "expected_success": false,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": false,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "notification-worker: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "401 Unauthorized"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-116",
+   "decision_text": "On report-builder, bump the logging library minor version.",
+   "prediction": {
+    "expected_outcome": "build stays green",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "build #2291 succeeded"
+     },
+     {
+      "role": "diagnostic",
+      "text": "runner ubuntu-22.04"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-117",
+   "decision_text": "On report-builder, run the canary query against the deprecated endpoint.",
+   "prediction": {
+    "expected_outcome": "the endpoint returns 410 Gone",
+    "expected_success": false,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": false,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "HTTP 410"
+     },
+     {
+      "role": "diagnostic",
+      "text": "2 retries on network fetch"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-118",
+   "decision_text": "On mobile-app, restart the stuck worker.",
+   "prediction": {
+    "expected_outcome": "worker resumes processing",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "mobile-app: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "queue depth back to 0"
+     },
+     {
+      "role": "diagnostic",
+      "text": "2 retries on network fetch"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-119",
+   "decision_text": "On web-frontend, bump the logging library minor version.",
+   "prediction": {
+    "expected_outcome": "build stays green",
+    "expected_success": true,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "web-frontend: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "build #2291 succeeded"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-120",
+   "decision_text": "On cache-layer, restart the stuck worker.",
+   "prediction": {
+    "expected_outcome": "worker resumes processing",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "cache-layer: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "queue depth back to 0"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-121",
+   "decision_text": "On web-frontend, merge the approved pull request.",
+   "prediction": {
+    "expected_outcome": "merge succeeds",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "web-frontend: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "merged, CI green on main"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine merge on web-frontend"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-122",
+   "decision_text": "On report-builder, check the feature flag before rollout.",
+   "prediction": {
+    "expected_outcome": "the flag is still off",
+    "expected_success": false,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": false,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "flag disabled"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-123",
+   "decision_text": "On web-frontend, apply the reviewed schema migration.",
+   "prediction": {
+    "expected_outcome": "migration applies cleanly",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "web-frontend: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "migration 0042 applied"
+     },
+     {
+      "role": "diagnostic",
+      "text": "artifact size 4.1 MB"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine apply on web-frontend"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-124",
+   "decision_text": "On search-indexer, check the feature flag before rollout.",
+   "prediction": {
+    "expected_outcome": "the flag is still off",
+    "expected_success": false,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": false,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "search-indexer: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "flag disabled"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-125",
+   "decision_text": "On notification-worker, run the new regression test before the fix.",
+   "prediction": {
+    "expected_outcome": "the test fails, reproducing the bug",
+    "expected_success": false,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": false,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "notification-worker: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "1 failed: expected 3, got 2"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-126",
+   "decision_text": "On notification-worker, run the unit tests after the refactor.",
+   "prediction": {
+    "expected_outcome": "all tests pass",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "notification-worker: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "42 passed, 0 failed"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-127",
+   "decision_text": "On payments-gateway, bump the logging library minor version.",
+   "prediction": {
+    "expected_outcome": "build stays green",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "payments-gateway: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "build #2291 succeeded"
+     },
+     {
+      "role": "diagnostic",
+      "text": "artifact size 4.1 MB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-128",
+   "decision_text": "On search-indexer, regenerate the API client.",
+   "prediction": {
+    "expected_outcome": "client compiles",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "search-indexer: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "codegen complete, 0 diffs in tests"
+     },
+     {
+      "role": "diagnostic",
+      "text": "no warnings"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-129",
+   "decision_text": "On cache-layer, rebuild the search index.",
+   "prediction": {
+    "expected_outcome": "index rebuild completes",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "cache-layer: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "indexed 18,204 documents"
+     },
+     {
+      "role": "diagnostic",
+      "text": "runner ubuntu-22.04"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-130",
+   "decision_text": "On report-builder, run the canary query against the deprecated endpoint.",
+   "prediction": {
+    "expected_outcome": "the endpoint returns 410 Gone",
+    "expected_success": false,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": false,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "HTTP 410"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-131",
+   "decision_text": "On report-builder, run the new regression test before the fix.",
+   "prediction": {
+    "expected_outcome": "the test fails, reproducing the bug",
+    "expected_success": false,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": false,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "1 failed: expected 3, got 2"
+     },
+     {
+      "role": "diagnostic",
+      "text": "peak memory 512 MB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-132",
+   "decision_text": "On mobile-app, restart the stuck worker.",
+   "prediction": {
+    "expected_outcome": "worker resumes processing",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "mobile-app: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "queue depth back to 0"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-133",
+   "decision_text": "On auth-service, bump the logging library minor version.",
+   "prediction": {
+    "expected_outcome": "build stays green",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "auth-service: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "build #2291 succeeded"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-134",
+   "decision_text": "On mobile-app, run the unit tests after the refactor.",
+   "prediction": {
+    "expected_outcome": "all tests pass",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "mobile-app: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "42 passed, 0 failed"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-135",
+   "decision_text": "On payments-gateway, restart the stuck worker.",
+   "prediction": {
+    "expected_outcome": "worker resumes processing",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "payments-gateway: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "queue depth back to 0"
+     },
+     {
+      "role": "diagnostic",
+      "text": "2 retries on network fetch"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine restart on payments-gateway"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-136",
+   "decision_text": "On billing-api, try the old credentials after rotation.",
+   "prediction": {
+    "expected_outcome": "authentication is refused",
+    "expected_success": false,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": false,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "billing-api: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "401 Unauthorized"
+     },
+     {
+      "role": "diagnostic",
+      "text": "runner ubuntu-22.04"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine try on billing-api"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-137",
+   "decision_text": "On payments-gateway, rotate the read replica.",
+   "prediction": {
+    "expected_outcome": "replica rotation completes without errors",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "payments-gateway: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "replica promoted, lag 0s"
+     },
+     {
+      "role": "diagnostic",
+      "text": "artifact size 4.1 MB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-138",
+   "decision_text": "On data-pipeline, restart the stuck worker.",
+   "prediction": {
+    "expected_outcome": "worker resumes processing",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "data-pipeline: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "queue depth back to 0"
+     },
+     {
+      "role": "diagnostic",
+      "text": "artifact size 4.1 MB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-139",
+   "decision_text": "On notification-worker, run the new regression test before the fix.",
+   "prediction": {
+    "expected_outcome": "the test fails, reproducing the bug",
+    "expected_success": false,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": false,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "notification-worker: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "1 failed: expected 3, got 2"
+     },
+     {
+      "role": "diagnostic",
+      "text": "2 retries on network fetch"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-140",
+   "decision_text": "On billing-api, run the unit tests after the refactor.",
+   "prediction": {
+    "expected_outcome": "all tests pass",
+    "expected_success": true,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "billing-api: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "42 passed, 0 failed"
+     },
+     {
+      "role": "diagnostic",
+      "text": "artifact size 4.1 MB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-141",
+   "decision_text": "On payments-gateway, rotate the read replica.",
+   "prediction": {
+    "expected_outcome": "replica rotation completes without errors",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "payments-gateway: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "replica promoted, lag 0s"
+     },
+     {
+      "role": "diagnostic",
+      "text": "artifact size 4.1 MB"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine rotate on payments-gateway"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-142",
+   "decision_text": "On report-builder, run the new regression test before the fix.",
+   "prediction": {
+    "expected_outcome": "the test fails, reproducing the bug",
+    "expected_success": false,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": false,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "1 failed: expected 3, got 2"
+     },
+     {
+      "role": "diagnostic",
+      "text": "no warnings"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-143",
+   "decision_text": "On billing-api, restart the stuck worker.",
+   "prediction": {
+    "expected_outcome": "worker resumes processing",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "billing-api: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "queue depth back to 0"
+     },
+     {
+      "role": "diagnostic",
+      "text": "duration 41s"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-144",
+   "decision_text": "On payments-gateway, deploy the patch to staging.",
+   "prediction": {
+    "expected_outcome": "staging deploy succeeds",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "payments-gateway: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "deploy finished, health checks green"
+     },
+     {
+      "role": "diagnostic",
+      "text": "artifact size 4.1 MB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-145",
+   "decision_text": "On data-pipeline, regenerate the API client.",
+   "prediction": {
+    "expected_outcome": "client compiles",
+    "expected_success": true,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "data-pipeline: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "codegen complete, 0 diffs in tests"
+     },
+     {
+      "role": "diagnostic",
+      "text": "peak memory 512 MB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-146",
+   "decision_text": "On mobile-app, run the new regression test before the fix.",
+   "prediction": {
+    "expected_outcome": "the test fails, reproducing the bug",
+    "expected_success": false,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": false,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "mobile-app: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "1 failed: expected 3, got 2"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine run on mobile-app"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-147",
+   "decision_text": "On notification-worker, run the linter on the changed files.",
+   "prediction": {
+    "expected_outcome": "no lint errors",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "notification-worker: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "0 problems"
+     },
+     {
+      "role": "diagnostic",
+      "text": "duration 41s"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-148",
+   "decision_text": "On data-pipeline, run the new regression test before the fix.",
+   "prediction": {
+    "expected_outcome": "the test fails, reproducing the bug",
+    "expected_success": false,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": false,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "data-pipeline: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "1 failed: expected 3, got 2"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine run on data-pipeline"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-149",
+   "decision_text": "On payments-gateway, run the linter on the changed files.",
+   "prediction": {
+    "expected_outcome": "no lint errors",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "payments-gateway: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "0 problems"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-150",
+   "decision_text": "On billing-api, restart the stuck worker.",
+   "prediction": {
+    "expected_outcome": "worker resumes processing",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "billing-api: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "queue depth back to 0"
+     },
+     {
+      "role": "diagnostic",
+      "text": "cache hit rate 93%"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-151",
+   "decision_text": "On report-builder, rotate the read replica.",
+   "prediction": {
+    "expected_outcome": "replica rotation completes without errors",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "replica promoted, lag 0s"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-152",
+   "decision_text": "On data-pipeline, run the new regression test before the fix.",
+   "prediction": {
+    "expected_outcome": "the test fails, reproducing the bug",
+    "expected_success": false,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": false,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "data-pipeline: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "1 failed: expected 3, got 2"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-153",
+   "decision_text": "On search-indexer, run the new regression test before the fix.",
+   "prediction": {
+    "expected_outcome": "the test fails, reproducing the bug",
+    "expected_success": false,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": false,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "search-indexer: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "1 failed: expected 3, got 2"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-154",
+   "decision_text": "On search-indexer, rotate the read replica.",
+   "prediction": {
+    "expected_outcome": "replica rotation completes without errors",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "search-indexer: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "replica promoted, lag 0s"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-155",
+   "decision_text": "On cache-layer, rebuild the search index.",
+   "prediction": {
+    "expected_outcome": "index rebuild completes",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "cache-layer: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "indexed 18,204 documents"
+     },
+     {
+      "role": "diagnostic",
+      "text": "duration 41s"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-156",
+   "decision_text": "On data-pipeline, bump the logging library minor version.",
+   "prediction": {
+    "expected_outcome": "build stays green",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "data-pipeline: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "build #2291 succeeded"
+     },
+     {
+      "role": "diagnostic",
+      "text": "peak memory 512 MB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-157",
+   "decision_text": "On cache-layer, run the linter on the changed files.",
+   "prediction": {
+    "expected_outcome": "no lint errors",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "cache-layer: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "0 problems"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-158",
+   "decision_text": "On mobile-app, deploy the patch to staging.",
+   "prediction": {
+    "expected_outcome": "staging deploy succeeds",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "mobile-app: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "deploy finished, health checks green"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-159",
+   "decision_text": "On data-pipeline, run the canary query against the deprecated endpoint.",
+   "prediction": {
+    "expected_outcome": "the endpoint returns 410 Gone",
+    "expected_success": false,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": false,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "data-pipeline: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "HTTP 410"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-160",
+   "decision_text": "On report-builder, run the load test above the documented limit.",
+   "prediction": {
+    "expected_outcome": "requests are rate limited",
+    "expected_success": false,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": false,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "429 on 12% of requests"
+     },
+     {
+      "role": "diagnostic",
+      "text": "artifact size 4.1 MB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-161",
+   "decision_text": "On report-builder, apply the reviewed schema migration.",
+   "prediction": {
+    "expected_outcome": "migration applies cleanly",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "migration 0042 applied"
+     },
+     {
+      "role": "diagnostic",
+      "text": "duration 41s"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine apply on report-builder"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-162",
+   "decision_text": "On notification-worker, try the old credentials after rotation.",
+   "prediction": {
+    "expected_outcome": "authentication is refused",
+    "expected_success": false,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": false,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "notification-worker: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "401 Unauthorized"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine try on notification-worker"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-163",
+   "decision_text": "On data-pipeline, regenerate the API client.",
+   "prediction": {
+    "expected_outcome": "client compiles",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "data-pipeline: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "codegen complete, 0 diffs in tests"
+     },
+     {
+      "role": "diagnostic",
+      "text": "artifact size 4.1 MB"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine regenerate on data-pipeline"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-164",
+   "decision_text": "On payments-gateway, merge the approved pull request.",
+   "prediction": {
+    "expected_outcome": "merge succeeds",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "payments-gateway: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "merged, CI green on main"
+     },
+     {
+      "role": "diagnostic",
+      "text": "no warnings"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-165",
+   "decision_text": "On search-indexer, run the linter on the changed files.",
+   "prediction": {
+    "expected_outcome": "no lint errors",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "search-indexer: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "0 problems"
+     },
+     {
+      "role": "diagnostic",
+      "text": "artifact size 4.1 MB"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine run on search-indexer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-166",
+   "decision_text": "On web-frontend, run the unit tests after the refactor.",
+   "prediction": {
+    "expected_outcome": "all tests pass",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "web-frontend: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "42 passed, 0 failed"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-167",
+   "decision_text": "On payments-gateway, run the linter on the changed files.",
+   "prediction": {
+    "expected_outcome": "no lint errors",
+    "expected_success": true,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "payments-gateway: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "0 problems"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-168",
+   "decision_text": "On payments-gateway, try the old credentials after rotation.",
+   "prediction": {
+    "expected_outcome": "authentication is refused",
+    "expected_success": false,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": false,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "payments-gateway: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "401 Unauthorized"
+     },
+     {
+      "role": "diagnostic",
+      "text": "duration 41s"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-169",
+   "decision_text": "On search-indexer, rebuild the search index.",
+   "prediction": {
+    "expected_outcome": "index rebuild completes",
+    "expected_success": true,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "search-indexer: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "indexed 18,204 documents"
+     },
+     {
+      "role": "diagnostic",
+      "text": "cache hit rate 93%"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-170",
+   "decision_text": "On payments-gateway, rotate the read replica.",
+   "prediction": {
+    "expected_outcome": "replica rotation completes without errors",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "payments-gateway: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "replica promoted, lag 0s"
+     },
+     {
+      "role": "diagnostic",
+      "text": "cache hit rate 93%"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine rotate on payments-gateway"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-171",
+   "decision_text": "On notification-worker, run the unit tests after the refactor.",
+   "prediction": {
+    "expected_outcome": "all tests pass",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "notification-worker: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "42 passed, 0 failed"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-172",
+   "decision_text": "On web-frontend, rotate the read replica.",
+   "prediction": {
+    "expected_outcome": "replica rotation completes without errors",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "web-frontend: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "replica promoted, lag 0s"
+     },
+     {
+      "role": "diagnostic",
+      "text": "peak memory 512 MB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-173",
+   "decision_text": "On search-indexer, rebuild the search index.",
+   "prediction": {
+    "expected_outcome": "index rebuild completes",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "search-indexer: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "indexed 18,204 documents"
+     },
+     {
+      "role": "diagnostic",
+      "text": "artifact size 4.1 MB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-174",
+   "decision_text": "On cache-layer, run the unit tests after the refactor.",
+   "prediction": {
+    "expected_outcome": "all tests pass",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "cache-layer: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "42 passed, 0 failed"
+     },
+     {
+      "role": "diagnostic",
+      "text": "artifact size 4.1 MB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-175",
+   "decision_text": "On billing-api, run the linter on the changed files.",
+   "prediction": {
+    "expected_outcome": "no lint errors",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "billing-api: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "0 problems"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-176",
+   "decision_text": "On auth-service, check the feature flag before rollout.",
+   "prediction": {
+    "expected_outcome": "the flag is still off",
+    "expected_success": false,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": false,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "auth-service: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "flag disabled"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-177",
+   "decision_text": "On data-pipeline, rotate the read replica.",
+   "prediction": {
+    "expected_outcome": "replica rotation completes without errors",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "data-pipeline: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "replica promoted, lag 0s"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-178",
+   "decision_text": "On web-frontend, merge the approved pull request.",
+   "prediction": {
+    "expected_outcome": "merge succeeds",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "web-frontend: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "merged, CI green on main"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-179",
+   "decision_text": "On cache-layer, rebuild the search index.",
+   "prediction": {
+    "expected_outcome": "index rebuild completes",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "cache-layer: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "indexed 18,204 documents"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-180",
+   "decision_text": "On cache-layer, run the load test above the documented limit.",
+   "prediction": {
+    "expected_outcome": "requests are rate limited",
+    "expected_success": false,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": false,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "cache-layer: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "429 on 12% of requests"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine run on cache-layer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-181",
+   "decision_text": "On mobile-app, merge the approved pull request.",
+   "prediction": {
+    "expected_outcome": "merge succeeds",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "mobile-app: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "merged, CI green on main"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-182",
+   "decision_text": "On data-pipeline, merge the approved pull request.",
+   "prediction": {
+    "expected_outcome": "merge succeeds",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "data-pipeline: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "merged, CI green on main"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-183",
+   "decision_text": "On auth-service, regenerate the API client.",
+   "prediction": {
+    "expected_outcome": "client compiles",
+    "expected_success": true,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "auth-service: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "codegen complete, 0 diffs in tests"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-184",
+   "decision_text": "On report-builder, rotate the read replica.",
+   "prediction": {
+    "expected_outcome": "replica rotation completes without errors",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "replica promoted, lag 0s"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-185",
+   "decision_text": "On auth-service, merge the approved pull request.",
+   "prediction": {
+    "expected_outcome": "merge succeeds",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "auth-service: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "merged, CI green on main"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-186",
+   "decision_text": "On search-indexer, try the old credentials after rotation.",
+   "prediction": {
+    "expected_outcome": "authentication is refused",
+    "expected_success": false,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": false,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "search-indexer: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "401 Unauthorized"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-187",
+   "decision_text": "On report-builder, apply the reviewed schema migration.",
+   "prediction": {
+    "expected_outcome": "migration applies cleanly",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "migration 0042 applied"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-188",
+   "decision_text": "On payments-gateway, try the old credentials after rotation.",
+   "prediction": {
+    "expected_outcome": "authentication is refused",
+    "expected_success": false,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": false,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "payments-gateway: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "401 Unauthorized"
+     },
+     {
+      "role": "diagnostic",
+      "text": "peak memory 512 MB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-189",
+   "decision_text": "On auth-service, apply the reviewed schema migration.",
+   "prediction": {
+    "expected_outcome": "migration applies cleanly",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "auth-service: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "migration 0042 applied"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-190",
+   "decision_text": "On auth-service, run the load test above the documented limit.",
+   "prediction": {
+    "expected_outcome": "requests are rate limited",
+    "expected_success": false,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": false,
+    "source": "review",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "auth-service: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "429 on 12% of requests"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-191",
+   "decision_text": "On mobile-app, merge the approved pull request.",
+   "prediction": {
+    "expected_outcome": "merge succeeds",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "mobile-app: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "merged, CI green on main"
+     },
+     {
+      "role": "diagnostic",
+      "text": "duration 41s"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine merge on mobile-app"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-192",
+   "decision_text": "On notification-worker, run the canary query against the deprecated endpoint.",
+   "prediction": {
+    "expected_outcome": "the endpoint returns 410 Gone",
+    "expected_success": false,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": false,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "notification-worker: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "HTTP 410"
+     },
+     {
+      "role": "diagnostic",
+      "text": "no warnings"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine run on notification-worker"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-193",
+   "decision_text": "On report-builder, run the linter on the changed files.",
+   "prediction": {
+    "expected_outcome": "no lint errors",
+    "expected_success": true,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "0 problems"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-194",
+   "decision_text": "On billing-api, rebuild the search index.",
+   "prediction": {
+    "expected_outcome": "index rebuild completes",
+    "expected_success": true,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": true,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "billing-api: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "indexed 18,204 documents"
+     },
+     {
+      "role": "diagnostic",
+      "text": "duration 41s"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine rebuild on billing-api"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-195",
+   "decision_text": "On auth-service, run the load test above the documented limit.",
+   "prediction": {
+    "expected_outcome": "requests are rate limited",
+    "expected_success": false,
+    "confidence_pct": 90
+   },
+   "outcome": {
+    "success": false,
+    "source": "tool",
+    "authorship": "external",
+    "actor_kind": "tool",
+    "sections": [
+     {
+      "role": "status",
+      "text": "auth-service: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "429 on 12% of requests"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-196",
+   "decision_text": "On search-indexer, run the unit tests after the refactor.",
+   "prediction": {
+    "expected_outcome": "all tests pass",
+    "expected_success": true,
+    "confidence_pct": 80
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "search-indexer: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "42 passed, 0 failed"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine run on search-indexer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-197",
+   "decision_text": "On data-pipeline, run the load test above the documented limit.",
+   "prediction": {
+    "expected_outcome": "requests are rate limited",
+    "expected_success": false,
+    "confidence_pct": 95
+   },
+   "outcome": {
+    "success": false,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "data-pipeline: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "429 on 12% of requests"
+     },
+     {
+      "role": "diagnostic",
+      "text": "peak memory 512 MB"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine run on data-pipeline"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-198",
+   "decision_text": "On report-builder, check the feature flag before rollout.",
+   "prediction": {
+    "expected_outcome": "the flag is still off",
+    "expected_success": false,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": false,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: FAIL (as expected)"
+     },
+     {
+      "role": "evaluation",
+      "text": "flag disabled"
+     },
+     {
+      "role": "operator_note",
+      "text": "routine check on report-builder"
+     }
+    ]
+   }
+  },
+  {
+   "id": "routine-199",
+   "decision_text": "On report-builder, merge the approved pull request.",
+   "prediction": {
+    "expected_outcome": "merge succeeds",
+    "expected_success": true,
+    "confidence_pct": 70
+   },
+   "outcome": {
+    "success": true,
+    "source": "ci",
+    "authorship": "integration_result",
+    "actor_kind": "system",
+    "sections": [
+     {
+      "role": "status",
+      "text": "report-builder: PASS"
+     },
+     {
+      "role": "evaluation",
+      "text": "merged, CI green on main"
+     },
+     {
+      "role": "diagnostic",
+      "text": "2 retries on network fetch"
+     }
+    ]
+   }
+  }
+ ]
+}

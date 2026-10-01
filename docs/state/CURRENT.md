@@ -64,8 +64,11 @@ Phase 2 is done when all of these pass on the Docker Postgres:
    one test per condition)**, versioning and upgrade, contradiction, contestation and supersession, and deviations
    1–4.
 6. **Episodes:** each MNEXA ADR-0009 invariant (Q-1…Q-15) has a passing test.
-7. **Write gate:** 100% flag recall on the lesson-bearing episodes of 003–016 through the real capture mapping;
-   an authoritative correction always flags (D-0019 R1–R2).
+7. **Write gate:**
+   - **Recall:** 100% flag recall on the lesson-bearing episodes of 003–016 through the real capture mapping; an
+     authoritative correction always flags (D-0019 R1–R2).
+   - **Selectivity (owner, R3):** flag rate ≤ 5% on the frozen routine set (`routine_episodes_v1`, 200 episodes).
+   - **Canary:** a flag-everything gate must fail this item.
 8. **Rebuild:** the `interp` projection rebuilt from the ledger is identical.
 9. **Shredding and privacy:**
    - erasing a scope or person makes its model-call recordings, proposals and beliefs unreadable;
@@ -801,3 +804,9 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
     graders, role markers or the harness. Guards (ii) and (iii) come with the sleep pass.
   - **Requested scope done:** P12, P13–P21 and P3. **Next:** stores (P27–P34, including D-0017 amendment 1 tests),
     then the sleep pass (P22–P26), P11, P5.
+- 2026-10-01 — **Gate item 7 selectivity pre-registered (D-0019 R3), before measuring.**
+  - Frozen routine set: sha256 `cad974a7…`, 200 episodes. Ceiling ≤ 5%. Canary: flag-everything fails.
+  - **Disclosed before measuring:** 32/200 are trusted expected failures that R1's failing-evaluation clause flags,
+    so a failure (about 16%) is expected and will be reported, not engineered away.
+  - **Note:** a first draft of the generator put expected failures in `diagnostic` sections. That would have dodged
+    R1, so it was changed to `evaluation` (realistic) before freezing.

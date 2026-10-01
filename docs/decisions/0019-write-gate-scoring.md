@@ -66,6 +66,25 @@ Option 3.
   authority), not on a separate idealised encoding.
 - Nothing in EXP-0001 bears on stakes or statement scoring; those stay as proposed.
 
+## Revision R3 (owner, 2026-10-01): selectivity, pre-registered before measuring
+- **Owner requirement:** alongside 100% recall on lesson-bearing episodes, gate item 7 measures **selectivity** on a
+  separate set of routine episodes. A gate that flags everything must fail item 7.
+- **Frozen set:** `tests/regression/routine/routine_episodes_v1.json`, sha256
+  `cad974a7dc541cb496f33918520835010d7b349b71562f5e54b36679c751e8f6`.
+  - 200 episodes from `scripts/make_routine_episodes.py` (seed 20261001), its own vocabulary, not drawn from
+    003–016.
+  - Every episode: the prediction was correct, the outcome was as expected, no correction section, no stakes tag.
+  - 50 are expected failures (for example, a new regression test failing before the fix).
+  - The observed result is always an `evaluation` section, as a real CI report would be.
+  - Sources: ci / review (trusted integration results) and tool (untrusted).
+- **Ceiling (proposed by Claude before any measurement):** the normal-mode flag rate on the routine set must be
+  **≤ 5% (≤ 10 of 200)**.
+- **Canary:** with the normal threshold set to 0 (a gate that flags everything), item 7 must fail.
+- **Disclosed before measuring:** counting the frozen set shows **32 episodes are trusted expected failures**. As
+  written, R1 ("a failing evaluation always flags, whatever the prediction") flags them, so the gate is **expected to
+  fail the ceiling (about 16%)**. That is a finding about R1, not a reason to change the set or the ceiling. The
+  measurement is run as registered and reported to the owner.
+
 ## Why this one
 - It is deterministic, costs nothing, and cannot be argued with by untrusted text.
 - It covers the SPEC signals.
