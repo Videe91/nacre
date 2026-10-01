@@ -74,5 +74,19 @@ caffeinate -i nohup .venv/bin/python scripts/run_exp0003.py run > ~/Desktop/nacr
 - Plumbing was checked 2026-10-01 with `--dry-run` (180 trials, safety 0) and its `--recorded` replay (identical
   verdicts, 0 live calls). These are not results.
 
+## Run log
+- **`EXP-0003-20261001T125548Z-8f32eb-LIVE`: ABORTED (infrastructure), EXCLUDED.**
+  - Code at 823207b, clean.
+  - Aborted by SIGHUP during rep 3 (last progress `rep3 016 xenial-api-xa-84`); reps 1–2 had completed.
+  - **Cause:** the runner installed its own SIGHUP handler, which overrode nohup's ignore, so a terminal hang-up
+    killed a detached run.
+  - **Handling (owner, per the pre-registration):** recorded as aborted; **grades from reps 1–2 are not computed or
+    looked at**. No `trials.json` or `summary.json` was ever written, only `run.json` was read, and its per-family
+    fixtures are not opened or used.
+  - **Fix (before the restart):** SIGHUP stays ignored when it is already ignored at startup (nohup); SIGINT and
+    SIGTERM are still recorded aborts; progress lines are flushed live. Tested by
+    `tests/scripts/test_run_exp0003_signals.py` (a real nohup run survives SIGHUP and keeps progressing).
+  - The same handler pattern in the EXP-0001 runner was fixed too.
+
 ## Results
 (Appended after the run.)

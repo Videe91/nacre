@@ -910,3 +910,16 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
     keeping g. Shredded rows are carried over. Aborts leave nothing. 6 new tests.
     **Mutations:** 7/8 killed; the "next generation" switch rule is an equivalent mutant (documented).
   - **Phase 5 requirement recorded:** no learning from evaluation epochs.
+- 2026-10-01 — **EXP-0003 live run 8f32eb ABORTED by SIGHUP in rep 3 → excluded.**
+  - Grades from reps 1–2 were not computed or looked at; only `run.json` was read (status, reason, progress).
+  - **Runner fix:**
+    - an ignored SIGHUP (nohup) stays ignored; SIGINT/SIGTERM (and SIGHUP when not under nohup) abort and are
+      recorded;
+    - per-family progress lines with `flush=True`;
+    - run folder printed at start.
+  - The same SIGHUP fix in `run_mnexa_rebaseline.py`.
+  - **New tests** (`tests/scripts/test_run_exp0003_signals.py`, 4): under real nohup, SIGHUP is ignored and progress
+    continues; SIGTERM still aborts and is recorded; without nohup, SIGHUP aborts and is recorded; SIGINT aborts; lines
+    appear one at a time (not buffered bursts).
+  - Mutations 3/3 killed (a first flush test did not discriminate; replaced). 5/5 repeat runs stable. No stray
+    databases left by the killed test runs.

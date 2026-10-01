@@ -158,6 +158,8 @@ def one_run(rep, rdir, record, mode, recorded_dir):
                 fallback += r.sleep.fallback
                 streams.append(stream)
                 record["progress"] = f"rep{rep} {n:03d} {fam['id']}"
+                print(json.dumps({"progress": record["progress"], "at": datetime.now(UTC).isoformat(timespec="seconds")}),
+                      flush=True)
         stranger = uuid.uuid4()
         with open_session() as s:
             set_access(s, provider, org_id=org, principal_id=stranger, stream_id=streams[0], can_read=True, can_append=False,
@@ -196,6 +198,7 @@ def main(argv):
         raise SystemExit(f"frozen suite does not match its manifests: {suite.problems[:3]}")
     rdir = a.out / f"EXP-0003-{datetime.now(UTC):%Y%m%dT%H%M%SZ}-{secrets.token_hex(3)}-{mode.upper()}"
     rdir.mkdir(parents=True)
+    print(f"run folder: {rdir}", flush=True)
     record = {"experiment": "EXP-0003", "mode": mode, "model": MODEL, "k": K, "sets": [f"{n:03d}" for n in SETS],
               "nacre_head": _git("rev-parse", "HEAD"), "dirty": bool(_git("status", "--porcelain")),
               "recorded_from": str(a.recorded) if a.recorded else None, "status": "running", "runs": []}
@@ -205,8 +208,12 @@ def main(argv):
         record["status"], record["abort_reason"] = "aborted", f"signal {signal.Signals(signum).name}"
         save()
         raise SystemExit(f"aborted by {signal.Signals(signum).name}; recorded in {rdir}/run.json")
-    for sig in (signal.SIGINT, signal.SIGTERM, signal.SIGHUP):
+    # SIGINT and SIGTERM abort the run (recorded). SIGHUP aborts too, UNLESS it is already ignored at startup (as under
+    # nohup): then it stays ignored, so a terminal hang-up cannot kill a detached run (EXP-0003 run 8f32eb, 2026-10-01).
+    for sig in (signal.SIGINT, signal.SIGTERM):
         signal.signal(sig, stop)
+    if signal.getsignal(signal.SIGHUP) is not signal.SIG_IGN:
+        signal.signal(signal.SIGHUP, stop)
     save()
     all_trials, all_safety = [], dict.fromkeys(SAFETY_METRICS, 0)
     for rep in range(1, K + 1):
@@ -224,8 +231,8 @@ def main(argv):
     (rdir / "summary.json").write_text(json.dumps(summary, indent=1))
     record["status"] = "complete"
     save()
-    print(json.dumps(summary, indent=1))
-    print(f"run folder: {rdir}")
+    print(json.dumps(summary, indent=1), flush=True)
+    print(f"run folder: {rdir}", flush=True)
 
 
 if __name__ == "__main__":

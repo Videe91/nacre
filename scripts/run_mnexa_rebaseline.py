@@ -170,8 +170,12 @@ def run(out_root: Path, dry: bool) -> Path:
         record["abort_reason"] = f"signal {signal.Signals(signum).name} (interrupted, terminal closed, or killed)"
         save()
         raise SystemExit(f"run aborted by {signal.Signals(signum).name}; recorded in {rdir}/run.json")
-    for sig in (signal.SIGINT, signal.SIGTERM, signal.SIGHUP):
+    # SIGINT and SIGTERM abort the run (recorded). SIGHUP aborts too, UNLESS it is already ignored at startup (as under
+    # nohup): then it stays ignored, so a terminal hang-up cannot kill a detached run (EXP-0003 run 8f32eb, 2026-10-01).
+    for sig in (signal.SIGINT, signal.SIGTERM):
         signal.signal(sig, stop)
+    if signal.getsignal(signal.SIGHUP) is not signal.SIG_IGN:
+        signal.signal(signal.SIGHUP, stop)
     for rep in range(1, K + 1):
         for s in SETS:
             for mode in ("harness", "control"):
@@ -262,11 +266,11 @@ def main(argv):
     a = ap.parse_args(argv)
     if a.cmd == "run":
         rdir = run(a.out, a.dry_run)
-        print(f"run complete: {rdir}")
+        print(f"run complete: {rdir}", flush=True)
         if not a.dry_run:
-            print(json.dumps(summarize(rdir), indent=1, sort_keys=True))
+            print(json.dumps(summarize(rdir), indent=1, sort_keys=True), flush=True)
     else:
-        print(json.dumps(summarize(a.run_dir), indent=1, sort_keys=True))
+        print(json.dumps(summarize(a.run_dir), indent=1, sort_keys=True), flush=True)
 
 
 if __name__ == "__main__":
