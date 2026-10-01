@@ -103,3 +103,27 @@ def test_committed_negatives_are_skipped_only_while_unchanged(tmp_path):
     assert scanner._reviewed_negative(path, data)                            # reviewed bytes: skipped
     assert not scanner._reviewed_negative(path, data + b"\n# edited\n")    # any change: scanned again
     assert not scanner._reviewed_negative("tests/ledger/secret_corpus/negatives/new.py", b"x = 1\n")
+
+
+def test_frozen_fixture_reviews_are_exact_value_and_scoped(tmp_path):
+    # Owner approval 2026-10-01: hashed exact-value entries, honoured only at their own path, rule and value.
+    import json
+    entries = json.loads((ROOT / "tests/regression/mnexa/SECRET_SCAN_REVIEWED.json").read_text())["entries"]
+    e = next(x for x in entries if x["path"].endswith("tasks_023.json"))
+    text = (ROOT / e["path"]).read_text()
+    flagged = {f[3] for f in scanner.scan("elsewhere/tasks_023.json", text)}
+    assert flagged                                               # the same values are still caught at another path
+    assert scanner.scan(e["path"], text) == []                   # and reviewed at their own path
+    assert scanner.scan(e["path"], text + '\n"id": "' + github_pat() + '"\n') != []   # new values still caught
+    assert all(x["reason"].strip() for x in entries)
+
+
+def test_a_reviewed_entry_outside_the_approved_scope_is_refused(monkeypatch, tmp_path):
+    import json
+    bad = tmp_path / "r.json"
+    bad.write_text(json.dumps({"entries": [{"path": "src/nacre/x.py", "rule_id": "entropy", "value_sha256": "0" * 64,
+                                            "reason": "no"}]}))
+    monkeypatch.setattr(scanner, "ROOT", tmp_path)
+    monkeypatch.setattr(scanner, "_FIXTURE_REVIEW_FILE", "r.json")
+    with pytest.raises(ValueError, match="outside the approved scope"):
+        scanner._fixture_reviews()

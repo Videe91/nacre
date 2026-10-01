@@ -17,7 +17,7 @@ Build the Phase 1 files in `docs/modules/INDEX.md` order, one functionality + te
 committing and pushing after each.
 - Done: #1 `core/event.py`, #2 `core/db.py`, #2a `core/blob_store.py`, #2b `core/root_key_provider.py`,
   #3 `schema/apply_migrations.py` + SQL 0001–0003, #2c `core/encode_cbor.py`, #2d `core/decode_cbor.py`, #4 `ledger/encode_envelope.py`, #5 `ledger/seal_event.py`, #3d `sql/0004_checkpoints.sql`.
-- **#6 CLOSED 2026-09-30** (H3 official). **#14 built; A-0007 measured; #7, #7a, #8 built.** #15/#15a/#15b, #16, #17, #18, #19 built. #20 (requests), #20c (execution), #20d (keyadmin tx) built; #21 folded into them. #20b master rotation and #20a root rotation built; **A-0008 validated** (pg_dump backup recovery, crash/resume). D-0015 accepted; #15c orphan collection built. **Every Phase 1 functionality in INDEX is done, and the Phase 1 gate was run in full on 2026-09-30 (all 6 items pass, below).** **Phase 1 gate ACCEPTED by the owner (2026-09-30); tagged `phase-1-complete`.** **Phase 2 planning done (2026-10-01), awaiting owner approval:** `docs/plans/phase-2-mnexa-port-inventory.md`, proposed D-0016 … D-0022, A-0023 … A-0028, INDEX rows P1–P34, and the proposed gate below. The MNEXA frozen suite is already frozen in `tests/regression/mnexa/` (data only). **No Phase 2 code until approval.**
+- **#6 CLOSED 2026-09-30** (H3 official). **#14 built; A-0007 measured; #7, #7a, #8 built.** #15/#15a/#15b, #16, #17, #18, #19 built. #20 (requests), #20c (execution), #20d (keyadmin tx) built; #21 folded into them. #20b master rotation and #20a root rotation built; **A-0008 validated** (pg_dump backup recovery, crash/resume). D-0015 accepted; #15c orphan collection built. **Every Phase 1 functionality in INDEX is done, and the Phase 1 gate was run in full on 2026-09-30 (all 6 items pass, below).** **Phase 1 gate ACCEPTED by the owner (2026-09-30); tagged `phase-1-complete`.** **Phase 2 planning done (2026-10-01). Owner answers received the same day (MNEXA = prior art; D3 parts approved). Next: EXP-0001 re-baseline, run by the owner, results to the owner BEFORE any porting.** Earlier status: `docs/plans/phase-2-mnexa-port-inventory.md`, proposed D-0016 … D-0022, A-0023 … A-0028, INDEX rows P1–P34, and the proposed gate below. The MNEXA frozen suite is already frozen in `tests/regression/mnexa/` (data only). **No Phase 2 code until approval.**
 - To run DB tests: `docker compose up -d --wait`, then `pytest`.
 - **Owner tool:** `scripts/measure_token_format.py` measures real tokens' prefix/length/charset without
   printing them (D-0007 amendment 4). Run locally; paste only its suggested ASSUMPTIONS row back.
@@ -46,32 +46,41 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
    confirmed at the gate run (4 writers p99 ≤ 22.7 ms, stress 93.3 ms). Unpooled tables are history only.
    Evidence: `docs/assumptions/evidence/A-0007-append-throughput-2026-09-30.md`; `pytest -m bench` (pooled).*
 
-## Phase 2 gate (PROPOSED 2026-10-01; not frozen until the owner approves D-0016)
-Phase 2 is done when all of these pass on the Docker Postgres:
-1. **Frozen-suite integrity:** every copied MNEXA file matches `MANIFEST.json`; hash-only entries match when MNEXA
-   is present.
-2. **L1 grader parity (0 model calls):** Nacre's grader reproduces MNEXA's recorded per-family grades exactly on the
-   stored decisions of 003–016.
+## Phase 2 gate (owner framing 2026-10-01; margins pre-registered in EXP-0001)
+MNEXA is **prior art, not proof** (SPEC amended; D-0016). Phase 2 is done when all of these pass on the Docker
+Postgres:
+1. **Frozen-suite integrity:** every file in `tests/regression/mnexa/` matches `MANIFEST.json`. Since 2026-10-01 all
+   task sets 003–029 and results 001–035 are copied; SQLite states and the 031 workspace are hash-only.
+2. **L1 grader parity (0 model calls):** exact reproduction of MNEXA's recorded grades on the stored decisions of
+   003–016.
 3. **L2 mechanism parity (0 model calls):** MNEXA's stored raw responses (007–016) through Nacre's gates give exactly
    MNEXA's recorded admissions, rejections (with reasons) and fallbacks.
-4. **L3 live parity (owner-run, `gpt-4o-mini`, provider defaults, k = 3):**
-   - sets 014 B, 015 A and 016 A: pooled ≥ 165/180 and each set ≥ 52/60;
-   - safety metrics exact: 0 unsupported or unsafe admissions, 100% of challenges rejected, 0 invented spans;
-   - no reruns to reach a pass.
-5. **Recorded-mode determinism:** replaying the L3 recording reproduces every grade exactly with the network blocked.
-6. **Belief lifecycle:** MNEXA's 48 lifecycle tests (ledger 34–39), translated, pass, and the 4 deviation tests
-   pass.
+4. **Live comparison (014–016 final pipeline only):**
+   - **Setup:** `gpt-4o-mini-2024-07-18`, provider defaults, k = 3, 180 trials per arm. Arms B (fresh MNEXA,
+     EXP-0001), C (no memory, same runs) and N (Nacre, same design).
+   - **Validity:** B − C ≥ 30 pp (A-0029).
+   - **Non-inferiority:** N ≥ B − 9 pooled, and N_set ≥ B_set − 6.
+   - **Superiority:** N − C ≥ 54 pooled, and N_set − C_set ≥ 9.
+   - **Safety:** zero margin. **No reruns to reach a pass.**
+5. **Recorded-mode determinism:** replaying Nacre's live recording reproduces every grade exactly with the network
+   blocked.
+6. **Belief lifecycle:** MNEXA's 48 lifecycle tests, translated, pass, plus the 4 deviation tests.
 7. **Episodes:** each MNEXA ADR-0009 invariant (Q-1…Q-15) has a passing test.
 8. **Write gate:** 100% flag recall on the lesson-bearing episodes of 003–016 (A-0028).
 9. **Rebuild:** the `interp` projection rebuilt from the ledger is identical.
 10. **Shredding and privacy:**
     - erasing a scope or person makes its model-call recordings, proposals and beliefs unreadable;
-    - the projection holds no content plaintext;
-    - security invariants SI-1 to SI-7 pass.
-11. **Cost reported:** tokens per flagged episode and per task (reported, not thresholded).
+    - no content plaintext in the projection;
+    - SI-1 to SI-7 pass.
+11. **Cost reported:** tokens per flagged episode and per task.
 12. **Phase 1 gate still passes.**
 
+**Not in the Phase 2 gate:** the checker model. It is deferred to its own experiment and gate, and ships only if it
+improves results.
+
 ## Standing instructions (owner, 2026-09-30)
+- **Models (owner, 2026-10-01):** always pin dated model versions. On a successor, re-baseline both MNEXA's harness
+  and the no-memory control before any comparison.
 - **A-0007 / gate item 6:** the throughput test must run with the **production connection setup**.
   Decide on `psycopg_pool` (new dependency, needs an ADR) **before** gate item 6 runs; otherwise
   the result is reported explicitly as **unpooled**.
@@ -80,6 +89,9 @@ Phase 2 is done when all of these pass on the Docker Postgres:
   comparison to the owner as part of A-0017.
 
 ## Open questions
+- **Phase 3, decide before recall is built (owner, 2026-10-01):** embeddings are content-derived and partly
+  invertible. They must be scoped and shreddable, so an ADR is needed before any embedding index exists (noted in
+  D-0017).
 - Resolved 2026-09-30: text attachments stripped, decided by CONTENT (valid, >= 95% printable UTF-8), not media type; binaries marked unscanned (D-0008 amendment 6).
 - Resolved 2026-09-30:
   - D-0013 accepted: attachments are written before commit and fingerprint-verified on every read; checkpoints
@@ -595,3 +607,31 @@ Phase 2 is done when all of these pass on the Docker Postgres:
     The D3 parts are marked. Every ADR lists its questions for the owner.
   - **Assumptions:** A-0023 … A-0028 (open).
   - **INDEX:** Phase 2 rows P1–P34 (planned); new folders `models`, `eval`.
+- 2026-10-01 — **Owner framing applied; EXP-0001 prepared (not yet run).**
+  - SPEC amended in three places: overview, lineage header and proof tier 1. MNEXA is prior art, not proof.
+  - D-0016 accepted with owner amendments: fresh MNEXA baseline plus a no-memory control; 014–016 only; checker
+    deferred; dated pins.
+  - The D3 parts of D-0017, D-0018, D-0021 and D-0022 are approved. Their D2 parts and all of D-0019 and D-0020 stay
+    proposed.
+  - Assumptions: A-0023 superseded; A-0029 added (014–016 recorded **no** no-memory arm; checked in the results).
+  - **Allowlist (owner-approved):**
+    - recall task sets 017–029 and results 030–035 copied byte-identical (`cmp`);
+    - 156 exact-value findings reviewed in `tests/regression/mnexa/SECRET_SCAN_REVIEWED.json` as path + rule +
+      sha256 of the value, each with a reason. The classes are Anthropic `msg_` response ids and synthetic ids in
+      `tasks_023`;
+    - the scanner honours an entry only at its exact path, rule and value hash, and only under those two paths;
+    - 2 new tests. One manifest false positive was removed by dropping a redundant field; no allowlist entry.
+  - **EXP-0001:**
+    - pre-registered in `docs/experiments/EXP-0001-mnexa-rebaseline.md`, committed before any run;
+    - runner `scripts/run_mnexa_rebaseline.py`; environment `~/Desktop/nacre-runs/mnexa-venv` (Python 3.13.5,
+      openai 3.22.1, sentence-transformers 6.1.0, torch 2.14.1; freeze saved beside it);
+    - dry run complete without a key: 18/18 steps; 300 logged calls; the control has no memory; 0 passes on fake
+      text; `.env` not copied; MNEXA tree unchanged;
+    - real-mode logging wrapper tested offline against a stubbed SDK;
+    - `summarize` reproduces MNEXA's historic 60/60/60 from the frozen results.
+  - Verification:
+    - check_structure: 0 failures.
+    - pytest, first run right after the Postgres container started: **1 failed, 693 passed**. The failing test's
+      name was not captured (only the summary line was kept).
+    - Three later runs: 694 passed each.
+    - **Open task:** identify this flaky test (suspect a timing-sensitive test on a cold container).

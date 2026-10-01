@@ -1,0 +1,2833 @@
+{
+  "experiment": "seed-growth-018",
+  "classification": "exploratory-fresh-identity-anchored-activation-ablation",
+  "pool_size": 20,
+  "identity_anchor_prefixes": [
+    "system:",
+    "code:"
+  ],
+  "hypothesis": "Exact identity addressing before similarity ranking will restore target-memory activation under pooled interference while leaving learned memory, compact representation, downstream ranking, context budget, and transfer reasoning unchanged.",
+  "principle": "Identity narrows. Similarity ranks.",
+  "conditions": {
+    "A": "current full-pool semantic lexical entity RRF",
+    "B": "same full memory pool with exact system/code identity candidate selection before unchanged RRF"
+  },
+  "primary_metrics": [
+    "semantic task success",
+    "target semantic clause visibility",
+    "wrong-family memory presentation",
+    "retrieval precision",
+    "retrieval recall",
+    "activation rescue"
+  ],
+  "secondary_metrics": [
+    "identity candidate count",
+    "identity fallback frequency",
+    "wrong-rule contamination",
+    "model-visible memory words",
+    "model-visible memory segments"
+  ],
+  "control_invariants": [
+    "same target learned lesson",
+    "same target source evidence",
+    "same transfer query",
+    "same compact renderer",
+    "same downstream retrieval implementation",
+    "same context budget",
+    "same transfer reasoner",
+    "zero model calls for identity routing",
+    "router does not receive benchmark target ID",
+    "router does not receive semantic clause or grader"
+  ],
+  "families": [
+    {
+      "id": "birch-api-br-101",
+      "system": "BirchAPI",
+      "code": "BR-101",
+      "entities": [
+        "system:BirchAPI",
+        "code:BR-101",
+        "domain:recovery",
+        "cluster:retry-policy"
+      ],
+      "experience": {
+        "prompt": "BirchAPI returns BR-101. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "BirchAPI returns BR-101 again. State the retry-count rule."
+      },
+      "candidate_decision": "Retry until the call succeeds.",
+      "authoritative_text": "refresh the authorization lease; preserve the request fingerprint; retry exactly three times; close the stale connection.",
+      "raw_source": "<<<ROLE:status>>>\nBR-101 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRetry until the call succeeds.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrefresh the authorization lease; preserve the request fingerprint; retry exactly three times; close the stale connection.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nupstream load may be transient\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 202 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "refresh the authorization lease",
+          "task_pattern": "refresh\\s+the\\s+authorization\\s+lease"
+        },
+        {
+          "id": "A2",
+          "text": "preserve the request fingerprint",
+          "task_pattern": "preserve\\s+the\\s+request\\s+fingerprint"
+        },
+        {
+          "id": "A3",
+          "text": "retry exactly three times",
+          "task_pattern": "retry\\s+exactly\\s+three\\s+times"
+        },
+        {
+          "id": "A4",
+          "text": "close the stale connection",
+          "task_pattern": "close\\s+the\\s+stale\\s+connection"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "refresh the authorization lease; preserve the request fingerprint",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "retry exactly three times; close the stale connection",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A3",
+      "semantic_clause": "retry exactly three times",
+      "semantic_operator": "exactly",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bexactly\\b"
+          ],
+          [
+            "\\bthree\\b",
+            "\\b3\\b"
+          ],
+          [
+            "\\bretr"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "refresh\\s+the\\s+authorization\\s+lease"
+          ],
+          [
+            "preserve\\s+the\\s+request\\s+fingerprint"
+          ],
+          [
+            "retry\\s+exactly\\s+three\\s+times"
+          ],
+          [
+            "close\\s+the\\s+stale\\s+connection"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "birch-api-br-101-R1",
+            "kind": "recoverable",
+            "source_quote": "retry exactly three times",
+            "candidate": {
+              "source_quote": "retry exactly three times",
+              "nucleus_quote": "retry exactly three times",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "exactly"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "birch-api-br-101-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction BR-101",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction BR-101",
+              "nucleus_quote": "fabricated fallback instruction BR-101",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "birch-api-br-101-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Retry until the call succeeds.",
+            "candidate": {
+              "source_quote": "Retry until the call succeeds.",
+              "nucleus_quote": "Retry until the call succeeds.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "interference_cluster": "retry-policy"
+    },
+    {
+      "id": "cedar-api-cd-102",
+      "system": "CedarAPI",
+      "code": "CD-102",
+      "entities": [
+        "system:CedarAPI",
+        "code:CD-102",
+        "domain:recovery",
+        "cluster:retry-policy"
+      ],
+      "experience": {
+        "prompt": "CedarAPI returns CD-102. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "CedarAPI returns CD-102 again. State the maximum retry-count rule."
+      },
+      "candidate_decision": "Retry six times.",
+      "authoritative_text": "refresh the authorization lease; preserve the request fingerprint; retry at most three times; close the stale connection.",
+      "raw_source": "<<<ROLE:status>>>\nCD-102 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRetry six times.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrefresh the authorization lease; preserve the request fingerprint; retry at most three times; close the stale connection.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nupstream load may be transient\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 205 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "refresh the authorization lease",
+          "task_pattern": "refresh\\s+the\\s+authorization\\s+lease"
+        },
+        {
+          "id": "A2",
+          "text": "preserve the request fingerprint",
+          "task_pattern": "preserve\\s+the\\s+request\\s+fingerprint"
+        },
+        {
+          "id": "A3",
+          "text": "retry at most three times",
+          "task_pattern": "retry\\s+at\\s+most\\s+three\\s+times"
+        },
+        {
+          "id": "A4",
+          "text": "close the stale connection",
+          "task_pattern": "close\\s+the\\s+stale\\s+connection"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "refresh the authorization lease; preserve the request fingerprint",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "retry at most three times; close the stale connection",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A3",
+      "semantic_clause": "retry at most three times",
+      "semantic_operator": "at_most",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bat\\s+most\\b",
+            "\\bmaximum\\b",
+            "\\bno\\s+more\\s+than\\b"
+          ],
+          [
+            "\\bthree\\b",
+            "\\b3\\b"
+          ],
+          [
+            "\\bretr"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "refresh\\s+the\\s+authorization\\s+lease"
+          ],
+          [
+            "preserve\\s+the\\s+request\\s+fingerprint"
+          ],
+          [
+            "retry\\s+at\\s+most\\s+three\\s+times"
+          ],
+          [
+            "close\\s+the\\s+stale\\s+connection"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "cedar-api-cd-102-R1",
+            "kind": "recoverable",
+            "source_quote": "retry at most three times",
+            "candidate": {
+              "source_quote": "retry at most three times",
+              "nucleus_quote": "retry at most three times",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "at most"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "cedar-api-cd-102-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction CD-102",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction CD-102",
+              "nucleus_quote": "fabricated fallback instruction CD-102",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "cedar-api-cd-102-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Retry six times.",
+            "candidate": {
+              "source_quote": "Retry six times.",
+              "nucleus_quote": "Retry six times.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "interference_cluster": "retry-policy"
+    },
+    {
+      "id": "dogwood-api-dw-103",
+      "system": "DogwoodAPI",
+      "code": "DW-103",
+      "entities": [
+        "system:DogwoodAPI",
+        "code:DW-103",
+        "domain:recovery",
+        "cluster:retry-policy"
+      ],
+      "experience": {
+        "prompt": "DogwoodAPI returns DW-103. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "DogwoodAPI returns DW-103 again. State the minimum retry-count rule."
+      },
+      "candidate_decision": "Retry only once.",
+      "authoritative_text": "refresh the authorization lease; preserve the request fingerprint; retry at least three times; close the stale connection.",
+      "raw_source": "<<<ROLE:status>>>\nDW-103 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRetry only once.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrefresh the authorization lease; preserve the request fingerprint; retry at least three times; close the stale connection.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nupstream load may be transient\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 208 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "refresh the authorization lease",
+          "task_pattern": "refresh\\s+the\\s+authorization\\s+lease"
+        },
+        {
+          "id": "A2",
+          "text": "preserve the request fingerprint",
+          "task_pattern": "preserve\\s+the\\s+request\\s+fingerprint"
+        },
+        {
+          "id": "A3",
+          "text": "retry at least three times",
+          "task_pattern": "retry\\s+at\\s+least\\s+three\\s+times"
+        },
+        {
+          "id": "A4",
+          "text": "close the stale connection",
+          "task_pattern": "close\\s+the\\s+stale\\s+connection"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "refresh the authorization lease; preserve the request fingerprint",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "retry at least three times; close the stale connection",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A3",
+      "semantic_clause": "retry at least three times",
+      "semantic_operator": "at_least",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bat\\s+least\\b",
+            "\\bminimum\\b"
+          ],
+          [
+            "\\bthree\\b",
+            "\\b3\\b"
+          ],
+          [
+            "\\bretr"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "refresh\\s+the\\s+authorization\\s+lease"
+          ],
+          [
+            "preserve\\s+the\\s+request\\s+fingerprint"
+          ],
+          [
+            "retry\\s+at\\s+least\\s+three\\s+times"
+          ],
+          [
+            "close\\s+the\\s+stale\\s+connection"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "dogwood-api-dw-103-R1",
+            "kind": "recoverable",
+            "source_quote": "retry at least three times",
+            "candidate": {
+              "source_quote": "retry at least three times",
+              "nucleus_quote": "retry at least three times",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "at least"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "dogwood-api-dw-103-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction DW-103",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction DW-103",
+              "nucleus_quote": "fabricated fallback instruction DW-103",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "dogwood-api-dw-103-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Retry only once.",
+            "candidate": {
+              "source_quote": "Retry only once.",
+              "nucleus_quote": "Retry only once.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "interference_cluster": "retry-policy"
+    },
+    {
+      "id": "elm-api-el-104",
+      "system": "ElmAPI",
+      "code": "EL-104",
+      "entities": [
+        "system:ElmAPI",
+        "code:EL-104",
+        "domain:recovery",
+        "cluster:retry-policy"
+      ],
+      "experience": {
+        "prompt": "ElmAPI returns EL-104. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "ElmAPI returns EL-104 again. State the retry rule for the timed-out request."
+      },
+      "candidate_decision": "Retry the timed-out request.",
+      "authoritative_text": "refresh the authorization lease; preserve the request fingerprint; never retry the timed-out request; close the stale connection.",
+      "raw_source": "<<<ROLE:status>>>\nEL-104 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRetry the timed-out request.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrefresh the authorization lease; preserve the request fingerprint; never retry the timed-out request; close the stale connection.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nupstream load may be transient\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 211 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "refresh the authorization lease",
+          "task_pattern": "refresh\\s+the\\s+authorization\\s+lease"
+        },
+        {
+          "id": "A2",
+          "text": "preserve the request fingerprint",
+          "task_pattern": "preserve\\s+the\\s+request\\s+fingerprint"
+        },
+        {
+          "id": "A3",
+          "text": "never retry the timed-out request",
+          "task_pattern": "never\\s+retry\\s+the\\s+timed\\-out\\s+request"
+        },
+        {
+          "id": "A4",
+          "text": "close the stale connection",
+          "task_pattern": "close\\s+the\\s+stale\\s+connection"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "refresh the authorization lease; preserve the request fingerprint",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "never retry the timed-out request; close the stale connection",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A3",
+      "semantic_clause": "never retry the timed-out request",
+      "semantic_operator": "never",
+      "semantic_dimension": "polarity",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bnever\\b",
+            "\\bdo\\s+not\\b",
+            "\\bmust\\s+not\\b"
+          ],
+          [
+            "\\bretry\\b"
+          ],
+          [
+            "\\btimed[- ]out\\b"
+          ],
+          [
+            "\\brequest\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "refresh\\s+the\\s+authorization\\s+lease"
+          ],
+          [
+            "preserve\\s+the\\s+request\\s+fingerprint"
+          ],
+          [
+            "never\\s+retry\\s+the\\s+timed\\-out\\s+request"
+          ],
+          [
+            "close\\s+the\\s+stale\\s+connection"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "elm-api-el-104-R1",
+            "kind": "recoverable",
+            "source_quote": "never retry the timed-out request",
+            "candidate": {
+              "source_quote": "never retry the timed-out request",
+              "nucleus_quote": "never retry the timed-out request",
+              "qualifiers": [
+                {
+                  "type": "negation",
+                  "source_quote": "never"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "elm-api-el-104-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction EL-104",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction EL-104",
+              "nucleus_quote": "fabricated fallback instruction EL-104",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "elm-api-el-104-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Retry the timed-out request.",
+            "candidate": {
+              "source_quote": "Retry the timed-out request.",
+              "nucleus_quote": "Retry the timed-out request.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "interference_cluster": "retry-policy"
+    },
+    {
+      "id": "fir-api-fr-105",
+      "system": "FirAPI",
+      "code": "FR-105",
+      "entities": [
+        "system:FirAPI",
+        "code:FR-105",
+        "domain:recovery",
+        "cluster:retry-policy"
+      ],
+      "experience": {
+        "prompt": "FirAPI returns FR-105. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "FirAPI returns FR-105 again. State when retrying is permitted."
+      },
+      "candidate_decision": "Retry before renewing the authorization lease.",
+      "authoritative_text": "preserve the request fingerprint; retry only after renewing the authorization lease; close the stale connection; record the retry generation.",
+      "raw_source": "<<<ROLE:status>>>\nFR-105 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRetry before renewing the authorization lease.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\npreserve the request fingerprint; retry only after renewing the authorization lease; close the stale connection; record the retry generation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nupstream load may be transient\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 214 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "preserve the request fingerprint",
+          "task_pattern": "preserve\\s+the\\s+request\\s+fingerprint"
+        },
+        {
+          "id": "A2",
+          "text": "retry only after renewing the authorization lease",
+          "task_pattern": "retry\\s+only\\s+after\\s+renewing\\s+the\\s+authorization\\s+lease"
+        },
+        {
+          "id": "A3",
+          "text": "close the stale connection",
+          "task_pattern": "close\\s+the\\s+stale\\s+connection"
+        },
+        {
+          "id": "A4",
+          "text": "record the retry generation",
+          "task_pattern": "record\\s+the\\s+retry\\s+generation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "preserve the request fingerprint; retry only after renewing the authorization lease",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "close the stale connection; record the retry generation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "retry only after renewing the authorization lease",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bonly\\b"
+          ],
+          [
+            "\\bafter\\b"
+          ],
+          [
+            "\\brenew"
+          ],
+          [
+            "\\bauthorization\\b"
+          ],
+          [
+            "\\blease\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "preserve\\s+the\\s+request\\s+fingerprint"
+          ],
+          [
+            "retry\\s+only\\s+after\\s+renewing\\s+the\\s+authorization\\s+lease"
+          ],
+          [
+            "close\\s+the\\s+stale\\s+connection"
+          ],
+          [
+            "record\\s+the\\s+retry\\s+generation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "fir-api-fr-105-R1",
+            "kind": "recoverable",
+            "source_quote": "retry only after renewing the authorization lease",
+            "candidate": {
+              "source_quote": "retry only after renewing the authorization lease",
+              "nucleus_quote": "retry only after renewing the authorization lease",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "only"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "fir-api-fr-105-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction FR-105",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction FR-105",
+              "nucleus_quote": "fabricated fallback instruction FR-105",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "fir-api-fr-105-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Retry before renewing the authorization lease.",
+            "candidate": {
+              "source_quote": "Retry before renewing the authorization lease.",
+              "nucleus_quote": "Retry before renewing the authorization lease.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "interference_cluster": "retry-policy"
+    },
+    {
+      "id": "gale-queue-gq-111",
+      "system": "GaleQueue",
+      "code": "GQ-111",
+      "entities": [
+        "system:GaleQueue",
+        "code:GQ-111",
+        "domain:recovery",
+        "cluster:lane-routing"
+      ],
+      "experience": {
+        "prompt": "GaleQueue returns GQ-111. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "GaleQueue returns GQ-111 again. State the permitted lane."
+      },
+      "candidate_decision": "Move the task to the teal lane.",
+      "authoritative_text": "request a fresh checkpoint; move the task only to the scarlet lane; retry once; preserve the original task ID.",
+      "raw_source": "<<<ROLE:status>>>\nGQ-111 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nMove the task to the teal lane.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrequest a fresh checkpoint; move the task only to the scarlet lane; retry once; preserve the original task ID.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nworker pressure may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 238 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "request a fresh checkpoint",
+          "task_pattern": "request\\s+a\\s+fresh\\s+checkpoint"
+        },
+        {
+          "id": "A2",
+          "text": "move the task only to the scarlet lane",
+          "task_pattern": "move\\s+the\\s+task\\s+only\\s+to\\s+the\\s+scarlet\\s+lane"
+        },
+        {
+          "id": "A3",
+          "text": "retry once",
+          "task_pattern": "retry\\s+once"
+        },
+        {
+          "id": "A4",
+          "text": "preserve the original task ID",
+          "task_pattern": "preserve\\s+the\\s+original\\s+task\\s+ID"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "request a fresh checkpoint; move the task only to the scarlet lane",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "retry once; preserve the original task ID",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "move the task only to the scarlet lane",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bonly\\b"
+          ],
+          [
+            "\\bscarlet\\b"
+          ],
+          [
+            "\\blane\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "request\\s+a\\s+fresh\\s+checkpoint"
+          ],
+          [
+            "move\\s+the\\s+task\\s+only\\s+to\\s+the\\s+scarlet\\s+lane"
+          ],
+          [
+            "retry\\s+once"
+          ],
+          [
+            "preserve\\s+the\\s+original\\s+task\\s+ID"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "gale-queue-gq-111-R1",
+            "kind": "recoverable",
+            "source_quote": "move the task only to the scarlet lane",
+            "candidate": {
+              "source_quote": "move the task only to the scarlet lane",
+              "nucleus_quote": "move the task only to the scarlet lane",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "only"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "gale-queue-gq-111-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction GQ-111",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction GQ-111",
+              "nucleus_quote": "fabricated fallback instruction GQ-111",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "gale-queue-gq-111-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Move the task to the teal lane.",
+            "candidate": {
+              "source_quote": "Move the task to the teal lane.",
+              "nucleus_quote": "Move the task to the teal lane.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "interference_cluster": "lane-routing"
+    },
+    {
+      "id": "heath-queue-hq-112",
+      "system": "HeathQueue",
+      "code": "HQ-112",
+      "entities": [
+        "system:HeathQueue",
+        "code:HQ-112",
+        "domain:recovery",
+        "cluster:lane-routing"
+      ],
+      "experience": {
+        "prompt": "HeathQueue returns HQ-112. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "HeathQueue returns HQ-112 again. State the permitted lane."
+      },
+      "candidate_decision": "Move the task to the scarlet lane.",
+      "authoritative_text": "request a fresh checkpoint; move the task only to the teal lane; retry once; preserve the original task ID.",
+      "raw_source": "<<<ROLE:status>>>\nHQ-112 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nMove the task to the scarlet lane.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrequest a fresh checkpoint; move the task only to the teal lane; retry once; preserve the original task ID.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nworker pressure may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 241 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "request a fresh checkpoint",
+          "task_pattern": "request\\s+a\\s+fresh\\s+checkpoint"
+        },
+        {
+          "id": "A2",
+          "text": "move the task only to the teal lane",
+          "task_pattern": "move\\s+the\\s+task\\s+only\\s+to\\s+the\\s+teal\\s+lane"
+        },
+        {
+          "id": "A3",
+          "text": "retry once",
+          "task_pattern": "retry\\s+once"
+        },
+        {
+          "id": "A4",
+          "text": "preserve the original task ID",
+          "task_pattern": "preserve\\s+the\\s+original\\s+task\\s+ID"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "request a fresh checkpoint; move the task only to the teal lane",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "retry once; preserve the original task ID",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "move the task only to the teal lane",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bonly\\b"
+          ],
+          [
+            "\\bteal\\b"
+          ],
+          [
+            "\\blane\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "request\\s+a\\s+fresh\\s+checkpoint"
+          ],
+          [
+            "move\\s+the\\s+task\\s+only\\s+to\\s+the\\s+teal\\s+lane"
+          ],
+          [
+            "retry\\s+once"
+          ],
+          [
+            "preserve\\s+the\\s+original\\s+task\\s+ID"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "heath-queue-hq-112-R1",
+            "kind": "recoverable",
+            "source_quote": "move the task only to the teal lane",
+            "candidate": {
+              "source_quote": "move the task only to the teal lane",
+              "nucleus_quote": "move the task only to the teal lane",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "only"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "heath-queue-hq-112-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction HQ-112",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction HQ-112",
+              "nucleus_quote": "fabricated fallback instruction HQ-112",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "heath-queue-hq-112-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Move the task to the scarlet lane.",
+            "candidate": {
+              "source_quote": "Move the task to the scarlet lane.",
+              "nucleus_quote": "Move the task to the scarlet lane.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "interference_cluster": "lane-routing"
+    },
+    {
+      "id": "ivory-queue-iq-113",
+      "system": "IvoryQueue",
+      "code": "IQ-113",
+      "entities": [
+        "system:IvoryQueue",
+        "code:IQ-113",
+        "domain:recovery",
+        "cluster:lane-routing"
+      ],
+      "experience": {
+        "prompt": "IvoryQueue returns IQ-113. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "IvoryQueue returns IQ-113 again. State the permitted lane."
+      },
+      "candidate_decision": "Move the task to the scarlet lane.",
+      "authoritative_text": "request a fresh checkpoint; move the task only to the gold lane; retry once; preserve the original task ID.",
+      "raw_source": "<<<ROLE:status>>>\nIQ-113 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nMove the task to the scarlet lane.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrequest a fresh checkpoint; move the task only to the gold lane; retry once; preserve the original task ID.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nworker pressure may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 244 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "request a fresh checkpoint",
+          "task_pattern": "request\\s+a\\s+fresh\\s+checkpoint"
+        },
+        {
+          "id": "A2",
+          "text": "move the task only to the gold lane",
+          "task_pattern": "move\\s+the\\s+task\\s+only\\s+to\\s+the\\s+gold\\s+lane"
+        },
+        {
+          "id": "A3",
+          "text": "retry once",
+          "task_pattern": "retry\\s+once"
+        },
+        {
+          "id": "A4",
+          "text": "preserve the original task ID",
+          "task_pattern": "preserve\\s+the\\s+original\\s+task\\s+ID"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "request a fresh checkpoint; move the task only to the gold lane",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "retry once; preserve the original task ID",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "move the task only to the gold lane",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bonly\\b"
+          ],
+          [
+            "\\bgold\\b"
+          ],
+          [
+            "\\blane\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "request\\s+a\\s+fresh\\s+checkpoint"
+          ],
+          [
+            "move\\s+the\\s+task\\s+only\\s+to\\s+the\\s+gold\\s+lane"
+          ],
+          [
+            "retry\\s+once"
+          ],
+          [
+            "preserve\\s+the\\s+original\\s+task\\s+ID"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "ivory-queue-iq-113-R1",
+            "kind": "recoverable",
+            "source_quote": "move the task only to the gold lane",
+            "candidate": {
+              "source_quote": "move the task only to the gold lane",
+              "nucleus_quote": "move the task only to the gold lane",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "only"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "ivory-queue-iq-113-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction IQ-113",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction IQ-113",
+              "nucleus_quote": "fabricated fallback instruction IQ-113",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "ivory-queue-iq-113-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Move the task to the scarlet lane.",
+            "candidate": {
+              "source_quote": "Move the task to the scarlet lane.",
+              "nucleus_quote": "Move the task to the scarlet lane.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "interference_cluster": "lane-routing"
+    },
+    {
+      "id": "jade-queue-jq-114",
+      "system": "JadeQueue",
+      "code": "JQ-114",
+      "entities": [
+        "system:JadeQueue",
+        "code:JQ-114",
+        "domain:recovery",
+        "cluster:lane-routing"
+      ],
+      "experience": {
+        "prompt": "JadeQueue returns JQ-114. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "JadeQueue returns JQ-114 again. State the rule governing the black lane."
+      },
+      "candidate_decision": "Move the task to the black lane.",
+      "authoritative_text": "request a fresh checkpoint; do not move the task to the black lane; retry once; preserve the original task ID.",
+      "raw_source": "<<<ROLE:status>>>\nJQ-114 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nMove the task to the black lane.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrequest a fresh checkpoint; do not move the task to the black lane; retry once; preserve the original task ID.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nworker pressure may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 247 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "request a fresh checkpoint",
+          "task_pattern": "request\\s+a\\s+fresh\\s+checkpoint"
+        },
+        {
+          "id": "A2",
+          "text": "do not move the task to the black lane",
+          "task_pattern": "do\\s+not\\s+move\\s+the\\s+task\\s+to\\s+the\\s+black\\s+lane"
+        },
+        {
+          "id": "A3",
+          "text": "retry once",
+          "task_pattern": "retry\\s+once"
+        },
+        {
+          "id": "A4",
+          "text": "preserve the original task ID",
+          "task_pattern": "preserve\\s+the\\s+original\\s+task\\s+ID"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "request a fresh checkpoint; do not move the task to the black lane",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "retry once; preserve the original task ID",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "do not move the task to the black lane",
+      "semantic_operator": "do_not",
+      "semantic_dimension": "polarity",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bdo\\s+not\\b",
+            "\\bnever\\b"
+          ],
+          [
+            "\\bmove\\b"
+          ],
+          [
+            "\\bblack\\b"
+          ],
+          [
+            "\\blane\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "request\\s+a\\s+fresh\\s+checkpoint"
+          ],
+          [
+            "do\\s+not\\s+move\\s+the\\s+task\\s+to\\s+the\\s+black\\s+lane"
+          ],
+          [
+            "retry\\s+once"
+          ],
+          [
+            "preserve\\s+the\\s+original\\s+task\\s+ID"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "jade-queue-jq-114-R1",
+            "kind": "recoverable",
+            "source_quote": "do not move the task to the black lane",
+            "candidate": {
+              "source_quote": "do not move the task to the black lane",
+              "nucleus_quote": "do not move the task to the black lane",
+              "qualifiers": [
+                {
+                  "type": "negation",
+                  "source_quote": "do not"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "jade-queue-jq-114-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction JQ-114",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction JQ-114",
+              "nucleus_quote": "fabricated fallback instruction JQ-114",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "jade-queue-jq-114-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Move the task to the black lane.",
+            "candidate": {
+              "source_quote": "Move the task to the black lane.",
+              "nucleus_quote": "Move the task to the black lane.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "interference_cluster": "lane-routing"
+    },
+    {
+      "id": "kestrel-queue-kq-115",
+      "system": "KestrelQueue",
+      "code": "KQ-115",
+      "entities": [
+        "system:KestrelQueue",
+        "code:KQ-115",
+        "domain:recovery",
+        "cluster:lane-routing"
+      ],
+      "experience": {
+        "prompt": "KestrelQueue returns KQ-115. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "KestrelQueue returns KQ-115. State the condition for moving the task to the white lane."
+      },
+      "candidate_decision": "Always move the task to the white lane.",
+      "authoritative_text": "request a fresh checkpoint; if the queue is saturated, move the task to the white lane; retry once; preserve the original task ID.",
+      "raw_source": "<<<ROLE:status>>>\nKQ-115 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nAlways move the task to the white lane.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrequest a fresh checkpoint; if the queue is saturated, move the task to the white lane; retry once; preserve the original task ID.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nworker pressure may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 250 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "request a fresh checkpoint",
+          "task_pattern": "request\\s+a\\s+fresh\\s+checkpoint"
+        },
+        {
+          "id": "A2",
+          "text": "if the queue is saturated, move the task to the white lane",
+          "task_pattern": "if\\s+the\\s+queue\\s+is\\s+saturated,\\s+move\\s+the\\s+task\\s+to\\s+the\\s+white\\s+lane"
+        },
+        {
+          "id": "A3",
+          "text": "retry once",
+          "task_pattern": "retry\\s+once"
+        },
+        {
+          "id": "A4",
+          "text": "preserve the original task ID",
+          "task_pattern": "preserve\\s+the\\s+original\\s+task\\s+ID"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "request a fresh checkpoint; if the queue is saturated, move the task to the white lane",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "retry once; preserve the original task ID",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "if the queue is saturated, move the task to the white lane",
+      "semantic_operator": "when_if",
+      "semantic_dimension": "condition",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bif\\b",
+            "\\bwhen\\b"
+          ],
+          [
+            "\\bsaturated\\b"
+          ],
+          [
+            "\\bwhite\\b"
+          ],
+          [
+            "\\blane\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "request\\s+a\\s+fresh\\s+checkpoint"
+          ],
+          [
+            "if\\s+the\\s+queue\\s+is\\s+saturated,\\s+move\\s+the\\s+task\\s+to\\s+the\\s+white\\s+lane"
+          ],
+          [
+            "retry\\s+once"
+          ],
+          [
+            "preserve\\s+the\\s+original\\s+task\\s+ID"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "kestrel-queue-kq-115-R1",
+            "kind": "recoverable",
+            "source_quote": "if the queue is saturated, move the task to the white lane",
+            "candidate": {
+              "source_quote": "if the queue is saturated, move the task to the white lane",
+              "nucleus_quote": "if the queue is saturated, move the task to the white lane",
+              "qualifiers": [
+                {
+                  "type": "condition",
+                  "source_quote": "if"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "kestrel-queue-kq-115-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction KQ-115",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction KQ-115",
+              "nucleus_quote": "fabricated fallback instruction KQ-115",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "kestrel-queue-kq-115-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Always move the task to the white lane.",
+            "candidate": {
+              "source_quote": "Always move the task to the white lane.",
+              "nucleus_quote": "Always move the task to the white lane.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "interference_cluster": "lane-routing"
+    },
+    {
+      "id": "larch-rpc-lr-121",
+      "system": "LarchRPC",
+      "code": "LR-121",
+      "entities": [
+        "system:LarchRPC",
+        "code:LR-121",
+        "domain:recovery",
+        "cluster:channel-session"
+      ],
+      "experience": {
+        "prompt": "LarchRPC returns LR-121. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "LarchRPC returns LR-121. State the transport-channel rule."
+      },
+      "candidate_decision": "Reuse the existing transport channel.",
+      "authoritative_text": "preserve the trace fingerprint; open only a fresh transport channel; send one probe frame; record the channel generation.",
+      "raw_source": "<<<ROLE:status>>>\nLR-121 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nReuse the existing transport channel.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\npreserve the trace fingerprint; open only a fresh transport channel; send one probe frame; record the channel generation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\ntransport jitter may exist\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 268 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "preserve the trace fingerprint",
+          "task_pattern": "preserve\\s+the\\s+trace\\s+fingerprint"
+        },
+        {
+          "id": "A2",
+          "text": "open only a fresh transport channel",
+          "task_pattern": "open\\s+only\\s+a\\s+fresh\\s+transport\\s+channel"
+        },
+        {
+          "id": "A3",
+          "text": "send one probe frame",
+          "task_pattern": "send\\s+one\\s+probe\\s+frame"
+        },
+        {
+          "id": "A4",
+          "text": "record the channel generation",
+          "task_pattern": "record\\s+the\\s+channel\\s+generation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "preserve the trace fingerprint; open only a fresh transport channel",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "send one probe frame; record the channel generation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "open only a fresh transport channel",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bonly\\b"
+          ],
+          [
+            "\\bfresh\\b"
+          ],
+          [
+            "\\bchannel\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "preserve\\s+the\\s+trace\\s+fingerprint"
+          ],
+          [
+            "open\\s+only\\s+a\\s+fresh\\s+transport\\s+channel"
+          ],
+          [
+            "send\\s+one\\s+probe\\s+frame"
+          ],
+          [
+            "record\\s+the\\s+channel\\s+generation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "larch-rpc-lr-121-R1",
+            "kind": "recoverable",
+            "source_quote": "open only a fresh transport channel",
+            "candidate": {
+              "source_quote": "open only a fresh transport channel",
+              "nucleus_quote": "open only a fresh transport channel",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "only"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "larch-rpc-lr-121-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction LR-121",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction LR-121",
+              "nucleus_quote": "fabricated fallback instruction LR-121",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "larch-rpc-lr-121-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Reuse the existing transport channel.",
+            "candidate": {
+              "source_quote": "Reuse the existing transport channel.",
+              "nucleus_quote": "Reuse the existing transport channel.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "interference_cluster": "channel-session"
+    },
+    {
+      "id": "moss-rpc-ms-122",
+      "system": "MossRPC",
+      "code": "MS-122",
+      "entities": [
+        "system:MossRPC",
+        "code:MS-122",
+        "domain:recovery",
+        "cluster:channel-session"
+      ],
+      "experience": {
+        "prompt": "MossRPC returns MS-122. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "MossRPC returns MS-122. State the previous-session-nonce rule."
+      },
+      "candidate_decision": "Reuse the previous session nonce.",
+      "authoritative_text": "open a fresh transport channel; never reuse the previous session nonce; send one probe frame; preserve the trace fingerprint.",
+      "raw_source": "<<<ROLE:status>>>\nMS-122 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nReuse the previous session nonce.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nopen a fresh transport channel; never reuse the previous session nonce; send one probe frame; preserve the trace fingerprint.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\ntransport jitter may exist\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 271 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "open a fresh transport channel",
+          "task_pattern": "open\\s+a\\s+fresh\\s+transport\\s+channel"
+        },
+        {
+          "id": "A2",
+          "text": "never reuse the previous session nonce",
+          "task_pattern": "never\\s+reuse\\s+the\\s+previous\\s+session\\s+nonce"
+        },
+        {
+          "id": "A3",
+          "text": "send one probe frame",
+          "task_pattern": "send\\s+one\\s+probe\\s+frame"
+        },
+        {
+          "id": "A4",
+          "text": "preserve the trace fingerprint",
+          "task_pattern": "preserve\\s+the\\s+trace\\s+fingerprint"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "open a fresh transport channel; never reuse the previous session nonce",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "send one probe frame; preserve the trace fingerprint",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "never reuse the previous session nonce",
+      "semantic_operator": "never",
+      "semantic_dimension": "polarity",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bnever\\b",
+            "\\bdo\\s+not\\b"
+          ],
+          [
+            "\\breuse\\b"
+          ],
+          [
+            "\\bsession\\b"
+          ],
+          [
+            "\\bnonce\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "open\\s+a\\s+fresh\\s+transport\\s+channel"
+          ],
+          [
+            "never\\s+reuse\\s+the\\s+previous\\s+session\\s+nonce"
+          ],
+          [
+            "send\\s+one\\s+probe\\s+frame"
+          ],
+          [
+            "preserve\\s+the\\s+trace\\s+fingerprint"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "moss-rpc-ms-122-R1",
+            "kind": "recoverable",
+            "source_quote": "never reuse the previous session nonce",
+            "candidate": {
+              "source_quote": "never reuse the previous session nonce",
+              "nucleus_quote": "never reuse the previous session nonce",
+              "qualifiers": [
+                {
+                  "type": "negation",
+                  "source_quote": "never"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "moss-rpc-ms-122-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction MS-122",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction MS-122",
+              "nucleus_quote": "fabricated fallback instruction MS-122",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "moss-rpc-ms-122-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Reuse the previous session nonce.",
+            "candidate": {
+              "source_quote": "Reuse the previous session nonce.",
+              "nucleus_quote": "Reuse the previous session nonce.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "interference_cluster": "channel-session"
+    },
+    {
+      "id": "nettle-rpc-nt-123",
+      "system": "NettleRPC",
+      "code": "NT-123",
+      "entities": [
+        "system:NettleRPC",
+        "code:NT-123",
+        "domain:recovery",
+        "cluster:channel-session"
+      ],
+      "experience": {
+        "prompt": "NettleRPC returns NT-123. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "NettleRPC returns NT-123. State the exact heartbeat-frame count."
+      },
+      "candidate_decision": "Send seven heartbeat frames.",
+      "authoritative_text": "open a fresh transport channel; send exactly four heartbeat frames; preserve the trace fingerprint; record the channel generation.",
+      "raw_source": "<<<ROLE:status>>>\nNT-123 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nSend seven heartbeat frames.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nopen a fresh transport channel; send exactly four heartbeat frames; preserve the trace fingerprint; record the channel generation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\ntransport jitter may exist\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 274 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "open a fresh transport channel",
+          "task_pattern": "open\\s+a\\s+fresh\\s+transport\\s+channel"
+        },
+        {
+          "id": "A2",
+          "text": "send exactly four heartbeat frames",
+          "task_pattern": "send\\s+exactly\\s+four\\s+heartbeat\\s+frames"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the trace fingerprint",
+          "task_pattern": "preserve\\s+the\\s+trace\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "record the channel generation",
+          "task_pattern": "record\\s+the\\s+channel\\s+generation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "open a fresh transport channel; send exactly four heartbeat frames",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the trace fingerprint; record the channel generation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "send exactly four heartbeat frames",
+      "semantic_operator": "exactly",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bexactly\\b"
+          ],
+          [
+            "\\bfour\\b",
+            "\\b4\\b"
+          ],
+          [
+            "\\bheartbeat\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "open\\s+a\\s+fresh\\s+transport\\s+channel"
+          ],
+          [
+            "send\\s+exactly\\s+four\\s+heartbeat\\s+frames"
+          ],
+          [
+            "preserve\\s+the\\s+trace\\s+fingerprint"
+          ],
+          [
+            "record\\s+the\\s+channel\\s+generation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "nettle-rpc-nt-123-R1",
+            "kind": "recoverable",
+            "source_quote": "send exactly four heartbeat frames",
+            "candidate": {
+              "source_quote": "send exactly four heartbeat frames",
+              "nucleus_quote": "send exactly four heartbeat frames",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "exactly"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "nettle-rpc-nt-123-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction NT-123",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction NT-123",
+              "nucleus_quote": "fabricated fallback instruction NT-123",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "nettle-rpc-nt-123-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Send seven heartbeat frames.",
+            "candidate": {
+              "source_quote": "Send seven heartbeat frames.",
+              "nucleus_quote": "Send seven heartbeat frames.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "interference_cluster": "channel-session"
+    },
+    {
+      "id": "oak-rpc-ok-124",
+      "system": "OakRPC",
+      "code": "OK-124",
+      "entities": [
+        "system:OakRPC",
+        "code:OK-124",
+        "domain:recovery",
+        "cluster:channel-session"
+      ],
+      "experience": {
+        "prompt": "OakRPC returns OK-124. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "OakRPC returns OK-124. State the minimum wait duration."
+      },
+      "candidate_decision": "Open the channel immediately.",
+      "authoritative_text": "preserve the trace fingerprint; wait at least 14 seconds; open a fresh transport channel; record the channel generation.",
+      "raw_source": "<<<ROLE:status>>>\nOK-124 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nOpen the channel immediately.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\npreserve the trace fingerprint; wait at least 14 seconds; open a fresh transport channel; record the channel generation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\ntransport jitter may exist\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 277 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "preserve the trace fingerprint",
+          "task_pattern": "preserve\\s+the\\s+trace\\s+fingerprint"
+        },
+        {
+          "id": "A2",
+          "text": "wait at least 14 seconds",
+          "task_pattern": "wait\\s+at\\s+least\\s+14\\s+seconds"
+        },
+        {
+          "id": "A3",
+          "text": "open a fresh transport channel",
+          "task_pattern": "open\\s+a\\s+fresh\\s+transport\\s+channel"
+        },
+        {
+          "id": "A4",
+          "text": "record the channel generation",
+          "task_pattern": "record\\s+the\\s+channel\\s+generation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "preserve the trace fingerprint; wait at least 14 seconds",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "open a fresh transport channel; record the channel generation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "wait at least 14 seconds",
+      "semantic_operator": "at_least",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bat\\s+least\\b",
+            "\\bminimum\\b"
+          ],
+          [
+            "\\b14\\b",
+            "\\bfourteen\\b"
+          ],
+          [
+            "\\bseconds?\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "preserve\\s+the\\s+trace\\s+fingerprint"
+          ],
+          [
+            "wait\\s+at\\s+least\\s+14\\s+seconds"
+          ],
+          [
+            "open\\s+a\\s+fresh\\s+transport\\s+channel"
+          ],
+          [
+            "record\\s+the\\s+channel\\s+generation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "oak-rpc-ok-124-R1",
+            "kind": "recoverable",
+            "source_quote": "wait at least 14 seconds",
+            "candidate": {
+              "source_quote": "wait at least 14 seconds",
+              "nucleus_quote": "wait at least 14 seconds",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "at least"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "oak-rpc-ok-124-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction OK-124",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction OK-124",
+              "nucleus_quote": "fabricated fallback instruction OK-124",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "oak-rpc-ok-124-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Open the channel immediately.",
+            "candidate": {
+              "source_quote": "Open the channel immediately.",
+              "nucleus_quote": "Open the channel immediately.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "interference_cluster": "channel-session"
+    },
+    {
+      "id": "pebble-rpc-pb-125",
+      "system": "PebbleRPC",
+      "code": "PB-125",
+      "entities": [
+        "system:PebbleRPC",
+        "code:PB-125",
+        "domain:recovery",
+        "cluster:channel-session"
+      ],
+      "experience": {
+        "prompt": "PebbleRPC returns PB-125. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "PebbleRPC returns PB-125. State the maximum pending-channel count."
+      },
+      "candidate_decision": "Keep eight pending channels.",
+      "authoritative_text": "refresh the channel table; keep at most three pending channels; expire stale channels; preserve the newest channel token.",
+      "raw_source": "<<<ROLE:status>>>\nPB-125 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nKeep eight pending channels.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrefresh the channel table; keep at most three pending channels; expire stale channels; preserve the newest channel token.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\ntransport jitter may exist\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 280 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "refresh the channel table",
+          "task_pattern": "refresh\\s+the\\s+channel\\s+table"
+        },
+        {
+          "id": "A2",
+          "text": "keep at most three pending channels",
+          "task_pattern": "keep\\s+at\\s+most\\s+three\\s+pending\\s+channels"
+        },
+        {
+          "id": "A3",
+          "text": "expire stale channels",
+          "task_pattern": "expire\\s+stale\\s+channels"
+        },
+        {
+          "id": "A4",
+          "text": "preserve the newest channel token",
+          "task_pattern": "preserve\\s+the\\s+newest\\s+channel\\s+token"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "refresh the channel table; keep at most three pending channels",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "expire stale channels; preserve the newest channel token",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "keep at most three pending channels",
+      "semantic_operator": "at_most",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bat\\s+most\\b",
+            "\\bmaximum\\b",
+            "\\bno\\s+more\\s+than\\b"
+          ],
+          [
+            "\\bthree\\b",
+            "\\b3\\b"
+          ],
+          [
+            "\\bchannel"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "refresh\\s+the\\s+channel\\s+table"
+          ],
+          [
+            "keep\\s+at\\s+most\\s+three\\s+pending\\s+channels"
+          ],
+          [
+            "expire\\s+stale\\s+channels"
+          ],
+          [
+            "preserve\\s+the\\s+newest\\s+channel\\s+token"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "pebble-rpc-pb-125-R1",
+            "kind": "recoverable",
+            "source_quote": "keep at most three pending channels",
+            "candidate": {
+              "source_quote": "keep at most three pending channels",
+              "nucleus_quote": "keep at most three pending channels",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "at most"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "pebble-rpc-pb-125-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction PB-125",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction PB-125",
+              "nucleus_quote": "fabricated fallback instruction PB-125",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "pebble-rpc-pb-125-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Keep eight pending channels.",
+            "candidate": {
+              "source_quote": "Keep eight pending channels.",
+              "nucleus_quote": "Keep eight pending channels.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "interference_cluster": "channel-session"
+    },
+    {
+      "id": "quartz-store-qs-131",
+      "system": "QuartzStore",
+      "code": "QS-131",
+      "entities": [
+        "system:QuartzStore",
+        "code:QS-131",
+        "domain:recovery",
+        "cluster:storage-finalization"
+      ],
+      "experience": {
+        "prompt": "QuartzStore returns QS-131. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "QuartzStore returns QS-131. State the permitted finalization header."
+      },
+      "candidate_decision": "Finalize with any completion header.",
+      "authoritative_text": "verify the manifest checksum; preserve the upload fingerprint; finalize only with X-Quartz-Final: locked; record the final generation.",
+      "raw_source": "<<<ROLE:status>>>\nQS-131 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nFinalize with any completion header.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nverify the manifest checksum; preserve the upload fingerprint; finalize only with X-Quartz-Final: locked; record the final generation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nstorage pressure may exist\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 298 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "verify the manifest checksum",
+          "task_pattern": "verify\\s+the\\s+manifest\\s+checksum"
+        },
+        {
+          "id": "A2",
+          "text": "preserve the upload fingerprint",
+          "task_pattern": "preserve\\s+the\\s+upload\\s+fingerprint"
+        },
+        {
+          "id": "A3",
+          "text": "finalize only with X-Quartz-Final: locked",
+          "task_pattern": "finalize\\s+only\\s+with\\s+X\\-Quartz\\-Final:\\s+locked"
+        },
+        {
+          "id": "A4",
+          "text": "record the final generation",
+          "task_pattern": "record\\s+the\\s+final\\s+generation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "verify the manifest checksum; preserve the upload fingerprint",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "finalize only with X-Quartz-Final: locked; record the final generation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A3",
+      "semantic_clause": "finalize only with X-Quartz-Final: locked",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bonly\\b"
+          ],
+          [
+            "X-Quartz-Final"
+          ],
+          [
+            "\\blocked\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "verify\\s+the\\s+manifest\\s+checksum"
+          ],
+          [
+            "preserve\\s+the\\s+upload\\s+fingerprint"
+          ],
+          [
+            "finalize\\s+only\\s+with\\s+X\\-Quartz\\-Final:\\s+locked"
+          ],
+          [
+            "record\\s+the\\s+final\\s+generation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "quartz-store-qs-131-R1",
+            "kind": "recoverable",
+            "source_quote": "finalize only with X-Quartz-Final: locked",
+            "candidate": {
+              "source_quote": "finalize only with X-Quartz-Final: locked",
+              "nucleus_quote": "finalize only with X-Quartz-Final: locked",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "only"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "quartz-store-qs-131-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction QS-131",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction QS-131",
+              "nucleus_quote": "fabricated fallback instruction QS-131",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "quartz-store-qs-131-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Finalize with any completion header.",
+            "candidate": {
+              "source_quote": "Finalize with any completion header.",
+              "nucleus_quote": "Finalize with any completion header.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "interference_cluster": "storage-finalization"
+    },
+    {
+      "id": "rowan-store-rw-132",
+      "system": "RowanStore",
+      "code": "RW-132",
+      "entities": [
+        "system:RowanStore",
+        "code:RW-132",
+        "domain:recovery",
+        "cluster:storage-finalization"
+      ],
+      "experience": {
+        "prompt": "RowanStore returns RW-132. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "RowanStore returns RW-132. State the manifest/finalization rule."
+      },
+      "candidate_decision": "Finalize before manifest verification.",
+      "authoritative_text": "preserve the upload fingerprint; do not finalize before manifest verification; record the final generation; seal the upload session.",
+      "raw_source": "<<<ROLE:status>>>\nRW-132 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nFinalize before manifest verification.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\npreserve the upload fingerprint; do not finalize before manifest verification; record the final generation; seal the upload session.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nstorage pressure may exist\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 301 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "preserve the upload fingerprint",
+          "task_pattern": "preserve\\s+the\\s+upload\\s+fingerprint"
+        },
+        {
+          "id": "A2",
+          "text": "do not finalize before manifest verification",
+          "task_pattern": "do\\s+not\\s+finalize\\s+before\\s+manifest\\s+verification"
+        },
+        {
+          "id": "A3",
+          "text": "record the final generation",
+          "task_pattern": "record\\s+the\\s+final\\s+generation"
+        },
+        {
+          "id": "A4",
+          "text": "seal the upload session",
+          "task_pattern": "seal\\s+the\\s+upload\\s+session"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "preserve the upload fingerprint; do not finalize before manifest verification",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "record the final generation; seal the upload session",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "do not finalize before manifest verification",
+      "semantic_operator": "do_not",
+      "semantic_dimension": "polarity",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bdo\\s+not\\b",
+            "\\bnever\\b"
+          ],
+          [
+            "\\bfinaliz"
+          ],
+          [
+            "\\bbefore\\b"
+          ],
+          [
+            "\\bmanifest\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "preserve\\s+the\\s+upload\\s+fingerprint"
+          ],
+          [
+            "do\\s+not\\s+finalize\\s+before\\s+manifest\\s+verification"
+          ],
+          [
+            "record\\s+the\\s+final\\s+generation"
+          ],
+          [
+            "seal\\s+the\\s+upload\\s+session"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "rowan-store-rw-132-R1",
+            "kind": "recoverable",
+            "source_quote": "do not finalize before manifest verification",
+            "candidate": {
+              "source_quote": "do not finalize before manifest verification",
+              "nucleus_quote": "do not finalize before manifest verification",
+              "qualifiers": [
+                {
+                  "type": "negation",
+                  "source_quote": "do not"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "rowan-store-rw-132-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction RW-132",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction RW-132",
+              "nucleus_quote": "fabricated fallback instruction RW-132",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "rowan-store-rw-132-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Finalize before manifest verification.",
+            "candidate": {
+              "source_quote": "Finalize before manifest verification.",
+              "nucleus_quote": "Finalize before manifest verification.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "interference_cluster": "storage-finalization"
+    },
+    {
+      "id": "sorrel-store-sr-133",
+      "system": "SorrelStore",
+      "code": "SR-133",
+      "entities": [
+        "system:SorrelStore",
+        "code:SR-133",
+        "domain:recovery",
+        "cluster:storage-finalization"
+      ],
+      "experience": {
+        "prompt": "SorrelStore returns SR-133. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "SorrelStore returns SR-133. State the exact signature-block count."
+      },
+      "candidate_decision": "Apply two signature blocks.",
+      "authoritative_text": "verify the manifest checksum; apply exactly five signature blocks; preserve the upload fingerprint; record the final generation.",
+      "raw_source": "<<<ROLE:status>>>\nSR-133 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nApply two signature blocks.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nverify the manifest checksum; apply exactly five signature blocks; preserve the upload fingerprint; record the final generation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nstorage pressure may exist\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 304 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "verify the manifest checksum",
+          "task_pattern": "verify\\s+the\\s+manifest\\s+checksum"
+        },
+        {
+          "id": "A2",
+          "text": "apply exactly five signature blocks",
+          "task_pattern": "apply\\s+exactly\\s+five\\s+signature\\s+blocks"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the upload fingerprint",
+          "task_pattern": "preserve\\s+the\\s+upload\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "record the final generation",
+          "task_pattern": "record\\s+the\\s+final\\s+generation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "verify the manifest checksum; apply exactly five signature blocks",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the upload fingerprint; record the final generation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "apply exactly five signature blocks",
+      "semantic_operator": "exactly",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bexactly\\b"
+          ],
+          [
+            "\\bfive\\b",
+            "\\b5\\b"
+          ],
+          [
+            "\\bsignature\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "verify\\s+the\\s+manifest\\s+checksum"
+          ],
+          [
+            "apply\\s+exactly\\s+five\\s+signature\\s+blocks"
+          ],
+          [
+            "preserve\\s+the\\s+upload\\s+fingerprint"
+          ],
+          [
+            "record\\s+the\\s+final\\s+generation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "sorrel-store-sr-133-R1",
+            "kind": "recoverable",
+            "source_quote": "apply exactly five signature blocks",
+            "candidate": {
+              "source_quote": "apply exactly five signature blocks",
+              "nucleus_quote": "apply exactly five signature blocks",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "exactly"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "sorrel-store-sr-133-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction SR-133",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction SR-133",
+              "nucleus_quote": "fabricated fallback instruction SR-133",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "sorrel-store-sr-133-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Apply two signature blocks.",
+            "candidate": {
+              "source_quote": "Apply two signature blocks.",
+              "nucleus_quote": "Apply two signature blocks.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "interference_cluster": "storage-finalization"
+    },
+    {
+      "id": "tamarind-store-tm-134",
+      "system": "TamarindStore",
+      "code": "TM-134",
+      "entities": [
+        "system:TamarindStore",
+        "code:TM-134",
+        "domain:recovery",
+        "cluster:storage-finalization"
+      ],
+      "experience": {
+        "prompt": "TamarindStore returns TM-134. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "TamarindStore returns TM-134. State the minimum replica count."
+      },
+      "candidate_decision": "Retain one replica.",
+      "authoritative_text": "verify the manifest checksum; retain at least four replicas; preserve the upload fingerprint; record the replica generation.",
+      "raw_source": "<<<ROLE:status>>>\nTM-134 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRetain one replica.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nverify the manifest checksum; retain at least four replicas; preserve the upload fingerprint; record the replica generation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nstorage pressure may exist\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 307 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "verify the manifest checksum",
+          "task_pattern": "verify\\s+the\\s+manifest\\s+checksum"
+        },
+        {
+          "id": "A2",
+          "text": "retain at least four replicas",
+          "task_pattern": "retain\\s+at\\s+least\\s+four\\s+replicas"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the upload fingerprint",
+          "task_pattern": "preserve\\s+the\\s+upload\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "record the replica generation",
+          "task_pattern": "record\\s+the\\s+replica\\s+generation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "verify the manifest checksum; retain at least four replicas",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the upload fingerprint; record the replica generation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "retain at least four replicas",
+      "semantic_operator": "at_least",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bat\\s+least\\b",
+            "\\bminimum\\b"
+          ],
+          [
+            "\\bfour\\b",
+            "\\b4\\b"
+          ],
+          [
+            "\\breplica"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "verify\\s+the\\s+manifest\\s+checksum"
+          ],
+          [
+            "retain\\s+at\\s+least\\s+four\\s+replicas"
+          ],
+          [
+            "preserve\\s+the\\s+upload\\s+fingerprint"
+          ],
+          [
+            "record\\s+the\\s+replica\\s+generation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "tamarind-store-tm-134-R1",
+            "kind": "recoverable",
+            "source_quote": "retain at least four replicas",
+            "candidate": {
+              "source_quote": "retain at least four replicas",
+              "nucleus_quote": "retain at least four replicas",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "at least"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "tamarind-store-tm-134-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction TM-134",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction TM-134",
+              "nucleus_quote": "fabricated fallback instruction TM-134",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "tamarind-store-tm-134-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Retain one replica.",
+            "candidate": {
+              "source_quote": "Retain one replica.",
+              "nucleus_quote": "Retain one replica.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "interference_cluster": "storage-finalization"
+    },
+    {
+      "id": "umber-store-um-135",
+      "system": "UmberStore",
+      "code": "UM-135",
+      "entities": [
+        "system:UmberStore",
+        "code:UM-135",
+        "domain:recovery",
+        "cluster:storage-finalization"
+      ],
+      "experience": {
+        "prompt": "UmberStore returns UM-135. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "UmberStore returns UM-135. State the condition under which the manifest may be purged."
+      },
+      "candidate_decision": "Purge the manifest immediately.",
+      "authoritative_text": "read the origin epoch; do not purge the manifest unless the origin epoch changes; preserve the upload fingerprint; record the new origin epoch.",
+      "raw_source": "<<<ROLE:status>>>\nUM-135 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nPurge the manifest immediately.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nread the origin epoch; do not purge the manifest unless the origin epoch changes; preserve the upload fingerprint; record the new origin epoch.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nstorage pressure may exist\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 310 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "read the origin epoch",
+          "task_pattern": "read\\s+the\\s+origin\\s+epoch"
+        },
+        {
+          "id": "A2",
+          "text": "do not purge the manifest unless the origin epoch changes",
+          "task_pattern": "do\\s+not\\s+purge\\s+the\\s+manifest\\s+unless\\s+the\\s+origin\\s+epoch\\s+changes"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the upload fingerprint",
+          "task_pattern": "preserve\\s+the\\s+upload\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "record the new origin epoch",
+          "task_pattern": "record\\s+the\\s+new\\s+origin\\s+epoch"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "read the origin epoch; do not purge the manifest unless the origin epoch changes",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the upload fingerprint; record the new origin epoch",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "do not purge the manifest unless the origin epoch changes",
+      "semantic_operator": "unless",
+      "semantic_dimension": "condition",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bunless\\b",
+            "\\bonly\\s+if\\b"
+          ],
+          [
+            "\\borigin\\b"
+          ],
+          [
+            "\\bepoch\\b"
+          ],
+          [
+            "\\bchang"
+          ],
+          [
+            "\\bpurge\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "read\\s+the\\s+origin\\s+epoch"
+          ],
+          [
+            "do\\s+not\\s+purge\\s+the\\s+manifest\\s+unless\\s+the\\s+origin\\s+epoch\\s+changes"
+          ],
+          [
+            "preserve\\s+the\\s+upload\\s+fingerprint"
+          ],
+          [
+            "record\\s+the\\s+new\\s+origin\\s+epoch"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "umber-store-um-135-R1",
+            "kind": "recoverable",
+            "source_quote": "do not purge the manifest unless the origin epoch changes",
+            "candidate": {
+              "source_quote": "do not purge the manifest unless the origin epoch changes",
+              "nucleus_quote": "do not purge the manifest unless the origin epoch changes",
+              "qualifiers": [
+                {
+                  "type": "condition",
+                  "source_quote": "unless"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "umber-store-um-135-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction UM-135",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction UM-135",
+              "nucleus_quote": "fabricated fallback instruction UM-135",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "umber-store-um-135-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Purge the manifest immediately.",
+            "candidate": {
+              "source_quote": "Purge the manifest immediately.",
+              "nucleus_quote": "Purge the manifest immediately.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "interference_cluster": "storage-finalization"
+    }
+  ]
+}

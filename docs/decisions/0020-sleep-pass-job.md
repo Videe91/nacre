@@ -84,7 +84,12 @@ Option 2.
 - L2 passes but L3 fails, which means drift outside the gates (prompt assembly, evidence bundling).
 - Fallback volume dominates in real use.
 
-## Questions for the owner
+## Owner answers (2026-10-01)
+- **Checker model: deferred.** Later it is its own experiment with its own gate, and it ships only if it improves
+  results.
+- **Repair** stays part of the final pipeline (014–016 scope, D-0016 amendment 2).
+
+## Original questions
 1. SPEC says a different model checks the work. MNEXA never had a checker; its closed-world span admission is a
    deterministic checker. Should the model checker be deferred to a later, separately measured ADR, so parity is
    measured on the MNEXA pipeline?

@@ -1,0 +1,198 @@
+{
+  "capability": {
+    "model_facing_text": "Capability: Recover KITE-17 throttled requests\nCapability key: kite17_throttle_recovery\nTrigger: KITE-17 returns THROTTLED for a safe-to-retry request.\nPreconditions:\n1. The operation is safe to retry.\nProcedure:\n1. If RETRY-AFTER is present, wait exactly that many seconds.\n2. If RETRY-AFTER is absent, wait 7 seconds before the first retry.\n3. For another throttle, double the delay to 14 seconds.\n4. Never exceed a 28-second delay.\n5. After three failed retries, stop and emit QUARTZ.\nExpected outcome: The operation recovers without a retry storm, or terminates with QUARTZ after the retry limit.",
+    "object_id": "c_9fa39d6a04621cbebba8ea463b676442",
+    "seq": 7,
+    "version": 1
+  },
+  "consumer_model": "claude-sonnet-4-6",
+  "consumer_provider": "anthropic",
+  "controlled_change": "The failing retry transition is shown both with Experiment 034's FAILED_RETRIES schema and with explicitly defined completed-retry semantics.",
+  "diagnosis": "state_schema_ambiguity_supported",
+  "experiment": "035_capability_state_semantics_diagnostic",
+  "held_constant": [
+    "Canonical KITE-17 capability representation.",
+    "Natural-language MNEXA capability artifact.",
+    "Anthropic consumer model.",
+    "ANSWER=<value> output grammar."
+  ],
+  "purpose": "Determine whether Experiment 034's Claude off-by-one failure came from ambiguous state-variable semantics or from receiver-side capability execution.",
+  "real_model_calls": 15,
+  "repeats": 5,
+  "summary": {
+    "ambiguous_correct": 0,
+    "explicit_delay_correct": 5,
+    "repeats": 5,
+    "terminal_control_correct": 5,
+    "total_correct": 10,
+    "total_trials": 15
+  },
+  "timestamp_utc": "2026-09-16T09:03:00.395894+00:00",
+  "trials": [
+    {
+      "correct": false,
+      "expected": "28",
+      "input_tokens": 372,
+      "output_tokens": 9,
+      "parsed_output": "QUARTZ",
+      "raw_output": "ANSWER=QUARTZ",
+      "repetition": 1,
+      "response_id": "msg_011Cf6r5PcG1jmYr44PFpn8i",
+      "task_id": "ambiguous-two-failed-retries"
+    },
+    {
+      "correct": true,
+      "expected": "28",
+      "input_tokens": 432,
+      "output_tokens": 9,
+      "parsed_output": "28",
+      "raw_output": "ANSWER=28 seconds",
+      "repetition": 1,
+      "response_id": "msg_011Cf6r5mrThGoZC8WjL99ED",
+      "task_id": "explicit-third-retry-delay"
+    },
+    {
+      "correct": true,
+      "expected": "QUARTZ",
+      "input_tokens": 427,
+      "output_tokens": 9,
+      "parsed_output": "QUARTZ",
+      "raw_output": "ANSWER=QUARTZ",
+      "repetition": 1,
+      "response_id": "msg_011Cf6r5sAhX24BBtCDL4qAc",
+      "task_id": "explicit-after-third-failure"
+    },
+    {
+      "correct": false,
+      "expected": "28",
+      "input_tokens": 372,
+      "output_tokens": 9,
+      "parsed_output": "QUARTZ",
+      "raw_output": "ANSWER=QUARTZ",
+      "repetition": 2,
+      "response_id": "msg_011Cf6r6VVyuk9dAMKyxwFow",
+      "task_id": "ambiguous-two-failed-retries"
+    },
+    {
+      "correct": true,
+      "expected": "28",
+      "input_tokens": 432,
+      "output_tokens": 9,
+      "parsed_output": "28",
+      "raw_output": "ANSWER=28 seconds",
+      "repetition": 2,
+      "response_id": "msg_011Cf6r6f9RmRBRgGAXmBPNk",
+      "task_id": "explicit-third-retry-delay"
+    },
+    {
+      "correct": true,
+      "expected": "QUARTZ",
+      "input_tokens": 427,
+      "output_tokens": 9,
+      "parsed_output": "QUARTZ",
+      "raw_output": "ANSWER=QUARTZ",
+      "repetition": 2,
+      "response_id": "msg_011Cf6r6mvxBsgmFZaUesDXz",
+      "task_id": "explicit-after-third-failure"
+    },
+    {
+      "correct": false,
+      "expected": "28",
+      "input_tokens": 372,
+      "output_tokens": 9,
+      "parsed_output": "QUARTZ",
+      "raw_output": "ANSWER=QUARTZ",
+      "repetition": 3,
+      "response_id": "msg_011Cf6r7QX84p7QUeM8zCpQg",
+      "task_id": "ambiguous-two-failed-retries"
+    },
+    {
+      "correct": true,
+      "expected": "28",
+      "input_tokens": 432,
+      "output_tokens": 9,
+      "parsed_output": "28",
+      "raw_output": "ANSWER=28 seconds",
+      "repetition": 3,
+      "response_id": "msg_011Cf6r7ipxSq6P2EXfga7ef",
+      "task_id": "explicit-third-retry-delay"
+    },
+    {
+      "correct": true,
+      "expected": "QUARTZ",
+      "input_tokens": 427,
+      "output_tokens": 9,
+      "parsed_output": "QUARTZ",
+      "raw_output": "ANSWER=QUARTZ",
+      "repetition": 3,
+      "response_id": "msg_011Cf6r7pxJFsRdzqEkvoXu8",
+      "task_id": "explicit-after-third-failure"
+    },
+    {
+      "correct": false,
+      "expected": "28",
+      "input_tokens": 372,
+      "output_tokens": 9,
+      "parsed_output": "QUARTZ",
+      "raw_output": "ANSWER=QUARTZ",
+      "repetition": 4,
+      "response_id": "msg_011Cf6r8BPdAPFN8Yxn45rgr",
+      "task_id": "ambiguous-two-failed-retries"
+    },
+    {
+      "correct": true,
+      "expected": "28",
+      "input_tokens": 432,
+      "output_tokens": 9,
+      "parsed_output": "28",
+      "raw_output": "ANSWER=28 seconds",
+      "repetition": 4,
+      "response_id": "msg_011Cf6r8Y5aXRVaPqgB1c8MF",
+      "task_id": "explicit-third-retry-delay"
+    },
+    {
+      "correct": true,
+      "expected": "QUARTZ",
+      "input_tokens": 427,
+      "output_tokens": 9,
+      "parsed_output": "QUARTZ",
+      "raw_output": "ANSWER=QUARTZ",
+      "repetition": 4,
+      "response_id": "msg_011Cf6r8e6UgVG8FN7gVsQum",
+      "task_id": "explicit-after-third-failure"
+    },
+    {
+      "correct": false,
+      "expected": "28",
+      "input_tokens": 372,
+      "output_tokens": 9,
+      "parsed_output": "QUARTZ",
+      "raw_output": "ANSWER=QUARTZ",
+      "repetition": 5,
+      "response_id": "msg_011Cf6r91aoTH4N12FzvfSnA",
+      "task_id": "ambiguous-two-failed-retries"
+    },
+    {
+      "correct": true,
+      "expected": "28",
+      "input_tokens": 432,
+      "output_tokens": 9,
+      "parsed_output": "28",
+      "raw_output": "ANSWER=28 seconds",
+      "repetition": 5,
+      "response_id": "msg_011Cf6r9NQSDU1a4fCFtcMbT",
+      "task_id": "explicit-third-retry-delay"
+    },
+    {
+      "correct": true,
+      "expected": "QUARTZ",
+      "input_tokens": 427,
+      "output_tokens": 9,
+      "parsed_output": "QUARTZ",
+      "raw_output": "ANSWER=QUARTZ",
+      "repetition": 5,
+      "response_id": "msg_011Cf6r9URLcLritdRDjjKD3",
+      "task_id": "explicit-after-third-failure"
+    }
+  ]
+}

@@ -1,0 +1,3016 @@
+{
+  "experiment": "seed-growth-027",
+  "classification": "exploratory-fresh-evidence-quorum-attention-ablation",
+  "pool_size": 20,
+  "candidate_neighborhood_size": 5,
+  "top_k": 3,
+  "rrf_k": 60,
+  "retrieval_policy": "proposition_local_max_handle_scoring",
+  "fusion_policy": "non_discriminative_channel_abstention",
+  "baseline_assembly_policy": "pareto_safe_active_channel_frontier",
+  "experimental_assembly_policy": "evidence_quorum_guarded_pareto",
+  "min_active_channels_for_pruning": 2,
+  "experimental_variable": "active-channel quorum guard on context pruning only",
+  "principle": "One signal may rank. Multiple distinct active signals are required to prune.",
+  "conditions": {
+    "A": "Seed 026 proposition-local retrieval with existing Pareto assembly",
+    "B": "same ranking and fusion; Pareto pruning allowed only when at least two retrieval channels remain active"
+  },
+  "frozen_invariants": [
+    "same learned memory bundles",
+    "same source evidence",
+    "same Seed 020 addressing",
+    "same five-memory candidate neighborhoods",
+    "same Seed 021 retrieval handles",
+    "same Seed 026 proposition-local scoring",
+    "same semantic scores",
+    "same lexical scores",
+    "same entity scores",
+    "same Seed 022 abstention",
+    "same exact-tie midranks",
+    "same RRF K",
+    "same complete fused ranking",
+    "same authoritative presentation representation",
+    "same transfer query",
+    "same reasoner",
+    "same context budget configuration",
+    "zero model calls for context assembly"
+  ],
+  "families": [
+    {
+      "id": "asterworks-retry-policy-1001",
+      "system": "AsterWorks",
+      "code": "AS-1001",
+      "entities": [
+        "system:AsterWorks",
+        "code:AS-1001",
+        "domain:operations",
+        "cluster:retry-policy"
+      ],
+      "experience": {
+        "prompt": "AsterWorks returns AS-1001. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the exact retry-count rule."
+      },
+      "candidate_decision": "Retry indefinitely.",
+      "authoritative_text": "refresh the recovery marker; retry exactly seventeen times; preserve the request fingerprint; close the expired connection.",
+      "raw_source": "<<<ROLE:status>>>\nAS-1001 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRetry indefinitely.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrefresh the recovery marker; retry exactly seventeen times; preserve the request fingerprint; close the expired connection.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nneighboring memories share three background propositions and differ primarily in one decision-relevant proposition\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 341 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "refresh the recovery marker",
+          "task_pattern": "refresh\\s+the\\s+recovery\\s+marker"
+        },
+        {
+          "id": "A2",
+          "text": "retry exactly seventeen times",
+          "task_pattern": "retry\\s+exactly\\s+seventeen\\s+times"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the request fingerprint",
+          "task_pattern": "preserve\\s+the\\s+request\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "close the expired connection",
+          "task_pattern": "close\\s+the\\s+expired\\s+connection"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "refresh the recovery marker; retry exactly seventeen times",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the request fingerprint; close the expired connection",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "retry exactly seventeen times",
+      "semantic_operator": "exactly",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bexactly\\b"
+          ],
+          [
+            "\\bseventeen\\b",
+            "\\b17\\b"
+          ],
+          [
+            "\\bretr"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "refresh\\s+the\\s+recovery\\s+marker"
+          ],
+          [
+            "retry\\s+exactly\\s+seventeen\\s+times"
+          ],
+          [
+            "preserve\\s+the\\s+request\\s+fingerprint"
+          ],
+          [
+            "close\\s+the\\s+expired\\s+connection"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "asterworks-retry-policy-1001-R1",
+            "kind": "recoverable",
+            "source_quote": "retry exactly seventeen times",
+            "candidate": {
+              "source_quote": "retry exactly seventeen times",
+              "nucleus_quote": "retry exactly seventeen times",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "exactly"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "asterworks-retry-policy-1001-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction AS-1001",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction AS-1001",
+              "nucleus_quote": "fabricated fallback instruction AS-1001",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "asterworks-retry-policy-1001-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Retry indefinitely.",
+            "candidate": {
+              "source_quote": "Retry indefinitely.",
+              "nucleus_quote": "Retry indefinitely.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "AsterWorks",
+      "code_name": "AS-1001",
+      "interference_cluster": "retry-policy",
+      "degradation_mode": "context_only",
+      "query_entities": [
+        "domain:operations",
+        "cluster:retry-policy"
+      ],
+      "query_prompt": "State the exact retry-count rule."
+    },
+    {
+      "id": "asterworks-lane-routing-1002",
+      "system": "AsterWorks",
+      "code": "AS-1002",
+      "entities": [
+        "system:AsterWorks",
+        "code:AS-1002",
+        "domain:operations",
+        "cluster:lane-routing"
+      ],
+      "experience": {
+        "prompt": "AsterWorks returns AS-1002. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the permitted lane for overflow tasks."
+      },
+      "candidate_decision": "Route overflow tasks through any lane.",
+      "authoritative_text": "request a fresh routing checkpoint; route overflow tasks only through the indigo lane; preserve the original task fingerprint; record the routing generation.",
+      "raw_source": "<<<ROLE:status>>>\nAS-1002 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRoute overflow tasks through any lane.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrequest a fresh routing checkpoint; route overflow tasks only through the indigo lane; preserve the original task fingerprint; record the routing generation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nneighboring memories share three background propositions and differ primarily in one decision-relevant proposition\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 342 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "request a fresh routing checkpoint",
+          "task_pattern": "request\\s+a\\s+fresh\\s+routing\\s+checkpoint"
+        },
+        {
+          "id": "A2",
+          "text": "route overflow tasks only through the indigo lane",
+          "task_pattern": "route\\s+overflow\\s+tasks\\s+only\\s+through\\s+the\\s+indigo\\s+lane"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the original task fingerprint",
+          "task_pattern": "preserve\\s+the\\s+original\\s+task\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "record the routing generation",
+          "task_pattern": "record\\s+the\\s+routing\\s+generation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "request a fresh routing checkpoint; route overflow tasks only through the indigo lane",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the original task fingerprint; record the routing generation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "route overflow tasks only through the indigo lane",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bonly\\b"
+          ],
+          [
+            "\\bindigo\\b"
+          ],
+          [
+            "\\blane\\b"
+          ],
+          [
+            "\\boverflow\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "request\\s+a\\s+fresh\\s+routing\\s+checkpoint"
+          ],
+          [
+            "route\\s+overflow\\s+tasks\\s+only\\s+through\\s+the\\s+indigo\\s+lane"
+          ],
+          [
+            "preserve\\s+the\\s+original\\s+task\\s+fingerprint"
+          ],
+          [
+            "record\\s+the\\s+routing\\s+generation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "asterworks-lane-routing-1002-R1",
+            "kind": "recoverable",
+            "source_quote": "route overflow tasks only through the indigo lane",
+            "candidate": {
+              "source_quote": "route overflow tasks only through the indigo lane",
+              "nucleus_quote": "route overflow tasks only through the indigo lane",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "only"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "asterworks-lane-routing-1002-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction AS-1002",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction AS-1002",
+              "nucleus_quote": "fabricated fallback instruction AS-1002",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "asterworks-lane-routing-1002-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Route overflow tasks through any lane.",
+            "candidate": {
+              "source_quote": "Route overflow tasks through any lane.",
+              "nucleus_quote": "Route overflow tasks through any lane.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "AsterWorks",
+      "code_name": "AS-1002",
+      "interference_cluster": "lane-routing",
+      "degradation_mode": "context_only",
+      "query_entities": [
+        "domain:operations",
+        "cluster:lane-routing"
+      ],
+      "query_prompt": "State the permitted lane for overflow tasks."
+    },
+    {
+      "id": "asterworks-channel-session-1003",
+      "system": "AsterWorks",
+      "code": "AS-1003",
+      "entities": [
+        "system:AsterWorks",
+        "code:AS-1003",
+        "domain:operations",
+        "cluster:channel-session"
+      ],
+      "experience": {
+        "prompt": "AsterWorks returns AS-1003. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the channel rule after a certificate mismatch."
+      },
+      "candidate_decision": "Reuse the current relay channel after a certificate mismatch.",
+      "authoritative_text": "preserve the transport fingerprint; open only a fresh relay channel after a certificate mismatch; send one diagnostic probe; record the session generation.",
+      "raw_source": "<<<ROLE:status>>>\nAS-1003 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nReuse the current relay channel after a certificate mismatch.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\npreserve the transport fingerprint; open only a fresh relay channel after a certificate mismatch; send one diagnostic probe; record the session generation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nneighboring memories share three background propositions and differ primarily in one decision-relevant proposition\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 343 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "preserve the transport fingerprint",
+          "task_pattern": "preserve\\s+the\\s+transport\\s+fingerprint"
+        },
+        {
+          "id": "A2",
+          "text": "open only a fresh relay channel after a certificate mismatch",
+          "task_pattern": "open\\s+only\\s+a\\s+fresh\\s+relay\\s+channel\\s+after\\s+a\\s+certificate\\s+mismatch"
+        },
+        {
+          "id": "A3",
+          "text": "send one diagnostic probe",
+          "task_pattern": "send\\s+one\\s+diagnostic\\s+probe"
+        },
+        {
+          "id": "A4",
+          "text": "record the session generation",
+          "task_pattern": "record\\s+the\\s+session\\s+generation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "preserve the transport fingerprint; open only a fresh relay channel after a certificate mismatch",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "send one diagnostic probe; record the session generation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "open only a fresh relay channel after a certificate mismatch",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bonly\\b"
+          ],
+          [
+            "\\bfresh\\b"
+          ],
+          [
+            "\\bchannel\\b"
+          ],
+          [
+            "\\bcertificate\\b"
+          ],
+          [
+            "\\bmismatch\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "preserve\\s+the\\s+transport\\s+fingerprint"
+          ],
+          [
+            "open\\s+only\\s+a\\s+fresh\\s+relay\\s+channel\\s+after\\s+a\\s+certificate\\s+mismatch"
+          ],
+          [
+            "send\\s+one\\s+diagnostic\\s+probe"
+          ],
+          [
+            "record\\s+the\\s+session\\s+generation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "asterworks-channel-session-1003-R1",
+            "kind": "recoverable",
+            "source_quote": "open only a fresh relay channel after a certificate mismatch",
+            "candidate": {
+              "source_quote": "open only a fresh relay channel after a certificate mismatch",
+              "nucleus_quote": "open only a fresh relay channel after a certificate mismatch",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "only"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "asterworks-channel-session-1003-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction AS-1003",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction AS-1003",
+              "nucleus_quote": "fabricated fallback instruction AS-1003",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "asterworks-channel-session-1003-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Reuse the current relay channel after a certificate mismatch.",
+            "candidate": {
+              "source_quote": "Reuse the current relay channel after a certificate mismatch.",
+              "nucleus_quote": "Reuse the current relay channel after a certificate mismatch.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "AsterWorks",
+      "code_name": "AS-1003",
+      "interference_cluster": "channel-session",
+      "degradation_mode": "context_only",
+      "query_entities": [
+        "domain:operations",
+        "cluster:channel-session"
+      ],
+      "query_prompt": "State the channel rule after a certificate mismatch."
+    },
+    {
+      "id": "asterworks-storage-finalization-1004",
+      "system": "AsterWorks",
+      "code": "AS-1004",
+      "entities": [
+        "system:AsterWorks",
+        "code:AS-1004",
+        "domain:operations",
+        "cluster:storage-finalization"
+      ],
+      "experience": {
+        "prompt": "AsterWorks returns AS-1004. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the permitted committed finalization header."
+      },
+      "candidate_decision": "Finalize with any completion header.",
+      "authoritative_text": "verify the storage checksum; finalize only with X-Aster-Seal: committed; preserve the upload fingerprint; record the committed revision.",
+      "raw_source": "<<<ROLE:status>>>\nAS-1004 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nFinalize with any completion header.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nverify the storage checksum; finalize only with X-Aster-Seal: committed; preserve the upload fingerprint; record the committed revision.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nneighboring memories share three background propositions and differ primarily in one decision-relevant proposition\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 344 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "verify the storage checksum",
+          "task_pattern": "verify\\s+the\\s+storage\\s+checksum"
+        },
+        {
+          "id": "A2",
+          "text": "finalize only with X-Aster-Seal: committed",
+          "task_pattern": "finalize\\s+only\\s+with\\s+X\\-Aster\\-Seal:\\s+committed"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the upload fingerprint",
+          "task_pattern": "preserve\\s+the\\s+upload\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "record the committed revision",
+          "task_pattern": "record\\s+the\\s+committed\\s+revision"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "verify the storage checksum; finalize only with X-Aster-Seal: committed",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the upload fingerprint; record the committed revision",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "finalize only with X-Aster-Seal: committed",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bonly\\b"
+          ],
+          [
+            "X-Aster-Seal"
+          ],
+          [
+            "\\bcommitted\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "verify\\s+the\\s+storage\\s+checksum"
+          ],
+          [
+            "finalize\\s+only\\s+with\\s+X\\-Aster\\-Seal:\\s+committed"
+          ],
+          [
+            "preserve\\s+the\\s+upload\\s+fingerprint"
+          ],
+          [
+            "record\\s+the\\s+committed\\s+revision"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "asterworks-storage-finalization-1004-R1",
+            "kind": "recoverable",
+            "source_quote": "finalize only with X-Aster-Seal: committed",
+            "candidate": {
+              "source_quote": "finalize only with X-Aster-Seal: committed",
+              "nucleus_quote": "finalize only with X-Aster-Seal: committed",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "only"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "asterworks-storage-finalization-1004-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction AS-1004",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction AS-1004",
+              "nucleus_quote": "fabricated fallback instruction AS-1004",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "asterworks-storage-finalization-1004-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Finalize with any completion header.",
+            "candidate": {
+              "source_quote": "Finalize with any completion header.",
+              "nucleus_quote": "Finalize with any completion header.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "AsterWorks",
+      "code_name": "AS-1004",
+      "interference_cluster": "storage-finalization",
+      "degradation_mode": "context_only",
+      "query_entities": [
+        "domain:operations",
+        "cluster:storage-finalization"
+      ],
+      "query_prompt": "State the permitted committed finalization header."
+    },
+    {
+      "id": "berylworks-retry-policy-1005",
+      "system": "BerylWorks",
+      "code": "BW-1005",
+      "entities": [
+        "system:BerylWorks",
+        "code:BW-1005",
+        "domain:operations",
+        "cluster:retry-policy"
+      ],
+      "experience": {
+        "prompt": "BerylWorks returns BW-1005. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the maximum retry-count rule."
+      },
+      "candidate_decision": "Retry nineteen times.",
+      "authoritative_text": "refresh the recovery marker; retry at most thirteen times; preserve the request fingerprint; close the expired connection.",
+      "raw_source": "<<<ROLE:status>>>\nBW-1005 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRetry nineteen times.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrefresh the recovery marker; retry at most thirteen times; preserve the request fingerprint; close the expired connection.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nneighboring memories share three background propositions and differ primarily in one decision-relevant proposition\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 345 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "refresh the recovery marker",
+          "task_pattern": "refresh\\s+the\\s+recovery\\s+marker"
+        },
+        {
+          "id": "A2",
+          "text": "retry at most thirteen times",
+          "task_pattern": "retry\\s+at\\s+most\\s+thirteen\\s+times"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the request fingerprint",
+          "task_pattern": "preserve\\s+the\\s+request\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "close the expired connection",
+          "task_pattern": "close\\s+the\\s+expired\\s+connection"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "refresh the recovery marker; retry at most thirteen times",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the request fingerprint; close the expired connection",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "retry at most thirteen times",
+      "semantic_operator": "at_most",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bat\\s+most\\b",
+            "\\bmaximum\\b",
+            "\\bno\\s+more\\s+than\\b"
+          ],
+          [
+            "\\bthirteen\\b",
+            "\\b13\\b"
+          ],
+          [
+            "\\bretr"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "refresh\\s+the\\s+recovery\\s+marker"
+          ],
+          [
+            "retry\\s+at\\s+most\\s+thirteen\\s+times"
+          ],
+          [
+            "preserve\\s+the\\s+request\\s+fingerprint"
+          ],
+          [
+            "close\\s+the\\s+expired\\s+connection"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "berylworks-retry-policy-1005-R1",
+            "kind": "recoverable",
+            "source_quote": "retry at most thirteen times",
+            "candidate": {
+              "source_quote": "retry at most thirteen times",
+              "nucleus_quote": "retry at most thirteen times",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "at most"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "berylworks-retry-policy-1005-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction BW-1005",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction BW-1005",
+              "nucleus_quote": "fabricated fallback instruction BW-1005",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "berylworks-retry-policy-1005-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Retry nineteen times.",
+            "candidate": {
+              "source_quote": "Retry nineteen times.",
+              "nucleus_quote": "Retry nineteen times.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "BerylWorks",
+      "code_name": "BW-1005",
+      "interference_cluster": "retry-policy",
+      "degradation_mode": "context_only",
+      "query_entities": [
+        "domain:operations",
+        "cluster:retry-policy"
+      ],
+      "query_prompt": "State the maximum retry-count rule."
+    },
+    {
+      "id": "berylworks-lane-routing-1006",
+      "system": "BerylWorks",
+      "code": "BW-1006",
+      "entities": [
+        "system:BerylWorks",
+        "code:BW-1006",
+        "domain:operations",
+        "cluster:lane-routing"
+      ],
+      "experience": {
+        "prompt": "BerylWorks returns BW-1006. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the permitted lane for replay tasks."
+      },
+      "candidate_decision": "Route replay tasks through the indigo lane.",
+      "authoritative_text": "request a fresh routing checkpoint; route replay tasks only through the copper lane; preserve the original task fingerprint; record the routing generation.",
+      "raw_source": "<<<ROLE:status>>>\nBW-1006 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRoute replay tasks through the indigo lane.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrequest a fresh routing checkpoint; route replay tasks only through the copper lane; preserve the original task fingerprint; record the routing generation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nneighboring memories share three background propositions and differ primarily in one decision-relevant proposition\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 346 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "request a fresh routing checkpoint",
+          "task_pattern": "request\\s+a\\s+fresh\\s+routing\\s+checkpoint"
+        },
+        {
+          "id": "A2",
+          "text": "route replay tasks only through the copper lane",
+          "task_pattern": "route\\s+replay\\s+tasks\\s+only\\s+through\\s+the\\s+copper\\s+lane"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the original task fingerprint",
+          "task_pattern": "preserve\\s+the\\s+original\\s+task\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "record the routing generation",
+          "task_pattern": "record\\s+the\\s+routing\\s+generation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "request a fresh routing checkpoint; route replay tasks only through the copper lane",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the original task fingerprint; record the routing generation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "route replay tasks only through the copper lane",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bonly\\b"
+          ],
+          [
+            "\\bcopper\\b"
+          ],
+          [
+            "\\blane\\b"
+          ],
+          [
+            "\\breplay\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "request\\s+a\\s+fresh\\s+routing\\s+checkpoint"
+          ],
+          [
+            "route\\s+replay\\s+tasks\\s+only\\s+through\\s+the\\s+copper\\s+lane"
+          ],
+          [
+            "preserve\\s+the\\s+original\\s+task\\s+fingerprint"
+          ],
+          [
+            "record\\s+the\\s+routing\\s+generation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "berylworks-lane-routing-1006-R1",
+            "kind": "recoverable",
+            "source_quote": "route replay tasks only through the copper lane",
+            "candidate": {
+              "source_quote": "route replay tasks only through the copper lane",
+              "nucleus_quote": "route replay tasks only through the copper lane",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "only"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "berylworks-lane-routing-1006-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction BW-1006",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction BW-1006",
+              "nucleus_quote": "fabricated fallback instruction BW-1006",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "berylworks-lane-routing-1006-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Route replay tasks through the indigo lane.",
+            "candidate": {
+              "source_quote": "Route replay tasks through the indigo lane.",
+              "nucleus_quote": "Route replay tasks through the indigo lane.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "BerylWorks",
+      "code_name": "BW-1006",
+      "interference_cluster": "lane-routing",
+      "degradation_mode": "context_only",
+      "query_entities": [
+        "domain:operations",
+        "cluster:lane-routing"
+      ],
+      "query_prompt": "State the permitted lane for replay tasks."
+    },
+    {
+      "id": "berylworks-channel-session-1007",
+      "system": "BerylWorks",
+      "code": "BW-1007",
+      "entities": [
+        "system:BerylWorks",
+        "code:BW-1007",
+        "domain:operations",
+        "cluster:channel-session"
+      ],
+      "experience": {
+        "prompt": "BerylWorks returns BW-1007. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the exchange-salt reuse rule."
+      },
+      "candidate_decision": "Reuse the prior exchange salt.",
+      "authoritative_text": "preserve the transport fingerprint; never reuse the prior exchange salt; send one diagnostic probe; record the session generation.",
+      "raw_source": "<<<ROLE:status>>>\nBW-1007 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nReuse the prior exchange salt.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\npreserve the transport fingerprint; never reuse the prior exchange salt; send one diagnostic probe; record the session generation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nneighboring memories share three background propositions and differ primarily in one decision-relevant proposition\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 347 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "preserve the transport fingerprint",
+          "task_pattern": "preserve\\s+the\\s+transport\\s+fingerprint"
+        },
+        {
+          "id": "A2",
+          "text": "never reuse the prior exchange salt",
+          "task_pattern": "never\\s+reuse\\s+the\\s+prior\\s+exchange\\s+salt"
+        },
+        {
+          "id": "A3",
+          "text": "send one diagnostic probe",
+          "task_pattern": "send\\s+one\\s+diagnostic\\s+probe"
+        },
+        {
+          "id": "A4",
+          "text": "record the session generation",
+          "task_pattern": "record\\s+the\\s+session\\s+generation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "preserve the transport fingerprint; never reuse the prior exchange salt",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "send one diagnostic probe; record the session generation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "never reuse the prior exchange salt",
+      "semantic_operator": "never",
+      "semantic_dimension": "polarity",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bnever\\b",
+            "\\bdo\\s+not\\b"
+          ],
+          [
+            "\\breuse\\b"
+          ],
+          [
+            "\\bexchange\\b"
+          ],
+          [
+            "\\bsalt\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "preserve\\s+the\\s+transport\\s+fingerprint"
+          ],
+          [
+            "never\\s+reuse\\s+the\\s+prior\\s+exchange\\s+salt"
+          ],
+          [
+            "send\\s+one\\s+diagnostic\\s+probe"
+          ],
+          [
+            "record\\s+the\\s+session\\s+generation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "berylworks-channel-session-1007-R1",
+            "kind": "recoverable",
+            "source_quote": "never reuse the prior exchange salt",
+            "candidate": {
+              "source_quote": "never reuse the prior exchange salt",
+              "nucleus_quote": "never reuse the prior exchange salt",
+              "qualifiers": [
+                {
+                  "type": "negation",
+                  "source_quote": "never"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "berylworks-channel-session-1007-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction BW-1007",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction BW-1007",
+              "nucleus_quote": "fabricated fallback instruction BW-1007",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "berylworks-channel-session-1007-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Reuse the prior exchange salt.",
+            "candidate": {
+              "source_quote": "Reuse the prior exchange salt.",
+              "nucleus_quote": "Reuse the prior exchange salt.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "BerylWorks",
+      "code_name": "BW-1007",
+      "interference_cluster": "channel-session",
+      "degradation_mode": "context_only",
+      "query_entities": [
+        "domain:operations",
+        "cluster:channel-session"
+      ],
+      "query_prompt": "State the exchange-salt reuse rule."
+    },
+    {
+      "id": "berylworks-storage-finalization-1008",
+      "system": "BerylWorks",
+      "code": "BW-1008",
+      "entities": [
+        "system:BerylWorks",
+        "code:BW-1008",
+        "domain:operations",
+        "cluster:storage-finalization"
+      ],
+      "experience": {
+        "prompt": "BerylWorks returns BW-1008. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the receipt-proof finalization rule."
+      },
+      "candidate_decision": "Finalize before receipt-proof verification.",
+      "authoritative_text": "verify the storage checksum; do not finalize before receipt-proof verification; preserve the upload fingerprint; record the committed revision.",
+      "raw_source": "<<<ROLE:status>>>\nBW-1008 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nFinalize before receipt-proof verification.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nverify the storage checksum; do not finalize before receipt-proof verification; preserve the upload fingerprint; record the committed revision.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nneighboring memories share three background propositions and differ primarily in one decision-relevant proposition\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 348 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "verify the storage checksum",
+          "task_pattern": "verify\\s+the\\s+storage\\s+checksum"
+        },
+        {
+          "id": "A2",
+          "text": "do not finalize before receipt-proof verification",
+          "task_pattern": "do\\s+not\\s+finalize\\s+before\\s+receipt\\-proof\\s+verification"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the upload fingerprint",
+          "task_pattern": "preserve\\s+the\\s+upload\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "record the committed revision",
+          "task_pattern": "record\\s+the\\s+committed\\s+revision"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "verify the storage checksum; do not finalize before receipt-proof verification",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the upload fingerprint; record the committed revision",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "do not finalize before receipt-proof verification",
+      "semantic_operator": "do_not",
+      "semantic_dimension": "polarity",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bdo\\s+not\\b",
+            "\\bnever\\b"
+          ],
+          [
+            "\\bfinaliz"
+          ],
+          [
+            "\\bbefore\\b"
+          ],
+          [
+            "\\breceipt\\b"
+          ],
+          [
+            "\\bproof\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "verify\\s+the\\s+storage\\s+checksum"
+          ],
+          [
+            "do\\s+not\\s+finalize\\s+before\\s+receipt\\-proof\\s+verification"
+          ],
+          [
+            "preserve\\s+the\\s+upload\\s+fingerprint"
+          ],
+          [
+            "record\\s+the\\s+committed\\s+revision"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "berylworks-storage-finalization-1008-R1",
+            "kind": "recoverable",
+            "source_quote": "do not finalize before receipt-proof verification",
+            "candidate": {
+              "source_quote": "do not finalize before receipt-proof verification",
+              "nucleus_quote": "do not finalize before receipt-proof verification",
+              "qualifiers": [
+                {
+                  "type": "negation",
+                  "source_quote": "do not"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "berylworks-storage-finalization-1008-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction BW-1008",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction BW-1008",
+              "nucleus_quote": "fabricated fallback instruction BW-1008",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "berylworks-storage-finalization-1008-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Finalize before receipt-proof verification.",
+            "candidate": {
+              "source_quote": "Finalize before receipt-proof verification.",
+              "nucleus_quote": "Finalize before receipt-proof verification.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "BerylWorks",
+      "code_name": "BW-1008",
+      "interference_cluster": "storage-finalization",
+      "degradation_mode": "context_only",
+      "query_entities": [
+        "domain:operations",
+        "cluster:storage-finalization"
+      ],
+      "query_prompt": "State the receipt-proof finalization rule."
+    },
+    {
+      "id": "cinderworks-retry-policy-1009",
+      "system": "CinderWorks",
+      "code": "CW-1009",
+      "entities": [
+        "system:CinderWorks",
+        "code:CW-1009",
+        "domain:operations",
+        "cluster:retry-policy"
+      ],
+      "experience": {
+        "prompt": "CinderWorks returns CW-1009. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the minimum retry-count rule."
+      },
+      "candidate_decision": "Retry only twice.",
+      "authoritative_text": "refresh the recovery marker; retry at least eight times; preserve the request fingerprint; close the expired connection.",
+      "raw_source": "<<<ROLE:status>>>\nCW-1009 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRetry only twice.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrefresh the recovery marker; retry at least eight times; preserve the request fingerprint; close the expired connection.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nneighboring memories share three background propositions and differ primarily in one decision-relevant proposition\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 349 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "refresh the recovery marker",
+          "task_pattern": "refresh\\s+the\\s+recovery\\s+marker"
+        },
+        {
+          "id": "A2",
+          "text": "retry at least eight times",
+          "task_pattern": "retry\\s+at\\s+least\\s+eight\\s+times"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the request fingerprint",
+          "task_pattern": "preserve\\s+the\\s+request\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "close the expired connection",
+          "task_pattern": "close\\s+the\\s+expired\\s+connection"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "refresh the recovery marker; retry at least eight times",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the request fingerprint; close the expired connection",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "retry at least eight times",
+      "semantic_operator": "at_least",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bat\\s+least\\b",
+            "\\bminimum\\b"
+          ],
+          [
+            "\\beight\\b",
+            "\\b8\\b"
+          ],
+          [
+            "\\bretr"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "refresh\\s+the\\s+recovery\\s+marker"
+          ],
+          [
+            "retry\\s+at\\s+least\\s+eight\\s+times"
+          ],
+          [
+            "preserve\\s+the\\s+request\\s+fingerprint"
+          ],
+          [
+            "close\\s+the\\s+expired\\s+connection"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "cinderworks-retry-policy-1009-R1",
+            "kind": "recoverable",
+            "source_quote": "retry at least eight times",
+            "candidate": {
+              "source_quote": "retry at least eight times",
+              "nucleus_quote": "retry at least eight times",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "at least"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "cinderworks-retry-policy-1009-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction CW-1009",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction CW-1009",
+              "nucleus_quote": "fabricated fallback instruction CW-1009",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "cinderworks-retry-policy-1009-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Retry only twice.",
+            "candidate": {
+              "source_quote": "Retry only twice.",
+              "nucleus_quote": "Retry only twice.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "CinderWorks",
+      "code_name": "CW-1009",
+      "interference_cluster": "retry-policy",
+      "degradation_mode": "context_only",
+      "query_entities": [
+        "domain:operations",
+        "cluster:retry-policy"
+      ],
+      "query_prompt": "State the minimum retry-count rule."
+    },
+    {
+      "id": "cinderworks-lane-routing-1010",
+      "system": "CinderWorks",
+      "code": "CW-1010",
+      "entities": [
+        "system:CinderWorks",
+        "code:CW-1010",
+        "domain:operations",
+        "cluster:lane-routing"
+      ],
+      "experience": {
+        "prompt": "CinderWorks returns CW-1010. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the slate-lane rule for poisoned tasks."
+      },
+      "candidate_decision": "Route poisoned tasks through the slate lane.",
+      "authoritative_text": "request a fresh routing checkpoint; do not route poisoned tasks through the slate lane; preserve the original task fingerprint; record the routing generation.",
+      "raw_source": "<<<ROLE:status>>>\nCW-1010 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRoute poisoned tasks through the slate lane.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrequest a fresh routing checkpoint; do not route poisoned tasks through the slate lane; preserve the original task fingerprint; record the routing generation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nneighboring memories share three background propositions and differ primarily in one decision-relevant proposition\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 350 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "request a fresh routing checkpoint",
+          "task_pattern": "request\\s+a\\s+fresh\\s+routing\\s+checkpoint"
+        },
+        {
+          "id": "A2",
+          "text": "do not route poisoned tasks through the slate lane",
+          "task_pattern": "do\\s+not\\s+route\\s+poisoned\\s+tasks\\s+through\\s+the\\s+slate\\s+lane"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the original task fingerprint",
+          "task_pattern": "preserve\\s+the\\s+original\\s+task\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "record the routing generation",
+          "task_pattern": "record\\s+the\\s+routing\\s+generation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "request a fresh routing checkpoint; do not route poisoned tasks through the slate lane",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the original task fingerprint; record the routing generation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "do not route poisoned tasks through the slate lane",
+      "semantic_operator": "do_not",
+      "semantic_dimension": "polarity",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bdo\\s+not\\b",
+            "\\bnever\\b"
+          ],
+          [
+            "\\bpoison"
+          ],
+          [
+            "\\bslate\\b"
+          ],
+          [
+            "\\blane\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "request\\s+a\\s+fresh\\s+routing\\s+checkpoint"
+          ],
+          [
+            "do\\s+not\\s+route\\s+poisoned\\s+tasks\\s+through\\s+the\\s+slate\\s+lane"
+          ],
+          [
+            "preserve\\s+the\\s+original\\s+task\\s+fingerprint"
+          ],
+          [
+            "record\\s+the\\s+routing\\s+generation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "cinderworks-lane-routing-1010-R1",
+            "kind": "recoverable",
+            "source_quote": "do not route poisoned tasks through the slate lane",
+            "candidate": {
+              "source_quote": "do not route poisoned tasks through the slate lane",
+              "nucleus_quote": "do not route poisoned tasks through the slate lane",
+              "qualifiers": [
+                {
+                  "type": "negation",
+                  "source_quote": "do not"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "cinderworks-lane-routing-1010-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction CW-1010",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction CW-1010",
+              "nucleus_quote": "fabricated fallback instruction CW-1010",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "cinderworks-lane-routing-1010-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Route poisoned tasks through the slate lane.",
+            "candidate": {
+              "source_quote": "Route poisoned tasks through the slate lane.",
+              "nucleus_quote": "Route poisoned tasks through the slate lane.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "CinderWorks",
+      "code_name": "CW-1010",
+      "interference_cluster": "lane-routing",
+      "degradation_mode": "context_only",
+      "query_entities": [
+        "domain:operations",
+        "cluster:lane-routing"
+      ],
+      "query_prompt": "State the slate-lane rule for poisoned tasks."
+    },
+    {
+      "id": "cinderworks-channel-session-1011",
+      "system": "CinderWorks",
+      "code": "CW-1011",
+      "entities": [
+        "system:CinderWorks",
+        "code:CW-1011",
+        "domain:operations",
+        "cluster:channel-session"
+      ],
+      "experience": {
+        "prompt": "CinderWorks returns CW-1011. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the exact heartbeat-frame count."
+      },
+      "candidate_decision": "Send five heartbeat frames.",
+      "authoritative_text": "preserve the transport fingerprint; send exactly seventeen heartbeat frames; send one diagnostic probe; record the session generation.",
+      "raw_source": "<<<ROLE:status>>>\nCW-1011 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nSend five heartbeat frames.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\npreserve the transport fingerprint; send exactly seventeen heartbeat frames; send one diagnostic probe; record the session generation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nneighboring memories share three background propositions and differ primarily in one decision-relevant proposition\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 351 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "preserve the transport fingerprint",
+          "task_pattern": "preserve\\s+the\\s+transport\\s+fingerprint"
+        },
+        {
+          "id": "A2",
+          "text": "send exactly seventeen heartbeat frames",
+          "task_pattern": "send\\s+exactly\\s+seventeen\\s+heartbeat\\s+frames"
+        },
+        {
+          "id": "A3",
+          "text": "send one diagnostic probe",
+          "task_pattern": "send\\s+one\\s+diagnostic\\s+probe"
+        },
+        {
+          "id": "A4",
+          "text": "record the session generation",
+          "task_pattern": "record\\s+the\\s+session\\s+generation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "preserve the transport fingerprint; send exactly seventeen heartbeat frames",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "send one diagnostic probe; record the session generation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "send exactly seventeen heartbeat frames",
+      "semantic_operator": "exactly",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bexactly\\b"
+          ],
+          [
+            "\\bseventeen\\b",
+            "\\b17\\b"
+          ],
+          [
+            "\\bheartbeat\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "preserve\\s+the\\s+transport\\s+fingerprint"
+          ],
+          [
+            "send\\s+exactly\\s+seventeen\\s+heartbeat\\s+frames"
+          ],
+          [
+            "send\\s+one\\s+diagnostic\\s+probe"
+          ],
+          [
+            "record\\s+the\\s+session\\s+generation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "cinderworks-channel-session-1011-R1",
+            "kind": "recoverable",
+            "source_quote": "send exactly seventeen heartbeat frames",
+            "candidate": {
+              "source_quote": "send exactly seventeen heartbeat frames",
+              "nucleus_quote": "send exactly seventeen heartbeat frames",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "exactly"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "cinderworks-channel-session-1011-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction CW-1011",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction CW-1011",
+              "nucleus_quote": "fabricated fallback instruction CW-1011",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "cinderworks-channel-session-1011-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Send five heartbeat frames.",
+            "candidate": {
+              "source_quote": "Send five heartbeat frames.",
+              "nucleus_quote": "Send five heartbeat frames.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "CinderWorks",
+      "code_name": "CW-1011",
+      "interference_cluster": "channel-session",
+      "degradation_mode": "context_only",
+      "query_entities": [
+        "domain:operations",
+        "cluster:channel-session"
+      ],
+      "query_prompt": "State the exact heartbeat-frame count."
+    },
+    {
+      "id": "cinderworks-storage-finalization-1012",
+      "system": "CinderWorks",
+      "code": "CW-1012",
+      "entities": [
+        "system:CinderWorks",
+        "code:CW-1012",
+        "domain:operations",
+        "cluster:storage-finalization"
+      ],
+      "experience": {
+        "prompt": "CinderWorks returns CW-1012. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the exact signature-block count."
+      },
+      "candidate_decision": "Apply six signature blocks.",
+      "authoritative_text": "verify the storage checksum; apply exactly seventeen signature blocks; preserve the upload fingerprint; record the committed revision.",
+      "raw_source": "<<<ROLE:status>>>\nCW-1012 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nApply six signature blocks.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nverify the storage checksum; apply exactly seventeen signature blocks; preserve the upload fingerprint; record the committed revision.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nneighboring memories share three background propositions and differ primarily in one decision-relevant proposition\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 352 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "verify the storage checksum",
+          "task_pattern": "verify\\s+the\\s+storage\\s+checksum"
+        },
+        {
+          "id": "A2",
+          "text": "apply exactly seventeen signature blocks",
+          "task_pattern": "apply\\s+exactly\\s+seventeen\\s+signature\\s+blocks"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the upload fingerprint",
+          "task_pattern": "preserve\\s+the\\s+upload\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "record the committed revision",
+          "task_pattern": "record\\s+the\\s+committed\\s+revision"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "verify the storage checksum; apply exactly seventeen signature blocks",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the upload fingerprint; record the committed revision",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "apply exactly seventeen signature blocks",
+      "semantic_operator": "exactly",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bexactly\\b"
+          ],
+          [
+            "\\bseventeen\\b",
+            "\\b17\\b"
+          ],
+          [
+            "\\bsignature\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "verify\\s+the\\s+storage\\s+checksum"
+          ],
+          [
+            "apply\\s+exactly\\s+seventeen\\s+signature\\s+blocks"
+          ],
+          [
+            "preserve\\s+the\\s+upload\\s+fingerprint"
+          ],
+          [
+            "record\\s+the\\s+committed\\s+revision"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "cinderworks-storage-finalization-1012-R1",
+            "kind": "recoverable",
+            "source_quote": "apply exactly seventeen signature blocks",
+            "candidate": {
+              "source_quote": "apply exactly seventeen signature blocks",
+              "nucleus_quote": "apply exactly seventeen signature blocks",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "exactly"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "cinderworks-storage-finalization-1012-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction CW-1012",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction CW-1012",
+              "nucleus_quote": "fabricated fallback instruction CW-1012",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "cinderworks-storage-finalization-1012-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Apply six signature blocks.",
+            "candidate": {
+              "source_quote": "Apply six signature blocks.",
+              "nucleus_quote": "Apply six signature blocks.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "CinderWorks",
+      "code_name": "CW-1012",
+      "interference_cluster": "storage-finalization",
+      "degradation_mode": "context_only",
+      "query_entities": [
+        "domain:operations",
+        "cluster:storage-finalization"
+      ],
+      "query_prompt": "State the exact signature-block count."
+    },
+    {
+      "id": "driftworks-retry-policy-1013",
+      "system": "DriftWorks",
+      "code": "DW-1013",
+      "entities": [
+        "system:DriftWorks",
+        "code:DW-1013",
+        "domain:operations",
+        "cluster:retry-policy"
+      ],
+      "experience": {
+        "prompt": "DriftWorks returns DW-1013. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the schema-rejection retry rule."
+      },
+      "candidate_decision": "Retry the schema-rejected request.",
+      "authoritative_text": "refresh the recovery marker; never retry a schema-rejected request; preserve the request fingerprint; close the expired connection.",
+      "raw_source": "<<<ROLE:status>>>\nDW-1013 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRetry the schema-rejected request.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrefresh the recovery marker; never retry a schema-rejected request; preserve the request fingerprint; close the expired connection.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nneighboring memories share three background propositions and differ primarily in one decision-relevant proposition\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 353 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "refresh the recovery marker",
+          "task_pattern": "refresh\\s+the\\s+recovery\\s+marker"
+        },
+        {
+          "id": "A2",
+          "text": "never retry a schema-rejected request",
+          "task_pattern": "never\\s+retry\\s+a\\s+schema\\-rejected\\s+request"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the request fingerprint",
+          "task_pattern": "preserve\\s+the\\s+request\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "close the expired connection",
+          "task_pattern": "close\\s+the\\s+expired\\s+connection"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "refresh the recovery marker; never retry a schema-rejected request",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the request fingerprint; close the expired connection",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "never retry a schema-rejected request",
+      "semantic_operator": "never",
+      "semantic_dimension": "polarity",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bnever\\b",
+            "\\bdo\\s+not\\b"
+          ],
+          [
+            "\\bretry\\b"
+          ],
+          [
+            "\\bschema\\b"
+          ],
+          [
+            "\\breject"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "refresh\\s+the\\s+recovery\\s+marker"
+          ],
+          [
+            "never\\s+retry\\s+a\\s+schema\\-rejected\\s+request"
+          ],
+          [
+            "preserve\\s+the\\s+request\\s+fingerprint"
+          ],
+          [
+            "close\\s+the\\s+expired\\s+connection"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "driftworks-retry-policy-1013-R1",
+            "kind": "recoverable",
+            "source_quote": "never retry a schema-rejected request",
+            "candidate": {
+              "source_quote": "never retry a schema-rejected request",
+              "nucleus_quote": "never retry a schema-rejected request",
+              "qualifiers": [
+                {
+                  "type": "negation",
+                  "source_quote": "never"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "driftworks-retry-policy-1013-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction DW-1013",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction DW-1013",
+              "nucleus_quote": "fabricated fallback instruction DW-1013",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "driftworks-retry-policy-1013-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Retry the schema-rejected request.",
+            "candidate": {
+              "source_quote": "Retry the schema-rejected request.",
+              "nucleus_quote": "Retry the schema-rejected request.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "DriftWorks",
+      "code_name": "DW-1013",
+      "interference_cluster": "retry-policy",
+      "degradation_mode": "context_only",
+      "query_entities": [
+        "domain:operations",
+        "cluster:retry-policy"
+      ],
+      "query_prompt": "State the schema-rejection retry rule."
+    },
+    {
+      "id": "driftworks-lane-routing-1014",
+      "system": "DriftWorks",
+      "code": "DW-1014",
+      "entities": [
+        "system:DriftWorks",
+        "code:DW-1014",
+        "domain:operations",
+        "cluster:lane-routing"
+      ],
+      "experience": {
+        "prompt": "DriftWorks returns DW-1014. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State when the coral lane should be used."
+      },
+      "candidate_decision": "Always route the task through the coral lane.",
+      "authoritative_text": "request a fresh routing checkpoint; if the queue is fragmented, route the task through the coral lane; preserve the original task fingerprint; record the routing generation.",
+      "raw_source": "<<<ROLE:status>>>\nDW-1014 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nAlways route the task through the coral lane.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrequest a fresh routing checkpoint; if the queue is fragmented, route the task through the coral lane; preserve the original task fingerprint; record the routing generation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nneighboring memories share three background propositions and differ primarily in one decision-relevant proposition\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 354 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "request a fresh routing checkpoint",
+          "task_pattern": "request\\s+a\\s+fresh\\s+routing\\s+checkpoint"
+        },
+        {
+          "id": "A2",
+          "text": "if the queue is fragmented, route the task through the coral lane",
+          "task_pattern": "if\\s+the\\s+queue\\s+is\\s+fragmented,\\s+route\\s+the\\s+task\\s+through\\s+the\\s+coral\\s+lane"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the original task fingerprint",
+          "task_pattern": "preserve\\s+the\\s+original\\s+task\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "record the routing generation",
+          "task_pattern": "record\\s+the\\s+routing\\s+generation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "request a fresh routing checkpoint; if the queue is fragmented, route the task through the coral lane",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the original task fingerprint; record the routing generation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "if the queue is fragmented, route the task through the coral lane",
+      "semantic_operator": "when_if",
+      "semantic_dimension": "condition",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bif\\b",
+            "\\bwhen\\b"
+          ],
+          [
+            "\\bfragment"
+          ],
+          [
+            "\\bcoral\\b"
+          ],
+          [
+            "\\blane\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "request\\s+a\\s+fresh\\s+routing\\s+checkpoint"
+          ],
+          [
+            "if\\s+the\\s+queue\\s+is\\s+fragmented,\\s+route\\s+the\\s+task\\s+through\\s+the\\s+coral\\s+lane"
+          ],
+          [
+            "preserve\\s+the\\s+original\\s+task\\s+fingerprint"
+          ],
+          [
+            "record\\s+the\\s+routing\\s+generation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "driftworks-lane-routing-1014-R1",
+            "kind": "recoverable",
+            "source_quote": "if the queue is fragmented, route the task through the coral lane",
+            "candidate": {
+              "source_quote": "if the queue is fragmented, route the task through the coral lane",
+              "nucleus_quote": "if the queue is fragmented, route the task through the coral lane",
+              "qualifiers": [
+                {
+                  "type": "condition",
+                  "source_quote": "if"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "driftworks-lane-routing-1014-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction DW-1014",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction DW-1014",
+              "nucleus_quote": "fabricated fallback instruction DW-1014",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "driftworks-lane-routing-1014-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Always route the task through the coral lane.",
+            "candidate": {
+              "source_quote": "Always route the task through the coral lane.",
+              "nucleus_quote": "Always route the task through the coral lane.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "DriftWorks",
+      "code_name": "DW-1014",
+      "interference_cluster": "lane-routing",
+      "degradation_mode": "context_only",
+      "query_entities": [
+        "domain:operations",
+        "cluster:lane-routing"
+      ],
+      "query_prompt": "State when the coral lane should be used."
+    },
+    {
+      "id": "driftworks-channel-session-1015",
+      "system": "DriftWorks",
+      "code": "DW-1015",
+      "entities": [
+        "system:DriftWorks",
+        "code:DW-1015",
+        "domain:operations",
+        "cluster:channel-session"
+      ],
+      "experience": {
+        "prompt": "DriftWorks returns DW-1015. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the minimum reconnect wait."
+      },
+      "candidate_decision": "Reconnect immediately.",
+      "authoritative_text": "preserve the transport fingerprint; wait at least 43 seconds before reconnecting; send one diagnostic probe; record the session generation.",
+      "raw_source": "<<<ROLE:status>>>\nDW-1015 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nReconnect immediately.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\npreserve the transport fingerprint; wait at least 43 seconds before reconnecting; send one diagnostic probe; record the session generation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nneighboring memories share three background propositions and differ primarily in one decision-relevant proposition\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 355 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "preserve the transport fingerprint",
+          "task_pattern": "preserve\\s+the\\s+transport\\s+fingerprint"
+        },
+        {
+          "id": "A2",
+          "text": "wait at least 43 seconds before reconnecting",
+          "task_pattern": "wait\\s+at\\s+least\\s+43\\s+seconds\\s+before\\s+reconnecting"
+        },
+        {
+          "id": "A3",
+          "text": "send one diagnostic probe",
+          "task_pattern": "send\\s+one\\s+diagnostic\\s+probe"
+        },
+        {
+          "id": "A4",
+          "text": "record the session generation",
+          "task_pattern": "record\\s+the\\s+session\\s+generation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "preserve the transport fingerprint; wait at least 43 seconds before reconnecting",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "send one diagnostic probe; record the session generation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "wait at least 43 seconds before reconnecting",
+      "semantic_operator": "at_least",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bat\\s+least\\b",
+            "\\bminimum\\b"
+          ],
+          [
+            "\\b43\\b",
+            "\\bforty[- ]three\\b"
+          ],
+          [
+            "\\bseconds?\\b"
+          ],
+          [
+            "\\breconnect"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "preserve\\s+the\\s+transport\\s+fingerprint"
+          ],
+          [
+            "wait\\s+at\\s+least\\s+43\\s+seconds\\s+before\\s+reconnecting"
+          ],
+          [
+            "send\\s+one\\s+diagnostic\\s+probe"
+          ],
+          [
+            "record\\s+the\\s+session\\s+generation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "driftworks-channel-session-1015-R1",
+            "kind": "recoverable",
+            "source_quote": "wait at least 43 seconds before reconnecting",
+            "candidate": {
+              "source_quote": "wait at least 43 seconds before reconnecting",
+              "nucleus_quote": "wait at least 43 seconds before reconnecting",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "at least"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "driftworks-channel-session-1015-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction DW-1015",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction DW-1015",
+              "nucleus_quote": "fabricated fallback instruction DW-1015",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "driftworks-channel-session-1015-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Reconnect immediately.",
+            "candidate": {
+              "source_quote": "Reconnect immediately.",
+              "nucleus_quote": "Reconnect immediately.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "DriftWorks",
+      "code_name": "DW-1015",
+      "interference_cluster": "channel-session",
+      "degradation_mode": "context_only",
+      "query_entities": [
+        "domain:operations",
+        "cluster:channel-session"
+      ],
+      "query_prompt": "State the minimum reconnect wait."
+    },
+    {
+      "id": "driftworks-storage-finalization-1016",
+      "system": "DriftWorks",
+      "code": "DW-1016",
+      "entities": [
+        "system:DriftWorks",
+        "code:DW-1016",
+        "domain:operations",
+        "cluster:storage-finalization"
+      ],
+      "experience": {
+        "prompt": "DriftWorks returns DW-1016. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the minimum durable-replica count."
+      },
+      "candidate_decision": "Retain four durable replicas.",
+      "authoritative_text": "verify the storage checksum; retain at least thirteen durable replicas; preserve the upload fingerprint; record the committed revision.",
+      "raw_source": "<<<ROLE:status>>>\nDW-1016 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRetain four durable replicas.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nverify the storage checksum; retain at least thirteen durable replicas; preserve the upload fingerprint; record the committed revision.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nneighboring memories share three background propositions and differ primarily in one decision-relevant proposition\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 356 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "verify the storage checksum",
+          "task_pattern": "verify\\s+the\\s+storage\\s+checksum"
+        },
+        {
+          "id": "A2",
+          "text": "retain at least thirteen durable replicas",
+          "task_pattern": "retain\\s+at\\s+least\\s+thirteen\\s+durable\\s+replicas"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the upload fingerprint",
+          "task_pattern": "preserve\\s+the\\s+upload\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "record the committed revision",
+          "task_pattern": "record\\s+the\\s+committed\\s+revision"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "verify the storage checksum; retain at least thirteen durable replicas",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the upload fingerprint; record the committed revision",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "retain at least thirteen durable replicas",
+      "semantic_operator": "at_least",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bat\\s+least\\b",
+            "\\bminimum\\b"
+          ],
+          [
+            "\\bthirteen\\b",
+            "\\b13\\b"
+          ],
+          [
+            "\\bdurable\\b"
+          ],
+          [
+            "\\breplica"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "verify\\s+the\\s+storage\\s+checksum"
+          ],
+          [
+            "retain\\s+at\\s+least\\s+thirteen\\s+durable\\s+replicas"
+          ],
+          [
+            "preserve\\s+the\\s+upload\\s+fingerprint"
+          ],
+          [
+            "record\\s+the\\s+committed\\s+revision"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "driftworks-storage-finalization-1016-R1",
+            "kind": "recoverable",
+            "source_quote": "retain at least thirteen durable replicas",
+            "candidate": {
+              "source_quote": "retain at least thirteen durable replicas",
+              "nucleus_quote": "retain at least thirteen durable replicas",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "at least"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "driftworks-storage-finalization-1016-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction DW-1016",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction DW-1016",
+              "nucleus_quote": "fabricated fallback instruction DW-1016",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "driftworks-storage-finalization-1016-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Retain four durable replicas.",
+            "candidate": {
+              "source_quote": "Retain four durable replicas.",
+              "nucleus_quote": "Retain four durable replicas.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "DriftWorks",
+      "code_name": "DW-1016",
+      "interference_cluster": "storage-finalization",
+      "degradation_mode": "context_only",
+      "query_entities": [
+        "domain:operations",
+        "cluster:storage-finalization"
+      ],
+      "query_prompt": "State the minimum durable-replica count."
+    },
+    {
+      "id": "emberworks-retry-policy-1017",
+      "system": "EmberWorks",
+      "code": "EW-1017",
+      "entities": [
+        "system:EmberWorks",
+        "code:EW-1017",
+        "domain:operations",
+        "cluster:retry-policy"
+      ],
+      "experience": {
+        "prompt": "EmberWorks returns EW-1017. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State when retrying is permitted relative to recovery-epoch rotation."
+      },
+      "candidate_decision": "Retry before rotating the recovery epoch.",
+      "authoritative_text": "refresh the recovery marker; retry only after rotating the recovery epoch; preserve the request fingerprint; close the expired connection.",
+      "raw_source": "<<<ROLE:status>>>\nEW-1017 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRetry before rotating the recovery epoch.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrefresh the recovery marker; retry only after rotating the recovery epoch; preserve the request fingerprint; close the expired connection.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nneighboring memories share three background propositions and differ primarily in one decision-relevant proposition\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 357 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "refresh the recovery marker",
+          "task_pattern": "refresh\\s+the\\s+recovery\\s+marker"
+        },
+        {
+          "id": "A2",
+          "text": "retry only after rotating the recovery epoch",
+          "task_pattern": "retry\\s+only\\s+after\\s+rotating\\s+the\\s+recovery\\s+epoch"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the request fingerprint",
+          "task_pattern": "preserve\\s+the\\s+request\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "close the expired connection",
+          "task_pattern": "close\\s+the\\s+expired\\s+connection"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "refresh the recovery marker; retry only after rotating the recovery epoch",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the request fingerprint; close the expired connection",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "retry only after rotating the recovery epoch",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bonly\\b"
+          ],
+          [
+            "\\bafter\\b"
+          ],
+          [
+            "\\brotat"
+          ],
+          [
+            "\\brecovery\\b"
+          ],
+          [
+            "\\bepoch\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "refresh\\s+the\\s+recovery\\s+marker"
+          ],
+          [
+            "retry\\s+only\\s+after\\s+rotating\\s+the\\s+recovery\\s+epoch"
+          ],
+          [
+            "preserve\\s+the\\s+request\\s+fingerprint"
+          ],
+          [
+            "close\\s+the\\s+expired\\s+connection"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "emberworks-retry-policy-1017-R1",
+            "kind": "recoverable",
+            "source_quote": "retry only after rotating the recovery epoch",
+            "candidate": {
+              "source_quote": "retry only after rotating the recovery epoch",
+              "nucleus_quote": "retry only after rotating the recovery epoch",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "only"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "emberworks-retry-policy-1017-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction EW-1017",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction EW-1017",
+              "nucleus_quote": "fabricated fallback instruction EW-1017",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "emberworks-retry-policy-1017-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Retry before rotating the recovery epoch.",
+            "candidate": {
+              "source_quote": "Retry before rotating the recovery epoch.",
+              "nucleus_quote": "Retry before rotating the recovery epoch.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "EmberWorks",
+      "code_name": "EW-1017",
+      "interference_cluster": "retry-policy",
+      "degradation_mode": "context_only",
+      "query_entities": [
+        "domain:operations",
+        "cluster:retry-policy"
+      ],
+      "query_prompt": "State when retrying is permitted relative to recovery-epoch rotation."
+    },
+    {
+      "id": "emberworks-lane-routing-1018",
+      "system": "EmberWorks",
+      "code": "EW-1018",
+      "entities": [
+        "system:EmberWorks",
+        "code:EW-1018",
+        "domain:operations",
+        "cluster:lane-routing"
+      ],
+      "experience": {
+        "prompt": "EmberWorks returns EW-1018. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the permitted lane for quarantine tasks."
+      },
+      "candidate_decision": "Route quarantine tasks through the copper lane.",
+      "authoritative_text": "request a fresh routing checkpoint; route quarantine tasks only through the moss lane; preserve the original task fingerprint; record the routing generation.",
+      "raw_source": "<<<ROLE:status>>>\nEW-1018 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRoute quarantine tasks through the copper lane.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrequest a fresh routing checkpoint; route quarantine tasks only through the moss lane; preserve the original task fingerprint; record the routing generation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nneighboring memories share three background propositions and differ primarily in one decision-relevant proposition\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 358 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "request a fresh routing checkpoint",
+          "task_pattern": "request\\s+a\\s+fresh\\s+routing\\s+checkpoint"
+        },
+        {
+          "id": "A2",
+          "text": "route quarantine tasks only through the moss lane",
+          "task_pattern": "route\\s+quarantine\\s+tasks\\s+only\\s+through\\s+the\\s+moss\\s+lane"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the original task fingerprint",
+          "task_pattern": "preserve\\s+the\\s+original\\s+task\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "record the routing generation",
+          "task_pattern": "record\\s+the\\s+routing\\s+generation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "request a fresh routing checkpoint; route quarantine tasks only through the moss lane",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the original task fingerprint; record the routing generation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "route quarantine tasks only through the moss lane",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bonly\\b"
+          ],
+          [
+            "\\bquarantine\\b"
+          ],
+          [
+            "\\bmoss\\b"
+          ],
+          [
+            "\\blane\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "request\\s+a\\s+fresh\\s+routing\\s+checkpoint"
+          ],
+          [
+            "route\\s+quarantine\\s+tasks\\s+only\\s+through\\s+the\\s+moss\\s+lane"
+          ],
+          [
+            "preserve\\s+the\\s+original\\s+task\\s+fingerprint"
+          ],
+          [
+            "record\\s+the\\s+routing\\s+generation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "emberworks-lane-routing-1018-R1",
+            "kind": "recoverable",
+            "source_quote": "route quarantine tasks only through the moss lane",
+            "candidate": {
+              "source_quote": "route quarantine tasks only through the moss lane",
+              "nucleus_quote": "route quarantine tasks only through the moss lane",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "only"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "emberworks-lane-routing-1018-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction EW-1018",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction EW-1018",
+              "nucleus_quote": "fabricated fallback instruction EW-1018",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "emberworks-lane-routing-1018-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Route quarantine tasks through the copper lane.",
+            "candidate": {
+              "source_quote": "Route quarantine tasks through the copper lane.",
+              "nucleus_quote": "Route quarantine tasks through the copper lane.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "EmberWorks",
+      "code_name": "EW-1018",
+      "interference_cluster": "lane-routing",
+      "degradation_mode": "context_only",
+      "query_entities": [
+        "domain:operations",
+        "cluster:lane-routing"
+      ],
+      "query_prompt": "State the permitted lane for quarantine tasks."
+    },
+    {
+      "id": "emberworks-channel-session-1019",
+      "system": "EmberWorks",
+      "code": "EW-1019",
+      "entities": [
+        "system:EmberWorks",
+        "code:EW-1019",
+        "domain:operations",
+        "cluster:channel-session"
+      ],
+      "experience": {
+        "prompt": "EmberWorks returns EW-1019. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the maximum pending-relay-channel count."
+      },
+      "candidate_decision": "Keep twenty pending relay channels.",
+      "authoritative_text": "preserve the transport fingerprint; keep at most twelve pending relay channels; send one diagnostic probe; record the session generation.",
+      "raw_source": "<<<ROLE:status>>>\nEW-1019 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nKeep twenty pending relay channels.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\npreserve the transport fingerprint; keep at most twelve pending relay channels; send one diagnostic probe; record the session generation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nneighboring memories share three background propositions and differ primarily in one decision-relevant proposition\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 359 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "preserve the transport fingerprint",
+          "task_pattern": "preserve\\s+the\\s+transport\\s+fingerprint"
+        },
+        {
+          "id": "A2",
+          "text": "keep at most twelve pending relay channels",
+          "task_pattern": "keep\\s+at\\s+most\\s+twelve\\s+pending\\s+relay\\s+channels"
+        },
+        {
+          "id": "A3",
+          "text": "send one diagnostic probe",
+          "task_pattern": "send\\s+one\\s+diagnostic\\s+probe"
+        },
+        {
+          "id": "A4",
+          "text": "record the session generation",
+          "task_pattern": "record\\s+the\\s+session\\s+generation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "preserve the transport fingerprint; keep at most twelve pending relay channels",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "send one diagnostic probe; record the session generation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "keep at most twelve pending relay channels",
+      "semantic_operator": "at_most",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bat\\s+most\\b",
+            "\\bmaximum\\b",
+            "\\bno\\s+more\\s+than\\b"
+          ],
+          [
+            "\\btwelve\\b",
+            "\\b12\\b"
+          ],
+          [
+            "\\bpending\\b"
+          ],
+          [
+            "\\bchannel"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "preserve\\s+the\\s+transport\\s+fingerprint"
+          ],
+          [
+            "keep\\s+at\\s+most\\s+twelve\\s+pending\\s+relay\\s+channels"
+          ],
+          [
+            "send\\s+one\\s+diagnostic\\s+probe"
+          ],
+          [
+            "record\\s+the\\s+session\\s+generation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "emberworks-channel-session-1019-R1",
+            "kind": "recoverable",
+            "source_quote": "keep at most twelve pending relay channels",
+            "candidate": {
+              "source_quote": "keep at most twelve pending relay channels",
+              "nucleus_quote": "keep at most twelve pending relay channels",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "at most"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "emberworks-channel-session-1019-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction EW-1019",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction EW-1019",
+              "nucleus_quote": "fabricated fallback instruction EW-1019",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "emberworks-channel-session-1019-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Keep twenty pending relay channels.",
+            "candidate": {
+              "source_quote": "Keep twenty pending relay channels.",
+              "nucleus_quote": "Keep twenty pending relay channels.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "EmberWorks",
+      "code_name": "EW-1019",
+      "interference_cluster": "channel-session",
+      "degradation_mode": "context_only",
+      "query_entities": [
+        "domain:operations",
+        "cluster:channel-session"
+      ],
+      "query_prompt": "State the maximum pending-relay-channel count."
+    },
+    {
+      "id": "emberworks-storage-finalization-1020",
+      "system": "EmberWorks",
+      "code": "EW-1020",
+      "entities": [
+        "system:EmberWorks",
+        "code:EW-1020",
+        "domain:operations",
+        "cluster:storage-finalization"
+      ],
+      "experience": {
+        "prompt": "EmberWorks returns EW-1020. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the origin-revision condition for manifest purging."
+      },
+      "candidate_decision": "Purge the manifest immediately.",
+      "authoritative_text": "verify the storage checksum; do not purge the manifest unless the origin revision advances; preserve the upload fingerprint; record the committed revision.",
+      "raw_source": "<<<ROLE:status>>>\nEW-1020 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nPurge the manifest immediately.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nverify the storage checksum; do not purge the manifest unless the origin revision advances; preserve the upload fingerprint; record the committed revision.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nneighboring memories share three background propositions and differ primarily in one decision-relevant proposition\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 360 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "verify the storage checksum",
+          "task_pattern": "verify\\s+the\\s+storage\\s+checksum"
+        },
+        {
+          "id": "A2",
+          "text": "do not purge the manifest unless the origin revision advances",
+          "task_pattern": "do\\s+not\\s+purge\\s+the\\s+manifest\\s+unless\\s+the\\s+origin\\s+revision\\s+advances"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the upload fingerprint",
+          "task_pattern": "preserve\\s+the\\s+upload\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "record the committed revision",
+          "task_pattern": "record\\s+the\\s+committed\\s+revision"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "verify the storage checksum; do not purge the manifest unless the origin revision advances",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the upload fingerprint; record the committed revision",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "do not purge the manifest unless the origin revision advances",
+      "semantic_operator": "unless",
+      "semantic_dimension": "condition",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bunless\\b",
+            "\\bonly\\s+if\\b"
+          ],
+          [
+            "\\borigin\\b"
+          ],
+          [
+            "\\brevision\\b"
+          ],
+          [
+            "\\badvance"
+          ],
+          [
+            "\\bpurg"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "verify\\s+the\\s+storage\\s+checksum"
+          ],
+          [
+            "do\\s+not\\s+purge\\s+the\\s+manifest\\s+unless\\s+the\\s+origin\\s+revision\\s+advances"
+          ],
+          [
+            "preserve\\s+the\\s+upload\\s+fingerprint"
+          ],
+          [
+            "record\\s+the\\s+committed\\s+revision"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "emberworks-storage-finalization-1020-R1",
+            "kind": "recoverable",
+            "source_quote": "do not purge the manifest unless the origin revision advances",
+            "candidate": {
+              "source_quote": "do not purge the manifest unless the origin revision advances",
+              "nucleus_quote": "do not purge the manifest unless the origin revision advances",
+              "qualifiers": [
+                {
+                  "type": "condition",
+                  "source_quote": "unless"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "emberworks-storage-finalization-1020-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction EW-1020",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction EW-1020",
+              "nucleus_quote": "fabricated fallback instruction EW-1020",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "emberworks-storage-finalization-1020-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Purge the manifest immediately.",
+            "candidate": {
+              "source_quote": "Purge the manifest immediately.",
+              "nucleus_quote": "Purge the manifest immediately.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "EmberWorks",
+      "code_name": "EW-1020",
+      "interference_cluster": "storage-finalization",
+      "degradation_mode": "context_only",
+      "query_entities": [
+        "domain:operations",
+        "cluster:storage-finalization"
+      ],
+      "query_prompt": "State the origin-revision condition for manifest purging."
+    }
+  ]
+}

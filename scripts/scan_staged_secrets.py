@@ -4,6 +4,7 @@ src/nacre/ledger/strip_secrets.py (gitleaks under RE2 + Nacre rules + public lay
 STAGED content of added/modified files. The temporary gitleaks-only scanner it replaced is gone.
 Repo-level additions (not product behaviour):
   - NACRE_ALLOWLIST: reviewed false positives in this repo, each with a reason (D-0010);
+  - frozen MNEXA fixtures: exact-value (hashed) reviewed entries, scoped to 017-029 / 030-035 (owner, 2026-10-01);
   - committed negative-corpus files are skipped only while their bytes match their reviewed manifest.
 Findings print redacted; exit 1 if any.
 
@@ -44,6 +45,27 @@ NACRE_ALLOWLIST = [
 ]
 _NACRE_ALLOW = [(re2.compile(p), re2.compile(s) if s else None) for p, s, _ in NACRE_ALLOWLIST]
 
+# Frozen MNEXA fixtures (owner approval 2026-10-01): exact-value entries, each with a reason, kept as the SHA-256
+# of the exact flagged value so the reviewed file does not itself contain the flagged strings. Scoped: an entry is
+# honoured only for its exact path, its rule id and its value hash, and only under these two paths.
+_FIXTURE_REVIEW_FILE = "tests/regression/mnexa/SECRET_SCAN_REVIEWED.json"
+_FIXTURE_REVIEW_SCOPE = re2.compile(
+    r"^tests/regression/mnexa/(tasks/tasks_0(1[7-9]|2[0-9])\.json|results/03[0-5]_[A-Za-z0-9_]+\.json)$")
+
+
+def _fixture_reviews() -> set[tuple[str, str, str]]:
+    import json
+    try:
+        entries = json.loads((ROOT / _FIXTURE_REVIEW_FILE).read_text())["entries"]
+    except (OSError, ValueError, KeyError):
+        return set()
+    out = set()
+    for e in entries:
+        if not _FIXTURE_REVIEW_SCOPE.search(e["path"]) or not e.get("reason", "").strip():
+            raise ValueError(f"reviewed fixture entry outside the approved scope or without a reason: {e['path']}")
+        out.add((e["path"], e["rule_id"], e["value_sha256"]))
+    return out
+
 # Committed negative corpus (D-0007 amendment 2): skipped ONLY while a file's bytes match the sha256
 # recorded in its reviewed manifest. Any edit makes it scanned again.
 _NEGATIVE_MANIFESTS = {
@@ -74,10 +96,14 @@ def scan(path: str, text: str) -> list[tuple[str, int, str, str]]:
     """(path, line, rule_id, secret) for each finding strip_secrets reports, minus reviewed repo allowlist."""
     if any(p.search(path) and s is None for p, s in _NACRE_ALLOW):
         return []
+    import hashlib
     out = []
+    reviewed = _fixture_reviews() if _FIXTURE_REVIEW_SCOPE.search(path) else set()
     for f in strip_secrets(text, path=path).findings:
         secret = text[f.start:f.end]
         if any(p.search(path) and s is not None and s.search(secret) for p, s in _NACRE_ALLOW):
+            continue
+        if (path, f.rule_id, hashlib.sha256(secret.encode()).hexdigest()) in reviewed:
             continue
         out.append((path, text.count("\n", 0, f.start) + 1, f.rule_id, secret))
     return out

@@ -1,6 +1,6 @@
 # D-0018: Capture event payloads (decision, prediction, action, outcome, correction)
 
-- **Status:** proposed
+- **Status:** proposed (D2 parts). **D3 part APPROVED by the owner 2026-10-01: outcome authority by source and trust.**
 - **Tier:** D2 (persistence format, public interface). The authority rule for outcome sections is **D3**
   (injection boundary).
 - **Date:** 2026-10-01

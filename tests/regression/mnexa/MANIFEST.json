@@ -81,34 +81,39 @@
  },
  "other_results": {
   "030": {
-   "copied": false,
+   "copied": true,
+   "copied_on": "2026-10-01 (owner-approved allowlist)",
+   "copied_to_dir": "results/",
    "file": "experiments/results/030_real_cross_model_transplant_20260915T073336Z.json",
-   "sha256": "fb59a4d5d5fc1804cf65e58a7f78b42651b1161102694171025ec281037375c6",
-   "why": "Phase 3 (transplant) / later (capabilities) evidence; holds provider response ids; left in MNEXA, frozen by hash"
+   "sha256": "fb59a4d5d5fc1804cf65e58a7f78b42651b1161102694171025ec281037375c6"
   },
   "031": {
-   "copied": false,
+   "copied": true,
+   "copied_on": "2026-10-01 (owner-approved allowlist)",
+   "copied_to_dir": "results/",
    "file": "experiments/results/031_bidirectional_cross_model_benchmark_20260915T092453Z_4121b84d.json",
-   "sha256": "c112e8021a0278cbfbf950a933a1352a0b062d2daa93c862d6683a4ef6764201",
-   "why": "Phase 3 (transplant) / later (capabilities) evidence; holds provider response ids; left in MNEXA, frozen by hash"
+   "sha256": "c112e8021a0278cbfbf950a933a1352a0b062d2daa93c862d6683a4ef6764201"
   },
   "033": {
-   "copied": false,
+   "copied": true,
+   "copied_on": "2026-10-01 (owner-approved allowlist)",
+   "copied_to_dir": "results/",
    "file": "experiments/results/033_real_cross_model_capability_inheritance_20260916T072956Z.json",
-   "sha256": "02c4bb37bb6342c5dee20118683c48e2a0f0da80c8245482aee3ea3d151ee433",
-   "why": "Phase 3 (transplant) / later (capabilities) evidence; holds provider response ids; left in MNEXA, frozen by hash"
+   "sha256": "02c4bb37bb6342c5dee20118683c48e2a0f0da80c8245482aee3ea3d151ee433"
   },
   "034": {
-   "copied": false,
+   "copied": true,
+   "copied_on": "2026-10-01 (owner-approved allowlist)",
+   "copied_to_dir": "results/",
    "file": "experiments/results/034_capability_execution_robustness_20260916T081802Z.json",
-   "sha256": "744d9791b62ad0f2d30ac017e2efd8889e1032e771e9e6e8622b3c63f45579e8",
-   "why": "Phase 3 (transplant) / later (capabilities) evidence; holds provider response ids; left in MNEXA, frozen by hash"
+   "sha256": "744d9791b62ad0f2d30ac017e2efd8889e1032e771e9e6e8622b3c63f45579e8"
   },
   "035": {
-   "copied": false,
+   "copied": true,
+   "copied_on": "2026-10-01 (owner-approved allowlist)",
+   "copied_to_dir": "results/",
    "file": "experiments/results/035_capability_state_semantics_diagnostic_20260916T090300Z.json",
-   "sha256": "c3627bac2d94131a9bc564b390798cdaecc63db5dc98c9d3d93b1b2631f6ac97",
-   "why": "Phase 3 (transplant) / later (capabilities) evidence; holds provider response ids; left in MNEXA, frozen by hash"
+   "sha256": "c3627bac2d94131a9bc564b390798cdaecc63db5dc98c9d3d93b1b2631f6ac97"
   }
  },
  "rule": "Files here are byte copies. Their sha256 below is the frozen identity; any change is a new version (D3, proposed D-0016).",
@@ -6044,6 +6049,7 @@
    "taskset_sha256": "d3efd44dd182af8399678ba8f9325f90dd93006667a0d2d7209a6187d23b5a22"
   }
  },
+ "secret_scan_review": "SECRET_SCAN_REVIEWED.json (exact-value hashed entries, owner-approved 2026-10-01)",
  "source_dirty_note": "mnexa_seed.py modified; capability/retrieval-index modules and 27 tests untracked",
  "source_dirty_paths": 50,
  "source_head": "2fc460cb2fd8f41f10c19bd286b456620471fefb",
@@ -6170,105 +6176,118 @@
    "sidecar_sha256": "eed1cfdd986857e040a5ee24dc657665ab0ab7deb19943e5b1c5544561ec8221"
   },
   "tasks_017": {
-   "copied": false,
+   "copied": true,
+   "copied_on": "2026-10-01 (owner-approved allowlist)",
    "generator": "experiments/make_tasks_017.py",
-   "location": "MNEXA git 2fc460c: experiments/tasks_017.json (Phase 3 recall set; frozen by hash here)",
+   "location": "tasks/tasks_017.json",
    "sha256": "6927a52bc41a02828971b8f736583d2d39a06c295e5583628f28b4d7737441c8",
    "sidecar_matches": true,
    "sidecar_sha256": "6927a52bc41a02828971b8f736583d2d39a06c295e5583628f28b4d7737441c8"
   },
   "tasks_018": {
-   "copied": false,
+   "copied": true,
+   "copied_on": "2026-10-01 (owner-approved allowlist)",
    "generator": "experiments/make_tasks_018.py",
-   "location": "MNEXA git 2fc460c: experiments/tasks_018.json (Phase 3 recall set; frozen by hash here)",
+   "location": "tasks/tasks_018.json",
    "sha256": "ef0286d64996549cad380070db1f4cfdb46c79e2a32e2b6fa112f9e3914a56ea",
    "sidecar_matches": true,
    "sidecar_sha256": "ef0286d64996549cad380070db1f4cfdb46c79e2a32e2b6fa112f9e3914a56ea"
   },
   "tasks_019": {
-   "copied": false,
+   "copied": true,
+   "copied_on": "2026-10-01 (owner-approved allowlist)",
    "generator": "experiments/make_tasks_019.py",
-   "location": "MNEXA git 2fc460c: experiments/tasks_019.json (Phase 3 recall set; frozen by hash here)",
+   "location": "tasks/tasks_019.json",
    "sha256": "6b80cb0dd1e1c7c283ee29bd99cf3fc5fef7f79bbbb2141a7e3b5d502a7b1032",
    "sidecar_matches": true,
    "sidecar_sha256": "6b80cb0dd1e1c7c283ee29bd99cf3fc5fef7f79bbbb2141a7e3b5d502a7b1032"
   },
   "tasks_020": {
-   "copied": false,
+   "copied": true,
+   "copied_on": "2026-10-01 (owner-approved allowlist)",
    "generator": "experiments/make_tasks_020.py",
-   "location": "MNEXA git 2fc460c: experiments/tasks_020.json (Phase 3 recall set; frozen by hash here)",
+   "location": "tasks/tasks_020.json",
    "sha256": "35f198c2cffebeeea3eb6c6df72b724ffa2ceb325d7e1088ed7b30de29119859",
    "sidecar_matches": true,
    "sidecar_sha256": "35f198c2cffebeeea3eb6c6df72b724ffa2ceb325d7e1088ed7b30de29119859"
   },
   "tasks_021": {
-   "copied": false,
+   "copied": true,
+   "copied_on": "2026-10-01 (owner-approved allowlist)",
    "generator": "experiments/make_tasks_021.py",
-   "location": "MNEXA git 2fc460c: experiments/tasks_021.json (Phase 3 recall set; frozen by hash here)",
+   "location": "tasks/tasks_021.json",
    "sha256": "5cab3adee47708db2042603dd29ab3343f6a632506c3645a8b3e8dfc05e33af2",
    "sidecar_matches": true,
    "sidecar_sha256": "5cab3adee47708db2042603dd29ab3343f6a632506c3645a8b3e8dfc05e33af2"
   },
   "tasks_022": {
-   "copied": false,
+   "copied": true,
+   "copied_on": "2026-10-01 (owner-approved allowlist)",
    "generator": "experiments/make_tasks_022.py",
-   "location": "MNEXA git 2fc460c: experiments/tasks_022.json (Phase 3 recall set; frozen by hash here)",
+   "location": "tasks/tasks_022.json",
    "sha256": "e62e6f0a01fac12c1864e9aed236f1f9b5af471d17935cee03fee43ff70440cd",
    "sidecar_matches": true,
    "sidecar_sha256": "e62e6f0a01fac12c1864e9aed236f1f9b5af471d17935cee03fee43ff70440cd"
   },
   "tasks_023": {
-   "copied": false,
+   "copied": true,
+   "copied_on": "2026-10-01 (owner-approved allowlist)",
    "generator": "experiments/make_tasks_023.py",
-   "location": "MNEXA git 2fc460c: experiments/tasks_023.json (Phase 3 recall set; frozen by hash here)",
+   "location": "tasks/tasks_023.json",
    "sha256": "438cc91f70653b16c6ec7283f8152180e608d52b2f00323e88b26a5ad684e623",
    "sidecar_matches": true,
    "sidecar_sha256": "438cc91f70653b16c6ec7283f8152180e608d52b2f00323e88b26a5ad684e623"
   },
   "tasks_024": {
-   "copied": false,
+   "copied": true,
+   "copied_on": "2026-10-01 (owner-approved allowlist)",
    "generator": "experiments/make_tasks_024.py",
-   "location": "MNEXA git 2fc460c: experiments/tasks_024.json (Phase 3 recall set; frozen by hash here)",
+   "location": "tasks/tasks_024.json",
    "sha256": "1a61feca4b1d586b68b9ab52a970610f7baff420aa47fd022c0670698f6309c9",
    "sidecar_matches": true,
    "sidecar_sha256": "1a61feca4b1d586b68b9ab52a970610f7baff420aa47fd022c0670698f6309c9"
   },
   "tasks_025": {
-   "copied": false,
+   "copied": true,
+   "copied_on": "2026-10-01 (owner-approved allowlist)",
    "generator": "experiments/make_tasks_025.py",
-   "location": "MNEXA git 2fc460c: experiments/tasks_025.json (Phase 3 recall set; frozen by hash here)",
+   "location": "tasks/tasks_025.json",
    "sha256": "80f35e33bffa340062435b5c1852478466c4230c8c975764c986a5313cb89267",
    "sidecar_matches": true,
    "sidecar_sha256": "80f35e33bffa340062435b5c1852478466c4230c8c975764c986a5313cb89267"
   },
   "tasks_026": {
-   "copied": false,
+   "copied": true,
+   "copied_on": "2026-10-01 (owner-approved allowlist)",
    "generator": "experiments/make_tasks_026.py",
-   "location": "MNEXA git 2fc460c: experiments/tasks_026.json (Phase 3 recall set; frozen by hash here)",
+   "location": "tasks/tasks_026.json",
    "sha256": "0b62c17d818b137136b8a39213a75a95cc4d8564316263a67be0e440df63bb8d",
    "sidecar_matches": true,
    "sidecar_sha256": "0b62c17d818b137136b8a39213a75a95cc4d8564316263a67be0e440df63bb8d"
   },
   "tasks_027": {
-   "copied": false,
+   "copied": true,
+   "copied_on": "2026-10-01 (owner-approved allowlist)",
    "generator": "experiments/make_tasks_027.py",
-   "location": "MNEXA git 2fc460c: experiments/tasks_027.json (Phase 3 recall set; frozen by hash here)",
+   "location": "tasks/tasks_027.json",
    "sha256": "69c94aa9b9ab72c48cd2d2ad4909bf4b186840e9d94d30d5fd8bced2846faefd",
    "sidecar_matches": true,
    "sidecar_sha256": "69c94aa9b9ab72c48cd2d2ad4909bf4b186840e9d94d30d5fd8bced2846faefd"
   },
   "tasks_028": {
-   "copied": false,
+   "copied": true,
+   "copied_on": "2026-10-01 (owner-approved allowlist)",
    "generator": "experiments/make_tasks_028.py",
-   "location": "MNEXA git 2fc460c: experiments/tasks_028.json (Phase 3 recall set; frozen by hash here)",
+   "location": "tasks/tasks_028.json",
    "sha256": "2d24af18b2b344420b74e7c448fe95e56eb24f113ec3cbffd13e818456f34a6d",
    "sidecar_matches": true,
    "sidecar_sha256": "2d24af18b2b344420b74e7c448fe95e56eb24f113ec3cbffd13e818456f34a6d"
   },
   "tasks_029": {
-   "copied": false,
+   "copied": true,
+   "copied_on": "2026-10-01 (owner-approved allowlist)",
    "generator": "experiments/make_tasks_029.py",
-   "location": "MNEXA git 2fc460c: experiments/tasks_029.json (Phase 3 recall set; frozen by hash here)",
+   "location": "tasks/tasks_029.json",
    "sha256": "d3efd44dd182af8399678ba8f9325f90dd93006667a0d2d7209a6187d23b5a22",
    "sidecar_matches": true,
    "sidecar_sha256": "d3efd44dd182af8399678ba8f9325f90dd93006667a0d2d7209a6187d23b5a22"

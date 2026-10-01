@@ -1,0 +1,1441 @@
+{
+  "controlled_changes_from_033": [
+    "Consumer task state is explicit machine-readable state.",
+    "Consumer output uses ANSWER=<value> grammar.",
+    "Numeric unit suffixes are normalized by deterministic parser.",
+    "Application errors and formatting errors are reported separately."
+  ],
+  "directions": [
+    {
+      "cold": {
+        "calls": [
+          {
+            "condition": "cold",
+            "input_tokens": 197,
+            "model": "claude-sonnet-4-6",
+            "output": "ANSWER=UNKNOWN",
+            "output_tokens": 8,
+            "prompt_sha256": "f7670f6168166ada85b8e4c6e5a45a4c67274b169de491a64c25248a409cdef2",
+            "purpose": "cold:retry-after-present::r1",
+            "response_id": "msg_011Cf6nbpue1AGSWp9pBgsQe",
+            "task_id": "retry-after-present::r1"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 198,
+            "model": "claude-sonnet-4-6",
+            "output": "ANSWER=UNKNOWN",
+            "output_tokens": 8,
+            "prompt_sha256": "0053e036fd5fe005935a6e51f1df92eef651159f6f140bb69c366d350039f316",
+            "purpose": "cold:no-header-first-retry::r1",
+            "response_id": "msg_011Cf6nbvLKM5ZMCuKS4Kz13",
+            "task_id": "no-header-first-retry::r1"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 197,
+            "model": "claude-sonnet-4-6",
+            "output": "ANSWER=UNKNOWN",
+            "output_tokens": 8,
+            "prompt_sha256": "51e42d4230fd74e912e5ff25e6db8f9b6a50d85625ca7282d933b4bcfc9721bd",
+            "purpose": "cold:one-failed-retry::r1",
+            "response_id": "msg_011Cf6nc2tUMHMBGNkrKZHnC",
+            "task_id": "one-failed-retry::r1"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 197,
+            "model": "claude-sonnet-4-6",
+            "output": "ANSWER=UNKNOWN",
+            "output_tokens": 8,
+            "prompt_sha256": "185a6f87f087ff4231cc205d7eff2ef22bb8f50c5a6068a21cf545be05fe315a",
+            "purpose": "cold:two-failed-retries::r1",
+            "response_id": "msg_011Cf6nc7jvGLM52KGnUGAJJ",
+            "task_id": "two-failed-retries::r1"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 197,
+            "model": "claude-sonnet-4-6",
+            "output": "ANSWER=UNKNOWN",
+            "output_tokens": 8,
+            "prompt_sha256": "851e3132e42bbf5b141f25c165d01926bed769cf288f2403de599f15e68ad233",
+            "purpose": "cold:three-failed-retries::r1",
+            "response_id": "msg_011Cf6ncChKE8MNtspFMjTua",
+            "task_id": "three-failed-retries::r1"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 197,
+            "model": "claude-sonnet-4-6",
+            "output": "ANSWER=UNKNOWN",
+            "output_tokens": 8,
+            "prompt_sha256": "f7670f6168166ada85b8e4c6e5a45a4c67274b169de491a64c25248a409cdef2",
+            "purpose": "cold:retry-after-present::r2",
+            "response_id": "msg_011Cf6ncHxL4P1eEbVTd7CVZ",
+            "task_id": "retry-after-present::r2"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 198,
+            "model": "claude-sonnet-4-6",
+            "output": "ANSWER=UNKNOWN",
+            "output_tokens": 8,
+            "prompt_sha256": "0053e036fd5fe005935a6e51f1df92eef651159f6f140bb69c366d350039f316",
+            "purpose": "cold:no-header-first-retry::r2",
+            "response_id": "msg_011Cf6ncPMH5cnuqtZt58gQe",
+            "task_id": "no-header-first-retry::r2"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 197,
+            "model": "claude-sonnet-4-6",
+            "output": "ANSWER=UNKNOWN",
+            "output_tokens": 8,
+            "prompt_sha256": "51e42d4230fd74e912e5ff25e6db8f9b6a50d85625ca7282d933b4bcfc9721bd",
+            "purpose": "cold:one-failed-retry::r2",
+            "response_id": "msg_011Cf6ncUwsSkCQgZbDLW6NB",
+            "task_id": "one-failed-retry::r2"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 197,
+            "model": "claude-sonnet-4-6",
+            "output": "ANSWER=UNKNOWN",
+            "output_tokens": 8,
+            "prompt_sha256": "185a6f87f087ff4231cc205d7eff2ef22bb8f50c5a6068a21cf545be05fe315a",
+            "purpose": "cold:two-failed-retries::r2",
+            "response_id": "msg_011Cf6nca2iLtCeYpwfncnCM",
+            "task_id": "two-failed-retries::r2"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 197,
+            "model": "claude-sonnet-4-6",
+            "output": "ANSWER=UNKNOWN",
+            "output_tokens": 8,
+            "prompt_sha256": "851e3132e42bbf5b141f25c165d01926bed769cf288f2403de599f15e68ad233",
+            "purpose": "cold:three-failed-retries::r2",
+            "response_id": "msg_011Cf6ncf3ahML56t3WBLAeD",
+            "task_id": "three-failed-retries::r2"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 197,
+            "model": "claude-sonnet-4-6",
+            "output": "ANSWER=UNKNOWN",
+            "output_tokens": 8,
+            "prompt_sha256": "f7670f6168166ada85b8e4c6e5a45a4c67274b169de491a64c25248a409cdef2",
+            "purpose": "cold:retry-after-present::r3",
+            "response_id": "msg_011Cf6ncmX2KSrX7JdGb8Lud",
+            "task_id": "retry-after-present::r3"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 198,
+            "model": "claude-sonnet-4-6",
+            "output": "ANSWER=UNKNOWN",
+            "output_tokens": 8,
+            "prompt_sha256": "0053e036fd5fe005935a6e51f1df92eef651159f6f140bb69c366d350039f316",
+            "purpose": "cold:no-header-first-retry::r3",
+            "response_id": "msg_011Cf6ncrkYhS4b7CSVNbV13",
+            "task_id": "no-header-first-retry::r3"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 197,
+            "model": "claude-sonnet-4-6",
+            "output": "ANSWER=UNKNOWN",
+            "output_tokens": 8,
+            "prompt_sha256": "51e42d4230fd74e912e5ff25e6db8f9b6a50d85625ca7282d933b4bcfc9721bd",
+            "purpose": "cold:one-failed-retry::r3",
+            "response_id": "msg_011Cf6ncx6mLNiLkir3V7CeS",
+            "task_id": "one-failed-retry::r3"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 197,
+            "model": "claude-sonnet-4-6",
+            "output": "ANSWER=UNKNOWN",
+            "output_tokens": 8,
+            "prompt_sha256": "185a6f87f087ff4231cc205d7eff2ef22bb8f50c5a6068a21cf545be05fe315a",
+            "purpose": "cold:two-failed-retries::r3",
+            "response_id": "msg_011Cf6nd3BbaRmqNxN3wzzcj",
+            "task_id": "two-failed-retries::r3"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 197,
+            "model": "claude-sonnet-4-6",
+            "output": "ANSWER=UNKNOWN",
+            "output_tokens": 8,
+            "prompt_sha256": "851e3132e42bbf5b141f25c165d01926bed769cf288f2403de599f15e68ad233",
+            "purpose": "cold:three-failed-retries::r3",
+            "response_id": "msg_011Cf6nd8NeiJj1EU3AgRPWx",
+            "task_id": "three-failed-retries::r3"
+          }
+        ],
+        "condition": "cold",
+        "model": "claude-sonnet-4-6",
+        "model_identity": "anthropic:claude-sonnet-4-6",
+        "opened_producer_db": false,
+        "pid": 66730,
+        "provider": "anthropic",
+        "report": {
+          "abstentions": 15,
+          "accuracy": 0.0,
+          "application_errors": 0,
+          "consumer_name": "anthropic:claude-sonnet-4-6",
+          "correct": 0,
+          "format_errors": 0,
+          "total": 15,
+          "trials": [
+            {
+              "classification": "abstention",
+              "expected": "11",
+              "parsed_output": "UNKNOWN",
+              "raw_output": "ANSWER=UNKNOWN",
+              "task_id": "retry-after-present::r1"
+            },
+            {
+              "classification": "abstention",
+              "expected": "7",
+              "parsed_output": "UNKNOWN",
+              "raw_output": "ANSWER=UNKNOWN",
+              "task_id": "no-header-first-retry::r1"
+            },
+            {
+              "classification": "abstention",
+              "expected": "14",
+              "parsed_output": "UNKNOWN",
+              "raw_output": "ANSWER=UNKNOWN",
+              "task_id": "one-failed-retry::r1"
+            },
+            {
+              "classification": "abstention",
+              "expected": "28",
+              "parsed_output": "UNKNOWN",
+              "raw_output": "ANSWER=UNKNOWN",
+              "task_id": "two-failed-retries::r1"
+            },
+            {
+              "classification": "abstention",
+              "expected": "QUARTZ",
+              "parsed_output": "UNKNOWN",
+              "raw_output": "ANSWER=UNKNOWN",
+              "task_id": "three-failed-retries::r1"
+            },
+            {
+              "classification": "abstention",
+              "expected": "11",
+              "parsed_output": "UNKNOWN",
+              "raw_output": "ANSWER=UNKNOWN",
+              "task_id": "retry-after-present::r2"
+            },
+            {
+              "classification": "abstention",
+              "expected": "7",
+              "parsed_output": "UNKNOWN",
+              "raw_output": "ANSWER=UNKNOWN",
+              "task_id": "no-header-first-retry::r2"
+            },
+            {
+              "classification": "abstention",
+              "expected": "14",
+              "parsed_output": "UNKNOWN",
+              "raw_output": "ANSWER=UNKNOWN",
+              "task_id": "one-failed-retry::r2"
+            },
+            {
+              "classification": "abstention",
+              "expected": "28",
+              "parsed_output": "UNKNOWN",
+              "raw_output": "ANSWER=UNKNOWN",
+              "task_id": "two-failed-retries::r2"
+            },
+            {
+              "classification": "abstention",
+              "expected": "QUARTZ",
+              "parsed_output": "UNKNOWN",
+              "raw_output": "ANSWER=UNKNOWN",
+              "task_id": "three-failed-retries::r2"
+            },
+            {
+              "classification": "abstention",
+              "expected": "11",
+              "parsed_output": "UNKNOWN",
+              "raw_output": "ANSWER=UNKNOWN",
+              "task_id": "retry-after-present::r3"
+            },
+            {
+              "classification": "abstention",
+              "expected": "7",
+              "parsed_output": "UNKNOWN",
+              "raw_output": "ANSWER=UNKNOWN",
+              "task_id": "no-header-first-retry::r3"
+            },
+            {
+              "classification": "abstention",
+              "expected": "14",
+              "parsed_output": "UNKNOWN",
+              "raw_output": "ANSWER=UNKNOWN",
+              "task_id": "one-failed-retry::r3"
+            },
+            {
+              "classification": "abstention",
+              "expected": "28",
+              "parsed_output": "UNKNOWN",
+              "raw_output": "ANSWER=UNKNOWN",
+              "task_id": "two-failed-retries::r3"
+            },
+            {
+              "classification": "abstention",
+              "expected": "QUARTZ",
+              "parsed_output": "UNKNOWN",
+              "raw_output": "ANSWER=UNKNOWN",
+              "task_id": "three-failed-retries::r3"
+            }
+          ]
+        }
+      },
+      "cold_control_pass": true,
+      "cold_per_task": {
+        "no-header-first-retry": {
+          "abstentions": 0,
+          "application_errors": 0,
+          "correct": 0,
+          "format_errors": 0,
+          "total": 3
+        },
+        "one-failed-retry": {
+          "abstentions": 0,
+          "application_errors": 0,
+          "correct": 0,
+          "format_errors": 0,
+          "total": 3
+        },
+        "retry-after-present": {
+          "abstentions": 0,
+          "application_errors": 0,
+          "correct": 0,
+          "format_errors": 0,
+          "total": 3
+        },
+        "three-failed-retries": {
+          "abstentions": 0,
+          "application_errors": 0,
+          "correct": 0,
+          "format_errors": 0,
+          "total": 3
+        },
+        "two-failed-retries": {
+          "abstentions": 0,
+          "application_errors": 0,
+          "correct": 0,
+          "format_errors": 0,
+          "total": 3
+        }
+      },
+      "consumer_model": "claude-sonnet-4-6",
+      "consumer_provider": "anthropic",
+      "direction": "openai_to_anthropic",
+      "direction_pass": false,
+      "inherited": {
+        "calls": [
+          {
+            "condition": "inherited",
+            "input_tokens": 389,
+            "model": "claude-sonnet-4-6",
+            "output": "ANSWER=11",
+            "output_tokens": 7,
+            "prompt_sha256": "994395a29f4e8edd5409b98d69115a2cf5be331ae0cce4d06bfa1a89df666a9f",
+            "purpose": "inherited:retry-after-present::r1",
+            "response_id": "msg_011Cf6ndFaiz4aPvDLj1wYmu",
+            "task_id": "retry-after-present::r1"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 390,
+            "model": "claude-sonnet-4-6",
+            "output": "ANSWER=7",
+            "output_tokens": 7,
+            "prompt_sha256": "1fc84a49d3b5af6fc1d24469cad1963962995e071a49bfdedc21719909f152c5",
+            "purpose": "inherited:no-header-first-retry::r1",
+            "response_id": "msg_011Cf6ndMH2mpZhQ4FUekKdE",
+            "task_id": "no-header-first-retry::r1"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 389,
+            "model": "claude-sonnet-4-6",
+            "output": "ANSWER=14",
+            "output_tokens": 7,
+            "prompt_sha256": "5fafe3c5e6d57e7c65ee78468a143f75e1381a9954afd626744fece83de5ef47",
+            "purpose": "inherited:one-failed-retry::r1",
+            "response_id": "msg_011Cf6ndSKtkaTu4n4hfsVqX",
+            "task_id": "one-failed-retry::r1"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 389,
+            "model": "claude-sonnet-4-6",
+            "output": "ANSWER=QUARTZ",
+            "output_tokens": 9,
+            "prompt_sha256": "cf02afa36da0b04296f30ef0c8f405168a57cb42633f419db672a511d06a4171",
+            "purpose": "inherited:two-failed-retries::r1",
+            "response_id": "msg_011Cf6ndXrXJt8ReJv477G7W",
+            "task_id": "two-failed-retries::r1"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 389,
+            "model": "claude-sonnet-4-6",
+            "output": "ANSWER=QUARTZ",
+            "output_tokens": 9,
+            "prompt_sha256": "2edef39ccdb9e385be69f8534f69554afc6569944b2be129483ac09ac399e0ef",
+            "purpose": "inherited:three-failed-retries::r1",
+            "response_id": "msg_011Cf6nde55auCgzV1WptuFa",
+            "task_id": "three-failed-retries::r1"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 389,
+            "model": "claude-sonnet-4-6",
+            "output": "ANSWER=11",
+            "output_tokens": 7,
+            "prompt_sha256": "994395a29f4e8edd5409b98d69115a2cf5be331ae0cce4d06bfa1a89df666a9f",
+            "purpose": "inherited:retry-after-present::r2",
+            "response_id": "msg_011Cf6ndn1pWCBmKpddUqdqH",
+            "task_id": "retry-after-present::r2"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 390,
+            "model": "claude-sonnet-4-6",
+            "output": "ANSWER=7",
+            "output_tokens": 7,
+            "prompt_sha256": "1fc84a49d3b5af6fc1d24469cad1963962995e071a49bfdedc21719909f152c5",
+            "purpose": "inherited:no-header-first-retry::r2",
+            "response_id": "msg_011Cf6ndsQ1phogfkTMBwKWb",
+            "task_id": "no-header-first-retry::r2"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 389,
+            "model": "claude-sonnet-4-6",
+            "output": "ANSWER=14",
+            "output_tokens": 7,
+            "prompt_sha256": "5fafe3c5e6d57e7c65ee78468a143f75e1381a9954afd626744fece83de5ef47",
+            "purpose": "inherited:one-failed-retry::r2",
+            "response_id": "msg_011Cf6ndy5KiH1FocbpJfVeL",
+            "task_id": "one-failed-retry::r2"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 389,
+            "model": "claude-sonnet-4-6",
+            "output": "ANSWER=QUARTZ",
+            "output_tokens": 9,
+            "prompt_sha256": "cf02afa36da0b04296f30ef0c8f405168a57cb42633f419db672a511d06a4171",
+            "purpose": "inherited:two-failed-retries::r2",
+            "response_id": "msg_011Cf6ne4GNPhCTGrYrdV1EN",
+            "task_id": "two-failed-retries::r2"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 389,
+            "model": "claude-sonnet-4-6",
+            "output": "ANSWER=QUARTZ",
+            "output_tokens": 9,
+            "prompt_sha256": "2edef39ccdb9e385be69f8534f69554afc6569944b2be129483ac09ac399e0ef",
+            "purpose": "inherited:three-failed-retries::r2",
+            "response_id": "msg_011Cf6ne9zfCvAZ9X8ofjywZ",
+            "task_id": "three-failed-retries::r2"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 389,
+            "model": "claude-sonnet-4-6",
+            "output": "ANSWER=11",
+            "output_tokens": 7,
+            "prompt_sha256": "994395a29f4e8edd5409b98d69115a2cf5be331ae0cce4d06bfa1a89df666a9f",
+            "purpose": "inherited:retry-after-present::r3",
+            "response_id": "msg_011Cf6neJDGViNqmTTryy768",
+            "task_id": "retry-after-present::r3"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 390,
+            "model": "claude-sonnet-4-6",
+            "output": "ANSWER=7",
+            "output_tokens": 7,
+            "prompt_sha256": "1fc84a49d3b5af6fc1d24469cad1963962995e071a49bfdedc21719909f152c5",
+            "purpose": "inherited:no-header-first-retry::r3",
+            "response_id": "msg_011Cf6nePtaKrBAbX7R3WKVe",
+            "task_id": "no-header-first-retry::r3"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 389,
+            "model": "claude-sonnet-4-6",
+            "output": "ANSWER=14",
+            "output_tokens": 7,
+            "prompt_sha256": "5fafe3c5e6d57e7c65ee78468a143f75e1381a9954afd626744fece83de5ef47",
+            "purpose": "inherited:one-failed-retry::r3",
+            "response_id": "msg_011Cf6neVjZJ7uQ4bKTt87Kg",
+            "task_id": "one-failed-retry::r3"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 389,
+            "model": "claude-sonnet-4-6",
+            "output": "ANSWER=QUARTZ",
+            "output_tokens": 9,
+            "prompt_sha256": "cf02afa36da0b04296f30ef0c8f405168a57cb42633f419db672a511d06a4171",
+            "purpose": "inherited:two-failed-retries::r3",
+            "response_id": "msg_011Cf6neax6CpMbmc5vsuHzP",
+            "task_id": "two-failed-retries::r3"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 389,
+            "model": "claude-sonnet-4-6",
+            "output": "ANSWER=QUARTZ",
+            "output_tokens": 9,
+            "prompt_sha256": "2edef39ccdb9e385be69f8534f69554afc6569944b2be129483ac09ac399e0ef",
+            "purpose": "inherited:three-failed-retries::r3",
+            "response_id": "msg_011Cf6negcuPXaB61WP5Su5K",
+            "task_id": "three-failed-retries::r3"
+          }
+        ],
+        "condition": "inherited",
+        "model": "claude-sonnet-4-6",
+        "model_identity": "anthropic:claude-sonnet-4-6",
+        "opened_producer_db": true,
+        "pid": 66752,
+        "provider": "anthropic",
+        "report": {
+          "abstentions": 0,
+          "accuracy": 0.8,
+          "application_errors": 3,
+          "consumer_name": "anthropic:claude-sonnet-4-6",
+          "correct": 12,
+          "format_errors": 0,
+          "total": 15,
+          "trials": [
+            {
+              "classification": "correct",
+              "expected": "11",
+              "parsed_output": "11",
+              "raw_output": "ANSWER=11",
+              "task_id": "retry-after-present::r1"
+            },
+            {
+              "classification": "correct",
+              "expected": "7",
+              "parsed_output": "7",
+              "raw_output": "ANSWER=7",
+              "task_id": "no-header-first-retry::r1"
+            },
+            {
+              "classification": "correct",
+              "expected": "14",
+              "parsed_output": "14",
+              "raw_output": "ANSWER=14",
+              "task_id": "one-failed-retry::r1"
+            },
+            {
+              "classification": "application_error",
+              "expected": "28",
+              "parsed_output": "QUARTZ",
+              "raw_output": "ANSWER=QUARTZ",
+              "task_id": "two-failed-retries::r1"
+            },
+            {
+              "classification": "correct",
+              "expected": "QUARTZ",
+              "parsed_output": "QUARTZ",
+              "raw_output": "ANSWER=QUARTZ",
+              "task_id": "three-failed-retries::r1"
+            },
+            {
+              "classification": "correct",
+              "expected": "11",
+              "parsed_output": "11",
+              "raw_output": "ANSWER=11",
+              "task_id": "retry-after-present::r2"
+            },
+            {
+              "classification": "correct",
+              "expected": "7",
+              "parsed_output": "7",
+              "raw_output": "ANSWER=7",
+              "task_id": "no-header-first-retry::r2"
+            },
+            {
+              "classification": "correct",
+              "expected": "14",
+              "parsed_output": "14",
+              "raw_output": "ANSWER=14",
+              "task_id": "one-failed-retry::r2"
+            },
+            {
+              "classification": "application_error",
+              "expected": "28",
+              "parsed_output": "QUARTZ",
+              "raw_output": "ANSWER=QUARTZ",
+              "task_id": "two-failed-retries::r2"
+            },
+            {
+              "classification": "correct",
+              "expected": "QUARTZ",
+              "parsed_output": "QUARTZ",
+              "raw_output": "ANSWER=QUARTZ",
+              "task_id": "three-failed-retries::r2"
+            },
+            {
+              "classification": "correct",
+              "expected": "11",
+              "parsed_output": "11",
+              "raw_output": "ANSWER=11",
+              "task_id": "retry-after-present::r3"
+            },
+            {
+              "classification": "correct",
+              "expected": "7",
+              "parsed_output": "7",
+              "raw_output": "ANSWER=7",
+              "task_id": "no-header-first-retry::r3"
+            },
+            {
+              "classification": "correct",
+              "expected": "14",
+              "parsed_output": "14",
+              "raw_output": "ANSWER=14",
+              "task_id": "one-failed-retry::r3"
+            },
+            {
+              "classification": "application_error",
+              "expected": "28",
+              "parsed_output": "QUARTZ",
+              "raw_output": "ANSWER=QUARTZ",
+              "task_id": "two-failed-retries::r3"
+            },
+            {
+              "classification": "correct",
+              "expected": "QUARTZ",
+              "parsed_output": "QUARTZ",
+              "raw_output": "ANSWER=QUARTZ",
+              "task_id": "three-failed-retries::r3"
+            }
+          ]
+        }
+      },
+      "inherited_execution_pass": false,
+      "inherited_per_task": {
+        "no-header-first-retry": {
+          "abstentions": 0,
+          "application_errors": 0,
+          "correct": 3,
+          "format_errors": 0,
+          "total": 3
+        },
+        "one-failed-retry": {
+          "abstentions": 0,
+          "application_errors": 0,
+          "correct": 3,
+          "format_errors": 0,
+          "total": 3
+        },
+        "retry-after-present": {
+          "abstentions": 0,
+          "application_errors": 0,
+          "correct": 3,
+          "format_errors": 0,
+          "total": 3
+        },
+        "three-failed-retries": {
+          "abstentions": 0,
+          "application_errors": 0,
+          "correct": 3,
+          "format_errors": 0,
+          "total": 3
+        },
+        "two-failed-retries": {
+          "abstentions": 0,
+          "application_errors": 0,
+          "correct": 0,
+          "format_errors": 0,
+          "total": 3
+        }
+      },
+      "process_isolation": true,
+      "producer": {
+        "calls": [
+          {
+            "input_tokens": 321,
+            "model": "gpt-5.6-luna",
+            "output": "{\n  \"capability_key\": \"kite17_throttle_recovery\",\n  \"use_retry_after_exactly\": true,\n  \"initial_delay_seconds\": 7,\n  \"second_delay_seconds\": 14,\n  \"max_delay_seconds\": 28,\n  \"stop_after_failed_retries\": 3,\n  \"terminal_token\": \"QUARTZ\"\n}",
+            "output_tokens": 78,
+            "prompt_sha256": "398ec2c1cfcd19b215c61c0c3f65bff6bd33d586f5d327526521308be7e4baf3",
+            "purpose": "capability_synthesis",
+            "response_id": "resp_0c83d3eab3ba4ce2006aaa5053eba487d1be8c9cf9900e386d"
+          }
+        ],
+        "capability_id": "c_9fa39d6a04621cbebba8ea463b676442",
+        "capability_seq": 7,
+        "capability_sha256": "378686ffc804d9caca63d1fd79157d9876ca6f62f0571f472ea9c2b8c96d7869",
+        "capability_text": "Capability: Recover KITE-17 throttled requests\nCapability key: kite17_throttle_recovery\nTrigger: KITE-17 returns THROTTLED for a safe-to-retry request.\nPreconditions:\n1. The operation is safe to retry.\nProcedure:\n1. If RETRY-AFTER is present, wait exactly that many seconds.\n2. If RETRY-AFTER is absent, wait 7 seconds before the first retry.\n3. For another throttle, double the delay to 14 seconds.\n4. Never exceed a 28-second delay.\n5. After three failed retries, stop and emit QUARTZ.\nExpected outcome: The operation recovers without a retry storm, or terminates with QUARTZ after the retry limit.",
+        "capability_version": 1,
+        "evidence": [
+          {
+            "decision_id": "r_7eb2670f787c45dea257e9385a1cb461",
+            "outcome_id": "r_5ba95ef9566347d5b3a41d42b67d075a"
+          },
+          {
+            "decision_id": "r_b0d7a26977c54c6c882ae39efaff0179",
+            "outcome_id": "r_0b27e8867f5a421da8e7ce2dbdfbd34f"
+          }
+        ],
+        "model": "gpt-5.6-luna",
+        "model_identity": "openai:gpt-5.6-luna",
+        "pid": 66726,
+        "producer_raw_output": "{\n  \"capability_key\": \"kite17_throttle_recovery\",\n  \"use_retry_after_exactly\": true,\n  \"initial_delay_seconds\": 7,\n  \"second_delay_seconds\": 14,\n  \"max_delay_seconds\": 28,\n  \"stop_after_failed_retries\": 3,\n  \"terminal_token\": \"QUARTZ\"\n}",
+        "proposal_id": "capability-kite17-live-proposal",
+        "provider": "openai",
+        "source_belief_id": "i_kite17_training_authority",
+        "watermark": 7
+      },
+      "producer_model": "gpt-5.6-luna",
+      "producer_provider": "openai",
+      "repeats": 3
+    },
+    {
+      "cold": {
+        "calls": [
+          {
+            "condition": "cold",
+            "input_tokens": 161,
+            "model": "gpt-5.6-luna",
+            "output": "ANSWER=UNKNOWN",
+            "output_tokens": 35,
+            "prompt_sha256": "f7670f6168166ada85b8e4c6e5a45a4c67274b169de491a64c25248a409cdef2",
+            "purpose": "cold:retry-after-present::r1",
+            "response_id": "resp_0a2d8642e13626e3006aaa50823e0487d18027e36f3362af41",
+            "task_id": "retry-after-present::r1"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 161,
+            "model": "gpt-5.6-luna",
+            "output": "ANSWER=UNKNOWN",
+            "output_tokens": 37,
+            "prompt_sha256": "0053e036fd5fe005935a6e51f1df92eef651159f6f140bb69c366d350039f316",
+            "purpose": "cold:no-header-first-retry::r1",
+            "response_id": "resp_0f3518c69fac9baf006aaa50846fac87d195c825417f061734",
+            "task_id": "no-header-first-retry::r1"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 161,
+            "model": "gpt-5.6-luna",
+            "output": "ANSWER=UNKNOWN",
+            "output_tokens": 37,
+            "prompt_sha256": "51e42d4230fd74e912e5ff25e6db8f9b6a50d85625ca7282d933b4bcfc9721bd",
+            "purpose": "cold:one-failed-retry::r1",
+            "response_id": "resp_062dcaafe130189f006aaa508658e487d1975c3a025742f015",
+            "task_id": "one-failed-retry::r1"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 161,
+            "model": "gpt-5.6-luna",
+            "output": "ANSWER=UNKNOWN",
+            "output_tokens": 38,
+            "prompt_sha256": "185a6f87f087ff4231cc205d7eff2ef22bb8f50c5a6068a21cf545be05fe315a",
+            "purpose": "cold:two-failed-retries::r1",
+            "response_id": "resp_0c507880c8978690006aaa5087fa3087d18adce172d9424682",
+            "task_id": "two-failed-retries::r1"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 161,
+            "model": "gpt-5.6-luna",
+            "output": "ANSWER=UNKNOWN",
+            "output_tokens": 34,
+            "prompt_sha256": "851e3132e42bbf5b141f25c165d01926bed769cf288f2403de599f15e68ad233",
+            "purpose": "cold:three-failed-retries::r1",
+            "response_id": "resp_0a01cf770c948d32006aaa5089484087d1a24c710be7037e13",
+            "task_id": "three-failed-retries::r1"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 161,
+            "model": "gpt-5.6-luna",
+            "output": "ANSWER=UNKNOWN",
+            "output_tokens": 26,
+            "prompt_sha256": "f7670f6168166ada85b8e4c6e5a45a4c67274b169de491a64c25248a409cdef2",
+            "purpose": "cold:retry-after-present::r2",
+            "response_id": "resp_07060b4f57ee29e0006aaa508ac10487d1ad60fd30cc59e4fa",
+            "task_id": "retry-after-present::r2"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 161,
+            "model": "gpt-5.6-luna",
+            "output": "ANSWER=UNKNOWN",
+            "output_tokens": 35,
+            "prompt_sha256": "0053e036fd5fe005935a6e51f1df92eef651159f6f140bb69c366d350039f316",
+            "purpose": "cold:no-header-first-retry::r2",
+            "response_id": "resp_077a6c70858c895c006aaa508ca49887d182a1bf8714424c51",
+            "task_id": "no-header-first-retry::r2"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 161,
+            "model": "gpt-5.6-luna",
+            "output": "ANSWER=UNKNOWN",
+            "output_tokens": 35,
+            "prompt_sha256": "51e42d4230fd74e912e5ff25e6db8f9b6a50d85625ca7282d933b4bcfc9721bd",
+            "purpose": "cold:one-failed-retry::r2",
+            "response_id": "resp_046fd1d66ed4dc62006aaa508e245887d1a46ed8e306033e03",
+            "task_id": "one-failed-retry::r2"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 161,
+            "model": "gpt-5.6-luna",
+            "output": "ANSWER=UNKNOWN",
+            "output_tokens": 39,
+            "prompt_sha256": "185a6f87f087ff4231cc205d7eff2ef22bb8f50c5a6068a21cf545be05fe315a",
+            "purpose": "cold:two-failed-retries::r2",
+            "response_id": "resp_0a8a9aee64cc7be6006aaa508fcef087d1ae5117bf269f4956",
+            "task_id": "two-failed-retries::r2"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 161,
+            "model": "gpt-5.6-luna",
+            "output": "ANSWER=UNKNOWN",
+            "output_tokens": 35,
+            "prompt_sha256": "851e3132e42bbf5b141f25c165d01926bed769cf288f2403de599f15e68ad233",
+            "purpose": "cold:three-failed-retries::r2",
+            "response_id": "resp_0f14c8160255420c006aaa5092e1a087d1be6acb16b6816b88",
+            "task_id": "three-failed-retries::r2"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 161,
+            "model": "gpt-5.6-luna",
+            "output": "ANSWER=UNKNOWN",
+            "output_tokens": 35,
+            "prompt_sha256": "f7670f6168166ada85b8e4c6e5a45a4c67274b169de491a64c25248a409cdef2",
+            "purpose": "cold:retry-after-present::r3",
+            "response_id": "resp_0f48d87ec5c6cb84006aaa5094a87087d1983c492405801dca",
+            "task_id": "retry-after-present::r3"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 161,
+            "model": "gpt-5.6-luna",
+            "output": "ANSWER=UNKNOWN",
+            "output_tokens": 40,
+            "prompt_sha256": "0053e036fd5fe005935a6e51f1df92eef651159f6f140bb69c366d350039f316",
+            "purpose": "cold:no-header-first-retry::r3",
+            "response_id": "resp_0ccec609f1c6cc5f006aaa5096200487d1a3376ac4d39da32b",
+            "task_id": "no-header-first-retry::r3"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 161,
+            "model": "gpt-5.6-luna",
+            "output": "ANSWER=UNKNOWN",
+            "output_tokens": 28,
+            "prompt_sha256": "51e42d4230fd74e912e5ff25e6db8f9b6a50d85625ca7282d933b4bcfc9721bd",
+            "purpose": "cold:one-failed-retry::r3",
+            "response_id": "resp_0d873abdc680c695006aaa50979ca487d1b0fd3207028da5e2",
+            "task_id": "one-failed-retry::r3"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 161,
+            "model": "gpt-5.6-luna",
+            "output": "ANSWER=UNKNOWN",
+            "output_tokens": 38,
+            "prompt_sha256": "185a6f87f087ff4231cc205d7eff2ef22bb8f50c5a6068a21cf545be05fe315a",
+            "purpose": "cold:two-failed-retries::r3",
+            "response_id": "resp_08ccb3aa97abddce006aaa5098bf3087d18fd41930e47f9a77",
+            "task_id": "two-failed-retries::r3"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 161,
+            "model": "gpt-5.6-luna",
+            "output": "ANSWER=UNKNOWN",
+            "output_tokens": 31,
+            "prompt_sha256": "851e3132e42bbf5b141f25c165d01926bed769cf288f2403de599f15e68ad233",
+            "purpose": "cold:three-failed-retries::r3",
+            "response_id": "resp_09dfea42dbfecefc006aaa509a2b2887d192934a2f5aec5ffc",
+            "task_id": "three-failed-retries::r3"
+          }
+        ],
+        "condition": "cold",
+        "model": "gpt-5.6-luna",
+        "model_identity": "openai:gpt-5.6-luna",
+        "opened_producer_db": false,
+        "pid": 66768,
+        "provider": "openai",
+        "report": {
+          "abstentions": 15,
+          "accuracy": 0.0,
+          "application_errors": 0,
+          "consumer_name": "openai:gpt-5.6-luna",
+          "correct": 0,
+          "format_errors": 0,
+          "total": 15,
+          "trials": [
+            {
+              "classification": "abstention",
+              "expected": "11",
+              "parsed_output": "UNKNOWN",
+              "raw_output": "ANSWER=UNKNOWN",
+              "task_id": "retry-after-present::r1"
+            },
+            {
+              "classification": "abstention",
+              "expected": "7",
+              "parsed_output": "UNKNOWN",
+              "raw_output": "ANSWER=UNKNOWN",
+              "task_id": "no-header-first-retry::r1"
+            },
+            {
+              "classification": "abstention",
+              "expected": "14",
+              "parsed_output": "UNKNOWN",
+              "raw_output": "ANSWER=UNKNOWN",
+              "task_id": "one-failed-retry::r1"
+            },
+            {
+              "classification": "abstention",
+              "expected": "28",
+              "parsed_output": "UNKNOWN",
+              "raw_output": "ANSWER=UNKNOWN",
+              "task_id": "two-failed-retries::r1"
+            },
+            {
+              "classification": "abstention",
+              "expected": "QUARTZ",
+              "parsed_output": "UNKNOWN",
+              "raw_output": "ANSWER=UNKNOWN",
+              "task_id": "three-failed-retries::r1"
+            },
+            {
+              "classification": "abstention",
+              "expected": "11",
+              "parsed_output": "UNKNOWN",
+              "raw_output": "ANSWER=UNKNOWN",
+              "task_id": "retry-after-present::r2"
+            },
+            {
+              "classification": "abstention",
+              "expected": "7",
+              "parsed_output": "UNKNOWN",
+              "raw_output": "ANSWER=UNKNOWN",
+              "task_id": "no-header-first-retry::r2"
+            },
+            {
+              "classification": "abstention",
+              "expected": "14",
+              "parsed_output": "UNKNOWN",
+              "raw_output": "ANSWER=UNKNOWN",
+              "task_id": "one-failed-retry::r2"
+            },
+            {
+              "classification": "abstention",
+              "expected": "28",
+              "parsed_output": "UNKNOWN",
+              "raw_output": "ANSWER=UNKNOWN",
+              "task_id": "two-failed-retries::r2"
+            },
+            {
+              "classification": "abstention",
+              "expected": "QUARTZ",
+              "parsed_output": "UNKNOWN",
+              "raw_output": "ANSWER=UNKNOWN",
+              "task_id": "three-failed-retries::r2"
+            },
+            {
+              "classification": "abstention",
+              "expected": "11",
+              "parsed_output": "UNKNOWN",
+              "raw_output": "ANSWER=UNKNOWN",
+              "task_id": "retry-after-present::r3"
+            },
+            {
+              "classification": "abstention",
+              "expected": "7",
+              "parsed_output": "UNKNOWN",
+              "raw_output": "ANSWER=UNKNOWN",
+              "task_id": "no-header-first-retry::r3"
+            },
+            {
+              "classification": "abstention",
+              "expected": "14",
+              "parsed_output": "UNKNOWN",
+              "raw_output": "ANSWER=UNKNOWN",
+              "task_id": "one-failed-retry::r3"
+            },
+            {
+              "classification": "abstention",
+              "expected": "28",
+              "parsed_output": "UNKNOWN",
+              "raw_output": "ANSWER=UNKNOWN",
+              "task_id": "two-failed-retries::r3"
+            },
+            {
+              "classification": "abstention",
+              "expected": "QUARTZ",
+              "parsed_output": "UNKNOWN",
+              "raw_output": "ANSWER=UNKNOWN",
+              "task_id": "three-failed-retries::r3"
+            }
+          ]
+        }
+      },
+      "cold_control_pass": true,
+      "cold_per_task": {
+        "no-header-first-retry": {
+          "abstentions": 0,
+          "application_errors": 0,
+          "correct": 0,
+          "format_errors": 0,
+          "total": 3
+        },
+        "one-failed-retry": {
+          "abstentions": 0,
+          "application_errors": 0,
+          "correct": 0,
+          "format_errors": 0,
+          "total": 3
+        },
+        "retry-after-present": {
+          "abstentions": 0,
+          "application_errors": 0,
+          "correct": 0,
+          "format_errors": 0,
+          "total": 3
+        },
+        "three-failed-retries": {
+          "abstentions": 0,
+          "application_errors": 0,
+          "correct": 0,
+          "format_errors": 0,
+          "total": 3
+        },
+        "two-failed-retries": {
+          "abstentions": 0,
+          "application_errors": 0,
+          "correct": 0,
+          "format_errors": 0,
+          "total": 3
+        }
+      },
+      "consumer_model": "gpt-5.6-luna",
+      "consumer_provider": "openai",
+      "direction": "anthropic_to_openai",
+      "direction_pass": true,
+      "inherited": {
+        "calls": [
+          {
+            "condition": "inherited",
+            "input_tokens": 324,
+            "model": "gpt-5.6-luna",
+            "output": "ANSWER=11 seconds",
+            "output_tokens": 43,
+            "prompt_sha256": "994395a29f4e8edd5409b98d69115a2cf5be331ae0cce4d06bfa1a89df666a9f",
+            "purpose": "inherited:retry-after-present::r1",
+            "response_id": "resp_0569355f209bfb52006aaa509c9d7087d1989ae76d68fbc27e",
+            "task_id": "retry-after-present::r1"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 324,
+            "model": "gpt-5.6-luna",
+            "output": "ANSWER=7 seconds",
+            "output_tokens": 8,
+            "prompt_sha256": "1fc84a49d3b5af6fc1d24469cad1963962995e071a49bfdedc21719909f152c5",
+            "purpose": "inherited:no-header-first-retry::r1",
+            "response_id": "resp_0eb0080e679e7c8e006aaa509f037087d19a213d613b78cfc7",
+            "task_id": "no-header-first-retry::r1"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 324,
+            "model": "gpt-5.6-luna",
+            "output": "ANSWER=14 seconds",
+            "output_tokens": 67,
+            "prompt_sha256": "5fafe3c5e6d57e7c65ee78468a143f75e1381a9954afd626744fece83de5ef47",
+            "purpose": "inherited:one-failed-retry::r1",
+            "response_id": "resp_09cd7e5564f180c4006aaa50a0694887d1bfcf594ab076f3d5",
+            "task_id": "one-failed-retry::r1"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 324,
+            "model": "gpt-5.6-luna",
+            "output": "ANSWER=28 seconds",
+            "output_tokens": 235,
+            "prompt_sha256": "cf02afa36da0b04296f30ef0c8f405168a57cb42633f419db672a511d06a4171",
+            "purpose": "inherited:two-failed-retries::r1",
+            "response_id": "resp_0d044a6a41fd4168006aaa50a303a087d1838fd827a48fb211",
+            "task_id": "two-failed-retries::r1"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 324,
+            "model": "gpt-5.6-luna",
+            "output": "ANSWER=QUARTZ",
+            "output_tokens": 54,
+            "prompt_sha256": "2edef39ccdb9e385be69f8534f69554afc6569944b2be129483ac09ac399e0ef",
+            "purpose": "inherited:three-failed-retries::r1",
+            "response_id": "resp_018c6d47a6d29803006aaa50a6ae3c87d1bacd476d1880591a",
+            "task_id": "three-failed-retries::r1"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 324,
+            "model": "gpt-5.6-luna",
+            "output": "ANSWER=11 seconds",
+            "output_tokens": 46,
+            "prompt_sha256": "994395a29f4e8edd5409b98d69115a2cf5be331ae0cce4d06bfa1a89df666a9f",
+            "purpose": "inherited:retry-after-present::r2",
+            "response_id": "resp_0b0738f5eaa5dccf006aaa50a89f1c87d196a7fc3437a06b7a",
+            "task_id": "retry-after-present::r2"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 324,
+            "model": "gpt-5.6-luna",
+            "output": "ANSWER=7 seconds",
+            "output_tokens": 44,
+            "prompt_sha256": "1fc84a49d3b5af6fc1d24469cad1963962995e071a49bfdedc21719909f152c5",
+            "purpose": "inherited:no-header-first-retry::r2",
+            "response_id": "resp_0fc43a4f3eb4b764006aaa50aa332c87d185e682793817a3b2",
+            "task_id": "no-header-first-retry::r2"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 324,
+            "model": "gpt-5.6-luna",
+            "output": "ANSWER=14 seconds",
+            "output_tokens": 86,
+            "prompt_sha256": "5fafe3c5e6d57e7c65ee78468a143f75e1381a9954afd626744fece83de5ef47",
+            "purpose": "inherited:one-failed-retry::r2",
+            "response_id": "resp_079f51263ae77c4a006aaa50abebf487d1b92de434f9fee062",
+            "task_id": "one-failed-retry::r2"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 324,
+            "model": "gpt-5.6-luna",
+            "output": "ANSWER=28 seconds",
+            "output_tokens": 88,
+            "prompt_sha256": "cf02afa36da0b04296f30ef0c8f405168a57cb42633f419db672a511d06a4171",
+            "purpose": "inherited:two-failed-retries::r2",
+            "response_id": "resp_0ed7f43f9b7844e1006aaa50ae329087d18f0e96ea5bd2ba73",
+            "task_id": "two-failed-retries::r2"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 324,
+            "model": "gpt-5.6-luna",
+            "output": "ANSWER=QUARTZ",
+            "output_tokens": 54,
+            "prompt_sha256": "2edef39ccdb9e385be69f8534f69554afc6569944b2be129483ac09ac399e0ef",
+            "purpose": "inherited:three-failed-retries::r2",
+            "response_id": "resp_03aa9d684fcc7ab3006aaa50b007dc87d18cd0283334015f5b",
+            "task_id": "three-failed-retries::r2"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 324,
+            "model": "gpt-5.6-luna",
+            "output": "ANSWER=11 seconds",
+            "output_tokens": 43,
+            "prompt_sha256": "994395a29f4e8edd5409b98d69115a2cf5be331ae0cce4d06bfa1a89df666a9f",
+            "purpose": "inherited:retry-after-present::r3",
+            "response_id": "resp_012094c2707cdea0006aaa50b1e8e887d19083c351a3ef86a5",
+            "task_id": "retry-after-present::r3"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 324,
+            "model": "gpt-5.6-luna",
+            "output": "ANSWER=7 seconds",
+            "output_tokens": 46,
+            "prompt_sha256": "1fc84a49d3b5af6fc1d24469cad1963962995e071a49bfdedc21719909f152c5",
+            "purpose": "inherited:no-header-first-retry::r3",
+            "response_id": "resp_036eee9cd99aac2d006aaa50b3811087d1af85fe180c91742c",
+            "task_id": "no-header-first-retry::r3"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 324,
+            "model": "gpt-5.6-luna",
+            "output": "ANSWER=14 seconds",
+            "output_tokens": 61,
+            "prompt_sha256": "5fafe3c5e6d57e7c65ee78468a143f75e1381a9954afd626744fece83de5ef47",
+            "purpose": "inherited:one-failed-retry::r3",
+            "response_id": "resp_0931c81e198c29b4006aaa50b4e12887d19c4db285bc827ff1",
+            "task_id": "one-failed-retry::r3"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 324,
+            "model": "gpt-5.6-luna",
+            "output": "ANSWER=28 seconds",
+            "output_tokens": 85,
+            "prompt_sha256": "cf02afa36da0b04296f30ef0c8f405168a57cb42633f419db672a511d06a4171",
+            "purpose": "inherited:two-failed-retries::r3",
+            "response_id": "resp_043f31c5c30efafc006aaa50b682e887d18a3fcac0023cde42",
+            "task_id": "two-failed-retries::r3"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 324,
+            "model": "gpt-5.6-luna",
+            "output": "ANSWER=QUARTZ",
+            "output_tokens": 61,
+            "prompt_sha256": "2edef39ccdb9e385be69f8534f69554afc6569944b2be129483ac09ac399e0ef",
+            "purpose": "inherited:three-failed-retries::r3",
+            "response_id": "resp_03a2b3eadd953489006aaa50b8c12887d1b8ea57a3e61ac08d",
+            "task_id": "three-failed-retries::r3"
+          }
+        ],
+        "condition": "inherited",
+        "model": "gpt-5.6-luna",
+        "model_identity": "openai:gpt-5.6-luna",
+        "opened_producer_db": true,
+        "pid": 67232,
+        "provider": "openai",
+        "report": {
+          "abstentions": 0,
+          "accuracy": 1.0,
+          "application_errors": 0,
+          "consumer_name": "openai:gpt-5.6-luna",
+          "correct": 15,
+          "format_errors": 0,
+          "total": 15,
+          "trials": [
+            {
+              "classification": "correct",
+              "expected": "11",
+              "parsed_output": "11",
+              "raw_output": "ANSWER=11 seconds",
+              "task_id": "retry-after-present::r1"
+            },
+            {
+              "classification": "correct",
+              "expected": "7",
+              "parsed_output": "7",
+              "raw_output": "ANSWER=7 seconds",
+              "task_id": "no-header-first-retry::r1"
+            },
+            {
+              "classification": "correct",
+              "expected": "14",
+              "parsed_output": "14",
+              "raw_output": "ANSWER=14 seconds",
+              "task_id": "one-failed-retry::r1"
+            },
+            {
+              "classification": "correct",
+              "expected": "28",
+              "parsed_output": "28",
+              "raw_output": "ANSWER=28 seconds",
+              "task_id": "two-failed-retries::r1"
+            },
+            {
+              "classification": "correct",
+              "expected": "QUARTZ",
+              "parsed_output": "QUARTZ",
+              "raw_output": "ANSWER=QUARTZ",
+              "task_id": "three-failed-retries::r1"
+            },
+            {
+              "classification": "correct",
+              "expected": "11",
+              "parsed_output": "11",
+              "raw_output": "ANSWER=11 seconds",
+              "task_id": "retry-after-present::r2"
+            },
+            {
+              "classification": "correct",
+              "expected": "7",
+              "parsed_output": "7",
+              "raw_output": "ANSWER=7 seconds",
+              "task_id": "no-header-first-retry::r2"
+            },
+            {
+              "classification": "correct",
+              "expected": "14",
+              "parsed_output": "14",
+              "raw_output": "ANSWER=14 seconds",
+              "task_id": "one-failed-retry::r2"
+            },
+            {
+              "classification": "correct",
+              "expected": "28",
+              "parsed_output": "28",
+              "raw_output": "ANSWER=28 seconds",
+              "task_id": "two-failed-retries::r2"
+            },
+            {
+              "classification": "correct",
+              "expected": "QUARTZ",
+              "parsed_output": "QUARTZ",
+              "raw_output": "ANSWER=QUARTZ",
+              "task_id": "three-failed-retries::r2"
+            },
+            {
+              "classification": "correct",
+              "expected": "11",
+              "parsed_output": "11",
+              "raw_output": "ANSWER=11 seconds",
+              "task_id": "retry-after-present::r3"
+            },
+            {
+              "classification": "correct",
+              "expected": "7",
+              "parsed_output": "7",
+              "raw_output": "ANSWER=7 seconds",
+              "task_id": "no-header-first-retry::r3"
+            },
+            {
+              "classification": "correct",
+              "expected": "14",
+              "parsed_output": "14",
+              "raw_output": "ANSWER=14 seconds",
+              "task_id": "one-failed-retry::r3"
+            },
+            {
+              "classification": "correct",
+              "expected": "28",
+              "parsed_output": "28",
+              "raw_output": "ANSWER=28 seconds",
+              "task_id": "two-failed-retries::r3"
+            },
+            {
+              "classification": "correct",
+              "expected": "QUARTZ",
+              "parsed_output": "QUARTZ",
+              "raw_output": "ANSWER=QUARTZ",
+              "task_id": "three-failed-retries::r3"
+            }
+          ]
+        }
+      },
+      "inherited_execution_pass": true,
+      "inherited_per_task": {
+        "no-header-first-retry": {
+          "abstentions": 0,
+          "application_errors": 0,
+          "correct": 3,
+          "format_errors": 0,
+          "total": 3
+        },
+        "one-failed-retry": {
+          "abstentions": 0,
+          "application_errors": 0,
+          "correct": 3,
+          "format_errors": 0,
+          "total": 3
+        },
+        "retry-after-present": {
+          "abstentions": 0,
+          "application_errors": 0,
+          "correct": 3,
+          "format_errors": 0,
+          "total": 3
+        },
+        "three-failed-retries": {
+          "abstentions": 0,
+          "application_errors": 0,
+          "correct": 3,
+          "format_errors": 0,
+          "total": 3
+        },
+        "two-failed-retries": {
+          "abstentions": 0,
+          "application_errors": 0,
+          "correct": 3,
+          "format_errors": 0,
+          "total": 3
+        }
+      },
+      "process_isolation": true,
+      "producer": {
+        "calls": [
+          {
+            "input_tokens": 376,
+            "model": "claude-sonnet-4-6",
+            "output": "```json\n{\n  \"capability_key\": \"kite17_throttle_recovery\",\n  \"use_retry_after_exactly\": true,\n  \"initial_delay_seconds\": 7,\n  \"second_delay_seconds\": 14,\n  \"max_delay_seconds\": 28,\n  \"stop_after_failed_retries\": 3,\n  \"terminal_token\": \"QUARTZ\"\n}\n```",
+            "output_tokens": 104,
+            "prompt_sha256": "398ec2c1cfcd19b215c61c0c3f65bff6bd33d586f5d327526521308be7e4baf3",
+            "purpose": "capability_synthesis",
+            "response_id": "msg_011Cf6neozA9au91L3KouXJg"
+          }
+        ],
+        "capability_id": "c_9fa39d6a04621cbebba8ea463b676442",
+        "capability_seq": 7,
+        "capability_sha256": "378686ffc804d9caca63d1fd79157d9876ca6f62f0571f472ea9c2b8c96d7869",
+        "capability_text": "Capability: Recover KITE-17 throttled requests\nCapability key: kite17_throttle_recovery\nTrigger: KITE-17 returns THROTTLED for a safe-to-retry request.\nPreconditions:\n1. The operation is safe to retry.\nProcedure:\n1. If RETRY-AFTER is present, wait exactly that many seconds.\n2. If RETRY-AFTER is absent, wait 7 seconds before the first retry.\n3. For another throttle, double the delay to 14 seconds.\n4. Never exceed a 28-second delay.\n5. After three failed retries, stop and emit QUARTZ.\nExpected outcome: The operation recovers without a retry storm, or terminates with QUARTZ after the retry limit.",
+        "capability_version": 1,
+        "evidence": [
+          {
+            "decision_id": "r_0eff458611c44558bd5b1ba7f41ef59f",
+            "outcome_id": "r_cdbe5fa5ff054c20b982d80ccde85dea"
+          },
+          {
+            "decision_id": "r_f0fd370a3fda4547bbb0f91f9fb49d27",
+            "outcome_id": "r_d37d8bbadae84c569ea6a3aed3ba756a"
+          }
+        ],
+        "model": "claude-sonnet-4-6",
+        "model_identity": "anthropic:claude-sonnet-4-6",
+        "pid": 66764,
+        "producer_raw_output": "```json\n{\n  \"capability_key\": \"kite17_throttle_recovery\",\n  \"use_retry_after_exactly\": true,\n  \"initial_delay_seconds\": 7,\n  \"second_delay_seconds\": 14,\n  \"max_delay_seconds\": 28,\n  \"stop_after_failed_retries\": 3,\n  \"terminal_token\": \"QUARTZ\"\n}\n```",
+        "proposal_id": "capability-kite17-live-proposal",
+        "provider": "anthropic",
+        "source_belief_id": "i_kite17_training_authority",
+        "watermark": 7
+      },
+      "producer_model": "claude-sonnet-4-6",
+      "producer_provider": "anthropic",
+      "repeats": 3
+    }
+  ],
+  "experiment": "034_capability_execution_robustness",
+  "held_constant_from_033": [
+    "Synthetic KITE-17 capability.",
+    "Producer training observations.",
+    "Producer synthesis protocol.",
+    "MNEXA capability promotion laws.",
+    "No raw training/provenance to consumer.",
+    "Provider pair.",
+    "OS-process isolation."
+  ],
+  "overall_pass": false,
+  "protocol": {
+    "base_tasks": 5,
+    "cold_opens_producer_db": false,
+    "inherited_receives_training_evidence": false,
+    "numeric_unit_normalization": true,
+    "output_grammar": "ANSWER=<value>",
+    "producer_consumer_process_isolation": true,
+    "repeats_per_task": 3,
+    "trials_per_condition": 15
+  },
+  "purpose": "Separate capability-application errors from output-format errors and eliminate ambiguous retry-state wording from Experiment 033.",
+  "timestamp_utc": "2026-09-16T08:18:02.182393+00:00"
+}

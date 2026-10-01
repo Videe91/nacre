@@ -1,6 +1,6 @@
 # D-0017: Interpretation-plane schema (proposals, beliefs, statuses, ancestry, episodes)
 
-- **Status:** proposed
+- **Status:** proposed (D2 parts). **D3 part APPROVED by the owner 2026-10-01: no content plaintext in the projection (keyed content MAC).**
 - **Tier:** D2 (persistence format, invariants). The privacy part (what the projection may hold in plaintext) is
   **D3**.
 - **Date:** 2026-10-01
@@ -130,6 +130,10 @@ identical (gate item).
 - **(D3) The projection holds no content plaintext.** A shredded belief keeps its structural row: ids, status and
   hashes. SHA-256 of short text could be guessed, so `content_sha256` is a keyed MAC under the data key, like
   `attachment_ref`. It is not a plain hash.
+
+## Open question for Phase 3 (owner, 2026-10-01)
+**Embeddings are content-derived and partly invertible.** They must be scoped and shreddable, never plaintext in a
+shared index. This must be decided by ADR **before recall is built**.
 
 ## How we'd know it was wrong
 - Phase 3 recall cannot meet latency without plaintext in the projection. That would need a new D3 decision on

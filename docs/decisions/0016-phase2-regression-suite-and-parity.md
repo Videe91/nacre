@@ -1,9 +1,26 @@
 # D-0016: Phase 2 regression suite, test modes and parity margins
 
-- **Status:** proposed
+- **Status:** accepted with owner amendments (2026-10-01). The framing is owner-decided (amendments below). The margin
+  numbers are fixed in EXP-0001, committed before any run
 - **Tier:** D3 (what counts as proof)
 - **Date:** 2026-10-01
 - **Relies on assumptions:** A-0003, A-0023, A-0024, A-0025
+
+## Amendment history (owner, 2026-10-01)
+1. **MNEXA is prior art, not proof.** Phase 2 must show two things:
+   - **non-inferiority** to a **fresh MNEXA baseline** (MNEXA's own harness run live, k = 3, on the pinned model,
+     **before any port**);
+   - **superiority** over a **no-memory control** in the same runs.
+
+   Both margins are fixed before any run. Safety metrics keep zero margin. No reruns to reach a pass. SPEC amended.
+2. **Live parity scope:** the final pipeline only (014–016). Earlier seeds are covered by L1 and L2.
+3. **Checker model:** deferred. It will be its own experiment with its own gate, and it ships only if it improves
+   results (see D-0020).
+4. **Model pinning:** always pin dated model versions. On a successor, re-baseline both MNEXA's harness and the
+   no-memory control before any comparison.
+
+**What this supersedes:** the original L3 below compared against MNEXA's historic single-run numbers (165/180). That
+comparison is **superseded** by section B-L3 (amended). The original text is kept for history.
 
 ## Context
 SPEC ("Proof", tier 1) says MNEXA's frozen task sets must reproduce "at the same or better rates" on the new build,
@@ -61,7 +78,26 @@ Option 3.
   after canonical JSON.
 - This is the port-drift check: same model output in, same memory out.
 
-**L3: live parity.** The gate only. Run by the owner locally with their own key (standing token rule).
+**L3 (AMENDED 2026-10-01): live non-inferiority and superiority.** This supersedes the original L3 below.
+- **Arms:**
+  - **B (fresh MNEXA baseline):** EXP-0001 runs MNEXA's own unmodified 014/015/016 harness. k = 3 full runs per
+    set on `gpt-4o-mini-2024-07-18` (provider-default decoding), embedder pinned at a revision.
+  - **C (no-memory control):** run in the same runs. An empty `MnexaSeed`, the same transfer reasoner and the set's
+    own grader (MNEXA's seed-005 construction).
+  - **N (Nacre):** later, the same design and the same model.
+  - **Trials:** 3 sets × 20 families × 3 runs = 180 per arm.
+- **Validity (checked on EXP-0001 itself):** B − C ≥ 30 pp. If not, the suite does not measure memory on this
+  model, and the comparison stops.
+- **Non-inferiority:** N ≥ B − 9 trials pooled (5 pp), and N_set ≥ B_set − 6 trials per set (10 pp).
+- **Superiority:** N − C ≥ 54 trials pooled (30 pp), and N_set − C_set ≥ 9 trials per set (15 pp).
+- **Safety:** Nacre has zero tolerance on every safety metric. MNEXA's safety numbers are reported, never used as an
+  allowance.
+- **Rules:**
+  - No reruns to reach a pass.
+  - An infrastructure abort is recorded, and the run is repeated in full with a new id.
+- **Pre-registration:** `docs/experiments/EXP-0001-mnexa-rebaseline.md`, committed before the run.
+
+**L3 (original proposal, superseded):** The gate only. Run by the owner locally with their own key (standing token rule).
 - **What runs:** the Nacre pipeline end to end (capture → sleep pass → admitted memory → transfer decision graded by
   L1's grader).
 - **Sets and conditions:** the final ported pipeline on the verbose lossless-memory condition of sets 014 (B), 015
@@ -117,8 +153,7 @@ Option 3.
 - L3 passes while a known regression was deliberately introduced. Canary: running L3 with the role gate disabled
   must fail.
 
-## Questions for the owner
-1. Approve reading "same or better" as the L3 margins above, and amending SPEC to match?
-2. Should L3 cover only the final verbose pipeline (014, 015 and 016), with the earlier variants covered by L1 and
-   L2 only?
-3. If `gpt-4o-mini` is retired, approve the re-baseline route (MNEXA harness plus successor model, run first)?
+## Owner answers (2026-10-01)
+1. SPEC amended: MNEXA is prior art, not proof. Non-inferiority to a fresh baseline plus superiority over no memory.
+2. L3 scope: 014–016 only.
+3. Re-baselining approved. Dated pins always; on a successor, re-baseline MNEXA and the control first.

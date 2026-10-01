@@ -16,13 +16,13 @@ The laws every layer follows:
 6. **Outcome-first.** A mechanism ships only if it measurably improves task results against a frozen evaluation.
 7. **Decision-first, but light.** Durable choices (persistence, privacy, interfaces, benchmark method) get a decision record; everything else is captured in code and tests.
 
-This build is new, but not from zero: every proven MNEXA mechanism is ported as-is, and MNEXA's frozen experiments become the regression suite. If the new build can't reproduce MNEXA's results, it isn't done.
+This build is new, but not from zero: MNEXA's mechanisms are ported as prior art, not proof (amended 2026-10-01, D-0016). MNEXA's frozen task sets become the regression suite: a port is done only when it is non-inferior to a fresh MNEXA baseline and beats a no-memory control, by margins fixed before any run.
 
 ## Lineage
 
 What each part inherits, and how much of it is already proven.
 
-| Part | From MNEXA (proven in repo) | From Nacre (designed) | New extension |
+| Part | From MNEXA (prior art; single-run evidence, D-0016) | From Nacre (designed) | New extension |
 | --- | --- | --- | --- |
 | Ledger | Append-only commits, AS\_OF(N) snapshots, idempotent writes (ADR-0018), experience vs. interpretation planes (ADR-0002), four time concepts (ADR-0010) | Postgres, scoped streams, fingerprint chain, crypto-shredding, attachments | Typed multimodal payloads |
 | Capture | Decision, prediction, action, outcome evidence (ADR-0016) | Predict-first line per action | Predictor supplies expected outcome |
@@ -238,7 +238,7 @@ Python core, Postgres storage, MCP as the plug; Rust only where the benchmark pr
 
 Three tiers, each frozen before the mechanism it judges is built, with null and negative results kept.
 
-1. **Regression (MNEXA parity).** MNEXA's frozen task sets (seed growth 003–029) and unit suites must reproduce at the same or better rates on the new build. Gate for porting.
+1. **Regression against prior art (amended 2026-10-01, owner; D-0016).** MNEXA is **prior art, not proof**: its recorded results are single runs and are not a target. Each port phase shows two things on its frozen tasks, measured live with replicates on one pinned, dated model: **non-inferiority** to a **fresh MNEXA baseline** (MNEXA's own harness re-run on that model before any port), and **superiority** over a **no-memory control** run in the same runs. Both margins and the zero-margin safety metrics are fixed before any run, and no run is repeated to reach a pass. Earlier MNEXA variants are covered by deterministic grader and mechanism parity on MNEXA's stored outputs. On a model change, MNEXA's harness and the no-memory control are re-baselined before any comparison.
 2. **Comparability.** LongMemEval and LoCoMo scores against Mem0, Zep and Letta, same model, independently re-run, so results speak the market's language.
 3. **Headline: real multi-week tracks.** A coding track (a real repo evolving over 4–6 simulated weeks of tickets, with decisions that change midway) and a general-work track (shifting client requirements, people, deadlines). Contenders: no memory, Mem0, Zep, Letta, this system, all on the same model.
 
@@ -268,7 +268,7 @@ Phases 1–3 rebuild and harden what MNEXA has proven; phases 4–6 add what's n
 
 **Risks**
 
-- **Port drift.** Re-implementing MNEXA mechanisms can silently lose proven behaviour. Mitigation: regression tier gates every port.
+- **Port drift.** Re-implementing MNEXA mechanisms can silently lose behaviour MNEXA showed. Mitigation: deterministic grader and mechanism parity on MNEXA's stored outputs, plus live non-inferiority to a fresh MNEXA baseline (D-0016).
 - **Consolidation errors.** Mitigated by the checker model, evidence-gated promotion, and full rebuild from the ledger.
 - **Outcome signals for general work** are weaker than tests and CI; needs explicit done/failed markers or ratings.
 - **Self-tuner overfitting the eval.** Mitigated by sealed hidden cases, small steps and regression gates.

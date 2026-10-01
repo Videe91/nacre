@@ -1,0 +1,1354 @@
+{
+  "directions": [
+    {
+      "cold": {
+        "calls": [
+          {
+            "condition": "cold",
+            "input_tokens": 159,
+            "model": "claude-sonnet-4-6",
+            "output": "UNKNOWN",
+            "output_tokens": 5,
+            "prompt_sha256": "c3a3d425c93379017e890d5702f16016d79ff6f4008db78be5ec64fafe1e7470",
+            "purpose": "cold:header-present::r1",
+            "response_id": "msg_011Cf6iwuHQLTTw1yNEXBnF7",
+            "task_id": "header-present::r1"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 161,
+            "model": "claude-sonnet-4-6",
+            "output": "UNKNOWN",
+            "output_tokens": 5,
+            "prompt_sha256": "67a037b91811fe5d124d3562a06faf3464bbef68008efd869d2d86e518f699c6",
+            "purpose": "cold:header-absent::r1",
+            "response_id": "msg_011Cf6iwzMFeLrGTskQyBmFw",
+            "task_id": "header-absent::r1"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 161,
+            "model": "claude-sonnet-4-6",
+            "output": "UNKNOWN",
+            "output_tokens": 5,
+            "prompt_sha256": "9e6d1e886f5281b2f93f327cef1759d27778da3e7a59b3ab00ef8321e83b3dc7",
+            "purpose": "cold:second-throttle::r1",
+            "response_id": "msg_011Cf6ix5fEtteY5tha4aNUz",
+            "task_id": "second-throttle::r1"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 145,
+            "model": "claude-sonnet-4-6",
+            "output": "UNKNOWN",
+            "output_tokens": 5,
+            "prompt_sha256": "19712c2285ec0cce16eb87fbac885c3a37c46e1304bf83dcd83ad748f50549da",
+            "purpose": "cold:delay-cap::r1",
+            "response_id": "msg_011Cf6ixAoYzrtyA5iLtiyab",
+            "task_id": "delay-cap::r1"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 141,
+            "model": "claude-sonnet-4-6",
+            "output": "UNKNOWN",
+            "output_tokens": 5,
+            "prompt_sha256": "22955e0ba58dd7c63037dbfd194d545ca603b482022c973b257211938fe87a68",
+            "purpose": "cold:retry-exhausted::r1",
+            "response_id": "msg_011Cf6ixFgzdVJuLtFJi3spS",
+            "task_id": "retry-exhausted::r1"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 159,
+            "model": "claude-sonnet-4-6",
+            "output": "UNKNOWN",
+            "output_tokens": 5,
+            "prompt_sha256": "c3a3d425c93379017e890d5702f16016d79ff6f4008db78be5ec64fafe1e7470",
+            "purpose": "cold:header-present::r2",
+            "response_id": "msg_011Cf6ixPgTPJDWHeCuT7WiG",
+            "task_id": "header-present::r2"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 161,
+            "model": "claude-sonnet-4-6",
+            "output": "UNKNOWN",
+            "output_tokens": 5,
+            "prompt_sha256": "67a037b91811fe5d124d3562a06faf3464bbef68008efd869d2d86e518f699c6",
+            "purpose": "cold:header-absent::r2",
+            "response_id": "msg_011Cf6ixUtVGSC36ZkDx7Xeh",
+            "task_id": "header-absent::r2"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 161,
+            "model": "claude-sonnet-4-6",
+            "output": "UNKNOWN",
+            "output_tokens": 5,
+            "prompt_sha256": "9e6d1e886f5281b2f93f327cef1759d27778da3e7a59b3ab00ef8321e83b3dc7",
+            "purpose": "cold:second-throttle::r2",
+            "response_id": "msg_011Cf6ixa24L3sm8UE6h76y8",
+            "task_id": "second-throttle::r2"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 145,
+            "model": "claude-sonnet-4-6",
+            "output": "UNKNOWN",
+            "output_tokens": 5,
+            "prompt_sha256": "19712c2285ec0cce16eb87fbac885c3a37c46e1304bf83dcd83ad748f50549da",
+            "purpose": "cold:delay-cap::r2",
+            "response_id": "msg_011Cf6ixepnmBjKhNFJMsnrx",
+            "task_id": "delay-cap::r2"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 141,
+            "model": "claude-sonnet-4-6",
+            "output": "UNKNOWN",
+            "output_tokens": 5,
+            "prompt_sha256": "22955e0ba58dd7c63037dbfd194d545ca603b482022c973b257211938fe87a68",
+            "purpose": "cold:retry-exhausted::r2",
+            "response_id": "msg_011Cf6ixk6nd5WMmwjzhym1y",
+            "task_id": "retry-exhausted::r2"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 159,
+            "model": "claude-sonnet-4-6",
+            "output": "UNKNOWN",
+            "output_tokens": 5,
+            "prompt_sha256": "c3a3d425c93379017e890d5702f16016d79ff6f4008db78be5ec64fafe1e7470",
+            "purpose": "cold:header-present::r3",
+            "response_id": "msg_011Cf6ixqXTzFsx58SSXbW6k",
+            "task_id": "header-present::r3"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 161,
+            "model": "claude-sonnet-4-6",
+            "output": "UNKNOWN",
+            "output_tokens": 5,
+            "prompt_sha256": "67a037b91811fe5d124d3562a06faf3464bbef68008efd869d2d86e518f699c6",
+            "purpose": "cold:header-absent::r3",
+            "response_id": "msg_011Cf6ixwGWAeG7qSoaiBy8D",
+            "task_id": "header-absent::r3"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 161,
+            "model": "claude-sonnet-4-6",
+            "output": "UNKNOWN",
+            "output_tokens": 5,
+            "prompt_sha256": "9e6d1e886f5281b2f93f327cef1759d27778da3e7a59b3ab00ef8321e83b3dc7",
+            "purpose": "cold:second-throttle::r3",
+            "response_id": "msg_011Cf6iy2yJWZM6mUQ85XvDe",
+            "task_id": "second-throttle::r3"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 145,
+            "model": "claude-sonnet-4-6",
+            "output": "UNKNOWN",
+            "output_tokens": 5,
+            "prompt_sha256": "19712c2285ec0cce16eb87fbac885c3a37c46e1304bf83dcd83ad748f50549da",
+            "purpose": "cold:delay-cap::r3",
+            "response_id": "msg_011Cf6iyAYx4phkgiEKWzyKL",
+            "task_id": "delay-cap::r3"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 141,
+            "model": "claude-sonnet-4-6",
+            "output": "UNKNOWN",
+            "output_tokens": 5,
+            "prompt_sha256": "22955e0ba58dd7c63037dbfd194d545ca603b482022c973b257211938fe87a68",
+            "purpose": "cold:retry-exhausted::r3",
+            "response_id": "msg_011Cf6iyFdZAmpNbcZExth56",
+            "task_id": "retry-exhausted::r3"
+          }
+        ],
+        "condition": "cold",
+        "model": "claude-sonnet-4-6",
+        "model_identity": "anthropic:claude-sonnet-4-6",
+        "opened_producer_db": false,
+        "pid": 52767,
+        "provider": "anthropic",
+        "report": {
+          "accuracy": 0.0,
+          "consumer_name": "anthropic:claude-sonnet-4-6",
+          "correct": 0,
+          "total": 15,
+          "trials": [
+            {
+              "actual_answer": "UNKNOWN",
+              "correct": false,
+              "expected_answer": "11",
+              "normalized_actual": "unknown",
+              "normalized_expected": "11",
+              "task_id": "header-present::r1"
+            },
+            {
+              "actual_answer": "UNKNOWN",
+              "correct": false,
+              "expected_answer": "7",
+              "normalized_actual": "unknown",
+              "normalized_expected": "7",
+              "task_id": "header-absent::r1"
+            },
+            {
+              "actual_answer": "UNKNOWN",
+              "correct": false,
+              "expected_answer": "14",
+              "normalized_actual": "unknown",
+              "normalized_expected": "14",
+              "task_id": "second-throttle::r1"
+            },
+            {
+              "actual_answer": "UNKNOWN",
+              "correct": false,
+              "expected_answer": "28",
+              "normalized_actual": "unknown",
+              "normalized_expected": "28",
+              "task_id": "delay-cap::r1"
+            },
+            {
+              "actual_answer": "UNKNOWN",
+              "correct": false,
+              "expected_answer": "QUARTZ",
+              "normalized_actual": "unknown",
+              "normalized_expected": "quartz",
+              "task_id": "retry-exhausted::r1"
+            },
+            {
+              "actual_answer": "UNKNOWN",
+              "correct": false,
+              "expected_answer": "11",
+              "normalized_actual": "unknown",
+              "normalized_expected": "11",
+              "task_id": "header-present::r2"
+            },
+            {
+              "actual_answer": "UNKNOWN",
+              "correct": false,
+              "expected_answer": "7",
+              "normalized_actual": "unknown",
+              "normalized_expected": "7",
+              "task_id": "header-absent::r2"
+            },
+            {
+              "actual_answer": "UNKNOWN",
+              "correct": false,
+              "expected_answer": "14",
+              "normalized_actual": "unknown",
+              "normalized_expected": "14",
+              "task_id": "second-throttle::r2"
+            },
+            {
+              "actual_answer": "UNKNOWN",
+              "correct": false,
+              "expected_answer": "28",
+              "normalized_actual": "unknown",
+              "normalized_expected": "28",
+              "task_id": "delay-cap::r2"
+            },
+            {
+              "actual_answer": "UNKNOWN",
+              "correct": false,
+              "expected_answer": "QUARTZ",
+              "normalized_actual": "unknown",
+              "normalized_expected": "quartz",
+              "task_id": "retry-exhausted::r2"
+            },
+            {
+              "actual_answer": "UNKNOWN",
+              "correct": false,
+              "expected_answer": "11",
+              "normalized_actual": "unknown",
+              "normalized_expected": "11",
+              "task_id": "header-present::r3"
+            },
+            {
+              "actual_answer": "UNKNOWN",
+              "correct": false,
+              "expected_answer": "7",
+              "normalized_actual": "unknown",
+              "normalized_expected": "7",
+              "task_id": "header-absent::r3"
+            },
+            {
+              "actual_answer": "UNKNOWN",
+              "correct": false,
+              "expected_answer": "14",
+              "normalized_actual": "unknown",
+              "normalized_expected": "14",
+              "task_id": "second-throttle::r3"
+            },
+            {
+              "actual_answer": "UNKNOWN",
+              "correct": false,
+              "expected_answer": "28",
+              "normalized_actual": "unknown",
+              "normalized_expected": "28",
+              "task_id": "delay-cap::r3"
+            },
+            {
+              "actual_answer": "UNKNOWN",
+              "correct": false,
+              "expected_answer": "QUARTZ",
+              "normalized_actual": "unknown",
+              "normalized_expected": "quartz",
+              "task_id": "retry-exhausted::r3"
+            }
+          ]
+        }
+      },
+      "comparison": {
+        "absolute_gain": 0.8,
+        "cold_accuracy": 0.0,
+        "cold_correct": 0,
+        "consumer_name": "anthropic:claude-sonnet-4-6",
+        "inherited_accuracy": 0.8,
+        "inherited_correct": 12,
+        "producer_name": "openai:gpt-5.6-luna",
+        "total": 15
+      },
+      "consumer_model": "claude-sonnet-4-6",
+      "consumer_provider": "anthropic",
+      "direction": "openai_to_anthropic",
+      "direction_pass": false,
+      "inherited": {
+        "calls": [
+          {
+            "condition": "inherited",
+            "input_tokens": 354,
+            "model": "claude-sonnet-4-6",
+            "output": "11",
+            "output_tokens": 5,
+            "prompt_sha256": "c970b7a0549fde0911d6ec8996bbec19f247174d7ee0ec295a6e82b08028aa05",
+            "purpose": "inherited:header-present::r1",
+            "response_id": "msg_011Cf6iyNfDoKFks2duvHDCx",
+            "task_id": "header-present::r1"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 356,
+            "model": "claude-sonnet-4-6",
+            "output": "7",
+            "output_tokens": 5,
+            "prompt_sha256": "f5c2e061e80a6e905c60298b06277e359c938319085576b2c2e682f18ee86860",
+            "purpose": "inherited:header-absent::r1",
+            "response_id": "msg_011Cf6iyUafxJREMoCfXNEoF",
+            "task_id": "header-absent::r1"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 356,
+            "model": "claude-sonnet-4-6",
+            "output": "28",
+            "output_tokens": 5,
+            "prompt_sha256": "342b8e456c4e9d0929691bca4981f76e11a1aaf7476a6ef2ee1811b83064b415",
+            "purpose": "inherited:second-throttle::r1",
+            "response_id": "msg_011Cf6iyZyrGYHD6firHrSJJ",
+            "task_id": "second-throttle::r1"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 340,
+            "model": "claude-sonnet-4-6",
+            "output": "28",
+            "output_tokens": 5,
+            "prompt_sha256": "3a3a2521e6f7fade2ba102e8b4386613e9d1358f193a024a8e5186391f3da86b",
+            "purpose": "inherited:delay-cap::r1",
+            "response_id": "msg_011Cf6iyiNPGh7oYoKEPLUKF",
+            "task_id": "delay-cap::r1"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 336,
+            "model": "claude-sonnet-4-6",
+            "output": "QUARTZ",
+            "output_tokens": 6,
+            "prompt_sha256": "a663dbeb5d2ebe2b2f07807fd5961d868c4b6fbbd0c20a4bd435c1e6a5cb372e",
+            "purpose": "inherited:retry-exhausted::r1",
+            "response_id": "msg_011Cf6iyp2TGBYJZXMf1mPss",
+            "task_id": "retry-exhausted::r1"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 354,
+            "model": "claude-sonnet-4-6",
+            "output": "11",
+            "output_tokens": 5,
+            "prompt_sha256": "c970b7a0549fde0911d6ec8996bbec19f247174d7ee0ec295a6e82b08028aa05",
+            "purpose": "inherited:header-present::r2",
+            "response_id": "msg_011Cf6iyuJwxHqZ7tJu6Mc7q",
+            "task_id": "header-present::r2"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 356,
+            "model": "claude-sonnet-4-6",
+            "output": "7",
+            "output_tokens": 5,
+            "prompt_sha256": "f5c2e061e80a6e905c60298b06277e359c938319085576b2c2e682f18ee86860",
+            "purpose": "inherited:header-absent::r2",
+            "response_id": "msg_011Cf6iyzaxV54VyJWPk4Hr4",
+            "task_id": "header-absent::r2"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 356,
+            "model": "claude-sonnet-4-6",
+            "output": "28",
+            "output_tokens": 5,
+            "prompt_sha256": "342b8e456c4e9d0929691bca4981f76e11a1aaf7476a6ef2ee1811b83064b415",
+            "purpose": "inherited:second-throttle::r2",
+            "response_id": "msg_011Cf6iz5wv623QC2pvPsme3",
+            "task_id": "second-throttle::r2"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 340,
+            "model": "claude-sonnet-4-6",
+            "output": "28",
+            "output_tokens": 5,
+            "prompt_sha256": "3a3a2521e6f7fade2ba102e8b4386613e9d1358f193a024a8e5186391f3da86b",
+            "purpose": "inherited:delay-cap::r2",
+            "response_id": "msg_011Cf6izB6yK9ps6ok42nQte",
+            "task_id": "delay-cap::r2"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 336,
+            "model": "claude-sonnet-4-6",
+            "output": "QUARTZ",
+            "output_tokens": 6,
+            "prompt_sha256": "a663dbeb5d2ebe2b2f07807fd5961d868c4b6fbbd0c20a4bd435c1e6a5cb372e",
+            "purpose": "inherited:retry-exhausted::r2",
+            "response_id": "msg_011Cf6izHhrCscWduNHH3kJY",
+            "task_id": "retry-exhausted::r2"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 354,
+            "model": "claude-sonnet-4-6",
+            "output": "11",
+            "output_tokens": 5,
+            "prompt_sha256": "c970b7a0549fde0911d6ec8996bbec19f247174d7ee0ec295a6e82b08028aa05",
+            "purpose": "inherited:header-present::r3",
+            "response_id": "msg_011Cf6izP2KQLBfm4JZ3wU2F",
+            "task_id": "header-present::r3"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 356,
+            "model": "claude-sonnet-4-6",
+            "output": "7",
+            "output_tokens": 5,
+            "prompt_sha256": "f5c2e061e80a6e905c60298b06277e359c938319085576b2c2e682f18ee86860",
+            "purpose": "inherited:header-absent::r3",
+            "response_id": "msg_011Cf6izUFM4kgzzne45NNiF",
+            "task_id": "header-absent::r3"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 356,
+            "model": "claude-sonnet-4-6",
+            "output": "28",
+            "output_tokens": 5,
+            "prompt_sha256": "342b8e456c4e9d0929691bca4981f76e11a1aaf7476a6ef2ee1811b83064b415",
+            "purpose": "inherited:second-throttle::r3",
+            "response_id": "msg_011Cf6izb3Niqbo5BfZwPZ5t",
+            "task_id": "second-throttle::r3"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 340,
+            "model": "claude-sonnet-4-6",
+            "output": "28",
+            "output_tokens": 5,
+            "prompt_sha256": "3a3a2521e6f7fade2ba102e8b4386613e9d1358f193a024a8e5186391f3da86b",
+            "purpose": "inherited:delay-cap::r3",
+            "response_id": "msg_011Cf6izgbWHBF48d3CohzNk",
+            "task_id": "delay-cap::r3"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 336,
+            "model": "claude-sonnet-4-6",
+            "output": "QUARTZ",
+            "output_tokens": 6,
+            "prompt_sha256": "a663dbeb5d2ebe2b2f07807fd5961d868c4b6fbbd0c20a4bd435c1e6a5cb372e",
+            "purpose": "inherited:retry-exhausted::r3",
+            "response_id": "msg_011Cf6iznhcWRYqpcfT14fmf",
+            "task_id": "retry-exhausted::r3"
+          }
+        ],
+        "condition": "inherited",
+        "model": "claude-sonnet-4-6",
+        "model_identity": "anthropic:claude-sonnet-4-6",
+        "opened_producer_db": true,
+        "pid": 53234,
+        "provider": "anthropic",
+        "report": {
+          "accuracy": 0.8,
+          "consumer_name": "anthropic:claude-sonnet-4-6",
+          "correct": 12,
+          "total": 15,
+          "trials": [
+            {
+              "actual_answer": "11",
+              "correct": true,
+              "expected_answer": "11",
+              "normalized_actual": "11",
+              "normalized_expected": "11",
+              "task_id": "header-present::r1"
+            },
+            {
+              "actual_answer": "7",
+              "correct": true,
+              "expected_answer": "7",
+              "normalized_actual": "7",
+              "normalized_expected": "7",
+              "task_id": "header-absent::r1"
+            },
+            {
+              "actual_answer": "28",
+              "correct": false,
+              "expected_answer": "14",
+              "normalized_actual": "28",
+              "normalized_expected": "14",
+              "task_id": "second-throttle::r1"
+            },
+            {
+              "actual_answer": "28",
+              "correct": true,
+              "expected_answer": "28",
+              "normalized_actual": "28",
+              "normalized_expected": "28",
+              "task_id": "delay-cap::r1"
+            },
+            {
+              "actual_answer": "QUARTZ",
+              "correct": true,
+              "expected_answer": "QUARTZ",
+              "normalized_actual": "quartz",
+              "normalized_expected": "quartz",
+              "task_id": "retry-exhausted::r1"
+            },
+            {
+              "actual_answer": "11",
+              "correct": true,
+              "expected_answer": "11",
+              "normalized_actual": "11",
+              "normalized_expected": "11",
+              "task_id": "header-present::r2"
+            },
+            {
+              "actual_answer": "7",
+              "correct": true,
+              "expected_answer": "7",
+              "normalized_actual": "7",
+              "normalized_expected": "7",
+              "task_id": "header-absent::r2"
+            },
+            {
+              "actual_answer": "28",
+              "correct": false,
+              "expected_answer": "14",
+              "normalized_actual": "28",
+              "normalized_expected": "14",
+              "task_id": "second-throttle::r2"
+            },
+            {
+              "actual_answer": "28",
+              "correct": true,
+              "expected_answer": "28",
+              "normalized_actual": "28",
+              "normalized_expected": "28",
+              "task_id": "delay-cap::r2"
+            },
+            {
+              "actual_answer": "QUARTZ",
+              "correct": true,
+              "expected_answer": "QUARTZ",
+              "normalized_actual": "quartz",
+              "normalized_expected": "quartz",
+              "task_id": "retry-exhausted::r2"
+            },
+            {
+              "actual_answer": "11",
+              "correct": true,
+              "expected_answer": "11",
+              "normalized_actual": "11",
+              "normalized_expected": "11",
+              "task_id": "header-present::r3"
+            },
+            {
+              "actual_answer": "7",
+              "correct": true,
+              "expected_answer": "7",
+              "normalized_actual": "7",
+              "normalized_expected": "7",
+              "task_id": "header-absent::r3"
+            },
+            {
+              "actual_answer": "28",
+              "correct": false,
+              "expected_answer": "14",
+              "normalized_actual": "28",
+              "normalized_expected": "14",
+              "task_id": "second-throttle::r3"
+            },
+            {
+              "actual_answer": "28",
+              "correct": true,
+              "expected_answer": "28",
+              "normalized_actual": "28",
+              "normalized_expected": "28",
+              "task_id": "delay-cap::r3"
+            },
+            {
+              "actual_answer": "QUARTZ",
+              "correct": true,
+              "expected_answer": "QUARTZ",
+              "normalized_actual": "quartz",
+              "normalized_expected": "quartz",
+              "task_id": "retry-exhausted::r3"
+            }
+          ]
+        }
+      },
+      "producer": {
+        "calls": [
+          {
+            "input_tokens": 321,
+            "model": "gpt-5.6-luna",
+            "output": "{\n  \"capability_key\": \"kite17_throttle_recovery\",\n  \"use_retry_after_exactly\": true,\n  \"initial_delay_seconds\": 7,\n  \"second_delay_seconds\": 14,\n  \"max_delay_seconds\": 28,\n  \"stop_after_failed_retries\": 3,\n  \"terminal_token\": \"QUARTZ\"\n}",
+            "output_tokens": 78,
+            "prompt_sha256": "398ec2c1cfcd19b215c61c0c3f65bff6bd33d586f5d327526521308be7e4baf3",
+            "purpose": "capability_synthesis",
+            "response_id": "resp_040a0da8b4b686ac006aaa45180bc487d18ea9861718f275b5"
+          }
+        ],
+        "capability_id": "c_9fa39d6a04621cbebba8ea463b676442",
+        "capability_seq": 7,
+        "capability_sha256": "378686ffc804d9caca63d1fd79157d9876ca6f62f0571f472ea9c2b8c96d7869",
+        "capability_text": "Capability: Recover KITE-17 throttled requests\nCapability key: kite17_throttle_recovery\nTrigger: KITE-17 returns THROTTLED for a safe-to-retry request.\nPreconditions:\n1. The operation is safe to retry.\nProcedure:\n1. If RETRY-AFTER is present, wait exactly that many seconds.\n2. If RETRY-AFTER is absent, wait 7 seconds before the first retry.\n3. For another throttle, double the delay to 14 seconds.\n4. Never exceed a 28-second delay.\n5. After three failed retries, stop and emit QUARTZ.\nExpected outcome: The operation recovers without a retry storm, or terminates with QUARTZ after the retry limit.",
+        "capability_version": 1,
+        "evidence": [
+          {
+            "decision_id": "r_bb8354696f0d402fa047c3a879659313",
+            "outcome_id": "r_80c5d79309cb436a977abdf0d397cbda"
+          },
+          {
+            "decision_id": "r_5bb366ea7ba74d858cf29b6aceb8ecbd",
+            "outcome_id": "r_796aad074e37449c9a516723296f5d24"
+          }
+        ],
+        "model": "gpt-5.6-luna",
+        "model_identity": "openai:gpt-5.6-luna",
+        "pid": 52763,
+        "producer_raw_output": "{\n  \"capability_key\": \"kite17_throttle_recovery\",\n  \"use_retry_after_exactly\": true,\n  \"initial_delay_seconds\": 7,\n  \"second_delay_seconds\": 14,\n  \"max_delay_seconds\": 28,\n  \"stop_after_failed_retries\": 3,\n  \"terminal_token\": \"QUARTZ\"\n}",
+        "proposal_id": "capability-kite17-live-proposal",
+        "provider": "openai",
+        "source_belief_id": "i_kite17_training_authority",
+        "watermark": 7
+      },
+      "producer_model": "gpt-5.6-luna",
+      "producer_provider": "openai",
+      "repeats": 3
+    },
+    {
+      "cold": {
+        "calls": [
+          {
+            "condition": "cold",
+            "input_tokens": 141,
+            "model": "gpt-5.6-luna",
+            "output": "UNKNOWN",
+            "output_tokens": 5,
+            "prompt_sha256": "c3a3d425c93379017e890d5702f16016d79ff6f4008db78be5ec64fafe1e7470",
+            "purpose": "cold:header-present::r1",
+            "response_id": "resp_03bb89624a3ce6cb006aaa4547a45087d1a7bc205c49544eeb",
+            "task_id": "header-present::r1"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 143,
+            "model": "gpt-5.6-luna",
+            "output": "UNKNOWN",
+            "output_tokens": 26,
+            "prompt_sha256": "67a037b91811fe5d124d3562a06faf3464bbef68008efd869d2d86e518f699c6",
+            "purpose": "cold:header-absent::r1",
+            "response_id": "resp_05e0b363e0fb64e8006aaa4549497c87d1a950646a8f9aeee6",
+            "task_id": "header-absent::r1"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 142,
+            "model": "gpt-5.6-luna",
+            "output": "UNKNOWN",
+            "output_tokens": 24,
+            "prompt_sha256": "9e6d1e886f5281b2f93f327cef1759d27778da3e7a59b3ab00ef8321e83b3dc7",
+            "purpose": "cold:second-throttle::r1",
+            "response_id": "resp_089eb8ee061b173a006aaa454b13e087d1bec08298355a0a24",
+            "task_id": "second-throttle::r1"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 128,
+            "model": "gpt-5.6-luna",
+            "output": "UNKNOWN",
+            "output_tokens": 25,
+            "prompt_sha256": "19712c2285ec0cce16eb87fbac885c3a37c46e1304bf83dcd83ad748f50549da",
+            "purpose": "cold:delay-cap::r1",
+            "response_id": "resp_0aa10aa330b74274006aaa454cf98c87d19fd69a474bf8f12a",
+            "task_id": "delay-cap::r1"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 122,
+            "model": "gpt-5.6-luna",
+            "output": "UNKNOWN",
+            "output_tokens": 25,
+            "prompt_sha256": "22955e0ba58dd7c63037dbfd194d545ca603b482022c973b257211938fe87a68",
+            "purpose": "cold:retry-exhausted::r1",
+            "response_id": "resp_0fb8c3967d08a6d2006aaa454ebfb887d1b7594d37835da4d1",
+            "task_id": "retry-exhausted::r1"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 141,
+            "model": "gpt-5.6-luna",
+            "output": "UNKNOWN",
+            "output_tokens": 23,
+            "prompt_sha256": "c3a3d425c93379017e890d5702f16016d79ff6f4008db78be5ec64fafe1e7470",
+            "purpose": "cold:header-present::r2",
+            "response_id": "resp_0d8fe4b738582b71006aaa4550348c87d1919b794ad927de6b",
+            "task_id": "header-present::r2"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 143,
+            "model": "gpt-5.6-luna",
+            "output": "UNKNOWN",
+            "output_tokens": 25,
+            "prompt_sha256": "67a037b91811fe5d124d3562a06faf3464bbef68008efd869d2d86e518f699c6",
+            "purpose": "cold:header-absent::r2",
+            "response_id": "resp_01f32621c0e4bd95006aaa4551568887d188f6ebac7d598314",
+            "task_id": "header-absent::r2"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 142,
+            "model": "gpt-5.6-luna",
+            "output": "UNKNOWN",
+            "output_tokens": 26,
+            "prompt_sha256": "9e6d1e886f5281b2f93f327cef1759d27778da3e7a59b3ab00ef8321e83b3dc7",
+            "purpose": "cold:second-throttle::r2",
+            "response_id": "resp_0730768e68332c1e006aaa4552990087d19fa68b20d394c6d8",
+            "task_id": "second-throttle::r2"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 128,
+            "model": "gpt-5.6-luna",
+            "output": "UNKNOWN",
+            "output_tokens": 26,
+            "prompt_sha256": "19712c2285ec0cce16eb87fbac885c3a37c46e1304bf83dcd83ad748f50549da",
+            "purpose": "cold:delay-cap::r2",
+            "response_id": "resp_076ca53c72ebd6f6006aaa455473b487d1894909020a0ff108",
+            "task_id": "delay-cap::r2"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 122,
+            "model": "gpt-5.6-luna",
+            "output": "UNKNOWN",
+            "output_tokens": 25,
+            "prompt_sha256": "22955e0ba58dd7c63037dbfd194d545ca603b482022c973b257211938fe87a68",
+            "purpose": "cold:retry-exhausted::r2",
+            "response_id": "resp_0e1e7239ad6020b2006aaa45569bd487d1830f7e0209b2b6f1",
+            "task_id": "retry-exhausted::r2"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 141,
+            "model": "gpt-5.6-luna",
+            "output": "UNKNOWN",
+            "output_tokens": 25,
+            "prompt_sha256": "c3a3d425c93379017e890d5702f16016d79ff6f4008db78be5ec64fafe1e7470",
+            "purpose": "cold:header-present::r3",
+            "response_id": "resp_013a26c515f72b8f006aaa45581cf087d1badeaa22b65387ab",
+            "task_id": "header-present::r3"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 143,
+            "model": "gpt-5.6-luna",
+            "output": "UNKNOWN",
+            "output_tokens": 5,
+            "prompt_sha256": "67a037b91811fe5d124d3562a06faf3464bbef68008efd869d2d86e518f699c6",
+            "purpose": "cold:header-absent::r3",
+            "response_id": "resp_07163cafc49d2e77006aaa45595fa487d1b05309467edc8f0b",
+            "task_id": "header-absent::r3"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 142,
+            "model": "gpt-5.6-luna",
+            "output": "UNKNOWN",
+            "output_tokens": 5,
+            "prompt_sha256": "9e6d1e886f5281b2f93f327cef1759d27778da3e7a59b3ab00ef8321e83b3dc7",
+            "purpose": "cold:second-throttle::r3",
+            "response_id": "resp_06ccc2ba9a9e5184006aaa455afd6087d1970aabcb3b788719",
+            "task_id": "second-throttle::r3"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 128,
+            "model": "gpt-5.6-luna",
+            "output": "UNKNOWN",
+            "output_tokens": 25,
+            "prompt_sha256": "19712c2285ec0cce16eb87fbac885c3a37c46e1304bf83dcd83ad748f50549da",
+            "purpose": "cold:delay-cap::r3",
+            "response_id": "resp_095c2a0e1b995f79006aaa455c504087d1bfd08ece4899d037",
+            "task_id": "delay-cap::r3"
+          },
+          {
+            "condition": "cold",
+            "input_tokens": 122,
+            "model": "gpt-5.6-luna",
+            "output": "UNKNOWN",
+            "output_tokens": 25,
+            "prompt_sha256": "22955e0ba58dd7c63037dbfd194d545ca603b482022c973b257211938fe87a68",
+            "purpose": "cold:retry-exhausted::r3",
+            "response_id": "resp_0ce9458f695873bc006aaa455e1e9487d1930e88801275b1d3",
+            "task_id": "retry-exhausted::r3"
+          }
+        ],
+        "condition": "cold",
+        "model": "gpt-5.6-luna",
+        "model_identity": "openai:gpt-5.6-luna",
+        "opened_producer_db": false,
+        "pid": 53246,
+        "provider": "openai",
+        "report": {
+          "accuracy": 0.0,
+          "consumer_name": "openai:gpt-5.6-luna",
+          "correct": 0,
+          "total": 15,
+          "trials": [
+            {
+              "actual_answer": "UNKNOWN",
+              "correct": false,
+              "expected_answer": "11",
+              "normalized_actual": "unknown",
+              "normalized_expected": "11",
+              "task_id": "header-present::r1"
+            },
+            {
+              "actual_answer": "UNKNOWN",
+              "correct": false,
+              "expected_answer": "7",
+              "normalized_actual": "unknown",
+              "normalized_expected": "7",
+              "task_id": "header-absent::r1"
+            },
+            {
+              "actual_answer": "UNKNOWN",
+              "correct": false,
+              "expected_answer": "14",
+              "normalized_actual": "unknown",
+              "normalized_expected": "14",
+              "task_id": "second-throttle::r1"
+            },
+            {
+              "actual_answer": "UNKNOWN",
+              "correct": false,
+              "expected_answer": "28",
+              "normalized_actual": "unknown",
+              "normalized_expected": "28",
+              "task_id": "delay-cap::r1"
+            },
+            {
+              "actual_answer": "UNKNOWN",
+              "correct": false,
+              "expected_answer": "QUARTZ",
+              "normalized_actual": "unknown",
+              "normalized_expected": "quartz",
+              "task_id": "retry-exhausted::r1"
+            },
+            {
+              "actual_answer": "UNKNOWN",
+              "correct": false,
+              "expected_answer": "11",
+              "normalized_actual": "unknown",
+              "normalized_expected": "11",
+              "task_id": "header-present::r2"
+            },
+            {
+              "actual_answer": "UNKNOWN",
+              "correct": false,
+              "expected_answer": "7",
+              "normalized_actual": "unknown",
+              "normalized_expected": "7",
+              "task_id": "header-absent::r2"
+            },
+            {
+              "actual_answer": "UNKNOWN",
+              "correct": false,
+              "expected_answer": "14",
+              "normalized_actual": "unknown",
+              "normalized_expected": "14",
+              "task_id": "second-throttle::r2"
+            },
+            {
+              "actual_answer": "UNKNOWN",
+              "correct": false,
+              "expected_answer": "28",
+              "normalized_actual": "unknown",
+              "normalized_expected": "28",
+              "task_id": "delay-cap::r2"
+            },
+            {
+              "actual_answer": "UNKNOWN",
+              "correct": false,
+              "expected_answer": "QUARTZ",
+              "normalized_actual": "unknown",
+              "normalized_expected": "quartz",
+              "task_id": "retry-exhausted::r2"
+            },
+            {
+              "actual_answer": "UNKNOWN",
+              "correct": false,
+              "expected_answer": "11",
+              "normalized_actual": "unknown",
+              "normalized_expected": "11",
+              "task_id": "header-present::r3"
+            },
+            {
+              "actual_answer": "UNKNOWN",
+              "correct": false,
+              "expected_answer": "7",
+              "normalized_actual": "unknown",
+              "normalized_expected": "7",
+              "task_id": "header-absent::r3"
+            },
+            {
+              "actual_answer": "UNKNOWN",
+              "correct": false,
+              "expected_answer": "14",
+              "normalized_actual": "unknown",
+              "normalized_expected": "14",
+              "task_id": "second-throttle::r3"
+            },
+            {
+              "actual_answer": "UNKNOWN",
+              "correct": false,
+              "expected_answer": "28",
+              "normalized_actual": "unknown",
+              "normalized_expected": "28",
+              "task_id": "delay-cap::r3"
+            },
+            {
+              "actual_answer": "UNKNOWN",
+              "correct": false,
+              "expected_answer": "QUARTZ",
+              "normalized_actual": "unknown",
+              "normalized_expected": "quartz",
+              "task_id": "retry-exhausted::r3"
+            }
+          ]
+        }
+      },
+      "comparison": {
+        "absolute_gain": 0.8,
+        "cold_accuracy": 0.0,
+        "cold_correct": 0,
+        "consumer_name": "openai:gpt-5.6-luna",
+        "inherited_accuracy": 0.8,
+        "inherited_correct": 12,
+        "producer_name": "anthropic:claude-sonnet-4-6",
+        "total": 15
+      },
+      "consumer_model": "gpt-5.6-luna",
+      "consumer_provider": "openai",
+      "direction": "anthropic_to_openai",
+      "direction_pass": false,
+      "inherited": {
+        "calls": [
+          {
+            "condition": "inherited",
+            "input_tokens": 304,
+            "model": "gpt-5.6-luna",
+            "output": "11",
+            "output_tokens": 5,
+            "prompt_sha256": "c970b7a0549fde0911d6ec8996bbec19f247174d7ee0ec295a6e82b08028aa05",
+            "purpose": "inherited:header-present::r1",
+            "response_id": "resp_01e5c51602d83715006aaa4560a20087d18c89f2be30578f35",
+            "task_id": "header-present::r1"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 306,
+            "model": "gpt-5.6-luna",
+            "output": "7 seconds",
+            "output_tokens": 6,
+            "prompt_sha256": "f5c2e061e80a6e905c60298b06277e359c938319085576b2c2e682f18ee86860",
+            "purpose": "inherited:header-absent::r1",
+            "response_id": "resp_0f049de6aeeb137e006aaa456201b887d18582dbd52b4fc162",
+            "task_id": "header-absent::r1"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 305,
+            "model": "gpt-5.6-luna",
+            "output": "14",
+            "output_tokens": 46,
+            "prompt_sha256": "342b8e456c4e9d0929691bca4981f76e11a1aaf7476a6ef2ee1811b83064b415",
+            "purpose": "inherited:second-throttle::r1",
+            "response_id": "resp_0ed42663e6ae6c72006aaa4563440087d1afb5bbaa6161a7d4",
+            "task_id": "second-throttle::r1"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 291,
+            "model": "gpt-5.6-luna",
+            "output": "28",
+            "output_tokens": 5,
+            "prompt_sha256": "3a3a2521e6f7fade2ba102e8b4386613e9d1358f193a024a8e5186391f3da86b",
+            "purpose": "inherited:delay-cap::r1",
+            "response_id": "resp_01c03e4dab30a47a006aaa4564b67887d1bd92e15228228579",
+            "task_id": "delay-cap::r1"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 285,
+            "model": "gpt-5.6-luna",
+            "output": "QUARTZ",
+            "output_tokens": 7,
+            "prompt_sha256": "a663dbeb5d2ebe2b2f07807fd5961d868c4b6fbbd0c20a4bd435c1e6a5cb372e",
+            "purpose": "inherited:retry-exhausted::r1",
+            "response_id": "resp_0505c69af7f5197e006aaa4566485887d1a9d28117658c0881",
+            "task_id": "retry-exhausted::r1"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 304,
+            "model": "gpt-5.6-luna",
+            "output": "11",
+            "output_tokens": 5,
+            "prompt_sha256": "c970b7a0549fde0911d6ec8996bbec19f247174d7ee0ec295a6e82b08028aa05",
+            "purpose": "inherited:header-present::r2",
+            "response_id": "resp_02e876dcdb286509006aaa4567afcc87d1b673dbc8e9fb16f1",
+            "task_id": "header-present::r2"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 306,
+            "model": "gpt-5.6-luna",
+            "output": "7 seconds",
+            "output_tokens": 6,
+            "prompt_sha256": "f5c2e061e80a6e905c60298b06277e359c938319085576b2c2e682f18ee86860",
+            "purpose": "inherited:header-absent::r2",
+            "response_id": "resp_00bfaab75bb7bee5006aaa4569020487d1bc1e339d7e11ffbe",
+            "task_id": "header-absent::r2"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 305,
+            "model": "gpt-5.6-luna",
+            "output": "14",
+            "output_tokens": 40,
+            "prompt_sha256": "342b8e456c4e9d0929691bca4981f76e11a1aaf7476a6ef2ee1811b83064b415",
+            "purpose": "inherited:second-throttle::r2",
+            "response_id": "resp_0fa8c816885a3547006aaa456a335887d180073dcd6b1883c8",
+            "task_id": "second-throttle::r2"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 291,
+            "model": "gpt-5.6-luna",
+            "output": "28",
+            "output_tokens": 5,
+            "prompt_sha256": "3a3a2521e6f7fade2ba102e8b4386613e9d1358f193a024a8e5186391f3da86b",
+            "purpose": "inherited:delay-cap::r2",
+            "response_id": "resp_015c1dfc656d2803006aaa456bd6bc87d1957a7bbc4b7d7b54",
+            "task_id": "delay-cap::r2"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 285,
+            "model": "gpt-5.6-luna",
+            "output": "QUARTZ",
+            "output_tokens": 7,
+            "prompt_sha256": "a663dbeb5d2ebe2b2f07807fd5961d868c4b6fbbd0c20a4bd435c1e6a5cb372e",
+            "purpose": "inherited:retry-exhausted::r2",
+            "response_id": "resp_0c538d3101dce13a006aaa456d558087d1a410187ef35e0216",
+            "task_id": "retry-exhausted::r2"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 304,
+            "model": "gpt-5.6-luna",
+            "output": "11",
+            "output_tokens": 5,
+            "prompt_sha256": "c970b7a0549fde0911d6ec8996bbec19f247174d7ee0ec295a6e82b08028aa05",
+            "purpose": "inherited:header-present::r3",
+            "response_id": "resp_0e5832db7fef3bfa006aaa456e841c87d19e8612e9d9e5a84a",
+            "task_id": "header-present::r3"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 306,
+            "model": "gpt-5.6-luna",
+            "output": "7 seconds",
+            "output_tokens": 6,
+            "prompt_sha256": "f5c2e061e80a6e905c60298b06277e359c938319085576b2c2e682f18ee86860",
+            "purpose": "inherited:header-absent::r3",
+            "response_id": "resp_04e45fe1b2ef3fcc006aaa456fb88887d1b5180b76caf474bb",
+            "task_id": "header-absent::r3"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 305,
+            "model": "gpt-5.6-luna",
+            "output": "14",
+            "output_tokens": 40,
+            "prompt_sha256": "342b8e456c4e9d0929691bca4981f76e11a1aaf7476a6ef2ee1811b83064b415",
+            "purpose": "inherited:second-throttle::r3",
+            "response_id": "resp_0fbee4b9059f9590006aaa4570fb4887d1b2d9f932f6baa97e",
+            "task_id": "second-throttle::r3"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 291,
+            "model": "gpt-5.6-luna",
+            "output": "28",
+            "output_tokens": 5,
+            "prompt_sha256": "3a3a2521e6f7fade2ba102e8b4386613e9d1358f193a024a8e5186391f3da86b",
+            "purpose": "inherited:delay-cap::r3",
+            "response_id": "resp_01281994a13901f4006aaa4572744487d186f7aab510d6209b",
+            "task_id": "delay-cap::r3"
+          },
+          {
+            "condition": "inherited",
+            "input_tokens": 285,
+            "model": "gpt-5.6-luna",
+            "output": "QUARTZ",
+            "output_tokens": 7,
+            "prompt_sha256": "a663dbeb5d2ebe2b2f07807fd5961d868c4b6fbbd0c20a4bd435c1e6a5cb372e",
+            "purpose": "inherited:retry-exhausted::r3",
+            "response_id": "resp_005b827fdd3b4e98006aaa4573bd6487d1b15e4c7e6595ec1f",
+            "task_id": "retry-exhausted::r3"
+          }
+        ],
+        "condition": "inherited",
+        "model": "gpt-5.6-luna",
+        "model_identity": "openai:gpt-5.6-luna",
+        "opened_producer_db": true,
+        "pid": 53283,
+        "provider": "openai",
+        "report": {
+          "accuracy": 0.8,
+          "consumer_name": "openai:gpt-5.6-luna",
+          "correct": 12,
+          "total": 15,
+          "trials": [
+            {
+              "actual_answer": "11",
+              "correct": true,
+              "expected_answer": "11",
+              "normalized_actual": "11",
+              "normalized_expected": "11",
+              "task_id": "header-present::r1"
+            },
+            {
+              "actual_answer": "7 seconds",
+              "correct": false,
+              "expected_answer": "7",
+              "normalized_actual": "7 seconds",
+              "normalized_expected": "7",
+              "task_id": "header-absent::r1"
+            },
+            {
+              "actual_answer": "14",
+              "correct": true,
+              "expected_answer": "14",
+              "normalized_actual": "14",
+              "normalized_expected": "14",
+              "task_id": "second-throttle::r1"
+            },
+            {
+              "actual_answer": "28",
+              "correct": true,
+              "expected_answer": "28",
+              "normalized_actual": "28",
+              "normalized_expected": "28",
+              "task_id": "delay-cap::r1"
+            },
+            {
+              "actual_answer": "QUARTZ",
+              "correct": true,
+              "expected_answer": "QUARTZ",
+              "normalized_actual": "quartz",
+              "normalized_expected": "quartz",
+              "task_id": "retry-exhausted::r1"
+            },
+            {
+              "actual_answer": "11",
+              "correct": true,
+              "expected_answer": "11",
+              "normalized_actual": "11",
+              "normalized_expected": "11",
+              "task_id": "header-present::r2"
+            },
+            {
+              "actual_answer": "7 seconds",
+              "correct": false,
+              "expected_answer": "7",
+              "normalized_actual": "7 seconds",
+              "normalized_expected": "7",
+              "task_id": "header-absent::r2"
+            },
+            {
+              "actual_answer": "14",
+              "correct": true,
+              "expected_answer": "14",
+              "normalized_actual": "14",
+              "normalized_expected": "14",
+              "task_id": "second-throttle::r2"
+            },
+            {
+              "actual_answer": "28",
+              "correct": true,
+              "expected_answer": "28",
+              "normalized_actual": "28",
+              "normalized_expected": "28",
+              "task_id": "delay-cap::r2"
+            },
+            {
+              "actual_answer": "QUARTZ",
+              "correct": true,
+              "expected_answer": "QUARTZ",
+              "normalized_actual": "quartz",
+              "normalized_expected": "quartz",
+              "task_id": "retry-exhausted::r2"
+            },
+            {
+              "actual_answer": "11",
+              "correct": true,
+              "expected_answer": "11",
+              "normalized_actual": "11",
+              "normalized_expected": "11",
+              "task_id": "header-present::r3"
+            },
+            {
+              "actual_answer": "7 seconds",
+              "correct": false,
+              "expected_answer": "7",
+              "normalized_actual": "7 seconds",
+              "normalized_expected": "7",
+              "task_id": "header-absent::r3"
+            },
+            {
+              "actual_answer": "14",
+              "correct": true,
+              "expected_answer": "14",
+              "normalized_actual": "14",
+              "normalized_expected": "14",
+              "task_id": "second-throttle::r3"
+            },
+            {
+              "actual_answer": "28",
+              "correct": true,
+              "expected_answer": "28",
+              "normalized_actual": "28",
+              "normalized_expected": "28",
+              "task_id": "delay-cap::r3"
+            },
+            {
+              "actual_answer": "QUARTZ",
+              "correct": true,
+              "expected_answer": "QUARTZ",
+              "normalized_actual": "quartz",
+              "normalized_expected": "quartz",
+              "task_id": "retry-exhausted::r3"
+            }
+          ]
+        }
+      },
+      "producer": {
+        "calls": [
+          {
+            "input_tokens": 376,
+            "model": "claude-sonnet-4-6",
+            "output": "```json\n{\n  \"capability_key\": \"kite17_throttle_recovery\",\n  \"use_retry_after_exactly\": true,\n  \"initial_delay_seconds\": 7,\n  \"second_delay_seconds\": 14,\n  \"max_delay_seconds\": 28,\n  \"stop_after_failed_retries\": 3,\n  \"terminal_token\": \"QUARTZ\"\n}\n```",
+            "output_tokens": 104,
+            "prompt_sha256": "398ec2c1cfcd19b215c61c0c3f65bff6bd33d586f5d327526521308be7e4baf3",
+            "purpose": "capability_synthesis",
+            "response_id": "msg_011Cf6izujH7mggN4NTPZHtz"
+          }
+        ],
+        "capability_id": "c_9fa39d6a04621cbebba8ea463b676442",
+        "capability_seq": 7,
+        "capability_sha256": "378686ffc804d9caca63d1fd79157d9876ca6f62f0571f472ea9c2b8c96d7869",
+        "capability_text": "Capability: Recover KITE-17 throttled requests\nCapability key: kite17_throttle_recovery\nTrigger: KITE-17 returns THROTTLED for a safe-to-retry request.\nPreconditions:\n1. The operation is safe to retry.\nProcedure:\n1. If RETRY-AFTER is present, wait exactly that many seconds.\n2. If RETRY-AFTER is absent, wait 7 seconds before the first retry.\n3. For another throttle, double the delay to 14 seconds.\n4. Never exceed a 28-second delay.\n5. After three failed retries, stop and emit QUARTZ.\nExpected outcome: The operation recovers without a retry storm, or terminates with QUARTZ after the retry limit.",
+        "capability_version": 1,
+        "evidence": [
+          {
+            "decision_id": "r_eadd8c81db264f239b85ba888f6db43c",
+            "outcome_id": "r_927ae1d688b741fa92fec8abe4096742"
+          },
+          {
+            "decision_id": "r_1a9f7818192a4875a897d2f9ab28c4b1",
+            "outcome_id": "r_94554e79508d431b8e14e907b99ce79d"
+          }
+        ],
+        "model": "claude-sonnet-4-6",
+        "model_identity": "anthropic:claude-sonnet-4-6",
+        "pid": 53241,
+        "producer_raw_output": "```json\n{\n  \"capability_key\": \"kite17_throttle_recovery\",\n  \"use_retry_after_exactly\": true,\n  \"initial_delay_seconds\": 7,\n  \"second_delay_seconds\": 14,\n  \"max_delay_seconds\": 28,\n  \"stop_after_failed_retries\": 3,\n  \"terminal_token\": \"QUARTZ\"\n}\n```",
+        "proposal_id": "capability-kite17-live-proposal",
+        "provider": "anthropic",
+        "source_belief_id": "i_kite17_training_authority",
+        "watermark": 7
+      },
+      "producer_model": "claude-sonnet-4-6",
+      "producer_provider": "anthropic",
+      "repeats": 3
+    }
+  ],
+  "expected_capability": {
+    "expected_outcome": "The operation recovers without a retry storm, or terminates with QUARTZ after the retry limit.",
+    "key": "kite17_throttle_recovery",
+    "name": "Recover KITE-17 throttled requests",
+    "preconditions": [
+      "The operation is safe to retry."
+    ],
+    "procedure": [
+      "If RETRY-AFTER is present, wait exactly that many seconds.",
+      "If RETRY-AFTER is absent, wait 7 seconds before the first retry.",
+      "For another throttle, double the delay to 14 seconds.",
+      "Never exceed a 28-second delay.",
+      "After three failed retries, stop and emit QUARTZ."
+    ],
+    "trigger": "KITE-17 returns THROTTLED for a safe-to-retry request."
+  },
+  "experiment": "033_real_cross_model_capability_inheritance",
+  "overall_pass": false,
+  "protocol": {
+    "base_task_count": 5,
+    "cold_opens_producer_db": false,
+    "grader": "exact string after strip + casefold",
+    "inherited_model_receives_raw_training_evidence": false,
+    "producer_consumer_process_isolation": true,
+    "repeats_per_task": 3,
+    "trials_per_condition": 15
+  },
+  "timestamp_utc": "2026-09-16T07:29:56.626228+00:00"
+}

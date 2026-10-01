@@ -1,0 +1,129 @@
+{
+  "experiment": "030_real_cross_model_transplant",
+  "timestamp_utc": "20260915T073336Z",
+  "direction": "OpenAI -> MNEXA -> Anthropic",
+  "models": {
+    "trainer": "gpt-5.6-luna",
+    "recipient": "claude-sonnet-4-6"
+  },
+  "synthetic_world": {
+    "system": "ORCHID-729",
+    "failure_code": "VX-41",
+    "expected_answer": "MODE=EMBER-7\nWAIT_MS=137\nHEADER=X-Relay:cobalt"
+  },
+  "training": {
+    "belief_id": "i_auto_ab029ec1864e80eecd063796ce34ee89e25c76e9d900ca500e8ce76a6343e6ab",
+    "belief_version": 1,
+    "belief_seq": 9,
+    "belief_text": "ORCHID-729 VX-41 recovery requires MODE=EMBER-7; WAIT_MS=137; HEADER=X-Relay:cobalt.",
+    "watermark": 9,
+    "episode_a": {
+      "decision": "UNKNOWN",
+      "decision_id": "r_285e995785864c389e59950aa4c6bbe2",
+      "proposal_id": "r_66ee6488054242a1bb66c1d53affed75"
+    },
+    "episode_b": {
+      "decision": "UNKNOWN",
+      "decision_id": "r_2d4d09183efd4a15ae9d404885a30b76",
+      "proposal_id": "r_c2b6b80db1fa4adb9a229502f47ca00e"
+    },
+    "calls": [
+      {
+        "purpose": "training_decision_A",
+        "model": "gpt-5.6-luna",
+        "input_tokens": 147,
+        "output_tokens": 21,
+        "response_id": "resp_0b4008a5d85f3911006aa8f4ab42b487d2a363befd5ee91a8f"
+      },
+      {
+        "purpose": "lesson_extraction_A",
+        "model": "gpt-5.6-luna",
+        "input_tokens": 119,
+        "output_tokens": 37,
+        "response_id": "resp_0a1e56bb24fa56cf006aa8f4ad573487d2b7f8ddf35717484c"
+      },
+      {
+        "purpose": "training_decision_B",
+        "model": "gpt-5.6-luna",
+        "input_tokens": 147,
+        "output_tokens": 22,
+        "response_id": "resp_08e6c2a34228681c006aa8f4af64f887d28c8d8c68bcbc0e93"
+      },
+      {
+        "purpose": "lesson_extraction_B",
+        "model": "gpt-5.6-luna",
+        "input_tokens": 119,
+        "output_tokens": 34,
+        "response_id": "resp_066b3e4d76ff1dbe006aa8f4b1bd3887d2b6ffc46826ef227a"
+      }
+    ]
+  },
+  "cold_claude": {
+    "condition": "claude_cold_control",
+    "decision": "UNKNOWN",
+    "parsed_rule": null,
+    "context_watermark": 0,
+    "selected_memory_ids": [],
+    "context_text": "",
+    "context_evidence_sha256": "8025bf721b9484b7fa3e63d07cce307f602cc2da8529f9c8af48796b6e24284a",
+    "calls": [
+      {
+        "purpose": "claude_cold_control",
+        "model": "claude-sonnet-4-6",
+        "input_tokens": 180,
+        "output_tokens": 5,
+        "response_id": "msg_011Cf4qWZ8K19ftqdb5zXhd1"
+      }
+    ]
+  },
+  "transplanted_claude": {
+    "condition": "claude_transplanted",
+    "decision": "MODE=EMBER-7\nWAIT_MS=137\nHEADER=X-Relay:cobalt",
+    "parsed_rule": [
+      "EMBER-7",
+      137,
+      "X-Relay:cobalt"
+    ],
+    "context_watermark": 9,
+    "selected_memory_ids": [
+      "interpretive:i_auto_ab029ec1864e80eecd063796ce34ee89e25c76e9d900ca500e8ce76a6343e6ab:v1"
+    ],
+    "context_text": "[interpretive:i_auto_ab029ec1864e80eecd063796ce34ee89e25c76e9d900ca500e8ce76a6343e6ab:v1] ORCHID-729 VX-41 recovery requires MODE=EMBER-7; WAIT_MS=137; HEADER=X-Relay:cobalt.",
+    "context_evidence_sha256": "c2707da849f87413962d37e9502649384fe69ff0c2691db7135a50cf75e7ace5",
+    "calls": [
+      {
+        "purpose": "claude_transplanted",
+        "model": "claude-sonnet-4-6",
+        "input_tokens": 267,
+        "output_tokens": 27,
+        "response_id": "msg_011Cf4qXcuoCQknFPTBoMLkF"
+      }
+    ]
+  },
+  "scores": {
+    "cold_answered_unknown": true,
+    "cold_rule_correct": false,
+    "transplanted_rule_correct": true,
+    "cold_context_clean": true,
+    "transplanted_received_belief": true,
+    "causal_contrast": true,
+    "proof_pass": true
+  },
+  "token_usage": {
+    "openai_training": {
+      "input_tokens": 532,
+      "output_tokens": 114,
+      "calls": 4
+    },
+    "anthropic_cold": {
+      "input_tokens": 180,
+      "output_tokens": 5,
+      "calls": 1
+    },
+    "anthropic_transplanted": {
+      "input_tokens": 267,
+      "output_tokens": 27,
+      "calls": 1
+    }
+  }
+}

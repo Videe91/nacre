@@ -1,0 +1,3009 @@
+{
+  "experiment": "seed-growth-020",
+  "classification": "exploratory-fresh-conjunctive-address-refinement-ablation",
+  "pool_size": 20,
+  "system_count": 5,
+  "memories_per_system": 4,
+  "cluster_count": 4,
+  "memories_per_cluster": 5,
+  "degradation_modes": [
+    "full_identity",
+    "code_only",
+    "system_context",
+    "context_only"
+  ],
+  "principle": "Strong identity constrains. Context refines.",
+  "conditions": {
+    "A": "Seed 019 first-successful hierarchical addressing",
+    "B": "conjunctive refinement using compatible weaker metadata"
+  },
+  "expected_candidate_geometry": {
+    "full_identity": {
+      "A": 1,
+      "B": 1
+    },
+    "code_only": {
+      "A": 1,
+      "B": 1
+    },
+    "system_context": {
+      "A": 4,
+      "B": 1
+    },
+    "context_only": {
+      "A": 5,
+      "B": 5
+    }
+  },
+  "same_state_control": "When A and B produce the same canonical candidate set, they share the exact frozen candidate snapshot and the exact same transfer evaluation. No second model call is made.",
+  "hypothesis": "Combining compatible identity and contextual address signals will remove residual system-level interference without weakening exact-code or context-only activation.",
+  "families": [
+    {
+      "id": "foxgloveworks-retry-policy-301",
+      "system": "FoxgloveWorks",
+      "code": "FW-301",
+      "entities": [
+        "system:FoxgloveWorks",
+        "code:FW-301",
+        "domain:operations",
+        "cluster:retry-policy"
+      ],
+      "experience": {
+        "prompt": "FoxgloveWorks returns FW-301. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the retry-count rule."
+      },
+      "candidate_decision": "Retry until the request succeeds.",
+      "authoritative_text": "refresh the recovery credential; retry exactly four times; preserve the request fingerprint; close the stale connection.",
+      "raw_source": "<<<ROLE:status>>>\nFW-301 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRetry until the request succeeds.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrefresh the recovery credential; retry exactly four times; preserve the request fingerprint; close the stale connection.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nenvironmental pressure may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 221 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "refresh the recovery credential",
+          "task_pattern": "refresh\\s+the\\s+recovery\\s+credential"
+        },
+        {
+          "id": "A2",
+          "text": "retry exactly four times",
+          "task_pattern": "retry\\s+exactly\\s+four\\s+times"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the request fingerprint",
+          "task_pattern": "preserve\\s+the\\s+request\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "close the stale connection",
+          "task_pattern": "close\\s+the\\s+stale\\s+connection"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "refresh the recovery credential; retry exactly four times",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the request fingerprint; close the stale connection",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "retry exactly four times",
+      "semantic_operator": "exactly",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bexactly\\b"
+          ],
+          [
+            "\\bfour\\b",
+            "\\b4\\b"
+          ],
+          [
+            "\\bretr"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "refresh\\s+the\\s+recovery\\s+credential"
+          ],
+          [
+            "retry\\s+exactly\\s+four\\s+times"
+          ],
+          [
+            "preserve\\s+the\\s+request\\s+fingerprint"
+          ],
+          [
+            "close\\s+the\\s+stale\\s+connection"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "foxgloveworks-retry-policy-301-R1",
+            "kind": "recoverable",
+            "source_quote": "retry exactly four times",
+            "candidate": {
+              "source_quote": "retry exactly four times",
+              "nucleus_quote": "retry exactly four times",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "exactly"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "foxgloveworks-retry-policy-301-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction FW-301",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction FW-301",
+              "nucleus_quote": "fabricated fallback instruction FW-301",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "foxgloveworks-retry-policy-301-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Retry until the request succeeds.",
+            "candidate": {
+              "source_quote": "Retry until the request succeeds.",
+              "nucleus_quote": "Retry until the request succeeds.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "FoxgloveWorks",
+      "code_name": "FW-301",
+      "interference_cluster": "retry-policy",
+      "degradation_mode": "full_identity",
+      "query_entities": [
+        "system:FoxgloveWorks",
+        "code:FW-301",
+        "domain:operations",
+        "cluster:retry-policy"
+      ],
+      "query_prompt": "FoxgloveWorks reports FW-301. State the retry-count rule."
+    },
+    {
+      "id": "foxgloveworks-lane-routing-302",
+      "system": "FoxgloveWorks",
+      "code": "FW-302",
+      "entities": [
+        "system:FoxgloveWorks",
+        "code:FW-302",
+        "domain:operations",
+        "cluster:lane-routing"
+      ],
+      "experience": {
+        "prompt": "FoxgloveWorks returns FW-302. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the permitted routing lane."
+      },
+      "candidate_decision": "Route the task through the azure lane.",
+      "authoritative_text": "request a fresh checkpoint; route the task only through the crimson lane; retry once; preserve the original task ID.",
+      "raw_source": "<<<ROLE:status>>>\nFW-302 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRoute the task through the azure lane.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrequest a fresh checkpoint; route the task only through the crimson lane; retry once; preserve the original task ID.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nenvironmental pressure may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 222 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "request a fresh checkpoint",
+          "task_pattern": "request\\s+a\\s+fresh\\s+checkpoint"
+        },
+        {
+          "id": "A2",
+          "text": "route the task only through the crimson lane",
+          "task_pattern": "route\\s+the\\s+task\\s+only\\s+through\\s+the\\s+crimson\\s+lane"
+        },
+        {
+          "id": "A3",
+          "text": "retry once",
+          "task_pattern": "retry\\s+once"
+        },
+        {
+          "id": "A4",
+          "text": "preserve the original task ID",
+          "task_pattern": "preserve\\s+the\\s+original\\s+task\\s+ID"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "request a fresh checkpoint; route the task only through the crimson lane",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "retry once; preserve the original task ID",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "route the task only through the crimson lane",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bonly\\b"
+          ],
+          [
+            "\\bcrimson\\b"
+          ],
+          [
+            "\\blane\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "request\\s+a\\s+fresh\\s+checkpoint"
+          ],
+          [
+            "route\\s+the\\s+task\\s+only\\s+through\\s+the\\s+crimson\\s+lane"
+          ],
+          [
+            "retry\\s+once"
+          ],
+          [
+            "preserve\\s+the\\s+original\\s+task\\s+ID"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "foxgloveworks-lane-routing-302-R1",
+            "kind": "recoverable",
+            "source_quote": "route the task only through the crimson lane",
+            "candidate": {
+              "source_quote": "route the task only through the crimson lane",
+              "nucleus_quote": "route the task only through the crimson lane",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "only"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "foxgloveworks-lane-routing-302-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction FW-302",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction FW-302",
+              "nucleus_quote": "fabricated fallback instruction FW-302",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "foxgloveworks-lane-routing-302-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Route the task through the azure lane.",
+            "candidate": {
+              "source_quote": "Route the task through the azure lane.",
+              "nucleus_quote": "Route the task through the azure lane.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "FoxgloveWorks",
+      "code_name": "FW-302",
+      "interference_cluster": "lane-routing",
+      "degradation_mode": "code_only",
+      "query_entities": [
+        "code:FW-302",
+        "domain:operations",
+        "cluster:lane-routing"
+      ],
+      "query_prompt": "Operation FW-302. State the permitted routing lane."
+    },
+    {
+      "id": "foxgloveworks-channel-session-303",
+      "system": "FoxgloveWorks",
+      "code": "FW-303",
+      "entities": [
+        "system:FoxgloveWorks",
+        "code:FW-303",
+        "domain:operations",
+        "cluster:channel-session"
+      ],
+      "experience": {
+        "prompt": "FoxgloveWorks returns FW-303. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the session-channel rule."
+      },
+      "candidate_decision": "Reuse the existing session channel.",
+      "authoritative_text": "preserve the trace fingerprint; open only a new session channel; send one probe frame; record the session generation.",
+      "raw_source": "<<<ROLE:status>>>\nFW-303 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nReuse the existing session channel.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\npreserve the trace fingerprint; open only a new session channel; send one probe frame; record the session generation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nenvironmental pressure may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 223 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "preserve the trace fingerprint",
+          "task_pattern": "preserve\\s+the\\s+trace\\s+fingerprint"
+        },
+        {
+          "id": "A2",
+          "text": "open only a new session channel",
+          "task_pattern": "open\\s+only\\s+a\\s+new\\s+session\\s+channel"
+        },
+        {
+          "id": "A3",
+          "text": "send one probe frame",
+          "task_pattern": "send\\s+one\\s+probe\\s+frame"
+        },
+        {
+          "id": "A4",
+          "text": "record the session generation",
+          "task_pattern": "record\\s+the\\s+session\\s+generation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "preserve the trace fingerprint; open only a new session channel",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "send one probe frame; record the session generation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "open only a new session channel",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bonly\\b"
+          ],
+          [
+            "\\bnew\\b",
+            "\\bfresh\\b"
+          ],
+          [
+            "\\bchannel\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "preserve\\s+the\\s+trace\\s+fingerprint"
+          ],
+          [
+            "open\\s+only\\s+a\\s+new\\s+session\\s+channel"
+          ],
+          [
+            "send\\s+one\\s+probe\\s+frame"
+          ],
+          [
+            "record\\s+the\\s+session\\s+generation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "foxgloveworks-channel-session-303-R1",
+            "kind": "recoverable",
+            "source_quote": "open only a new session channel",
+            "candidate": {
+              "source_quote": "open only a new session channel",
+              "nucleus_quote": "open only a new session channel",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "only"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "foxgloveworks-channel-session-303-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction FW-303",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction FW-303",
+              "nucleus_quote": "fabricated fallback instruction FW-303",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "foxgloveworks-channel-session-303-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Reuse the existing session channel.",
+            "candidate": {
+              "source_quote": "Reuse the existing session channel.",
+              "nucleus_quote": "Reuse the existing session channel.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "FoxgloveWorks",
+      "code_name": "FW-303",
+      "interference_cluster": "channel-session",
+      "degradation_mode": "system_context",
+      "query_entities": [
+        "system:FoxgloveWorks",
+        "domain:operations",
+        "cluster:channel-session"
+      ],
+      "query_prompt": "For FoxgloveWorks, State the session-channel rule."
+    },
+    {
+      "id": "foxgloveworks-storage-finalization-304",
+      "system": "FoxgloveWorks",
+      "code": "FW-304",
+      "entities": [
+        "system:FoxgloveWorks",
+        "code:FW-304",
+        "domain:operations",
+        "cluster:storage-finalization"
+      ],
+      "experience": {
+        "prompt": "FoxgloveWorks returns FW-304. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the permitted finalization header."
+      },
+      "candidate_decision": "Finalize with any completion header.",
+      "authoritative_text": "verify the manifest digest; finalize only with X-Foxglove-Seal: ready; preserve the upload fingerprint; record the final generation.",
+      "raw_source": "<<<ROLE:status>>>\nFW-304 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nFinalize with any completion header.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nverify the manifest digest; finalize only with X-Foxglove-Seal: ready; preserve the upload fingerprint; record the final generation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nenvironmental pressure may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 224 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "verify the manifest digest",
+          "task_pattern": "verify\\s+the\\s+manifest\\s+digest"
+        },
+        {
+          "id": "A2",
+          "text": "finalize only with X-Foxglove-Seal: ready",
+          "task_pattern": "finalize\\s+only\\s+with\\s+X\\-Foxglove\\-Seal:\\s+ready"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the upload fingerprint",
+          "task_pattern": "preserve\\s+the\\s+upload\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "record the final generation",
+          "task_pattern": "record\\s+the\\s+final\\s+generation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "verify the manifest digest; finalize only with X-Foxglove-Seal: ready",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the upload fingerprint; record the final generation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "finalize only with X-Foxglove-Seal: ready",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bonly\\b"
+          ],
+          [
+            "X-Foxglove-Seal"
+          ],
+          [
+            "\\bready\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "verify\\s+the\\s+manifest\\s+digest"
+          ],
+          [
+            "finalize\\s+only\\s+with\\s+X\\-Foxglove\\-Seal:\\s+ready"
+          ],
+          [
+            "preserve\\s+the\\s+upload\\s+fingerprint"
+          ],
+          [
+            "record\\s+the\\s+final\\s+generation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "foxgloveworks-storage-finalization-304-R1",
+            "kind": "recoverable",
+            "source_quote": "finalize only with X-Foxglove-Seal: ready",
+            "candidate": {
+              "source_quote": "finalize only with X-Foxglove-Seal: ready",
+              "nucleus_quote": "finalize only with X-Foxglove-Seal: ready",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "only"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "foxgloveworks-storage-finalization-304-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction FW-304",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction FW-304",
+              "nucleus_quote": "fabricated fallback instruction FW-304",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "foxgloveworks-storage-finalization-304-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Finalize with any completion header.",
+            "candidate": {
+              "source_quote": "Finalize with any completion header.",
+              "nucleus_quote": "Finalize with any completion header.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "FoxgloveWorks",
+      "code_name": "FW-304",
+      "interference_cluster": "storage-finalization",
+      "degradation_mode": "context_only",
+      "query_entities": [
+        "domain:operations",
+        "cluster:storage-finalization"
+      ],
+      "query_prompt": "State the permitted finalization header."
+    },
+    {
+      "id": "graniteworks-retry-policy-305",
+      "system": "GraniteWorks",
+      "code": "GW-305",
+      "entities": [
+        "system:GraniteWorks",
+        "code:GW-305",
+        "domain:operations",
+        "cluster:retry-policy"
+      ],
+      "experience": {
+        "prompt": "GraniteWorks returns GW-305. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the maximum retry-count rule."
+      },
+      "candidate_decision": "Retry eight times.",
+      "authoritative_text": "refresh the recovery credential; retry at most four times; preserve the request fingerprint; close the stale connection.",
+      "raw_source": "<<<ROLE:status>>>\nGW-305 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRetry eight times.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrefresh the recovery credential; retry at most four times; preserve the request fingerprint; close the stale connection.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nenvironmental pressure may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 225 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "refresh the recovery credential",
+          "task_pattern": "refresh\\s+the\\s+recovery\\s+credential"
+        },
+        {
+          "id": "A2",
+          "text": "retry at most four times",
+          "task_pattern": "retry\\s+at\\s+most\\s+four\\s+times"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the request fingerprint",
+          "task_pattern": "preserve\\s+the\\s+request\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "close the stale connection",
+          "task_pattern": "close\\s+the\\s+stale\\s+connection"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "refresh the recovery credential; retry at most four times",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the request fingerprint; close the stale connection",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "retry at most four times",
+      "semantic_operator": "at_most",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bat\\s+most\\b",
+            "\\bmaximum\\b",
+            "\\bno\\s+more\\s+than\\b"
+          ],
+          [
+            "\\bfour\\b",
+            "\\b4\\b"
+          ],
+          [
+            "\\bretr"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "refresh\\s+the\\s+recovery\\s+credential"
+          ],
+          [
+            "retry\\s+at\\s+most\\s+four\\s+times"
+          ],
+          [
+            "preserve\\s+the\\s+request\\s+fingerprint"
+          ],
+          [
+            "close\\s+the\\s+stale\\s+connection"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "graniteworks-retry-policy-305-R1",
+            "kind": "recoverable",
+            "source_quote": "retry at most four times",
+            "candidate": {
+              "source_quote": "retry at most four times",
+              "nucleus_quote": "retry at most four times",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "at most"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "graniteworks-retry-policy-305-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction GW-305",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction GW-305",
+              "nucleus_quote": "fabricated fallback instruction GW-305",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "graniteworks-retry-policy-305-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Retry eight times.",
+            "candidate": {
+              "source_quote": "Retry eight times.",
+              "nucleus_quote": "Retry eight times.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "GraniteWorks",
+      "code_name": "GW-305",
+      "interference_cluster": "retry-policy",
+      "degradation_mode": "code_only",
+      "query_entities": [
+        "code:GW-305",
+        "domain:operations",
+        "cluster:retry-policy"
+      ],
+      "query_prompt": "Operation GW-305. State the maximum retry-count rule."
+    },
+    {
+      "id": "graniteworks-lane-routing-306",
+      "system": "GraniteWorks",
+      "code": "GW-306",
+      "entities": [
+        "system:GraniteWorks",
+        "code:GW-306",
+        "domain:operations",
+        "cluster:lane-routing"
+      ],
+      "experience": {
+        "prompt": "GraniteWorks returns GW-306. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the permitted routing lane."
+      },
+      "candidate_decision": "Route the task through the crimson lane.",
+      "authoritative_text": "request a fresh checkpoint; route the task only through the azure lane; retry once; preserve the original task ID.",
+      "raw_source": "<<<ROLE:status>>>\nGW-306 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRoute the task through the crimson lane.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrequest a fresh checkpoint; route the task only through the azure lane; retry once; preserve the original task ID.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nenvironmental pressure may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 226 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "request a fresh checkpoint",
+          "task_pattern": "request\\s+a\\s+fresh\\s+checkpoint"
+        },
+        {
+          "id": "A2",
+          "text": "route the task only through the azure lane",
+          "task_pattern": "route\\s+the\\s+task\\s+only\\s+through\\s+the\\s+azure\\s+lane"
+        },
+        {
+          "id": "A3",
+          "text": "retry once",
+          "task_pattern": "retry\\s+once"
+        },
+        {
+          "id": "A4",
+          "text": "preserve the original task ID",
+          "task_pattern": "preserve\\s+the\\s+original\\s+task\\s+ID"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "request a fresh checkpoint; route the task only through the azure lane",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "retry once; preserve the original task ID",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "route the task only through the azure lane",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bonly\\b"
+          ],
+          [
+            "\\bazure\\b"
+          ],
+          [
+            "\\blane\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "request\\s+a\\s+fresh\\s+checkpoint"
+          ],
+          [
+            "route\\s+the\\s+task\\s+only\\s+through\\s+the\\s+azure\\s+lane"
+          ],
+          [
+            "retry\\s+once"
+          ],
+          [
+            "preserve\\s+the\\s+original\\s+task\\s+ID"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "graniteworks-lane-routing-306-R1",
+            "kind": "recoverable",
+            "source_quote": "route the task only through the azure lane",
+            "candidate": {
+              "source_quote": "route the task only through the azure lane",
+              "nucleus_quote": "route the task only through the azure lane",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "only"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "graniteworks-lane-routing-306-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction GW-306",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction GW-306",
+              "nucleus_quote": "fabricated fallback instruction GW-306",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "graniteworks-lane-routing-306-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Route the task through the crimson lane.",
+            "candidate": {
+              "source_quote": "Route the task through the crimson lane.",
+              "nucleus_quote": "Route the task through the crimson lane.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "GraniteWorks",
+      "code_name": "GW-306",
+      "interference_cluster": "lane-routing",
+      "degradation_mode": "system_context",
+      "query_entities": [
+        "system:GraniteWorks",
+        "domain:operations",
+        "cluster:lane-routing"
+      ],
+      "query_prompt": "For GraniteWorks, State the permitted routing lane."
+    },
+    {
+      "id": "graniteworks-channel-session-307",
+      "system": "GraniteWorks",
+      "code": "GW-307",
+      "entities": [
+        "system:GraniteWorks",
+        "code:GW-307",
+        "domain:operations",
+        "cluster:channel-session"
+      ],
+      "experience": {
+        "prompt": "GraniteWorks returns GW-307. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the handshake-nonce rule."
+      },
+      "candidate_decision": "Reuse the prior handshake nonce.",
+      "authoritative_text": "preserve the trace fingerprint; never reuse the prior handshake nonce; send one probe frame; record the session generation.",
+      "raw_source": "<<<ROLE:status>>>\nGW-307 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nReuse the prior handshake nonce.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\npreserve the trace fingerprint; never reuse the prior handshake nonce; send one probe frame; record the session generation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nenvironmental pressure may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 227 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "preserve the trace fingerprint",
+          "task_pattern": "preserve\\s+the\\s+trace\\s+fingerprint"
+        },
+        {
+          "id": "A2",
+          "text": "never reuse the prior handshake nonce",
+          "task_pattern": "never\\s+reuse\\s+the\\s+prior\\s+handshake\\s+nonce"
+        },
+        {
+          "id": "A3",
+          "text": "send one probe frame",
+          "task_pattern": "send\\s+one\\s+probe\\s+frame"
+        },
+        {
+          "id": "A4",
+          "text": "record the session generation",
+          "task_pattern": "record\\s+the\\s+session\\s+generation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "preserve the trace fingerprint; never reuse the prior handshake nonce",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "send one probe frame; record the session generation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "never reuse the prior handshake nonce",
+      "semantic_operator": "never",
+      "semantic_dimension": "polarity",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bnever\\b",
+            "\\bdo\\s+not\\b"
+          ],
+          [
+            "\\breuse\\b"
+          ],
+          [
+            "\\bnonce\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "preserve\\s+the\\s+trace\\s+fingerprint"
+          ],
+          [
+            "never\\s+reuse\\s+the\\s+prior\\s+handshake\\s+nonce"
+          ],
+          [
+            "send\\s+one\\s+probe\\s+frame"
+          ],
+          [
+            "record\\s+the\\s+session\\s+generation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "graniteworks-channel-session-307-R1",
+            "kind": "recoverable",
+            "source_quote": "never reuse the prior handshake nonce",
+            "candidate": {
+              "source_quote": "never reuse the prior handshake nonce",
+              "nucleus_quote": "never reuse the prior handshake nonce",
+              "qualifiers": [
+                {
+                  "type": "negation",
+                  "source_quote": "never"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "graniteworks-channel-session-307-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction GW-307",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction GW-307",
+              "nucleus_quote": "fabricated fallback instruction GW-307",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "graniteworks-channel-session-307-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Reuse the prior handshake nonce.",
+            "candidate": {
+              "source_quote": "Reuse the prior handshake nonce.",
+              "nucleus_quote": "Reuse the prior handshake nonce.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "GraniteWorks",
+      "code_name": "GW-307",
+      "interference_cluster": "channel-session",
+      "degradation_mode": "context_only",
+      "query_entities": [
+        "domain:operations",
+        "cluster:channel-session"
+      ],
+      "query_prompt": "State the handshake-nonce rule."
+    },
+    {
+      "id": "graniteworks-storage-finalization-308",
+      "system": "GraniteWorks",
+      "code": "GW-308",
+      "entities": [
+        "system:GraniteWorks",
+        "code:GW-308",
+        "domain:operations",
+        "cluster:storage-finalization"
+      ],
+      "experience": {
+        "prompt": "GraniteWorks returns GW-308. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the digest/finalization rule."
+      },
+      "candidate_decision": "Finalize before digest verification.",
+      "authoritative_text": "verify the manifest digest; do not finalize before digest verification; preserve the upload fingerprint; record the final generation.",
+      "raw_source": "<<<ROLE:status>>>\nGW-308 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nFinalize before digest verification.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nverify the manifest digest; do not finalize before digest verification; preserve the upload fingerprint; record the final generation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nenvironmental pressure may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 228 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "verify the manifest digest",
+          "task_pattern": "verify\\s+the\\s+manifest\\s+digest"
+        },
+        {
+          "id": "A2",
+          "text": "do not finalize before digest verification",
+          "task_pattern": "do\\s+not\\s+finalize\\s+before\\s+digest\\s+verification"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the upload fingerprint",
+          "task_pattern": "preserve\\s+the\\s+upload\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "record the final generation",
+          "task_pattern": "record\\s+the\\s+final\\s+generation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "verify the manifest digest; do not finalize before digest verification",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the upload fingerprint; record the final generation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "do not finalize before digest verification",
+      "semantic_operator": "do_not",
+      "semantic_dimension": "polarity",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bdo\\s+not\\b",
+            "\\bnever\\b"
+          ],
+          [
+            "\\bfinaliz"
+          ],
+          [
+            "\\bbefore\\b"
+          ],
+          [
+            "\\bdigest\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "verify\\s+the\\s+manifest\\s+digest"
+          ],
+          [
+            "do\\s+not\\s+finalize\\s+before\\s+digest\\s+verification"
+          ],
+          [
+            "preserve\\s+the\\s+upload\\s+fingerprint"
+          ],
+          [
+            "record\\s+the\\s+final\\s+generation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "graniteworks-storage-finalization-308-R1",
+            "kind": "recoverable",
+            "source_quote": "do not finalize before digest verification",
+            "candidate": {
+              "source_quote": "do not finalize before digest verification",
+              "nucleus_quote": "do not finalize before digest verification",
+              "qualifiers": [
+                {
+                  "type": "negation",
+                  "source_quote": "do not"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "graniteworks-storage-finalization-308-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction GW-308",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction GW-308",
+              "nucleus_quote": "fabricated fallback instruction GW-308",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "graniteworks-storage-finalization-308-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Finalize before digest verification.",
+            "candidate": {
+              "source_quote": "Finalize before digest verification.",
+              "nucleus_quote": "Finalize before digest verification.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "GraniteWorks",
+      "code_name": "GW-308",
+      "interference_cluster": "storage-finalization",
+      "degradation_mode": "full_identity",
+      "query_entities": [
+        "system:GraniteWorks",
+        "code:GW-308",
+        "domain:operations",
+        "cluster:storage-finalization"
+      ],
+      "query_prompt": "GraniteWorks reports GW-308. State the digest/finalization rule."
+    },
+    {
+      "id": "hazelworks-retry-policy-309",
+      "system": "HazelWorks",
+      "code": "HW-309",
+      "entities": [
+        "system:HazelWorks",
+        "code:HW-309",
+        "domain:operations",
+        "cluster:retry-policy"
+      ],
+      "experience": {
+        "prompt": "HazelWorks returns HW-309. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the minimum retry-count rule."
+      },
+      "candidate_decision": "Retry once.",
+      "authoritative_text": "refresh the recovery credential; retry at least four times; preserve the request fingerprint; close the stale connection.",
+      "raw_source": "<<<ROLE:status>>>\nHW-309 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRetry once.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrefresh the recovery credential; retry at least four times; preserve the request fingerprint; close the stale connection.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nenvironmental pressure may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 229 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "refresh the recovery credential",
+          "task_pattern": "refresh\\s+the\\s+recovery\\s+credential"
+        },
+        {
+          "id": "A2",
+          "text": "retry at least four times",
+          "task_pattern": "retry\\s+at\\s+least\\s+four\\s+times"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the request fingerprint",
+          "task_pattern": "preserve\\s+the\\s+request\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "close the stale connection",
+          "task_pattern": "close\\s+the\\s+stale\\s+connection"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "refresh the recovery credential; retry at least four times",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the request fingerprint; close the stale connection",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "retry at least four times",
+      "semantic_operator": "at_least",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bat\\s+least\\b",
+            "\\bminimum\\b"
+          ],
+          [
+            "\\bfour\\b",
+            "\\b4\\b"
+          ],
+          [
+            "\\bretr"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "refresh\\s+the\\s+recovery\\s+credential"
+          ],
+          [
+            "retry\\s+at\\s+least\\s+four\\s+times"
+          ],
+          [
+            "preserve\\s+the\\s+request\\s+fingerprint"
+          ],
+          [
+            "close\\s+the\\s+stale\\s+connection"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "hazelworks-retry-policy-309-R1",
+            "kind": "recoverable",
+            "source_quote": "retry at least four times",
+            "candidate": {
+              "source_quote": "retry at least four times",
+              "nucleus_quote": "retry at least four times",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "at least"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "hazelworks-retry-policy-309-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction HW-309",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction HW-309",
+              "nucleus_quote": "fabricated fallback instruction HW-309",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "hazelworks-retry-policy-309-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Retry once.",
+            "candidate": {
+              "source_quote": "Retry once.",
+              "nucleus_quote": "Retry once.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "HazelWorks",
+      "code_name": "HW-309",
+      "interference_cluster": "retry-policy",
+      "degradation_mode": "system_context",
+      "query_entities": [
+        "system:HazelWorks",
+        "domain:operations",
+        "cluster:retry-policy"
+      ],
+      "query_prompt": "For HazelWorks, State the minimum retry-count rule."
+    },
+    {
+      "id": "hazelworks-lane-routing-310",
+      "system": "HazelWorks",
+      "code": "HW-310",
+      "entities": [
+        "system:HazelWorks",
+        "code:HW-310",
+        "domain:operations",
+        "cluster:lane-routing"
+      ],
+      "experience": {
+        "prompt": "HazelWorks returns HW-310. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the rule governing the obsidian lane."
+      },
+      "candidate_decision": "Route the task through the obsidian lane.",
+      "authoritative_text": "request a fresh checkpoint; do not route the task through the obsidian lane; retry once; preserve the original task ID.",
+      "raw_source": "<<<ROLE:status>>>\nHW-310 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRoute the task through the obsidian lane.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrequest a fresh checkpoint; do not route the task through the obsidian lane; retry once; preserve the original task ID.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nenvironmental pressure may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 230 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "request a fresh checkpoint",
+          "task_pattern": "request\\s+a\\s+fresh\\s+checkpoint"
+        },
+        {
+          "id": "A2",
+          "text": "do not route the task through the obsidian lane",
+          "task_pattern": "do\\s+not\\s+route\\s+the\\s+task\\s+through\\s+the\\s+obsidian\\s+lane"
+        },
+        {
+          "id": "A3",
+          "text": "retry once",
+          "task_pattern": "retry\\s+once"
+        },
+        {
+          "id": "A4",
+          "text": "preserve the original task ID",
+          "task_pattern": "preserve\\s+the\\s+original\\s+task\\s+ID"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "request a fresh checkpoint; do not route the task through the obsidian lane",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "retry once; preserve the original task ID",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "do not route the task through the obsidian lane",
+      "semantic_operator": "do_not",
+      "semantic_dimension": "polarity",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bdo\\s+not\\b",
+            "\\bnever\\b"
+          ],
+          [
+            "\\broute\\b"
+          ],
+          [
+            "\\bobsidian\\b"
+          ],
+          [
+            "\\blane\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "request\\s+a\\s+fresh\\s+checkpoint"
+          ],
+          [
+            "do\\s+not\\s+route\\s+the\\s+task\\s+through\\s+the\\s+obsidian\\s+lane"
+          ],
+          [
+            "retry\\s+once"
+          ],
+          [
+            "preserve\\s+the\\s+original\\s+task\\s+ID"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "hazelworks-lane-routing-310-R1",
+            "kind": "recoverable",
+            "source_quote": "do not route the task through the obsidian lane",
+            "candidate": {
+              "source_quote": "do not route the task through the obsidian lane",
+              "nucleus_quote": "do not route the task through the obsidian lane",
+              "qualifiers": [
+                {
+                  "type": "negation",
+                  "source_quote": "do not"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "hazelworks-lane-routing-310-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction HW-310",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction HW-310",
+              "nucleus_quote": "fabricated fallback instruction HW-310",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "hazelworks-lane-routing-310-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Route the task through the obsidian lane.",
+            "candidate": {
+              "source_quote": "Route the task through the obsidian lane.",
+              "nucleus_quote": "Route the task through the obsidian lane.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "HazelWorks",
+      "code_name": "HW-310",
+      "interference_cluster": "lane-routing",
+      "degradation_mode": "context_only",
+      "query_entities": [
+        "domain:operations",
+        "cluster:lane-routing"
+      ],
+      "query_prompt": "State the rule governing the obsidian lane."
+    },
+    {
+      "id": "hazelworks-channel-session-311",
+      "system": "HazelWorks",
+      "code": "HW-311",
+      "entities": [
+        "system:HazelWorks",
+        "code:HW-311",
+        "domain:operations",
+        "cluster:channel-session"
+      ],
+      "experience": {
+        "prompt": "HazelWorks returns HW-311. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the exact heartbeat-frame count."
+      },
+      "candidate_decision": "Send two heartbeat frames.",
+      "authoritative_text": "preserve the trace fingerprint; send exactly six heartbeat frames; send one probe frame; record the session generation.",
+      "raw_source": "<<<ROLE:status>>>\nHW-311 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nSend two heartbeat frames.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\npreserve the trace fingerprint; send exactly six heartbeat frames; send one probe frame; record the session generation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nenvironmental pressure may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 231 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "preserve the trace fingerprint",
+          "task_pattern": "preserve\\s+the\\s+trace\\s+fingerprint"
+        },
+        {
+          "id": "A2",
+          "text": "send exactly six heartbeat frames",
+          "task_pattern": "send\\s+exactly\\s+six\\s+heartbeat\\s+frames"
+        },
+        {
+          "id": "A3",
+          "text": "send one probe frame",
+          "task_pattern": "send\\s+one\\s+probe\\s+frame"
+        },
+        {
+          "id": "A4",
+          "text": "record the session generation",
+          "task_pattern": "record\\s+the\\s+session\\s+generation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "preserve the trace fingerprint; send exactly six heartbeat frames",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "send one probe frame; record the session generation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "send exactly six heartbeat frames",
+      "semantic_operator": "exactly",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bexactly\\b"
+          ],
+          [
+            "\\bsix\\b",
+            "\\b6\\b"
+          ],
+          [
+            "\\bheartbeat\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "preserve\\s+the\\s+trace\\s+fingerprint"
+          ],
+          [
+            "send\\s+exactly\\s+six\\s+heartbeat\\s+frames"
+          ],
+          [
+            "send\\s+one\\s+probe\\s+frame"
+          ],
+          [
+            "record\\s+the\\s+session\\s+generation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "hazelworks-channel-session-311-R1",
+            "kind": "recoverable",
+            "source_quote": "send exactly six heartbeat frames",
+            "candidate": {
+              "source_quote": "send exactly six heartbeat frames",
+              "nucleus_quote": "send exactly six heartbeat frames",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "exactly"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "hazelworks-channel-session-311-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction HW-311",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction HW-311",
+              "nucleus_quote": "fabricated fallback instruction HW-311",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "hazelworks-channel-session-311-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Send two heartbeat frames.",
+            "candidate": {
+              "source_quote": "Send two heartbeat frames.",
+              "nucleus_quote": "Send two heartbeat frames.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "HazelWorks",
+      "code_name": "HW-311",
+      "interference_cluster": "channel-session",
+      "degradation_mode": "full_identity",
+      "query_entities": [
+        "system:HazelWorks",
+        "code:HW-311",
+        "domain:operations",
+        "cluster:channel-session"
+      ],
+      "query_prompt": "HazelWorks reports HW-311. State the exact heartbeat-frame count."
+    },
+    {
+      "id": "hazelworks-storage-finalization-312",
+      "system": "HazelWorks",
+      "code": "HW-312",
+      "entities": [
+        "system:HazelWorks",
+        "code:HW-312",
+        "domain:operations",
+        "cluster:storage-finalization"
+      ],
+      "experience": {
+        "prompt": "HazelWorks returns HW-312. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the exact signature-block count."
+      },
+      "candidate_decision": "Apply two signature blocks.",
+      "authoritative_text": "verify the manifest digest; apply exactly six signature blocks; preserve the upload fingerprint; record the final generation.",
+      "raw_source": "<<<ROLE:status>>>\nHW-312 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nApply two signature blocks.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nverify the manifest digest; apply exactly six signature blocks; preserve the upload fingerprint; record the final generation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nenvironmental pressure may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 232 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "verify the manifest digest",
+          "task_pattern": "verify\\s+the\\s+manifest\\s+digest"
+        },
+        {
+          "id": "A2",
+          "text": "apply exactly six signature blocks",
+          "task_pattern": "apply\\s+exactly\\s+six\\s+signature\\s+blocks"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the upload fingerprint",
+          "task_pattern": "preserve\\s+the\\s+upload\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "record the final generation",
+          "task_pattern": "record\\s+the\\s+final\\s+generation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "verify the manifest digest; apply exactly six signature blocks",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the upload fingerprint; record the final generation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "apply exactly six signature blocks",
+      "semantic_operator": "exactly",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bexactly\\b"
+          ],
+          [
+            "\\bsix\\b",
+            "\\b6\\b"
+          ],
+          [
+            "\\bsignature\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "verify\\s+the\\s+manifest\\s+digest"
+          ],
+          [
+            "apply\\s+exactly\\s+six\\s+signature\\s+blocks"
+          ],
+          [
+            "preserve\\s+the\\s+upload\\s+fingerprint"
+          ],
+          [
+            "record\\s+the\\s+final\\s+generation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "hazelworks-storage-finalization-312-R1",
+            "kind": "recoverable",
+            "source_quote": "apply exactly six signature blocks",
+            "candidate": {
+              "source_quote": "apply exactly six signature blocks",
+              "nucleus_quote": "apply exactly six signature blocks",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "exactly"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "hazelworks-storage-finalization-312-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction HW-312",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction HW-312",
+              "nucleus_quote": "fabricated fallback instruction HW-312",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "hazelworks-storage-finalization-312-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Apply two signature blocks.",
+            "candidate": {
+              "source_quote": "Apply two signature blocks.",
+              "nucleus_quote": "Apply two signature blocks.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "HazelWorks",
+      "code_name": "HW-312",
+      "interference_cluster": "storage-finalization",
+      "degradation_mode": "code_only",
+      "query_entities": [
+        "code:HW-312",
+        "domain:operations",
+        "cluster:storage-finalization"
+      ],
+      "query_prompt": "Operation HW-312. State the exact signature-block count."
+    },
+    {
+      "id": "indigoworks-retry-policy-313",
+      "system": "IndigoWorks",
+      "code": "IW-313",
+      "entities": [
+        "system:IndigoWorks",
+        "code:IW-313",
+        "domain:operations",
+        "cluster:retry-policy"
+      ],
+      "experience": {
+        "prompt": "IndigoWorks returns IW-313. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the rejected-request retry rule."
+      },
+      "candidate_decision": "Retry the rejected request.",
+      "authoritative_text": "refresh the recovery credential; never retry the rejected request; preserve the request fingerprint; close the stale connection.",
+      "raw_source": "<<<ROLE:status>>>\nIW-313 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRetry the rejected request.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrefresh the recovery credential; never retry the rejected request; preserve the request fingerprint; close the stale connection.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nenvironmental pressure may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 233 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "refresh the recovery credential",
+          "task_pattern": "refresh\\s+the\\s+recovery\\s+credential"
+        },
+        {
+          "id": "A2",
+          "text": "never retry the rejected request",
+          "task_pattern": "never\\s+retry\\s+the\\s+rejected\\s+request"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the request fingerprint",
+          "task_pattern": "preserve\\s+the\\s+request\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "close the stale connection",
+          "task_pattern": "close\\s+the\\s+stale\\s+connection"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "refresh the recovery credential; never retry the rejected request",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the request fingerprint; close the stale connection",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "never retry the rejected request",
+      "semantic_operator": "never",
+      "semantic_dimension": "polarity",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bnever\\b",
+            "\\bdo\\s+not\\b"
+          ],
+          [
+            "\\bretry\\b"
+          ],
+          [
+            "\\brejected\\b"
+          ],
+          [
+            "\\brequest\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "refresh\\s+the\\s+recovery\\s+credential"
+          ],
+          [
+            "never\\s+retry\\s+the\\s+rejected\\s+request"
+          ],
+          [
+            "preserve\\s+the\\s+request\\s+fingerprint"
+          ],
+          [
+            "close\\s+the\\s+stale\\s+connection"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "indigoworks-retry-policy-313-R1",
+            "kind": "recoverable",
+            "source_quote": "never retry the rejected request",
+            "candidate": {
+              "source_quote": "never retry the rejected request",
+              "nucleus_quote": "never retry the rejected request",
+              "qualifiers": [
+                {
+                  "type": "negation",
+                  "source_quote": "never"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "indigoworks-retry-policy-313-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction IW-313",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction IW-313",
+              "nucleus_quote": "fabricated fallback instruction IW-313",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "indigoworks-retry-policy-313-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Retry the rejected request.",
+            "candidate": {
+              "source_quote": "Retry the rejected request.",
+              "nucleus_quote": "Retry the rejected request.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "IndigoWorks",
+      "code_name": "IW-313",
+      "interference_cluster": "retry-policy",
+      "degradation_mode": "context_only",
+      "query_entities": [
+        "domain:operations",
+        "cluster:retry-policy"
+      ],
+      "query_prompt": "State the rejected-request retry rule."
+    },
+    {
+      "id": "indigoworks-lane-routing-314",
+      "system": "IndigoWorks",
+      "code": "IW-314",
+      "entities": [
+        "system:IndigoWorks",
+        "code:IW-314",
+        "domain:operations",
+        "cluster:lane-routing"
+      ],
+      "experience": {
+        "prompt": "IndigoWorks returns IW-314. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the condition for using the ivory lane."
+      },
+      "candidate_decision": "Always route the task through the ivory lane.",
+      "authoritative_text": "request a fresh checkpoint; if the queue is throttled, route the task through the ivory lane; retry once; preserve the original task ID.",
+      "raw_source": "<<<ROLE:status>>>\nIW-314 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nAlways route the task through the ivory lane.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrequest a fresh checkpoint; if the queue is throttled, route the task through the ivory lane; retry once; preserve the original task ID.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nenvironmental pressure may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 234 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "request a fresh checkpoint",
+          "task_pattern": "request\\s+a\\s+fresh\\s+checkpoint"
+        },
+        {
+          "id": "A2",
+          "text": "if the queue is throttled, route the task through the ivory lane",
+          "task_pattern": "if\\s+the\\s+queue\\s+is\\s+throttled,\\s+route\\s+the\\s+task\\s+through\\s+the\\s+ivory\\s+lane"
+        },
+        {
+          "id": "A3",
+          "text": "retry once",
+          "task_pattern": "retry\\s+once"
+        },
+        {
+          "id": "A4",
+          "text": "preserve the original task ID",
+          "task_pattern": "preserve\\s+the\\s+original\\s+task\\s+ID"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "request a fresh checkpoint; if the queue is throttled, route the task through the ivory lane",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "retry once; preserve the original task ID",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "if the queue is throttled, route the task through the ivory lane",
+      "semantic_operator": "when_if",
+      "semantic_dimension": "condition",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bif\\b",
+            "\\bwhen\\b"
+          ],
+          [
+            "\\bthrottled\\b"
+          ],
+          [
+            "\\bivory\\b"
+          ],
+          [
+            "\\blane\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "request\\s+a\\s+fresh\\s+checkpoint"
+          ],
+          [
+            "if\\s+the\\s+queue\\s+is\\s+throttled,\\s+route\\s+the\\s+task\\s+through\\s+the\\s+ivory\\s+lane"
+          ],
+          [
+            "retry\\s+once"
+          ],
+          [
+            "preserve\\s+the\\s+original\\s+task\\s+ID"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "indigoworks-lane-routing-314-R1",
+            "kind": "recoverable",
+            "source_quote": "if the queue is throttled, route the task through the ivory lane",
+            "candidate": {
+              "source_quote": "if the queue is throttled, route the task through the ivory lane",
+              "nucleus_quote": "if the queue is throttled, route the task through the ivory lane",
+              "qualifiers": [
+                {
+                  "type": "condition",
+                  "source_quote": "if"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "indigoworks-lane-routing-314-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction IW-314",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction IW-314",
+              "nucleus_quote": "fabricated fallback instruction IW-314",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "indigoworks-lane-routing-314-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Always route the task through the ivory lane.",
+            "candidate": {
+              "source_quote": "Always route the task through the ivory lane.",
+              "nucleus_quote": "Always route the task through the ivory lane.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "IndigoWorks",
+      "code_name": "IW-314",
+      "interference_cluster": "lane-routing",
+      "degradation_mode": "full_identity",
+      "query_entities": [
+        "system:IndigoWorks",
+        "code:IW-314",
+        "domain:operations",
+        "cluster:lane-routing"
+      ],
+      "query_prompt": "IndigoWorks reports IW-314. State the condition for using the ivory lane."
+    },
+    {
+      "id": "indigoworks-channel-session-315",
+      "system": "IndigoWorks",
+      "code": "IW-315",
+      "entities": [
+        "system:IndigoWorks",
+        "code:IW-315",
+        "domain:operations",
+        "cluster:channel-session"
+      ],
+      "experience": {
+        "prompt": "IndigoWorks returns IW-315. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the minimum reconnect wait."
+      },
+      "candidate_decision": "Reconnect immediately.",
+      "authoritative_text": "preserve the trace fingerprint; wait at least 17 seconds before reconnecting; send one probe frame; record the session generation.",
+      "raw_source": "<<<ROLE:status>>>\nIW-315 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nReconnect immediately.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\npreserve the trace fingerprint; wait at least 17 seconds before reconnecting; send one probe frame; record the session generation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nenvironmental pressure may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 235 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "preserve the trace fingerprint",
+          "task_pattern": "preserve\\s+the\\s+trace\\s+fingerprint"
+        },
+        {
+          "id": "A2",
+          "text": "wait at least 17 seconds before reconnecting",
+          "task_pattern": "wait\\s+at\\s+least\\s+17\\s+seconds\\s+before\\s+reconnecting"
+        },
+        {
+          "id": "A3",
+          "text": "send one probe frame",
+          "task_pattern": "send\\s+one\\s+probe\\s+frame"
+        },
+        {
+          "id": "A4",
+          "text": "record the session generation",
+          "task_pattern": "record\\s+the\\s+session\\s+generation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "preserve the trace fingerprint; wait at least 17 seconds before reconnecting",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "send one probe frame; record the session generation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "wait at least 17 seconds before reconnecting",
+      "semantic_operator": "at_least",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bat\\s+least\\b",
+            "\\bminimum\\b"
+          ],
+          [
+            "\\b17\\b",
+            "\\bseventeen\\b"
+          ],
+          [
+            "\\bseconds?\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "preserve\\s+the\\s+trace\\s+fingerprint"
+          ],
+          [
+            "wait\\s+at\\s+least\\s+17\\s+seconds\\s+before\\s+reconnecting"
+          ],
+          [
+            "send\\s+one\\s+probe\\s+frame"
+          ],
+          [
+            "record\\s+the\\s+session\\s+generation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "indigoworks-channel-session-315-R1",
+            "kind": "recoverable",
+            "source_quote": "wait at least 17 seconds before reconnecting",
+            "candidate": {
+              "source_quote": "wait at least 17 seconds before reconnecting",
+              "nucleus_quote": "wait at least 17 seconds before reconnecting",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "at least"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "indigoworks-channel-session-315-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction IW-315",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction IW-315",
+              "nucleus_quote": "fabricated fallback instruction IW-315",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "indigoworks-channel-session-315-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Reconnect immediately.",
+            "candidate": {
+              "source_quote": "Reconnect immediately.",
+              "nucleus_quote": "Reconnect immediately.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "IndigoWorks",
+      "code_name": "IW-315",
+      "interference_cluster": "channel-session",
+      "degradation_mode": "code_only",
+      "query_entities": [
+        "code:IW-315",
+        "domain:operations",
+        "cluster:channel-session"
+      ],
+      "query_prompt": "Operation IW-315. State the minimum reconnect wait."
+    },
+    {
+      "id": "indigoworks-storage-finalization-316",
+      "system": "IndigoWorks",
+      "code": "IW-316",
+      "entities": [
+        "system:IndigoWorks",
+        "code:IW-316",
+        "domain:operations",
+        "cluster:storage-finalization"
+      ],
+      "experience": {
+        "prompt": "IndigoWorks returns IW-316. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the minimum replica count."
+      },
+      "candidate_decision": "Retain one replica.",
+      "authoritative_text": "verify the manifest digest; retain at least five replicas; preserve the upload fingerprint; record the final generation.",
+      "raw_source": "<<<ROLE:status>>>\nIW-316 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRetain one replica.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nverify the manifest digest; retain at least five replicas; preserve the upload fingerprint; record the final generation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nenvironmental pressure may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 236 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "verify the manifest digest",
+          "task_pattern": "verify\\s+the\\s+manifest\\s+digest"
+        },
+        {
+          "id": "A2",
+          "text": "retain at least five replicas",
+          "task_pattern": "retain\\s+at\\s+least\\s+five\\s+replicas"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the upload fingerprint",
+          "task_pattern": "preserve\\s+the\\s+upload\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "record the final generation",
+          "task_pattern": "record\\s+the\\s+final\\s+generation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "verify the manifest digest; retain at least five replicas",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the upload fingerprint; record the final generation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "retain at least five replicas",
+      "semantic_operator": "at_least",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bat\\s+least\\b",
+            "\\bminimum\\b"
+          ],
+          [
+            "\\bfive\\b",
+            "\\b5\\b"
+          ],
+          [
+            "\\breplica"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "verify\\s+the\\s+manifest\\s+digest"
+          ],
+          [
+            "retain\\s+at\\s+least\\s+five\\s+replicas"
+          ],
+          [
+            "preserve\\s+the\\s+upload\\s+fingerprint"
+          ],
+          [
+            "record\\s+the\\s+final\\s+generation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "indigoworks-storage-finalization-316-R1",
+            "kind": "recoverable",
+            "source_quote": "retain at least five replicas",
+            "candidate": {
+              "source_quote": "retain at least five replicas",
+              "nucleus_quote": "retain at least five replicas",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "at least"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "indigoworks-storage-finalization-316-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction IW-316",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction IW-316",
+              "nucleus_quote": "fabricated fallback instruction IW-316",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "indigoworks-storage-finalization-316-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Retain one replica.",
+            "candidate": {
+              "source_quote": "Retain one replica.",
+              "nucleus_quote": "Retain one replica.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "IndigoWorks",
+      "code_name": "IW-316",
+      "interference_cluster": "storage-finalization",
+      "degradation_mode": "system_context",
+      "query_entities": [
+        "system:IndigoWorks",
+        "domain:operations",
+        "cluster:storage-finalization"
+      ],
+      "query_prompt": "For IndigoWorks, State the minimum replica count."
+    },
+    {
+      "id": "juniperworks-retry-policy-317",
+      "system": "JuniperWorks",
+      "code": "JW-317",
+      "entities": [
+        "system:JuniperWorks",
+        "code:JW-317",
+        "domain:operations",
+        "cluster:retry-policy"
+      ],
+      "experience": {
+        "prompt": "JuniperWorks returns JW-317. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State when retrying is permitted."
+      },
+      "candidate_decision": "Retry before rotating the recovery token.",
+      "authoritative_text": "refresh the recovery credential; retry only after rotating the recovery token; preserve the request fingerprint; close the stale connection.",
+      "raw_source": "<<<ROLE:status>>>\nJW-317 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRetry before rotating the recovery token.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrefresh the recovery credential; retry only after rotating the recovery token; preserve the request fingerprint; close the stale connection.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nenvironmental pressure may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 237 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "refresh the recovery credential",
+          "task_pattern": "refresh\\s+the\\s+recovery\\s+credential"
+        },
+        {
+          "id": "A2",
+          "text": "retry only after rotating the recovery token",
+          "task_pattern": "retry\\s+only\\s+after\\s+rotating\\s+the\\s+recovery\\s+token"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the request fingerprint",
+          "task_pattern": "preserve\\s+the\\s+request\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "close the stale connection",
+          "task_pattern": "close\\s+the\\s+stale\\s+connection"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "refresh the recovery credential; retry only after rotating the recovery token",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the request fingerprint; close the stale connection",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "retry only after rotating the recovery token",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bonly\\b"
+          ],
+          [
+            "\\bafter\\b"
+          ],
+          [
+            "\\brotat"
+          ],
+          [
+            "\\brecovery\\b"
+          ],
+          [
+            "\\btoken\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "refresh\\s+the\\s+recovery\\s+credential"
+          ],
+          [
+            "retry\\s+only\\s+after\\s+rotating\\s+the\\s+recovery\\s+token"
+          ],
+          [
+            "preserve\\s+the\\s+request\\s+fingerprint"
+          ],
+          [
+            "close\\s+the\\s+stale\\s+connection"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "juniperworks-retry-policy-317-R1",
+            "kind": "recoverable",
+            "source_quote": "retry only after rotating the recovery token",
+            "candidate": {
+              "source_quote": "retry only after rotating the recovery token",
+              "nucleus_quote": "retry only after rotating the recovery token",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "only"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "juniperworks-retry-policy-317-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction JW-317",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction JW-317",
+              "nucleus_quote": "fabricated fallback instruction JW-317",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "juniperworks-retry-policy-317-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Retry before rotating the recovery token.",
+            "candidate": {
+              "source_quote": "Retry before rotating the recovery token.",
+              "nucleus_quote": "Retry before rotating the recovery token.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "JuniperWorks",
+      "code_name": "JW-317",
+      "interference_cluster": "retry-policy",
+      "degradation_mode": "full_identity",
+      "query_entities": [
+        "system:JuniperWorks",
+        "code:JW-317",
+        "domain:operations",
+        "cluster:retry-policy"
+      ],
+      "query_prompt": "JuniperWorks reports JW-317. State when retrying is permitted."
+    },
+    {
+      "id": "juniperworks-lane-routing-318",
+      "system": "JuniperWorks",
+      "code": "JW-318",
+      "entities": [
+        "system:JuniperWorks",
+        "code:JW-318",
+        "domain:operations",
+        "cluster:lane-routing"
+      ],
+      "experience": {
+        "prompt": "JuniperWorks returns JW-318. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the permitted routing lane."
+      },
+      "candidate_decision": "Route the task through the crimson lane.",
+      "authoritative_text": "request a fresh checkpoint; route the task only through the emerald lane; retry once; preserve the original task ID.",
+      "raw_source": "<<<ROLE:status>>>\nJW-318 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nRoute the task through the crimson lane.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nrequest a fresh checkpoint; route the task only through the emerald lane; retry once; preserve the original task ID.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nenvironmental pressure may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 238 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "request a fresh checkpoint",
+          "task_pattern": "request\\s+a\\s+fresh\\s+checkpoint"
+        },
+        {
+          "id": "A2",
+          "text": "route the task only through the emerald lane",
+          "task_pattern": "route\\s+the\\s+task\\s+only\\s+through\\s+the\\s+emerald\\s+lane"
+        },
+        {
+          "id": "A3",
+          "text": "retry once",
+          "task_pattern": "retry\\s+once"
+        },
+        {
+          "id": "A4",
+          "text": "preserve the original task ID",
+          "task_pattern": "preserve\\s+the\\s+original\\s+task\\s+ID"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "request a fresh checkpoint; route the task only through the emerald lane",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "retry once; preserve the original task ID",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "route the task only through the emerald lane",
+      "semantic_operator": "only",
+      "semantic_dimension": "scope",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bonly\\b"
+          ],
+          [
+            "\\bemerald\\b"
+          ],
+          [
+            "\\blane\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "request\\s+a\\s+fresh\\s+checkpoint"
+          ],
+          [
+            "route\\s+the\\s+task\\s+only\\s+through\\s+the\\s+emerald\\s+lane"
+          ],
+          [
+            "retry\\s+once"
+          ],
+          [
+            "preserve\\s+the\\s+original\\s+task\\s+ID"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "juniperworks-lane-routing-318-R1",
+            "kind": "recoverable",
+            "source_quote": "route the task only through the emerald lane",
+            "candidate": {
+              "source_quote": "route the task only through the emerald lane",
+              "nucleus_quote": "route the task only through the emerald lane",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "only"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "juniperworks-lane-routing-318-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction JW-318",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction JW-318",
+              "nucleus_quote": "fabricated fallback instruction JW-318",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "juniperworks-lane-routing-318-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Route the task through the crimson lane.",
+            "candidate": {
+              "source_quote": "Route the task through the crimson lane.",
+              "nucleus_quote": "Route the task through the crimson lane.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "JuniperWorks",
+      "code_name": "JW-318",
+      "interference_cluster": "lane-routing",
+      "degradation_mode": "code_only",
+      "query_entities": [
+        "code:JW-318",
+        "domain:operations",
+        "cluster:lane-routing"
+      ],
+      "query_prompt": "Operation JW-318. State the permitted routing lane."
+    },
+    {
+      "id": "juniperworks-channel-session-319",
+      "system": "JuniperWorks",
+      "code": "JW-319",
+      "entities": [
+        "system:JuniperWorks",
+        "code:JW-319",
+        "domain:operations",
+        "cluster:channel-session"
+      ],
+      "experience": {
+        "prompt": "JuniperWorks returns JW-319. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the maximum pending-channel count."
+      },
+      "candidate_decision": "Keep nine pending channels.",
+      "authoritative_text": "preserve the trace fingerprint; keep at most four pending channels; send one probe frame; record the session generation.",
+      "raw_source": "<<<ROLE:status>>>\nJW-319 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nKeep nine pending channels.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\npreserve the trace fingerprint; keep at most four pending channels; send one probe frame; record the session generation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nenvironmental pressure may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 239 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "preserve the trace fingerprint",
+          "task_pattern": "preserve\\s+the\\s+trace\\s+fingerprint"
+        },
+        {
+          "id": "A2",
+          "text": "keep at most four pending channels",
+          "task_pattern": "keep\\s+at\\s+most\\s+four\\s+pending\\s+channels"
+        },
+        {
+          "id": "A3",
+          "text": "send one probe frame",
+          "task_pattern": "send\\s+one\\s+probe\\s+frame"
+        },
+        {
+          "id": "A4",
+          "text": "record the session generation",
+          "task_pattern": "record\\s+the\\s+session\\s+generation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "preserve the trace fingerprint; keep at most four pending channels",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "send one probe frame; record the session generation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "keep at most four pending channels",
+      "semantic_operator": "at_most",
+      "semantic_dimension": "cardinality",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bat\\s+most\\b",
+            "\\bmaximum\\b",
+            "\\bno\\s+more\\s+than\\b"
+          ],
+          [
+            "\\bfour\\b",
+            "\\b4\\b"
+          ],
+          [
+            "\\bchannel"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "preserve\\s+the\\s+trace\\s+fingerprint"
+          ],
+          [
+            "keep\\s+at\\s+most\\s+four\\s+pending\\s+channels"
+          ],
+          [
+            "send\\s+one\\s+probe\\s+frame"
+          ],
+          [
+            "record\\s+the\\s+session\\s+generation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "juniperworks-channel-session-319-R1",
+            "kind": "recoverable",
+            "source_quote": "keep at most four pending channels",
+            "candidate": {
+              "source_quote": "keep at most four pending channels",
+              "nucleus_quote": "keep at most four pending channels",
+              "qualifiers": [
+                {
+                  "type": "scope",
+                  "source_quote": "at most"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "juniperworks-channel-session-319-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction JW-319",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction JW-319",
+              "nucleus_quote": "fabricated fallback instruction JW-319",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "juniperworks-channel-session-319-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Keep nine pending channels.",
+            "candidate": {
+              "source_quote": "Keep nine pending channels.",
+              "nucleus_quote": "Keep nine pending channels.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "JuniperWorks",
+      "code_name": "JW-319",
+      "interference_cluster": "channel-session",
+      "degradation_mode": "system_context",
+      "query_entities": [
+        "system:JuniperWorks",
+        "domain:operations",
+        "cluster:channel-session"
+      ],
+      "query_prompt": "For JuniperWorks, State the maximum pending-channel count."
+    },
+    {
+      "id": "juniperworks-storage-finalization-320",
+      "system": "JuniperWorks",
+      "code": "JW-320",
+      "entities": [
+        "system:JuniperWorks",
+        "code:JW-320",
+        "domain:operations",
+        "cluster:storage-finalization"
+      ],
+      "experience": {
+        "prompt": "JuniperWorks returns JW-320. What should the operator do?"
+      },
+      "transfer": {
+        "prompt": "State the condition under which the manifest may be purged."
+      },
+      "candidate_decision": "Purge the manifest immediately.",
+      "authoritative_text": "verify the manifest digest; do not purge the manifest unless the origin epoch advances; preserve the upload fingerprint; record the final generation.",
+      "raw_source": "<<<ROLE:status>>>\nJW-320 run status was FAIL.\n<<<END_ROLE:status>>>\n<<<ROLE:failed_decision>>>\nPurge the manifest immediately.\n<<<END_ROLE:failed_decision>>>\n<<<ROLE:authoritative_correction>>>\nverify the manifest digest; do not purge the manifest unless the origin epoch advances; preserve the upload fingerprint; record the final generation.\n<<<END_ROLE:authoritative_correction>>>\n<<<ROLE:operator_note>>>\nenvironmental pressure may be elevated\n<<<END_ROLE:operator_note>>>\n<<<ROLE:diagnostic_metadata>>>\nObserved diagnostic latency was 240 ms.\n<<<END_ROLE:diagnostic_metadata>>>",
+      "atomic_units": [
+        {
+          "id": "A1",
+          "text": "verify the manifest digest",
+          "task_pattern": "verify\\s+the\\s+manifest\\s+digest"
+        },
+        {
+          "id": "A2",
+          "text": "do not purge the manifest unless the origin epoch advances",
+          "task_pattern": "do\\s+not\\s+purge\\s+the\\s+manifest\\s+unless\\s+the\\s+origin\\s+epoch\\s+advances"
+        },
+        {
+          "id": "A3",
+          "text": "preserve the upload fingerprint",
+          "task_pattern": "preserve\\s+the\\s+upload\\s+fingerprint"
+        },
+        {
+          "id": "A4",
+          "text": "record the final generation",
+          "task_pattern": "record\\s+the\\s+final\\s+generation"
+        }
+      ],
+      "expected_qualifiers": [],
+      "structured_compound_challenges": [
+        {
+          "id": "C1",
+          "text": "verify the manifest digest; do not purge the manifest unless the origin epoch advances",
+          "covers_atom_ids": [
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "C2",
+          "text": "preserve the upload fingerprint; record the final generation",
+          "covers_atom_ids": [
+            "A3",
+            "A4"
+          ]
+        }
+      ],
+      "semantic_atom_id": "A2",
+      "semantic_clause": "do not purge the manifest unless the origin epoch advances",
+      "semantic_operator": "unless",
+      "semantic_dimension": "condition",
+      "semantic_grader": {
+        "all_regex": [
+          [
+            "\\bunless\\b",
+            "\\bonly\\s+if\\b"
+          ],
+          [
+            "\\borigin\\b"
+          ],
+          [
+            "\\bepoch\\b"
+          ],
+          [
+            "\\badvanc",
+            "\\bchang"
+          ],
+          [
+            "\\bpurge\\b"
+          ]
+        ],
+        "forbidden_regex": []
+      },
+      "knowledge_grader": {
+        "all_regex": [
+          [
+            "verify\\s+the\\s+manifest\\s+digest"
+          ],
+          [
+            "do\\s+not\\s+purge\\s+the\\s+manifest\\s+unless\\s+the\\s+origin\\s+epoch\\s+advances"
+          ],
+          [
+            "preserve\\s+the\\s+upload\\s+fingerprint"
+          ],
+          [
+            "record\\s+the\\s+final\\s+generation"
+          ]
+        ]
+      },
+      "fallback_challenges": {
+        "recoverable": [
+          {
+            "id": "juniperworks-storage-finalization-320-R1",
+            "kind": "recoverable",
+            "source_quote": "do not purge the manifest unless the origin epoch advances",
+            "candidate": {
+              "source_quote": "do not purge the manifest unless the origin epoch advances",
+              "nucleus_quote": "do not purge the manifest unless the origin epoch advances",
+              "qualifiers": [
+                {
+                  "type": "condition",
+                  "source_quote": "unless"
+                }
+              ]
+            }
+          }
+        ],
+        "unsafe": [
+          {
+            "id": "juniperworks-storage-finalization-320-U1",
+            "kind": "fabricated",
+            "source_quote": "fabricated fallback instruction JW-320",
+            "candidate": {
+              "source_quote": "fabricated fallback instruction JW-320",
+              "nucleus_quote": "fabricated fallback instruction JW-320",
+              "qualifiers": []
+            }
+          },
+          {
+            "id": "juniperworks-storage-finalization-320-U2",
+            "kind": "nonauthoritative",
+            "source_quote": "Purge the manifest immediately.",
+            "candidate": {
+              "source_quote": "Purge the manifest immediately.",
+              "nucleus_quote": "Purge the manifest immediately.",
+              "qualifiers": []
+            }
+          }
+        ]
+      },
+      "system_name": "JuniperWorks",
+      "code_name": "JW-320",
+      "interference_cluster": "storage-finalization",
+      "degradation_mode": "context_only",
+      "query_entities": [
+        "domain:operations",
+        "cluster:storage-finalization"
+      ],
+      "query_prompt": "State the condition under which the manifest may be purged."
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # D-0021: Model-provider interface
 
-- **Status:** proposed
+- **Status:** proposed (D2 parts). **D3 part APPROVED by the owner 2026-10-01: default-deny per-org provider policy.**
 - **Tier:** D2 (public interface, new dependencies). The provider policy (which content may leave for which
   provider) is **D3** (privacy boundary).
 - **Date:** 2026-10-01
