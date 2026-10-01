@@ -710,3 +710,11 @@ recorded formation parity (old 14) — and the non-inferiority margins against E
   - **Interpretation flagged to the owner:** "keep gate items 13–15" conflicts with dropping R2/R3, since items 13
     and 14 *were* R2 and R3. Applied: drop 13–14, keep 15 (now item 11). Awaiting confirmation.
   - **Blocking question raised:** single-episode promotion (Open questions).
+- 2026-10-01 — **Phase 2 build started. P1 and P2 done (instrument first).**
+  - **P1 `eval/verify_frozen_suite.py`:** every copied file plus, when present, the 1,000+ hash-only originals (MNEXA
+    states, the 031 workspace, the EXP-0001 run folder). All match. 5 tests.
+  - **P2 `eval/grade_decision.py`:** port of `grade_text`, `semantic_grade` and `contains_any_regex`.
+    - **L1:** reproduces all **2,070** verdicts MNEXA recorded on stored decisions of 003–016 (1,394 true,
+      676 false), exactly. 9 tests.
+    - **Mutations:** 9/9 killed. 5 survive L1 alone, because MNEXA's data never exercises phrase lists,
+      `none_regex`, bare strings or forbidden hits; the contract tests guard them. Documented in the header.

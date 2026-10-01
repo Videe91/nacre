@@ -69,8 +69,8 @@ Notes:
 
 | # | Capability | Functionality | File | Test | Decisions | Assumptions | Status |
 |---|---|---|---|---|---|---|---|
-| P1 | eval | Verify the frozen MNEXA suite: every copied file and every hash-only entry against MANIFEST.json | `src/nacre/eval/verify_frozen_suite.py` | `tests/eval/test_verify_frozen_suite.py` | D-0016 | — | planned |
-| P2 | eval | Port MNEXA `grade_text` and the regrade profiles: grade a decision against a frozen task's grader spec (deterministic) | `src/nacre/eval/grade_decision.py` | `tests/eval/test_grade_decision.py` (L1: 003–016 exact) | D-0016 | — | planned |
+| P1 | eval | Verify the frozen MNEXA suite: every copied file and every hash-only entry against MANIFEST.json | `src/nacre/eval/verify_frozen_suite.py` | `tests/eval/test_verify_frozen_suite.py` | D-0016 | — | done |
+| P2 | eval | Port MNEXA `grade_text` and the regrade profiles: grade a decision against a frozen task's grader spec (deterministic) | `src/nacre/eval/grade_decision.py` | `tests/eval/test_grade_decision.py` (L1: 003–016 exact) | D-0016 | — | done |
 | P3 | eval | Map a frozen MNEXA family to Nacre capture events: decision, plus an outcome whose sections follow the EXP-0003 role-to-section table (markers removed) | `src/nacre/eval/load_mnexa_family.py` | `tests/eval/test_load_mnexa_family.py` | D-0016, D-0018 | A-0026 | planned |
 | P5 | eval | EXP-0003 run: Nacre arm plus same-run no-memory control, k = 3, graded by P2, separate discarded safety-challenge check, the bar applied, report written (owner-run) | `src/nacre/eval/run_phase2_gate.py` | `tests/eval/test_run_phase2_gate.py` (recorded mode) | D-0016 | A-0023, A-0024 | planned |
 | P6 | core | Model request/response types and the ModelProvider protocol (types only) | `src/nacre/core/model_provider.py` | `—` (via P9) | D-0021 | — | planned |
