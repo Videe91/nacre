@@ -7,7 +7,9 @@
   - runs the unmutated baseline first, and stops if it fails;
   - restores each mutant and checks the worktree is back to baseline;
   - removes the worktree, then asserts the real tree is byte-for-byte unchanged (git status plus a hash of every
-    tracked and untracked file; exit 3 if not).
+    tracked and untracked file; exit 3 if not);
+  - never writes bytecode in the worktree, and refuses to run if any `.pyc` is present. A cached `.pyc` with the same
+    source size and mtime second turns a same-size mutant into a false SURVIVED (2026-10-01).
 - No ad-hoc `sed`/`cp` mutation loops on the real tree. Why: on 2026-09-30 such a loop, piped through `head`,
   was killed before it restored `store_attachment.py`, leaving a security lock removed in the working tree. The
   tests caught it, but it must not be possible at all.
@@ -17,3 +19,12 @@
 ## Evidence
 - Performance evidence uses the production connection setup (pooled, `core.db.open_pool`). Any other setup is
   labelled as such in the evidence file. Labels come from the code actually run, never from a docstring.
+
+## Flaky tests (owner rule 2026-10-01)
+- A flaky test is hunted, never retried or skipped:
+  - restart the Docker DB cold;
+  - run the full suite repeatedly in random order until it reproduces;
+  - capture the name and output;
+  - classify it as a test bug (fix the test) or a product race (fix the code, add a deterministic test for the
+    interleaving, record it in CURRENT.md).
+- Always run with `-rf` (or keep the junit XML), so a failing test's name is never lost.

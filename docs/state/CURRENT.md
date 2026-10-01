@@ -634,4 +634,33 @@ improves results.
     - pytest, first run right after the Postgres container started: **1 failed, 693 passed**. The failing test's
       name was not captured (only the summary line was kept).
     - Three later runs: 694 passed each.
-    - **Open task:** identify this flaky test (suspect a timing-sensitive test on a cold container).
+    - Open task (identify this flaky test): **RESOLVED the same day**, see the next entry.
+- 2026-10-01 — **Flaky test hunted and resolved (owner: before any Phase 2 code).**
+  - **Hunt:** cold Postgres restart (`down` + `up`, tmpfs) before every iteration, then the full suite in random
+    order (`pytest-randomly` 5.0.0, installed temporarily and uninstalled afterwards).
+  - **Reproduced:** 2 failures in 11 iterations (seeds 255875928 and 1011632240), both
+    `tests/scripts/test_run_mutants.py::test_uncommitted_changes_are_what_gets_mutated`:
+    `assert 'SURVIVED' == 'killed'`. The earlier unnamed failure fits the same test, which was new in that session.
+  - **Cause (a real bug in `scripts/run_mutants.py`, not a test bug):**
+    - Python and pytest's assertion rewriter reuse a cached `.pyc` when the source's size and whole-second mtime
+      match.
+    - A same-size mutant (`== 2` → `== 3`) written in the same second as the baseline's compile ran the original code
+      and was reported SURVIVED.
+    - It can produce false survivors only, never false kills.
+    - Reproduced deterministically outside the runner: the file says `== 3` and pytest passes.
+  - **Fix:**
+    - every inner pytest gets `PYTHONDONTWRITEBYTECODE=1`;
+    - `_assert_no_bytecode` refuses to run if any `.pyc` exists in the worktree;
+    - mutant writes go through `_write_source`.
+  - **Deterministic test** `test_a_same_size_same_second_mutant_is_still_judged_on_its_own_code` forces the exact
+    interleaving: same size and the same mtime in nanoseconds. It is proved by self-mutation: with the fix removed,
+    the test fails 3/3; with only the env setting removed, the guard catches it.
+  - **Two more runner bugs found while proving it:**
+    - the baseline dropped flags but passed their values (`-k x`) to pytest as paths; it now runs each mutant's exact
+      argument list (tested);
+    - the runner hard-coded `ROOT/.venv/bin/python`, which does not exist inside a worktree; it now uses
+      `sys.executable`.
+  - **Impact on earlier mutation results:** none. Kills cannot be faked by stale bytecode, and every survivor
+    reported so far came from a size-changing mutant.
+  - **Confirmation:** a fresh 20-iteration run with a cold restart and random order each time, untouched tree:
+    **20/20 clean, 697 passed each.**

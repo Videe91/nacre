@@ -38,3 +38,41 @@ def test_uncommitted_changes_are_what_gets_mutated(tmp_path):
         assert r["outcome"] == "killed"
     finally:
         probe.unlink()
+
+
+def test_a_same_size_same_second_mutant_is_still_judged_on_its_own_code(monkeypatch):
+    # The flaky failure of 2026-10-01, forced deterministically: the mutant has the SAME size and the SAME mtime as
+    # the source the baseline compiled. Cached bytecode would run the original code and report SURVIVED.
+    import os
+    probe = ROOT / "tests" / "scripts" / "_probe_same_size_test.py"
+    probe.write_text("def test_probe():\n    assert 1 + 1 == 2\n")
+    real_write = rm._write_source
+
+    def write_keeping_mtime(path, text):
+        st = path.stat()
+        real_write(path, text)
+        os.utime(path, ns=(st.st_atime_ns, st.st_mtime_ns))
+    monkeypatch.setattr(rm, "_write_source", write_keeping_mtime)
+    try:
+        (r,) = rm.run([{"file": "tests/scripts/_probe_same_size_test.py", "old": "1 + 1 == 2", "new": "1 + 1 == 3",
+                        "tests": ["tests/scripts/_probe_same_size_test.py"]}], out=lambda _: None)
+        assert r["outcome"] == "killed"
+    finally:
+        probe.unlink()
+
+
+def test_bytecode_in_the_worktree_is_refused(tmp_path):
+    (tmp_path / "pkg" / "__pycache__").mkdir(parents=True)
+    (tmp_path / "pkg" / "__pycache__" / "m.cpython-314.pyc").write_bytes(b"x")
+    import pytest
+    with pytest.raises(RuntimeError, match="bytecode present"):
+        rm._assert_no_bytecode(tmp_path)
+
+
+def test_the_baseline_runs_each_mutants_exact_arguments(monkeypatch):
+    # A flag's value ("-k", "x") must stay with its flag; an earlier baseline passed "x" to pytest as a path.
+    seen = []
+    monkeypatch.setattr(rm, "_pytest", lambda worktree, tests: seen.append(list(tests)) or 0)
+    rm.run([{"file": "src/nacre/core/encode_cbor.py", "old": "    if arg < 24:", "new": "    if arg < 23:",
+             "tests": ["tests/core/test_encode_cbor.py", "-k", "head"]}], out=lambda _: None)
+    assert seen[0] == ["tests/core/test_encode_cbor.py", "-k", "head"]           # the baseline

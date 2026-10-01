@@ -11,6 +11,10 @@ How:
      its baseline state.
   5. Remove the worktree, then assert the real working tree is byte-for-byte unchanged (exit 3 if not).
 Mutations only ever happen inside the temporary worktree, so an interrupted run cannot damage the real tree.
+No bytecode is ever written in the worktree (PYTHONDONTWRITEBYTECODE=1 for every pytest run, checked before each
+run). Why: Python and pytest's assertion rewriter reuse a cached .pyc when the source's SIZE and whole-second MTIME
+match. A same-size mutant (`24` -> `23`) written in the same second as the baseline's compile then ran the
+ORIGINAL code and was reported as SURVIVED (found 2026-10-01 by a flaky test; reproduced deterministically).
 `git worktree prune` at start removes worktrees left registered by an interrupted run.
 
 Spec (JSON): [{"file": "src/...py", "old": "exact text", "new": "replacement", "tests": ["tests/...py", "-k", "x"]}]
@@ -27,7 +31,7 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-PYTEST = [str(ROOT / ".venv" / "bin" / "python"), "-m", "pytest", "-q", "-x", "-p", "no:cacheprovider"]
+PYTEST = [sys.executable, "-m", "pytest", "-q", "-x", "-p", "no:cacheprovider"]  # the interpreter running this script
 
 
 def _git(*args: str, cwd: Path = ROOT, stdin: bytes | None = None) -> bytes:
@@ -54,8 +58,20 @@ def _prepare(worktree: Path) -> None:
             shutil.copy2(ROOT / name, worktree / name)
 
 
+def _write_source(path: Path, text: str) -> None:
+    path.write_text(text)
+
+
+def _assert_no_bytecode(worktree: Path) -> None:
+    cached = next(worktree.rglob("*.pyc"), None)
+    if cached is not None:
+        raise RuntimeError(f"bytecode present in the mutation worktree ({cached}); results could be stale")
+
+
 def _pytest(worktree: Path, tests: list[str]) -> int:
-    env = dict(os.environ, COMPOSE_PROJECT_NAME=os.environ.get("COMPOSE_PROJECT_NAME", ROOT.name))  # same DB container
+    _assert_no_bytecode(worktree)
+    env = dict(os.environ, COMPOSE_PROJECT_NAME=os.environ.get("COMPOSE_PROJECT_NAME", ROOT.name),  # same DB container
+               PYTHONDONTWRITEBYTECODE="1")
     return subprocess.run([*PYTEST, *tests], cwd=worktree, env=env, capture_output=True).returncode
 
 
@@ -68,8 +84,9 @@ def run(mutants: list[dict], out=print) -> list[dict]:
     try:
         _prepare(worktree)
         baseline = snapshot(worktree)
-        tests = sorted({t for m in mutants for t in m["tests"] if not t.startswith("-")})
-        if _pytest(worktree, tests) != 0:
+        # One baseline per distinct argument list, run exactly as its mutants will run (flags and their values kept
+        # together; an earlier version dropped flags but kept their values as paths).
+        if any(_pytest(worktree, list(args)) != 0 for args in dict.fromkeys(tuple(m["tests"]) for m in mutants)):
             out("baseline tests FAIL without any mutant; fix them first")
             raise SystemExit(2)
         for m in mutants:
@@ -79,11 +96,11 @@ def run(mutants: list[dict], out=print) -> list[dict]:
                 results.append({**m, "outcome": "not-found"})
                 out(f"NOT FOUND  {m['file']}: {m['old']!r}")
                 continue
-            target.write_text(original.replace(m["old"], m["new"], 1))
+            _write_source(target, original.replace(m["old"], m["new"], 1))
             try:
                 code = _pytest(worktree, m["tests"])
             finally:
-                target.write_text(original)
+                _write_source(target, original)
             if snapshot(worktree) != baseline:
                 raise RuntimeError(f"worktree not restored after mutating {m['file']}")
             outcome = {0: "SURVIVED", 1: "killed"}.get(code, f"error (pytest exit {code})")
