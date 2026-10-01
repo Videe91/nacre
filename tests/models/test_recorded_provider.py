@@ -4,7 +4,7 @@ import uuid
 import psycopg
 import pytest
 
-from conftest import MODEL, FakeProvider, ok, req
+from model_fakes import MODEL, FakeProvider, ok, req, transient
 from nacre.core.model_provider import CallPolicy
 from nacre.ledger.read_stream import ReadError
 from nacre.models.call_model import call_model
@@ -36,7 +36,6 @@ def test_replay_returns_recorded_responses_in_order_with_no_network_and_no_new_e
 
 
 def test_failed_and_redacted_attempts_are_not_replayable(world, provider):
-    from conftest import transient
     world["allow"](MODEL)
     token = "gh" + "p_" + "A1b2C3d4E5f6G7h8I9j0K1l2M3n4O5p6Q7r8"
     src = world["source"]()

@@ -4,7 +4,7 @@ from decimal import Decimal
 
 import pytest
 
-from conftest import MODEL, FakeProvider, ok, req, transient
+from model_fakes import MODEL, FakeProvider, ok, req, transient
 from nacre.core.event import ActorKind, EventType, Trust
 from nacre.core.model_provider import CallPolicy, ProviderError, request_sha256
 from nacre.ledger.read_stream import read_stream

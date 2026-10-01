@@ -744,3 +744,13 @@ recorded formation parity (old 14) — and the non-inferiority margins against E
     - P8 Anthropic adapter (needs a dated pin and a price entry; not on the Phase 2 path);
     - P11 fixture loader;
     - the D-0022 attachment route for model-call bodies over 1 MiB (refused for now; Phase 2 bodies are about 4 KB).
+  - **Correction to commit 4b01a54:**
+    - **What happened:** its full-suite run had **1 failure**, and the commit chain still committed and pushed,
+      because the exit status came from `tail`, not pytest.
+    - **The failure:** test files imported helpers with `from conftest import …`. In a full run, `conftest`
+      resolved to another folder's conftest (`tests/scopes/conftest.py`), so `transient` was missing. It passed in
+      isolation. A test bug.
+    - **Fix:** the helpers moved to the uniquely named `tests/models/model_fakes.py`; no other test file uses the
+      pattern.
+    - **Process fix:** suite results are now taken from pytest's own exit code (`pipefail`).
+    - Full suite: **741 passed, exit 0**.

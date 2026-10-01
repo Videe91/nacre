@@ -28,3 +28,9 @@
   - classify it as a test bug (fix the test) or a product race (fix the code, add a deterministic test for the
     interleaving, record it in CURRENT.md).
 - Always run with `-rf` (or keep the junit XML), so a failing test's name is never lost.
+
+## Running the suite before a commit (2026-10-01)
+- Gate commits on **pytest's exit code**, never on a piped `tail` (use `set -o pipefail`, or capture to a file and
+  check `$?`). Commit 4b01a54 was pushed with 1 failing test because of this.
+- Never `from conftest import ...` in a test file; `conftest` is not a unique module name across folders. Put shared
+  helpers in a uniquely named module.

@@ -5,7 +5,7 @@ import types
 import openai
 import pytest
 
-from conftest import MODEL, req
+from model_fakes import MODEL, req
 from nacre.core.model_provider import Message, ModelParams, ModelRequest, ProviderError
 from nacre.models.openai_responses_provider import OpenAIResponsesProvider
 

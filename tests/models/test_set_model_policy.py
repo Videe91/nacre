@@ -4,7 +4,7 @@ import uuid
 import psycopg
 import pytest
 
-from conftest import MODEL
+from model_fakes import MODEL
 from nacre.models.set_model_policy import PolicyError, allowed_models, set_model_policy
 
 
