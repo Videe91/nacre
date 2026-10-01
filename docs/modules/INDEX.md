@@ -111,6 +111,43 @@ Notes:
 
 Build order: P1–P2 (instrument first; L1 before any mechanism code) → P6, P9–P11 (+ price table `src/nacre/models/data/prices.json`) → P12 → P13–P19 → P20–P21 → P27–P34 (promotion waits on the single-episode question) → P22–P26 → P3 → P5 (EXP-0003, owner-run).
 
+## Phase 3 — recall and interface (PLANNED; proposed ADRs D-0024 … D-0028, awaiting owner approval; no code)
+
+Research scripts (not product code, run from a separate venv): `scripts/bench_encrypted_vectors.py`,
+`scripts/bench_minilm_encode.py` (evidence: A-0032).
+
+| # | Capability | Functionality | File | Test | Decisions | Assumptions | Status |
+|---|---|---|---|---|---|---|---|
+| R1 | schema | DDL: `auth.principals`, `auth.tokens` (hash only), `auth.delegations`, RLS by org | `src/nacre/schema/sql/0012_auth.sql` | `tests/schema/test_0012_auth.py` | D-0026 | A-0039, A-0040 | planned |
+| R2 | interface | Resolve a bearer token to a principal (format, checksum, constant-time hash compare, expiry, revocation) | `src/nacre/interface/authenticate_principal.py` | `tests/interface/test_authenticate_principal.py` | D-0026 | A-0039 | planned |
+| R3 | interface | Check a write's claims against the principal (source ceiling, actor_kind, scope grant, delegation for on_behalf_of); reject over-claims; mark verified | `src/nacre/interface/check_claims.py` | `tests/interface/test_check_claims.py` | D-0026, D-0012, D-0023 | A-0040 | planned |
+| R4 | interface | Admin CLI: principals, tokens (shown once), delegations, scopes, erasure requests | `src/nacre/interface/admin_cli.py` | `tests/interface/test_admin_cli.py` | D-0026, D-0014 | — | planned |
+| R5 | ledger | Scan a binary attachment before storage: bounded extraction (archives, PDF, OCR), detector verdict, reject or mark binary-scanned | `src/nacre/ledger/scan_binary_attachment.py` | `tests/ledger/test_scan_binary_attachment.py` | D-0027, D-0008 | A-0021, A-0041, A-0042 | planned |
+| R6 | schema | DDL: `recall.index_entries` (ciphertext only), `keys.shred_epoch` | `src/nacre/schema/sql/0013_recall_index.sql` | `tests/schema/test_0013_recall_index.py` | D-0024 | A-0032 | planned |
+| R7 | core | Embedder interface (Protocol only: embed texts → unit f32 vectors; embedder_id) | `src/nacre/core/embedder.py` | — (via R8) | D-0024 | — | planned |
+| R8 | recall | Local pinned embedder (the only file importing the runtime; hash-checked weights; offline) | `src/nacre/recall/embed_local.py` | `tests/recall/test_embed_local.py` (pin refusal, equivalence vs frozen reference vectors) | D-0024 | A-0034 | planned |
+| R9 | recall | Write one encrypted index entry for a version, in the version's transaction, under the version key's recall_index subkey | `src/nacre/recall/index_version.py` | `tests/recall/test_index_version.py` | D-0024, D-0023 | A-0031 | planned |
+| R10 | recall | Load and incrementally refresh a scope's decrypted index cache; evict destroyed keys on shred_epoch change; LRU memory cap | `src/nacre/recall/load_index_cache.py` | `tests/recall/test_load_index_cache.py` | D-0024 | A-0032, A-0033, A-0035 | planned |
+| R11 | recall | Rebuild a scope's index into a new generation; compare; switch atomically | `src/nacre/recall/rebuild_index.py` | `tests/recall/test_rebuild_index.py` | D-0024, D-0017 | — | planned |
+| R12 | recall | Freeze the recall snapshot: one RR read-only transaction, per-stream position vector, shred_epoch, generations | `src/nacre/recall/freeze_snapshot.py` | `tests/recall/test_freeze_snapshot.py` | D-0025 | A-0037 | planned |
+| R13 | recall | Merge granted scopes into the recall-eligible candidate pool (narrowest-wins ordering) | `src/nacre/recall/merge_scopes.py` | `tests/recall/test_merge_scopes.py` | D-0025, D-0023 | — | planned |
+| R14 | recall | Narrow by identity addresses, conjunctive, hierarchical relaxation recorded | `src/nacre/recall/narrow_by_identity.py` | `tests/recall/test_narrow_by_identity.py` | D-0025 | A-0038 | planned |
+| R15 | recall | Rank candidates: semantic, lexical (BM25), entity channels; abstention; RRF fusion; quantised deterministic ties | `src/nacre/recall/rank_candidates.py` | `tests/recall/test_rank_candidates.py` | D-0025, D-0024 | A-0034, A-0036 | planned |
+| R16 | recall | Assemble the frame: quorum pruning, budget fill, contested pinning, canonical CBOR, frame_id | `src/nacre/recall/assemble_frame.py` | `tests/recall/test_assemble_frame.py` | D-0025 | A-0036 | planned |
+| R17 | recall | Assess coverage (strong / weak / none) from frozen τ | `src/nacre/recall/assess_coverage.py` | `tests/recall/test_assess_coverage.py` | D-0025 | — | planned |
+| R18 | recall | Record ContextAssembled: header (no content) plus content and query parts under contributor-set keys, committed before return | `src/nacre/recall/record_context_assembled.py` | `tests/recall/test_record_context_assembled.py` | D-0025, D-0023 | A-0030 | planned |
+| R19 | recall | Public entry: recall_context() orchestrating R12–R18 | `src/nacre/recall/recall_context.py` | `tests/recall/test_recall_context.py` (incl. latency evidence) | D-0025 | A-0004 | planned |
+| R20 | recall | Replay a trace: recompute at its snapshot; same frame_id or unverifiable | `src/nacre/recall/replay_frame.py` | `tests/recall/test_replay_frame.py` | D-0025 | A-0036 | planned |
+| R21 | interface | Render a frame for a provider profile (pure; memory section byte-identical across providers) | `src/nacre/interface/render_frame.py` | `tests/interface/test_render_frame.py` | D-0025, D-0028 | — | planned |
+| R22 | interface | MCP server: stdio and loopback HTTP transport, dispatch to public entries, typed errors, limits | `src/nacre/interface/mcp_server.py` | `tests/interface/test_mcp_server.py` | D-0026 | A-0006 | planned |
+| R23 | sdk | Python SDK client (remote and in-process modes) | `src/nacre/sdk/client.py` | `tests/sdk/test_client.py` | D-0026 | A-0006 | planned |
+| R24 | models | Anthropic Messages adapter (only `anthropic` importer; refuses unsupported params; refusal non-retryable) | `src/nacre/models/anthropic_messages_provider.py` | `tests/models/test_anthropic_messages_provider.py` | D-0028, D-0021 | A-0043 | planned |
+| R25 | eval | EXP-0004 runner: arms C / V / N, k = 3, grading, safety metrics, audit (owner-run) | `src/nacre/eval/run_exp0004.py` | `tests/eval/test_run_exp0004.py` | D-0025, D-0016 | A-0034 | planned |
+| R26 | eval | EXP-0004 naive arm V: embed every readable captured event in granted scopes, top-10 cosine | `src/nacre/eval/naive_memory_arm.py` | `tests/eval/test_naive_memory_arm.py` | D-0025 | — | planned |
+
+Build order: freeze EXP-0004 sets, H4 and I1 (separate sessions) → R1–R4 → R5 → H4 measurement (gate 12) → R6–R11 →
+R12–R20 → R21–R24 → R25–R26 → EXP-0004 dev, dry, live → full Phase 3 gate. See `docs/plans/phase-3-plan.md`.
+
 ## Planned capability folders (phase in brackets)
 ledger [1] · scopes [1] · keys [1] · schema [1] · capture [2] · gate [2] · sleep [2] · stores [2] · models [2] · eval [2] ·
 recall [3] · interface (MCP/SDK) [3] · living [4] · tuner [4] · modes [4] · coding [5] · maps [5] ·

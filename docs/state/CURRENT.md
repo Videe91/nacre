@@ -1,7 +1,17 @@
 # Current state
 
-**Phase:** 2 COMPLETE (tag `phase-2-complete`, owner-accepted 2026-10-01); Phase 3 — recall, interface (PLANNING, no code)
-**Last updated:** 2026-09-30
+**Phase:** 2 COMPLETE (tag `phase-2-complete`, owner-accepted 2026-10-01); Phase 3 — recall, interface (PLANNING DONE, AWAITING OWNER APPROVAL; no code)
+**Last updated:** 2026-10-01
+
+**Phase 3 status (2026-10-01):** the plan is ready for owner review in `docs/plans/phase-3-plan.md`.
+- **Proposed ADRs:** D-0024 (embeddings and search, D3), D-0025 (recall pipeline, ContextFrame and trace),
+  D-0026 (interface and auth, D3), D-0027 (binary attachment scanning, D3), D-0028 (Anthropic adapter).
+- **Other documents:** the EXP-0004 pre-registration DRAFT; assumptions A-0032 … A-0043; INDEX rows R1–R26
+  (planned).
+- **Evidence:** the encrypted index is feasible (A-0032 evidence).
+- **Next:** owner decisions (listed in the plan). Then freeze EXP-0004, H4 and I1 in separate sessions **before any
+  recall code**.
+- **No Phase 3 product code until approval.**
 
 ## Done
 - Repo constitution, rules, registers, structure checker.
@@ -1034,3 +1044,20 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
     ABOUT a person written by others.
 - 2026-10-01 — **Phase 2 gate ACCEPTED by the owner; tagged `phase-2-complete`** (at 8131c5d). No fresh live run is
   needed (prompts were verified identical by hash). **Phase 3 planning started (no product code).**
+- 2026-10-01 — **Phase 3 planning delivered (no product code).**
+  - **Embeddings measured** (research scripts in a separate venv; Docker Desktop; single connection, labelled):
+    - warm exact top-50 search: 0.1 ms at 10k, 2 ms at 100k;
+    - cold fetch + decrypt: 0.12–0.15 s at 10k, 1.2–1.5 s at 100k;
+    - MiniLM query encode: 3.4 ms.
+  - **Proposed:**
+    - D-0024: encrypted recall index under each version's contributor-set key; a decrypted per-process cache with a
+      `shred_epoch` erasure check; no pgvector;
+    - D-0025: recall pipeline; snapshot = vector of per-stream positions; RRF fusion; quorum pruning; coverage;
+      frozen CBOR frame; split ContextAssembled trace; latency targets;
+    - D-0026: per-principal tokens, reject over-claims, `verified` trust_basis, MCP and SDK;
+    - D-0027: binary scanning, reject on a secret, reject unscannable by default;
+    - D-0028: Anthropic adapter.
+  - **Owner question, pinning:** current Claude IDs are undated except `claude-haiku-4-5-20251001`.
+  - **EXP-0004 draft:** arms C / V / N, k = 3, 1,080 trials per arm, bar N ≥ 0.80, N − V ≥ 15 pp, N − C ≥ 40 pp,
+    safety 0.
+  - **Phase 3 gate:** 16 items, including H4 (credential-slot target, ≥ 90% proposed) and binary scanning.
