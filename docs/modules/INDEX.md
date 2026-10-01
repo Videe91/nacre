@@ -81,13 +81,13 @@ Notes:
 | P10 | models | Replay provider: answer only from recorded `result` events with the same request hash, in recorded order; RecordingMiss otherwise | `src/nacre/models/recorded_provider.py` | `tests/models/test_recorded_provider.py` | D-0022 | A-0025 | done |
 | P11 | models | Load and verify model-call fixture files into a test ledger | `src/nacre/models/load_model_call_fixtures.py` | `tests/models/test_load_model_call_fixtures.py` | D-0022 | — | planned |
 | P12 | schema | DDL: `interp` projection (versions, edges, heads view), RLS by stream, append-only | `src/nacre/schema/sql/0009_interpretation_plane.sql` | `tests/schema/test_0009_interpretation_plane.py` | D-0017 | — | done |
-| P13 | capture | Record a decision | `src/nacre/capture/record_decision.py` | `tests/capture/test_record_decision.py` | D-0018 | — | planned |
-| P14 | capture | Record a prediction | `src/nacre/capture/record_prediction.py` | `tests/capture/test_record_prediction.py` | D-0018 | — | planned |
-| P15 | capture | Record a dispatched action (`execution_of`) | `src/nacre/capture/record_action.py` | `tests/capture/test_record_action.py` | D-0018 | — | planned |
-| P16 | capture | Record an outcome: typed sections, `outcome_for`, optional `evaluates_prediction`; absence is never failure | `src/nacre/capture/record_outcome.py` | `tests/capture/test_record_outcome.py` | D-0018 | A-0026 | planned |
-| P17 | capture | Record a correction (`correction_of`) | `src/nacre/capture/record_correction.py` | `tests/capture/test_record_correction.py` | D-0018 | — | planned |
-| P18 | capture | Validate typed refs: known rel, backward-only, same stream, no self-reference | `src/nacre/capture/validate_refs.py` | `tests/capture/test_validate_refs.py` | D-0018 | — | planned |
-| P19 | capture | Decide section authority from the envelope (the D3 rule) | `src/nacre/capture/section_authority.py` | `tests/capture/test_section_authority.py` | D-0018 | A-0026 | planned |
+| P13 | capture | Record a decision | `src/nacre/capture/record_decision.py` | `tests/capture/test_record_decision.py` | D-0018 | — | done |
+| P14 | capture | Record a prediction | `src/nacre/capture/record_prediction.py` | `tests/capture/test_record_prediction.py` | D-0018 | — | done |
+| P15 | capture | Record a dispatched action (`execution_of`) | `src/nacre/capture/record_action.py` | `tests/capture/test_record_action.py` | D-0018 | — | done |
+| P16 | capture | Record an outcome: typed sections, `outcome_for`, optional `evaluates_prediction`; absence is never failure | `src/nacre/capture/record_outcome.py` | `tests/capture/test_record_outcome.py` | D-0018 | A-0026 | done |
+| P17 | capture | Record a correction (`correction_of`) | `src/nacre/capture/record_correction.py` | `tests/capture/test_record_correction.py` | D-0018 | — | done |
+| P18 | capture | Validate typed refs: known rel, backward-only, same stream, no self-reference | `src/nacre/capture/validate_refs.py` | `tests/capture/test_validate_refs.py` | D-0018 | — | done |
+| P19 | capture | Decide section authority from the envelope (the D3 rule) | `src/nacre/capture/section_authority.py` | `tests/capture/test_section_authority.py` | D-0018 | A-0026 | done |
 | P20 | gate | Score one event: surprise, stakes, statement | `src/nacre/gate/score_event.py` | `tests/gate/test_score_event.py` | D-0019 | A-0028 | planned |
 | P21 | gate | Flag events above the mode threshold (idempotent `flag` memory events) | `src/nacre/gate/flag_events.py` | `tests/gate/test_flag_events.py` (+ 100% flag recall on 003–016) | D-0019 | A-0028 | planned |
 | P22 | sleep | Build the evidence bundle for one flagged episode (decision as history; sections with authority) | `src/nacre/sleep/build_evidence_bundle.py` | `tests/sleep/test_build_evidence_bundle.py` | D-0020 | — | planned |

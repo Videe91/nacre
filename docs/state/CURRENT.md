@@ -768,3 +768,12 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   - **No foreign key to `ledger.events`:** it changed how the ledger refuses TRUNCATE, breaking 2 Phase 1 tests. The
     backing check is done by trigger instead.
   - **Tests:** 15. **Mutations:** 10/10 killed after 2 survivors got tests (version gap, FORCE RLS).
+- 2026-10-01 — **P13–P19 done: capture** (D-0018).
+  - **Recorders:** `record_decision` (decided_from optional in Phase 2), `record_prediction` (expected_success,
+    confidence as an integer %), `record_action` (always dispatched), `record_outcome` (typed sections with closed
+    roles; absence is never recorded as failure), `record_correction`.
+  - **References (`validate_refs`):** the MNEXA ADR-0008 vocabulary, target types per relation, same stream,
+    committed and readable, no duplicates; causal relation names are absent by construction.
+  - **Authority (`section_authority`):** the D-0018 rule from the envelope only. It never reads text.
+  - **Stakes tags:** a closed set (D-0019).
+  - **Tests:** 45. **Mutations:** 10/10 killed on the authority rule and the reference validator.
