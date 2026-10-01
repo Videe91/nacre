@@ -85,6 +85,24 @@ Option 3.
   fail the ceiling (about 16%)**. That is a finding about R1, not a reason to change the set or the ceiling. The
   measurement is run as registered and reported to the owner.
 
+### R3 measured (2026-10-01, as registered)
+- **Result:** **32 / 200 flagged = 160 per mille (16%) > ceiling 50.** **Item 7 FAILS on selectivity.** Recall stays
+  at 100% (A-0028).
+- **Which episodes:** exactly the 32 trusted (ci / review) expected failures. R1's clause "a failing evaluation always
+  scores 1000, whatever the prediction" flags them. No other routine episode is flagged.
+- **Canary:** threshold 0 flags 200/200, and item 7 fails, as required.
+- Recorded in `tests/eval/test_measure_gate_selectivity.py`; item 7 is held open by a strict xfail.
+
+**Proposed fix (R4, needs owner approval, because R1 was owner-approved):**
+- An authoritative **correction** section always flags, as now.
+- A **failing evaluation** keeps its D-0018 authority (a span inside it can ground a lesson) but **flags only by the
+  surprise rule**: when the failure was not predicted.
+- **Predicted effect, computed and not yet measured:**
+  - routine set: 0 / 200 flagged;
+  - recall stays 100% (005–016 carry correction sections; 003/004 are unpredicted failures).
+
+  If approved, R4 is measured against the same frozen set and ceiling.
+
 ## Why this one
 - It is deterministic, costs nothing, and cannot be argued with by untrusted text.
 - It covers the SPEC signals.

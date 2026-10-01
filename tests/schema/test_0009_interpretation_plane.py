@@ -148,3 +148,23 @@ def test_rls_is_forced_even_for_the_owner(streams):
         rows = dict(c.execute("SELECT relname, relforcerowsecurity FROM pg_class c JOIN pg_namespace n ON n.oid = c.relnamespace "
                               "WHERE n.nspname = 'interp' AND relkind = 'r'").fetchall())
     assert rows == {"versions": True, "edges": True}
+
+
+@pytest.mark.parametrize("sql", ["ALTER TABLE interp.versions DISABLE TRIGGER versions_check",
+                                 "ALTER TABLE interp.versions DISABLE TRIGGER ALL",
+                                 "ALTER TABLE interp.edges DISABLE TRIGGER edges_check",
+                                 "SET session_replication_role = replica",
+                                 "DROP TRIGGER versions_check ON interp.versions"])
+def test_the_app_role_cannot_disable_or_bypass_the_projection_triggers(rw, sql):
+    with pytest.raises(psycopg.errors.InsufficientPrivilege):
+        with rw() as s:
+            s.conn.execute(sql)
+
+
+def test_a_version_cannot_reference_a_memory_event_of_another_stream(rw, session, provider, streams):
+    with session(uuid.uuid4(), read=[streams["b"]], write=[streams["b"]]) as sb:
+        foreign = _event(sb, provider, streams["b"])
+    with pytest.raises(psycopg.errors.RaiseException, match="backed by a memory_event of its stream"):
+        with rw() as s:                       # claims stream a while pointing at stream b's event
+            s.conn.execute("INSERT INTO interp.versions VALUES (%s,1,'belief','active','quorum',%s,%s,%s,%s)",
+                           (uuid.uuid4(), streams["a"], foreign.event_id, foreign.commit_seq, MAC))

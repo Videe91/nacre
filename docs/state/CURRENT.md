@@ -810,3 +810,12 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
     so a failure (about 16%) is expected and will be reported, not engineered away.
   - **Note:** a first draft of the generator put expected failures in `diagnostic` sections. That would have dodged
     R1, so it was changed to `evaluation` (realistic) before freezing.
+- 2026-10-01 — **Gate item 7 selectivity MEASURED: FAIL (32/200 = 16% > 5%).**
+  - The failures are all trusted expected failures, flagged by R1's failing-evaluation clause. Recall still 100%.
+    The canary (flag everything) fails item 7 as required.
+  - **Item 7 is OPEN**, held by a strict xfail. Proposed R4 (owner decision): corrections always flag; failing
+    evaluations flag only when unpredicted. Predicted: 0/200 routine, recall unchanged.
+  - **Belief-store trigger confirmation (owner request):** `nacre_app` cannot disable or bypass the projection
+    triggers. `DISABLE TRIGGER` (one / ALL / edges), `session_replication_role = replica` and `DROP TRIGGER` are all
+    refused. A version cannot reference a missing event, an event of another stream, the wrong commit_seq, or a
+    non-memory event. 22 tests in `test_0009_interpretation_plane.py`.
