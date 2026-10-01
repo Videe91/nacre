@@ -718,3 +718,29 @@ recorded formation parity (old 14) — and the non-inferiority margins against E
       676 false), exactly. 9 tests.
     - **Mutations:** 9/9 killed. 5 survive L1 alone, because MNEXA's data never exercises phrase lists,
       `none_regex`, bare strings or forbidden hits; the contract tests guard them. Documented in the header.
+- 2026-10-01 — **Models layer built: P6, P7, P9, P9b, P10** (D-0021 with amendment 1, D-0022).
+  - **`core/model_provider.py`:** types plus the canonical request form (v1) and its hash; `is_dated_pin`.
+  - **Price table `models/data/prices.json`, version 2026-10-01:** `gpt-4o-mini-2024-07-18` at $0.15 input, $0.075
+    cached input and $0.60 output per 1M tokens, verified on OpenAI's model page the same day (listed as the default
+    snapshot, no deprecation date). Fail closed for any other model.
+  - **`models/set_model_policy.py` (P9b, new row):** org allow-list of dated pins; default deny; latest wins; an
+    unreadable org stream means deny.
+  - **`models/call_model.py`:**
+    - **Checks before sending:** dated pin, price entry, provider policy, SI-1 (readable sources, one scope).
+    - **Each attempt** becomes a `result` event (actor_kind model, untrusted, cycle_id = run) recording the canonical
+      request and hash, the response, the timeout/retry settings, the attempt number, tokens, and the USD cost with
+      the price-table version. A secret-shaped request or response is marked `redacted` and not replayable.
+    - **Design fix found by a test:** provider failures are *returned* (`ModelCall.error`, `raise_for_error()`), not
+      raised. Raising inside the caller's transaction rolled back the failed-attempt recordings.
+  - **`models/recorded_provider.py`:** exact replay by request hash in recorded order; a miss raises
+    `RecordingMiss`; no live fallback.
+  - **`models/openai_responses_provider.py`:** SDK retries off; per-call timeout; errors classified retryable or
+    not; error messages carry class and HTTP status only. Optional extra `nacre[openai]` = `openai==3.22.1`.
+  - **`check_structure.py` rule 6 (SI-4):** each SDK may be imported only by its adapter.
+  - **Tests:** 30 (`tests/models/`), including SI-1, SI-2 (canary key through the real SDK against a closed
+    localhost port), SI-3, SI-5, SI-6 (sockets blocked in replay) and SI-7 (shredded scope means nothing
+    replayable). **Mutations:** 12/12 killed on `call_model`'s guards.
+  - **Not built yet (tracked):**
+    - P8 Anthropic adapter (needs a dated pin and a price entry; not on the Phase 2 path);
+    - P11 fixture loader;
+    - the D-0022 attachment route for model-call bodies over 1 MiB (refused for now; Phase 2 bodies are about 4 KB).

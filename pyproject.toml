@@ -10,6 +10,8 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+# D-0021: provider SDKs are optional extras, exact pins; imported only by their adapter in src/nacre/models/.
+openai = ["openai==3.22.1"]
 # Test-only (D-0008): cbor2 is a cross-check oracle, never imported by src/.
 test = [
     "pytest>=9",

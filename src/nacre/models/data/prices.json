@@ -1,0 +1,15 @@
+{
+ "version": "2026-10-01",
+ "currency": "USD",
+ "unit": "per 1,000,000 tokens",
+ "rule": "D-0021 amendment 1: a model with no entry here cannot be called (fail closed). Change = new version + source.",
+ "models": {
+  "gpt-4o-mini-2024-07-18": {
+   "provider": "openai",
+   "input": "0.15",
+   "cached_input": "0.075",
+   "output": "0.60",
+   "source": "https://developers.openai.com/api/docs/models/gpt-4o-mini (read 2026-10-01; listed as the default snapshot, no deprecation date shown)"
+  }
+ }
+}

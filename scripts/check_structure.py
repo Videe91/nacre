@@ -5,6 +5,7 @@ Checks the repo rules mechanically:
   3. No file is over the hard line limit.
   4. Every source file is registered in docs/modules/INDEX.md.
   5. No utils.py / helpers.py grab-bag files.
+  6. Provider SDKs are imported only by their adapter (D-0021 SI-4).
 Run: python scripts/check_structure.py   (exit code 1 on any failure)
 """
 import re
@@ -16,6 +17,10 @@ SRC = ROOT / "src" / "nacre"
 HARD_LIMIT, SOFT_LIMIT = 400, 300
 REQUIRED = ["Functionality:", "Public entry:", "Decisions:", "Assumptions:"]
 BANNED_NAMES = {"utils.py", "helpers.py", "misc.py", "common.py"}
+# D-0021 SI-4: each provider SDK may be imported by exactly one adapter file.
+SDK_ADAPTERS = {"openai": "src/nacre/models/openai_responses_provider.py",
+                "anthropic": "src/nacre/models/anthropic_messages_provider.py"}
+SDK_IMPORT = re.compile(r"^\s*(?:import|from)\s+(openai|anthropic)\b", re.M)
 
 
 def known_ids():
@@ -55,6 +60,9 @@ def main():
             warnings.append(f"{rel}: {lines} lines, nearing limit")
         if rel not in index:
             errors.append(f"{rel}: not registered in docs/modules/INDEX.md")
+        for sdk in SDK_IMPORT.findall(text):
+            if rel != SDK_ADAPTERS[sdk]:
+                errors.append(f"{rel}: imports the {sdk} SDK; only {SDK_ADAPTERS[sdk]} may (D-0021 SI-4)")
 
     for w in warnings:
         print("WARN ", w)
