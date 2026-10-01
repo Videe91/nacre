@@ -55,13 +55,12 @@ Postgres:
    003–016.
 3. **L2 mechanism parity (0 model calls):** MNEXA's stored raw responses (007–016) through Nacre's gates give exactly
    MNEXA's recorded admissions, rejections (with reasons) and fallbacks.
-4. **Live comparison (014–016 final pipeline only):**
-   - **Setup:** `gpt-4o-mini-2024-07-18`, provider defaults, k = 3, 180 trials per arm. Arms B (fresh MNEXA,
-     EXP-0001), C (no memory, same runs) and N (Nacre, same design).
-   - **Validity:** B − C ≥ 30 pp (A-0029).
-   - **Non-inferiority:** N ≥ B − 9 pooled, and N_set ≥ B_set − 6.
-   - **Superiority:** N − C ≥ 54 pooled, and N_set − C_set ≥ 9.
-   - **Safety:** zero margin. **No reruns to reach a pass.**
+4. **Live comparison (014–016 final pipeline only; FROZEN from EXP-0001, B = 178/180, C = 21/180):**
+   - **Setup:** `gpt-4o-mini-2024-07-18`, provider defaults, k = 3, 180 trials. Nacre arm N on the same design.
+   - **Non-inferiority:** N ≥ **169** pooled, and per set ≥ **53 / 53 / 54** (014 / 015 / 016).
+   - **Superiority:** N ≥ **75** pooled, and per set ≥ **17 / 15 / 16**. This is implied by non-inferiority; both
+     checks are kept.
+   - **Safety:** zero tolerance. **No reruns to reach a pass.**
 5. **Recorded-mode determinism:** replaying Nacre's live recording reproduces every grade exactly with the network
    blocked.
 6. **Belief lifecycle:** MNEXA's 48 lifecycle tests, translated, pass, plus the 4 deviation tests.
@@ -74,6 +73,13 @@ Postgres:
     - SI-1 to SI-7 pass.
 11. **Cost reported:** tokens per flagged episode and per task.
 12. **Phase 1 gate still passes.**
+13. **(PROPOSED with the D-0020 revision)** Prompt parity: Nacre's proposer and repair prompts are byte-identical to
+    MNEXA's recorded EXP-0001 prompts, except for named, reviewed deltas.
+14. **(PROPOSED)** Recorded formation parity: EXP-0001's recorded responses replayed through Nacre give MNEXA's
+    admitted memory for that run (injected candidates excluded).
+15. **(PROPOSED)** No test-only shortcuts: product modules never receive task-author fields or parse role markers;
+    injected safety challenges never reach memory; canary — all-untrusted sections admit nothing
+    (`docs/plans/phase-2-shortcut-audit.md`).
 
 **Not in the Phase 2 gate:** the checker model. It is deferred to its own experiment and gate, and ships only if it
 improves results.
@@ -664,3 +670,24 @@ improves results.
     reported so far came from a size-changing mutant.
   - **Confirmation:** a fresh 20-iteration run with a cold restart and random order each time, untouched tree:
     **20/20 clean, 697 passed each.**
+- 2026-10-01 — **EXP-0001 complete and frozen; margins frozen; D-0019/D-0020 revised (proposed).**
+  - Run `EXP-0001-20261001T071654Z-69b7b4`, verified independently:
+    - 18/18 steps; 1,260 calls, all `gpt-4o-mini-2024-07-18`;
+    - **B = 178/180, C = 21/180**; validity 87.2 pp; MNEXA safety all 0. A-0029 validated.
+  - **Frozen** in `tests/regression/exp0001/`: run, summary, the full call log (the first recorded MNEXA prompts),
+    9 harness results and 9 control results. Byte copies, scan clean. The manifest hashes all 1,275 files in the run
+    folder. One entropy false positive on a manifest path was removed by storing paths as component lists; no
+    allowlist change.
+  - **Nacre's margins (frozen):** N ≥ 169 pooled, and per set 53 / 53 / 54; superiority 75 and 17 / 15 / 16 (implied;
+    kept); zero safety tolerance.
+  - **Shortcut audit** (`docs/plans/phase-2-shortcut-audit.md`):
+    - MNEXA's harness injects task-author recoverable candidates, which contain the answer clause in all 60
+      families;
+    - attribution shows the model itself supplied the clause in all 180 B trials (147 through structured
+      propositions, 33 through fallback with the model's same-run proposal);
+    - recommendation: keep B as frozen, because the asymmetry runs against Nacre.
+  - **D-0020 revision R1–R6 (proposed):** no injection; prompt parity against the recorded prompts; recorded
+    formation parity; fallback mandatory; measured cost; transfer stays in the harness.
+  - **D-0019 revision R1–R2 (proposed):** an authoritative correction always flags; flag recall is measured through
+    the real capture mapping.
+  - **No porting until the owner approves.**

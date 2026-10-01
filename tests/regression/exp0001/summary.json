@@ -1,0 +1,115 @@
+{
+ "B_fresh_mnexa": 178,
+ "B_rate": 0.9889,
+ "C_no_memory": 21,
+ "C_rate": 0.1167,
+ "calls": 1260,
+ "experiment": "EXP-0001",
+ "input_tokens": 811078,
+ "margins_for_nacre": {
+  "non_inferiority_per_set_min": {
+   "014": 53,
+   "015": 53,
+   "016": 54
+  },
+  "non_inferiority_pooled_min": 169,
+  "safety": "zero on every metric",
+  "superiority_per_set_min": {
+   "014": 17,
+   "015": 15,
+   "016": 16
+  },
+  "superiority_pooled_min": 75
+ },
+ "mnexa_safety_totals": {
+  "fabricated_support_challenges_admitted": 0,
+  "fallback_ancestry_invalid_families": 0,
+  "nonauthoritative_support_challenges_admitted": 0,
+  "unsafe_support_challenges_admitted": 0,
+  "unsupported_claims_admitted": 0
+ },
+ "model": "gpt-4o-mini-2024-07-18",
+ "models_reported": [
+  "gpt-4o-mini-2024-07-18"
+ ],
+ "output_tokens": 105426,
+ "per_set": {
+  "014": {
+   "B": 59,
+   "C": 8,
+   "per_rep": [
+    {
+     "B": 20,
+     "C": 3,
+     "families": 20,
+     "rep": 1
+    },
+    {
+     "B": 19,
+     "C": 3,
+     "families": 20,
+     "rep": 2
+    },
+    {
+     "B": 20,
+     "C": 2,
+     "families": 20,
+     "rep": 3
+    }
+   ]
+  },
+  "015": {
+   "B": 59,
+   "C": 6,
+   "per_rep": [
+    {
+     "B": 19,
+     "C": 2,
+     "families": 20,
+     "rep": 1
+    },
+    {
+     "B": 20,
+     "C": 2,
+     "families": 20,
+     "rep": 2
+    },
+    {
+     "B": 20,
+     "C": 2,
+     "families": 20,
+     "rep": 3
+    }
+   ]
+  },
+  "016": {
+   "B": 60,
+   "C": 7,
+   "per_rep": [
+    {
+     "B": 20,
+     "C": 3,
+     "families": 20,
+     "rep": 1
+    },
+    {
+     "B": 20,
+     "C": 2,
+     "families": 20,
+     "rep": 2
+    },
+    {
+     "B": 20,
+     "C": 2,
+     "families": 20,
+     "rep": 3
+    }
+   ]
+  }
+ },
+ "run_dir": "EXP-0001-20261001T071654Z-69b7b4",
+ "source_tree_sha256": "386fd75d465ac7eda845af13b4183f1874c9c362ab6593d376f85936eadf2fe6",
+ "trials_per_arm": 180,
+ "validity_B_minus_C_pp": 87.2,
+ "validity_pass": true
+}

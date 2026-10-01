@@ -1,0 +1,265 @@
+{
+ "set": "015",
+ "families": [
+  {
+   "family_id": "opal-pay-op-85",
+   "attempts": 1,
+   "passes": 1,
+   "pass": true,
+   "decisions": [
+    {
+     "decision": "To address the task regarding OpalPay returning OP-85, the rule for the reuse of the previous settlement nonce is:\n\n\"Never reuse the previous settlement nonce.\"",
+     "passed": true,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "pearl-rpc-pr-46",
+   "attempts": 1,
+   "passes": 1,
+   "pass": true,
+   "decisions": [
+    {
+     "decision": "State the rule for the old request token which must not be reused.\n\nAction: Ensure that a new request token is generated, and do not reuse the old request token PR-46.",
+     "passed": true,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "quince-auth-qa-61",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "For a retired credential, the rule is as follows:\n\n- Retired credentials **must not** be used for authentication.\n\nThe action I would take is to ensure that any attempt to authenticate using the credential associated with QA-61 is denied, as it is retired.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "reed-bus-rb-34",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "State the acknowledgement rule for ReedBus returning RB-34: \n\n- Acknowledge receipt of RB-34 immediately and ensure that no further actions are taken until confirmation is received. \n\n**Action to take:**\n- Acknowledge receipt of RB-34.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "sable-db-sd-79",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "Write rule for the passive replica:\n\n\"Ensure that all write operations to the passive replica must be acknowledged by SD-79 before proceeding.\"",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "topaz-queue-tq-59",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "Permit lane restrictions for TQ-59 are: \"Only use lane 3 for TQ-59. Do not attempt to use lanes 1 or 2.\"",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "umber-store-us-89",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "Set the finalization header to \"UmberStore-US-89-Complete\". Ensure that you do not modify or omit any part of the specified header.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "violet-rpc-vr-27",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "The transport-channel restriction for VioletRPC returning VR-27 is: \"must not use any unauthorized transport channels.\" \n\nAction to take: Ensure that the transport channel used complies with authorized protocols only and does not include any unauthorized channels.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "walnut-rpc-wr-55",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "The exact heartbeat-frame requirement for WalnutRPC returning WR-55 is to ensure that the heartbeat frame contains a specific payload, adhering to the required format and timing intervals. There are no prohibitions, retry limits, or specific identifiers mentioned in the task or accumulated experience to reference. \n\nAction: Implement the heartbeat-frame as specified by WalnutRPC, ensuring adherence to any available format and timing guidelines associated with WR-55.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "xylem-queue-xq-66",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "The retry count for XylemQueue returning XQ-66 is 3.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "yucca-store-ys-41",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "To determine the minimum replica requirement for YuccaStore returning YS-41, the action to take is to assess the system's current replication strategy. Since there is no prior operational experience outlined in the accumulated MNEXA memory, the minimum requirement should adhere to standard best practices which typically recommend a minimum of **three replicas** to ensure reliability and fault tolerance.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "zenith-pay-zp-72",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "The minimum wait duration after ZenithPay returns ZP-72 is 72 hours.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "acorn-api-aa-83",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "The maximum retry count for AcornAPI is 3.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "briar-lock-bl-48",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "Given the operational task, the action to take is:\n\nDetermine and state the maximum pending-lease count for BriarLock returning BL-48.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "coral-cdn-cc-69",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "Condition for purging the edge shard: The edge shard may be purged if the cache data is older than 24 hours.\n\nAction to take: Check the age of the cache data. If the cache data is older than 24 hours, proceed to purge the edge shard.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "drift-sign-ds-56",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "Before key rotation, ensure that the DriftSign returns DS-56.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "elm-pay-ep-97",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "To refresh the ElmPay recovery lease, follow this applicability rule:\n\n- Only refresh the lease if it is within 30 days of expiration.\n- Always initiate the refresh process 7 days before the lease expires.\n- Do not attempt to refresh the lease after it has expired.\n- Each lease refresh request must include the current lease ID and the appropriate authentication token.\n- Maximize the refresh attempts to 3 times within a 24-hour period if the refresh fails.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "fjord-db-fd-75",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "To route writes to the FjordDB leader, adhere to the following applicability rule: \n\n\"Only route writes to the FjordDB leader when it is in a synchronized state. Do not route writes to the leader if it is in a recovery mode or when unavailable.\" \n\nAction: Check the state of the FjordDB leader before routing any writes, ensuring it is synchronized.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "garnet-parser-gp-67",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "State S should be mapped to blocked when the operational parameters indicate that the state cannot be executed successfully according to established criteria.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "hemlock-cache-hc-38",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "HemlockCache should rebuild its local index when it has detected significant changes in the underlying data. Ensure that this rebuild occurs only after all data modifications are complete, and do not rebuild the index if there are ongoing data operations.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  }
+ ]
+}

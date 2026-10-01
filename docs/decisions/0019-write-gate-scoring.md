@@ -54,6 +54,18 @@ Option 3.
   lesson-bearing episodes. In MNEXA those are the failed decision → authoritative correction pairs. Measured
   deterministically, 0 model calls.
 
+## Revision after EXP-0001 (2026-10-01, proposed; owner to approve)
+- **R1. An authoritative correction always flags.**
+  - Any outcome carrying an **authoritative** `correction` or failing-`evaluation` section (D-0018 authority) scores
+    **1.0**, whatever the prediction said.
+  - Why: in EXP-0001 every piece of lesson content in B came from authoritative-correction spans. Under the original
+    surprise rule, an agent that *predicted* failure would get surprise 0. The episode would not be flagged, and the
+    correction, the most valuable signal, would never be consolidated.
+- **R2. The non-regression check uses the real capture mapping.** Flag recall is measured on 003–016 families
+  converted through the same harness mapping as R3 of D-0020 (decision → outcome with sections and envelope
+  authority), not on a separate idealised encoding.
+- Nothing in EXP-0001 bears on stakes or statement scoring; those stay as proposed.
+
 ## Why this one
 - It is deterministic, costs nothing, and cannot be argued with by untrusted text.
 - It covers the SPEC signals.

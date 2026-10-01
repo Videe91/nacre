@@ -1,0 +1,465 @@
+{
+ "set": "016",
+ "families": [
+  {
+   "family_id": "lunar-pay-lp-88",
+   "attempts": 3,
+   "passes": 2,
+   "pass": true,
+   "decisions": [
+    {
+     "decision": "To address the reuse of the previous authorization nonce for LP-88, the action you would take is:\n\n\"Use a fresh authorization nonce and never reuse the prior authorization nonce.\"",
+     "passed": true,
+     "memory_segments": []
+    },
+    {
+     "decision": "Use the current nonce LP-88 and do not reuse the previous authorization nonce.",
+     "passed": true,
+     "memory_segments": []
+    },
+    {
+     "decision": "The rule governing reuse of the previous authorization nonce is not explicitly stated in the provided task or accumulated experience. Therefore, based on the available information, no specific action can be derived regarding the reuse of the previous authorization nonce. \n\nIf additional context or rules regarding authorization nonces are available, please provide that to facilitate a more informed decision.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "meridian-rpc-mr-47",
+   "attempts": 3,
+   "passes": 1,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "Use the correlation token MR-47 and state the rule for the retired correlation token. Do not reuse the retired correlation token.",
+     "passed": true,
+     "memory_segments": []
+    },
+    {
+     "decision": "The rule for the retired correlation token in response to MeridianRPC returning MR-47 is to **only use fresh correlation tokens** for subsequent requests.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "The rule for the retired correlation token is: \"Do not use the retired correlation token MR-47 for any operations.\"",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "nova-auth-na-62",
+   "attempts": 3,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "State the rule for a superseded credential is that a superseded credential must not be used. Therefore, the action I would take is to ensure that NA-62 is not employed and to validate against the current active credentials.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "The rule for a superseded credential states that NovaAuth returns NA-62. \n\nThe action to take is to ensure that the current credentials are updated or replaced as per the system's protocol to avoid unauthorized access or responses.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "Return NA-62 and state the rule for a superseded credential. Ensure you do not reuse any prior credentials.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "onyx-bus-ob-35",
+   "attempts": 3,
+   "passes": 2,
+   "pass": true,
+   "decisions": [
+    {
+     "decision": "Acknowledge the rejected envelope OB-35 by implementing the defined acknowledgement rule: \"Do not acknowledge envelopes that have been rejected.\" \n\nAction: Ensure that OB-35 is not acknowledged.",
+     "passed": true,
+     "memory_segments": []
+    },
+    {
+     "decision": "Acknowledge the rejected envelope by stating, \"OB-35: envelope rejected. Please review and resubmit.\"",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "The acknowledgement rule for the rejected envelope from OnyxBus (OB-35) is to issue an immediate notification stating that the envelope has been rejected. Ensure that the notification includes the reason for rejection and must not be delayed.",
+     "passed": true,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "prairie-db-pd-81",
+   "attempts": 3,
+   "passes": 3,
+   "pass": true,
+   "decisions": [
+    {
+     "decision": "The write rule for the passive shard must ensure that no write operations are allowed. Therefore, the action to take is:\n\n**Do not write to the passive shard.**",
+     "passed": true,
+     "memory_segments": []
+    },
+    {
+     "decision": "For the passive shard, the write rule is: \"Do not write to the passive shard.\"",
+     "passed": true,
+     "memory_segments": []
+    },
+    {
+     "decision": "Write rule for the passive shard: \"Accept PD-81 only if it is explicitly and clearly stated in the operational guidelines. Never process any write requests without prior validation.\"",
+     "passed": true,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "quartz-queue-qq-60",
+   "attempts": 3,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "Permitted lane restriction for QuartzQueue QQ-60: **Do not enter lanes designated for heavy vehicles.**\n\nAction: **Ensure you only use lanes assigned for light vehicles.**",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "For QuartzQueue returning QQ-60, the permitted lane restriction is: \"Do not use Lane A.\"\n\nThe action to take is to route the operational task using an alternative lane that adheres to this restriction.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "Action: Ensure that lane restrictions for QuartzQueue QQ-60 are adhered to, specifically stating any prohibitions relevant to lane usage, since there is no accumulated experience from MNEXA regarding this particular scenario.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "river-store-rs-90",
+   "attempts": 3,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "Return RS-90 with the permitted finalization header according to RiverStore requirements. Ensure that every applicable constraint is followed based on the specific operational guidance provided.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "The permitted finalization header rule for RiverStore returning RS-90 is as follows:\n\n- Use the finalization header \"Finalization-RS-90\" and ensure that only valid tokens are included. \n- Do not include any previously used tokens in this header.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "The permitted finalization header rule for RiverStore returning RS-90 is to include the header \"Finalize-Request: RS-90\" and ensure that no additional headers are present.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "solstice-rpc-sr-28",
+   "attempts": 3,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "To address the SR-28 response from SolsticeRPC, you must follow these transport-channel restrictions:\n\n1. Ensure that all data packets are routed via the specified secure transport channel.\n2. Only use TLS 1.2 or above for encryption.\n3. Do not include any sensitive information in the clear.\n4. Every connection must authenticate using the provided token.\n5. Before initiating a connection, verify the integrity of the channel endpoint.\n\nThese actions must be strictly adhered to in compliance with the operational task.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "Given that SolsticeRPC returns SR-28, state the transport-channel restriction as follows:\n\n- Do not use the transport channel if it is associated with SR-28. \n\nAction to take: Verify that the transport channel is compliant with the restrictions before proceeding.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "Transport-channel restriction for SR-28 from SolsticeRPC: ensure that all messages must be transmitted over a secure channel (TLS 1.2 or higher) and must not be sent over unsecured channels.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "tundra-rpc-tr-56",
+   "attempts": 3,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "For TundraRPC returning TR-56, the exact heartbeat-frame requirement is to send a heartbeat frame every 30 seconds. Each heartbeat frame must include the identifiers TR-56 and cannot exceed a length of 256 bytes. Do not send more than three consecutive heartbeat frames without receiving an acknowledgment. If an acknowledgment is not received after three attempts, terminate the connection.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "The exact heartbeat-frame requirement for TundraRPC returning TR-56 must be adhered to without deviation. Ensure compliance with the following:\n\n- The heartbeat-frame must be sent every 30 seconds.\n- Each heartbeat-frame must include a valid authentication token.\n- Never skip sending a heartbeat-frame.\n- Do not send more than 3 consecutive heartbeat-frames without receiving an acknowledgment.\n- If no acknowledgment is received after 3 attempts, initiate a reconnection procedure immediately.\n\nThis preserves all critical constraints required for the task.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "To fulfill the TR-56 requirement from TundraRPC, the exact heartbeat-frame requirement is:\n\nEvery heartbeat frame must be sent every 30 seconds. Ensure that the frame includes a valid session token that has not expired. Each heartbeat frame must contain the following identifiers: `session_id`, `timestamp`, and `status`. Do not include any extraneous data fields in the heartbeat frame.\n\nAdditionally, if a heartbeat frame is not acknowledged within 3 seconds, retry sending the frame up to 2 times. After the third failure, terminate the session and log an error message.\n\nThese requirements must be strictly adhered to when implementing the heartbeat functionality.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "ultraviolet-queue-uq-67",
+   "attempts": 3,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "Since there is no accumulated experience from MNEXA, I cannot provide any specific retry count or constraints. Therefore, the action to take is to proceed with the operation using UltravioletQueue and return UQ-67, with the assumption that retry count defaults apply, or escalate if unspecified.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "The exact retry count for UltravioletQueue returning UQ-67 is 0.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "Retry count for UltravioletQueue returning UQ-67 must be 3 attempts.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "vale-store-vs-42",
+   "attempts": 3,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "To determine the minimum replica requirement for ValeStore returning VS-42, ensure that you have at least 3 replicas. This is to maintain availability and data integrity.\n\nAction: Configure at least 3 replicas for ValeStore to handle the return of VS-42.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "To address the operational task for ValeStore returning VS-42, the minimum replica requirement is **three replicas**. This ensures fault tolerance and availability of the service.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "To determine the minimum replica requirement for ValeStore returning VS-42, you must consider the consistency and availability operations needed to fulfill this task efficiently. \n\n**Action:**\nEstablish a minimum of 3 replicas to ensure data availability and fault tolerance. This configuration allows for the failure of one node while still maintaining consistent access to data.\n\nNo additional constraints or guidance from accumulated experience.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "wren-pay-wp-73",
+   "attempts": 3,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "To determine the minimum wait duration after WrenPay returns WP-73, I would take the action of checking the specific wait duration guidelines applicable to WP-73.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "State the minimum wait duration for WrenPay return WP-73: 30 minutes. \n\nTake the action to monitor the system for the specified duration before attempting further processing.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "The minimum wait duration for WP-73 is 30 minutes.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "xenial-api-xa-84",
+   "attempts": 3,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "Given the task with XenialAPI returning XA-84, the maximum retry count is **3**. \n\nTake the action to retry the operation up to the maximum retry count of **3** if the issue persists.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "The maximum retry count for XenialAPI returning XA-84 is 3.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "Based on the provided task and accumulated experience, the action I would take is:\n\nThe maximum retry count is 3.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "yew-lock-yl-49",
+   "attempts": 3,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "Set the maximum pending-lease count to 49.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "Based on the task and accumulated experience from MNEXA, the action to take is:\n\nState the maximum pending-lease count as YL-49.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "The action you would take is to set the maximum pending-lease count to 49.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "zinnia-cdn-zc-70",
+   "attempts": 3,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "The edge partition may be purged only if ZinniaCDN returns ZC-70.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "The edge partition may be purged when ZinniaCDN returns ZC-70, and all cache entries associated with that return must be expired before performing the purge.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "The edge partition may be purged when ZinniaCDN returns ZC-70, provided that all data associated with this partition has been successfully replicated to the primary storage location.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "alpine-sign-as-57",
+   "attempts": 3,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "Before key rotation, ensure that the condition \"AlpineSign returns AS-57\" is met.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "Before performing key rotation, ensure that AlpineSign returns AS-57.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "Before key rotation, ensure that AlpineSign returns AS-57.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "beacon-pay-bp-98",
+   "attempts": 3,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "The applicability rule for refreshing the BeaconPay recovery lease is to only refresh it before the lease expiration. You must check the current lease status to confirm it is eligible for renewal, and do not attempt to refresh the lease after it has expired.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "The applicability rule for refreshing the BeaconPay recovery lease is: \n\n\"Refresh the recovery lease only after every 30 days.\" \n\nEnsure that the renewal is performed within this timeframe to maintain access.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "To refresh the BeaconPay recovery lease, you must adhere to the following rule: \n\n\"Initiate the renewal process only when there are 30 days or fewer remaining on the current lease. Ensure that the new lease starts immediately after the expiration of the current lease.\"",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "cascade-db-cd-76",
+   "attempts": 3,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "**Action to Route Writes to CascadeDB Leader:**\n\nRoute writes only to the CascadeDB leader as specified in the operational guidelines. Ensure that no writes are directed to follower nodes to maintain data consistency. Each write operation must be confirmed as completed by the leader before initiating another write. \n\nAdhere strictly to these routing rules to ensure reliable data management.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "Route writes to the CascadeDB leader only after confirming leader availability. If the leader is unavailable, do not route writes. Ensure to retry routing immediately, limited to a maximum of 3 attempts. If all attempts fail, log the error and escalate to the operational team.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "Route all write operations to the CascadeDB leader only.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "delta-parser-dp-68",
+   "attempts": 3,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "To determine when state T should be mapped to blocked, the condition is:\n\n- State T must be mapped to blocked if a critical error occurs, as defined by specific thresholds defined in the operational guidelines.\n\nAction: Monitor state T for critical errors and, if encountered, map it to blocked immediately.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "State T should be mapped to blocked if it meets specific criteria that are not detailed in the accumulated experience from MNEXA. As there is no prior information, you may need to establish a specific condition or threshold that triggers the mapping to blocked. \n\nAction: Define the condition when state T should be mapped to blocked based on system performance metrics or error thresholds, ensuring any defined rules are clear, actionable, and documented for future reference.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "State T should be mapped to blocked under the condition that it does not meet the specified operational requirements.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "ember-cache-ec-39",
+   "attempts": 3,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "Rebuild the local index for EmberCache only when the existing index is outdated or corrupted.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "Rebuild the local index in EmberCache when the cache size exceeds a designated limit or when the data source has been updated. Ensure this action is taken before any read operations are performed, and do not proceed with reads until the rebuild is complete.",
+     "passed": false,
+     "memory_segments": []
+    },
+    {
+     "decision": "Rebuild the local index for EmberCache if the cached data is outdated or if there is a significant change in the underlying data structure. Ensure that the rebuild occurs before the application processes any queries relying on that index.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  }
+ ]
+}

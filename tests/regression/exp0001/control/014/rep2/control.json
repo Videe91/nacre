@@ -1,0 +1,265 @@
+{
+ "set": "014",
+ "families": [
+  {
+   "family_id": "umbra-pay-up-84",
+   "attempts": 1,
+   "passes": 1,
+   "pass": true,
+   "decisions": [
+    {
+     "decision": "Use a new idempotency key and do not reuse the old idempotency key associated with the UP-84 error.",
+     "passed": true,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "verdant-rpc-vr-42",
+   "attempts": 1,
+   "passes": 1,
+   "pass": true,
+   "decisions": [
+    {
+     "decision": "Rule for the stale correlation ID: Use a fresh correlation ID and never reuse the prior correlation ID.",
+     "passed": true,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "willow-auth-wa-63",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "To address the revoked credential, refer to the rule associated with WillowAuth returning WA-63: \n\n**Action: Immediately cease any operations or access associated with the revoked credential.** \n\nThis includes ensuring that all active sessions with the credential are terminated and that no new sessions or actions are initiated using this credential.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "xenon-bus-xb-31",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "Acknowledge the event XB-31 from XenonBus. \n\nEnsure that the acknowledgement is made immediately after receiving the event without delay. Do not ignore any subsequent communications related to this event.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "yarrow-db-yd-76",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "For the replica shard in response to YarrowDB returning YD-76, the write rule is:\n\n\"Write to the replica shard must occur only after confirming the primary shard has successfully processed the request.\"",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "zephyr-queue-zq-57",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "The permitted lane restriction for ZephyrQueue returning ZQ-57 is: \n\n\"Do not use the left lane.\" \n\nTake action to route the queue in the right lane only.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "alder-store-as-88",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "To finalize the request for AlderStore AS-88, the permitted finalization header is:\n\n**Finalization-Header: AS-88**\n\nEnsure that no other identifiers or headers are included outside of the specified finalization header.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "birch-rpc-bi-26",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "State the channel restriction for BI-26:\n\n\"BirchRPC must not use channels that have not been validated for BI-26.\" \n\nAction to take:\n\nValidate the channel prior to usage for BirchRPC BI-26 compliance.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "cypress-rpc-cr-53",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "The exact heartbeat requirement for CR-53 from CypressRPC must be stated as follows:\n\n\"Ensure the heartbeat is sent every 30 seconds. Never send a heartbeat that is not in accordance with this timing.\"",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "dune-queue-dq-64",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "Return DQ-64 and set the retry count to 1.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "elm-store-es-39",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "To determine the minimum replica requirement for ElmStore returning ES-39, I will need to refer to existing operational guidelines or documentation regarding the minimum number of replicas for data consistency and reliability. Since no relevant experience is provided from MNEXA, I cannot state a specific minimum replica requirement.\n\nAction: Consult operational guidelines specific to ElmStore or document equivalent constraints for minimum replicas.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "fir-pay-fp-71",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "To determine the minimum wait duration for FirPay returning FP-71, consult the task details or relevant ruleset for specific time constraints. Since there are no accumulated experiences from MNEXA or stated prohibitions regarding wait times, I'm unable to provide a precise duration. \n\nAction: Check the task documentation for the minimum wait duration regarding FP-71 before proceeding.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "grove-api-ga-82",
+   "attempts": 1,
+   "passes": 1,
+   "pass": true,
+   "decisions": [
+    {
+     "decision": "The maximum retry count is 3. \n\nAction to take: Attempt the GroveAPI call up to a maximum of 3 times if it fails.",
+     "passed": true,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "hazel-lock-hl-45",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "To determine the maximum pending-lease count for HazelLock returning HL-45, follow these steps:\n\n1. **Check current leases** associated with HL-45.\n2. **Count the pending leases.**\n3. **Verify that the count does not exceed the maximum pending-lease threshold** defined in your operational parameters.\n\nSince no specific maximum pending-lease count is given, if you cannot find this threshold, you must consult your operational guidelines before proceeding with any action regarding HL-45. \n\nIf there are no prior constraints to refer to, state that the maximum pending-lease count is unclear and requires further operational context.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "iris-cdn-ic-68",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "To determine the condition under which the shard may be purged when IrisCDN returns IC-68, the following action must be taken:\n\n**Action:**\n\nPurge the shard only if it has not been accessed in the last 30 days.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "juniper-sign-js-54",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "Before rotating the signing key, ensure that JuniperSign has returned JS-54.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "kelp-pay-kp-96",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "To refresh the KelpPay recovery lease, the applicability rule is as follows:\n\n- The recovery lease must be renewed **before** it expires.\n- **Only** the authorized personnel may initiate the refresh.\n- The refresh process must not exceed **three attempts** within a single session. \n- Each attempt must be logged with the timestamp and the status.\n\nAction:\nInitiate the refresh of the KelpPay recovery lease as soon as possible, ensuring it is completed before expiration and adhering to the specified constraints.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "laurel-db-ld-73",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "To route writes to the leader in LaurelDB, the applicability rule is:\n\n\"Every write operation must be directed to the leader node only.\" \n\nEnsure that all writes are routed to the designated leader node and do not attempt to write to any follower nodes.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "maple-parser-mp-65",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "State R should be mapped to blocked when there is a condition that requires a halt in processing or an inability to proceed according to established criteria. \n\nAction to take: Map state R to blocked based on this condition.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "north-cache-nc-37",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "Rebuild the local index in NorthCache when the following condition is met: **data consistency cannot be validated** due to an operational error or corruption that affects the integrity of the index.\n\nDo not rebuild the local index under any other circumstances.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  }
+ ]
+}

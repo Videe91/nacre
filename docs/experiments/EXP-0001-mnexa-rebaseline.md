@@ -73,5 +73,47 @@ These apply later to Nacre's run (N, the same design and model).
   - Afterwards the runner was changed: step output now streams to disk, and SIGINT/SIGTERM/SIGHUP mark a run
     `aborted` with the reason. The design is unchanged.
 
-## Results
-(Appended after the run. The raw run directory is frozen by hash, and its summary is copied here verbatim.)
+## Results (run `EXP-0001-20261001T071654Z-69b7b4`, complete; frozen in `tests/regression/exp0001/`)
+
+**Run facts:**
+- 18/18 steps, all exit 0.
+- Every one of the 1,260 calls reported `gpt-4o-mini-2024-07-18`.
+- 811,078 input and 105,426 output tokens.
+- The pre-registration commit `5eb30b3` precedes the run (runner at `1ddd3a4`). The margins were not changed.
+
+| Set | B (fresh MNEXA) | C (no memory) | Per run (B, C) |
+|---|---|---|---|
+| 014 | 59/60 | 8/60 | (20,3) (19,3) (20,2) |
+| 015 | 59/60 | 6/60 | (19,2) (20,2) (20,2) |
+| 016 | 60/60 | 7/60 | (20,3) (20,2) (20,2) |
+| **Pooled** | **178/180** | **21/180** | |
+
+- **Validity:** B − C = 87.2 pp ≥ 30 pp. **PASS** (A-0029 validated).
+- **MNEXA safety totals:** all 0 (unsupported, unsafe, fabricated and non-authoritative admissions; invalid fallback
+  ancestry).
+
+**Margins for Nacre, now frozen** (owner, 2026-10-01):
+
+| Check | Pooled | Per set (014 / 015 / 016) |
+|---|---|---|
+| Non-inferiority | N ≥ **169** | ≥ **53 / 53 / 54** |
+| Superiority | N ≥ **75** (C + 54) | ≥ **17 / 15 / 16** (C_set + 9) |
+| Safety | **zero** on every metric | |
+
+**The superiority bound is now implied by non-inferiority** (169 ≥ 75; 53/53/54 ≥ 17/15/16). Both checks are
+kept anyway (owner).
+
+**Note on the no-memory arm:** it passes 21/180 (11.7%). Some transfer tasks are partly solvable from the task text
+alone.
+
+**Attribution finding (post-run analysis; does not change the frozen numbers):**
+- **The injection:** MNEXA's 014–016 harness injects task-author "recoverable" challenge candidates into the proposal
+  list before admission (`ensure_fallback_challenges`). In all 60 families, that candidate contains the answer
+  clause.
+- **Where the clause came from:**
+  - in 147/180 trials it entered memory through **model-proposed structured** propositions, which injected
+    candidates cannot become by design;
+  - in the other 33 it entered through fallback records, and in **all 33** the model's own extraction or repair
+    output in the **same run** contained the clause (matched by call time window and source text).
+- **Reading:** strong evidence that B did not depend on injected content. It is not proof, because both copies are the
+  same source span and the record does not say which one was admitted. See `docs/plans/phase-2-shortcut-audit.md`.

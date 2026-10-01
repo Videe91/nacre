@@ -1,0 +1,265 @@
+{
+ "set": "015",
+ "families": [
+  {
+   "family_id": "opal-pay-op-85",
+   "attempts": 1,
+   "passes": 1,
+   "pass": true,
+   "decisions": [
+    {
+     "decision": "Use the previous settlement nonce only if it has not been utilized before. Never reuse the prior settlement nonce in any other context.",
+     "passed": true,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "pearl-rpc-pr-46",
+   "attempts": 1,
+   "passes": 1,
+   "pass": true,
+   "decisions": [
+    {
+     "decision": "State the rule for the old request token as follows:\n\n\"Do not reuse the old request token when handling PR-46.\"",
+     "passed": true,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "quince-auth-qa-61",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "The rule for a retired credential is: \"Do not use retired credentials for authentication.\" \n\nAction: Ensure the credential QA-61 is marked as retired in the system and remove it from active authentication processes.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "reed-bus-rb-34",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "To acknowledge the return of RB-34 from ReedBus, you must state the following acknowledgment rule:\n\n\"Accept RB-34 only if all prior operational tasks have been successfully completed.\" \n\nIf any prior tasks are incomplete, do not acknowledge RB-34.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "sable-db-sd-79",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "**Action:** Write to the passive replica must adhere to the returned state SD-79.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "topaz-queue-tq-59",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "To comply with TopazQueue returning TQ-59, the permitted lane restriction is: \"Do not use lane 3.\"\n\nAction to take: Ensure that lane 3 is not used for any operations.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "umber-store-us-89",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "Set the permitted finalization header to \u201cUS-89\u201d and ensure all actions comply with the requirements specified.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "violet-rpc-vr-27",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "Action: State the transport-channel restriction for VR-27 from VioletRPC. \n\n(Note: There is no specific transport-channel restriction mentioned in the task or accumulated experience.)",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "walnut-rpc-wr-55",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "For the WalnutRPC returning WR-55, the exact heartbeat-frame requirement is as follows:\n\n- Must send a heartbeat frame every 30 seconds.\n- The heartbeat frame must include the identifier \"HB-2023\".\n- Do not miss more than 3 consecutive heartbeat frames before triggering an alert.\n\nTake the action of implementing these heartbeat frame requirements immediately.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "xylem-queue-xq-66",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "XylemQueue returns XQ-66. The exact retry count is 3.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "yucca-store-ys-41",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "To ensure the availability of YuccaStore (YS-41), a minimum of 3 replicas must be maintained.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "zenith-pay-zp-72",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "State the minimum wait duration is \"ZP-72.\"",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "acorn-api-aa-83",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "The maximum retry count for AcornAPI is 3.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "briar-lock-bl-48",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "Action: State the maximum pending-lease count returned by BriarLock, which is BL-48.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "coral-cdn-cc-69",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "The edge shard may be purged if the CoralCDN returns CC-69 under the condition that it has remained unused for 30 days. \n\nAction: Initiate purging of the edge shard accordingly.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "drift-sign-ds-56",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "Before key rotation, ensure that the DriftSign returns DS-56.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "elm-pay-ep-97",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "The applicability rule for refreshing the ElmPay recovery lease is as follows:\n\n1. The lease must be refreshed **every 30 minutes**.\n2. The refresh must occur **before** the lease expires.\n3. Do not perform a refresh if the recovery process is currently running.\n4. If the recovery lease cannot be refreshed after **3 attempts**, escalate the issue.\n\nAction to take: Refresh the ElmPay recovery lease **now**, ensuring it is done **before the next expiration** and confirming that no recovery process is currently in progress.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "fjord-db-fd-75",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "To route writes to the FjordDB leader, the applicability rule is:\n\n- Only route writes to the FjordDB leader if the request is authenticated.\n- Before sending any write request, check the current leader status to ensure it is reachable.\n- Each write must include the appropriate headers for authentication.\n- Retry the write operation a maximum of three times if the leader is unreachable, waiting 2 seconds between attempts.\n- After three consecutive failed attempts, log the error and escalate the issue. \n\nNo additional MNEXA experience constraints apply.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "garnet-parser-gp-67",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "State S should be mapped to blocked if it meets any of the following conditions:\n\n1. If the task execution exceeds the defined timeout limit.\n2. If there is a detected failure in the underlying system components.\n3. If there are insufficient resources available to proceed with the task.\n\nAction: Map state S to blocked upon identifying any of these conditions.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  },
+  {
+   "family_id": "hemlock-cache-hc-38",
+   "attempts": 1,
+   "passes": 0,
+   "pass": false,
+   "decisions": [
+    {
+     "decision": "HemlockCache should rebuild its local index **when** it detects that the current index is outdated or corrupted. \n\nNo specific conditions or prohibitions from MNEXA experience were provided to further clarify this condition. Therefore, the action to take is to monitor the integrity and currency of the index, proceeding with a rebuild if necessary.",
+     "passed": false,
+     "memory_segments": []
+    }
+   ]
+  }
+ ]
+}

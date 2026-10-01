@@ -3,7 +3,7 @@
 - **Status:** proposed
 - **Tier:** D2 (cross-module behaviour; a new job with model calls)
 - **Date:** 2026-10-01
-- **Relies on assumptions:** A-0003, A-0023, A-0026, A-0027
+- **Relies on assumptions:** A-0003, A-0026, A-0027, A-0029 (A-0023 superseded)
 
 ## Context
 SPEC defines the sleep pass as an offline job, per scope, only where flagged events exist. It proposes lessons with
@@ -69,6 +69,38 @@ Option 2.
 - duplicate merging beyond exact normalised text;
 - decay, protection, habituation and pattern compression (Phase 4);
 - compact rendering (015, Phase 3 recall).
+
+## Revision after EXP-0001 (2026-10-01, proposed; owner to approve)
+EXP-0001 (B = 178/180) and the shortcut audit (`docs/plans/phase-2-shortcut-audit.md`) suggest these changes.
+
+- **R1. No injected candidates in the product pipeline.**
+  - MNEXA's `ensure_fallback_challenges` appends task-author candidates (one of which contains the answer clause in
+    all 60 families) to the model's proposals before admission.
+  - In Nacre, admission sees **only** the model's proposals.
+  - Safety challenges run through the same deterministic admission in a separate, discarded check in the evaluation
+    harness.
+  - Gate checks: product modules never receive task fields, and injected text never reaches memory.
+- **R2. Prompt parity against recorded MNEXA prompts (new deterministic check, 0 model calls).**
+  - EXP-0001 recorded MNEXA's exact extraction and repair prompts (`tests/regression/exp0001/calls.jsonl`, 360
+    formation calls).
+  - For each family and run, Nacre's proposer and repair prompts, built from the mapped capture events, must be
+    **byte-identical** to MNEXA's. Where a difference is required (no role markers in the text, because authority
+    now comes from the envelope), it is listed as a named, reviewed prompt delta, and L2 shows it does not change
+    admissions.
+- **R3. Recorded end-to-end formation parity.**
+  - Replay EXP-0001's recorded extraction and repair responses through Nacre's pipeline (`RecordedProvider`).
+  - The admitted structured propositions and fallback records must equal MNEXA's for that run. Comparison excludes
+    injected candidates, and accounts for R2's named deltas.
+  - This extends L2 from MNEXA's 007–016 history to the exact pipeline and model of the frozen baseline.
+- **R4. Fallback is load-bearing.** In 33/180 baseline trials the answer reached memory only through
+  support-first fallback (model-proposed, valid support, failed structure). Fallback is mandatory in the port, not
+  optional.
+- **R5. Measured cost, replacing the estimate.**
+  - 2 model calls per flagged episode, about 1,055 input and 228 output tokens per call (about 2,110 / 456 per
+    episode), median latency 3.0 s per call.
+  - Measured on `gpt-4o-mini-2024-07-18` in EXP-0001.
+- **R6. The transfer step is evaluation only in Phase 2.** The reasoning seat (`make_fidelity_reasoner`) belongs to
+  the harness and is identical for B, C and N. Product recall and reasoning are Phase 3.
 
 ## Why this one
 - It is the only option that ports what MNEXA measured.

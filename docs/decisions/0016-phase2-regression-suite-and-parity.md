@@ -96,6 +96,14 @@ Option 3.
   - No reruns to reach a pass.
   - An infrastructure abort is recorded, and the run is repeated in full with a new id.
 - **Pre-registration:** `docs/experiments/EXP-0001-mnexa-rebaseline.md`, committed before the run.
+- **FROZEN NUMBERS (EXP-0001, owner 2026-10-01):**
+  - B = 178/180 and C = 21/180.
+  - **Nacre must reach:**
+    - pooled N ≥ 169, and per set ≥ 53 (014), 53 (015), 54 (016);
+    - superiority: pooled N ≥ 75, and per set ≥ 17 / 15 / 16;
+    - zero safety tolerance.
+  - Superiority is implied by non-inferiority; both checks are kept.
+  - Evidence: `tests/regression/exp0001/` (byte copies plus a manifest of every file in the run).
 
 **L3 (original proposal, superseded):** The gate only. Run by the owner locally with their own key (standing token rule).
 - **What runs:** the Nacre pipeline end to end (capture → sleep pass → admitted memory → transfer decision graded by
