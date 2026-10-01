@@ -29,5 +29,6 @@ def test_a_shredded_head_keeps_its_structure_but_not_its_content(rw, provider, s
     with psycopg.connect(streams["dsn"]["admin"]) as c:
         c.execute("DELETE FROM keys.stream_master_keys WHERE stream_id = %s", (a,))
     with rw() as s:
-        (h,) = read_heads(s, provider, a)
+        assert read_heads(s, provider, a) == []                                      # lost: not recall-eligible
+        (h,) = read_heads(s, provider, a, include_unreadable=True)
     assert (h.kind, h.status, h.content) == ("belief", "active", None)

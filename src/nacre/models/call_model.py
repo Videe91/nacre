@@ -5,7 +5,7 @@ Owns: the dated-pin check, the one-scope / readable-sources check (SI-1), the pr
   the fail-closed price lookup and cost, the retry loop, the `result` recording of each attempt (D-0022), and the
   replay short-circuit.
 Public entry: call_model(), ModelCall, ModelCallRefused, load_prices(), DEFAULT_POLICY
-Decisions: D-0021, D-0022, D-0005, D-0016
+Decisions: D-0021, D-0022, D-0005, D-0016, D-0023
 Assumptions: A-0025
 Notes: The ONLY path from Nacre to a model provider (D-0021). Every attempt, failed or not, becomes one `result`
   event in the stream the prompt came from: actor_kind=model, actor_model = the requested dated pin,
@@ -20,6 +20,8 @@ Notes: The ONLY path from Nacre to a model provider (D-0021). Every attempt, fai
   Provider failures are RETURNED (ModelCall.error), not raised: raising inside the caller's scoped transaction
   would roll back the very recordings of the failed attempts. Callers commit, then call raise_for_error().
   Refusals (ModelCallRefused) are raised: nothing was sent, so there is nothing to record.
+  D-0023: each recording is encrypted under the contributor-set key of its sources (erased with any contributing
+  person or period); a source set that is shredded or over the 256 cap is refused before any provider call.
   Replay providers (`replay = True`) are answered without a new recording: replay never re-records. The scope,
   policy and price checks still run, so a replay is refused wherever the live call would have been.
   D1: recordings are appended inside the CALLER's transaction. A caller that must keep recordings even if its own
@@ -38,6 +40,7 @@ from nacre.core.event import ActorKind, EventType, PayloadType, Source
 from nacre.core.model_provider import (CallPolicy, ModelProvider, ModelRequest, ModelResponse, ProviderError,
                                        canonical_request, is_dated_pin, request_sha256)
 from nacre.core.root_key_provider import RootKeyProvider
+from nacre.keys.derive_contributor_key import MAX_CONTRIBUTORS, ContributorError, contributors_of
 from nacre.ledger.append_event import AppendRequest, Authorship, append_event
 from nacre.ledger.strip_secrets import strip_secrets
 from nacre.models.set_model_policy import allowed_models
@@ -125,6 +128,12 @@ def call_model(session: ScopedSession, key_provider: RootKeyProvider, model_prov
     stream, org = _source_stream(session, source_event_ids)
     if (request.provider, request.model) not in allowed_models(session, key_provider, org):
         raise ModelCallRefused(f"org policy does not allow {request.provider}/{request.model} (default deny, D-0021)")
+    try:                                             # D-0023: refuse BEFORE paying when the record could not be keyed
+        members = contributors_of(session.conn, stream, list(source_event_ids))
+    except ContributorError as exc:
+        raise ModelCallRefused(f"sources cannot be derived from (D-0023): {exc}") from None
+    if len(members) + 1 > MAX_CONTRIBUTORS:
+        raise ModelCallRefused(f"{len(members) + 1} contributors > {MAX_CONTRIBUTORS}: refused (D-0023, fail closed)")
     digest = request_sha256(request)
     if model_provider.replay:
         response = model_provider.complete(request, timeout_s=policy.timeout_s)
@@ -158,7 +167,7 @@ def call_model(session: ScopedSession, key_provider: RootKeyProvider, model_prov
             stream_id=stream, org_id=org, event_type=EventType.RESULT, payload_type=PayloadType.TRACE,
             actor_kind=ActorKind.MODEL, actor_id=uuid.uuid5(_MODEL_ACTOR_NS, f"{request.provider}/{request.model}"),
             source=Source.SYSTEM, authorship=Authorship.EXTERNAL, idempotency_key=str(uuid.uuid4()),
-            content=body, actor_model=request.model,
+            content=body, actor_model=request.model, sources=tuple(sorted(set(source_event_ids))),
             actor_model_version=response.model_reported if response is not None else None, cycle_id=run_id)).envelope
         if response is not None:
             return ModelCall(response, env.event_id, digest, attempt, cost)

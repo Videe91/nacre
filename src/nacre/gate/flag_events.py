@@ -3,7 +3,7 @@ Functionality: Flag the events of one stream whose write-gate score reaches the 
 Owns: the versioned mode thresholds, scanning a stream's scorable events, idempotent `flag` memory events (one per
   target and threshold version), and serialising concurrent flaggers of a stream.
 Public entry: flag_events(), THRESHOLDS, THRESHOLD_VERSION, Flag
-Decisions: D-0019, D-0017, D-0003
+Decisions: D-0019, D-0017, D-0003, D-0023
 Assumptions: A-0028
 Notes: D-0019: the gate only FLAGS; it never promotes. A flag is a `memory_event`, op `flag`, appended in the scored
   event's stream, with caused_by = the target event. Body: target, per-mille score and components, threshold, mode,
@@ -62,6 +62,7 @@ def flag_events(session: ScopedSession, key_provider: RootKeyProvider, stream_id
             stream_id=stream_id, event_type=EventType.MEMORY_EVENT, payload_type=PayloadType.STRUCTURED,
             actor_kind=ActorKind.SYSTEM, actor_id=GATE_ACTOR, source=Source.SYSTEM,
             authorship=Authorship.SCOPE_PRINCIPAL, idempotency_key=str(uuid.uuid4()), caused_by=env.event_id,
+            sources=(env.event_id,),
             content={"op": "flag", "target_event_id": str(env.event_id), "score": s.score, "surprise": s.surprise,
                      "stakes": s.stakes, "statement": s.statement, "threshold": THRESHOLDS[mode], "mode": mode.value,
                      "threshold_version": THRESHOLD_VERSION, "reasons": list(s.reasons)})).envelope

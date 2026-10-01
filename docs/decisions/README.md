@@ -24,4 +24,4 @@
 | D-0020 | The sleep-pass job | D2 | accepted (R2/R3 dropped) |
 | D-0021 | Model-provider interface and provider policy | D2 (+D3 part) | accepted (amendment 1) |
 | D-0022 | Recording and replaying model calls as ledger events | D2 (+D3 part) | accepted |
-| D-0023 | Contributor-set keys: derived records erased with every contributing person or period | D3 | proposed |
+| D-0023 | Contributor-set keys: derived records erased with every contributing person or period | D3 | accepted (owner decisions 1–4) |

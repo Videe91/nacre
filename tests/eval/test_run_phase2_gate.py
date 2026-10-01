@@ -94,19 +94,24 @@ def test_gate4_a_recorded_replay_reproduces_every_grade_with_no_live_call(w, pro
         n = export_model_calls(s, provider, live_stream, tmp_path / "calls.jsonl")
     assert n == 2 + 6                                                  # propose + repair + 3 N + 3 C transfers
     replay_stream = w["new_scope"]()
-    with w["session"]() as s:
-        assert load_model_calls(s, provider, replay_stream, tmp_path / "calls.jsonl") == n
+    loaded = []
 
-    class Recorded:                                                    # RecordedProvider over the replay stream
-        name, replay = "recorded", True
+    def load(lf):
+        with w["session"]() as s:
+            loaded.append(load_model_calls(s, provider, replay_stream, tmp_path / "calls.jsonl",
+                                           sources=(lf.decision_id, lf.outcome_id)))
+
+    class Recorded:                                                    # RecordedProvider over the replay stream (lazy)
+        name, replay, rp = "recorded", True, None
 
         def complete(self, request, *, timeout_s):
-            with w["session"]() as s:
-                return self.rp.complete(request, timeout_s=timeout_s)
-    with w["session"]() as s:
-        rec = Recorded()
-        rec.rp = RecordedProvider(s, provider, [replay_stream])
-    replay = g.run_family(w["session"], provider, rec, rec, replay_stream, fam, 16)
+            if self.rp is None:
+                with w["session"]() as s:
+                    self.rp = RecordedProvider(s, provider, [replay_stream])
+            return self.rp.complete(request, timeout_s=timeout_s)
+    rec = Recorded()
+    replay = g.run_family(w["session"], provider, rec, rec, replay_stream, fam, 16, before_sleep=load)
+    assert loaded == [n]
     assert (replay.n_attempts, replay.c_attempts, replay.memory) == (live.n_attempts, live.c_attempts, live.memory)
     assert replay.sleep.calls_live == 0
 

@@ -4,7 +4,7 @@ Owns: (via ledger/validate_append.py: request validation and trust) secret strip
   idempotent retries (principal-bound request MAC), subject and key-month choice, sequencing under the
   stream lock, encryption, sealing and the insert.
 Public entry: append_event(), AppendResult (AppendRequest, Authorship, AppendError re-exported from validate_append)
-Decisions: D-0002, D-0003, D-0004, D-0005, D-0007, D-0008, D-0012, D-0013
+Decisions: D-0002, D-0003, D-0004, D-0005, D-0007, D-0008, D-0012, D-0013, D-0023
 Assumptions: A-0007, A-0009, A-0010, A-0014, A-0021
 Notes: Runs inside a scoped session (scopes/open_scoped_session.py); RLS admits only the principal's
   streams, and the transaction commits or rolls back with the session.
@@ -42,6 +42,7 @@ from nacre.core.event import (ENVELOPE_VERSION, ActorKind, Envelope, EventType, 
 from nacre.core.blob_store import BlobStore
 from nacre.core.root_key_provider import RootKeyProvider
 from nacre.keys.encrypt_payload import MacPurpose, derive_mac, encrypt_payload
+from nacre.keys.derive_contributor_key import Contributor, ContributorError, contributors_of, derived_key
 from nacre.keys.get_or_create_key import get_or_create_key, load_key
 from nacre.ledger.seal_event import GENESIS_PREV_HASH, seal_event
 from nacre.ledger.store_attachment import store_attachment
@@ -81,10 +82,22 @@ def append_event(session: ScopedSession, provider: RootKeyProvider, request: App
 
     # Work that needs no sequence number happens BEFORE the stream lock (D1), so the serialised section
     # is only: idempotency check, head, commit_seq/committed_at, encrypt, MAC, seal, insert (D-0003 order).
-    subject = request.subject_id or (request.actor_id if request.actor_kind == ActorKind.PERSON
-                                     and request.event_type in (EventType.STATEMENT, EventType.MESSAGE) else stream)
+    # D-0023 (supersedes D-0004's intake sentence): every event AUTHORED by a person is under that person's key; an
+    # agent acting on a person's behalf uses that person's key; content derived from `sources` is under the key of
+    # its contributor set (never falling back to the stream key).
+    subject = request.subject_id or request.on_behalf_of or (
+        request.actor_id if request.actor_kind == ActorKind.PERSON else stream)
+    month = date(recorded_at.year, recorded_at.month, 1)
     body, redactions, public = _body(request)
-    key = get_or_create_key(conn, provider, stream, subject, date(recorded_at.year, recorded_at.month, 1))
+    if request.sources:
+        own = Contributor(subject, month, subject != stream)
+        try:
+            members = contributors_of(conn, stream, list(request.sources)) | {own}
+            key = derived_key(conn, provider, stream, members, month)
+        except ContributorError as exc:
+            raise AppendError(f"derived write refused (D-0023): {exc}") from exc
+    else:
+        key = get_or_create_key(conn, provider, stream, subject, month)
     attachment_ref = attachment_sha256 = None
     if request.attachment is not None:
         if blob_store is None:
@@ -139,7 +152,14 @@ def _plain(value):
 
 def _mac_input(r: AppendRequest, principal_id: UUID) -> dict:
     """Every caller-supplied field, pre-strip, plus the writing principal (D-0012 part B)."""
-    return {"v": 1, "principal": str(principal_id), **{f.name: _plain(getattr(r, f.name)) for f in fields(r)}}
+    out = {"v": 1, "principal": str(principal_id), **{f.name: _plain(getattr(r, f.name)) for f in fields(r)
+                                                      if f.name not in ("sources", "on_behalf_of")}}
+    # D-0023 fields enter the MAC only when used, so the MAC of every earlier kind of request is unchanged.
+    if r.sources:
+        out["sources"] = sorted(str(s) for s in r.sources)
+    if r.on_behalf_of is not None:
+        out["on_behalf_of"] = str(r.on_behalf_of)
+    return out
 
 
 def _body(r: AppendRequest):

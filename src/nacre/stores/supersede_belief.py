@@ -32,7 +32,7 @@ def supersede_belief(session: ScopedSession, key_provider: RootKeyProvider, stre
     def head(obj):
         hs = [v for v in versions if v.body["content"]["object_id"] == str(obj) and v.body["content"]["kind"] == "belief"]
         return (hs[-1].body["content"], hs[-1].envelope) if hs else (None, None)
-    old, _ = head(old_object_id)
+    old, old_env = head(old_object_id)
     new, _ = head(replacement_object_id)
     if old is None or new is None:
         raise SupersessionError("both beliefs must exist in this stream")
@@ -53,5 +53,6 @@ def supersede_belief(session: ScopedSession, key_provider: RootKeyProvider, stre
                    shared_decisions=sorted(shared))
     edges = edges_from_body(old["edges"]) + [Edge("superseded_by", target_object_id=replacement_object_id, target_version=new["version"])]
     write_version(session, key_provider, stream_id, VersionRecord(
-        old_object_id, old["version"] + 1, "belief", "superseded", old["support"], content, tuple(edges)), cycle_id=cycle_id)
+        old_object_id, old["version"] + 1, "belief", "superseded", old["support"], content, tuple(edges)), cycle_id=cycle_id,
+        carried_from=old_env.event_id)
     return Promotion(old_object_id, old["version"] + 1, "superseded", old["support"], True)

@@ -81,14 +81,16 @@ class NoLiveCalls:
 
 
 class StreamReplay:
-    """Replays the recordings loaded into one family's stream, in recorded order."""
+    """Replays the recordings loaded into one family's stream, in recorded order (read lazily, after loading)."""
     name, replay = "recorded", True
 
     def __init__(self, open_session, provider, stream):
-        with open_session() as s:
-            self._rp = RecordedProvider(s, provider, [stream])
+        self._open, self._provider, self._stream, self._rp = open_session, provider, stream, None
 
     def complete(self, request, *, timeout_s):
+        if self._rp is None:
+            with self._open() as s:
+                self._rp = RecordedProvider(s, self._provider, [self._stream])
         return self._rp.complete(request, timeout_s=timeout_s)
 
 
@@ -115,9 +117,9 @@ def _rebuild_check(open_session, provider, streams):
 
 def one_run(rep, rdir, record, mode, recorded_dir, keep_db=False, rebuild=False):
     name = f"nacre_exp0003_{uuid.uuid4().hex[:10]}"
-    with psycopg.connect(ADMIN, autocommit=True) as c:
-        c.execute(f'CREATE DATABASE "{name}"')
-    try:
+    try:                                     # created INSIDE the cleanup scope: a kill right after CREATE cannot leak it
+        with psycopg.connect(ADMIN, autocommit=True) as c:
+            c.execute(f'CREATE DATABASE "{name}"')
         db = _dsn(dbname=name)
         with connect(DbRole.MIGRATOR, dsn=db) as conn:
             apply_migrations(conn)
@@ -151,12 +153,15 @@ def one_run(rep, rdir, record, mode, recorded_dir, keep_db=False, rebuild=False)
                     set_access(s, provider, org_id=org, principal_id=owner, stream_id=stream, can_read=True, can_append=True,
                                idempotency_key=str(uuid.uuid4()))
                 fixture = rdir / "fixtures" / f"rep{rep}" / f"{n:03d}" / f"{fam['id']}.jsonl"
-                transfer = live
+                transfer, before_sleep = live, None
                 if mode == "recorded":
-                    with open_session() as s:
-                        load_model_calls(s, provider, stream, recorded_dir / "fixtures" / f"rep{rep}" / f"{n:03d}" / f"{fam['id']}.jsonl")
+                    path = recorded_dir / "fixtures" / f"rep{rep}" / f"{n:03d}" / f"{fam['id']}.jsonl"
+
+                    def before_sleep(lf, stream=stream, path=path):
+                        with open_session() as s:
+                            load_model_calls(s, provider, stream, path, sources=(lf.decision_id, lf.outcome_id))
                     transfer = StreamReplay(open_session, provider, stream)
-                r = run_family(open_session, provider, live, transfer, stream, fam, n)
+                r = run_family(open_session, provider, live, transfer, stream, fam, n, before_sleep=before_sleep)
                 fixture.parent.mkdir(parents=True, exist_ok=True)
                 if mode != "recorded":
                     with open_session() as s:
@@ -189,7 +194,7 @@ def one_run(rep, rdir, record, mode, recorded_dir, keep_db=False, rebuild=False)
     finally:
         if not keep_db:
             with psycopg.connect(ADMIN, autocommit=True) as c:
-                c.execute(f'DROP DATABASE "{name}" WITH (FORCE)')
+                c.execute(f'DROP DATABASE IF EXISTS "{name}" WITH (FORCE)')
 
 
 def summarize(trials, safety):

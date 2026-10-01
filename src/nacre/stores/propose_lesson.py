@@ -4,7 +4,7 @@ Owns: checking the decision -> outcome ancestry, checking the span is exactly th
   nucleus/qualifiers lie inside the support span (structured proposals), computing whether the support is a
   TRUSTED CORRECTION (D-0017 amendment 1), and the `lesson_proposed` memory event.
 Public entry: propose_lesson(), ProposalError, Qualifier
-Decisions: D-0017, D-0018, D-0020
+Decisions: D-0017, D-0018, D-0020, D-0023
 Assumptions: A-0026
 Notes: A proposal is historical evidence with authority "proposal_only"; it is never recalled (D-0017). Admission
   rules (unique quote, closed world, atomicity) belong to the sleep pass (sleep/admit_propositions.py); this store
@@ -78,4 +78,4 @@ def propose_lesson(session: ScopedSession, key_provider: RootKeyProvider, *, str
         stream_id=stream_id, event_type=EventType.MEMORY_EVENT, payload_type=PayloadType.STRUCTURED,
         actor_kind=ActorKind.SYSTEM, actor_id=VERSION_ACTOR, source=Source.SYSTEM,
         authorship=Authorship.SCOPE_PRINCIPAL, idempotency_key=str(uuid.uuid4()), content=content,
-        caused_by=outcome_id, cycle_id=run_id)).envelope
+        caused_by=outcome_id, cycle_id=run_id, sources=(decision_id, outcome_id))).envelope

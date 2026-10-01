@@ -73,11 +73,11 @@ def test_a_mismatch_switches_to_a_new_generation_and_keeps_the_old(rw, provider,
         _workflow(s, provider, a)
     forged = _forge_extra_row(streams, a)
     with rw() as s:
-        assert forged in {h.object_id for h in read_heads(s, provider, a, include_inactive=True)}    # served from gen 1
+        assert forged in {h.object_id for h in read_heads(s, provider, a, include_inactive=True, include_unreadable=True)}
         check = rebuild_projection(s, provider, a)
     assert (check.generation, check.switched_to, len(check.differences)) == (1, 2, 1)
     with rw() as s:
-        assert forged not in {h.object_id for h in read_heads(s, provider, a, include_inactive=True)}  # gen 2 is clean
+        assert forged not in {h.object_id for h in read_heads(s, provider, a, include_inactive=True, include_unreadable=True)}
         gens = dict(s.conn.execute("SELECT generation, count(*) FROM interp.versions WHERE stream_id = %s GROUP BY 1", (a,)).fetchall())
         assert gens[1] == gens[2] + 1                                                          # gen 1 retained, forged row incl.
         again = rebuild_projection(s, provider, a)

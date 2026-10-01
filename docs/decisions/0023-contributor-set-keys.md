@@ -1,10 +1,25 @@
 # D-0023: Contributor-set keys, so erasure reaches every derived copy
 
-- **Status:** proposed (owner approved option (a) in principle, 2026-10-01; this ADR needs explicit approval before
-  any build)
+- **Status:** accepted (owner, 2026-10-01) with the decisions below
 - **Tier:** D3. It changes the privacy boundary and erasure semantics, and supersedes part of D-0004's intake rule.
 - **Date:** 2026-10-01
 - **Relies on assumptions:** A-0030, A-0031 (new), A-0008
+
+## Owner decisions at acceptance (2026-10-01)
+1. **Approved (D3): every event authored by a person is stored under that person's key.**
+   - **Agents acting on a person's behalf:** an agent event acting for a person uses that person's key (explicit
+     `on_behalf_of`).
+   - **Content that derives from a person's words:** any event or derived record whose content derives from a
+     person's words lists them as a contributor (explicit `sources`).
+   - **Open question for later:** events ABOUT a person written by others.
+2. **Approved: membership is recorded as (subject, source month) pairs.** Forgetting month M destroys every derived
+   key in that stream with any membership in M.
+   - *Implementation note (Claude):* the stream's system subject is recorded as a member too (flagged non-person), so
+     derived copies of non-person content from month M are also reached. Person erasure matches person members
+     only.
+3. **Approved: lost beliefs are not auto-rebuilt in Phase 2;** deferred to Phase 4.
+4. **Approved: a cap of 256 contributors per key, failing closed.** Over the cap the derived write is REFUSED and the
+   refusal is RECORDED; it never falls back to the stream key.
 
 ## Context
 Phase 2 gate item 9 is open.

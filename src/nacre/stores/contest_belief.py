@@ -45,5 +45,5 @@ def contest_belief(session: ScopedSession, key_provider: RootKeyProvider, stream
     edges = edges_from_body(head["edges"]) + [Edge("contradiction", target_event_id=e.envelope.event_id) for e in winner.values()]
     write_version(session, key_provider, stream_id, VersionRecord(
         belief_object_id, head["version"] + 1, "belief", "contested", head["support"], content, tuple(edges)),
-        caused_by=next(iter(winner.values())).envelope.event_id, cycle_id=cycle_id)
+        caused_by=next(iter(winner.values())).envelope.event_id, cycle_id=cycle_id, carried_from=heads[-1].envelope.event_id)
     return Promotion(belief_object_id, head["version"] + 1, "contested", head["support"], True)

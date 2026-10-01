@@ -3,7 +3,7 @@ Functionality: Validate one append request and derive its trust, before anything
 Owns: the AppendRequest shape, request validation (types, ids, short identifiers, time basis and precision,
   idempotency-key form, person and attachment metadata), and trust derivation from source + authorship.
 Public entry: validate_append(), AppendRequest, Authorship, AppendError
-Decisions: D-0002, D-0012, D-0013
+Decisions: D-0002, D-0012, D-0013, D-0023
 Assumptions: A-0009, A-0012
 Notes: Split out of ledger/append_event.py (owner, 2026-09-30) so the write path stays one readable
   orchestration. validate_append() raises AppendError or returns the derived Trust. It enforces:
@@ -64,6 +64,8 @@ class AppendRequest:
     person: dict | None = None
     source_ref: str | None = None
     subject_id: UUID | None = None
+    on_behalf_of: UUID | None = None                 # D-0023: an agent acting for this person uses the person's key
+    sources: tuple[UUID, ...] = ()                   # D-0023: events this content derives from -> contributor-set key
     attachment: bytes | None = None
     attachment_media_type: str | None = None
     attachment_description: str | None = None
@@ -83,6 +85,11 @@ def validate_append(r: "AppendRequest") -> Trust:
 
 
 def _validate(r: AppendRequest) -> None:
+    if r.on_behalf_of is not None and (type(r.on_behalf_of) is not UUID or r.actor_kind == ActorKind.PERSON):
+        raise AppendError("on_behalf_of is a person id, for a non-person actor acting for that person (D-0023)")
+    if not isinstance(r.sources, tuple) or len(r.sources) > 1024 or len(set(r.sources)) != len(r.sources) \
+            or any(type(s) is not UUID for s in r.sources):
+        raise AppendError("sources is a tuple of distinct event ids (at most 1024) (D-0023)")
     for name, kind in (("event_type", EventType), ("payload_type", PayloadType), ("actor_kind", ActorKind),
                        ("source", Source), ("authorship", Authorship)):
         if not isinstance(getattr(r, name), kind):

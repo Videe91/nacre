@@ -2,7 +2,7 @@
 Functionality: Execute every due destructive request: destroy the keys and record it, atomically, per request.
 Owns: what each kind destroys, the scope status change on deletion, and the execution and deletion-marker events.
 Public entry: execute_due_shreds()
-Decisions: D-0004, D-0014
+Decisions: D-0004, D-0014, D-0023
 Assumptions: A-0008
 Notes: A request is due when its grace period has passed, it is not cancelled, and it is not under an active legal
   hold (manage_shred_requests.list_shred_requests). One keyadmin transaction per request, so the destruction and
@@ -56,12 +56,19 @@ def _execute(tx, provider, org: UUID, req: ShredRequest) -> None:
         streams = [req.stream_id]
     else:
         if req.kind == ShredKind.ERASE_PERSON:
+            # D-0023: the person's own keys AND every contributor-set key with the person as a member.
             rows = db.execute("""DELETE FROM keys.data_keys d USING scopes.scopes s
-                                 WHERE d.stream_id = s.stream_id AND s.org_id = %s AND d.subject_id = %s
-                                 RETURNING d.key_id, d.stream_id""", (org, req.person_id)).fetchall()
+                                 WHERE d.stream_id = s.stream_id AND s.org_id = %s
+                                   AND (d.subject_id = %s OR d.key_id IN (
+                                        SELECT key_id FROM keys.key_contributors
+                                         WHERE member_subject = %s AND member_is_person))
+                                 RETURNING d.key_id, d.stream_id""", (org, req.person_id, req.person_id)).fetchall()
         else:
-            rows = db.execute("DELETE FROM keys.data_keys WHERE stream_id = %s AND month = ANY(%s) "
-                              "RETURNING key_id, stream_id", (req.stream_id, list(req.months))).fetchall()
+            # D-0023: the months' keys AND every contributor-set key of the stream with a member month in them.
+            rows = db.execute("DELETE FROM keys.data_keys WHERE stream_id = %s AND (month = ANY(%s) OR key_id IN ("
+                              "SELECT key_id FROM keys.key_contributors WHERE stream_id = %s AND member_month = ANY(%s))) "
+                              "RETURNING key_id, stream_id",
+                              (req.stream_id, list(req.months), req.stream_id, list(req.months))).fetchall()
         for key_id, stream in rows:
             markers.setdefault(stream, []).append(str(key_id))
         key_ids = [k for ks in markers.values() for k in ks]

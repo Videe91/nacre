@@ -98,3 +98,19 @@ def test_an_unparseable_repair_falls_back_to_the_proposers_list(world, provider,
     _, rule = _correction(world, provider, family)
     r = run_sleep_pass(world["session"], provider, Fake([props((2, rule, rule[:20])), "{broken"]), world["proj"])
     assert (r.structured, r.parse_errors) == (1, 1)
+
+
+def test_a_d0023_refusal_is_recorded_and_not_retried(world, provider, family, monkeypatch):
+    from nacre.models import call_model as cm
+    from nacre.sleep.run_sleep_pass import REFUSED
+    _, rule = _correction(world, provider, family)
+    monkeypatch.setattr(cm, "MAX_CONTRIBUTORS", 1)                      # force the cap: every seat call is refused
+    fake = Fake([props((2, rule, rule[:20]))] * 2)
+    r = run_sleep_pass(world["session"], provider, fake, world["proj"])
+    assert (r.refused, r.episodes, fake.requests) == (1, 0, [])          # refused before any call, never paid
+    (marker,) = _ops(world, provider, REFUSED)
+    assert set(marker) == {"op", "run_id", "outcome_id", "reason"}      # content-free
+    assert _ops(world, provider, "lesson_proposed") == []
+    monkeypatch.undo()
+    again = run_sleep_pass(world["session"], provider, Fake([]), world["proj"])
+    assert (again.episodes, again.refused) == (0, 0)                     # recorded refusals are not retried

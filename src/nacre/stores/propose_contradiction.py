@@ -3,7 +3,7 @@ Functionality: Record a contradiction proposal pinned to one exact belief versio
 Owns: resolving the belief's current head (version and event), checking the contradicting decision has at least one
   real outcome, and the `contradiction_proposed` memory event.
 Public entry: propose_contradiction(), ContradictionError
-Decisions: D-0017, D-0020
+Decisions: D-0017, D-0020, D-0023
 Assumptions: none
 Notes: Proposal only (authority "proposal_only"); it never changes the belief (MNEXA ledger 38). Pinned to the head
   version seen NOW, so a later version is not contested by stale evidence (contest considers only proposals pinned to
@@ -49,4 +49,5 @@ def propose_contradiction(session: ScopedSession, key_provider: RootKeyProvider,
         stream_id=stream_id, event_type=EventType.MEMORY_EVENT, payload_type=PayloadType.STRUCTURED,
         actor_kind=ActorKind.SYSTEM, actor_id=VERSION_ACTOR, source=Source.SYSTEM,
         authorship=Authorship.SCOPE_PRINCIPAL, idempotency_key=str(uuid.uuid4()), content=content,
-        caused_by=head.envelope.event_id, cycle_id=run_id)).envelope
+        caused_by=head.envelope.event_id, cycle_id=run_id,
+        sources=tuple(dict.fromkeys((decision_id, *outcomes, head.envelope.event_id))))).envelope

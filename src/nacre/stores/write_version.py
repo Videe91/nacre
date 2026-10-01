@@ -4,7 +4,7 @@ Owns: the version event body (op `version`, full structural record + content), t
   every grounded span (MacPurpose.INTERP_MAC under the event's own data key), and the `interp` rows.
 Public entry: write_version(), read_version_events(), edges_from_body(), Edge, VersionRecord, normalize,
   VERSION_ACTOR
-Decisions: D-0017, D-0008, D-0004
+Decisions: D-0017, D-0008, D-0004, D-0023
 Assumptions: A-0014
 Notes: The ONLY writer of interp.versions / interp.edges. Everything the projection holds is derivable from the event
   body, so stores/rebuild_projection.py can recompute it. Rows are written in the caller's transaction right after
@@ -12,6 +12,10 @@ Notes: The ONLY writer of interp.versions / interp.edges. Everything the project
   makes the projection's MACs unverifiable and the content unreadable, while the structure stays (D-0017, D3).
   Spans are verified by the caller (the store that produced them); this file only records them.
   D-0017 amendment 2: rows go into the stream's ACTIVE generation (interp.active_generation).
+  D-0023: the version event is under the contributor-set key of its sources (edge targets + the prior version whose
+  content it carries), so its content and its MACs are erased with any contributing person or period. Mutation
+  2026-10-01: naming `carried_from` is an equivalent mutant today (every writer also carries the prior version's edges);
+  kept as defence in depth.
 """
 import uuid
 from dataclasses import dataclass, field
@@ -62,6 +66,16 @@ def _edge_body(e: Edge) -> dict:
             "span_end": e.span[1] if e.span else None, "span_text": e.span_text}
 
 
+def _sources(rec: VersionRecord, carried_from: UUID | None) -> tuple[UUID, ...]:
+    """D-0023: every event the version's content derives from (edge targets, plus the prior version it carries)."""
+    ids = [e.target_event_id for e in rec.edges if e.target_event_id is not None]
+    if carried_from is not None:
+        ids.append(carried_from)
+    if not ids:
+        raise ValueError("a version must derive from at least one event (D-0023: no stream-key fallback)")
+    return tuple(dict.fromkeys(ids))
+
+
 def edges_from_body(raw: list[dict]) -> list[Edge]:
     """The Edge objects of a version event body (inverse of what write_version records)."""
     return [Edge(x["role"], target_event_id=UUID(x["target_event_id"]) if x["target_event_id"] else None,
@@ -72,7 +86,7 @@ def edges_from_body(raw: list[dict]) -> list[Edge]:
 
 
 def write_version(session: ScopedSession, key_provider: RootKeyProvider, stream_id: UUID, rec: VersionRecord, *,
-                  caused_by: UUID | None = None, cycle_id: UUID | None = None):
+                  caused_by: UUID | None = None, cycle_id: UUID | None = None, carried_from: UUID | None = None):
     """Append the version event and its projection rows; return the event's envelope."""
     body = {"op": "version", "object_id": str(rec.object_id), "version": rec.version, "kind": rec.kind,
             "status": rec.status, "support": rec.support, "content": rec.content,
@@ -81,7 +95,7 @@ def write_version(session: ScopedSession, key_provider: RootKeyProvider, stream_
         stream_id=stream_id, event_type=EventType.MEMORY_EVENT, payload_type=PayloadType.STRUCTURED,
         actor_kind=ActorKind.SYSTEM, actor_id=VERSION_ACTOR, source=Source.SYSTEM,
         authorship=Authorship.SCOPE_PRINCIPAL, idempotency_key=str(uuid.uuid4()), content=body,
-        caused_by=caused_by, cycle_id=cycle_id)).envelope
+        caused_by=caused_by, cycle_id=cycle_id, sources=_sources(rec, carried_from))).envelope
     key = load_key(session.conn, key_provider, env.key_id)
     gen = session.conn.execute("SELECT interp.active_generation(%s)", (stream_id,)).fetchone()[0]
     session.conn.execute(

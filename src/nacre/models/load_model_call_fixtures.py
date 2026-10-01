@@ -4,7 +4,7 @@ Functionality: Export a stream's recorded model calls as a fixture file, and loa
 Owns: the fixture line format (JSONL of the replay-relevant body fields), the file's sha256, and appending loaded
   calls as `result` events in the D-0022 body shape, marked `loaded_from_fixture`.
 Public entry: export_model_calls(), load_model_calls(), fixture_sha256()
-Decisions: D-0022, D-0016
+Decisions: D-0022, D-0016, D-0023
 Assumptions: A-0025
 Notes: Recorded mode (D-0022): everyday tests and the gate's determinism check (Phase 2 gate item 4) replay a live
   run's calls. Fixtures hold synthetic task data only (frozen MNEXA families). Only successful, unredacted calls are
@@ -44,8 +44,12 @@ def export_model_calls(session: ScopedSession, key_provider: RootKeyProvider, st
     return len(lines)
 
 
-def load_model_calls(session: ScopedSession, key_provider: RootKeyProvider, stream_id: UUID, path: Path) -> int:
-    """Append every fixture line as a replayable `result` event in `stream_id`; return how many."""
+def load_model_calls(session: ScopedSession, key_provider: RootKeyProvider, stream_id: UUID, path: Path, *,
+                     sources: tuple[UUID, ...]) -> int:
+    """Append every fixture line as a replayable `result` event in `stream_id`, keyed like the live recording
+    (D-0023: under the contributor set of `sources`, the events the recorded prompts were built from)."""
+    if not sources:
+        raise ValueError("fixtures must name the events their prompts derive from (D-0023: no stream-key fallback)")
     digest = fixture_sha256(path)
     n = 0
     for line in Path(path).read_text().splitlines():
@@ -56,6 +60,6 @@ def load_model_calls(session: ScopedSession, key_provider: RootKeyProvider, stre
             stream_id=stream_id, event_type=EventType.RESULT, payload_type=PayloadType.TRACE, actor_kind=ActorKind.MODEL,
             actor_id=_FIXTURE_ACTOR, source=Source.SYSTEM, authorship=Authorship.EXTERNAL,
             idempotency_key=str(uuid.uuid4()), content=body, actor_model=rec["model"],
-            actor_model_version=rec["response"].get("model_reported")))
+            actor_model_version=rec["response"].get("model_reported"), sources=tuple(sources)))
         n += 1
     return n

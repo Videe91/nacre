@@ -110,5 +110,6 @@ def promote_if_supported(session: ScopedSession, key_provider: RootKeyProvider, 
     if head:
         edges += [e for e in edges_from_body(head["edges"]) if e.role in _CARRIED]
     write_version(session, key_provider, stream_id, VersionRecord(object_id, version, kind, status, support, content,
-                                                                  tuple(edges)), caused_by=proposal_id, cycle_id=cycle_id)
+                                                                  tuple(edges)), caused_by=proposal_id, cycle_id=cycle_id,
+                  carried_from=heads[-1].envelope.event_id if heads else None)
     return Promotion(object_id, version, status, support, True)

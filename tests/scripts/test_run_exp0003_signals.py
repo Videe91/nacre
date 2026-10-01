@@ -79,3 +79,19 @@ def test_progress_lines_appear_one_at_a_time_not_in_buffered_bursts(tmp_path):
     finally:
         proc.send_signal(signal.SIGTERM)
         proc.wait(timeout=120)
+
+
+def test_killed_runs_leave_no_database_behind(tmp_path):
+    import psycopg
+    admin = "host=127.0.0.1 port=54329 user=postgres dbname=postgres password=" + \
+        next(line.split(":", 1)[1].strip() for line in (ROOT / "docker-compose.yml").read_text().splitlines()
+             if "POSTGRES_PASSWORD:" in line)
+    count = lambda: psycopg.connect(admin).execute(  # noqa: E731
+        "SELECT count(*) FROM pg_database WHERE datname LIKE 'nacre_exp0003_%'").fetchone()[0]
+    before = count()
+    for delay in (0.3, 0.8, 1.5):                       # kill at different points during start-up
+        proc, _ = _start(tmp_path / str(delay), under_nohup=True) if (tmp_path / str(delay)).mkdir() is None else None
+        time.sleep(delay)
+        proc.send_signal(signal.SIGTERM)
+        proc.wait(timeout=120)
+    assert count() == before

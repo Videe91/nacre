@@ -73,7 +73,7 @@ Phase 2 is done when all of these pass on the Docker Postgres:
    - **Canary:** a flag-everything gate must fail this item (passing).
 8. **Rebuild:** the `interp` projection rebuilt from the ledger is identical. **PASSED on real state**: 180/180
    EXP-0003 scopes in an offline recorded replay (`tests/regression/exp0003_item8/`).
-9. **Shredding and privacy:**
+9. **Shredding and privacy (D-0023 contributor-set keys built 2026-10-01):**
    - erasing a scope or person makes its model-call recordings, proposals and beliefs unreadable;
    - no content plaintext in the projection;
    - SI-1 to SI-7 pass.
@@ -108,7 +108,9 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   flagged, consolidated, promoted or formed into an episode (MNEXA ADR-0004 K-4, ADR-0009 Q-9).
 
 ## Open questions
-- **OPEN, Phase 2 gate item 9 (found 2026-10-01; D3 decision needed): erasing a PERSON does not erase derived
+- **Later (owner, 2026-10-01):** events ABOUT a person written by others (D-0023 decision 1). Today they stay on the
+  writer's or system subject unless a caller names the person subject.
+- **RESOLVED 2026-10-01 by D-0023 (built and tested): Phase 2 gate item 9, erasing a PERSON did not erase derived
   copies.**
   - **What happens:** model-call records, lesson proposals and belief versions are encrypted under the STREAM's
     (system-subject) key. After a person's data keys are destroyed, their original statement is unreadable, but a
@@ -971,3 +973,39 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
     corrections are not erasable. D-0023 §6 proposes every person-actor event be person-subject (owner question 1).
   - **New assumptions:** A-0030 (contributor sets stay small), A-0031 (every derived record can name its sources).
   - Nothing built for item 9.
+- 2026-10-01 — **D-0023 accepted (owner decisions 1–4) and BUILT; gate item 9 closed.**
+  - **Housekeeping:**
+    - dropped the 3 kept replay databases and their key folders;
+    - also dropped 2 EMPTY `nacre_exp0003_*` databases leaked by my signal tests: the runner created its database
+      before the cleanup `try`. Fixed (create inside it) and tested (killed runs leave no database).
+  - **Migration 0011 `keys.key_contributors`:** (subject, source month, is_person) per derived key; cascade; RLS;
+    keyadmin delete. The system subject is a member too (non-person), so forgetting a month reaches derived system
+    content.
+  - **`keys/derive_contributor_key.py`:** contributors from sources, recursive through derived keys; a shredded or
+    foreign source → refused; cap 256 → `ContributorCapExceeded`. No fallback.
+  - **`append_event` intake (supersedes D-0004's sentence):**
+    - every person-authored event is under the person's key;
+    - `on_behalf_of` puts an agent's event under the person's key;
+    - `sources` → contributor-set key;
+    - the MAC input changes only when these fields are used.
+  - **Every derived writer passes sources:** model calls (cap and shredded-source check BEFORE the provider call);
+    proposals; contradictions; versions (edges + carried prior version); flags; episode markers; fixtures (sources
+    required).
+  - **Sleep pass:** D-0023 refusals are recorded as content-free `derived_write_refused` markers and not retried.
+  - **Erasure:** erase_person destroys every derived key with the person as a member (org-wide); forget_period
+    destroys every derived key in the stream with a member month in the forgotten months.
+  - **Recall:** `read_heads` excludes heads whose content is unreadable (lost beliefs); `include_unreadable` exists
+    for structure views.
+  - **Tests (D-0023 list):** `tests/keys/test_contributor_keys.py` (17) + a sleep refusal test:
+    - erasure reaches derived records incl. derived-of-derived, and only those;
+    - mixed records erased whole, either way;
+    - a belief from an erased person's correction is lost; a legal hold keeps it until expiry; rebuild treats it as
+      shredded;
+    - forget-month via membership;
+    - every person-authored event type, plus on_behalf_of;
+    - rotation; membership RLS;
+    - cap fail-closed (no key created, no provider call);
+    - shredded sources refused;
+    - structure test: no derived append without sources.
+    - Phase 3 embeddings: the binding requirement is recorded in D-0023 §3 and the Phase 3 gate.
+  - **Mutations:** 11/12 killed; `carried_from` is an equivalent mutant today (documented).

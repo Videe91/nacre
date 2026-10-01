@@ -137,11 +137,13 @@ def _safety(s, kp, stream, family, result, bundle):
 
 def run_family(open_session: Callable[[], AbstractContextManager[ScopedSession]], key_provider: RootKeyProvider,
                sleep_provider: ModelProvider, transfer_provider: ModelProvider, stream_id: UUID, family: dict,
-               set_number: int, *, policy: CallPolicy = DEFAULT_POLICY) -> FamilyResult:
+               set_number: int, *, policy: CallPolicy = DEFAULT_POLICY, before_sleep=None) -> FamilyResult:
     """One family, both arms, in its own scope `stream_id` (already registered and granted)."""
     result, run_id = FamilyResult(family["id"]), uuid.uuid4()
     with open_session() as s:
         lf = load_mnexa_family(s, key_provider, stream_id, family, set_number, cycle_id=run_id)
+    if before_sleep is not None:                     # e.g. recorded mode: load fixtures keyed by this family's events
+        before_sleep(lf)
     result.sleep = run_sleep_pass(open_session, key_provider, sleep_provider, stream_id, policy=policy)
     with open_session() as s:
         heads = read_heads(s, key_provider, stream_id)
