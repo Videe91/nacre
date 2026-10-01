@@ -1,0 +1,1306 @@
+{
+ "built_by": "separate blind session",
+ "composition": {
+  "stdlib": 128,
+  "third_party": 22,
+  "total": 150
+ },
+ "date": "2026-10-01",
+ "files": [
+  {
+   "bytes": 5218,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "__future__.py",
+   "path": "__future__.py",
+   "sha256": "981d4c398849f9ebcab72300d9c1fe288fd6d7f28957b3b3fa3a493a5836d95c"
+  },
+  {
+   "bytes": 2256,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "_apple_support.py",
+   "path": "_apple_support.py",
+   "sha256": "3bde7533b66dafa0c755c92bf09b30932a723ca58905a3fac670d53e3149f47b"
+  },
+  {
+   "bytes": 16364,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "_ast_unparse.py",
+   "path": "_ast_unparse.py",
+   "sha256": "af152cfec0ade8cf2051fcc7030fadec362678ade0f98d5a3bc52c0dd3987ff8"
+  },
+  {
+   "bytes": 16358,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "_collections_abc.py",
+   "path": "_collections_abc.py",
+   "sha256": "5c8f759971ecf35c29a6cd8a71080aeb3365f4da58c77750bf55f758f8c0d6d3"
+  },
+  {
+   "bytes": 14695,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "_markupbase.py",
+   "path": "_markupbase.py",
+   "sha256": "01046da4883344a898fb1261a0805a7ab1bae371e95ade31311ac03b43b33c98"
+  },
+  {
+   "bytes": 16378,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "_pyio.py",
+   "path": "_pyio.py",
+   "sha256": "2db01cfa2e13d136cbaf809b253c6d2f1750577bcaa64b39de29135eeb14c151"
+  },
+  {
+   "bytes": 422,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "_pyrepl/__main__.py",
+   "path": "_pyrepl/__main__.py",
+   "sha256": "3b207710ddae4728028d57c550d4315f88a626f06265cb719dd29f7b04977685"
+  },
+  {
+   "bytes": 15195,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "_pyrepl/_module_completer.py",
+   "path": "_pyrepl/_module_completer.py",
+   "sha256": "bb684a455564e1adf6696a8366bfad881b75ca1903ab988bd31b7b104b07a708"
+  },
+  {
+   "bytes": 3840,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "_pyrepl/base_eventqueue.py",
+   "path": "_pyrepl/base_eventqueue.py",
+   "sha256": "4ec1110f52ccba2e4e751e8c0fc0f6842ea2b67c2458b8639cc62c068f6e11f1"
+  },
+  {
+   "bytes": 767,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "_pyrepl/trace.py",
+   "path": "_pyrepl/trace.py",
+   "sha256": "41bbca51aff4922b3f5d5146648e23411c866d61b3b92025f60d98fcafb6bde3"
+  },
+  {
+   "bytes": 2554,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "_pyrepl/unix_eventqueue.py",
+   "path": "_pyrepl/unix_eventqueue.py",
+   "sha256": "85fcc878c81b99f10f2735ce83aabd5acb8f923758aaa1395d8e50d6edd8c0e8"
+  },
+  {
+   "bytes": 13122,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "_pyrepl/utils.py",
+   "path": "_pyrepl/utils.py",
+   "sha256": "563b512e49c8084bf588e3b3f18ae76e9058813fe6597715656da21894e8958c"
+  },
+  {
+   "bytes": 16324,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "_pyrepl/windows_console.py",
+   "path": "_pyrepl/windows_console.py",
+   "sha256": "afd1773c821817b0147e970dca542ce639bde69c63c1bde13d21bfc693e2b4e5"
+  },
+  {
+   "bytes": 991,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "_pyrepl/windows_eventqueue.py",
+   "path": "_pyrepl/windows_eventqueue.py",
+   "sha256": "ca39efc778d55c97357fc8b95f25f1c9301f79f487ee7486f24bf872a87c3aa7"
+  },
+  {
+   "bytes": 2699,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "_sitebuiltins.py",
+   "path": "_sitebuiltins.py",
+   "sha256": "f688c89b860d5839aff1047d4f3df6c9695f136e2ae8a167bbbfa51846bbdaa5"
+  },
+  {
+   "bytes": 16374,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "_strptime.py",
+   "path": "_strptime.py",
+   "sha256": "61752d2643599bc4102740c89ab7312b5baac94b7b55058b6e6186779c6e5aec"
+  },
+  {
+   "bytes": 5626,
+   "licence": "MIT",
+   "origin": "anyio 4.15.1",
+   "original": "site-packages/anyio/_core/_asyncio_selector_thread.py",
+   "path": "anyio-4.15.1/anyio/_core/_asyncio_selector_thread.py",
+   "sha256": "d8f77114cddcb34d8aa7a052a696ef9914fbabb6acade4d6e45801c44b1f941a"
+  },
+  {
+   "bytes": 1016,
+   "licence": "MIT",
+   "origin": "anyio 4.15.1",
+   "original": "site-packages/anyio/_core/_signals.py",
+   "path": "anyio-4.15.1/anyio/_core/_signals.py",
+   "sha256": "9a34c107685328d3d1954d088678a379079da563861110e23234a5250b05aee8"
+  },
+  {
+   "bytes": 11797,
+   "licence": "MIT",
+   "origin": "anyio 4.15.1",
+   "original": "site-packages/anyio/functools.py",
+   "path": "anyio-4.15.1/anyio/functools.py",
+   "sha256": "4f8252f085eafb1d52d0b6e8da8c05f25f5fcdad8aca93b5e3b40b7b2cf8723b"
+  },
+  {
+   "bytes": 16353,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "ast.py",
+   "path": "ast.py",
+   "sha256": "d8dbc97ac97a4127ed539b9def75d532755ae8610e5c998f62a1ee85e31bd55b"
+  },
+  {
+   "bytes": 7539,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "asyncio/__main__.py",
+   "path": "asyncio/__main__.py",
+   "sha256": "6e46626b7d2cdaf41e4628344b497c1d21efeac818cbc29332533ae5c766e62e"
+  },
+  {
+   "bytes": 1413,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "asyncio/constants.py",
+   "path": "asyncio/constants.py",
+   "sha256": "873fc2f9e66313c3c19c337269e704f204b59f9e91d6ecbec59f68335484d338"
+  },
+  {
+   "bytes": 10152,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "asyncio/queues.py",
+   "path": "asyncio/queues.py",
+   "sha256": "559dd0b597af27d60f0ea75a0ee4eff19d9337d685d13e0685d13045ee7b7cdf"
+  },
+  {
+   "bytes": 16351,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "asyncio/selector_events.py",
+   "path": "asyncio/selector_events.py",
+   "sha256": "deacc9a7123c20455774e269d736131d1ad7eb8fe39764943e743a528bc4a120"
+  },
+  {
+   "bytes": 2475,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "asyncio/trsock.py",
+   "path": "asyncio/trsock.py",
+   "sha256": "c0eac37debcc51b702b808f6b7ed3e417343f5ff5f57125dad600a27eb082328"
+  },
+  {
+   "bytes": 16358,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "asyncio/windows_events.py",
+   "path": "asyncio/windows_events.py",
+   "sha256": "b5e39e0aaa9c968e09c5196c80e252823bbb76ea9a2e68047cb491e76cf6f5e7"
+  },
+  {
+   "bytes": 16375,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "base64.py",
+   "path": "base64.py",
+   "sha256": "b393afc8f00c48f73ec841a8ebb25169235a44286fb41b39ec732f4efb6d241a"
+  },
+  {
+   "bytes": 11978,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "bz2.py",
+   "path": "bz2.py",
+   "sha256": "368b9ee55f0b6dbfc81b15e1a17c51cccddb009389eae8e9a7acf2402ca4109a"
+  },
+  {
+   "bytes": 7122,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "cProfile.py",
+   "path": "cProfile.py",
+   "sha256": "4349fe3dba56e2636cee1ce4038baac7988104986c96be808b62bb46939ad7bf"
+  },
+  {
+   "bytes": 15411,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "cmd.py",
+   "path": "cmd.py",
+   "sha256": "2412ce55bbaa0be0bb33e11e3a13735160194e674a7d88a262da708ee00e4d7f"
+  },
+  {
+   "bytes": 13443,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "code.py",
+   "path": "code.py",
+   "sha256": "fcb15fcef14ca2a66ec8e02d52d2ab88b50e86f232317f8b35811dd9c2aa0de9"
+  },
+  {
+   "bytes": 16321,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "compileall.py",
+   "path": "compileall.py",
+   "sha256": "8df5b3b07d5c69ae675e2b36aed12831c34711c7ff46685988b0c2cb14b1fa63"
+  },
+  {
+   "bytes": 5670,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "compression/_common/_streams.py",
+   "path": "compression/_common/_streams.py",
+   "sha256": "8b8e943815c748d030e540a023400cb87fb13f75c2f0615a63ec42ef9f156c92"
+  },
+  {
+   "bytes": 60,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "compression/bz2.py",
+   "path": "compression/bz2.py",
+   "sha256": "0179b1d941eb89941776a5a4a92108c2680cc3b9da614998ca5e621617ce8bf8"
+  },
+  {
+   "bytes": 64,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "compression/gzip.py",
+   "path": "compression/gzip.py",
+   "sha256": "20c9914eeadab67976d460979f111c0679f6c515ad2430df605a592bac71f7e8"
+  },
+  {
+   "bytes": 64,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "compression/lzma.py",
+   "path": "compression/lzma.py",
+   "sha256": "b9c1d0a5a84f0af8c022db06732a2a9331186cb1fc589123ab39d53525491352"
+  },
+  {
+   "bytes": 2907,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "concurrent/interpreters/_crossinterp.py",
+   "path": "concurrent/interpreters/_crossinterp.py",
+   "sha256": "029fa98334c0dd71aead1cb3662a661f292aee5c9960fd71a15c1ac7a941cc72"
+  },
+  {
+   "bytes": 16362,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "contextlib.py",
+   "path": "contextlib.py",
+   "sha256": "55d342e22265493a05970e96051e6ac7bd07bc7f709b0763ea0c63d36f440cd8"
+  },
+  {
+   "bytes": 2557,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "ctypes/_endian.py",
+   "path": "ctypes/_endian.py",
+   "sha256": "499773a028a41ee18153fedfe0a00a26efb2a650f568b9bc17e2f3a914a23468"
+  },
+  {
+   "bytes": 154,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "ctypes/macholib/__init__.py",
+   "path": "ctypes/macholib/__init__.py",
+   "sha256": "1e77c01eec8f167ed10b754f153c0c743c8e5196ae9c81dffc08f129ab56dbfd"
+  },
+  {
+   "bytes": 16382,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "ctypes/util.py",
+   "path": "ctypes/util.py",
+   "sha256": "bdce6e419e346338b56419daa28910c4bcb690d1a0f9e96d7a286f93b1de2759"
+  },
+  {
+   "bytes": 331,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "datetime.py",
+   "path": "datetime.py",
+   "sha256": "742884b0c8e7dc69911858245db4f34d42e8ec0f769d580c570bd56032b0866c"
+  },
+  {
+   "bytes": 11711,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "dbm/dumb.py",
+   "path": "dbm/dumb.py",
+   "sha256": "7e18577a32d85827efd72c5da14709b9f3fb7fe0eed86abf74b5f6df54acecb3"
+  },
+  {
+   "bytes": 16355,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "email/_header_value_parser.py",
+   "path": "email/_header_value_parser.py",
+   "sha256": "87f896fbff567744d3f1b6ab70db97e3c1b2c8d7a9c2edbd0a9a887955b090b9"
+  },
+  {
+   "bytes": 3546,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "email/base64mime.py",
+   "path": "email/base64mime.py",
+   "sha256": "f9afd67a21d496a2cb571595ecbf79db1f1d4140e6b8b453a569a7eb8a688822"
+  },
+  {
+   "bytes": 10594,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "email/contentmanager.py",
+   "path": "email/contentmanager.py",
+   "sha256": "b76b572c0adfd3b3c6e08978e82895fcf9a6da5782d488f26d192759fa3cc94d"
+  },
+  {
+   "bytes": 3809,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "email/errors.py",
+   "path": "email/errors.py",
+   "sha256": "16e9ae1143667e7224e2ab4048339d0175ed02f3e4946f30daf94d98a25968be"
+  },
+  {
+   "bytes": 16361,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "email/feedparser.py",
+   "path": "email/feedparser.py",
+   "sha256": "e3f2123c0faae2efe800d429e4c18cc0f35569a7c3e0fc64195e0a4af8fc87b2"
+  },
+  {
+   "bytes": 16383,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "email/generator.py",
+   "path": "email/generator.py",
+   "sha256": "5bc606550b53d936963c9ed5951f7099a6c94e9958cbc9c9f8ea9e0d1384053c"
+  },
+  {
+   "bytes": 684,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "email/mime/nonmultipart.py",
+   "path": "email/mime/nonmultipart.py",
+   "sha256": "e93a956cf8cc781fc8c36e1fd2d2c3105f2e258df5465292c2980abef2f3d3ed"
+  },
+  {
+   "bytes": 5809,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "encodings/__init__.py",
+   "path": "encodings/__init__.py",
+   "sha256": "dadc37a3e430ce905b113d2e2a73ee2762dda8a4ad30567b83eb4b44eda147eb"
+  },
+  {
+   "bytes": 15957,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "encodings/aliases.py",
+   "path": "encodings/aliases.py",
+   "sha256": "e38fc524cc8b2355807921411c918c0d971419c4d6ba6147409785db42d257a3"
+  },
+  {
+   "bytes": 2084,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "encodings/charmap.py",
+   "path": "encodings/charmap.py",
+   "sha256": "1b8b5fdb36ce3becc62a6115ed904a17083949ec8aaef5a80f7078cec232f43b"
+  },
+  {
+   "bytes": 16368,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "encodings/cp1125.py",
+   "path": "encodings/cp1125.py",
+   "sha256": "6b68a151fba6f93e359f7517993b3dc6d5d350f48fd36b5bef438e79d2c035cf"
+  },
+  {
+   "bytes": 13094,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "encodings/cp1253.py",
+   "path": "encodings/cp1253.py",
+   "sha256": "8c27696dcfb6894b378869bc89f113703fbd1e9b13a83934463d5999b055d1e8"
+  },
+  {
+   "bytes": 12466,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "encodings/cp1255.py",
+   "path": "encodings/cp1255.py",
+   "sha256": "54a1b5087578fa78e5bdd0afa6a9e80e8c5467c1e4226cf6e586cfe7a674a653"
+  },
+  {
+   "bytes": 12814,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "encodings/cp1256.py",
+   "path": "encodings/cp1256.py",
+   "sha256": "ad3768ac2fef2a646b3301c20af705f4d4a1544f22fa8a84241bada27ab84133"
+  },
+  {
+   "bytes": 13364,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "encodings/cp1258.py",
+   "path": "encodings/cp1258.py",
+   "sha256": "672e05b51952a82c8dbd5603769195fcedf565e457bb86c0d5bae04955d04630"
+  },
+  {
+   "bytes": 12055,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "encodings/cp424.py",
+   "path": "encodings/cp424.py",
+   "sha256": "30414c2186ea0802bbf3db034122ddec1f8a10061b97c50871e14b74ee36d0ca"
+  },
+  {
+   "bytes": 16339,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "encodings/cp850.py",
+   "path": "encodings/cp850.py",
+   "sha256": "30bb6f8c8b610ff3eafb7032acafdb4f5ccf13b489235c602218a6c34325c186"
+  },
+  {
+   "bytes": 16377,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "encodings/cp852.py",
+   "path": "encodings/cp852.py",
+   "sha256": "01b4253d3b9d3ef1d104ef828b9ed917be5b6b3e37a9eb0991c421060fae02ad"
+  },
+  {
+   "bytes": 16372,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "encodings/cp855.py",
+   "path": "encodings/cp855.py",
+   "sha256": "37225dc0d31b0f6fbf2f40ea0e06395c2032d483e478bc61c44b5ecc03f3c811"
+  },
+  {
+   "bytes": 12854,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "encodings/cp875.py",
+   "path": "encodings/cp875.py",
+   "sha256": "2fe72632015db2cba2bb4367055551da6fe22051b96d170c7b96fa271c46b257"
+  },
+  {
+   "bytes": 1023,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "encodings/cp950.py",
+   "path": "encodings/cp950.py",
+   "sha256": "27811178b450731fc955b1247656a605d04e5ee98e0d585e4596b94b703a27f6"
+  },
+  {
+   "bytes": 1051,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "encodings/euc_jisx0213.py",
+   "path": "encodings/euc_jisx0213.py",
+   "sha256": "e28315910da20218dae8b7d5becd81de1e283dfd8b0415a4980d67065de73a0b"
+  },
+  {
+   "bytes": 1061,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "encodings/iso2022_jp_1.py",
+   "path": "encodings/iso2022_jp_1.py",
+   "sha256": "63bacad13a979a5519fcaa4f1e1e07b2c7415005167fac3a689408c7d886fabd"
+  },
+  {
+   "bytes": 1061,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "encodings/iso2022_jp_2.py",
+   "path": "encodings/iso2022_jp_2.py",
+   "sha256": "5d4248181548b0fc89a9f5ee9cf52ebecb235708ba87d47896ad14130884ef9f"
+  },
+  {
+   "bytes": 1073,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "encodings/iso2022_jp_2004.py",
+   "path": "encodings/iso2022_jp_2004.py",
+   "sha256": "b4d1468bcd608b46f38cb0c6ef115510dcf9aa0f71e590792f407efc6e165164"
+  },
+  {
+   "bytes": 1069,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "encodings/iso2022_jp_ext.py",
+   "path": "encodings/iso2022_jp_ext.py",
+   "sha256": "f4c9ed8f3031995faa224bcb10153d2b6144944477d1f27d1a6cc4a879fac34c"
+  },
+  {
+   "bytes": 13723,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "encodings/kz1048.py",
+   "path": "encodings/kz1048.py",
+   "sha256": "76beb30e98a911f72f97609a2373782573c17c88a5fb3537db338aa382979ffc"
+  },
+  {
+   "bytes": 14118,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "encodings/mac_latin2.py",
+   "path": "encodings/mac_latin2.py",
+   "sha256": "31670da18ce8b5394cd53fe6bf216268e7e8eae4c0247532e420e2e103727d50"
+  },
+  {
+   "bytes": 13480,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "encodings/mac_roman.py",
+   "path": "encodings/mac_roman.py",
+   "sha256": "230367d96aef8e8d7f185b4acfb84923714f39ddbcbf9cf38a06bf6f5d621c22"
+  },
+  {
+   "bytes": 13661,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "encodings/mac_romanian.py",
+   "path": "encodings/mac_romanian.py",
+   "sha256": "49630cf035c19e896a123ed6e5fee18b5e485123daf2f15da38bf727ff387bee"
+  },
+  {
+   "bytes": 14015,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "encodings/ptcp154.py",
+   "path": "encodings/ptcp154.py",
+   "sha256": "0eabcb2c287d335e86b71b0abe5718bd6ddc9aaee234f0f0f2363845d2926d8d"
+  },
+  {
+   "bytes": 2448,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "encodings/rot_13.py",
+   "path": "encodings/rot_13.py",
+   "sha256": "14767f475acdc0bf48e6272280dd15b80efaecafb93c06be21136f83dd1ee7e4"
+  },
+  {
+   "bytes": 1039,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "encodings/shift_jis.py",
+   "path": "encodings/shift_jis.py",
+   "sha256": "ad4ac50ebf58294304e412cc0f1b12980988dd6edc414e4110029c0a1abbe966"
+  },
+  {
+   "bytes": 5175,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "encodings/utf_32.py",
+   "path": "encodings/utf_32.py",
+   "sha256": "6c235e377e1e277cde5f684cee6f6f8da4c73d153a21891df0cb834f17cd2b6f"
+  },
+  {
+   "bytes": 1005,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "encodings/utf_8.py",
+   "path": "encodings/utf_8.py",
+   "sha256": "ba0cac060269583523ca9506473a755203037c57d466a11aa89a30a5f6756f3d"
+  },
+  {
+   "bytes": 6247,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "genericpath.py",
+   "path": "genericpath.py",
+   "sha256": "cdac5a68dd738051e0d66fc81d5947d6a1776248fc6fe862253477608d870ec4"
+  },
+  {
+   "bytes": 9589,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "hmac.py",
+   "path": "hmac.py",
+   "sha256": "10e8952ae06300f63a1a8f4898f7f828e8e5ad17bf29240d4e2d106418f0226b"
+  },
+  {
+   "bytes": 16360,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "html/entities.py",
+   "path": "html/entities.py",
+   "sha256": "36c2077fdd4a90a417b6376de4fbfec89addb5b83ddcc8e76765227bef162616"
+  },
+  {
+   "bytes": 9259,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "http/__init__.py",
+   "path": "http/__init__.py",
+   "sha256": "ff5f3d443b9174909975e1c9c67573cf2ffd5fbff9fc2e28529c0601cd17ed9b"
+  },
+  {
+   "bytes": 16366,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "http/client.py",
+   "path": "http/client.py",
+   "sha256": "6fb24f29266824e21fa8b560b41bafe68b1452c0ed8f35bfe3adff14846de40e"
+  },
+  {
+   "bytes": 8305,
+   "licence": "BSD-3-Clause",
+   "origin": "httpcore2 2.13.1",
+   "original": "site-packages/httpcore2/_async/connection.py",
+   "path": "httpcore2-2.13.1/httpcore2/_async/connection.py",
+   "sha256": "9c3271ee7524a7d1d780e143a87514c48fed3f297d06d62e7c542a1bbe3eb980"
+  },
+  {
+   "bytes": 14766,
+   "licence": "BSD-3-Clause",
+   "origin": "httpcore2 2.13.1",
+   "original": "site-packages/httpcore2/_async/http_proxy.py",
+   "path": "httpcore2-2.13.1/httpcore2/_async/http_proxy.py",
+   "sha256": "ba374f61bcef34f33cbe9c51d4dd98a133b053d84f4a034b7550be6fee1ab412"
+  },
+  {
+   "bytes": 5363,
+   "licence": "BSD-3-Clause",
+   "origin": "httpcore2 2.13.1",
+   "original": "site-packages/httpcore2/_async/interfaces.py",
+   "path": "httpcore2-2.13.1/httpcore2/_async/interfaces.py",
+   "sha256": "109de8e32eb543cd9c9a6ec7d888a71f1243ab03b5f012b21000396f70cbbb2b"
+  },
+  {
+   "bytes": 4079,
+   "licence": "BSD-3-Clause",
+   "origin": "httpcore2 2.13.1",
+   "original": "site-packages/httpcore2/_backends/mock.py",
+   "path": "httpcore2-2.13.1/httpcore2/_backends/mock.py",
+   "sha256": "6a16f0625da612ee4ad3be634ed1ba8f02c254761d56a576992d06e3e28d4081"
+  },
+  {
+   "bytes": 14528,
+   "licence": "BSD-3-Clause",
+   "origin": "httpcore2 2.13.1",
+   "original": "site-packages/httpcore2/_sync/http_proxy.py",
+   "path": "httpcore2-2.13.1/httpcore2/_sync/http_proxy.py",
+   "sha256": "202e88073635c823bd4c35a7e6fab4fbf0825375ad658750d391d5ef50d04b1d"
+  },
+  {
+   "bytes": 16377,
+   "licence": "BSD-3-Clause",
+   "origin": "httpx2 2.13.1",
+   "original": "site-packages/httpx2/_models.py",
+   "path": "httpx2-2.13.1/httpx2/_models.py",
+   "sha256": "64abd25fb2efec683f465b1a424dcc9cb9813d0eefe77ec327972a59167c80d0"
+  },
+  {
+   "bytes": 1258,
+   "licence": "BSD-3-Clause",
+   "origin": "httpx2 2.13.1",
+   "original": "site-packages/httpx2/websockets/_ping.py",
+   "path": "httpx2-2.13.1/httpx2/websockets/_ping.py",
+   "sha256": "33a5e66daa74d7e95d9757a37a39a48c96c180ad6e9418fefe8694a0a722aab3"
+  },
+  {
+   "bytes": 4245,
+   "licence": "BSD-3-Clause",
+   "origin": "idna 3.20",
+   "original": "site-packages/idna/cli.py",
+   "path": "idna-3.20/idna/cli.py",
+   "sha256": "2e01972a25e67afdfba5d824013c01e808893916539c0db33f72f37c42b8896a"
+  },
+  {
+   "bytes": 1354,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "importlib/_abc.py",
+   "path": "importlib/_abc.py",
+   "sha256": "80aab7931dc999dee581c8b8b56fcd973fe156335a96ceeaf6acfc03cebf10e8"
+  },
+  {
+   "bytes": 2166,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "importlib/machinery.py",
+   "path": "importlib/machinery.py",
+   "sha256": "34b7583fd83ebb2629b7645c0dd293839ce16b19cf8742801e21a21fe08f5811"
+  },
+  {
+   "bytes": 1801,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "importlib/metadata/_meta.py",
+   "path": "importlib/metadata/_meta.py",
+   "sha256": "9f167b0bc19595c04500a5b254e9ff767ee8b7fb7005c6e6d4d9af8c87ad0472"
+  },
+  {
+   "bytes": 327,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "importlib/readers.py",
+   "path": "importlib/readers.py",
+   "sha256": "d0d57d118d64916f7e6edb04f8bd1a760a1abb879125899ef50a36d09ef54df4"
+  },
+  {
+   "bytes": 1277,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "importlib/resources/_itertools.py",
+   "path": "importlib/resources/_itertools.py",
+   "sha256": "7838ac57a46a88d64ea202d25dfe8b3861ce61cefd14680faca34bcc52e60ab5"
+  },
+  {
+   "bytes": 4576,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "json/tool.py",
+   "path": "json/tool.py",
+   "sha256": "a9b45e8452bd19fba0db863da86c6c5b74bfbd9fcd18f581cff1139b33d5af75"
+  },
+  {
+   "bytes": 1073,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "keyword.py",
+   "path": "keyword.py",
+   "sha256": "18c2be738c04ad20ad375f6a71db34b3823c7f40b0340f5294d0e89f3c9b093b"
+  },
+  {
+   "bytes": 16356,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "logging/handlers.py",
+   "path": "logging/handlers.py",
+   "sha256": "634258a0256b7716d7face087d17bd8253c05cecb4f5a5dc5f7da425b4907656"
+  },
+  {
+   "bytes": 13426,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "lzma.py",
+   "path": "lzma.py",
+   "sha256": "b01a78a04c6a9ba6c645758cace78ed53a53871ea3ff88744e23f6263613d507"
+  },
+  {
+   "bytes": 16357,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "modulefinder.py",
+   "path": "modulefinder.py",
+   "sha256": "127fe9cdea5139e977e6b76a427808327e0016fea9230f8b81c801e838c3d978"
+  },
+  {
+   "bytes": 3063,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "multiprocessing/dummy/__init__.py",
+   "path": "multiprocessing/dummy/__init__.py",
+   "sha256": "bd08f18fce4393e38be9a94a67b6595c05959d59140135d65dc6b3fecfe70e54"
+  },
+  {
+   "bytes": 2143,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "multiprocessing/popen_spawn_posix.py",
+   "path": "multiprocessing/popen_spawn_posix.py",
+   "sha256": "3738d2da3f5f57c83149232120a389a3b03cb4ed6f275957b884b18eb227628a"
+  },
+  {
+   "bytes": 7031,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "netrc.py",
+   "path": "netrc.py",
+   "sha256": "3ddc67d7599759d745525af7e00ef1bf2d6bb958129698169b7548f17b81cbe8"
+  },
+  {
+   "bytes": 2443,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "nturl2path.py",
+   "path": "nturl2path.py",
+   "sha256": "876806ae202de9a3dbef166ac49d0b5f854f17511e6dc443314215a66d51dd69"
+  },
+  {
+   "bytes": 805,
+   "licence": "Apache-2.0",
+   "origin": "openai 3.22.1",
+   "original": "site-packages/openai/_extras/numpy_proxy.py",
+   "path": "openai-3.22.1/openai/_extras/numpy_proxy.py",
+   "sha256": "2f24d990a0dd9e3cf487548a2eca61ae1997c94b09ff111485314cac27fb93b8"
+  },
+  {
+   "bytes": 2499,
+   "licence": "Apache-2.0",
+   "origin": "openai 3.22.1",
+   "original": "site-packages/openai/_provider.py",
+   "path": "openai-3.22.1/openai/_provider.py",
+   "sha256": "e6ae07aa11525be0a98c90ca85cc361c6f5ea3e9c00e9b0241c92d3e679e5a17"
+  },
+  {
+   "bytes": 16272,
+   "licence": "Apache-2.0",
+   "origin": "openai 3.22.1",
+   "original": "site-packages/openai/_utils/_transform.py",
+   "path": "openai-3.22.1/openai/_utils/_transform.py",
+   "sha256": "cef7a6255d4d41dc49e5ce3a0957d63ea7081bf6c248a8970843576c57798139"
+  },
+  {
+   "bytes": 1947,
+   "licence": "Apache-2.0",
+   "origin": "openai 3.22.1",
+   "original": "site-packages/openai/lib/_old_api.py",
+   "path": "openai-3.22.1/openai/lib/_old_api.py",
+   "sha256": "5d99d706b10ab9377bd22262ae3e66196df97d9a2aaee2686db053aba6ef835d"
+  },
+  {
+   "bytes": 402,
+   "licence": "Apache-2.0",
+   "origin": "openai 3.22.1",
+   "original": "site-packages/openai/types/beta/realtime/session_updated_event.py",
+   "path": "openai-3.22.1/openai/types/beta/realtime/session_updated_event.py",
+   "sha256": "27846306f5b45aded79128cc8756434c70af03d93392e023c3b33b233607f580"
+  },
+  {
+   "bytes": 16336,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "pickle.py",
+   "path": "pickle.py",
+   "sha256": "bc7d6ac5e60442dcd5b7d7f841d6a8091459ba6a3dc2414c4afa136d239f98ab"
+  },
+  {
+   "bytes": 16353,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "posixpath.py",
+   "path": "posixpath.py",
+   "sha256": "810ce664550cc4685ca92382ae71f79f0f108d0b8fb131411b6ec83f4604a94d"
+  },
+  {
+   "bytes": 16376,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "pprint.py",
+   "path": "pprint.py",
+   "sha256": "d4543d1421bb0202703de264607aef7e79185694082e350db6a4f5fb7b0f0f3d"
+  },
+  {
+   "bytes": 5172,
+   "licence": "MIT",
+   "origin": "pydantic 2.13.5",
+   "original": "site-packages/pydantic/_internal/_repr.py",
+   "path": "pydantic-2.13.5/pydantic/_internal/_repr.py",
+   "sha256": "8d07e726ec83c50a5244d846dbd208f4f5fc7b836fdaa599ac4c3696a8a1dd41"
+  },
+  {
+   "bytes": 10281,
+   "licence": "MIT",
+   "origin": "pydantic 2.13.5",
+   "original": "site-packages/pydantic/deprecated/class_validators.py",
+   "path": "pydantic-2.13.5/pydantic/deprecated/class_validators.py",
+   "sha256": "9f48d840e71be58422c346fb617ca2ecd3e261d57bba3591e0ac99ba68d33e89"
+  },
+  {
+   "bytes": 3157,
+   "licence": "MIT",
+   "origin": "pydantic 2.13.5",
+   "original": "site-packages/pydantic/v1/annotated_types.py",
+   "path": "pydantic-2.13.5/pydantic/v1/annotated_types.py",
+   "sha256": "ba4d8d000c6a88d10b2a388787287129a20e87c1759585bf2f3ad6dd7ee86417"
+  },
+  {
+   "bytes": 14105,
+   "licence": "MIT",
+   "origin": "pydantic 2.13.5",
+   "original": "site-packages/pydantic/v1/env_settings.py",
+   "path": "pydantic-2.13.5/pydantic/v1/env_settings.py",
+   "sha256": "03d557c2d465d36018fa31f40b4a2ecb954dc377e2e85fe9933b870e380000e3"
+  },
+  {
+   "bytes": 16338,
+   "licence": "MIT",
+   "origin": "pydantic 2.13.5",
+   "original": "site-packages/pydantic/v1/fields.py",
+   "path": "pydantic-2.13.5/pydantic/v1/fields.py",
+   "sha256": "db7839b79cc5abd18b96d44fe4c127624ccf434bfd72333303a31325af9680a7"
+  },
+  {
+   "bytes": 16328,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "pydoc.py",
+   "path": "pydoc.py",
+   "sha256": "84bc4a389cd21f03899e390cdfce70a2356b7dd8a4665d765f03483bfab8d23d"
+  },
+  {
+   "bytes": 5444,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "re/_casefix.py",
+   "path": "re/_casefix.py",
+   "sha256": "1b12d9136f23db6c3f6f26053fefc15ca964b886838c7b9c1fabf8d2efc1e5c8"
+  },
+  {
+   "bytes": 12885,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "runpy.py",
+   "path": "runpy.py",
+   "sha256": "81e07da29bb2235111079bb64efea7d291639c5d2cf163e7af187d6a38cef389"
+  },
+  {
+   "bytes": 1984,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "secrets.py",
+   "path": "secrets.py",
+   "sha256": "277000574358a6ecda4bb40e73332ae81a3bc1c8e1fa36f50e5c6a7d4d3f0f17"
+  },
+  {
+   "bytes": 16383,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "shutil.py",
+   "path": "shutil.py",
+   "sha256": "d5cb2aee701e6eeacd33da7d80eddad6abec7a3cd6f4c90e1e197c264b967d5b"
+  },
+  {
+   "bytes": 16359,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "smtplib.py",
+   "path": "smtplib.py",
+   "sha256": "602d42acf173dcebf9bfb404b74d2a5ed29c070d2bc3b94ad5dc0d9adaee6a3e"
+  },
+  {
+   "bytes": 4288,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "sqlite3/__main__.py",
+   "path": "sqlite3/__main__.py",
+   "sha256": "c6fe6460fbfa6aa2c97668db782000f32796d780d9f7a4765de4daef1b460989"
+  },
+  {
+   "bytes": 12355,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "string/__init__.py",
+   "path": "string/__init__.py",
+   "sha256": "10c1c744ce2518dd739c3debec3831682d453814ce9e228376fadcc83f0f1a4f"
+  },
+  {
+   "bytes": 16352,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "subprocess.py",
+   "path": "subprocess.py",
+   "sha256": "ed2f026accd2143634ea4dfa0738f732e186344c7d7819155aaf5b0d92026eaa"
+  },
+  {
+   "bytes": 9228,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "sysconfig/__main__.py",
+   "path": "sysconfig/__main__.py",
+   "sha256": "e0f9e52f5263e0f351940534dd20d6c7036a99f351fa97553493ca428c3d570b"
+  },
+  {
+   "bytes": 2660,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "tkinter/colorchooser.py",
+   "path": "tkinter/colorchooser.py",
+   "sha256": "1224241dcfb4ec6aff3cafc66adeb2b2a3759397a28693173915458c50040143"
+  },
+  {
+   "bytes": 14939,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "tkinter/filedialog.py",
+   "path": "tkinter/filedialog.py",
+   "sha256": "d75c1eb4131db658b8622acffd8262ecbd7337425c799ea3be8d605ea6be7b94"
+  },
+  {
+   "bytes": 11749,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "tkinter/simpledialog.py",
+   "path": "tkinter/simpledialog.py",
+   "sha256": "e836cd284580a71c37b4bbb93e2a1eda31101f0bb5a11aa3c608c9dc1263c3a8"
+  },
+  {
+   "bytes": 16310,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "tomllib/_parser.py",
+   "path": "tomllib/_parser.py",
+   "sha256": "a83c2374263ed4d27574a81949cffa3c1765f9993651213c029ecac239aa0eaa"
+  },
+  {
+   "bytes": 254,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "tomllib/_types.py",
+   "path": "tomllib/_types.py",
+   "sha256": "f864c6d9552a929c7032ace654ee05ef26ca75d21b027b801d77e65907138b74"
+  },
+  {
+   "bytes": 16361,
+   "licence": "MIT",
+   "origin": "truststore 0.10.4",
+   "original": "site-packages/truststore/_windows.py",
+   "path": "truststore-0.10.4/truststore/_windows.py",
+   "sha256": "ab540ee806c00275d3a4594ba9a3016cdec90c847339e80d379cf92b1218f517"
+  },
+  {
+   "bytes": 1356,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "turtledemo/colormixer.py",
+   "path": "turtledemo/colormixer.py",
+   "sha256": "d3c471b192c769f24a658a29f3f78646d2267d674f477fce3f883aef57fa69d3"
+  },
+  {
+   "bytes": 6477,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "turtledemo/nim.py",
+   "path": "turtledemo/nim.py",
+   "sha256": "313923085890915fd464d7dd726ca8d87dbfe20cebfc609703acbd7d3cade8b8"
+  },
+  {
+   "bytes": 1122,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "turtledemo/two_canvases.py",
+   "path": "turtledemo/two_canvases.py",
+   "sha256": "6fe0a6b5d7fcda098b3822100864760406dfe3c155f0c7e383679de4c93d6dc4"
+  },
+  {
+   "bytes": 2415,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "urllib/error.py",
+   "path": "urllib/error.py",
+   "sha256": "d12b3cc66af3f42a8ebe63e1c91d24f92c6237b6a93a3702938dffabd812d77b"
+  },
+  {
+   "bytes": 2361,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "urllib/response.py",
+   "path": "urllib/response.py",
+   "sha256": "7e6c3b6d7a95f0d74f5968f51a87adae8a51bf42390cdfec98c7a99203e7bb76"
+  },
+  {
+   "bytes": 141,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "venv/__main__.py",
+   "path": "venv/__main__.py",
+   "sha256": "ac861a02c7483fa4a67449a61b79d82723d94676860173b3580d9a9322807153"
+  },
+  {
+   "bytes": 557,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "xml/__init__.py",
+   "path": "xml/__init__.py",
+   "sha256": "34296f728e7fe68cccb97a9f6edbf3bf3a686f44044c744fe85f207a92ed4811"
+  },
+  {
+   "bytes": 4033,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "xml/dom/__init__.py",
+   "path": "xml/dom/__init__.py",
+   "sha256": "e7139ed583a7f60fbbc750044df4f1e3655371d8b8c4f80a43bff4aa3ba97857"
+  },
+  {
+   "bytes": 3451,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "xml/dom/domreg.py",
+   "path": "xml/dom/domreg.py",
+   "sha256": "826b02a803930834b96b1086cbee7db1d21c684f65dd3073706dc7bb5ba1a3e8"
+  },
+  {
+   "bytes": 16363,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "xml/dom/expatbuilder.py",
+   "path": "xml/dom/expatbuilder.py",
+   "sha256": "04e80508d0d4611dca2560941e3a604a7d80a1a2f23bdc213932032b34a66241"
+  },
+  {
+   "bytes": 16313,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "xml/dom/minidom.py",
+   "path": "xml/dom/minidom.py",
+   "sha256": "146d09865959fb2f263f54d07846dc206dd5f4e625ada7a64205e449f4fc1097"
+  },
+  {
+   "bytes": 6952,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "xml/etree/ElementInclude.py",
+   "path": "xml/etree/ElementInclude.py",
+   "sha256": "8e10c99668216701224831c82f13b36d29cd408554c19e34d290c351595df4ce"
+  },
+  {
+   "bytes": 3532,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "xml/sax/__init__.py",
+   "path": "xml/sax/__init__.py",
+   "sha256": "b097eb749917fd49dd6cc710a44492cbfd12dd994637afb34b8445a60c222884"
+  },
+  {
+   "bytes": 16034,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "xml/sax/expatreader.py",
+   "path": "xml/sax/expatreader.py",
+   "sha256": "5b6750ae591cffa303b20f092b13409a92df5ee1c403adac08dd5320eafee0be"
+  },
+  {
+   "bytes": 16333,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "zipfile/__init__.py",
+   "path": "zipfile/__init__.py",
+   "sha256": "14698ec7c33d58866ca6961a6eab3d7ad4d88e33c7cc40615b18c78f105b29ac"
+  },
+  {
+   "bytes": 16319,
+   "licence": "PSF-2.0",
+   "origin": "stdlib CPython 3.14.3",
+   "original": "zipimport.py",
+   "path": "zipimport.py",
+   "sha256": "3ab83380bf4c326f5369c670e8527dc63dce24c274a53fff8b711c4266a545d0"
+  }
+ ],
+ "note": "H4 negatives redraw, 2026-10-01, built by a separate blind session (no detector read or run). Composition: 128 CPython 3.14.3 stdlib files (all eligible, no seed) + 22 third-party files (seed 4211584703) = 150. Replaces the withdrawn first draw (seed 638022740). Disjoint by path and content sha256 from negatives, negatives_external, negatives_holdout2, negatives_holdout3 and the first draw.",
+ "packages": {
+  "anyio": {
+   "count": 3,
+   "licence": "MIT",
+   "licence_files": [
+    "LICENSES/anyio-4.15.1-LICENSE.txt"
+   ],
+   "version": "4.15.1"
+  },
+  "httpcore2": {
+   "count": 5,
+   "licence": "BSD-3-Clause",
+   "licence_files": [
+    "LICENSES/httpcore2-2.13.1-LICENSE.md.txt"
+   ],
+   "version": "2.13.1"
+  },
+  "httpx2": {
+   "count": 2,
+   "licence": "BSD-3-Clause",
+   "licence_files": [
+    "LICENSES/httpx2-2.13.1-LICENSE.md.txt"
+   ],
+   "version": "2.13.1"
+  },
+  "idna": {
+   "count": 1,
+   "licence": "BSD-3-Clause",
+   "licence_files": [
+    "LICENSES/idna-3.20-LICENSE.md.txt"
+   ],
+   "version": "3.20"
+  },
+  "openai": {
+   "count": 5,
+   "licence": "Apache-2.0",
+   "licence_files": [
+    "LICENSES/openai-3.22.1-LICENSE.txt"
+   ],
+   "version": "3.22.1"
+  },
+  "pydantic": {
+   "count": 5,
+   "licence": "MIT",
+   "licence_files": [
+    "LICENSES/pydantic-2.13.5-LICENSE.txt"
+   ],
+   "version": "2.13.5"
+  },
+  "truststore": {
+   "count": 1,
+   "licence": "MIT",
+   "licence_files": [
+    "LICENSES/truststore-0.10.4-LICENSE.txt"
+   ],
+   "version": "0.10.4"
+  }
+ },
+ "prescan": {
+  "candidates_scanned": 533,
+  "candidates_scanned_stdlib": 128,
+  "candidates_scanned_third_party": 405,
+  "excluded_as_real_credentials": 0,
+  "files_with_hits": 4,
+  "judgement": "each flagged line read by eye; only a plausible live credential for a real service excludes a file",
+  "reviewed_hits": {
+   "httpx2 _urls.py": "keyword/basic-auth flags on docstring URL examples with placeholder userinfo",
+   "pydantic networks.py": "basic-auth/keyword flags on docstring URL examples with placeholder userinfo",
+   "stdlib base64.py": "high-entropy flag on a base32 alphabet constant; not a credential",
+   "stdlib secrets.py": "high-entropy flag on a doctest example output of token_hex; not a credential"
+  },
+  "scanned": "every stdlib candidate and every eligible third-party candidate, truncated as written",
+  "tool": "detect-secrets 1.5.0 (Yelp, Apache-2.0), default plugins, scratch venv outside the repo"
+ },
+ "python_version": "3.14.3",
+ "real_credential_exclusions": {},
+ "seeds": {
+  "stdlib": null,
+  "third_party": 4211584703,
+  "withdrawn_first_draw": 638022740
+ },
+ "selection": {
+  "generated_rule": "first 10 lines",
+  "per_package_cap": 5,
+  "third_party_exclude_substrings": [
+   "test",
+   "vendor",
+   "__pycache__"
+  ],
+  "third_party_pool": 405
+ },
+ "source": "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14",
+ "stdlib_licence": "PSF-2.0",
+ "stdlib_licence_file": "LICENSES/LICENSE-PSF.txt"
+}

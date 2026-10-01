@@ -1127,3 +1127,8 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   - **Speed:** 1.4 ms per query on CPU.
   - **Structure rule:** only `embed_local.py` may import onnxruntime or tokenizers.
   - **Setup on a new machine:** `.venv/bin/python scripts/fetch_embedder.py` before pytest.
+- 2026-10-01 — **H4 committed** with redrawn negatives, built by a separate blind session.
+  - **Composition:** 128 stdlib + 22 permissive third-party files.
+  - **Real-secret pre-scan:** detect-secrets; 0 real credentials found.
+  - **Total sha256:** `4b573eef…`; composition logged in the holdout log.
+  - **Not yet measured:** see the measurement-order question to the owner.
