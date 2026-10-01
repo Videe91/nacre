@@ -30,7 +30,8 @@
 - Always run with `-rf` (or keep the junit XML), so a failing test's name is never lost.
 
 ## Running the suite before a commit (2026-10-01)
-- Gate commits on **pytest's exit code**, never on a piped `tail` (use `set -o pipefail`, or capture to a file and
+- Gate commits on **pytest's exit code AND `check_structure.py`'s exit code**, never on a piped `tail` (use `set -o pipefail`, or capture to a file and
   check `$?`). Commit 4b01a54 was pushed with 1 failing test because of this.
 - Never `from conftest import ...` in a test file; `conftest` is not a unique module name across folders. Put shared
   helpers in a uniquely named module.
+- Commit cde072d went in with `check_structure.py` failing (an unregistered file), because only pytest gated it. Fixed in the next commit; both now gate.
