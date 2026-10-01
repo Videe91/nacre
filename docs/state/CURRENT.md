@@ -860,3 +860,22 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   - **Tests:** 27, including guard (iii) end to end (an untrusted outcome teaches nothing), crash mid-episode then
     resume with 0 live calls, and repair-vs-proposer selection.
   - **Mutations:** 13/13 killed (one test had a misquote that did not change the quote for some families; fixed).
+- 2026-10-01 — **P11 and P5 done: the EXP-0003 harness is ready for the owner's live run.**
+  - **`models/load_model_call_fixtures.py`:** export a stream's replayable calls as JSONL; load fixtures as
+    `result` events marked `loaded_from_fixture`.
+  - **`eval/run_phase2_gate.py`:**
+    - **Transfer instrument:** MNEXA's fidelity-reasoner prompt verbatim (sha256 `b0a2b76d…` pinned),
+      provider-default decoding, max_tokens 1024 (Nacre needs a cap; MNEXA had none; mean answer 26 tokens).
+    - **Arms:** Nacre memory = recall-eligible heads (active beliefs + fallbacks), one segment each. No-memory arm in
+      the same run. 016 uses majority of 3 attempts.
+    - **Safety:** all six metrics, with the challenge check run separately and discarded (guard ii).
+  - **`scripts/run_exp0003.py`:** live, dry and recorded modes; fresh database per run; frozen-suite check first;
+    signal → aborted; summary applies the pre-registered bar, with EXP-0001 alongside (not a gate).
+  - **Verified without a key:** dry run 180 trials with safety 0; recorded replay of it identical with 0 live calls.
+  - **Tests:** 11, including gate 4 (recorded replay identical, network blocked), guard (ii), metric 5 positive
+    case, the cross-scope probe both ways, and majority. **Mutations:** 7/7 killed after 3 tests were added.
+  - **Open, needs the owner:**
+    - the live EXP-0003 run;
+    - gate item 7 selectivity R4 decision (item 7 currently FAILS: 32/200);
+    - D-0017 rebuild wording;
+    - ADR-0009 Q-9 epoch half.

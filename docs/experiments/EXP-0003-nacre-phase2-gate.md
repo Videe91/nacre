@@ -60,5 +60,19 @@ check. They are never added to memory (D-0020 R1).
 - **Also reported, not gated:** per-set and per-run counts; EXP-0001 alongside; tokens, cost and calls per episode
   (D-0021); fallback share; admission rejections by reason.
 
+## How to run (owner)
+```
+cd ~/Desktop/nacre
+export OPENAI_API_KEY=…            # throwaway, minimum-permission; revoke afterwards
+caffeinate -i nohup .venv/bin/python scripts/run_exp0003.py run > ~/Desktop/nacre-runs/exp0003.log 2>&1 &
+```
+- Verifies the frozen suite first. Each run gets a fresh database; each family its own scope.
+- Writes `run.json`, `trials.json`, `summary.json` and per-family fixtures to
+  `~/Desktop/nacre-runs/EXP-0003-<utc>-<id>-LIVE/`.
+- Gate item 4: `scripts/run_exp0003.py run --recorded <that folder>` must reproduce every trial with zero live
+  calls.
+- Plumbing was checked 2026-10-01 with `--dry-run` (180 trials, safety 0) and its `--recorded` replay (identical
+  verdicts, 0 live calls). These are not results.
+
 ## Results
 (Appended after the run.)
