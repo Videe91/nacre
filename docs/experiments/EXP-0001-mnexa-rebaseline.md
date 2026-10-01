@@ -65,5 +65,13 @@ These apply later to Nacre's run (N, the same design and model).
 - **Model unavailable** (A-0024): stop. Apply the successor route: re-baseline both MNEXA and the control on a dated
   successor, after owner approval.
 
+## Run log
+- **`EXP-0001-20261001T061800Z-8eafe9`: ABORTED (infrastructure).**
+  - The runner process ended after 4 calls (first family of 014 rep 1, 06:18 UTC) and recorded no reason.
+  - The 4 calls confirm that `gpt-4o-mini-2024-07-18` is served under that exact name (A-0024).
+  - Not a result. It is not summarised, and its outputs are not used.
+  - Afterwards the runner was changed: step output now streams to disk, and SIGINT/SIGTERM/SIGHUP mark a run
+    `aborted` with the reason. The design is unchanged.
+
 ## Results
 (Appended after the run. The raw run directory is frozen by hash, and its summary is copied here verbatim.)

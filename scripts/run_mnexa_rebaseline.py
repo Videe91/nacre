@@ -23,6 +23,7 @@ import os
 import re
 import secrets
 import shutil
+import signal
 import subprocess
 import sys
 import time
@@ -163,16 +164,24 @@ def run(out_root: Path, dry: bool) -> Path:
                PYTHONDONTWRITEBYTECODE="1")
     save = lambda: (rdir / "run.json").write_text(json.dumps(record, indent=1, sort_keys=True))  # noqa: E731
     save()
+
+    def stop(signum, _frame):
+        record["status"] = "aborted"
+        record["abort_reason"] = f"signal {signal.Signals(signum).name} (interrupted, terminal closed, or killed)"
+        save()
+        raise SystemExit(f"run aborted by {signal.Signals(signum).name}; recorded in {rdir}/run.json")
+    for sig in (signal.SIGINT, signal.SIGTERM, signal.SIGHUP):
+        signal.signal(sig, stop)
     for rep in range(1, K + 1):
         for s in SETS:
             for mode in ("harness", "control"):
                 out = rdir / mode / s / f"rep{rep}"
                 out.mkdir(parents=True, exist_ok=True)
                 t0 = time.time()
-                p = subprocess.run([sys.executable, "_nacre_launcher.py", mode, s, str(out)], cwd=src, env=env,
-                                   capture_output=True, text=True, timeout=7200)
-                (out / "stdout.txt").write_text(p.stdout)
-                (out / "stderr.txt").write_text(p.stderr)
+                # Output streams to disk live, so a killed run still shows how far it got and why.
+                with open(out / "stdout.txt", "w") as so, open(out / "stderr.txt", "w") as se:
+                    p = subprocess.run([sys.executable, "_nacre_launcher.py", mode, s, str(out)], cwd=src, env=env,
+                                       stdout=so, stderr=se, text=True, timeout=7200)
                 step = {"rep": rep, "set": s, "mode": mode, "exit": p.returncode, "seconds": round(time.time() - t0, 1)}
                 record["steps"].append(step)
                 save()
