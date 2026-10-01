@@ -83,10 +83,11 @@ def verify_frozen_suite(regression_root: Path, *, mnexa_root: Path | None = None
         rel = Path(*f["path"])
         if f["copied"]:
             _check(report, exp / rel, f["sha256"])
-    exp3 = Path(regression_root) / "exp0003"
-    if (exp3 / "MANIFEST.json").exists():                     # the EXP-0003 gate run (every file copied)
-        for f in json.loads((exp3 / "MANIFEST.json").read_text())["files"]:
-            _check(report, exp3 / Path(*f["path"]), f["sha256"])
+    for name in ("exp0003", "exp0003_item8"):                 # EXP-0003 gate run; its gate-item-8 replay evidence
+        d = Path(regression_root) / name
+        if (d / "MANIFEST.json").exists():
+            for f in json.loads((d / "MANIFEST.json").read_text())["files"]:
+                _check(report, d / Path(*f["path"]), f["sha256"])
     if runs_root is not None and (Path(runs_root) / e["run_dir"]).is_dir():
         report.external_roots_checked.append(str(Path(runs_root) / e["run_dir"]))
         for f in e["files"]:

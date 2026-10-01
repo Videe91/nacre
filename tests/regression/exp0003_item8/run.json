@@ -1,0 +1,58 @@
+{
+ "experiment": "EXP-0003",
+ "mode": "recorded",
+ "keep_databases": true,
+ "rebuild_check": true,
+ "model": "gpt-4o-mini-2024-07-18",
+ "k": 3,
+ "sets": [
+  "014",
+  "015",
+  "016"
+ ],
+ "nacre_head": "a58da3aa2fdaf9388fe2f6a3e536f4c56320cb08",
+ "dirty": true,
+ "recorded_from": "/Users/vineetpandey/Desktop/nacre/tests/regression/exp0003",
+ "status": "complete",
+ "runs": [
+  {
+   "rep": 1,
+   "seconds": 89.5,
+   "sleep_cost_usd": "0",
+   "sleep_calls_live": 0,
+   "fallback_records": 0
+  },
+  {
+   "rep": 2,
+   "seconds": 81.4,
+   "sleep_cost_usd": "0",
+   "sleep_calls_live": 0,
+   "fallback_records": 0
+  },
+  {
+   "rep": 3,
+   "seconds": 78.0,
+   "sleep_cost_usd": "0",
+   "sleep_calls_live": 0,
+   "fallback_records": 0
+  }
+ ],
+ "progress": "rep3 016 ember-cache-ec-39",
+ "kept_databases": [
+  {
+   "rep": 1,
+   "database": "nacre_exp0003_460d69d265",
+   "rootkeys": "/var/folders/r8/9868jrh57ygd2l_ymbj01ql80000gn/T/tmpwkuaa5km/rootkeys"
+  },
+  {
+   "rep": 2,
+   "database": "nacre_exp0003_72924601c4",
+   "rootkeys": "/var/folders/r8/9868jrh57ygd2l_ymbj01ql80000gn/T/tmpclt0hjwd/rootkeys"
+  },
+  {
+   "rep": 3,
+   "database": "nacre_exp0003_c6b3273201",
+   "rootkeys": "/var/folders/r8/9868jrh57ygd2l_ymbj01ql80000gn/T/tmp_w_glo6r/rootkeys"
+  }
+ ]
+}

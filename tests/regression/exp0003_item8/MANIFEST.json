@@ -1,0 +1,45 @@
+{
+ "evidence": "Phase 2 gate item 8 on real state",
+ "replay_run": "EXP-0003-20261001T145916Z-d77c1f-RECORDED",
+ "replayed_from": "tests/regression/exp0003 (frozen EXP-0003 record)",
+ "network": "every non-loopback connection refused",
+ "path_format": "path = list of components",
+ "files": [
+  {
+   "path": [
+    "run.json"
+   ],
+   "sha256": "47c41f871f6fa93bd925435b849a4ccca1dcb4e29da2b3389fddb7e5dc563e39"
+  },
+  {
+   "path": [
+    "summary.json"
+   ],
+   "sha256": "ce1e8748a554b84816dffbf77893cffdba13355c13f291b0b02ee8293e01884a"
+  },
+  {
+   "path": [
+    "trials.json"
+   ],
+   "sha256": "e60a5063e7c52df1c992d8416323e3f08cb528e363e656ec06e3282181538722"
+  },
+  {
+   "path": [
+    "rebuild_rep1.json"
+   ],
+   "sha256": "313e1744d41788d3fee99a196301783e0d91030a6798c4412a35496731074137"
+  },
+  {
+   "path": [
+    "rebuild_rep2.json"
+   ],
+   "sha256": "4580345d426ac1fcab81893f224d73029acd0fb6f4760f536c33da46da4325eb"
+  },
+  {
+   "path": [
+    "rebuild_rep3.json"
+   ],
+   "sha256": "3804a27428ebdd58a58a0c354d48c75b0f697d667d628b0596121acb9258bd0a"
+  }
+ ]
+}

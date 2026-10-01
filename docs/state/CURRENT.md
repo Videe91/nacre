@@ -71,7 +71,8 @@ Phase 2 is done when all of these pass on the Docker Postgres:
      adversarial episodes (vague, mismatched, late) flagged. **PASSING: 0/200 routine, 0/75 missed.** v1 is
      historical.
    - **Canary:** a flag-everything gate must fail this item (passing).
-8. **Rebuild:** the `interp` projection rebuilt from the ledger is identical.
+8. **Rebuild:** the `interp` projection rebuilt from the ledger is identical. **PASSED on real state**: 180/180
+   EXP-0003 scopes in an offline recorded replay (`tests/regression/exp0003_item8/`).
 9. **Shredding and privacy:**
    - erasing a scope or person makes its model-call recordings, proposals and beliefs unreadable;
    - no content plaintext in the projection;
@@ -120,7 +121,8 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
     - (b) cascade on erasure: append replacements and rebuild a projection generation. This fails for the ledger
       copies, which are append-only;
     - (c) keep person content out of model prompts and memory.
-  - **Recommendation: (a).**
+  - **Recommendation: (a).** → Owner approved (a) in principle; **D-0023 proposed (D3), awaiting approval before
+    any build.**
 - **RESOLVED 2026-10-01 (D-0017 amendment 2: rebuild into a new generation, switch atomically, keep the old):** D-0017 text vs its own tables: D-0017 says rebuild "drops the scope's projection rows and
   replays", but the same ADR makes them append-only. Implemented as recompute-and-compare (gate item 8 checks
   identity). Owner: confirm, or amend D-0017's wording.
@@ -955,3 +957,17 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
     deleting the person's data key, the statement was unreadable but the model-call record still held the words).
     D3 options under Open questions.
   - **Cost:** ≈ $0.00027 per flagged episode; ≈ $0.00037 per task.
+- 2026-10-01 — **Gate item 8 PASSED on real state; D-0023 proposed for gate item 9.**
+  - **Runner flags:** `--keep-databases` and `--rebuild-check`.
+  - **Evidence:** an offline recorded replay of the frozen EXP-0003 record (network refused) rebuilt every scope from
+    its ledger: **180/180 identical** (360 versions, 720 edges, 0 differences, 0 unverifiable). Grades identical to
+    the live run again. Frozen in `tests/regression/exp0003_item8/` and covered by the frozen-suite checker.
+  - **Kept databases (inspection):** `nacre_exp0003_460d69d265`, `_72924601c4`, `_c6b3273201`, with root keys in
+    temp folders listed in the replay's run.json. Drop when no longer needed.
+  - **D-0023 (D3, proposed):** contributor-set keys per (stream, set of contributing (subject, source month), month),
+    with erase_person and forget_period reaching every derived record; mixed records erased whole; lost beliefs not
+    recall-eligible; rebuild treats them as shredded; Phase 3 embeddings bound by the same rule.
+  - **Second gap found:** D-0004's intake gives the person subject only to statements and messages, so a person's
+    corrections are not erasable. D-0023 §6 proposes every person-actor event be person-subject (owner question 1).
+  - **New assumptions:** A-0030 (contributor sets stay small), A-0031 (every derived record can name its sources).
+  - Nothing built for item 9.

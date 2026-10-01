@@ -44,6 +44,7 @@ from nacre.scopes.bootstrap_org import bootstrap_org  # noqa: E402
 from nacre.scopes.open_scoped_session import open_scoped_session  # noqa: E402
 from nacre.scopes.register_scope import ScopeKind, register_scope  # noqa: E402
 from nacre.scopes.set_access import set_access  # noqa: E402
+from nacre.stores.rebuild_projection import rebuild_projection  # noqa: E402
 
 
 
@@ -101,7 +102,18 @@ def _git(*a):
     return subprocess.run(["git", "-C", str(ROOT), *a], capture_output=True, text=True).stdout.strip()
 
 
-def one_run(rep, rdir, record, mode, recorded_dir):
+def _rebuild_check(open_session, provider, streams):
+    """Gate item 8 on real state: recompute every scope's projection from its ledger and compare (no switch)."""
+    out = []
+    for stream in streams:
+        with open_session() as s:
+            c = rebuild_projection(s, provider, stream, switch=False)
+        out.append({"stream": str(stream), "identical": c.identical, "versions": c.expected_versions,
+                    "edges": c.expected_edges, "differences": c.differences, "unverifiable": len(c.unverifiable)})
+    return out
+
+
+def one_run(rep, rdir, record, mode, recorded_dir, keep_db=False, rebuild=False):
     name = f"nacre_exp0003_{uuid.uuid4().hex[:10]}"
     with psycopg.connect(ADMIN, autocommit=True) as c:
         c.execute(f'CREATE DATABASE "{name}"')
@@ -165,10 +177,19 @@ def one_run(rep, rdir, record, mode, recorded_dir):
             set_access(s, provider, org_id=org, principal_id=stranger, stream_id=streams[0], can_read=True, can_append=False,
                        idempotency_key=str(uuid.uuid4()))
         safety["cross_scope_memory"] += probe_cross_scope(open_as, provider, stranger, streams[-1])
+        if rebuild:
+            checks = _rebuild_check(open_session, provider, streams)
+            (rdir / f"rebuild_rep{rep}.json").write_text(json.dumps({"database": name, "scopes": checks}, indent=1))
+            print(json.dumps({"rebuild_rep": rep, "scopes": len(checks), "identical": sum(c["identical"] for c in checks)}),
+                  flush=True)
+        if keep_db:
+            record.setdefault("kept_databases", []).append({"rep": rep, "database": name, "rootkeys": str(provider._dir)
+                                                            if hasattr(provider, "_dir") else None})
         return trials, safety, str(cost), calls, fallback
     finally:
-        with psycopg.connect(ADMIN, autocommit=True) as c:
-            c.execute(f'DROP DATABASE "{name}" WITH (FORCE)')
+        if not keep_db:
+            with psycopg.connect(ADMIN, autocommit=True) as c:
+                c.execute(f'DROP DATABASE "{name}" WITH (FORCE)')
 
 
 def summarize(trials, safety):
@@ -189,6 +210,8 @@ def main(argv):
     r.add_argument("--dry-run", action="store_true")
     r.add_argument("--recorded", type=Path)
     r.add_argument("--out", type=Path, default=Path.home() / "Desktop" / "nacre-runs")
+    r.add_argument("--keep-databases", action="store_true", help="do not drop the per-run databases (inspection)")
+    r.add_argument("--rebuild-check", action="store_true", help="gate item 8: rebuild every scope and compare")
     a = ap.parse_args(argv)
     mode = "dry" if a.dry_run else "recorded" if a.recorded else "live"
     if mode == "live" and not os.environ.get("OPENAI_API_KEY"):
@@ -199,7 +222,7 @@ def main(argv):
     rdir = a.out / f"EXP-0003-{datetime.now(UTC):%Y%m%dT%H%M%SZ}-{secrets.token_hex(3)}-{mode.upper()}"
     rdir.mkdir(parents=True)
     print(f"run folder: {rdir}", flush=True)
-    record = {"experiment": "EXP-0003", "mode": mode, "model": MODEL, "k": K, "sets": [f"{n:03d}" for n in SETS],
+    record = {"experiment": "EXP-0003", "mode": mode, "keep_databases": a.keep_databases, "rebuild_check": a.rebuild_check, "model": MODEL, "k": K, "sets": [f"{n:03d}" for n in SETS],
               "nacre_head": _git("rev-parse", "HEAD"), "dirty": bool(_git("status", "--porcelain")),
               "recorded_from": str(a.recorded) if a.recorded else None, "status": "running", "runs": []}
     save = lambda: (rdir / "run.json").write_text(json.dumps(record, indent=1))  # noqa: E731
@@ -218,7 +241,7 @@ def main(argv):
     all_trials, all_safety = [], dict.fromkeys(SAFETY_METRICS, 0)
     for rep in range(1, K + 1):
         t0 = time.time()
-        trials, safety, cost, calls, fallback = one_run(rep, rdir, record, mode, a.recorded)
+        trials, safety, cost, calls, fallback = one_run(rep, rdir, record, mode, a.recorded, a.keep_databases, a.rebuild_check)
         all_trials += trials
         for k, v in safety.items():
             all_safety[k] += v
