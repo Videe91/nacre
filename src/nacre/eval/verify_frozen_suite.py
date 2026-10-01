@@ -83,7 +83,7 @@ def verify_frozen_suite(regression_root: Path, *, mnexa_root: Path | None = None
         rel = Path(*f["path"])
         if f["copied"]:
             _check(report, exp / rel, f["sha256"])
-    for name in ("exp0003", "exp0003_item8"):                 # EXP-0003 gate run; its gate-item-8 replay evidence
+    for name in ("exp0003", "exp0003_item8", "exp0003_replay_8601ee6"):                 # EXP-0003 gate run; its gate-item-8 replay evidence
         d = Path(regression_root) / name
         if (d / "MANIFEST.json").exists():
             for f in json.loads((d / "MANIFEST.json").read_text())["files"]:

@@ -1,0 +1,41 @@
+{
+ "experiment": "EXP-0003",
+ "mode": "recorded",
+ "keep_databases": false,
+ "rebuild_check": true,
+ "model": "gpt-4o-mini-2024-07-18",
+ "k": 3,
+ "sets": [
+  "014",
+  "015",
+  "016"
+ ],
+ "nacre_head": "8601ee6e2a9cde8f9fa08c6f8432e037d4958322",
+ "dirty": false,
+ "recorded_from": "/Users/vineetpandey/Desktop/nacre/tests/regression/exp0003",
+ "status": "complete",
+ "runs": [
+  {
+   "rep": 1,
+   "seconds": 83.6,
+   "sleep_cost_usd": "0",
+   "sleep_calls_live": 0,
+   "fallback_records": 0
+  },
+  {
+   "rep": 2,
+   "seconds": 79.4,
+   "sleep_cost_usd": "0",
+   "sleep_calls_live": 0,
+   "fallback_records": 0
+  },
+  {
+   "rep": 3,
+   "seconds": 83.6,
+   "sleep_cost_usd": "0",
+   "sleep_calls_live": 0,
+   "fallback_records": 0
+  }
+ ],
+ "progress": "rep3 016 ember-cache-ec-39"
+}

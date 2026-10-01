@@ -1,0 +1,45 @@
+{
+ "evidence": "Phase 2 gate items 3, 4 and 8 re-confirmed on 8601ee6 (after D-0023)",
+ "replay_run": "EXP-0003-20261001T153814Z-593bb7-RECORDED",
+ "replayed_from": "tests/regression/exp0003",
+ "network": "every non-loopback connection refused",
+ "path_format": "path = list of components",
+ "files": [
+  {
+   "path": [
+    "run.json"
+   ],
+   "sha256": "509e10c548fd9d40de50fa8e53d6377112d0eb6158754fca1814a11e72d2df2d"
+  },
+  {
+   "path": [
+    "summary.json"
+   ],
+   "sha256": "ce1e8748a554b84816dffbf77893cffdba13355c13f291b0b02ee8293e01884a"
+  },
+  {
+   "path": [
+    "trials.json"
+   ],
+   "sha256": "e60a5063e7c52df1c992d8416323e3f08cb528e363e656ec06e3282181538722"
+  },
+  {
+   "path": [
+    "rebuild_rep1.json"
+   ],
+   "sha256": "dcf277fe2aec5e9e9a84fb347d99dbdabe49e55e6bf9fedc849d4a5b03c089ee"
+  },
+  {
+   "path": [
+    "rebuild_rep2.json"
+   ],
+   "sha256": "2d33784fa665f5e8eacf1b7daff5baad41390340e67520c6d649cb7d19689610"
+  },
+  {
+   "path": [
+    "rebuild_rep3.json"
+   ],
+   "sha256": "bb604be50dec897dcf18a9c53625648d6db4cc5ba450d65870fb833eb27a3c75"
+  }
+ ]
+}

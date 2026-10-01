@@ -1,0 +1,2762 @@
+[
+ {
+  "rep": 1,
+  "set": "014",
+  "family": "umbra-pay-up-84",
+  "N": true,
+  "C": true,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   true
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "014",
+  "family": "verdant-rpc-vr-42",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "014",
+  "family": "willow-auth-wa-63",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "014",
+  "family": "xenon-bus-xb-31",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "014",
+  "family": "yarrow-db-yd-76",
+  "N": true,
+  "C": true,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   true
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "014",
+  "family": "zephyr-queue-zq-57",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "014",
+  "family": "alder-store-as-88",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "014",
+  "family": "birch-rpc-bi-26",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "014",
+  "family": "cypress-rpc-cr-53",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "014",
+  "family": "dune-queue-dq-64",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "014",
+  "family": "elm-store-es-39",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "014",
+  "family": "fir-pay-fp-71",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "014",
+  "family": "grove-api-ga-82",
+  "N": true,
+  "C": true,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   true
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "014",
+  "family": "hazel-lock-hl-45",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "014",
+  "family": "iris-cdn-ic-68",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "014",
+  "family": "juniper-sign-js-54",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "014",
+  "family": "kelp-pay-kp-96",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "014",
+  "family": "laurel-db-ld-73",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "014",
+  "family": "maple-parser-mp-65",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "014",
+  "family": "north-cache-nc-37",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "015",
+  "family": "opal-pay-op-85",
+  "N": true,
+  "C": true,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   true
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "015",
+  "family": "pearl-rpc-pr-46",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "015",
+  "family": "quince-auth-qa-61",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "015",
+  "family": "reed-bus-rb-34",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "015",
+  "family": "sable-db-sd-79",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "015",
+  "family": "topaz-queue-tq-59",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "015",
+  "family": "umber-store-us-89",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "015",
+  "family": "violet-rpc-vr-27",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "015",
+  "family": "walnut-rpc-wr-55",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "015",
+  "family": "xylem-queue-xq-66",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "015",
+  "family": "yucca-store-ys-41",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "015",
+  "family": "zenith-pay-zp-72",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "015",
+  "family": "acorn-api-aa-83",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "015",
+  "family": "briar-lock-bl-48",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "015",
+  "family": "coral-cdn-cc-69",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "015",
+  "family": "drift-sign-ds-56",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "015",
+  "family": "elm-pay-ep-97",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "015",
+  "family": "fjord-db-fd-75",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "015",
+  "family": "garnet-parser-gp-67",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "015",
+  "family": "hemlock-cache-hc-38",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "016",
+  "family": "lunar-pay-lp-88",
+  "N": true,
+  "C": true,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   true,
+   true,
+   true
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "016",
+  "family": "meridian-rpc-mr-47",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   true,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "016",
+  "family": "nova-auth-na-62",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   false,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "016",
+  "family": "onyx-bus-ob-35",
+  "N": true,
+  "C": true,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   true,
+   true,
+   true
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "016",
+  "family": "prairie-db-pd-81",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   true,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "016",
+  "family": "quartz-queue-qq-60",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "016",
+  "family": "river-store-rs-90",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "016",
+  "family": "solstice-rpc-sr-28",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "016",
+  "family": "tundra-rpc-tr-56",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "016",
+  "family": "ultraviolet-queue-uq-67",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "016",
+  "family": "vale-store-vs-42",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "016",
+  "family": "wren-pay-wp-73",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "016",
+  "family": "xenial-api-xa-84",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "016",
+  "family": "yew-lock-yl-49",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "016",
+  "family": "zinnia-cdn-zc-70",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "016",
+  "family": "alpine-sign-as-57",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "016",
+  "family": "beacon-pay-bp-98",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "016",
+  "family": "cascade-db-cd-76",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "016",
+  "family": "delta-parser-dp-68",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 1,
+  "set": "016",
+  "family": "ember-cache-ec-39",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "014",
+  "family": "umbra-pay-up-84",
+  "N": true,
+  "C": true,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   true
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "014",
+  "family": "verdant-rpc-vr-42",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "014",
+  "family": "willow-auth-wa-63",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "014",
+  "family": "xenon-bus-xb-31",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "014",
+  "family": "yarrow-db-yd-76",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "014",
+  "family": "zephyr-queue-zq-57",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "014",
+  "family": "alder-store-as-88",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "014",
+  "family": "birch-rpc-bi-26",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "014",
+  "family": "cypress-rpc-cr-53",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "014",
+  "family": "dune-queue-dq-64",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "014",
+  "family": "elm-store-es-39",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "014",
+  "family": "fir-pay-fp-71",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "014",
+  "family": "grove-api-ga-82",
+  "N": true,
+  "C": true,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   true
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "014",
+  "family": "hazel-lock-hl-45",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "014",
+  "family": "iris-cdn-ic-68",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "014",
+  "family": "juniper-sign-js-54",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "014",
+  "family": "kelp-pay-kp-96",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "014",
+  "family": "laurel-db-ld-73",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "014",
+  "family": "maple-parser-mp-65",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "014",
+  "family": "north-cache-nc-37",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "015",
+  "family": "opal-pay-op-85",
+  "N": true,
+  "C": true,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   true
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "015",
+  "family": "pearl-rpc-pr-46",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "015",
+  "family": "quince-auth-qa-61",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "015",
+  "family": "reed-bus-rb-34",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "015",
+  "family": "sable-db-sd-79",
+  "N": true,
+  "C": true,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   true
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "015",
+  "family": "topaz-queue-tq-59",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "015",
+  "family": "umber-store-us-89",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "015",
+  "family": "violet-rpc-vr-27",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "015",
+  "family": "walnut-rpc-wr-55",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "015",
+  "family": "xylem-queue-xq-66",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "015",
+  "family": "yucca-store-ys-41",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "015",
+  "family": "zenith-pay-zp-72",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "015",
+  "family": "acorn-api-aa-83",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "015",
+  "family": "briar-lock-bl-48",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "015",
+  "family": "coral-cdn-cc-69",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "015",
+  "family": "drift-sign-ds-56",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "015",
+  "family": "elm-pay-ep-97",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "015",
+  "family": "fjord-db-fd-75",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "015",
+  "family": "garnet-parser-gp-67",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "015",
+  "family": "hemlock-cache-hc-38",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "016",
+  "family": "lunar-pay-lp-88",
+  "N": true,
+  "C": true,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   true,
+   false,
+   true
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "016",
+  "family": "meridian-rpc-mr-47",
+  "N": true,
+  "C": true,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   true,
+   true,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "016",
+  "family": "nova-auth-na-62",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "016",
+  "family": "onyx-bus-ob-35",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   true,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "016",
+  "family": "prairie-db-pd-81",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "016",
+  "family": "quartz-queue-qq-60",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "016",
+  "family": "river-store-rs-90",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "016",
+  "family": "solstice-rpc-sr-28",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "016",
+  "family": "tundra-rpc-tr-56",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "016",
+  "family": "ultraviolet-queue-uq-67",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "016",
+  "family": "vale-store-vs-42",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "016",
+  "family": "wren-pay-wp-73",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "016",
+  "family": "xenial-api-xa-84",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "016",
+  "family": "yew-lock-yl-49",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "016",
+  "family": "zinnia-cdn-zc-70",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "016",
+  "family": "alpine-sign-as-57",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "016",
+  "family": "beacon-pay-bp-98",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "016",
+  "family": "cascade-db-cd-76",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "016",
+  "family": "delta-parser-dp-68",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 2,
+  "set": "016",
+  "family": "ember-cache-ec-39",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "014",
+  "family": "umbra-pay-up-84",
+  "N": true,
+  "C": true,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   true
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "014",
+  "family": "verdant-rpc-vr-42",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "014",
+  "family": "willow-auth-wa-63",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "014",
+  "family": "xenon-bus-xb-31",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "014",
+  "family": "yarrow-db-yd-76",
+  "N": true,
+  "C": true,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   true
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "014",
+  "family": "zephyr-queue-zq-57",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "014",
+  "family": "alder-store-as-88",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "014",
+  "family": "birch-rpc-bi-26",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "014",
+  "family": "cypress-rpc-cr-53",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "014",
+  "family": "dune-queue-dq-64",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "014",
+  "family": "elm-store-es-39",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "014",
+  "family": "fir-pay-fp-71",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "014",
+  "family": "grove-api-ga-82",
+  "N": true,
+  "C": true,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   true
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "014",
+  "family": "hazel-lock-hl-45",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "014",
+  "family": "iris-cdn-ic-68",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "014",
+  "family": "juniper-sign-js-54",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "014",
+  "family": "kelp-pay-kp-96",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "014",
+  "family": "laurel-db-ld-73",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "014",
+  "family": "maple-parser-mp-65",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "014",
+  "family": "north-cache-nc-37",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "015",
+  "family": "opal-pay-op-85",
+  "N": true,
+  "C": true,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   true
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "015",
+  "family": "pearl-rpc-pr-46",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "015",
+  "family": "quince-auth-qa-61",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "015",
+  "family": "reed-bus-rb-34",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "015",
+  "family": "sable-db-sd-79",
+  "N": true,
+  "C": true,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   true
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "015",
+  "family": "topaz-queue-tq-59",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "015",
+  "family": "umber-store-us-89",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "015",
+  "family": "violet-rpc-vr-27",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "015",
+  "family": "walnut-rpc-wr-55",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "015",
+  "family": "xylem-queue-xq-66",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "015",
+  "family": "yucca-store-ys-41",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "015",
+  "family": "zenith-pay-zp-72",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "015",
+  "family": "acorn-api-aa-83",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "015",
+  "family": "briar-lock-bl-48",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "015",
+  "family": "coral-cdn-cc-69",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "015",
+  "family": "drift-sign-ds-56",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "015",
+  "family": "elm-pay-ep-97",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "015",
+  "family": "fjord-db-fd-75",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "015",
+  "family": "garnet-parser-gp-67",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "015",
+  "family": "hemlock-cache-hc-38",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true
+  ],
+  "C_attempts": [
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "016",
+  "family": "lunar-pay-lp-88",
+  "N": true,
+  "C": true,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   true,
+   true,
+   true
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "016",
+  "family": "meridian-rpc-mr-47",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   true,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "016",
+  "family": "nova-auth-na-62",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "016",
+  "family": "onyx-bus-ob-35",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "016",
+  "family": "prairie-db-pd-81",
+  "N": true,
+  "C": true,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   true,
+   true,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "016",
+  "family": "quartz-queue-qq-60",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "016",
+  "family": "river-store-rs-90",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "016",
+  "family": "solstice-rpc-sr-28",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "016",
+  "family": "tundra-rpc-tr-56",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "016",
+  "family": "ultraviolet-queue-uq-67",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "016",
+  "family": "vale-store-vs-42",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "016",
+  "family": "wren-pay-wp-73",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "016",
+  "family": "xenial-api-xa-84",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "016",
+  "family": "yew-lock-yl-49",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "016",
+  "family": "zinnia-cdn-zc-70",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "016",
+  "family": "alpine-sign-as-57",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "016",
+  "family": "beacon-pay-bp-98",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "016",
+  "family": "cascade-db-cd-76",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "016",
+  "family": "delta-parser-dp-68",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ },
+ {
+  "rep": 3,
+  "set": "016",
+  "family": "ember-cache-ec-39",
+  "N": true,
+  "C": false,
+  "N_attempts": [
+   true,
+   true,
+   true
+  ],
+  "C_attempts": [
+   false,
+   false,
+   false
+  ],
+  "memory_items": 1
+ }
+]

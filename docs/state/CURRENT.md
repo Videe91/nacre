@@ -1009,3 +1009,26 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
     - structure test: no derived append without sources.
     - Phase 3 embeddings: the binding requirement is recorded in D-0023 §3 and the Phase 3 gate.
   - **Mutations:** 11/12 killed; `carried_from` is an equivalent mutant today (documented).
+- 2026-10-01 — **FULL PHASE 2 GATE RUN on 8601ee6 (after D-0023): every item passes.**
+
+  | # | Item | Result |
+  |---|---|---|
+  | 1 | Frozen-suite integrity | pass (now incl. the EXP-0003 record and its replays) |
+  | 2 | Grader check | pass (2,070 verdicts) |
+  | 3 | EXP-0003 bar | pass: live 180/180 vs 19/180 (run c07ad2 on 73c73fe); the offline replay on 8601ee6 reproduces it exactly |
+  | 4 | Recorded determinism | pass on 8601ee6: 180/180 identical, 0 live calls, network refused, every request hash matched |
+  | 5 | Belief lifecycle | pass |
+  | 6 | Episode invariants Q-1…Q-15 | pass |
+  | 7 | Write gate | pass: recall 100%, v2 0/200 routine, 75/75 adversarial |
+  | 8 | Rebuild | pass on real state, 180/180 scopes identical on 8601ee6 |
+  | 9 | Shredding and privacy | pass: D-0023 tests + SI-1…SI-7 |
+  | 10 | Model-call records and cost | pass |
+  | 11–13 | Anti-shortcut guards | pass |
+  | 14 | Phase 1 gate | pass: 980 main, 25 holdout, 3 bench, check_structure 0 |
+
+  - Evidence frozen in `tests/regression/exp0003_replay_8601ee6/`.
+  - Request hashes all matched in replay, so D-0023 changed no model prompt: a new live EXP-0003 run would only
+    resample the model. Optional; owner decision.
+  - **Not gate items, still not built:** D-0019 stakes keyword rules; D-0020 corrections → contradictions; the
+    D-0022 attachment route for model-call records over 1 MiB; the Anthropic adapter. **Open question:** events
+    ABOUT a person written by others.

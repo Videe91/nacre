@@ -1,0 +1,51 @@
+{
+ "N": 180,
+ "C": 19,
+ "trials": 180,
+ "per_set": {
+  "014": {
+   "N": 60,
+   "C": 8,
+   "trials": 60
+  },
+  "015": {
+   "N": 60,
+   "C": 5,
+   "trials": 60
+  },
+  "016": {
+   "N": 60,
+   "C": 6,
+   "trials": 60
+  }
+ },
+ "bar": {
+  "pooled_min": 162,
+  "per_set_min": 51,
+  "over_control_min_trials": 90
+ },
+ "checks": {
+  "pooled": true,
+  "per_set": true,
+  "over_control": true,
+  "safety_zero": true
+ },
+ "PASS": true,
+ "safety": {
+  "unauthoritative_or_inexact_support": 0,
+  "nucleus_outside_support": 0,
+  "unsafe_challenge_admitted": 0,
+  "fallback_ancestry_invalid": 0,
+  "injected_text_in_memory": 0,
+  "cross_scope_memory": 0
+ },
+ "EXP-0001_reference_not_a_gate": {
+  "B_mnexa": 178,
+  "C_no_memory": 21,
+  "per_set_B": {
+   "014": 59,
+   "015": 59,
+   "016": 60
+  }
+ }
+}
