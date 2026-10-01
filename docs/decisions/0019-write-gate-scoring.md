@@ -1,6 +1,6 @@
 # D-0019: Write-gate scoring (surprise, stakes, direct statements)
 
-- **Status:** accepted (owner, 2026-10-01) with revisions R1–R2
+- **Status:** accepted (owner, 2026-10-01) with revisions R1–R4 (R4 refines R1's failing-evaluation clause)
 - **Tier:** D2 (cross-module behaviour)
 - **Date:** 2026-10-01
 - **Relies on assumptions:** A-0028
@@ -102,6 +102,37 @@ Option 3.
   - recall stays 100% (005–016 carry correction sections; 003/004 are unpredicted failures).
 
   If approved, R4 is measured against the same frozen set and ceiling.
+
+## Revision R4 (owner, 2026-10-01): predicted failures, with anti-gaming rules
+Approved after the R3 measurement (32/200 routine expected failures flagged by R1's failing-evaluation clause).
+
+- **An authoritative `correction` always flags** (unchanged from R1).
+- **A failing outcome is NOT flagged only when a valid prediction foresaw exactly that failure.** A failing
+  evaluation keeps its D-0018 authority (a span inside it can still ground a lesson), but it no longer flags by
+  itself. A prediction is valid only if all of these hold:
+  1. it `evaluates_prediction`-links to the outcome and expected failure (`expected_success = false`);
+  2. it **names the specific failing test or check** (`expected_failing_check`, D-0018 amendment 1). A vague
+     prediction with no named check never suppresses;
+  3. it **precedes the action in commit order**: committed before the first `action` executing the same decision,
+     or, when the episode records no action, before the outcome;
+  4. the outcome's recorded `failing_checks` are **exactly** `{expected_failing_check}`, after trimming and
+     casefolding. A different failure, an extra failure, or an outcome that names no failing check all flag.
+- Otherwise the surprise rules stand: an unpredicted failure flags, and a success where failure was predicted flags.
+- **Confirmation (owner):**
+  - a second routine set built **in a separate session, frozen before measuring**, flag rate ≤ 5%;
+  - adversarial cases that must ALL flag: a vague prediction, a mismatched failure, a prediction recorded after the
+    action;
+  - recall on 003–016 stays 100%.
+
+### R4 confirmation set, FROZEN before measuring (2026-10-01)
+- **File:** `tests/regression/routine/routine_episodes_v2.json`, sha256
+  `b1900a51f54f9797f94bb1d61f9c62190d7ae9196da68d23694d44d2a1361aad`. Built by a SEPARATE session blind to the gate
+  code (generator `scripts/make_routine_episodes_v2.py`, seed 730214).
+- **Contents:** 200 routine episodes (140 expected successes; 60 expected failures named by check, predicted before
+  the action, failing exactly that check) plus 75 adversarial episodes (25 vague, 25 mismatched, 25 late).
+- **Verified by this session before freezing (structure only, no measurement):** shape, ordering, naming, roles,
+  sources; no names reserved for other sets; byte-identical regeneration; secret scan clean.
+- **Bar:** routine flag rate ≤ 5% (≤ 10/200), and ALL 75 adversarial episodes flagged, and recall on 003–016 = 100%.
 
 ## Why this one
 - It is deterministic, costs nothing, and cannot be argued with by untrusted text.
