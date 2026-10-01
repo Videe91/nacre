@@ -788,3 +788,16 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
     survivors got tests (statement needs trusted + person).
   - **Not built (tracked):** the D-0019 config keyword → stakes rules (tags only for now). The A-0028 100%-recall
     check on 003–016 runs once P3 exists.
+- 2026-10-01 — **P3 done; A-0028 validated; anti-shortcut guard (i) in place.**
+  - **`eval/load_mnexa_family.py`** maps the three frozen formats to capture events:
+    - 003/004: live first decision plus feedback, with `success` from the ported grader;
+    - 005–007: forced decision plus correction;
+    - 008–016: role regions through the pre-registered EXP-0003 table, markers removed, no text outside regions.
+
+    The outcome is a trusted `review` integration result; only its correction (or failing evaluation) section is
+    authoritative.
+  - **A-0028 validated (gate item 7):** the gate flags 100% of lesson-bearing episodes in every set 003–016.
+  - **Guard (i), gate item 11:** a test asserts that no product module outside `eval/` references task fields,
+    graders, role markers or the harness. Guards (ii) and (iii) come with the sleep pass.
+  - **Requested scope done:** P12, P13–P21 and P3. **Next:** stores (P27–P34, including D-0017 amendment 1 tests),
+    then the sleep pass (P22–P26), P11, P5.

@@ -71,7 +71,7 @@ Notes:
 |---|---|---|---|---|---|---|---|
 | P1 | eval | Verify the frozen MNEXA suite: every copied file and every hash-only entry against MANIFEST.json | `src/nacre/eval/verify_frozen_suite.py` | `tests/eval/test_verify_frozen_suite.py` | D-0016 | — | done |
 | P2 | eval | Port MNEXA `grade_text` and the regrade profiles: grade a decision against a frozen task's grader spec (deterministic) | `src/nacre/eval/grade_decision.py` | `tests/eval/test_grade_decision.py` (L1: 003–016 exact) | D-0016 | — | done |
-| P3 | eval | Map a frozen MNEXA family to Nacre capture events: decision, plus an outcome whose sections follow the EXP-0003 role-to-section table (markers removed) | `src/nacre/eval/load_mnexa_family.py` | `tests/eval/test_load_mnexa_family.py` | D-0016, D-0018 | A-0026 | planned |
+| P3 | eval | Map a frozen MNEXA family to Nacre capture events: decision, plus an outcome whose sections follow the EXP-0003 role-to-section table (markers removed) | `src/nacre/eval/load_mnexa_family.py` | `tests/eval/test_load_mnexa_family.py` | D-0016, D-0018 | A-0026 | done |
 | P5 | eval | EXP-0003 run: Nacre arm plus same-run no-memory control, k = 3, graded by P2, separate discarded safety-challenge check, the bar applied, report written (owner-run) | `src/nacre/eval/run_phase2_gate.py` | `tests/eval/test_run_phase2_gate.py` (recorded mode) | D-0016 | A-0023, A-0024 | planned |
 | P6 | core | Model request/response types and the ModelProvider protocol (types only) | `src/nacre/core/model_provider.py` | `—` (via P9) | D-0021 | — | done |
 | P7 | models | OpenAI Responses adapter (SDK retries off; the only file importing `openai`) | `src/nacre/models/openai_responses_provider.py` | `tests/models/test_openai_responses_provider.py` (fake SDK client) | D-0021 | A-0024 | done |
@@ -88,8 +88,8 @@ Notes:
 | P17 | capture | Record a correction (`correction_of`) | `src/nacre/capture/record_correction.py` | `tests/capture/test_record_correction.py` | D-0018 | — | done |
 | P18 | capture | Validate typed refs: known rel, backward-only, same stream, no self-reference | `src/nacre/capture/validate_refs.py` | `tests/capture/test_validate_refs.py` | D-0018 | — | done |
 | P19 | capture | Decide section authority from the envelope (the D3 rule) | `src/nacre/capture/section_authority.py` | `tests/capture/test_section_authority.py` | D-0018 | A-0026 | done |
-| P20 | gate | Score one event: surprise, stakes, statement | `src/nacre/gate/score_event.py` | `tests/gate/test_score_event.py` | D-0019 | A-0028 | done (A-0028 recall check pending P3) |
-| P21 | gate | Flag events above the mode threshold (idempotent `flag` memory events) | `src/nacre/gate/flag_events.py` | `tests/gate/test_flag_events.py` (+ 100% flag recall on 003–016) | D-0019 | A-0028 | done (A-0028 recall check pending P3) |
+| P20 | gate | Score one event: surprise, stakes, statement | `src/nacre/gate/score_event.py` | `tests/gate/test_score_event.py` | D-0019 | A-0028 | done |
+| P21 | gate | Flag events above the mode threshold (idempotent `flag` memory events) | `src/nacre/gate/flag_events.py` | `tests/gate/test_flag_events.py` (+ 100% flag recall on 003–016) | D-0019 | A-0028 | done |
 | P22 | sleep | Build the evidence bundle for one flagged episode (decision as history; sections with authority) | `src/nacre/sleep/build_evidence_bundle.py` | `tests/sleep/test_build_evidence_bundle.py` | D-0020 | — | planned |
 | P23 | sleep | Proposer seat: structured-proposition proposal (Nacre's own prompt, frozen by hash in the file) | `src/nacre/sleep/propose_propositions.py` | `tests/sleep/test_propose_propositions.py` (recorded) | D-0020, D-0021 | A-0025 | planned |
 | P24 | sleep | Repair seat: structure repair (Nacre's own prompt, frozen by hash in the file) | `src/nacre/sleep/repair_structure.py` | `tests/sleep/test_repair_structure.py` (recorded) | D-0020, D-0021 | A-0025 | planned |
