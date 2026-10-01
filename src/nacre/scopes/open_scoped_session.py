@@ -3,7 +3,7 @@ Functionality: The one door to the ledger: open a transaction scoped to one prin
 Owns: the pre-flight checks on the connection, setting the transaction-local scope settings, and
   guaranteeing they vanish at commit or rollback.
 Public entry: open_scoped_session(), ScopedSession
-Decisions: D-0003, D-0005
+Decisions: D-0003, D-0005, D-0025
 Assumptions: A-0011, A-0012
 Notes: Steps (D-0005): check the connection → BEGIN → set nacre.principal → resolve_access →
   set nacre.read_streams / nacre.write_streams → yield → COMMIT (or ROLLBACK on error).
@@ -14,6 +14,11 @@ Notes: Steps (D-0005): check the connection → BEGIN → set nacre.principal �
       nest under someone else's);
     - the connection's role is superuser or has BYPASSRLS (RLS would not apply at all);
     - the isolation level is not READ COMMITTED (D-0003 visibility order depends on it).
+  Snapshot sessions (D-0025 §1, recall): `snapshot=True` makes the FIRST statement of the transaction
+  SET TRANSACTION ISOLATION LEVEL REPEATABLE READ, READ ONLY. Everything after it, including resolve_access, reads
+  one consistent snapshot, so the principal's grants are confirmed in the same transaction as the recall snapshot
+  (owner, D-0024 decision 2). A snapshot session never writes: its write set is empty and the transaction is read
+  only. A grant revoked after the snapshot began is seen by the next snapshot.
 """
 from collections.abc import Iterator
 from contextlib import contextmanager
@@ -35,6 +40,7 @@ class ScopeError(RuntimeError):
 class ScopedSession:
     conn: psycopg.Connection
     access: Access
+    snapshot: bool = False
 
 
 def _uuid_array(ids: frozenset[UUID]) -> str:
@@ -42,7 +48,8 @@ def _uuid_array(ids: frozenset[UUID]) -> str:
 
 
 @contextmanager
-def open_scoped_session(conn: psycopg.Connection, principal_id: UUID) -> Iterator[ScopedSession]:
+def open_scoped_session(conn: psycopg.Connection, principal_id: UUID, *, snapshot: bool = False
+                        ) -> Iterator[ScopedSession]:
     """Yield a transaction in which RLS admits exactly this principal's streams."""
     if conn.info.transaction_status != TransactionStatus.IDLE:
         raise ScopeError("connection is already inside a transaction; open the scoped session first")
@@ -54,8 +61,13 @@ def open_scoped_session(conn: psycopg.Connection, principal_id: UUID) -> Iterato
     if unsafe:
         raise ScopeError("connection role bypasses row-level security; connect as nacre_app")
     with conn.transaction():
+        if snapshot:   # must be the transaction's first statement
+            conn.execute("SET TRANSACTION ISOLATION LEVEL REPEATABLE READ, READ ONLY")
         conn.execute("SELECT set_config('nacre.principal', %s, true)", (str(principal_id),))
         access = resolve_access(conn, principal_id)
+        if snapshot:
+            access = Access(principal_id=access.principal_id, read_streams=access.read_streams,
+                            write_streams=frozenset())
         conn.execute("SELECT set_config('nacre.read_streams', %s, true)", (_uuid_array(access.read_streams),))
         conn.execute("SELECT set_config('nacre.write_streams', %s, true)", (_uuid_array(access.write_streams),))
-        yield ScopedSession(conn=conn, access=access)
+        yield ScopedSession(conn=conn, access=access, snapshot=snapshot)

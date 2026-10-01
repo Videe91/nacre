@@ -1142,3 +1142,20 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   - **Index text (D1):** nucleus, else support_text; episodes index "".
   - **Embedder check:** a stream indexed with another embedder refuses writes until it is re-indexed.
   - **Tests:** 10, plus 1 in keys.
+- 2026-10-02 — **R10 built: `recall/load_index_cache.py`**, plus snapshot sessions in `open_scoped_session`
+  (`snapshot=True`: REPEATABLE READ, read only).
+  - **Snapshot sessions:** the transaction's first statement sets the isolation, so grants are resolved inside the
+    recall snapshot (owner decision 2); a snapshot session's write set is empty.
+  - **The cache:**
+    - serves only inside a snapshot session, and only for streams granted in that snapshot. An ungranted stream
+      refuses the whole call, even when another principal warmed it;
+    - erasure: on a shred-epoch change, entries of destroyed keys are evicted before serving;
+    - generation or embedder change: the stream is dropped and reloaded;
+    - entries are fetched by version id, not by sequence, to avoid missing late commits.
+  - **Tested:**
+    - every kind pair (25), warm and cold;
+    - erasure honoured by two independent caches ("processes");
+    - an older snapshot may still see content its own snapshot predates; the next one never does;
+    - revocation;
+    - LRU cap.
+  - **Still to do:** the every-pair suite runs again end to end through `recall_context` at R19.

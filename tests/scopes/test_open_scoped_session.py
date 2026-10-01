@@ -200,3 +200,40 @@ def test_gate5_real_events_do_not_cross_scopes(session, streams, provider, tmp_p
             append_event(s, provider, req(b, "p writes into b"), blob_store=blobs)
     with session(q, read=[b], write=[b]) as s:
         assert [e.envelope.event_id for e in read_stream(s, provider, b)] == [env_b.event_id]   # nothing from p
+
+
+# --- snapshot sessions (D-0025 §1: recall reads one REPEATABLE READ, read-only snapshot) -------------------
+
+def test_a_snapshot_session_is_repeatable_read_read_only_and_never_writes(world, grant):
+    p, proj = uuid.uuid4(), world["streams"]["project"][0]
+    grant(p, proj, read=True, append=True)
+    with _app(world) as conn, open_scoped_session(conn, p, snapshot=True) as s:
+        assert s.snapshot and s.access.write_streams == frozenset() and s.access.read_streams == {proj}
+        assert s.conn.execute("SHOW transaction_isolation").fetchone()[0] == "repeatable read"
+        assert s.conn.execute("SHOW transaction_read_only").fetchone()[0] == "on"
+        with pytest.raises(psycopg.errors.ReadOnlySqlTransaction):
+            s.conn.execute("INSERT INTO keys.stream_master_keys (stream_id, root_key_version, wrapped_key) "
+                           "VALUES (%s, 'v1', 'w')", (proj,))
+    with _app(world) as conn, open_scoped_session(conn, p) as s:   # the connection is usable again, normally
+        assert s.conn.execute("SHOW transaction_isolation").fetchone()[0] == "read committed"
+
+
+def test_grants_are_frozen_with_the_snapshot_and_a_revoke_is_seen_by_the_next_one(world, grant):
+    p, proj = uuid.uuid4(), world["streams"]["project"][0]
+    grant(p, proj)
+    with _app(world) as conn:
+        with open_scoped_session(conn, p, snapshot=True) as s:
+            grant(p, proj, read=False, append=False)                # committed by another connection mid-snapshot
+            assert s.access.read_streams == {proj} and _seen(s.conn) == {proj}   # one consistent snapshot
+        with open_scoped_session(conn, p, snapshot=True) as s:
+            assert s.access.read_streams == frozenset() and _seen(s.conn) == set()
+
+
+@pytest.mark.parametrize("granted_kind,other_kind", list(itertools.product(KINDS, KINDS)), ids=lambda k: k)
+def test_s3_snapshot_sessions_hold_isolation_for_every_kind_pair(world, grant, granted_kind, other_kind):
+    mine, other = world["streams"][granted_kind][0], world["streams"][other_kind][1]
+    p = uuid.uuid4()
+    grant(p, mine)
+    with _app(world) as conn, open_scoped_session(conn, p, snapshot=True) as s:
+        assert _seen(s.conn) == {mine} and _seen(s.conn, "keys.data_keys") == {mine}
+        assert s.conn.execute("SELECT count(*) FROM ledger.events WHERE stream_id = %s", (other,)).fetchone()[0] == 0
