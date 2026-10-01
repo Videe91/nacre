@@ -1,6 +1,6 @@
 # Current state
 
-**Phase:** 1 COMPLETE (tag `phase-1-complete`); Phase 2 — interpretation plane (PLANNING, no code)
+**Phase:** 2 COMPLETE (tag `phase-2-complete`, owner-accepted 2026-10-01); Phase 3 — recall, interface (PLANNING, no code)
 **Last updated:** 2026-09-30
 
 ## Done
@@ -1032,3 +1032,5 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   - **Not gate items, still not built:** D-0019 stakes keyword rules; D-0020 corrections → contradictions; the
     D-0022 attachment route for model-call records over 1 MiB; the Anthropic adapter. **Open question:** events
     ABOUT a person written by others.
+- 2026-10-01 — **Phase 2 gate ACCEPTED by the owner; tagged `phase-2-complete`** (at 8131c5d). No fresh live run is
+  needed (prompts were verified identical by hash). **Phase 3 planning started (no product code).**
