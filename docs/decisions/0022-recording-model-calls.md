@@ -1,6 +1,6 @@
 # D-0022: How model calls are recorded (and replayed)
 
-- **Status:** proposed (D2 parts). **D3 part APPROVED by the owner 2026-10-01: storing full prompts, encrypted and scoped.**
+- **Status:** accepted (owner, 2026-10-01). **D3 part APPROVED by the owner 2026-10-01: storing full prompts, encrypted and scoped.**
 - **Tier:** D2 (persistence format). Recording prompts, which contain user content, is **D3** (privacy).
 - **Date:** 2026-10-01
 - **Relies on assumptions:** A-0025

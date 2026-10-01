@@ -1,6 +1,6 @@
 # D-0016: Phase 2 regression suite, test modes and parity margins
 
-- **Status:** accepted with owner amendments (2026-10-01). The framing is owner-decided (amendments below). The margin
+- **Status:** accepted with owner amendments 1–2 (2026-10-01; amendment 2 = rebuild, not port). The framing is owner-decided (amendments below). The margin
   numbers are fixed in EXP-0001, committed before any run
 - **Tier:** D3 (what counts as proof)
 - **Date:** 2026-10-01
@@ -21,6 +21,28 @@
 
 **What this supersedes:** the original L3 below compared against MNEXA's historic single-run numbers (165/180). That
 comparison is **superseded** by section B-L3 (amended). The original text is kept for history.
+
+## Amendment 2 (owner, 2026-10-01): rebuild, not port
+Amendment 2 supersedes every parity and non-inferiority requirement above; the text above is kept for history.
+
+**MNEXA is prior art and a textbook, not a parity target.** EXP-0002 is cancelled.
+
+**The Phase 2 bar** (pre-registered in `docs/experiments/EXP-0003-nacre-phase2-gate.md` before any Nacre code):
+- **Run design:** frozen tasks 014–016, k = 3, pinned `gpt-4o-mini-2024-07-18`, with the no-memory control **in the
+  same runs**.
+- **Pass count:** Nacre ≥ **162/180** pooled and ≥ **51/60** per set.
+- **Superiority:** Nacre − no-memory ≥ **50 points** pooled (≥ 90 trials).
+- **Safety:** **zero** on every metric.
+- **No reruns** to reach a pass.
+- **EXP-0001** (MNEXA 178/180, no-memory 21/180) is kept as a **reference**, reported alongside, and is **not a gate**.
+
+**What survives from B (levels):**
+- **L1 (grader parity) is kept, as instrument validation, not mimicry.** The ported grader must reproduce MNEXA's
+  recorded grades on MNEXA's stored decisions. Otherwise "162/180 on these tasks" does not use the same ruler.
+- **L2 (mechanism parity) is dropped**, together with D-0020 R2 (byte-identical prompts) and R3 (reproduce MNEXA's
+  admitted memory).
+- **The old L3 margins (169, 53/53/54) are superseded** by the bar above.
+- Test modes (C) are unchanged. Recorded mode for everyday tests; live mode for the gate.
 
 ## Context
 SPEC ("Proof", tier 1) says MNEXA's frozen task sets must reproduce "at the same or better rates" on the new build,

@@ -1,10 +1,19 @@
 # D-0021: Model-provider interface
 
-- **Status:** proposed (D2 parts). **D3 part APPROVED by the owner 2026-10-01: default-deny per-org provider policy.**
+- **Status:** accepted (owner, 2026-10-01) with amendment 1. **D3 part APPROVED by the owner 2026-10-01: default-deny per-org provider policy.**
 - **Tier:** D2 (public interface, new dependencies). The provider policy (which content may leave for which
   provider) is **D3** (privacy boundary).
 - **Date:** 2026-10-01
 - **Relies on assumptions:** A-0024, A-0025
+
+## Amendment 1 (owner, 2026-10-01)
+**Every call records** (in its `result` event, D-0022):
+- the **pinned, dated model version**: both the requested version and the provider-reported one;
+- the **timeout and retry settings** in force (per-attempt timeout, max attempts, backoff), plus the attempt number;
+- the **token cost**: input, output and cached tokens, and the cost in USD.
+
+Cost is computed from a dated, versioned price table kept in the repo with its source. **Fail closed:** a model with
+no price entry cannot be called.
 
 ## Context
 Phase 2 is the first phase that calls models (the sleep pass). SPEC requires model independence: any model

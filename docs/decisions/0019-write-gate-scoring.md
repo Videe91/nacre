@@ -1,6 +1,6 @@
 # D-0019: Write-gate scoring (surprise, stakes, direct statements)
 
-- **Status:** proposed
+- **Status:** accepted (owner, 2026-10-01) with revisions R1–R2
 - **Tier:** D2 (cross-module behaviour)
 - **Date:** 2026-10-01
 - **Relies on assumptions:** A-0028

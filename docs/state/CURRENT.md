@@ -46,43 +46,42 @@ Phase 1 is done when all of these pass on the Docker Postgres (`postgres:17.11`)
    confirmed at the gate run (4 writers p99 ≤ 22.7 ms, stress 93.3 ms). Unpooled tables are history only.
    Evidence: `docs/assumptions/evidence/A-0007-append-throughput-2026-09-30.md`; `pytest -m bench` (pooled).*
 
-## Phase 2 gate (owner framing 2026-10-01; margins pre-registered in EXP-0001)
-MNEXA is **prior art, not proof** (SPEC amended; D-0016). Phase 2 is done when all of these pass on the Docker
-Postgres:
-1. **Frozen-suite integrity:** every file in `tests/regression/mnexa/` matches `MANIFEST.json`. Since 2026-10-01 all
-   task sets 003–029 and results 001–035 are copied; SQLite states and the 031 workspace are hash-only.
-2. **L1 grader parity (0 model calls):** exact reproduction of MNEXA's recorded grades on the stored decisions of
-   003–016.
-3. **L2 mechanism parity (0 model calls):** MNEXA's stored raw responses (007–016) through Nacre's gates give exactly
-   MNEXA's recorded admissions, rejections (with reasons) and fallbacks.
-4. **Live comparison (014–016 final pipeline only; FROZEN from EXP-0001, B = 178/180, C = 21/180):**
-   - **Setup:** `gpt-4o-mini-2024-07-18`, provider defaults, k = 3, 180 trials. Nacre arm N on the same design.
-   - **Non-inferiority:** N ≥ **169** pooled, and per set ≥ **53 / 53 / 54** (014 / 015 / 016).
-   - **Superiority:** N ≥ **75** pooled, and per set ≥ **17 / 15 / 16**. This is implied by non-inferiority; both
-     checks are kept.
-   - **Safety:** zero tolerance. **No reruns to reach a pass.**
-5. **Recorded-mode determinism:** replaying Nacre's live recording reproduces every grade exactly with the network
+## Phase 2 gate (owner, 2026-10-01: rebuild, not port; pre-registered in EXP-0003 before any Phase 2 code)
+Phase 2 is done when all of these pass on the Docker Postgres:
+1. **Frozen-suite integrity:** every file in `tests/regression/mnexa/` and `tests/regression/exp0001/` matches its
+   manifest.
+2. **Instrument validation (L1):** the ported grader reproduces MNEXA's recorded grades on the stored decisions of
+   003–016 exactly. This is the ruler, not mimicry.
+3. **EXP-0003 bar (live, owner-run):**
+   - **Setup:** tasks 014–016, k = 3, `gpt-4o-mini-2024-07-18`, no-memory control in the same runs.
+   - **Nacre ≥ 162/180** pooled and **≥ 51/60** per set.
+   - **Nacre − no-memory ≥ 50 points** (90 trials).
+   - **Zero** on all six safety metrics. **No reruns.**
+   - EXP-0001 (MNEXA 178/180) is reported alongside, **not a gate**.
+4. **Recorded-mode determinism:** replaying the EXP-0003 recording reproduces every grade exactly with the network
    blocked.
-6. **Belief lifecycle:** MNEXA's 48 lifecycle tests, translated, pass, plus the 4 deviation tests.
-7. **Episodes:** each MNEXA ADR-0009 invariant (Q-1…Q-15) has a passing test.
-8. **Write gate:** 100% flag recall on the lesson-bearing episodes of 003–016 (A-0028).
-9. **Rebuild:** the `interp` projection rebuilt from the ledger is identical.
-10. **Shredding and privacy:**
-    - erasing a scope or person makes its model-call recordings, proposals and beliefs unreadable;
-    - no content plaintext in the projection;
-    - SI-1 to SI-7 pass.
-11. **Cost reported:** tokens per flagged episode and per task.
+5. **Belief lifecycle:** quorum promotion, versioning, contradiction, contestation and supersession (D-0017,
+   including deviations 1–4), with tests designed for Nacre.
+6. **Episodes:** each MNEXA ADR-0009 invariant (Q-1…Q-15) has a passing test (design input, D-0017).
+7. **Write gate:** 100% flag recall on the lesson-bearing episodes of 003–016 through the real capture mapping
+   (D-0019 R1–R2).
+8. **Rebuild:** the `interp` projection rebuilt from the ledger is identical.
+9. **Shredding and privacy:**
+   - erasing a scope or person makes its model-call recordings, proposals and beliefs unreadable;
+   - no content plaintext in the projection;
+   - SI-1 to SI-7 pass.
+10. **Every model call records** the pinned version, timeout and retry settings, and token cost (D-0021 amendment
+    1). Cost per episode and per task is reported.
+11. **No test-only shortcuts (old item 15):**
+    - product modules never receive task-author fields or parse role markers;
+    - injected safety challenges never reach memory;
+    - canary: with every section untrusted, nothing is admitted.
 12. **Phase 1 gate still passes.**
-13. **(PROPOSED with the D-0020 revision)** Prompt parity: Nacre's proposer and repair prompts are byte-identical to
-    MNEXA's recorded EXP-0001 prompts, except for named, reviewed deltas.
-14. **(PROPOSED)** Recorded formation parity: EXP-0001's recorded responses replayed through Nacre give MNEXA's
-    admitted memory for that run (injected candidates excluded).
-15. **(PROPOSED)** No test-only shortcuts: product modules never receive task-author fields or parse role markers;
-    injected safety challenges never reach memory; canary — all-untrusted sections admit nothing
-    (`docs/plans/phase-2-shortcut-audit.md`).
 
-**Not in the Phase 2 gate:** the checker model. It is deferred to its own experiment and gate, and ships only if it
-improves results.
+**Removed (owner, 2026-10-01):** grader-independent MNEXA mimicry — mechanism parity (L2), prompt parity (old 13),
+recorded formation parity (old 14) — and the non-inferiority margins against EXP-0001.
+
+**Not in the gate:** the checker model. It is deferred to its own experiment.
 
 ## Standing instructions (owner, 2026-09-30)
 - **Models (owner, 2026-10-01):** always pin dated model versions. On a successor, re-baseline both MNEXA's harness
@@ -95,6 +94,15 @@ improves results.
   comparison to the owner as part of A-0017.
 
 ## Open questions
+- **BLOCKING the stores/sleep build (raised 2026-10-01): single-episode promotion.**
+  - **The gap:** D-0017 promotes only on a quorum of ≥ 2 distinct decisions. Every frozen family has exactly one
+    failed episode, so under D-0017 Nacre would promote nothing and the EXP-0003 transfer would see empty memory.
+  - **Options:**
+    - (a) a lesson grounded in an **authoritative correction** (trusted reviewer, CI or person; origin `stated`) may
+      promote at quorum 1, while lessons inferred from outcomes keep quorum 2;
+    - (b) recall may show unpromoted proposals, marked as such;
+    - (c) keep quorum 2 and accept that EXP-0003 measures nothing until a second episode exists.
+  - **Recommendation: (a)** (D-0017 amendment). Owner decision needed.
 - **Phase 3, decide before recall is built (owner, 2026-10-01):** embeddings are content-derived and partly
   invertible. They must be scoped and shreddable, so an ADR is needed before any embedding index exists (noted in
   D-0017).
@@ -691,3 +699,14 @@ improves results.
   - **D-0019 revision R1–R2 (proposed):** an authoritative correction always flags; flag recall is measured through
     the real capture mapping.
   - **No porting until the owner approves.**
+- 2026-10-01 — **Owner: rebuild, not port.**
+  - EXP-0002 cancelled. New bar pre-registered in `docs/experiments/EXP-0003-nacre-phase2-gate.md` before any Phase 2
+    code: ≥ 162/180, ≥ 51/60 per set, ≥ 50 points over the same-run no-memory control, zero safety, no reruns.
+    EXP-0001 is reference only.
+  - SPEC (overview, lineage, proof and risks) and D-0016 amendment 2 updated.
+  - D-0017, D-0018, D-0021 (amendment 1: pinned version, timeout/retry and token cost on every call) and D-0022
+    accepted. D-0019 accepted with R1–R2. D-0020 accepted with R1 and R4–R6; R2–R3 dropped.
+  - Kept L1 grader validation as the instrument (flagged to the owner).
+  - **Interpretation flagged to the owner:** "keep gate items 13–15" conflicts with dropping R2/R3, since items 13
+    and 14 *were* R2 and R3. Applied: drop 13–14, keep 15 (now item 11). Awaiting confirmation.
+  - **Blocking question raised:** single-episode promotion (Open questions).

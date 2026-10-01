@@ -1,6 +1,6 @@
 # D-0020: The sleep-pass job (consolidation)
 
-- **Status:** proposed
+- **Status:** accepted (owner, 2026-10-01) with revisions R1, R4, R5 and R6. **R2 and R3 are dropped.** Rebuild, not port (D-0016 amendment 2)
 - **Tier:** D2 (cross-module behaviour; a new job with model calls)
 - **Date:** 2026-10-01
 - **Relies on assumptions:** A-0003, A-0026, A-0027, A-0029 (A-0023 superseded)
@@ -70,7 +70,19 @@ Option 2.
 - decay, protection, habituation and pattern compression (Phase 4);
 - compact rendering (015, Phase 3 recall).
 
-## Revision after EXP-0001 (2026-10-01, proposed; owner to approve)
+## Owner decision, 2026-10-01: rebuild, not port
+- **The pipeline and prompts are Nacre's own, designed on their merits.** Wherever this ADR says "MNEXA's
+  instruction", "ported verbatim" or "L2 against MNEXA's stored responses", read instead: designed for Nacre, using
+  MNEXA's documented lessons as input. The lessons are:
+  - the support-first fallback (014; carried 33/180 answers in EXP-0001);
+  - the shortcut audit (no injected candidates; authority from the envelope);
+  - seed 010's negative result: a model choosing its own boundaries without grounding lost 18 → 14, so admission
+    stays deterministic span grounding.
+- **Kept:** R1, R4, R5, R6.
+- **Dropped:** R2 (byte-identical prompts) and R3 (reproduce MNEXA's admitted memory).
+- Prompts are D1 inside `sleep/` files: frozen by hash in their file, and every change recorded.
+
+## Revision after EXP-0001 (2026-10-01; R1, R4–R6 accepted, R2–R3 dropped)
 EXP-0001 (B = 178/180) and the shortcut audit (`docs/plans/phase-2-shortcut-audit.md`) suggest these changes.
 
 - **R1. No injected candidates in the product pipeline.**

@@ -1,6 +1,6 @@
 # D-0017: Interpretation-plane schema (proposals, beliefs, statuses, ancestry, episodes)
 
-- **Status:** proposed (D2 parts). **D3 part APPROVED by the owner 2026-10-01: no content plaintext in the projection (keyed content MAC).**
+- **Status:** accepted (owner, 2026-10-01). **D3 part APPROVED by the owner 2026-10-01: no content plaintext in the projection (keyed content MAC).**
 - **Tier:** D2 (persistence format, invariants). The privacy part (what the projection may hold in plaintext) is
   **D3**.
 - **Date:** 2026-10-01

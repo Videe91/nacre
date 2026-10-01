@@ -65,19 +65,18 @@ Notes:
 - Not in Phase 1 (by SPEC): cross-scope promotion, scope merge for recall, derived-store rebuild
   after shredding, principal authentication, month partitioning (D-0003).
 
-## Phase 2 — interpretation plane (PROPOSED 2026-10-01; nothing built; awaiting owner approval of D-0016 … D-0022)
+## Phase 2 — interpretation plane (rebuild, not port; D-0016 … D-0022 accepted 2026-10-01; bar = EXP-0003)
 
 | # | Capability | Functionality | File | Test | Decisions | Assumptions | Status |
 |---|---|---|---|---|---|---|---|
 | P1 | eval | Verify the frozen MNEXA suite: every copied file and every hash-only entry against MANIFEST.json | `src/nacre/eval/verify_frozen_suite.py` | `tests/eval/test_verify_frozen_suite.py` | D-0016 | — | planned |
 | P2 | eval | Port MNEXA `grade_text` and the regrade profiles: grade a decision against a frozen task's grader spec (deterministic) | `src/nacre/eval/grade_decision.py` | `tests/eval/test_grade_decision.py` (L1: 003–016 exact) | D-0016 | — | planned |
-| P3 | eval | Map a frozen MNEXA family to Nacre capture events: decision, outcome sections with roles and authority | `src/nacre/eval/load_mnexa_family.py` | `tests/eval/test_load_mnexa_family.py` | D-0016, D-0018 | A-0026 | planned |
-| P4 | eval | L2 mechanism parity: feed MNEXA's stored raw responses through the sleep-pass gates and compare with MNEXA's recorded admissions | `src/nacre/eval/check_mechanism_parity.py` | `tests/eval/test_check_mechanism_parity.py` (007–016 exact) | D-0016, D-0020 | A-0026 | planned |
-| P5 | eval | L3 live parity run: k replicates per family on fresh state, graded, with margins applied, and a report written (owner-run) | `src/nacre/eval/run_live_parity.py` | `tests/eval/test_run_live_parity.py` (recorded mode) | D-0016 | A-0023, A-0024 | planned |
+| P3 | eval | Map a frozen MNEXA family to Nacre capture events: decision, plus an outcome whose sections follow the EXP-0003 role-to-section table (markers removed) | `src/nacre/eval/load_mnexa_family.py` | `tests/eval/test_load_mnexa_family.py` | D-0016, D-0018 | A-0026 | planned |
+| P5 | eval | EXP-0003 run: Nacre arm plus same-run no-memory control, k = 3, graded by P2, separate discarded safety-challenge check, the bar applied, report written (owner-run) | `src/nacre/eval/run_phase2_gate.py` | `tests/eval/test_run_phase2_gate.py` (recorded mode) | D-0016 | A-0023, A-0024 | planned |
 | P6 | core | Model request/response types and the ModelProvider protocol (types only) | `src/nacre/core/model_provider.py` | `—` (via P9) | D-0021 | — | planned |
 | P7 | models | OpenAI Responses adapter (SDK retries off; the only file importing `openai`) | `src/nacre/models/openai_responses_provider.py` | `tests/models/test_openai_responses_provider.py` (fake SDK client) | D-0021 | A-0024 | planned |
 | P8 | models | Anthropic Messages adapter (the only file importing `anthropic`) | `src/nacre/models/anthropic_messages_provider.py` | `tests/models/test_anthropic_messages_provider.py` (fake SDK client) | D-0021 | — | planned |
-| P9 | models | Call a model end to end: provider-policy check, one-scope check, canonicalise and hash, bounded retries, record each attempt as a `result` event | `src/nacre/models/call_model.py` | `tests/models/test_call_model.py` | D-0021, D-0022 | A-0025 | planned |
+| P9 | models | Call a model end to end: provider-policy check, one-scope check, canonicalise and hash, bounded retries with recorded timeout/retry settings, cost from the price table (fail closed), record each attempt as a `result` event | `src/nacre/models/call_model.py` | `tests/models/test_call_model.py` | D-0021, D-0022 | A-0025 | planned |
 | P10 | models | Replay provider: answer only from recorded `result` events with the same request hash, in recorded order; RecordingMiss otherwise | `src/nacre/models/recorded_provider.py` | `tests/models/test_recorded_provider.py` | D-0022 | A-0025 | planned |
 | P11 | models | Load and verify model-call fixture files into a test ledger | `src/nacre/models/load_model_call_fixtures.py` | `tests/models/test_load_model_call_fixtures.py` | D-0022 | — | planned |
 | P12 | schema | DDL: `interp` projection (versions, edges, heads view), RLS by stream, append-only | `src/nacre/schema/sql/0009_interpretation_plane.sql` | `tests/schema/test_0009_interpretation_plane.py` | D-0017 | — | planned |
@@ -91,8 +90,8 @@ Notes:
 | P20 | gate | Score one event: surprise, stakes, statement | `src/nacre/gate/score_event.py` | `tests/gate/test_score_event.py` | D-0019 | A-0028 | planned |
 | P21 | gate | Flag events above the mode threshold (idempotent `flag` memory events) | `src/nacre/gate/flag_events.py` | `tests/gate/test_flag_events.py` (+ 100% flag recall on 003–016) | D-0019 | A-0028 | planned |
 | P22 | sleep | Build the evidence bundle for one flagged episode (decision as history; sections with authority) | `src/nacre/sleep/build_evidence_bundle.py` | `tests/sleep/test_build_evidence_bundle.py` | D-0020 | — | planned |
-| P23 | sleep | Proposer seat: structured-proposition proposal (MNEXA 005 + 011 prompt, frozen by hash) | `src/nacre/sleep/propose_propositions.py` | `tests/sleep/test_propose_propositions.py` (recorded) | D-0020, D-0021 | A-0025 | planned |
-| P24 | sleep | Repair seat: structure repair (MNEXA 012 prompt, frozen by hash) | `src/nacre/sleep/repair_structure.py` | `tests/sleep/test_repair_structure.py` (recorded) | D-0020, D-0021 | A-0025 | planned |
+| P23 | sleep | Proposer seat: structured-proposition proposal (Nacre's own prompt, frozen by hash in the file) | `src/nacre/sleep/propose_propositions.py` | `tests/sleep/test_propose_propositions.py` (recorded) | D-0020, D-0021 | A-0025 | planned |
+| P24 | sleep | Repair seat: structure repair (Nacre's own prompt, frozen by hash in the file) | `src/nacre/sleep/repair_structure.py` | `tests/sleep/test_repair_structure.py` (recorded) | D-0020, D-0021 | A-0025 | planned |
 | P25 | sleep | Support-first admission: exact spans, authority, structure, fallback, closed world (MNEXA 006/007/008/014) | `src/nacre/sleep/admit_propositions.py` | `tests/sleep/test_admit_propositions.py` (+ L2) | D-0020, D-0018 | A-0026 | planned |
 | P26 | sleep | Run the sleep pass for one scope: flags since the last pass, per-episode transactions, resumable | `src/nacre/sleep/run_sleep_pass.py` | `tests/sleep/test_run_sleep_pass.py` (recorded; crash/resume) | D-0020 | A-0025 | planned |
 | P27 | stores | Record a lesson proposal (pinned span edges) | `src/nacre/stores/propose_lesson.py` | `tests/stores/test_propose_lesson.py` | D-0017 | — | planned |
@@ -104,7 +103,7 @@ Notes:
 | P33 | stores | Rebuild a scope's `interp` projection from its memory events (must be identical) | `src/nacre/stores/rebuild_projection.py` | `tests/stores/test_rebuild_projection.py` | D-0017 | — | planned |
 | P34 | stores | Propose and commit an episode version (MNEXA ADR-0009: admissibility validation, runtime commits) | `src/nacre/stores/commit_episode.py` | `tests/stores/test_commit_episode.py` (Q-1…Q-15) | D-0017 | — | planned |
 
-Build order (proposed): P1–P2 (L1 runs before any port code) → P6, P9–P11 → P12 → P13–P19 → P20–P21 → P27–P34 → P22–P26 → P3–P4 (L2) → P5 (L3, owner-run).
+Build order: P1–P2 (instrument first; L1 before any mechanism code) → P6, P9–P11 (+ price table `src/nacre/models/data/prices.json`) → P12 → P13–P19 → P20–P21 → P27–P34 (promotion waits on the single-episode question) → P22–P26 → P3 → P5 (EXP-0003, owner-run).
 
 ## Planned capability folders (phase in brackets)
 ledger [1] · scopes [1] · keys [1] · schema [1] · capture [2] · gate [2] · sleep [2] · stores [2] · models [2] · eval [2] ·
