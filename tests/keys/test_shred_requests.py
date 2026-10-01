@@ -175,3 +175,31 @@ def test_a_destruction_that_finds_no_key_does_not_bump_the_epoch(world, provider
     execute_due_shreds(world["ka"](), provider, now=NOW + timedelta(days=8))
     assert _epoch(migrated_db, world["proj"]) == 0
 
+
+def test_person_erasure_bumps_the_epoch_in_every_stream_where_their_keys_existed(world, provider, migrated_db):
+    # Owner check (2026-10-01): own keys in two streams, membership in a derived key in a third, and an untouched
+    # fourth stream. Every stream that lost a key is bumped once; the untouched one is not.
+    from nacre.keys.derive_contributor_key import Contributor, derived_key
+    org_id, owner, person = world["org"], world["owner"], world["person"]
+    p2, p3, p4 = uuid.uuid4(), uuid.uuid4(), uuid.uuid4()
+    for proj in (p2, p3, p4):
+        with world["open"](owner) as s:
+            register_scope(s, provider, org_id=org_id, stream_id=proj, kind=ScopeKind.PROJECT,
+                           idempotency_key=str(uuid.uuid4()))
+        with world["open"](owner) as s:
+            set_access(s, provider, org_id=org_id, principal_id=owner, stream_id=proj, can_read=True, can_append=True,
+                       idempotency_key=str(uuid.uuid4()))
+    month = date(NOW.year, NOW.month, 1)
+    with world["open"](owner) as s:
+        append_event(s, provider, AppendRequest(
+            stream_id=p2, event_type=EventType.STATEMENT, payload_type=PayloadType.TEXT, actor_kind=ActorKind.PERSON,
+            actor_id=person, source=Source.CHAT, authorship=Authorship.SCOPE_PRINCIPAL,
+            idempotency_key=str(uuid.uuid4()), content="more of my words"))
+        derived_key(s.conn, provider, p3, frozenset({Contributor(person, month, True), Contributor(p3, month, False)}), month)
+        append_event(s, provider, AppendRequest(
+            stream_id=p4, event_type=EventType.ACTION, payload_type=PayloadType.TEXT, actor_kind=ActorKind.AGENT,
+            actor_id=uuid.uuid4(), source=Source.TOOL, idempotency_key=str(uuid.uuid4()), content="unrelated"))
+    _request(world, provider, owner, ShredKind.ERASE_PERSON, person_id=person)
+    execute_due_shreds(world["ka"](), provider, now=NOW + timedelta(days=8))
+    assert [_epoch(migrated_db, s) for s in (world["proj"], p2, p3, p4)] == [1, 1, 1, 0]
+

@@ -7,6 +7,11 @@ dependencies = [
     "psycopg-pool>=3.2,<4",  # D-0006 amendment 1: production connection setup
     "cryptography>=45",
     "google-re2==1.1.20251105",  # D-0009: exact pin; upgrades re-run scripts/a0017
+    # D-0024 (owner decision 4): the local embedder runtime and vector math; exact pins. Only
+    # src/nacre/recall/embed_local.py imports onnxruntime and tokenizers.
+    "numpy==2.5.3",
+    "onnxruntime==1.30.0",
+    "tokenizers==0.23.2",
 ]
 
 [project.optional-dependencies]

@@ -1116,3 +1116,14 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   - **D1 refinements of D-0024:** keyed by stream (= scope, D-0005); the epoch is per stream, not per org, so it
     stays inside RLS.
   - **Renumbering:** the auth migration becomes `0013`.
+- 2026-10-01 — **R6 check:** person erasure bumps the epoch in every stream where the person's keys existed: own keys
+  in 2 streams, plus derived-key membership in a 3rd; the untouched 4th stays at 0 (new test).
+- 2026-10-01 — **R7 and R8 built (embedder).**
+  - **Dependencies:** numpy 2.5.3, onnxruntime 1.30.0, tokenizers 0.23.2 (exact pins, D-0024).
+  - **Model:** all-MiniLM-L6-v2 ONNX at commit `1110a243` (Apache-2.0; `THIRD_PARTY_NOTICES.md`).
+    - Not in git: `scripts/fetch_embedder.py` fetches from the pinned commit, or from our backup GitHub release
+      `embedder-minilm-l6-v2-1110a243`; both sources verified to serve the pinned sha256s.
+  - **Equivalence** vs frozen sentence-transformers vectors: min cosine **0.99999988** (bar 0.9999, 25 texts).
+  - **Speed:** 1.4 ms per query on CPU.
+  - **Structure rule:** only `embed_local.py` may import onnxruntime or tokenizers.
+  - **Setup on a new machine:** `.venv/bin/python scripts/fetch_embedder.py` before pytest.

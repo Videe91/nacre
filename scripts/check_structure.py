@@ -19,8 +19,11 @@ REQUIRED = ["Functionality:", "Public entry:", "Decisions:", "Assumptions:"]
 BANNED_NAMES = {"utils.py", "helpers.py", "misc.py", "common.py"}
 # D-0021 SI-4: each provider SDK may be imported by exactly one adapter file.
 SDK_ADAPTERS = {"openai": "src/nacre/models/openai_responses_provider.py",
-                "anthropic": "src/nacre/models/anthropic_messages_provider.py"}
-SDK_IMPORT = re.compile(r"^\s*(?:import|from)\s+(openai|anthropic)\b", re.M)
+                "anthropic": "src/nacre/models/anthropic_messages_provider.py",
+                # D-0024: the embedder runtime is imported only by the local embedder
+                "onnxruntime": "src/nacre/recall/embed_local.py",
+                "tokenizers": "src/nacre/recall/embed_local.py"}
+SDK_IMPORT = re.compile(r"^\s*(?:import|from)\s+(openai|anthropic|onnxruntime|tokenizers)\b", re.M)
 
 
 def known_ids():
@@ -62,7 +65,7 @@ def main():
             errors.append(f"{rel}: not registered in docs/modules/INDEX.md")
         for sdk in SDK_IMPORT.findall(text):
             if rel != SDK_ADAPTERS[sdk]:
-                errors.append(f"{rel}: imports the {sdk} SDK; only {SDK_ADAPTERS[sdk]} may (D-0021 SI-4)")
+                errors.append(f"{rel}: imports {sdk}; only {SDK_ADAPTERS[sdk]} may (D-0021 SI-4, D-0024)")
 
     for w in warnings:
         print("WARN ", w)

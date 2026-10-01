@@ -1,31 +1,22 @@
 # Third-party notices
 
-## gitleaks rule set
-- **File:** `src/nacre/ledger/data/gitleaks-v8.30.1.toml` (vendored unmodified, D-0007)
-- **Source:** https://github.com/gitleaks/gitleaks/blob/v8.30.1/config/gitleaks.toml
-- **Version:** v8.30.1, commit `83d9cd684c87d95d656c1458ef04895a7f1cbd8e`
-- **sha256:** `e163e53b9e7e8a8511e77271e2b323ed057759542a6d988258afe3a1fa329caf`
-- **License:** MIT. Full text: `src/nacre/ledger/data/LICENSE-gitleaks-v8.30.1`
+## all-MiniLM-L6-v2 (local embedder, D-0024)
+- **Model:** `sentence-transformers/all-MiniLM-L6-v2`, ONNX export (`onnx/model.onnx`) and `tokenizer.json`.
+- **Version:** pinned at commit `1110a243fdf4706b3f48f1d95db1a4f5529b4d41`.
+- **Licence:** Apache License 2.0.
+- **Authors:** the sentence-transformers team (Nils Reimers et al.). Fine-tuned from
+  `nreimers/MiniLM-L6-H384-uncased` (Microsoft MiniLM).
+- **Not in this repository.**
+  - `scripts/fetch_embedder.py` fetches the files from the pinned commit, or from our backup release asset
+    <https://github.com/Videe91/nacre/releases/tag/embedder-minilm-l6-v2-1110a243> (unmodified copies, with the model
+    card and a NOTICE).
+  - It verifies the sha256s pinned in `src/nacre/recall/embed_local.py`:
+    - `model.onnx`: `6fd5d72fe4589f189f8ebc006442dbb529bb7ce38f8082112682524616046452`
+    - `tokenizer.json`: `be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037`
 
-## Negative test corpus (committed third-party files, D-0007 amendments 2-3)
-Unmodified excerpts (truncated at a line boundary to 16 KiB) of permissively licensed Python packages,
-used only as secret-free test input. Per-package versions, licences and licence files:
-`tests/ledger/secret_corpus/negatives/MANIFEST.json` and `negatives/<package>/LICENSES/`.
-Packages: cbor2 (MIT), cffi (MIT-0), cryptography (Apache-2.0 OR BSD-3-Clause), google-re2 (BSD),
-iniconfig (MIT), packaging (Apache-2.0 OR BSD-2-Clause), pip (MIT; `pip/_vendor` excluded), pluggy (MIT),
-pycparser (BSD-3-Clause), Pygments (BSD-2-Clause), pytest (MIT), sortedcontainers (Apache-2.0).
+## DejaVu fonts (test data, I1 OCR set, D-0027)
+`tests/ledger/secret_corpus/fonts/`: DejaVu 2.37, Bitstream Vera licence plus Arev (`LICENSE-DejaVu.txt`).
 
-## lodash 4.17.21 (minified)
-- **File:** `tests/ledger/secret_corpus/negatives_external/lodash-4.17.21/lodash.min.js`, unmodified
-- **Source:** cdnjs, integrity matched against its published SRI hash
-- **License:** MIT, full text beside it (`LICENSE`), © OpenJS Foundation and other contributors
-
-## CPython 3.14.3 standard library excerpts (holdout H2 negatives)
-- **Files:** `tests/ledger/secret_corpus/negatives_holdout2/` — 150 `.py` files truncated at a line boundary to
-  16 KiB, test directories excluded; provenance in its `MANIFEST.json`.
-- **License:** PSF License (PSF-2.0); full text in `negatives_holdout2/LICENSES/LICENSE-PSF.txt`.
-
-## CPython 3.14.3 standard library excerpts (holdout H3 negatives)
-- **Files:** `tests/ledger/secret_corpus/negatives_holdout3/`: 150 further `.py` files (disjoint from H2's),
-  truncated at a line boundary to 16 KiB; provenance in its `MANIFEST.json`.
-- **License:** PSF License (PSF-2.0); full text in `negatives_holdout3/LICENSES/LICENSE-PSF.txt`.
+## Secret-corpus negatives (test data)
+CPython standard-library files (PSF licence) and permissively licensed third-party package files. Each set's
+`MANIFEST.json` and `LICENSES/` folder give per-file origin and licence.
