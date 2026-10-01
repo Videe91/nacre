@@ -96,6 +96,11 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   comparison to the owner as part of A-0017.
 
 ## Open questions
+- **D-0017 text vs its own tables (raised 2026-10-01):** D-0017 says rebuild "drops the scope's projection rows and
+  replays", but the same ADR makes them append-only. Implemented as recompute-and-compare (gate item 8 checks
+  identity). Owner: confirm, or amend D-0017's wording.
+- **ADR-0009 Q-9, evaluation-epoch half:** Nacre has no evaluation epochs yet, so only "episodes form only inside a
+  sleep pass" is enforced. Revisit when the evaluation harness gets epochs.
 - **RESOLVED 2026-10-01 (D-0017 amendment 1, option (a) with safeguards): single-episode promotion.**
   - **The gap:** D-0017 promotes only on a quorum of ≥ 2 distinct decisions. Every frozen family has exactly one
     failed episode, so under D-0017 Nacre would promote nothing and the EXP-0003 transfer would see empty memory.
@@ -819,3 +824,21 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
     triggers. `DISABLE TRIGGER` (one / ALL / edges), `session_replication_role = replica` and `DROP TRIGGER` are all
     refused. A version cannot reference a missing event, an event of another stream, the wrong commit_seq, or a
     non-memory event. 22 tests in `test_0009_interpretation_plane.py`.
+- 2026-10-01 — **P27–P34 done: stores** (D-0017 with amendment 1).
+  - **`write_version` (P27b, new row):** the only writer of `interp`. Version event plus rows atomically; keyed MACs
+    (new `MacPurpose.INTERP_MAC` under the event's own data key; no plaintext and no plain hashes in the projection).
+  - **`propose_lesson`:** exact-span grounding, real decision → outcome ancestry, nucleus and qualifiers inside the
+    span; `grounded_in_trusted_correction` = correction role + D-0018 authority.
+  - **`promote_if_supported`:** quorum 2; single-source only for trusted, correction-grounded spans (50/50, versus
+    quorum 80/100); a second agreeing episode upgrades; deviations 1–2; fallback records from unresolved proposals
+    under the same evidence rule.
+  - **`propose_contradiction` / `contest_belief`:** pinned to the exact head version; quorum 2; deviation 3
+    (no-op unless active).
+  - **`supersede_belief`:** contested old, active and different replacement, ≥ 2 shared decisions.
+  - **`read_heads`:** as-of N; contested and superseded withheld with no fallback to older versions; shredded content
+    is None.
+  - **`rebuild_projection`:** recompute and compare (see Open questions).
+  - **`commit_episode`:** MNEXA ADR-0009 Q-1…Q-15 (Q-9 partial, see Open questions).
+  - **Tests:** 47, including one per amendment-1 safeguard and every Q-n.
+  - **Mutations:** 17/17 killed after 2 tests were added (deviation 3 against a contested head; contested replacement
+    refused). The dead `upgrade` condition was removed (an equivalent mutant: an upgrade always brings a new decision).

@@ -4,7 +4,7 @@ Functionality: Everything the write path does with a data key: encrypt an event 
 Owns: body validation (D-0008 body map v1), the ciphertext header, the AAD, the per-key encryption
   count and its 2^28 cap, and HKDF sub-keys for request_mac / attachment_ref.
 Public entry: encrypt_payload(), seal_bytes(), derive_mac()
-Decisions: D-0002, D-0004, D-0007, D-0008
+Decisions: D-0002, D-0004, D-0007, D-0008, D-0017
 Assumptions: A-0015
 Notes: Ciphertext = version(0x01) | algorithm(0x01, AES-256-GCM) | flags(0x00) | key_id(16) | nonce(12) | ct+tag.
   AAD = encode_envelope(AAD fields) | header bytes 0-2 (D-0008): the event's identity, type and
@@ -40,6 +40,7 @@ _ATTACHMENT_KEYS = {"description", "media_type", "scan"}   # scan: D-0008 amendm
 class MacPurpose(StrEnum):
     REQUEST_MAC = "request_mac"
     ATTACHMENT_REF = "attachment_ref"
+    INTERP_MAC = "interp_mac"          # D-0017: keyed MACs in the interp projection (no plaintext, shredded with the key)
 
 
 class EncryptError(ValueError):

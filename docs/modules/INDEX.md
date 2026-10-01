@@ -96,14 +96,15 @@ Notes:
 | P24 | sleep | Repair seat: structure repair (Nacre's own prompt, frozen by hash in the file) | `src/nacre/sleep/repair_structure.py` | `tests/sleep/test_repair_structure.py` (recorded) | D-0020, D-0021 | A-0025 | planned |
 | P25 | sleep | Support-first admission: exact spans, authority, structure, fallback, closed world (MNEXA 006/007/008/014) | `src/nacre/sleep/admit_propositions.py` | `tests/sleep/test_admit_propositions.py` (+ L2) | D-0020, D-0018 | A-0026 | planned |
 | P26 | sleep | Run the sleep pass for one scope: flags since the last pass, per-episode transactions, resumable | `src/nacre/sleep/run_sleep_pass.py` | `tests/sleep/test_run_sleep_pass.py` (recorded; crash/resume) | D-0020 | A-0025 | planned |
-| P27 | stores | Record a lesson proposal (pinned span edges) | `src/nacre/stores/propose_lesson.py` | `tests/stores/test_propose_lesson.py` | D-0017 | — | planned |
-| P28 | stores | Promote on quorum, and version on new independent support (never re-activates; retry returns head) | `src/nacre/stores/promote_if_supported.py` | `tests/stores/test_promote_if_supported.py` (MNEXA 36–37 translated + deviations) | D-0017 | A-0027 | planned |
-| P29 | stores | Record a contradiction proposal pinned to one belief version | `src/nacre/stores/propose_contradiction.py` | `tests/stores/test_propose_contradiction.py` | D-0017 | — | planned |
-| P30 | stores | Contest a belief on quorum (no-op on contested or superseded) | `src/nacre/stores/contest_belief.py` | `tests/stores/test_contest_belief.py` (MNEXA 38 translated + deviations) | D-0017 | — | planned |
-| P31 | stores | Supersede a contested belief (shared counter-decisions) | `src/nacre/stores/supersede_belief.py` | `tests/stores/test_supersede_belief.py` (MNEXA 39 translated) | D-0017 | — | planned |
-| P32 | stores | Read interpretation heads as-of N with status (content decrypted from the ledger) | `src/nacre/stores/read_heads.py` | `tests/stores/test_read_heads.py` | D-0017 | — | planned |
-| P33 | stores | Rebuild a scope's `interp` projection from its memory events (must be identical) | `src/nacre/stores/rebuild_projection.py` | `tests/stores/test_rebuild_projection.py` | D-0017 | — | planned |
-| P34 | stores | Propose and commit an episode version (MNEXA ADR-0009: admissibility validation, runtime commits) | `src/nacre/stores/commit_episode.py` | `tests/stores/test_commit_episode.py` (Q-1…Q-15) | D-0017 | — | planned |
+| P27 | stores | Record a lesson proposal (pinned span edges) | `src/nacre/stores/propose_lesson.py` | `tests/stores/test_propose_lesson.py` | D-0017 | — | done |
+| P27b | stores | Write one interpretation version: the memory event (truth) plus its projection rows with keyed MACs, atomically; the only writer of `interp` | `src/nacre/stores/write_version.py` | `tests/stores/test_write_version.py` | D-0017, D-0008, D-0004 | A-0014 | done |
+| P28 | stores | Promote on quorum, and version on new independent support (never re-activates; retry returns head) | `src/nacre/stores/promote_if_supported.py` | `tests/stores/test_promote_if_supported.py` (MNEXA 36–37 translated + deviations) | D-0017 | A-0027 | done |
+| P29 | stores | Record a contradiction proposal pinned to one belief version | `src/nacre/stores/propose_contradiction.py` | `tests/stores/test_propose_contradiction.py` | D-0017 | — | done |
+| P30 | stores | Contest a belief on quorum (no-op on contested or superseded) | `src/nacre/stores/contest_belief.py` | `tests/stores/test_contest_belief.py` (MNEXA 38 translated + deviations) | D-0017 | — | done |
+| P31 | stores | Supersede a contested belief (shared counter-decisions) | `src/nacre/stores/supersede_belief.py` | `tests/stores/test_supersede_belief.py` (MNEXA 39 translated) | D-0017 | — | done |
+| P32 | stores | Read interpretation heads as-of N with status (content decrypted from the ledger) | `src/nacre/stores/read_heads.py` | `tests/stores/test_read_heads.py` | D-0017 | — | done |
+| P33 | stores | Rebuild a scope's `interp` projection from its memory events (must be identical) | `src/nacre/stores/rebuild_projection.py` | `tests/stores/test_rebuild_projection.py` | D-0017 | — | done |
+| P34 | stores | Propose and commit an episode version (MNEXA ADR-0009: admissibility validation, runtime commits) | `src/nacre/stores/commit_episode.py` | `tests/stores/test_commit_episode.py` (Q-1…Q-15) | D-0017 | — | done |
 
 Build order: P1–P2 (instrument first; L1 before any mechanism code) → P6, P9–P11 (+ price table `src/nacre/models/data/prices.json`) → P12 → P13–P19 → P20–P21 → P27–P34 (promotion waits on the single-episode question) → P22–P26 → P3 → P5 (EXP-0003, owner-run).
 
