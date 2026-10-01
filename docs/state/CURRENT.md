@@ -1159,3 +1159,7 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
     - revocation;
     - LRU cap.
   - **Still to do:** the every-pair suite runs again end to end through `recall_context` at R19.
+- 2026-10-02 — **Credential-slot rule `credential-slot-value` added** (D-0011 tightening; no allowlist).
+  - **Working data:** 748/750 caught (H3 credential slots were 54–72%); working-negatives FP 0.37% → 0.49%.
+  - **H3 other categories and FP:** still pass.
+  - **H4 is ready for its single gate measurement**, awaiting the owner's go.

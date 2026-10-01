@@ -163,3 +163,41 @@ def test_working_reported_and_overfitting_flagged(working, official, capsys):
     with capsys.disabled():
         print(f"\nA-0010 H3 overfitting flags: {flags or 'none'}; credential-slot strip rates (reported): {slots}")
     assert working["fp_rate"] <= 0.02
+
+
+# ---- credential-slot-value (D-0011 amendment 8; Nacre rule, 2026-10-02) ----------------------------------------
+def _slot_value(seed):
+    import random
+    r = random.Random(seed)
+    return "".join(r.choice("abcdef0123456789") for _ in range(40))      # random hex, built at runtime
+
+
+@pytest.mark.parametrize("shape", [
+    'db_password: >-\n  {v}\n',                                    # YAML folded block scalar
+    'let secret = String::from("{v}");',                          # call wrapper
+    'proxy_set_header X-Auth-Token {v};',                         # space-separated header
+    '<config><credential>{v}</credential></config>',              # XML element
+    "INSERT INTO settings (k, v) VALUES ('cred', '{v}');",        # quoted key-value pair
+    'machine example.test login ci password {v}',                 # netrc, last bytes
+    "headers = {{'Authorization': 'Token {v}'}}",                 # auth scheme word
+    'spring.datasource.password={v}\nspring.datasource.url=x',   # dotted key, unquoted
+    'docker login --username ci --password {v} registry.test',   # CLI flag
+])
+def test_credential_slot_rule_shapes(shape):
+    v = _slot_value(shape)
+    r = strip_secrets(shape.format(v=v))
+    assert v not in r.text and "credential-slot-value" in {f.rule_id for f in r.findings} | set(r.redactions)
+
+
+@pytest.mark.parametrize("text", [
+    "password_length = 1234567890123456",                         # key suffix not a credential slot
+    "token = tokenize.generate_tokens(readline)",                 # code expression
+    "self.secret = secret",
+    "author: Jane Doe 2026",                                      # 'auth' inside another word
+    "password: correcthorsebatterystaple",                        # no digit: not taken (documented trade-off)
+    "api_key: ${API_KEY_2026}",                                   # placeholder
+    "secret: 0000000000000000",                                   # entropy <= 3.0
+    "credential_type: OAuthClientCredentials2",                   # suffix `_type` is not a slot
+])
+def test_credential_slot_rule_leaves_non_values_alone(text):
+    assert "credential-slot-value" not in {f.rule_id for f in strip_secrets(text).findings}

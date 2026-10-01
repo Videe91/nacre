@@ -46,3 +46,18 @@ failures and written a fix; then it is **demoted** to working data and a fresh o
 - **No H4 baseline is taken before that** (owner, 2026-10-02), so H4 is never seen by the rule writer before it
   judges the rules.
 
+## Credential-slot rule work (2026-10-02, on working data only)
+- **New Nacre rule `credential-slot-value`** (`nacre-rules-v1.toml`; a tightening change under D-0011 amendment 4,
+  with no allowlist).
+  - **Match:** a key naming a credential, then only structural syntax, then a 16–128 character value containing a
+    digit, with entropy > 3.0.
+- **Working data** (working set + demoted H1 + H3, which is working for this category since 2026-10-02):
+  - **748/750 caught per character.** Before the rule, H3's credential-slot rates were 54–72%.
+  - **Working-negatives FP:** 0.37% → 0.49% (one Python type annotation whose type name contains a digit, in a cryptography signature).
+  - **H3 (official) for every other category still passes**, including its FP bar (the holdout suite, pass/fail).
+- **Narrowed once (repo-tree false positives):** the quoted key-value pair separator now stays on one line and
+  takes only ' or " quotes (Markdown lists of rule names and multi-line JSON lists were matched).
+- **Known trade-off:** a value with no digit is not taken. About 1.5% of random 24-character alphanumeric values
+  have none; passphrases made only of letters are also missed.
+- **H4 is READY to be measured once, as the gate** (catch ≥ 90% and FP ≤ 2%, together). Awaiting the owner's go.
+
