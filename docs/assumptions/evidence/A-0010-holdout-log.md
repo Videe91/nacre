@@ -36,3 +36,13 @@ failures and written a fix; then it is **demoted** to working data and a fresh o
   - The first draw's file names are kept in `HOLDOUT4_FIRST_DRAW_NEGATIVES.json` for exclusion.
   - H4 is not committed and not measured until the redraw is done.
 
+## H3 demoted to working data for the credential-slot category (owner, 2026-10-02)
+- **From now on, H3's credential-slot samples are working data.** The credential-slot rules are written against
+  them and other working data. Its numbers for that category are no longer official.
+- **H3 stays official for every other category** (provider and generic groups, public kept, FP), until a rule
+  writer sees those failures.
+- **The credential-slot gate is H4, measured exactly once** after the rule work: catch ≥ 90% **and** FP ≤ 2%,
+  together.
+- **No H4 baseline is taken before that** (owner, 2026-10-02), so H4 is never seen by the rule writer before it
+  judges the rules.
+

@@ -4,7 +4,7 @@ Owns: the version event body (op `version`, full structural record + content), t
   every grounded span (MacPurpose.INTERP_MAC under the event's own data key), and the `interp` rows.
 Public entry: write_version(), read_version_events(), edges_from_body(), Edge, VersionRecord, normalize,
   VERSION_ACTOR
-Decisions: D-0017, D-0008, D-0004, D-0023
+Decisions: D-0017, D-0008, D-0004, D-0023, D-0024
 Assumptions: A-0014
 Notes: The ONLY writer of interp.versions / interp.edges. Everything the projection holds is derivable from the event
   body, so stores/rebuild_projection.py can recompute it. Rows are written in the caller's transaction right after
@@ -16,6 +16,9 @@ Notes: The ONLY writer of interp.versions / interp.edges. Everything the project
   content it carries), so its content and its MACs are erased with any contributing person or period. Mutation
   2026-10-01: naming `carried_from` is an equivalent mutant today (every writer also carries the prior version's edges);
   kept as defence in depth.
+  D-0024: the version's encrypted recall-index entry is written last, in the same transaction
+  (recall.index_version), so an entry exists if and only if the version does. `embedder` defaults to the process's
+  pinned local embedder.
 """
 import uuid
 from dataclasses import dataclass, field
@@ -28,6 +31,7 @@ from nacre.keys.encrypt_payload import MacPurpose, derive_mac
 from nacre.keys.get_or_create_key import load_key
 from nacre.ledger.append_event import AppendRequest, Authorship, append_event
 from nacre.ledger.read_stream import ReadEvent, read_stream
+from nacre.recall.index_version import index_version
 from nacre.scopes.open_scoped_session import ScopedSession
 
 VERSION_ACTOR = uuid.UUID("6f2a1e4d-5b3c-4a2f-9e8d-7c6b5a4f3e2d")
@@ -86,7 +90,8 @@ def edges_from_body(raw: list[dict]) -> list[Edge]:
 
 
 def write_version(session: ScopedSession, key_provider: RootKeyProvider, stream_id: UUID, rec: VersionRecord, *,
-                  caused_by: UUID | None = None, cycle_id: UUID | None = None, carried_from: UUID | None = None):
+                  caused_by: UUID | None = None, cycle_id: UUID | None = None, carried_from: UUID | None = None,
+                  embedder=None):
     """Append the version event and its projection rows; return the event's envelope."""
     body = {"op": "version", "object_id": str(rec.object_id), "version": rec.version, "kind": rec.kind,
             "status": rec.status, "support": rec.support, "content": rec.content,
@@ -110,6 +115,7 @@ def write_version(session: ScopedSession, key_provider: RootKeyProvider, stream_
             "target_version, span_start, span_end, span_mac, generation) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
             (rec.object_id, rec.version, i, stream_id, e.role, e.target_event_id, e.target_object_id, e.target_version,
              e.span[0] if e.span else None, e.span[1] if e.span else None, span_mac, gen))
+    index_version(session, key_provider, stream_id, env.event_id, env.key_id, rec.kind, rec.content, embedder)
     return env
 
 

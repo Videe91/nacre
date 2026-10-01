@@ -135,3 +135,13 @@ def test_tagged_body_round_trips(writer):
     s, key = writer
     ct = encrypt_payload(s.conn, key, aad(key), {**BODY, "public_credentials": ["sentry-dsn-public"]})
     assert ct[:3] == b"\x01\x01\x00"
+
+
+def test_mac_and_sealing_subkey_purposes_never_share_an_hkdf_label():
+    # D-0024: both kinds of sub-key use the "nacre-subkey-v1|" + purpose namespace; a shared value would make a MAC
+    # key equal to a sealing key.
+    from nacre.keys.encrypt_payload import MacPurpose, SubkeyPurpose, derive_subkey
+    assert not {p.value for p in MacPurpose} & {p.value for p in SubkeyPurpose}
+    m = bytes(range(32))
+    keys = [derive_subkey(m, p) for p in (*MacPurpose, *SubkeyPurpose)]
+    assert len(set(keys)) == len(keys) and m not in keys

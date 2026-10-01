@@ -2,9 +2,10 @@
 Functionality: Everything the write path does with a data key: encrypt an event body into the
   D-0008 ciphertext, count the key's uses, and derive the keyed MACs that die with the key.
 Owns: body validation (D-0008 body map v1), the ciphertext header, the AAD, the per-key encryption
-  count and its 2^28 cap, and HKDF sub-keys for request_mac / attachment_ref.
-Public entry: encrypt_payload(), seal_bytes(), derive_mac()
-Decisions: D-0002, D-0004, D-0007, D-0008, D-0017
+  count and its 2^28 cap, and HKDF sub-keys for request_mac / attachment_ref / interp MACs, and for sealing
+  purpose-separated derived data (the recall index, D-0024).
+Public entry: encrypt_payload(), seal_bytes(), derive_mac(), derive_subkey(), SubkeyPurpose
+Decisions: D-0002, D-0004, D-0007, D-0008, D-0017, D-0024
 Assumptions: A-0015
 Notes: Ciphertext = version(0x01) | algorithm(0x01, AES-256-GCM) | flags(0x00) | key_id(16) | nonce(12) | ct+tag.
   AAD = encode_envelope(AAD fields) | header bytes 0-2 (D-0008): the event's identity, type and
@@ -13,6 +14,10 @@ Notes: Ciphertext = version(0x01) | algorithm(0x01, AES-256-GCM) | flags(0x00) |
   rolls back its count too; its ciphertext was never stored, so the nonce was never exposed. (D1)
   MAC sub-keys: HKDF-SHA256(data key, info = "nacre-subkey-v1|" + purpose). They are shredded with
   the data key, so a MAC of a short plaintext cannot be brute-forced after erasure (D-0002).
+  Sealing sub-keys (D-0024 §2): seal_bytes(..., subkey=SubkeyPurpose.X) encrypts under HKDF(data key, purpose X)
+  instead of the data key itself. The header still names the data key, and the use still counts against the data
+  key's 2^28 cap (conservative: one counter per data key). MAC and sealing purposes share the HKDF info namespace and
+  must never share a value (checked by a test).
 """
 import hashlib
 import hmac
@@ -43,6 +48,10 @@ class MacPurpose(StrEnum):
     INTERP_MAC = "interp_mac"          # D-0017: keyed MACs in the interp projection (no plaintext, shredded with the key)
 
 
+class SubkeyPurpose(StrEnum):
+    RECALL_INDEX = "recall_index"      # D-0024: encrypted recall index entries, erased with the version's key
+
+
 class EncryptError(ValueError):
     """The body or key cannot be used to produce a valid ciphertext."""
 
@@ -60,9 +69,12 @@ def encrypt_payload(conn: psycopg.Connection, key: DataKey, aad_fields: Mapping[
     return seal_bytes(conn, key, encode_envelope(aad_fields, Purpose.AAD), encode_cbor(body))
 
 
-def seal_bytes(conn: psycopg.Connection, key: DataKey, aad_prefix: bytes, plaintext: bytes) -> bytes:
-    """The D-0008 ciphertext of raw bytes under `key` (bodies and attachments share it, D-0013).
-    AAD = aad_prefix | header bytes 0-2. Counts the use against the key's 2^28 cap."""
+def seal_bytes(conn: psycopg.Connection, key: DataKey, aad_prefix: bytes, plaintext: bytes, *,
+               subkey: SubkeyPurpose | None = None) -> bytes:
+    """The D-0008 ciphertext of raw bytes under `key` (bodies and attachments share it, D-0013), or under its sealing
+    sub-key for `subkey`. AAD = aad_prefix | header bytes 0-2. Counts the use against the key's 2^28 cap."""
+    if subkey is not None and not isinstance(subkey, SubkeyPurpose):
+        raise EncryptError(f"unknown sealing purpose {subkey!r}")
     try:
         conn.execute("SAVEPOINT nacre_count")
         counted = conn.execute("UPDATE keys.data_keys SET encryption_count = encryption_count + 1 "
@@ -75,16 +87,23 @@ def seal_bytes(conn: psycopg.Connection, key: DataKey, aad_prefix: bytes, plaint
         raise EncryptError(f"data key {key.key_id} is not writable here (shredded or not in the write set)")
     prefix = bytes([FORMAT_VERSION, ALGORITHM_AES_256_GCM, FLAGS_V1])
     nonce = secrets.token_bytes(12)
-    return prefix + key.key_id.bytes + nonce + AESGCM(key.material).encrypt(nonce, plaintext, aad_prefix + prefix)
+    material = derive_subkey(key.material, subkey) if subkey is not None else key.material
+    return prefix + key.key_id.bytes + nonce + AESGCM(material).encrypt(nonce, plaintext, aad_prefix + prefix)
 
 
 def derive_mac(key: DataKey, purpose: MacPurpose, data: bytes) -> bytes:
     """HMAC-SHA256 of `data` under the data key's sub-key for `purpose` (32 bytes)."""
     if not isinstance(purpose, MacPurpose):
         raise EncryptError(f"unknown MAC purpose {purpose!r}")
-    subkey = HKDF(algorithm=hashes.SHA256(), length=32, salt=None,
-                  info=b"nacre-subkey-v1|" + purpose.value.encode()).derive(key.material)
-    return hmac.new(subkey, data, hashlib.sha256).digest()
+    return hmac.new(derive_subkey(key.material, purpose), data, hashlib.sha256).digest()
+
+
+def derive_subkey(material: bytes, purpose: MacPurpose | SubkeyPurpose) -> bytes:
+    """HKDF-SHA256(data key material, info = "nacre-subkey-v1|" + purpose): 32 bytes, gone with the data key."""
+    if not isinstance(purpose, (MacPurpose, SubkeyPurpose)):
+        raise EncryptError(f"unknown sub-key purpose {purpose!r}")
+    return HKDF(algorithm=hashes.SHA256(), length=32, salt=None,
+                info=b"nacre-subkey-v1|" + purpose.value.encode()).derive(material)
 
 
 def _validate_body(body: object) -> None:

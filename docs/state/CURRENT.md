@@ -1132,3 +1132,13 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   - **Real-secret pre-scan:** detect-secrets; 0 real credentials found.
   - **Total sha256:** `4b573eef…`; composition logged in the holdout log.
   - **Not yet measured:** see the measurement-order question to the owner.
+- 2026-10-02 — **Owner:** no H4 baseline; the credential-slot rules are written against H3 and other working data,
+  then H4 is measured ONCE as the gate (catch ≥ 90% and FP ≤ 2% together). **H3 is demoted to working data for the
+  credential-slot category** (holdout log).
+- 2026-10-02 — **R9 built: `recall/index_version.py`.**
+  - **What it does:** every version gets one entry in its own transaction (`write_version` calls it), sealed under
+    the version key's RECALL_INDEX HKDF sub-key (new `SubkeyPurpose` in `encrypt_payload`; it still counts against
+    the data key's cap). The AAD binds stream, generation, version id and embedder.
+  - **Index text (D1):** nucleus, else support_text; episodes index "".
+  - **Embedder check:** a stream indexed with another embedder refuses writes until it is re-indexed.
+  - **Tests:** 10, plus 1 in keys.
