@@ -1072,3 +1072,20 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   - **EXP-0004 PRE-REGISTERED** with all numbers fixed: per-category floors ≥ 0.70 and ≥ naive; stale ≤ 0.05 of T3;
     budget 10 items / 4,000 chars; cap $15.
   - **H4 target:** ≥ 90% credential-slot catch, FP ≤ 2%.
+- 2026-10-01 — **Sets frozen in separate blind sessions, each verified by this session.**
+  - **EXP-0004:** test `93e1b689…`, dev `0e4874d9…`; byte-identical regeneration; checker 0 violations; no test text
+    viewed.
+  - **H4:** built (total `1cdc0d45…`; structure test 6/6) but **NOT COMMITTED.**
+    - The pre-commit hook scanned its stdlib negatives, because `negatives_holdout4/` was not yet in the hook's
+      manifest-skip table (my omission).
+    - The scan **revealed one detector result to this session:** an entropy-layer flag on one negative file.
+    - **Owner decision needed:** keep H4 sealed with the disclosure, or rebuild H4's negatives in a fresh session.
+      Also: approve adding `negatives_holdout4/` to the hook's skip table (the H2/H3 mechanism).
+    - The H4 files and the A-0010 log row stay uncommitted in the working tree.
+  - **I1:** total `567b5931…`; 500 images regenerate byte-identically; evidence in A-0042.
+  - **Open for the owner:**
+    - the **D-0026 erratum** (ceiling table uses nonexistent sources; trust is source × authorship). This blocks R3;
+    - I1 measurement questions (wrapped secrets; logical vs physical px; Pillow 12.3.0 as a test-only dependency);
+    - H4 builder notes (slot 4 is a CLI flag; 3-line disjointness window).
+  - **Next:** recall code (R6–R20) may start; the interface (R1–R4) waits for the erratum.
+

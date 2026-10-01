@@ -20,6 +20,31 @@
 3. **Approved:** `require_verified` as the default for interface scopes; stdio plus loopback-only HTTP, with OAuth
    later; the `mcp` dependency (exact pin).
 
+## ERRATUM, open for the owner (found 2026-10-01, before any D-0026 code)
+- **The defect:** the "source ceilings" table in §1 names `source` values `agent` and `person`. D-0012 has no such
+  sources.
+  - D-0012's sources are `chat | git | ci | review | web | tool | system`.
+  - Trust is derived from **source AND `authorship`** (`scope_principal | integration_result | external`).
+  - The table also ignores `authorship`.
+- **Found by:** the EXP-0004 blind builder, who mapped person-authored events to `chat` + `actor_kind = person`.
+- **Why it matters:** under D-0012, `authorship = scope_principal` + `source = chat` is **trusted**. So the real
+  ceiling must constrain the triple (`source`, `authorship`, `actor_kind`), and which triples an *agent* principal
+  may claim is a D3 trust question.
+- **The accepted decision (reject over-claims, never downgrade) is unchanged.** Only the vocabulary of the ceiling
+  table is wrong.
+- **Proposed correction, NOT applied; it needs the owner (D3):**
+
+  | Kind | May claim (`source`, `authorship`, `actor_kind`) |
+  |---|---|
+  | person | (`chat`, `scope_principal`, `person`) |
+  | agent | (`chat` or `tool`, `external`, `agent`): untrusted, so an agent's own words never ground a lesson; plus (`tool`, `external`, `agent`) for tool output it relays |
+  | service | (its configured `ci` / `review` / `git`, `integration_result`, `system`) with structured payloads |
+  | operator (admin CLI only) | (`system`, `scope_principal`, `system`) |
+
+  - Open: should an agent's own `decision` / `prediction` / `action` events be `scope_principal` (trusted
+    authorship of the agent's *own* acts), while its free text stays `external`?
+- **R3 (`check_claims`) is not built until the owner decides.**
+
 ## Context
 - **Today `trust_basis` is always `asserted`** (D-0012): the app process states the caller, source and actor, and
   nothing checks them (A-0012).

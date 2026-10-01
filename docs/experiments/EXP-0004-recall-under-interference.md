@@ -161,4 +161,35 @@ infrastructure abort.
 8. Audit; results appended here, failures included.
 
 ## Frozen set
-(Filled in when the separate session's set is frozen: generator commit, seeds, sha256 of the dev and test splits.)
+**FROZEN 2026-10-01.** Built by a separate, blind session from the brief at 21c5706 (it read no product code and no
+recall ADR).
+
+| File | sha256 |
+|---|---|
+| `tests/regression/exp0004/test.json` (sealed; 17,990,986 bytes) | `93e1b6894cb42be54e4c97637ba2a2efd012f701cd16bd51e5837f086fabcbe6` |
+| `tests/regression/exp0004/dev.json` (2,845,900 bytes) | `0e4874d9233ea8bbf92ee1b651e633657abd1fea961c79831bbd0401801bcf38` |
+| `tests/regression/exp0004/MANIFEST.json` | `fa62630753c02fab6766b8ba17edd029aa3505b08d4c6cf1512cfd417e78ef5b` |
+| `scripts/make_exp0004_set.py` (generator, stdlib only) | `a4a36213339228dbde2f23cf8cbb5f03d2c1bf1852fa9c5d16ce95d729054e23` |
+| `scripts/check_exp0004_set.py` (structure checker; counts and hashes only) | `589372b12af91fc9905a8714bc4f80bba8d2ab3270d5ef2a4984142af231a643` |
+
+- **Seeds:** names 2694428327, test 1070181541, dev 957980160.
+- **Test split:**
+  - 90 scopes, 30 per set; T1 = T2 = T3 = T5 = 30 per set;
+  - 30 erasure targets (5 T1 + 5 T2 per set);
+  - 80–120 episodes per scope (9,340 episodes, 36,715 events);
+  - ≥ 55 lesson-bearing corrections per scope; ≥ 6 distractors per task; max T2 Jaccard 0.200.
+- **Dev split:** 15 scopes (5 per set), 6 erasure targets.
+
+**Verified by the caller (this session), structure only:**
+- regenerating gives byte-identical files;
+- `check_exp0004_set.py`: 0 violations;
+- no test text was viewed.
+
+**The builder's documented interpretations** (in the generator's docstring):
+- person-authored events are `chat` + `actor_kind = person` (D-0012 has no `person` source);
+- "high surface overlap" = token Jaccard ≥ 0.25;
+- "independent" counter-episodes = separate days and authors;
+- twin = the next scope in the same set (cyclic);
+- every task has an injection;
+- grading refs are kept apart from the events and **must never be given to any arm**;
+- number regexes require the unit.
