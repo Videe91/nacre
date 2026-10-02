@@ -16,6 +16,21 @@
 3. **Binding addition from D-0024:** grants are confirmed inside the snapshot transaction (§1), and nothing is
    served from the cache for a scope without a confirmed grant.
 
+## Amendment 1 (owner, 2026-10-02): contested beliefs in recall (resolves the D-0017 / D-0025 conflict)
+- **Recall follows D-0025.** Recall includes contested beliefs, and each one is:
+  1. **explicitly labelled `contested`** in the frame item and in every rendering;
+  2. **accompanied by the contradicting evidence:** the frame item carries the contradiction proposals and
+     counter-decisions that contest it (their ids, and their readable text where the key still exists);
+  3. **ranked below every uncontested candidate** (in §4's tie order, uncontested always comes first; contested
+     items keep their relative fused order among themselves);
+  4. **never phrased as fact:** the renderer presents a contested item as "contested: <text>. Contradicting
+     evidence: …" and never as a bare statement.
+- **Unchanged:** `stores/read_heads.py` and Phase 2 point-in-time reads keep D-0017's rule (contested heads are
+  withheld from recall-eligible reads there). Only Phase 3 recall (`recall/merge_scopes.py` onward) follows this
+  amendment.
+- **Tests (binding):** the labelling, the evidence attached, the ranking below uncontested, the rendering never
+  bare, and `read_heads` unchanged.
+
 ## Context
 - **SPEC "Recall and the reasoning boundary"** defines eight steps:
   1. freeze the snapshot;

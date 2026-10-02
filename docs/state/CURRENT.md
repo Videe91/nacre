@@ -1243,3 +1243,12 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   - **Tested:** concurrent two-stream writes never tear the cut (A-0037).
   - **R13 is BLOCKED** on an owner decision: D-0017 (contested heads withheld from recall-eligible reads,
     `read_heads`) vs D-0025 §2 (contested heads eligible, shown as contested).
+- 2026-10-02 — **Owner decisions.**
+  - **Gate item 12 NOT MET, RISK ACCEPTED BY OWNER (2026-10-02)**, with H6: common 83.8%, long-tail 46.7%, FP
+    1.0%. No new target definition.
+  - **Compensating controls → D-0029** (accepted in principle; design details PROPOSED, owner review before code):
+    a report-leaked-secret suppression path; a rotate-credential notice for every detected secret. A-0045.
+  - **Future Phase 4/5 item:** a second-opinion local secret classifier on a fresh holdout.
+  - **R13 follows D-0025 (amendment 1):** contested beliefs are labelled, carry their contradicting evidence, rank
+    below uncontested ones, and are never phrased as fact. `read_heads` and Phase 2 reads are unchanged (D-0017
+    cross-reference).

@@ -233,3 +233,18 @@ failures and written a fix; then it is **demoted** to working data and a fresh o
   `url-userinfo-password` flags. Exact-value repo allowlist entries (`value`, `{v}`), scoped to that file, were
   added after the measurement.
 
+## Gate item 12: NOT MET, RISK ACCEPTED BY OWNER (2026-10-02)
+- **Decision (owner, option (a)):** gate item 12 is recorded as not met, with the risk accepted by the owner on
+  2026-10-02.
+- **The final numbers (H6, revised targets):** common contexts 83.8%, long-tail contexts 46.7%, false positives
+  1.0%.
+- **Earlier results:** H4 88.8% and H5 74.0% against the original 90% target.
+- **No new target definition** after three failures (owner).
+- **Compensating controls added to Phase 3 (D-0029):**
+  1. a "report leaked secret" path: a recorded suppression event hides the event's content from all recall and
+     exports immediately; full erasure goes through the existing person or period shredding;
+  2. every detected secret returns a "rotate this credential" notice to the caller.
+- **Future item (Phase 4/5):** evaluate a second-opinion secret classifier (a local model) on a fresh holdout.
+- **The detector stays as committed at c4bb683.** Credential-slot catch on working data is 99.6–100%, every other
+  category is ≥ 99%, and the repository's own JSON and docs are clean.
+

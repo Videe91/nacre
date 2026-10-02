@@ -55,7 +55,7 @@
 | 9 | Interface claims: over-claims rejected; valid claims written `verified`; no agent can plant an authoritative correction | D-0026 tests 1, 3 | tests |
 | 10 | Tokens never stored or logged; typo checksum; expiry and revocation; no admin or erasure tools on MCP; HTTP without TLS refuses non-loopback | D-0026 tests 2, 4, 5 | tests, plus scans |
 | 11 | **Binary attachment scanning:** each carrier rejected on a secret; clean files stored `binary-scanned`; bomb guards; unscannable always rejected (no opt-out); I1 OCR recall ≥ 95% at ≥ 12 px | D-0027; owner item 2026-09-30 | tests; sealed I1 measurement |
-| 12 | **Credential-slot target (owner item 2026-09-30):** before real agent data flows through the interface, a fresh **H4** holdout is sealed under the H3 protocol (separate session, frozen before measuring). **Target (owner, fixed): ≥ 90% of credential-slot values caught** (H3: 54–72%), **with false positives ≤ 2% on the H4 holdout**. Loosening detection is not a lever; only additive rules (D-0011) | CURRENT.md gate item; D-0011 | H4 measurement evidence; owner sets the final number before H4 is built |
+| 12 | **Credential-slot target: NOT MET, RISK ACCEPTED BY OWNER (2026-10-02).** Three blind holdouts failed: H4 88.8% (target 90%), H5 74.0% (90%), and H6 on the revised targets: common 83.8% (95%), long-tail 46.7% (80%), FP 1.0% (≤ 2%, met). No new target definition (owner). **Compensating controls (D-0029):** a report-leaked-secret suppression path; a rotate-this-credential notice for every detected secret. **Future (Phase 4/5):** evaluate a second-opinion secret classifier (local model) on a fresh holdout | holdout log; D-0029 | risk acceptance recorded; D-0029 tests |
 | 13 | **Cross-provider frame:** one `frame_id` rendered for OpenAI and Anthropic with byte-identical memory sections; both recorded and replayable offline; a live smoke run | D-0028 §3 | test, plus an owner smoke run |
 | 14 | Embedder pinned: hash mismatch refuses to start; ONNX equivalence vs reference vectors (if D-0024 (ii)) | D-0024 test 5 | test |
 | 15 | Index rebuild is byte-identical and switches atomically | D-0024 test 4 | test |
@@ -136,6 +136,8 @@
 **Gate item 12:** the H4 credential-slot target number (proposed ≥ 90%).
 
 ## Not in Phase 3 (recorded so nothing is silently dropped)
+- **Phase 4/5 (owner, 2026-10-02):** evaluate a second-opinion secret classifier (a local model) on a fresh,
+  pre-registered holdout. It is the follow-up to gate item 12 not met (D-0029 §3).
 - Threat store and predictor checks: the frame reserves the fields.
 - Cross-scope promotion and shadowing.
 - An ANN index.

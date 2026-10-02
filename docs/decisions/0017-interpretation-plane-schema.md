@@ -53,6 +53,11 @@ agreeing decisions**.
 - contestable and demoted;
 - an outcome-inferred lesson stays at quorum 2.
 
+## Cross-reference (2026-10-02)
+- Phase 3 recall shows contested heads, labelled and ranked below uncontested ones (D-0025 amendment 1, owner).
+- This ADR's rule (contested heads withheld from recall-eligible reads) still governs `read_heads` and Phase 2
+  point-in-time reads. No decision here changes.
+
 ## Context
 - **SPEC:** "Two planes (MNEXA ADR-0002)". Interpretations (beliefs, episodes, …) are versioned and always linked
   back to experience. Memory records have status `proposed / active / contested / superseded / fallback`.
