@@ -1237,3 +1237,9 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
     - vocabulary (`pass:`, `htpasswd`);
     - two contexts have no credential word at all.
   - **Gate item 12 remains open; owner decision needed.**
+- 2026-10-02 — **R12 built: `recall/freeze_snapshot.py`.**
+  - **What it reads:** per-stream positions, shred epochs, projection and index generations and the embedder, all
+    read once inside a grant-confirmed snapshot session.
+  - **Tested:** concurrent two-stream writes never tear the cut (A-0037).
+  - **R13 is BLOCKED** on an owner decision: D-0017 (contested heads withheld from recall-eligible reads,
+    `read_heads`) vs D-0025 §2 (contested heads eligible, shown as contested).
