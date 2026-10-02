@@ -1252,3 +1252,12 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   - **R13 follows D-0025 (amendment 1):** contested beliefs are labelled, carry their contradicting evidence, rank
     below uncontested ones, and are never phrased as fact. `read_heads` and Phase 2 reads are unchanged (D-0017
     cross-reference).
+- 2026-10-02 — **Process note:** docs commit 8464f3b went in on `check_structure` and a secret scan only, without the
+  required full pytest gate. The full suite was run right after: 1195 passed.
+- 2026-10-02 — **R13 built: `recall/merge_scopes.py`.**
+  - **Eligibility:** active, contested and fallback heads plus active episodes, from each stream's active projection
+    generation at the snapshot position. Lost and superseded heads are excluded.
+  - **Contested heads** carry their contradicting evidence (the agreeing contradiction proposals).
+  - **Scope levels** are ranked narrowest first.
+  - `read_heads` is unchanged (a test asserts it still withholds contested heads).
+  - **Still to come:** ranking below uncontested (R15) and never-as-fact rendering (R16/R21).

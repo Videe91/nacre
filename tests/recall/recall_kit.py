@@ -26,3 +26,15 @@ def belief(s, kp, stream, correction: str, nucleus: str, *, person=None):
     p = propose_lesson(s, kp, stream_id=stream, decision_id=d.event_id, outcome_id=o.event_id, section_index=1,
                        span=(0, len(correction)), nucleus=nucleus).event_id
     return promote_if_supported(s, kp, stream, p)
+
+
+def counter_episode(s, kp, stream, correction: str):
+    """A decision with an observed failing outcome (a contradiction must come from such a decision); returns its id."""
+    d = record_decision(s, kp, stream_id=stream, actor_kind=ActorKind.AGENT, actor_id=AGENT, source=Source.CHAT,
+                        authorship=Authorship.SCOPE_PRINCIPAL, idempotency_key=str(uuid.uuid4()),
+                        decision_text="counter attempt").envelope
+    record_outcome(s, kp, stream_id=stream, idempotency_key=str(uuid.uuid4()), outcome_for=d.event_id, success=False,
+                   source=Source.REVIEW, actor_kind=ActorKind.SYSTEM, actor_id=REVIEWER,
+                   authorship=Authorship.INTEGRATION_RESULT,
+                   sections=(Section("status", "FAIL"), Section("correction", correction)))
+    return d.event_id
