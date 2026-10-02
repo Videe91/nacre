@@ -1311,3 +1311,8 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   - **Deviation:** integrated in `append_event`, not `store_attachment`.
   - **A-0021:** resolved for scanned formats.
   - **I1** (gate item 11) can now be measured once; awaiting the owner's go.
+- 2026-10-02 — **R18–R20 and R5 committed** (49fbfb3, 06f0516; full gate 1293 passed).
+  - **R1 (auth migration) BLOCKED** on D-0026 amendment 2 (PROPOSED, D3): the database roles for token lookup
+    (`nacre_auth`) and principal admin (`nacre_principal_admin`), and the `nacre_app` read grants.
+  - **Not blocked meanwhile:** EXP-0004 preparation (runner R25/R26, τ on the dev split), the Anthropic adapter
+    (R24), `render_frame` (R21).

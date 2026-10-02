@@ -60,6 +60,32 @@ rejected, never downgraded.
   5. the D-0018 / D-0019 authority check (the gate and the sleep-pass admission) agrees with this table on every
      row. That is a cross-check test against `capture/section_authority.py`.
 
+## Amendment 2: database roles for authentication and principal admin. PROPOSED (D3), awaiting owner (2026-10-02)
+**The gap (found before building R1):** D-0026 names the `auth.*` tables but not which database roles may touch
+them. Token lookup runs BEFORE any scoped session exists, so it cannot rely on stream RLS.
+
+**Proposal:**
+1. **`nacre_auth`** (login role, used only by `authenticate_principal`):
+   - may: SELECT on `auth.tokens` and `auth.principals`, and UPDATE of `auth.tokens.last_used_at` only;
+   - no access to ledger, keys or scopes.
+   - A compromised authenticator can only tell whether a token hash is valid and who it belongs to; it can never
+     read content.
+2. **`nacre_principal_admin`** (login role, used only by the admin CLI):
+   - may: INSERT/UPDATE on `auth.principals`, `auth.tokens` (revoke), `auth.delegations` and
+     `auth.reviewer_grants`;
+   - every change is ALSO a `config_event` in the org stream, written as the operator through the normal append
+     path (as keyadmin does, D-0014);
+   - NOINHERIT, no ledger read.
+3. **`nacre_app` (the request path):**
+   - may: SELECT on `auth.delegations` and `auth.reviewer_grants` (needed to check claims inside the write
+     transaction), scoped by org;
+   - may not: write anything in `auth`.
+4. **Storage:** tokens are stored only as sha256 of the 256-bit secret (D-0026 §2). No role can read a secret,
+   because none is stored.
+
+**Questions for the owner (D3):** approve the two new roles and these grants? Or should principal administration
+reuse `nacre_keyadmin` (fewer roles, but a broader one)?
+
 ## ERRATUM (resolved by amendment 1 above; kept for history)
 - **The defect:** the "source ceilings" table in §1 names `source` values `agent` and `person`. D-0012 has no such
   sources.
