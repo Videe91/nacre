@@ -1,0 +1,277 @@
+{
+ "groups": {
+  "credential-slot:alnum-24": {
+   "n": 50,
+   "rate": 0.74,
+   "misses": [
+    "alnum-24 | context: #!/usr/bin/env bash\nset -euo pipefail\nre",
+    "alnum-24 | context: use strict;\nuse warnings;\nmy $db_passwor",
+    "alnum-24 | context: <configuration>\n  <appSettings>\n    <add"
+   ],
+   "residue_rate": 0.0,
+   "strict_rate": 0.74,
+   "longest_fragment": 24
+  },
+  "credential-slot:base64-32-bytes": {
+   "n": 50,
+   "rate": 0.74,
+   "misses": [
+    "base64-32-bytes | context: #!/usr/bin/env bash\nset -euo pipefail\nre",
+    "base64-32-bytes | context: use strict;\nuse warnings;\nmy $db_passwor",
+    "base64-32-bytes | context: <configuration>\n  <appSettings>\n    <add"
+   ],
+   "residue_rate": 0.0,
+   "strict_rate": 0.74,
+   "longest_fragment": 44
+  },
+  "credential-slot:hex-40": {
+   "n": 50,
+   "rate": 0.74,
+   "misses": [
+    "hex-40 | context: #!/usr/bin/env bash\nset -euo pipefail\nre",
+    "hex-40 | context: use strict;\nuse warnings;\nmy $db_passwor",
+    "hex-40 | context: <configuration>\n  <appSettings>\n    <add"
+   ],
+   "residue_rate": 0.0,
+   "strict_rate": 0.74,
+   "longest_fragment": 40
+  },
+  "credential-slot:hex-64": {
+   "n": 50,
+   "rate": 0.74,
+   "misses": [
+    "hex-64 | context: #!/usr/bin/env bash\nset -euo pipefail\nre",
+    "hex-64 | context: use strict;\nuse warnings;\nmy $db_passwor",
+    "hex-64 | context: <configuration>\n  <appSettings>\n    <add"
+   ],
+   "residue_rate": 0.0,
+   "strict_rate": 0.74,
+   "longest_fragment": 64
+  },
+  "credential-slot:uuid": {
+   "n": 50,
+   "rate": 0.74,
+   "misses": [
+    "uuid | context: #!/usr/bin/env bash\nset -euo pipefail\nre",
+    "uuid | context: use strict;\nuse warnings;\nmy $db_passwor",
+    "uuid | context: <configuration>\n  <appSettings>\n    <add"
+   ],
+   "residue_rate": 0.0,
+   "strict_rate": 0.74,
+   "longest_fragment": 36
+  },
+  "generic:credentials-in-url/https-userinfo": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:db-connection-string/mongodb": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:db-connection-string/mysql": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:db-connection-string/postgresql": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:dotenv/assignment": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:jwt/hs256": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:private-key/openssh-ed25519": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:private-key/openssh-rsa": {
+   "n": 22,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:private-key/pkcs1-rsa": {
+   "n": 22,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:private-key/pkcs8-ec": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:private-key/pkcs8-rsa": {
+   "n": 22,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:private-key/sec1-ec": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "provider:GitHub": {
+   "n": 100,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "provider:GitLab": {
+   "n": 100,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "provider:Heroku": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "provider:PyPI": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "provider:Sentry": {
+   "n": 150,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "provider:Supabase": {
+   "n": 100,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "public:Sentry/DSN (public key only)": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 0.0,
+   "longest_fragment": 0
+  },
+  "public:Supabase/legacy anon JWT": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 0.0,
+   "longest_fragment": 0
+  },
+  "public:Supabase/sb_publishable": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 0.0,
+   "longest_fragment": 0
+  }
+ },
+ "fp_rate": 0.005,
+ "fp_docs": [
+  [
+   "negatives_holdout5/fsspec-2026.9.0/fsspec/implementations/gist.py",
+   [
+    "url-userinfo-password"
+   ]
+  ],
+  [
+   "negatives_holdout5/fsspec-2026.9.0/fsspec/utils.py",
+   [
+    "url-userinfo-password"
+   ]
+  ]
+ ],
+ "negatives": 400,
+ "fp_findings_per_mb": 2.0518937611486225,
+ "rules_hit": {
+  "credential-slot-value": 217,
+  "url-userinfo-password": 250,
+  "generic-api-key": 24,
+  "jwt": 100,
+  "private-key": 216,
+  "github-app-token": 23,
+  "github-oauth": 6,
+  "github-pat": 12,
+  "github-refresh-token": 9,
+  "github-installation-token-stateless": 50,
+  "gitlab-pat": 50,
+  "gitlab-pat-routable-current": 50,
+  "heroku-oauth-token": 50,
+  "pypi-upload-token": 50,
+  "sentry-org-token": 36,
+  "sentry-org-token-full": 14,
+  "sentry-user-token": 50,
+  "supabase-secret-key": 50
+ },
+ "meta": {
+  "commit": "98bf5dcd00e33c7c7532da95ab6c9b1152e42d74",
+  "nacre_rules_sha256": "4b9d285ead869d645c0460458dcba134718bb1e830da194aea87c19a9caac411",
+  "gitleaks_rules_sha256": "e163e53b9e7e8a8511e77271e2b323ed057759542a6d988258afe3a1fa329caf",
+  "seconds": 8.6,
+  "date": "2026-10-02",
+  "run": "single official H5 measurement"
+ }
+}

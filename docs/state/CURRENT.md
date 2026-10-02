@@ -1203,3 +1203,11 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   - **EXP-0001 runner:** has the same handler but uses SQLite, so it is unaffected.
   - **Noted, not fixed (out of scope):** runs STARTED simultaneously can fail with "tuple concurrently updated",
     because concurrent migrations GRANT on cluster-wide roles. Runs are sequential in practice.
+- 2026-10-02 — **H5 measured ONCE: GATE ITEM 12 FAILED AGAIN.**
+  - **Credential-slot catch:** 185/250 = 74.0%.
+  - **FP:** 2/400 = 0.5% (met; url-userinfo docstrings, no type annotations); other groups ≥ 99%.
+  - **Demoted; no patching on H5.**
+  - **Misses (all four contexts missed entirely):** Bash `read -d '' NAME <<'EOF' || true`, Perl heredoc opener
+    ending in `;`, a .NET `key="…SigningKey" value="…"` attribute pair, redis-cli `AUTH user pass`. 9 of the 12
+    multi-line contexts were caught.
+  - **Owner decision needed** on how to proceed with gate item 12.
