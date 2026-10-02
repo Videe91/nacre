@@ -134,3 +134,27 @@ failures and written a fix; then it is **demoted** to working data and a fresh o
   PHP nowdoc, YAML), so the generalisation from the language references held where the key-then-opener shape
   applied. All four failures are shapes outside it.
 
+
+## PRE-REGISTRATION: gate item 12, revised (owner, 2026-10-02). Committed BEFORE H6 is built or any H6 context is chosen
+- **New approach (owner):** replace shape enumeration with an additive **proximity rule**.
+  - **It takes:** a high-entropy, digit-bearing token (16–128 characters, entropy > 3.0) that appears after a
+    credential word in the same statement, or on the first non-empty line after a string or heredoc opener,
+    whatever the syntax between them.
+  - The existing `credential-slot-value` rule is kept.
+  - The rule is measured on working data (working set, H3, H4, H5) before H6 is measured.
+- **Targets (all three must hold; measured ONCE on H6):**
+
+  | Metric | Target |
+  |---|---|
+  | Credential-slot catch, per character, pooled over H6's **common** contexts | **≥ 95%** |
+  | Credential-slot catch, per character, pooled over H6's **long-tail** contexts | **≥ 80%** |
+  | False positives on H6 negatives (document level, as A-0010) | **≤ 2%** |
+
+- **Common contexts (owner list):** .env, YAML, JSON, TOML, .properties, Dockerfile, Kubernetes manifests, CLI
+  flags, connection strings.
+  - The H6 builder classifies EACH slot context as common or long-tail **before building**, from public prevalence
+    data, documented in `holdout_6.py` with its sources.
+  - Owner-listed formats are common; anything else needs prevalence evidence to count as common.
+- **H6 contents:** built and sealed by a separate blind session. It includes command-line, attribute-pair and
+  heredoc shapes.
+- **Pre-decided (owner):** a pass closes gate item 12. A fail means **no H7**: the result goes to the owner.

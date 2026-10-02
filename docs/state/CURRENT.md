@@ -1211,3 +1211,11 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
     ending in `;`, a .NET `key="…SigningKey" value="…"` attribute pair, redis-cli `AUTH user pass`. 9 of the 12
     multi-line contexts were caught.
   - **Owner decision needed** on how to proceed with gate item 12.
+- 2026-10-02 — **Gate item 12 re-planned (owner).**
+  - **Rule:** an additive proximity rule (credential word → high-entropy digit-bearing token in the same statement,
+    or on the first non-empty line after a string or heredoc opener).
+  - **Targets, PRE-REGISTERED in the holdout log before H6 exists:** common ≥ 95%, long-tail ≥ 80%, FP ≤ 2%.
+  - **H6:** built blind and measured once. Pass closes item 12; fail means no H7, back to the owner.
+- **KNOWN LIMITATION (for later, owner 2026-10-02):** concurrent migrations (e.g. EXP runs started at the same
+  instant) can fail with "tuple concurrently updated", because migrations GRANT on cluster-wide roles. Runs are
+  sequential today.
