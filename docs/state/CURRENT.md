@@ -1172,3 +1172,11 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   - **Open:** gate item 12 needs a fresh sealed H5 after any rule work. **Owner decision needed.**
   - **Also recorded:** A-0044 (the digit requirement's gap); D-0024 clarification (erasure takes effect at the next
     recall's snapshot, so a recall already in flight may still see the entry).
+- 2026-10-02 — **R11 built: `recall/rebuild_index.py`.**
+  - **Behaviour:** an identical rebuild writes nothing; a different or missing entry writes generation g+1 and
+    switches (reason `rebuild`); an embedder change does a full re-index into g+1 (reason `embedder_change`), after
+    which the old model may no longer write.
+  - **Shredded versions** are unverifiable and get no new entry.
+  - **Back-fill:** generation 1 is back-filled for streams indexed before R9.
+  - **Locking:** the append lock is held throughout, so no version can land mid-rebuild.
+  - **Refactor:** `index_version` gained an explicit generation, `entry_plaintext()` and `open_plaintext()`.

@@ -4,7 +4,8 @@ Owns: the entry plaintext format (deterministic CBOR: embedding bytes, index tex
   indexed per kind, the entry AAD, sealing under the version key's recall_index sub-key, the generation bookkeeping
   (first generation created on first use; the active generation's embedder must be the caller's), and decoding an
   entry back (for the cache, R10).
-Public entry: index_version(), open_entry(), entry_aad(), IndexEntry, IndexEmbedderMismatch, default_embedder()
+Public entry: index_version(), open_entry(), open_plaintext(), entry_aad(), entry_plaintext(), IndexEntry, IndexEmbedderMismatch,
+  default_embedder()
 Decisions: D-0024, D-0023, D-0008
 Assumptions: A-0034, A-0031
 Notes: Called by stores/write_version.py right after the version's projection rows, so an entry exists if and only
@@ -69,9 +70,9 @@ def _index_text(kind: str, content: dict) -> str:
     return content.get("nucleus") or content.get("support_text") or ""
 
 
-def _generation(session: ScopedSession, stream_id: UUID, embedder_id: str) -> int:
+def _generation(session: ScopedSession, stream_id: UUID, embedder_id: str, generation: int | None = None) -> int:
     conn = session.conn
-    gen = conn.execute("SELECT recall.active_generation(%s)", (stream_id,)).fetchone()[0]
+    gen = generation or conn.execute("SELECT recall.active_generation(%s)", (stream_id,)).fetchone()[0]
     conn.execute("INSERT INTO recall.index_generations (stream_id, generation, embedder_id) VALUES (%s, %s, %s) "
                  "ON CONFLICT (stream_id, generation) DO NOTHING", (stream_id, gen, embedder_id))
     have = conn.execute("SELECT embedder_id FROM recall.index_generations WHERE stream_id = %s AND generation = %s",
@@ -82,18 +83,16 @@ def _generation(session: ScopedSession, stream_id: UUID, embedder_id: str) -> in
 
 
 def index_version(session: ScopedSession, key_provider: RootKeyProvider, stream_id: UUID, version_event_id: UUID,
-                  key_id: UUID, kind: str, content: dict, embedder: Embedder | None = None) -> None:
-    """Seal and insert the index entry of one version event (same transaction as the version)."""
+                  key_id: UUID, kind: str, content: dict, embedder: Embedder | None = None, *,
+                  generation: int | None = None) -> None:
+    """Seal and insert the index entry of one version event (same transaction as the version). `generation` is for
+    recall/rebuild_index.py only: write into that (new) generation instead of the active one."""
     embedder = embedder or default_embedder()
     key: DataKey | None = load_key(session.conn, key_provider, key_id)
     if key is None:
         raise ValueError(f"the version's key {key_id} is not loadable here")
-    text = _index_text(kind, content)
-    addresses = [str(a) for a in content.get("addresses", [])]
-    vec = np.ascontiguousarray(embedder.embed([text])[0], dtype="<f4")
-    plain = encode_cbor({"v": ENTRY_VERSION, "embedding": vec.tobytes(), "text": text, "addresses": addresses,
-                         "kind": kind})
-    gen = _generation(session, stream_id, embedder.embedder_id)
+    plain = entry_plaintext(kind, content, embedder)
+    gen = _generation(session, stream_id, embedder.embedder_id, generation)
     body = seal_bytes(session.conn, key, entry_aad(stream_id, gen, version_event_id, embedder.embedder_id), plain,
                       subkey=SubkeyPurpose.RECALL_INDEX)
     session.conn.execute("INSERT INTO recall.index_entries (stream_id, index_generation, version_event_id, key_id, "
@@ -101,14 +100,28 @@ def index_version(session: ScopedSession, key_provider: RootKeyProvider, stream_
                          (stream_id, gen, version_event_id, key_id, embedder.embedder_id, body))
 
 
+def entry_plaintext(kind: str, content: dict, embedder: Embedder) -> bytes:
+    """The deterministic CBOR plaintext of a version's entry (what index_version seals, and what a rebuild compares)."""
+    text = _index_text(kind, content)
+    vec = np.ascontiguousarray(embedder.embed([text])[0], dtype="<f4")
+    return encode_cbor({"v": ENTRY_VERSION, "embedding": vec.tobytes(), "text": text,
+                        "addresses": [str(a) for a in content.get("addresses", [])], "kind": kind})
+
+
 def open_entry(key: DataKey, stream_id: UUID, generation: int, version_event_id: UUID, embedder_id: str,
                body: bytes, dim: int) -> IndexEntry:
     """Decrypt and decode one entry (raises on a wrong key, a tampered body or a malformed plaintext)."""
-    if check_header(body) != key.key_id:
-        raise DecryptError(f"index entry {version_event_id}: header names another key")
-    plain = decode_cbor(open_bytes(derive_subkey(key.material, SubkeyPurpose.RECALL_INDEX),
-                                   entry_aad(stream_id, generation, version_event_id, embedder_id), body))
+    plain = decode_cbor(open_plaintext(key, stream_id, generation, version_event_id, embedder_id, body))
     if plain.get("v") != ENTRY_VERSION or len(plain["embedding"]) != 4 * dim:
         raise ValueError(f"index entry {version_event_id}: unknown format or wrong dimension")
     return IndexEntry(version_event_id, key.key_id, plain["kind"], plain["text"], tuple(plain["addresses"]),
                       np.frombuffer(plain["embedding"], dtype="<f4").astype(np.float32))
+
+
+def open_plaintext(key: DataKey, stream_id: UUID, generation: int, version_event_id: UUID, embedder_id: str,
+                   body: bytes) -> bytes:
+    """The raw plaintext bytes of one entry (authenticated; the header must name `key`)."""
+    if check_header(body) != key.key_id:
+        raise DecryptError(f"index entry {version_event_id}: header names another key")
+    return open_bytes(derive_subkey(key.material, SubkeyPurpose.RECALL_INDEX),
+                      entry_aad(stream_id, generation, version_event_id, embedder_id), body)
