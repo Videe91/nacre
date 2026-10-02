@@ -42,8 +42,12 @@ NACRE_ALLOWLIST = [
      "the Base62 alphabet constant, caught by the entropy layer"),
     (r"^tests/ledger/secret_corpus/generic\.py$", r"^\{_password\(rng\)\}$",
      "f-string template in the corpus generator, not a value"),
-    (r"^scripts/scan_staged_secrets\.py$", r"^tests/ledger/secret_corpus/negatives_holdout[234]/(MANIFEST\.json)?$",
+    (r"^scripts/scan_staged_secrets\.py$", r"^tests/ledger/secret_corpus/negatives_holdout[2-5]/(MANIFEST\.json)?$",
      "the H2 negatives path in this script's own manifest table, caught by the entropy layer"),
+    (r"^tests/ledger/secret_corpus/(HOLDOUT5_MANIFEST|negatives_holdout5/MANIFEST)\.json$",
+     r"^PyYAML-6\.0\.3/yaml/(constructor|tokens)\.py$",
+     "file paths of two H5 real-code negatives in H5's own manifests, caught by the entropy layer (capitalised "
+     "distribution name + version + path); sealed files, cannot be restructured; exact values only (2026-10-02)"),
     (r".*", r"^(x25519\.)?X25519PrivateKey$",
      "the pyca/cryptography class name, matched by generic-api-key after `private_key:` (reviewed FP, "
      "negatives MANIFEST); exact value only"),
@@ -82,6 +86,8 @@ _NEGATIVE_MANIFESTS = {
     "tests/ledger/secret_corpus/negatives_holdout3/": "tests/ledger/secret_corpus/negatives_holdout3/MANIFEST.json",
     # H4 (owner approval 2026-10-01, after its first draw was scanned by accident; see the A-0010 holdout log).
     "tests/ledger/secret_corpus/negatives_holdout4/": "tests/ledger/secret_corpus/negatives_holdout4/MANIFEST.json",
+    # H5 (owner 2026-10-02: build, seal and measure once; same skip mechanism as H4, registered before staging).
+    "tests/ledger/secret_corpus/negatives_holdout5/": "tests/ledger/secret_corpus/negatives_holdout5/MANIFEST.json",
 }
 
 # Fail-closed registry of the other folders under the secret corpus (owner, 2026-10-01).

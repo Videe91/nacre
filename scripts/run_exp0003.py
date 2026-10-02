@@ -10,6 +10,12 @@ Rules it enforces: frozen suite verified first (P1); a fresh database per run (k
 read by the OpenAI SDK only and never printed or stored; every call is recorded (D-0021/D-0022) and exported as
 fixtures; SIGINT/SIGTERM/SIGHUP mark the run `aborted`; no reruns (a failed bar is a result). Results go to
 ~/Desktop/nacre-runs/EXP-0003-<utc>-<id>/ (outside the repo).
+
+Aborts are cooperative (2026-10-02, flaky-test hunt): a signal records the abort at once but the run stops only at the
+next safe point (_check_abort: between families and between reps), never asynchronously. Why: an exception raised
+from the handler in the middle of psycopg's connection handshake left a half-authenticated backend; the run's
+`DROP DATABASE ... WITH (FORCE)` then waited for it to accept a ProcSignalBarrier until authentication_timeout (60 s
+per backend), so a killed run could hang > 120 s under load. A second signal still exits at once.
 """
 import argparse
 import json
@@ -115,6 +121,15 @@ def _rebuild_check(open_session, provider, streams):
     return out
 
 
+_ABORT: dict[str, str] = {}
+
+
+def _check_abort() -> None:
+    """A safe point: stop here if a signal asked the run to abort (never mid-connection or mid-statement)."""
+    if _ABORT:
+        raise SystemExit(_ABORT["message"])
+
+
 def one_run(rep, rdir, record, mode, recorded_dir, keep_db=False, rebuild=False):
     name = f"nacre_exp0003_{uuid.uuid4().hex[:10]}"
     try:                                     # created INSIDE the cleanup scope: a kill right after CREATE cannot leak it
@@ -146,6 +161,7 @@ def one_run(rep, rdir, record, mode, recorded_dir, keep_db=False, rebuild=False)
         for n in SETS:
             families = json.loads((REGRESSION / "mnexa" / "tasks" / f"tasks_{n:03d}.json").read_text())["families"]
             for fam in families:
+                _check_abort()
                 stream = uuid.uuid4()
                 with open_session() as s:
                     register_scope(s, provider, org_id=org, stream_id=stream, kind=ScopeKind.PROJECT, idempotency_key=str(uuid.uuid4()))
@@ -233,9 +249,11 @@ def main(argv):
     save = lambda: (rdir / "run.json").write_text(json.dumps(record, indent=1))  # noqa: E731
 
     def stop(signum, _f):
+        if _ABORT:                                  # a second signal: leave now
+            raise SystemExit(_ABORT["message"])
         record["status"], record["abort_reason"] = "aborted", f"signal {signal.Signals(signum).name}"
         save()
-        raise SystemExit(f"aborted by {signal.Signals(signum).name}; recorded in {rdir}/run.json")
+        _ABORT["message"] = f"aborted by {signal.Signals(signum).name}; recorded in {rdir}/run.json"
     # SIGINT and SIGTERM abort the run (recorded). SIGHUP aborts too, UNLESS it is already ignored at startup (as under
     # nohup): then it stays ignored, so a terminal hang-up cannot kill a detached run (EXP-0003 run 8f32eb, 2026-10-01).
     for sig in (signal.SIGINT, signal.SIGTERM):
@@ -245,6 +263,7 @@ def main(argv):
     save()
     all_trials, all_safety = [], dict.fromkeys(SAFETY_METRICS, 0)
     for rep in range(1, K + 1):
+        _check_abort()
         t0 = time.time()
         trials, safety, cost, calls, fallback = one_run(rep, rdir, record, mode, a.recorded, a.keep_databases, a.rebuild_check)
         all_trials += trials
@@ -254,6 +273,7 @@ def main(argv):
                                "sleep_calls_live": calls, "fallback_records": fallback})
         save()
         print(json.dumps(record["runs"][-1]), flush=True)
+    _check_abort()
     (rdir / "trials.json").write_text(json.dumps(all_trials, indent=1))
     summary = summarize(all_trials, all_safety)
     (rdir / "summary.json").write_text(json.dumps(summary, indent=1))

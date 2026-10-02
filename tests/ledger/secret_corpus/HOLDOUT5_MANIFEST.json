@@ -1,0 +1,716 @@
+{
+ "build_call": "build(seed=HOLDOUT5_SEED, per_generator=50, contexts=HOLDOUT5_CONTEXTS, embed_documents=True, cover_all_contexts=True, credential_slots=HOLDOUT5_CREDENTIAL_SLOTS, embed_negatives=False)",
+ "builder_statement": "Sealed 2026-10-02 by a separate session that did not read detector code (strip_secrets.py, src/nacre/ledger/data/, scripts/scan_staged_secrets.py, scripts/hooks/, tests/ledger/test_strip_secrets.py, measure.py, A-0010 measurement evidence, docs/decisions/, docs/state/, git history) and ran no detector, hook or measurement. Seed and negatives seed drawn once from os.urandom. Never consult H5 samples or results while writing or tuning rules.",
+ "contexts": {
+  "count": 22,
+  "credential_slots": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14
+  ],
+  "descriptions": [
+   "0. [SLOT][ML] Bash: read -r -d '' DEPLOY_TOKEN <<'EOF' (quoted heredoc), value at column 0, then EOF.",
+   "1. [SLOT][ML] Python: OAUTH_CLIENT_SECRET = ''' (triple single quotes), value indented 4, '''.strip().",
+   "2. [SLOT][ML] PowerShell single-quoted here-string $apiKey = @' ... '@, value at column 0.",
+   "3. [SLOT][ML] Kotlin raw string val clientSecret = \"\"\" ... \"\"\".trimIndent() inside an object.",
+   "4. [SLOT][ML] Swift multi-line string literal static let password = \"\"\" (closing delimiter indented).",
+   "5. [SLOT][ML] TOML multi-line literal string password = ''' in an [smtp] table.",
+   "6. [SLOT][ML] C++ raw string literal kAuthToken = R\"tok( ... )tok\"; (custom delimiter), value indented 2.",
+   "7. [SLOT][ML] Perl indented heredoc my $db_password = <<~\"END\"; then chomp.",
+   "8. [SLOT][ML] Nix indented string accessSecret = '' ... ''; in a NixOS module attrset.",
+   "9. [SLOT][ML] PHP nowdoc $privateKey = <<<'KEY' with an indented closing marker (PHP >= 7.3).",
+   "10. [SLOT][ML] YAML literal block scalar with indentation indicator client_secret: |2- (extra indent kept).",
+   "11. [SLOT][ML] .NET web.config <add key=\"Webhook:SigningKey\" with a multi-line value=\"...\" attribute.",
+   "12. [SLOT]     .pypirc [pypi] section: username = __token__, then password = value as the last line.",
+   "13. [SLOT]     C# OpenID Connect options lambda: options.ClientSecret = \"value\";",
+   "14. [SLOT]     redis-cli transcript: AUTH default value, then OK.",
+   "15. [no slot]  Fortran program: print *, 'value'",
+   "16. [no slot]  Erlang function returning {ok, <<\"value\">>}. (binary literal)",
+   "17. [no slot]  R: ids <- c(\"a1\", \"value\") then length(ids).",
+   "18. [no slot]  Haskell main = putStrLn \"value\" as the last bytes, no trailing newline.",
+   "19. [no slot]  Gherkin scenario step: When I look up record \"value\"",
+   "20. [no slot][ML] Bash: cat > fixtures/sample.txt <<EOF (unquoted heredoc writing a fixture), value at column 0.",
+   "21. [no slot][ML] Ruby squiggly heredoc EXPECTED_OUTPUT = <<~TEXT, value indented 2."
+  ],
+  "multiline_credential_slots": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11
+  ],
+  "multiline_non_slots": [
+   20,
+   21
+  ],
+  "non_slot": [
+   15,
+   16,
+   17,
+   18,
+   19,
+   20,
+   21
+  ]
+ },
+ "holdout": "H5",
+ "negatives": {
+  "composition": {
+   "stdlib": 0,
+   "third_party": 150,
+   "total": 150
+  },
+  "count": 150,
+  "dir": "tests/ledger/secret_corpus/negatives_holdout5",
+  "disjoint_from": [
+   "negatives",
+   "negatives_external",
+   "negatives_holdout2",
+   "negatives_holdout3",
+   "negatives_holdout4",
+   "H4 withdrawn first draw"
+  ],
+  "files": [
+   {
+    "path": "PyYAML-6.0.3/_yaml/__init__.py",
+    "sha256": "d3801eff9a2cc5a8692476b75c165401fe308ba5d7df6811f03e97ea9eb81840"
+   },
+   {
+    "path": "PyYAML-6.0.3/yaml/composer.py",
+    "sha256": "fcaa37d16afa783594794a5ab94193dcb720f503c19ce3d59539c8311189f453"
+   },
+   {
+    "path": "PyYAML-6.0.3/yaml/constructor.py",
+    "sha256": "e0eef18091f222b49709f06ada0f31cb36b6e642e9525fde4862e6882c5db296"
+   },
+   {
+    "path": "PyYAML-6.0.3/yaml/dumper.py",
+    "sha256": "3cb72d66563064ba7b5e679477046ebf89d8399d940670c8532f3e94a7cb17ea"
+   },
+   {
+    "path": "PyYAML-6.0.3/yaml/error.py",
+    "sha256": "021f73fada072546c4f63f8cf18a7181244ce4280b09cc15cc980b2d1176171a"
+   },
+   {
+    "path": "PyYAML-6.0.3/yaml/events.py",
+    "sha256": "e74fd392c810884e2ea7e94aa3f57e9c1cbeb402319083d0c58e6a0e1282787c"
+   },
+   {
+    "path": "PyYAML-6.0.3/yaml/parser.py",
+    "sha256": "25455932ce8e76f293a9b018598f89b946805bb58d44a2452f7d639d227a27fb"
+   },
+   {
+    "path": "PyYAML-6.0.3/yaml/representer.py",
+    "sha256": "22e58ff9c016f6c1ca1274b4802a926bcf78935060e1c813c5a0f021c6d143e6"
+   },
+   {
+    "path": "PyYAML-6.0.3/yaml/scanner.py",
+    "sha256": "089e7a195f3a18826432679f607790002824cc743ae6c2e4410e208104da2eb6"
+   },
+   {
+    "path": "PyYAML-6.0.3/yaml/serializer.py",
+    "sha256": "0a1b85826854d35863e31808f0668abfabdf33606e8f06bd8bb7761401e3edc0"
+   },
+   {
+    "path": "PyYAML-6.0.3/yaml/tokens.py",
+    "sha256": "953408cd2570f0c83dc2fe39f7e4e388e41eeb05738aa69196a5f6ffcf6ba79e"
+   },
+   {
+    "path": "anyio-4.15.1/anyio/__init__.py",
+    "sha256": "39fae86118c8530fc9163d19c21d4901a6a331083856ab6802dd17a0e1c34701"
+   },
+   {
+    "path": "anyio-4.15.1/anyio/_backends/_asyncio.py",
+    "sha256": "e5a8dc02f501f36b38ab8c0f11b57843343b482c922af88718ea9b75e04efca9"
+   },
+   {
+    "path": "anyio-4.15.1/anyio/_backends/_trio.py",
+    "sha256": "ec2cdcae7f1ef94502fc0312ec04a2d81ca2c9d65fe47c5c2ffd916cdfb39b50"
+   },
+   {
+    "path": "anyio-4.15.1/anyio/_core/_contextmanagers.py",
+    "sha256": "6089c109a6e211e4be51a3ff25dc5ad426850bbd444cf5bc1d94c720cf11b1cf"
+   },
+   {
+    "path": "anyio-4.15.1/anyio/_core/_eventloop.py",
+    "sha256": "0726547890fd6a531f7324ec791a392334ced0896d12e97f1b2abd8aa4a3a839"
+   },
+   {
+    "path": "anyio-4.15.1/anyio/_core/_fileio.py",
+    "sha256": "2f4280535ae38968de6f9952a92cef8ad0e39e3c77d6d43cf034d53601edbbc8"
+   },
+   {
+    "path": "anyio-4.15.1/anyio/_core/_futures.py",
+    "sha256": "610ab9ba19c29ca40c403eb6b4e2dfcc49bb7545d8dc6428ac9747ea085f8084"
+   },
+   {
+    "path": "anyio-4.15.1/anyio/_core/_resources.py",
+    "sha256": "2dde5db827bd37080f7c8ec420e87708c201610eebaba65011aec2152d2ef447"
+   },
+   {
+    "path": "anyio-4.15.1/anyio/_core/_subprocesses.py",
+    "sha256": "4cc06e18d20bcfee3bc39b7dbdac89d46a42a434fa2f1b0ca212431427b02117"
+   },
+   {
+    "path": "anyio-4.15.1/anyio/_core/_synchronization.py",
+    "sha256": "28a5786a0607cbc2aca6afe3536bcb995429a922bc3c6685bbfaec0c1a1dccf9"
+   },
+   {
+    "path": "anyio-4.15.1/anyio/_core/_tasks.py",
+    "sha256": "27676133f26adc6aec7e0fde9cd5a9473d92c5f335e6e2edfa911fbe842adee0"
+   },
+   {
+    "path": "anyio-4.15.1/anyio/_lazyimport.py",
+    "sha256": "2c28e761a9c87d813d1be0effc4b2a34b0ee551a693627166630937d2f7eb095"
+   },
+   {
+    "path": "anyio-4.15.1/anyio/abc/_streams.py",
+    "sha256": "20c78e3cfbad15745bc9e02eb715751c97bb154419629daa2ab249a4fd430afd"
+   },
+   {
+    "path": "anyio-4.15.1/anyio/abc/_subprocesses.py",
+    "sha256": "083a94d69d07b814b4a57533056fe16df86285325133aee7fffeea666a0f53ce"
+   },
+   {
+    "path": "anyio-4.15.1/anyio/abc/_tasks.py",
+    "sha256": "1c13e94fbd9a3b2d1bc0c0310422a69d7b11df6f30098463626de2695c367d0a"
+   },
+   {
+    "path": "anyio-4.15.1/anyio/from_thread.py",
+    "sha256": "b1e7a8d787d31bf86de2bf8a5944135b810f93dcd3d08843d8008c2222abf7f0"
+   },
+   {
+    "path": "anyio-4.15.1/anyio/streams/buffered.py",
+    "sha256": "bbb8420fc48dad81dcbad1ba2b9c048b2d45f3cfa98b3823bc414cdb62aad82c"
+   },
+   {
+    "path": "anyio-4.15.1/anyio/streams/text.py",
+    "sha256": "05c540189c35551bed22a9effa8d116f4a701fba7cbf096f976d711eae76d9a8"
+   },
+   {
+    "path": "anyio-4.15.1/anyio/streams/tls.py",
+    "sha256": "7ea2e6c6f50b14ef6bbf11b2277dd53eb38837b1377a2535abdd019262a2810f"
+   },
+   {
+    "path": "anyio-4.15.1/anyio/to_interpreter.py",
+    "sha256": "0139e84fa91e8bdc0399066d5d30374ac63808aed72abf136b8ff1e62ea96d3c"
+   },
+   {
+    "path": "anyio-4.15.1/anyio/to_process.py",
+    "sha256": "a7a9fc8f49eb789525d4312447ff4f2fa291a0ab4da85c4e4539fca9906f9fde"
+   },
+   {
+    "path": "anyio-4.15.1/anyio/to_thread.py",
+    "sha256": "f0c3d5aeb42af2db46bd5db571277af2b32da396e1c49d3e8bd0aea576a0e46b"
+   },
+   {
+    "path": "click-8.5.0/click/__init__.py",
+    "sha256": "5abfc54d37d47cc788b7e7a05e9514787f8c5a0b7db429d0f24d748ac89964ca"
+   },
+   {
+    "path": "click-8.5.0/click/_compat.py",
+    "sha256": "da839c4cab0275128a890dac75b739433282aacad65b0db4a252f68f6e22bf87"
+   },
+   {
+    "path": "click-8.5.0/click/core.py",
+    "sha256": "ad05296a3ad3110745944918a1ce73dba0a163a5acaa9dd9b853bbbed2622319"
+   },
+   {
+    "path": "click-8.5.0/click/exceptions.py",
+    "sha256": "1ef498df81b86ae8ff6d8451f3e4fc094f09c2aff5f8e72c454e1ecdfa337849"
+   },
+   {
+    "path": "click-8.5.0/click/globals.py",
+    "sha256": "80cf8d87a0383341c1fd2824685e4ce2770618c0c773f7e51d7bbdfe88781845"
+   },
+   {
+    "path": "click-8.5.0/click/shell_completion.py",
+    "sha256": "68c74d4351093f749f3c0bf535e8f5c3d5f95fd01e9ac21a920d8e91f8fc6fb7"
+   },
+   {
+    "path": "click-8.5.0/click/termui.py",
+    "sha256": "0d72db30f41ad071e333ed9af1dc4801691a28092512821154f1379ac9a6b1b1"
+   },
+   {
+    "path": "click-8.5.0/click/types.py",
+    "sha256": "70d5dac9c464834539cb1adb61dc409f70a4edd9c385a082eebc528ae1136d3e"
+   },
+   {
+    "path": "click-8.5.0/click/utils.py",
+    "sha256": "74bfc635c5529c9eb01baefdcbd5470a37ba4594b96e3df775b2ce847f12847e"
+   },
+   {
+    "path": "filelock-4.0.8/filelock/_api.py",
+    "sha256": "9789c91f5fc1797635cd83daeb828711bfa8f5c11e0f1194c916d2d2297001fb"
+   },
+   {
+    "path": "filelock-4.0.8/filelock/_identity.py",
+    "sha256": "d0bbdeaa413cc85547f13d59dfa7ff1e009d4724c1786b522c7a329cd0bdc101"
+   },
+   {
+    "path": "filelock-4.0.8/filelock/_lease.py",
+    "sha256": "b816d5c02ef5db5c67a8432ec66d736ee6fe776e76f7aff17f333049583e27ca"
+   },
+   {
+    "path": "filelock-4.0.8/filelock/_marker.py",
+    "sha256": "92db03a9bcb6a97fea5d18b4c92109939b7bd644d0a213a2671735031f12c387"
+   },
+   {
+    "path": "filelock-4.0.8/filelock/_soft_protocol.py",
+    "sha256": "a84336c7d373f7382e5f0c168d9b02b0f11f6ace67a87949fbfa07bc0334528e"
+   },
+   {
+    "path": "filelock-4.0.8/filelock/_soft_rw/_async.py",
+    "sha256": "ea419cb564fcd39723096c920ece24cbf4c48244afe884456cf0fb09734ea628"
+   },
+   {
+    "path": "filelock-4.0.8/filelock/_soft_rw/_protocol.py",
+    "sha256": "62db7fd121237aca6007ee90651a748bc47452db389ef9cd8ceffb3d8616dddc"
+   },
+   {
+    "path": "filelock-4.0.8/filelock/_soft_rw/_storage.py",
+    "sha256": "359d2ebf4f121d775aa19a5fec3d76bae31669cff7c59960261934fa96d45413"
+   },
+   {
+    "path": "filelock-4.0.8/filelock/_strict.py",
+    "sha256": "e6c32548d1647b5b5ddfcedf188daa68a99a22b74d5d05258120df568574d760"
+   },
+   {
+    "path": "filelock-4.0.8/filelock/_util.py",
+    "sha256": "a7ddeff19ce057a8a62bdf35d81d03c52a02c56447395bbec0d19f7ab1e22421"
+   },
+   {
+    "path": "filelock-4.0.8/filelock/_windows.py",
+    "sha256": "44d9e4dd5cd224339a17c23bedd076a65af02e8eb536eb5e8f226f741ccb338e"
+   },
+   {
+    "path": "fsspec-2026.9.0/fsspec/__init__.py",
+    "sha256": "c457281c10f5edf73929a98a510008034ade3c68cba8837558101df4d028022f"
+   },
+   {
+    "path": "fsspec-2026.9.0/fsspec/caching.py",
+    "sha256": "54bfe4fd0f5ee386d374ba0753d077d575851151a13ee1d705a014b5eba708a5"
+   },
+   {
+    "path": "fsspec-2026.9.0/fsspec/callbacks.py",
+    "sha256": "0432302f32baaebff4579721e79edf4b3b22bc2125a5daa15ebe5d67d4def841"
+   },
+   {
+    "path": "fsspec-2026.9.0/fsspec/config.py",
+    "sha256": "9872b30208d76bf2f0aad3bf5684c9279ebc56ac1891b2b7814a7827a259269e"
+   },
+   {
+    "path": "fsspec-2026.9.0/fsspec/exceptions.py",
+    "sha256": "a5ab922c3331cd324c3a3bd7d561142b470cc8592b171a5626cc85cb06afec0f"
+   },
+   {
+    "path": "fsspec-2026.9.0/fsspec/fuse.py",
+    "sha256": "43edcd38ec8ba817d86b80dbe44d7dcff658dfacf3607b48b3598e51ab08b414"
+   },
+   {
+    "path": "fsspec-2026.9.0/fsspec/implementations/arrow.py",
+    "sha256": "346b49f72581b7948fa6f0cf4e8fa9e2bcb68f447d70e09379c779a00eabc45a"
+   },
+   {
+    "path": "fsspec-2026.9.0/fsspec/implementations/asyn_wrapper.py",
+    "sha256": "218ad8fbe5ccec6533fb97378bfe0513bce74d0a20aeecaab29ed48402b066f9"
+   },
+   {
+    "path": "fsspec-2026.9.0/fsspec/implementations/chained.py",
+    "sha256": "8868afa4d6875058c1fde6b4f8700f85c9a6e822fcaa70dfdbbd0f4a3ec9c2e1"
+   },
+   {
+    "path": "fsspec-2026.9.0/fsspec/implementations/data.py",
+    "sha256": "f6d31ccb57f25f56aebf3157d9a00d3caf427cfa1aae7c530832e15f5daeb2fb"
+   },
+   {
+    "path": "fsspec-2026.9.0/fsspec/implementations/gist.py",
+    "sha256": "63a8d30eb13ec2e4f0be93f20100eeb8e3011b195a8da7ca5a8075ff25fa8dd6"
+   },
+   {
+    "path": "fsspec-2026.9.0/fsspec/implementations/http_sync.py",
+    "sha256": "6a31942595c37b3ee550459a2197fd9c34c1e3442e03464d2274cce56018ae9c"
+   },
+   {
+    "path": "fsspec-2026.9.0/fsspec/implementations/reference.py",
+    "sha256": "f55fd5c2f668080e3d7fa01d4cf8cfa9b662dfd3de7c6649c30d14771c5505a2"
+   },
+   {
+    "path": "fsspec-2026.9.0/fsspec/implementations/tar.py",
+    "sha256": "616c1cc3f7a01c00734e06126ae684816919ebf7d037a3b3874dec3484a2b374"
+   },
+   {
+    "path": "fsspec-2026.9.0/fsspec/implementations/webhdfs.py",
+    "sha256": "42f472c825523b43d6d98c275da2f9c75d37b7f8ca2f156d0ab9a0f5762dcbb1"
+   },
+   {
+    "path": "fsspec-2026.9.0/fsspec/implementations/zip.py",
+    "sha256": "e8324f76ad3598831cf024a726932cd3c2ca44d1a2a4532a24f502f2ba2ed6a5"
+   },
+   {
+    "path": "fsspec-2026.9.0/fsspec/json.py",
+    "sha256": "e04059fb13a6462cb1988a8f230c660c89a8b1143b8a8eea04cdb18c93ec104e"
+   },
+   {
+    "path": "fsspec-2026.9.0/fsspec/parquet.py",
+    "sha256": "a973270ce1cf8799ed99beb84662d6b502eef8c82eb38a913a792661b5f39118"
+   },
+   {
+    "path": "fsspec-2026.9.0/fsspec/prefetcher.py",
+    "sha256": "59da535ec3b85f95a5c6e19504891d25707621431ac0bbe6f7eba1382c47659c"
+   },
+   {
+    "path": "fsspec-2026.9.0/fsspec/spec.py",
+    "sha256": "c7b1529d7ac8e59cdd8210d3a14c923f5753b6465dbd23e86fc9e3ef04c9f177"
+   },
+   {
+    "path": "fsspec-2026.9.0/fsspec/transaction.py",
+    "sha256": "6d2d724103c48079511104818f0fb50eb76a627dbb31d72d900e7913bf27b7db"
+   },
+   {
+    "path": "fsspec-2026.9.0/fsspec/utils.py",
+    "sha256": "488f131de0bd2bd4b7d104753608e35ecde52b8d6bf6f5cf63de90bbb606a2eb"
+   },
+   {
+    "path": "h11-0.16.0/h11/__init__.py",
+    "sha256": "88ed4ace448ee36c99e9f7e0f953206f1fd9553586518d349d16045a7facde46"
+   },
+   {
+    "path": "h11-0.16.0/h11/_abnf.py",
+    "sha256": "c9b8b1af4c6cba99e403a18503232e6ee5c5e9373595bfe117cf743600ac7cd7"
+   },
+   {
+    "path": "h11-0.16.0/h11/_connection.py",
+    "sha256": "5622dbe0915ab19090b9dbd87166b80843fa007cf8155c3fbdeebec9e10bc962"
+   },
+   {
+    "path": "h11-0.16.0/h11/_events.py",
+    "sha256": "23deda5e86a5d56bbb7642f9e3c04034150290e21b7bec790a2a1803d201635e"
+   },
+   {
+    "path": "h11-0.16.0/h11/_headers.py",
+    "sha256": "3fb0fe9413711f074b64f2e29a6630acf1bef59923125bef25925d6408123fee"
+   },
+   {
+    "path": "h11-0.16.0/h11/_readers.py",
+    "sha256": "6b8472a4e454082dddd2afe4c4fb8120cee34c3f222ede57f754c7d05b1db8de"
+   },
+   {
+    "path": "h11-0.16.0/h11/_receivebuffer.py",
+    "sha256": "c6bb29b1db0d81617145f41c4d7c51f11add8d15d74cad08a39710616a49d56b"
+   },
+   {
+    "path": "h11-0.16.0/h11/_state.py",
+    "sha256": "ff92c6fc1191f0509c1507813c7f93307826ffe07e1147160a74287fff578c51"
+   },
+   {
+    "path": "h11-0.16.0/h11/_version.py",
+    "sha256": "1954ac6cf48f0dc3ae17aa6d7c88979d52686849b7ca05db327aa5aff1a26a1c"
+   },
+   {
+    "path": "httpcore-1.0.9/httpcore/_async/__init__.py",
+    "sha256": "116765dafe2d867007cc9a6a8d4e21d9af03522180bcd896ae48a2f697e14dfd"
+   },
+   {
+    "path": "httpcore-1.0.9/httpcore/_async/connection.py",
+    "sha256": "e8e70f5ea3047dcd01537f3ffa21d4343775bca4937365154f4f57a8d6ff04e9"
+   },
+   {
+    "path": "httpcore-1.0.9/httpcore/_async/http11.py",
+    "sha256": "faa33d6d5ecf8d2405e6fc6cdfbf9e5173881706c88cf7196cd962b97f53b41c"
+   },
+   {
+    "path": "httpcore-1.0.9/httpcore/_async/http2.py",
+    "sha256": "f389462cf53799156df1f0ea0285bf34633482ef26fb26432c7fb2034c563cf3"
+   },
+   {
+    "path": "httpcore-1.0.9/httpcore/_async/http_proxy.py",
+    "sha256": "db3564ae5bfe0ecfab5866aa69796b84426201014fa36dc14f71aafec5a80575"
+   },
+   {
+    "path": "httpcore-1.0.9/httpcore/_async/interfaces.py",
+    "sha256": "8d389a58bf37a60a460bdce2bfdd197f068a34c987c2639a97368a8ae4f1013a"
+   },
+   {
+    "path": "httpcore-1.0.9/httpcore/_backends/anyio.py",
+    "sha256": "c7c3e01215d10bc6d5aac77393f609c7c63a77d4ee6f4e82b944b09db9adaa86"
+   },
+   {
+    "path": "httpcore-1.0.9/httpcore/_backends/auto.py",
+    "sha256": "cced77e8f2999ac6930caf87464f38780f8c520f3fdb025fe0dbe62b8df6022a"
+   },
+   {
+    "path": "httpcore-1.0.9/httpcore/_backends/base.py",
+    "sha256": "69286045d6673264611561deb63ba694cef77fc2b3d58380c8250fff8907b250"
+   },
+   {
+    "path": "httpcore-1.0.9/httpcore/_backends/mock.py",
+    "sha256": "7abf53e37eae49eecd2eb7e22dae31e8dbaa8398af43af770b1598096b206c7e"
+   },
+   {
+    "path": "httpcore-1.0.9/httpcore/_backends/trio.py",
+    "sha256": "2c7bb8fccaf932cc109a64f7c84e282e07fd6ff2497de552e018c3c5e25ced1a"
+   },
+   {
+    "path": "httpcore-1.0.9/httpcore/_exceptions.py",
+    "sha256": "968a022a06b7fd8558bb7b3e7772fd44c3d127286c63b7e2bae1b1be4383d1cd"
+   },
+   {
+    "path": "httpcore-1.0.9/httpcore/_ssl.py",
+    "sha256": "b2baa648d53888e52f585f92ac9bdbf06fd811b1c510b39740ec1d0c80534bd7"
+   },
+   {
+    "path": "httpcore-1.0.9/httpcore/_sync/__init__.py",
+    "sha256": "2410c8817b7995ad4b089d6c2d078a863285a4b9e936bf12beceb3da78b77e08"
+   },
+   {
+    "path": "httpcore-1.0.9/httpcore/_sync/connection.py",
+    "sha256": "f5ec4639bdcf07e329d93d7eb1c91278bdadfad27ff7e357a2657c8a19960a05"
+   },
+   {
+    "path": "httpcore-1.0.9/httpcore/_sync/connection_pool.py",
+    "sha256": "9f89fe56254dd97ab71fabefaf8de25272babc9760f4c05694005faab16eeb76"
+   },
+   {
+    "path": "httpcore-1.0.9/httpcore/_sync/http11.py",
+    "sha256": "205a1b0f531de491652462969e1d7f4377a98a452bc88f2aa34f6ff0c8892040"
+   },
+   {
+    "path": "httpcore-1.0.9/httpcore/_sync/http2.py",
+    "sha256": "6bfa91a8934cac3f529e842ad007e2bfbee3cfac6dbd0c18a6fff27936763fc9"
+   },
+   {
+    "path": "httpcore-1.0.9/httpcore/_sync/http_proxy.py",
+    "sha256": "fda97fe9cacab8466edb0cafbb8f7745922625d0499e3e6818a3632ce24bd99a"
+   },
+   {
+    "path": "httpcore-1.0.9/httpcore/_trace.py",
+    "sha256": "724e99a08cd84e474d0087eae4c19e2aa0570edaa3397faa7d8c266456eb19ca"
+   },
+   {
+    "path": "httpcore-1.0.9/httpcore/_utils.py",
+    "sha256": "fd12e05d8380602df9d229002d5e7d199ebc209adda1c459c4fb3d3e39b37456"
+   },
+   {
+    "path": "huggingface_hub-1.33.0/huggingface_hub/_hot_reload/sse_client.py",
+    "sha256": "e3d926b01d8ff6cc606d9d7a79de85e1a2c3b37aec1eb3696e9ea22a5bc5f747"
+   },
+   {
+    "path": "huggingface_hub-1.33.0/huggingface_hub/_inference_endpoints.py",
+    "sha256": "88daf53a201ba25edf4d12518038338be601a04e9b12a67a67cad4a8da177be1"
+   },
+   {
+    "path": "huggingface_hub-1.33.0/huggingface_hub/_local_folder.py",
+    "sha256": "5f3d220bbb3237d6de264cc1ba7cb0bfd99689450f12d1f88a153f7519d549da"
+   },
+   {
+    "path": "huggingface_hub-1.33.0/huggingface_hub/_login.py",
+    "sha256": "9f1b9d6c846fa858dd87c4a702e6b19bfcb9bee8d21c0dbca91c3db80a64bf96"
+   },
+   {
+    "path": "huggingface_hub-1.33.0/huggingface_hub/_sandbox.py",
+    "sha256": "0b6428a563d12cb82f107b94c923d4831ece8a28f17e5c3f299735ea77048c29"
+   },
+   {
+    "path": "huggingface_hub-1.33.0/huggingface_hub/_webhooks_payload.py",
+    "sha256": "07dcea963726db40c6795c4929b6b9ef48ba44ff9c47d084ba930606e3431c70"
+   },
+   {
+    "path": "huggingface_hub-1.33.0/huggingface_hub/cli/__init__.py",
+    "sha256": "b56bb722cfa6dad949c1784cfef4f698f460a67b7d2a153daafc39691b278d4d"
+   },
+   {
+    "path": "huggingface_hub-1.33.0/huggingface_hub/cli/_cp.py",
+    "sha256": "67ed99fed06cd5ee1706a44ee51f509da6d4e2a4e2f470e56c0e768d305a0a46"
+   },
+   {
+    "path": "huggingface_hub-1.33.0/huggingface_hub/cli/_errors.py",
+    "sha256": "5f4ad44cefb77822b9bff30b184cdad41c5cb9719c70f63e87b4a1ce6b90737e"
+   },
+   {
+    "path": "huggingface_hub-1.33.0/huggingface_hub/cli/cache.py",
+    "sha256": "a6eb3732d2041060e2c6954a2f9bcdcb6a2491f697ff428469b35f0e7c893be3"
+   },
+   {
+    "path": "huggingface_hub-1.33.0/huggingface_hub/cli/papers.py",
+    "sha256": "1ef4fef338f67e2d78b9ae9ac16a47a6195b277eb6144248c12081251419fdc3"
+   },
+   {
+    "path": "huggingface_hub-1.33.0/huggingface_hub/cli/skills.py",
+    "sha256": "5fab0f11e529235793eb829ee74bab346b889f9763a186cbeae6b82e523830f7"
+   },
+   {
+    "path": "huggingface_hub-1.33.0/huggingface_hub/cli/system.py",
+    "sha256": "701d8616557db22d076e6524ca88f99c02997febd6a5ff608bd5c0ab9d6cd396"
+   },
+   {
+    "path": "huggingface_hub-1.33.0/huggingface_hub/dataclasses.py",
+    "sha256": "8cd6637045e311e6957996fda1d2ac803eebd3e3d40111b59ae4e409e4ac83af"
+   },
+   {
+    "path": "huggingface_hub-1.33.0/huggingface_hub/inference/_mcp/types.py",
+    "sha256": "c8735f3ec33d3210f4ea878a7646e6ac1b16fb75a151ea80dba7f27d17f1fdb9"
+   },
+   {
+    "path": "huggingface_hub-1.33.0/huggingface_hub/inference/_providers/publicai.py",
+    "sha256": "d48d96eab3919680794074af932e278d93b65ca2d3c00fa43dd3686aea13e6b8"
+   },
+   {
+    "path": "huggingface_hub-1.33.0/huggingface_hub/serialization/_torch.py",
+    "sha256": "8bb91b984ea7a3554e019d7825668a42e96ce32e7be839b5f3aa4e6ffe59a3a8"
+   },
+   {
+    "path": "huggingface_hub-1.33.0/huggingface_hub/utils/_cache_manager.py",
+    "sha256": "ccd621aaf6bf85230e531d2f38f009fd1f4567a620390345915e032b7cba7d1f"
+   },
+   {
+    "path": "huggingface_hub-1.33.0/huggingface_hub/utils/_experimental.py",
+    "sha256": "abdbd4bdcd49c9b545450d06451106f812e8b991090bfe343317306c094eb9dd"
+   },
+   {
+    "path": "huggingface_hub-1.33.0/huggingface_hub/utils/_paths.py",
+    "sha256": "62f52f69e3f1b4bcb1cc03dc96db69293e0ee7a05385c986f124b0a3174d872a"
+   },
+   {
+    "path": "huggingface_hub-1.33.0/huggingface_hub/utils/_typing.py",
+    "sha256": "d4b784efce5879da695d247d6b57d00eee6b853c57e6ff6405805a1eb3fae6b0"
+   },
+   {
+    "path": "huggingface_hub-1.33.0/huggingface_hub/utils/sha.py",
+    "sha256": "87cc3185e66972febbd5186d88815c1664130d2ae880dde4c10c7765a3445078"
+   },
+   {
+    "path": "pydantic-2.13.5/pydantic/_internal/_discriminated_union.py",
+    "sha256": "7ef5d4b514037b64558d2699d997065f3c418e1e4b99e125c5037289aaed05b9"
+   },
+   {
+    "path": "pydantic-2.13.5/pydantic/_internal/_docs_extraction.py",
+    "sha256": "7f2ce74801e1e40ce88675d94ad5741ef1fe9d16dabcd1cfca0fa49f1f92fc41"
+   },
+   {
+    "path": "pydantic-2.13.5/pydantic/_internal/_forward_ref.py",
+    "sha256": "e67dd8efedc028b9fcfc54b761cecabad2e23d48725e602d90464e6859e89f03"
+   },
+   {
+    "path": "pydantic-2.13.5/pydantic/_internal/_mock_val_ser.py",
+    "sha256": "c2645115206fa9f70b6c8e353ec165881e2ed80677989a597a21116c3df1293a"
+   },
+   {
+    "path": "pydantic-2.13.5/pydantic/_internal/_namespace_utils.py",
+    "sha256": "865dfe4d102bf365368d3c8f3f7b7e42ab2f28b8abc6d90b7cd7eb37e7e9d31f"
+   },
+   {
+    "path": "pydantic-2.13.5/pydantic/_migration.py",
+    "sha256": "545ef72d1094cf722b6f9c55b75de36f7340717567105e93d7e27438b7de6790"
+   },
+   {
+    "path": "pydantic-2.13.5/pydantic/annotated_handlers.py",
+    "sha256": "59fc854aac28108157061ed3ef73f270a9682350e25f8e465a2d3e24eb024786"
+   },
+   {
+    "path": "pydantic-2.13.5/pydantic/class_validators.py",
+    "sha256": "8bf5778fe3d87462d22e68ff20965e913463ba73bc488573f0b325aae3f23fb1"
+   },
+   {
+    "path": "pydantic-2.13.5/pydantic/color.py",
+    "sha256": "1ba2111023cd9c6b855ecfe2a70ff558cadc9bfcdf7c6c250a2ce3e35935be0a"
+   },
+   {
+    "path": "pydantic-2.13.5/pydantic/error_wrappers.py",
+    "sha256": "44aea6a804dcf72303f8a043f48252f47a4a0a9ad61ddf30a3ce019e6fb77d1f"
+   },
+   {
+    "path": "pydantic-2.13.5/pydantic/experimental/arguments_schema.py",
+    "sha256": "1059e35ffba5a7eb4fc948d05f9a6642dba0d4e14bfc071cf1b70c6cb77e7d56"
+   },
+   {
+    "path": "pydantic-2.13.5/pydantic/experimental/missing_sentinel.py",
+    "sha256": "8507a382d174d3052e40c9e2f78dbd7af83e797c88c292af8ec0fca1fa9f8fec"
+   },
+   {
+    "path": "pydantic-2.13.5/pydantic/functional_serializers.py",
+    "sha256": "a9686e6bfcd1214524e6af3ede1712869b13df2e3771d4ba5efc560cfde3a81f"
+   },
+   {
+    "path": "pydantic-2.13.5/pydantic/mypy.py",
+    "sha256": "645f0b5a6afd93165377aeae4d2cf3953ce55c992ed9fc86b19037cdb5d4d170"
+   },
+   {
+    "path": "pydantic-2.13.5/pydantic/plugin/_loader.py",
+    "sha256": "8408e04a58e82211b1dc0569229baac3948fb6d04d35e181493aea48c9cd8899"
+   },
+   {
+    "path": "pydantic-2.13.5/pydantic/type_adapter.py",
+    "sha256": "87cb2a9ad6159a790d2ee5629e4066a6606ce8166613a9f826e553082a2a00b9"
+   },
+   {
+    "path": "pydantic-2.13.5/pydantic/v1/config.py",
+    "sha256": "6ba3f459eafdc7871bc0a5bb5eff29a1252a33858ff912d6c17e9832962af400"
+   },
+   {
+    "path": "pydantic-2.13.5/pydantic/v1/generics.py",
+    "sha256": "b028e1481bc375798711255b8ab7ad119a6ae09b46e30207a94c65247e1b81b2"
+   },
+   {
+    "path": "pydantic-2.13.5/pydantic/v1/json.py",
+    "sha256": "590e47cbf848a5f751dd84bc93a37613a28c273b1d6c18bf95d58e3c9695f353"
+   },
+   {
+    "path": "pydantic-2.13.5/pydantic/v1/mypy.py",
+    "sha256": "e7387e216c4f911acde4b5587a11f76f0559534a9715a865d4cce2bce0fab3a5"
+   },
+   {
+    "path": "pydantic-2.13.5/pydantic/v1/networks.py",
+    "sha256": "244994bd0d52bf608e7998bea8a45927598dd7d6246ebad499a952d155bbb2bc"
+   },
+   {
+    "path": "pydantic-2.13.5/pydantic/warnings.py",
+    "sha256": "dd0c90a3a94ddf970eece5c36c511759c35a3e518245aade815640f86fa56702"
+   },
+   {
+    "path": "typing-inspection-0.4.4/typing_inspection/introspection.py",
+    "sha256": "50f8e5ce10f96c9374556d0c37bf0d00c9d98b0d02b387941c0c78233a0e0b35"
+   }
+  ],
+  "note": "H5 negatives, 2026-10-02, built by a separate blind session (no detector read or run). 150 third-party files from 10 permissively licensed distributions in .venv (seed 4113351651, per-package cap 22). Disjoint by path and content sha256 from negatives, negatives_external, negatives_holdout2, negatives_holdout3, negatives_holdout4 and the H4 withdrawn first draw."
+ },
+ "negatives_seed": 4113351651,
+ "samples": {
+  "by_category_expected": {
+   "credential-slot/secret": 250,
+   "generic/secret": 516,
+   "negative/negative": 250,
+   "provider/public": 150,
+   "provider/secret": 550
+  },
+  "total": 1716
+ },
+ "sealed": "2026-10-02",
+ "seed": 615367920,
+ "sha256": {
+  "corpus_digest": "6efe55e19a09429cdd9a6d857bb3c9786c706f2ff8bdf8d285a691490757f1de",
+  "holdout_5_py_sha256": "bed5631d76690a929e9d84a9ecb7dc4070d7b5acb49766d149a3301fd2eb8619",
+  "negatives_manifest_sha256": "de7a0319d82ffea66621e6c8d54b53252d3b0fb08401ac57ebbab183edef6955",
+  "total": "153a6858db68318e899f5657c967b4fc129a3089573c5c54666472b172cd48b5",
+  "total_method": "sha256 of json.dumps({corpus_digest, holdout_5_py_sha256, negatives_manifest_sha256}, sort_keys=True); corpus_digest = secret_corpus.corpus.digest(build_holdout5()), the same method that pins H3 and H4"
+ }
+}

@@ -8,6 +8,8 @@ import sys
 import time
 from pathlib import Path
 
+import pytest
+
 ROOT = Path(__file__).resolve().parents[2]
 
 
@@ -95,3 +97,34 @@ def test_killed_runs_leave_no_database_behind(tmp_path):
         proc.send_signal(signal.SIGTERM)
         proc.wait(timeout=120)
     assert count() == before
+
+
+def test_a_signal_during_a_connection_handshake_never_interrupts_it(tmp_path, monkeypatch):
+    # Flaky-test hunt 2026-10-02 (test_killed_runs_leave_no_database_behind timed out under load). Root cause: the
+    # handler raised SystemExit wherever the main thread was; inside psycopg's handshake that left a half-authenticated
+    # backend, and DROP DATABASE ... WITH (FORCE) waited for it to accept a ProcSignalBarrier until
+    # authentication_timeout. Deterministic interleaving: the signal arrives exactly mid-"handshake".
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("run_exp0003_mod", ROOT / "scripts" / "run_exp0003.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    steps = []
+
+    def fake_one_run(rep, rdir, record, mode, recorded_dir, keep_db=False, rebuild=False):
+        for family in range(3):
+            mod._check_abort()                         # the real loop's safe point before each family
+            steps.append(f"handshake-start-{family}")
+            os.kill(os.getpid(), signal.SIGTERM)       # delivered synchronously, mid-handshake
+            steps.append(f"handshake-done-{family}")   # the old handler never got here
+        return [], dict.fromkeys(mod.SAFETY_METRICS, 0), "0", 0, 0
+    monkeypatch.setattr(mod, "one_run", fake_one_run)
+    saved = {s: signal.getsignal(s) for s in (signal.SIGINT, signal.SIGTERM, signal.SIGHUP)}
+    try:
+        with pytest.raises(SystemExit, match="aborted by SIGTERM"):
+            mod.main(["run", "--dry-run", "--out", str(tmp_path)])
+    finally:
+        for s, h in saved.items():
+            signal.signal(s, h)
+    assert steps == ["handshake-start-0", "handshake-done-0"]   # completed, then stopped at the next safe point
+    r = _run_json(tmp_path)
+    assert (r["status"], r["abort_reason"]) == ("aborted", "signal SIGTERM")

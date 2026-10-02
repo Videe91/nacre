@@ -1,0 +1,1337 @@
+{
+ "built_by": "separate blind session",
+ "composition": {
+  "stdlib": 0,
+  "third_party": 150,
+  "total": 150
+ },
+ "date": "2026-10-02",
+ "files": [
+  {
+   "bytes": 1402,
+   "licence": "MIT",
+   "origin": "PyYAML 6.0.3",
+   "original": "site-packages/_yaml/__init__.py",
+   "path": "PyYAML-6.0.3/_yaml/__init__.py",
+   "sha256": "d3801eff9a2cc5a8692476b75c165401fe308ba5d7df6811f03e97ea9eb81840"
+  },
+  {
+   "bytes": 4883,
+   "licence": "MIT",
+   "origin": "PyYAML 6.0.3",
+   "original": "site-packages/yaml/composer.py",
+   "path": "PyYAML-6.0.3/yaml/composer.py",
+   "sha256": "fcaa37d16afa783594794a5ab94193dcb720f503c19ce3d59539c8311189f453"
+  },
+  {
+   "bytes": 16351,
+   "licence": "MIT",
+   "origin": "PyYAML 6.0.3",
+   "original": "site-packages/yaml/constructor.py",
+   "path": "PyYAML-6.0.3/yaml/constructor.py",
+   "sha256": "e0eef18091f222b49709f06ada0f31cb36b6e642e9525fde4862e6882c5db296"
+  },
+  {
+   "bytes": 2837,
+   "licence": "MIT",
+   "origin": "PyYAML 6.0.3",
+   "original": "site-packages/yaml/dumper.py",
+   "path": "PyYAML-6.0.3/yaml/dumper.py",
+   "sha256": "3cb72d66563064ba7b5e679477046ebf89d8399d940670c8532f3e94a7cb17ea"
+  },
+  {
+   "bytes": 2533,
+   "licence": "MIT",
+   "origin": "PyYAML 6.0.3",
+   "original": "site-packages/yaml/error.py",
+   "path": "PyYAML-6.0.3/yaml/error.py",
+   "sha256": "021f73fada072546c4f63f8cf18a7181244ce4280b09cc15cc980b2d1176171a"
+  },
+  {
+   "bytes": 2445,
+   "licence": "MIT",
+   "origin": "PyYAML 6.0.3",
+   "original": "site-packages/yaml/events.py",
+   "path": "PyYAML-6.0.3/yaml/events.py",
+   "sha256": "e74fd392c810884e2ea7e94aa3f57e9c1cbeb402319083d0c58e6a0e1282787c"
+  },
+  {
+   "bytes": 16351,
+   "licence": "MIT",
+   "origin": "PyYAML 6.0.3",
+   "original": "site-packages/yaml/parser.py",
+   "path": "PyYAML-6.0.3/yaml/parser.py",
+   "sha256": "25455932ce8e76f293a9b018598f89b946805bb58d44a2452f7d639d227a27fb"
+  },
+  {
+   "bytes": 14190,
+   "licence": "MIT",
+   "origin": "PyYAML 6.0.3",
+   "original": "site-packages/yaml/representer.py",
+   "path": "PyYAML-6.0.3/yaml/representer.py",
+   "sha256": "22e58ff9c016f6c1ca1274b4802a926bcf78935060e1c813c5a0f021c6d143e6"
+  },
+  {
+   "bytes": 16372,
+   "licence": "MIT",
+   "origin": "PyYAML 6.0.3",
+   "original": "site-packages/yaml/scanner.py",
+   "path": "PyYAML-6.0.3/yaml/scanner.py",
+   "sha256": "089e7a195f3a18826432679f607790002824cc743ae6c2e4410e208104da2eb6"
+  },
+  {
+   "bytes": 4165,
+   "licence": "MIT",
+   "origin": "PyYAML 6.0.3",
+   "original": "site-packages/yaml/serializer.py",
+   "path": "PyYAML-6.0.3/yaml/serializer.py",
+   "sha256": "0a1b85826854d35863e31808f0668abfabdf33606e8f06bd8bb7761401e3edc0"
+  },
+  {
+   "bytes": 2573,
+   "licence": "MIT",
+   "origin": "PyYAML 6.0.3",
+   "original": "site-packages/yaml/tokens.py",
+   "path": "PyYAML-6.0.3/yaml/tokens.py",
+   "sha256": "953408cd2570f0c83dc2fe39f7e4e388e41eeb05738aa69196a5f6ffcf6ba79e"
+  },
+  {
+   "bytes": 7602,
+   "licence": "MIT",
+   "origin": "anyio 4.15.1",
+   "original": "site-packages/anyio/__init__.py",
+   "path": "anyio-4.15.1/anyio/__init__.py",
+   "sha256": "39fae86118c8530fc9163d19c21d4901a6a331083856ab6802dd17a0e1c34701"
+  },
+  {
+   "bytes": 16370,
+   "licence": "MIT",
+   "origin": "anyio 4.15.1",
+   "original": "site-packages/anyio/_backends/_asyncio.py",
+   "path": "anyio-4.15.1/anyio/_backends/_asyncio.py",
+   "sha256": "e5a8dc02f501f36b38ab8c0f11b57843343b482c922af88718ea9b75e04efca9"
+  },
+  {
+   "bytes": 16381,
+   "licence": "MIT",
+   "origin": "anyio 4.15.1",
+   "original": "site-packages/anyio/_backends/_trio.py",
+   "path": "anyio-4.15.1/anyio/_backends/_trio.py",
+   "sha256": "ec2cdcae7f1ef94502fc0312ec04a2d81ca2c9d65fe47c5c2ffd916cdfb39b50"
+  },
+  {
+   "bytes": 7215,
+   "licence": "MIT",
+   "origin": "anyio 4.15.1",
+   "original": "site-packages/anyio/_core/_contextmanagers.py",
+   "path": "anyio-4.15.1/anyio/_core/_contextmanagers.py",
+   "sha256": "6089c109a6e211e4be51a3ff25dc5ad426850bbd444cf5bc1d94c720cf11b1cf"
+  },
+  {
+   "bytes": 6658,
+   "licence": "MIT",
+   "origin": "anyio 4.15.1",
+   "original": "site-packages/anyio/_core/_eventloop.py",
+   "path": "anyio-4.15.1/anyio/_core/_eventloop.py",
+   "sha256": "0726547890fd6a531f7324ec791a392334ced0896d12e97f1b2abd8aa4a3a839"
+  },
+  {
+   "bytes": 16360,
+   "licence": "MIT",
+   "origin": "anyio 4.15.1",
+   "original": "site-packages/anyio/_core/_fileio.py",
+   "path": "anyio-4.15.1/anyio/_core/_fileio.py",
+   "sha256": "2f4280535ae38968de6f9952a92cef8ad0e39e3c77d6d43cf034d53601edbbc8"
+  },
+  {
+   "bytes": 6177,
+   "licence": "MIT",
+   "origin": "anyio 4.15.1",
+   "original": "site-packages/anyio/_core/_futures.py",
+   "path": "anyio-4.15.1/anyio/_core/_futures.py",
+   "sha256": "610ab9ba19c29ca40c403eb6b4e2dfcc49bb7545d8dc6428ac9747ea085f8084"
+  },
+  {
+   "bytes": 450,
+   "licence": "MIT",
+   "origin": "anyio 4.15.1",
+   "original": "site-packages/anyio/_core/_resources.py",
+   "path": "anyio-4.15.1/anyio/_core/_resources.py",
+   "sha256": "2dde5db827bd37080f7c8ec420e87708c201610eebaba65011aec2152d2ef447"
+  },
+  {
+   "bytes": 7938,
+   "licence": "MIT",
+   "origin": "anyio 4.15.1",
+   "original": "site-packages/anyio/_core/_subprocesses.py",
+   "path": "anyio-4.15.1/anyio/_core/_subprocesses.py",
+   "sha256": "4cc06e18d20bcfee3bc39b7dbdac89d46a42a434fa2f1b0ca212431427b02117"
+  },
+  {
+   "bytes": 16362,
+   "licence": "MIT",
+   "origin": "anyio 4.15.1",
+   "original": "site-packages/anyio/_core/_synchronization.py",
+   "path": "anyio-4.15.1/anyio/_core/_synchronization.py",
+   "sha256": "28a5786a0607cbc2aca6afe3536bcb995429a922bc3c6685bbfaec0c1a1dccf9"
+  },
+  {
+   "bytes": 15391,
+   "licence": "MIT",
+   "origin": "anyio 4.15.1",
+   "original": "site-packages/anyio/_core/_tasks.py",
+   "path": "anyio-4.15.1/anyio/_core/_tasks.py",
+   "sha256": "27676133f26adc6aec7e0fde9cd5a9473d92c5f335e6e2edfa911fbe842adee0"
+  },
+  {
+   "bytes": 6082,
+   "licence": "MIT",
+   "origin": "anyio 4.15.1",
+   "original": "site-packages/anyio/_lazyimport.py",
+   "path": "anyio-4.15.1/anyio/_lazyimport.py",
+   "sha256": "2c28e761a9c87d813d1be0effc4b2a34b0ee551a693627166630937d2f7eb095"
+  },
+  {
+   "bytes": 7620,
+   "licence": "MIT",
+   "origin": "anyio 4.15.1",
+   "original": "site-packages/anyio/abc/_streams.py",
+   "path": "anyio-4.15.1/anyio/abc/_streams.py",
+   "sha256": "20c78e3cfbad15745bc9e02eb715751c97bb154419629daa2ab249a4fd430afd"
+  },
+  {
+   "bytes": 2123,
+   "licence": "MIT",
+   "origin": "anyio 4.15.1",
+   "original": "site-packages/anyio/abc/_subprocesses.py",
+   "path": "anyio-4.15.1/anyio/abc/_subprocesses.py",
+   "sha256": "083a94d69d07b814b4a57533056fe16df86285325133aee7fffeea666a0f53ce"
+  },
+  {
+   "bytes": 7070,
+   "licence": "MIT",
+   "origin": "anyio 4.15.1",
+   "original": "site-packages/anyio/abc/_tasks.py",
+   "path": "anyio-4.15.1/anyio/abc/_tasks.py",
+   "sha256": "1c13e94fbd9a3b2d1bc0c0310422a69d7b11df6f30098463626de2695c367d0a"
+  },
+  {
+   "bytes": 16355,
+   "licence": "MIT",
+   "origin": "anyio 4.15.1",
+   "original": "site-packages/anyio/from_thread.py",
+   "path": "anyio-4.15.1/anyio/from_thread.py",
+   "sha256": "b1e7a8d787d31bf86de2bf8a5944135b810f93dcd3d08843d8008c2222abf7f0"
+  },
+  {
+   "bytes": 6746,
+   "licence": "MIT",
+   "origin": "anyio 4.15.1",
+   "original": "site-packages/anyio/streams/buffered.py",
+   "path": "anyio-4.15.1/anyio/streams/buffered.py",
+   "sha256": "bbb8420fc48dad81dcbad1ba2b9c048b2d45f3cfa98b3823bc414cdb62aad82c"
+  },
+  {
+   "bytes": 5765,
+   "licence": "MIT",
+   "origin": "anyio 4.15.1",
+   "original": "site-packages/anyio/streams/text.py",
+   "path": "anyio-4.15.1/anyio/streams/text.py",
+   "sha256": "05c540189c35551bed22a9effa8d116f4a701fba7cbf096f976d711eae76d9a8"
+  },
+  {
+   "bytes": 15818,
+   "licence": "MIT",
+   "origin": "anyio 4.15.1",
+   "original": "site-packages/anyio/streams/tls.py",
+   "path": "anyio-4.15.1/anyio/streams/tls.py",
+   "sha256": "7ea2e6c6f50b14ef6bbf11b2277dd53eb38837b1377a2535abdd019262a2810f"
+  },
+  {
+   "bytes": 7100,
+   "licence": "MIT",
+   "origin": "anyio 4.15.1",
+   "original": "site-packages/anyio/to_interpreter.py",
+   "path": "anyio-4.15.1/anyio/to_interpreter.py",
+   "sha256": "0139e84fa91e8bdc0399066d5d30374ac63808aed72abf136b8ff1e62ea96d3c"
+  },
+  {
+   "bytes": 9850,
+   "licence": "MIT",
+   "origin": "anyio 4.15.1",
+   "original": "site-packages/anyio/to_process.py",
+   "path": "anyio-4.15.1/anyio/to_process.py",
+   "sha256": "a7a9fc8f49eb789525d4312447ff4f2fa291a0ab4da85c4e4539fca9906f9fde"
+  },
+  {
+   "bytes": 2750,
+   "licence": "MIT",
+   "origin": "anyio 4.15.1",
+   "original": "site-packages/anyio/to_thread.py",
+   "path": "anyio-4.15.1/anyio/to_thread.py",
+   "sha256": "f0c3d5aeb42af2db46bd5db571277af2b32da396e1c49d3e8bd0aea576a0e46b"
+  },
+  {
+   "bytes": 5145,
+   "licence": "BSD-3-Clause",
+   "origin": "click 8.5.0",
+   "original": "site-packages/click/__init__.py",
+   "path": "click-8.5.0/click/__init__.py",
+   "sha256": "5abfc54d37d47cc788b7e7a05e9514787f8c5a0b7db429d0f24d748ac89964ca"
+  },
+  {
+   "bytes": 16362,
+   "licence": "BSD-3-Clause",
+   "origin": "click 8.5.0",
+   "original": "site-packages/click/_compat.py",
+   "path": "click-8.5.0/click/_compat.py",
+   "sha256": "da839c4cab0275128a890dac75b739433282aacad65b0db4a252f68f6e22bf87"
+  },
+  {
+   "bytes": 16366,
+   "licence": "BSD-3-Clause",
+   "origin": "click 8.5.0",
+   "original": "site-packages/click/core.py",
+   "path": "click-8.5.0/click/core.py",
+   "sha256": "ad05296a3ad3110745944918a1ce73dba0a163a5acaa9dd9b853bbbed2622319"
+  },
+  {
+   "bytes": 11862,
+   "licence": "BSD-3-Clause",
+   "origin": "click 8.5.0",
+   "original": "site-packages/click/exceptions.py",
+   "path": "click-8.5.0/click/exceptions.py",
+   "sha256": "1ef498df81b86ae8ff6d8451f3e4fc094f09c2aff5f8e72c454e1ecdfa337849"
+  },
+  {
+   "bytes": 1923,
+   "licence": "BSD-3-Clause",
+   "origin": "click 8.5.0",
+   "original": "site-packages/click/globals.py",
+   "path": "click-8.5.0/click/globals.py",
+   "sha256": "80cf8d87a0383341c1fd2824685e4ce2770618c0c773f7e51d7bbdfe88781845"
+  },
+  {
+   "bytes": 16344,
+   "licence": "BSD-3-Clause",
+   "origin": "click 8.5.0",
+   "original": "site-packages/click/shell_completion.py",
+   "path": "click-8.5.0/click/shell_completion.py",
+   "sha256": "68c74d4351093f749f3c0bf535e8f5c3d5f95fd01e9ac21a920d8e91f8fc6fb7"
+  },
+  {
+   "bytes": 16318,
+   "licence": "BSD-3-Clause",
+   "origin": "click 8.5.0",
+   "original": "site-packages/click/termui.py",
+   "path": "click-8.5.0/click/termui.py",
+   "sha256": "0d72db30f41ad071e333ed9af1dc4801691a28092512821154f1379ac9a6b1b1"
+  },
+  {
+   "bytes": 16382,
+   "licence": "BSD-3-Clause",
+   "origin": "click 8.5.0",
+   "original": "site-packages/click/types.py",
+   "path": "click-8.5.0/click/types.py",
+   "sha256": "70d5dac9c464834539cb1adb61dc409f70a4edd9c385a082eebc528ae1136d3e"
+  },
+  {
+   "bytes": 16348,
+   "licence": "BSD-3-Clause",
+   "origin": "click 8.5.0",
+   "original": "site-packages/click/utils.py",
+   "path": "click-8.5.0/click/utils.py",
+   "sha256": "74bfc635c5529c9eb01baefdcbd5470a37ba4594b96e3df775b2ce847f12847e"
+  },
+  {
+   "bytes": 16338,
+   "licence": "MIT",
+   "origin": "filelock 4.0.8",
+   "original": "site-packages/filelock/_api.py",
+   "path": "filelock-4.0.8/filelock/_api.py",
+   "sha256": "9789c91f5fc1797635cd83daeb828711bfa8f5c11e0f1194c916d2d2297001fb"
+  },
+  {
+   "bytes": 10276,
+   "licence": "MIT",
+   "origin": "filelock 4.0.8",
+   "original": "site-packages/filelock/_identity.py",
+   "path": "filelock-4.0.8/filelock/_identity.py",
+   "sha256": "d0bbdeaa413cc85547f13d59dfa7ff1e009d4724c1786b522c7a329cd0bdc101"
+  },
+  {
+   "bytes": 15873,
+   "licence": "MIT",
+   "origin": "filelock 4.0.8",
+   "original": "site-packages/filelock/_lease.py",
+   "path": "filelock-4.0.8/filelock/_lease.py",
+   "sha256": "b816d5c02ef5db5c67a8432ec66d736ee6fe776e76f7aff17f333049583e27ca"
+  },
+  {
+   "bytes": 6485,
+   "licence": "MIT",
+   "origin": "filelock 4.0.8",
+   "original": "site-packages/filelock/_marker.py",
+   "path": "filelock-4.0.8/filelock/_marker.py",
+   "sha256": "92db03a9bcb6a97fea5d18b4c92109939b7bd644d0a213a2671735031f12c387"
+  },
+  {
+   "bytes": 187,
+   "licence": "MIT",
+   "origin": "filelock 4.0.8",
+   "original": "site-packages/filelock/_soft_protocol.py",
+   "path": "filelock-4.0.8/filelock/_soft_protocol.py",
+   "sha256": "a84336c7d373f7382e5f0c168d9b02b0f11f6ace67a87949fbfa07bc0334528e"
+  },
+  {
+   "bytes": 13559,
+   "licence": "MIT",
+   "origin": "filelock 4.0.8",
+   "original": "site-packages/filelock/_soft_rw/_async.py",
+   "path": "filelock-4.0.8/filelock/_soft_rw/_async.py",
+   "sha256": "ea419cb564fcd39723096c920ece24cbf4c48244afe884456cf0fb09734ea628"
+  },
+  {
+   "bytes": 16309,
+   "licence": "MIT",
+   "origin": "filelock 4.0.8",
+   "original": "site-packages/filelock/_soft_rw/_protocol.py",
+   "path": "filelock-4.0.8/filelock/_soft_rw/_protocol.py",
+   "sha256": "62db7fd121237aca6007ee90651a748bc47452db389ef9cd8ceffb3d8616dddc"
+  },
+  {
+   "bytes": 6424,
+   "licence": "MIT",
+   "origin": "filelock 4.0.8",
+   "original": "site-packages/filelock/_soft_rw/_storage.py",
+   "path": "filelock-4.0.8/filelock/_soft_rw/_storage.py",
+   "sha256": "359d2ebf4f121d775aa19a5fec3d76bae31669cff7c59960261934fa96d45413"
+  },
+  {
+   "bytes": 16308,
+   "licence": "MIT",
+   "origin": "filelock 4.0.8",
+   "original": "site-packages/filelock/_strict.py",
+   "path": "filelock-4.0.8/filelock/_strict.py",
+   "sha256": "e6c32548d1647b5b5ddfcedf188daa68a99a22b74d5d05258120df568574d760"
+  },
+  {
+   "bytes": 6775,
+   "licence": "MIT",
+   "origin": "filelock 4.0.8",
+   "original": "site-packages/filelock/_util.py",
+   "path": "filelock-4.0.8/filelock/_util.py",
+   "sha256": "a7ddeff19ce057a8a62bdf35d81d03c52a02c56447395bbec0d19f7ab1e22421"
+  },
+  {
+   "bytes": 16380,
+   "licence": "MIT",
+   "origin": "filelock 4.0.8",
+   "original": "site-packages/filelock/_windows.py",
+   "path": "filelock-4.0.8/filelock/_windows.py",
+   "sha256": "44d9e4dd5cd224339a17c23bedd076a65af02e8eb536eb5e8f226f741ccb338e"
+  },
+  {
+   "bytes": 2111,
+   "licence": "BSD-3-Clause",
+   "origin": "fsspec 2026.9.0",
+   "original": "site-packages/fsspec/__init__.py",
+   "path": "fsspec-2026.9.0/fsspec/__init__.py",
+   "sha256": "c457281c10f5edf73929a98a510008034ade3c68cba8837558101df4d028022f"
+  },
+  {
+   "bytes": 16367,
+   "licence": "BSD-3-Clause",
+   "origin": "fsspec 2026.9.0",
+   "original": "site-packages/fsspec/caching.py",
+   "path": "fsspec-2026.9.0/fsspec/caching.py",
+   "sha256": "54bfe4fd0f5ee386d374ba0753d077d575851151a13ee1d705a014b5eba708a5"
+  },
+  {
+   "bytes": 9210,
+   "licence": "BSD-3-Clause",
+   "origin": "fsspec 2026.9.0",
+   "original": "site-packages/fsspec/callbacks.py",
+   "path": "fsspec-2026.9.0/fsspec/callbacks.py",
+   "sha256": "0432302f32baaebff4579721e79edf4b3b22bc2125a5daa15ebe5d67d4def841"
+  },
+  {
+   "bytes": 4238,
+   "licence": "BSD-3-Clause",
+   "origin": "fsspec 2026.9.0",
+   "original": "site-packages/fsspec/config.py",
+   "path": "fsspec-2026.9.0/fsspec/config.py",
+   "sha256": "9872b30208d76bf2f0aad3bf5684c9279ebc56ac1891b2b7814a7827a259269e"
+  },
+  {
+   "bytes": 331,
+   "licence": "BSD-3-Clause",
+   "origin": "fsspec 2026.9.0",
+   "original": "site-packages/fsspec/exceptions.py",
+   "path": "fsspec-2026.9.0/fsspec/exceptions.py",
+   "sha256": "a5ab922c3331cd324c3a3bd7d561142b470cc8592b171a5626cc85cb06afec0f"
+  },
+  {
+   "bytes": 10177,
+   "licence": "BSD-3-Clause",
+   "origin": "fsspec 2026.9.0",
+   "original": "site-packages/fsspec/fuse.py",
+   "path": "fsspec-2026.9.0/fsspec/fuse.py",
+   "sha256": "43edcd38ec8ba817d86b80dbe44d7dcff658dfacf3607b48b3598e51ab08b414"
+  },
+  {
+   "bytes": 9344,
+   "licence": "BSD-3-Clause",
+   "origin": "fsspec 2026.9.0",
+   "original": "site-packages/fsspec/implementations/arrow.py",
+   "path": "fsspec-2026.9.0/fsspec/implementations/arrow.py",
+   "sha256": "346b49f72581b7948fa6f0cf4e8fa9e2bcb68f447d70e09379c779a00eabc45a"
+  },
+  {
+   "bytes": 4304,
+   "licence": "BSD-3-Clause",
+   "origin": "fsspec 2026.9.0",
+   "original": "site-packages/fsspec/implementations/asyn_wrapper.py",
+   "path": "fsspec-2026.9.0/fsspec/implementations/asyn_wrapper.py",
+   "sha256": "218ad8fbe5ccec6533fb97378bfe0513bce74d0a20aeecaab29ed48402b066f9"
+  },
+  {
+   "bytes": 680,
+   "licence": "BSD-3-Clause",
+   "origin": "fsspec 2026.9.0",
+   "original": "site-packages/fsspec/implementations/chained.py",
+   "path": "fsspec-2026.9.0/fsspec/implementations/chained.py",
+   "sha256": "8868afa4d6875058c1fde6b4f8700f85c9a6e822fcaa70dfdbbd0f4a3ec9c2e1"
+  },
+  {
+   "bytes": 2131,
+   "licence": "BSD-3-Clause",
+   "origin": "fsspec 2026.9.0",
+   "original": "site-packages/fsspec/implementations/data.py",
+   "path": "fsspec-2026.9.0/fsspec/implementations/data.py",
+   "sha256": "f6d31ccb57f25f56aebf3157d9a00d3caf427cfa1aae7c530832e15f5daeb2fb"
+  },
+  {
+   "bytes": 8528,
+   "licence": "BSD-3-Clause",
+   "origin": "fsspec 2026.9.0",
+   "original": "site-packages/fsspec/implementations/gist.py",
+   "path": "fsspec-2026.9.0/fsspec/implementations/gist.py",
+   "sha256": "63a8d30eb13ec2e4f0be93f20100eeb8e3011b195a8da7ca5a8075ff25fa8dd6"
+  },
+  {
+   "bytes": 16379,
+   "licence": "BSD-3-Clause",
+   "origin": "fsspec 2026.9.0",
+   "original": "site-packages/fsspec/implementations/http_sync.py",
+   "path": "fsspec-2026.9.0/fsspec/implementations/http_sync.py",
+   "sha256": "6a31942595c37b3ee550459a2197fd9c34c1e3442e03464d2274cce56018ae9c"
+  },
+  {
+   "bytes": 16373,
+   "licence": "BSD-3-Clause",
+   "origin": "fsspec 2026.9.0",
+   "original": "site-packages/fsspec/implementations/reference.py",
+   "path": "fsspec-2026.9.0/fsspec/implementations/reference.py",
+   "sha256": "f55fd5c2f668080e3d7fa01d4cf8cfa9b662dfd3de7c6649c30d14771c5505a2"
+  },
+  {
+   "bytes": 5573,
+   "licence": "BSD-3-Clause",
+   "origin": "fsspec 2026.9.0",
+   "original": "site-packages/fsspec/implementations/tar.py",
+   "path": "fsspec-2026.9.0/fsspec/implementations/tar.py",
+   "sha256": "616c1cc3f7a01c00734e06126ae684816919ebf7d037a3b3874dec3484a2b374"
+  },
+  {
+   "bytes": 16365,
+   "licence": "BSD-3-Clause",
+   "origin": "fsspec 2026.9.0",
+   "original": "site-packages/fsspec/implementations/webhdfs.py",
+   "path": "fsspec-2026.9.0/fsspec/implementations/webhdfs.py",
+   "sha256": "42f472c825523b43d6d98c275da2f9c75d37b7f8ca2f156d0ab9a0f5762dcbb1"
+  },
+  {
+   "bytes": 6712,
+   "licence": "BSD-3-Clause",
+   "origin": "fsspec 2026.9.0",
+   "original": "site-packages/fsspec/implementations/zip.py",
+   "path": "fsspec-2026.9.0/fsspec/implementations/zip.py",
+   "sha256": "e8324f76ad3598831cf024a726932cd3c2ca44d1a2a4532a24f502f2ba2ed6a5"
+  },
+  {
+   "bytes": 3768,
+   "licence": "BSD-3-Clause",
+   "origin": "fsspec 2026.9.0",
+   "original": "site-packages/fsspec/json.py",
+   "path": "fsspec-2026.9.0/fsspec/json.py",
+   "sha256": "e04059fb13a6462cb1988a8f230c660c89a8b1143b8a8eea04cdb18c93ec104e"
+  },
+  {
+   "bytes": 16331,
+   "licence": "BSD-3-Clause",
+   "origin": "fsspec 2026.9.0",
+   "original": "site-packages/fsspec/parquet.py",
+   "path": "fsspec-2026.9.0/fsspec/parquet.py",
+   "sha256": "a973270ce1cf8799ed99beb84662d6b502eef8c82eb38a913a792661b5f39118"
+  },
+  {
+   "bytes": 16343,
+   "licence": "BSD-3-Clause",
+   "origin": "fsspec 2026.9.0",
+   "original": "site-packages/fsspec/prefetcher.py",
+   "path": "fsspec-2026.9.0/fsspec/prefetcher.py",
+   "sha256": "59da535ec3b85f95a5c6e19504891d25707621431ac0bbe6f7eba1382c47659c"
+  },
+  {
+   "bytes": 16349,
+   "licence": "BSD-3-Clause",
+   "origin": "fsspec 2026.9.0",
+   "original": "site-packages/fsspec/spec.py",
+   "path": "fsspec-2026.9.0/fsspec/spec.py",
+   "sha256": "c7b1529d7ac8e59cdd8210d3a14c923f5753b6465dbd23e86fc9e3ef04c9f177"
+  },
+  {
+   "bytes": 3392,
+   "licence": "BSD-3-Clause",
+   "origin": "fsspec 2026.9.0",
+   "original": "site-packages/fsspec/transaction.py",
+   "path": "fsspec-2026.9.0/fsspec/transaction.py",
+   "sha256": "6d2d724103c48079511104818f0fb50eb76a627dbb31d72d900e7913bf27b7db"
+  },
+  {
+   "bytes": 16338,
+   "licence": "BSD-3-Clause",
+   "origin": "fsspec 2026.9.0",
+   "original": "site-packages/fsspec/utils.py",
+   "path": "fsspec-2026.9.0/fsspec/utils.py",
+   "sha256": "488f131de0bd2bd4b7d104753608e35ecde52b8d6bf6f5cf63de90bbb606a2eb"
+  },
+  {
+   "bytes": 1507,
+   "licence": "MIT",
+   "origin": "h11 0.16.0",
+   "original": "site-packages/h11/__init__.py",
+   "path": "h11-0.16.0/h11/__init__.py",
+   "sha256": "88ed4ace448ee36c99e9f7e0f953206f1fd9553586518d349d16045a7facde46"
+  },
+  {
+   "bytes": 4815,
+   "licence": "MIT",
+   "origin": "h11 0.16.0",
+   "original": "site-packages/h11/_abnf.py",
+   "path": "h11-0.16.0/h11/_abnf.py",
+   "sha256": "c9b8b1af4c6cba99e403a18503232e6ee5c5e9373595bfe117cf743600ac7cd7"
+  },
+  {
+   "bytes": 16350,
+   "licence": "MIT",
+   "origin": "h11 0.16.0",
+   "original": "site-packages/h11/_connection.py",
+   "path": "h11-0.16.0/h11/_connection.py",
+   "sha256": "5622dbe0915ab19090b9dbd87166b80843fa007cf8155c3fbdeebec9e10bc962"
+  },
+  {
+   "bytes": 11792,
+   "licence": "MIT",
+   "origin": "h11 0.16.0",
+   "original": "site-packages/h11/_events.py",
+   "path": "h11-0.16.0/h11/_events.py",
+   "sha256": "23deda5e86a5d56bbb7642f9e3c04034150290e21b7bec790a2a1803d201635e"
+  },
+  {
+   "bytes": 10412,
+   "licence": "MIT",
+   "origin": "h11 0.16.0",
+   "original": "site-packages/h11/_headers.py",
+   "path": "h11-0.16.0/h11/_headers.py",
+   "sha256": "3fb0fe9413711f074b64f2e29a6630acf1bef59923125bef25925d6408123fee"
+  },
+  {
+   "bytes": 8590,
+   "licence": "MIT",
+   "origin": "h11 0.16.0",
+   "original": "site-packages/h11/_readers.py",
+   "path": "h11-0.16.0/h11/_readers.py",
+   "sha256": "6b8472a4e454082dddd2afe4c4fb8120cee34c3f222ede57f754c7d05b1db8de"
+  },
+  {
+   "bytes": 5252,
+   "licence": "MIT",
+   "origin": "h11 0.16.0",
+   "original": "site-packages/h11/_receivebuffer.py",
+   "path": "h11-0.16.0/h11/_receivebuffer.py",
+   "sha256": "c6bb29b1db0d81617145f41c4d7c51f11add8d15d74cad08a39710616a49d56b"
+  },
+  {
+   "bytes": 13231,
+   "licence": "MIT",
+   "origin": "h11 0.16.0",
+   "original": "site-packages/h11/_state.py",
+   "path": "h11-0.16.0/h11/_state.py",
+   "sha256": "ff92c6fc1191f0509c1507813c7f93307826ffe07e1147160a74287fff578c51"
+  },
+  {
+   "bytes": 686,
+   "licence": "MIT",
+   "origin": "h11 0.16.0",
+   "original": "site-packages/h11/_version.py",
+   "path": "h11-0.16.0/h11/_version.py",
+   "sha256": "1954ac6cf48f0dc3ae17aa6d7c88979d52686849b7ca05db327aa5aff1a26a1c"
+  },
+  {
+   "bytes": 1221,
+   "licence": "BSD-3-Clause",
+   "origin": "httpcore 1.0.9",
+   "original": "site-packages/httpcore/_async/__init__.py",
+   "path": "httpcore-1.0.9/httpcore/_async/__init__.py",
+   "sha256": "116765dafe2d867007cc9a6a8d4e21d9af03522180bcd896ae48a2f697e14dfd"
+  },
+  {
+   "bytes": 8449,
+   "licence": "BSD-3-Clause",
+   "origin": "httpcore 1.0.9",
+   "original": "site-packages/httpcore/_async/connection.py",
+   "path": "httpcore-1.0.9/httpcore/_async/connection.py",
+   "sha256": "e8e70f5ea3047dcd01537f3ffa21d4343775bca4937365154f4f57a8d6ff04e9"
+  },
+  {
+   "bytes": 13880,
+   "licence": "BSD-3-Clause",
+   "origin": "httpcore 1.0.9",
+   "original": "site-packages/httpcore/_async/http11.py",
+   "path": "httpcore-1.0.9/httpcore/_async/http11.py",
+   "sha256": "faa33d6d5ecf8d2405e6fc6cdfbf9e5173881706c88cf7196cd962b97f53b41c"
+  },
+  {
+   "bytes": 16368,
+   "licence": "BSD-3-Clause",
+   "origin": "httpcore 1.0.9",
+   "original": "site-packages/httpcore/_async/http2.py",
+   "path": "httpcore-1.0.9/httpcore/_async/http2.py",
+   "sha256": "f389462cf53799156df1f0ea0285bf34633482ef26fb26432c7fb2034c563cf3"
+  },
+  {
+   "bytes": 14701,
+   "licence": "BSD-3-Clause",
+   "origin": "httpcore 1.0.9",
+   "original": "site-packages/httpcore/_async/http_proxy.py",
+   "path": "httpcore-1.0.9/httpcore/_async/http_proxy.py",
+   "sha256": "db3564ae5bfe0ecfab5866aa69796b84426201014fa36dc14f71aafec5a80575"
+  },
+  {
+   "bytes": 4455,
+   "licence": "BSD-3-Clause",
+   "origin": "httpcore 1.0.9",
+   "original": "site-packages/httpcore/_async/interfaces.py",
+   "path": "httpcore-1.0.9/httpcore/_async/interfaces.py",
+   "sha256": "8d389a58bf37a60a460bdce2bfdd197f068a34c987c2639a97368a8ae4f1013a"
+  },
+  {
+   "bytes": 5252,
+   "licence": "BSD-3-Clause",
+   "origin": "httpcore 1.0.9",
+   "original": "site-packages/httpcore/_backends/anyio.py",
+   "path": "httpcore-1.0.9/httpcore/_backends/anyio.py",
+   "sha256": "c7c3e01215d10bc6d5aac77393f609c7c63a77d4ee6f4e82b944b09db9adaa86"
+  },
+  {
+   "bytes": 1662,
+   "licence": "BSD-3-Clause",
+   "origin": "httpcore 1.0.9",
+   "original": "site-packages/httpcore/_backends/auto.py",
+   "path": "httpcore-1.0.9/httpcore/_backends/auto.py",
+   "sha256": "cced77e8f2999ac6930caf87464f38780f8c520f3fdb025fe0dbe62b8df6022a"
+  },
+  {
+   "bytes": 3042,
+   "licence": "BSD-3-Clause",
+   "origin": "httpcore 1.0.9",
+   "original": "site-packages/httpcore/_backends/base.py",
+   "path": "httpcore-1.0.9/httpcore/_backends/base.py",
+   "sha256": "69286045d6673264611561deb63ba694cef77fc2b3d58380c8250fff8907b250"
+  },
+  {
+   "bytes": 4077,
+   "licence": "BSD-3-Clause",
+   "origin": "httpcore 1.0.9",
+   "original": "site-packages/httpcore/_backends/mock.py",
+   "path": "httpcore-1.0.9/httpcore/_backends/mock.py",
+   "sha256": "7abf53e37eae49eecd2eb7e22dae31e8dbaa8398af43af770b1598096b206c7e"
+  },
+  {
+   "bytes": 5996,
+   "licence": "BSD-3-Clause",
+   "origin": "httpcore 1.0.9",
+   "original": "site-packages/httpcore/_backends/trio.py",
+   "path": "httpcore-1.0.9/httpcore/_backends/trio.py",
+   "sha256": "2c7bb8fccaf932cc109a64f7c84e282e07fd6ff2497de552e018c3c5e25ced1a"
+  },
+  {
+   "bytes": 1184,
+   "licence": "BSD-3-Clause",
+   "origin": "httpcore 1.0.9",
+   "original": "site-packages/httpcore/_exceptions.py",
+   "path": "httpcore-1.0.9/httpcore/_exceptions.py",
+   "sha256": "968a022a06b7fd8558bb7b3e7772fd44c3d127286c63b7e2bae1b1be4383d1cd"
+  },
+  {
+   "bytes": 187,
+   "licence": "BSD-3-Clause",
+   "origin": "httpcore 1.0.9",
+   "original": "site-packages/httpcore/_ssl.py",
+   "path": "httpcore-1.0.9/httpcore/_ssl.py",
+   "sha256": "b2baa648d53888e52f585f92ac9bdbf06fd811b1c510b39740ec1d0c80534bd7"
+  },
+  {
+   "bytes": 1141,
+   "licence": "BSD-3-Clause",
+   "origin": "httpcore 1.0.9",
+   "original": "site-packages/httpcore/_sync/__init__.py",
+   "path": "httpcore-1.0.9/httpcore/_sync/__init__.py",
+   "sha256": "2410c8817b7995ad4b089d6c2d078a863285a4b9e936bf12beceb3da78b77e08"
+  },
+  {
+   "bytes": 8238,
+   "licence": "BSD-3-Clause",
+   "origin": "httpcore 1.0.9",
+   "original": "site-packages/httpcore/_sync/connection.py",
+   "path": "httpcore-1.0.9/httpcore/_sync/connection.py",
+   "sha256": "f5ec4639bdcf07e329d93d7eb1c91278bdadfad27ff7e357a2657c8a19960a05"
+  },
+  {
+   "bytes": 16373,
+   "licence": "BSD-3-Clause",
+   "origin": "httpcore 1.0.9",
+   "original": "site-packages/httpcore/_sync/connection_pool.py",
+   "path": "httpcore-1.0.9/httpcore/_sync/connection_pool.py",
+   "sha256": "9f89fe56254dd97ab71fabefaf8de25272babc9760f4c05694005faab16eeb76"
+  },
+  {
+   "bytes": 13476,
+   "licence": "BSD-3-Clause",
+   "origin": "httpcore 1.0.9",
+   "original": "site-packages/httpcore/_sync/http11.py",
+   "path": "httpcore-1.0.9/httpcore/_sync/http11.py",
+   "sha256": "205a1b0f531de491652462969e1d7f4377a98a452bc88f2aa34f6ff0c8892040"
+  },
+  {
+   "bytes": 16354,
+   "licence": "BSD-3-Clause",
+   "origin": "httpcore 1.0.9",
+   "original": "site-packages/httpcore/_sync/http2.py",
+   "path": "httpcore-1.0.9/httpcore/_sync/http2.py",
+   "sha256": "6bfa91a8934cac3f529e842ad007e2bfbee3cfac6dbd0c18a6fff27936763fc9"
+  },
+  {
+   "bytes": 14463,
+   "licence": "BSD-3-Clause",
+   "origin": "httpcore 1.0.9",
+   "original": "site-packages/httpcore/_sync/http_proxy.py",
+   "path": "httpcore-1.0.9/httpcore/_sync/http_proxy.py",
+   "sha256": "fda97fe9cacab8466edb0cafbb8f7745922625d0499e3e6818a3632ce24bd99a"
+  },
+  {
+   "bytes": 3952,
+   "licence": "BSD-3-Clause",
+   "origin": "httpcore 1.0.9",
+   "original": "site-packages/httpcore/_trace.py",
+   "path": "httpcore-1.0.9/httpcore/_trace.py",
+   "sha256": "724e99a08cd84e474d0087eae4c19e2aa0570edaa3397faa7d8c266456eb19ca"
+  },
+  {
+   "bytes": 1537,
+   "licence": "BSD-3-Clause",
+   "origin": "httpcore 1.0.9",
+   "original": "site-packages/httpcore/_utils.py",
+   "path": "httpcore-1.0.9/httpcore/_utils.py",
+   "sha256": "fd12e05d8380602df9d229002d5e7d199ebc209adda1c459c4fb3d3e39b37456"
+  },
+  {
+   "bytes": 4948,
+   "licence": "Apache-2.0",
+   "origin": "huggingface_hub 1.33.0",
+   "original": "site-packages/huggingface_hub/_hot_reload/sse_client.py",
+   "path": "huggingface_hub-1.33.0/huggingface_hub/_hot_reload/sse_client.py",
+   "sha256": "e3d926b01d8ff6cc606d9d7a79de85e1a2c3b37aec1eb3696e9ea22a5bc5f747"
+  },
+  {
+   "bytes": 16352,
+   "licence": "Apache-2.0",
+   "origin": "huggingface_hub 1.33.0",
+   "original": "site-packages/huggingface_hub/_inference_endpoints.py",
+   "path": "huggingface_hub-1.33.0/huggingface_hub/_inference_endpoints.py",
+   "sha256": "88daf53a201ba25edf4d12518038338be601a04e9b12a67a67cad4a8da177be1"
+  },
+  {
+   "bytes": 16381,
+   "licence": "Apache-2.0",
+   "origin": "huggingface_hub 1.33.0",
+   "original": "site-packages/huggingface_hub/_local_folder.py",
+   "path": "huggingface_hub-1.33.0/huggingface_hub/_local_folder.py",
+   "sha256": "5f3d220bbb3237d6de264cc1ba7cb0bfd99689450f12d1f88a153f7519d549da"
+  },
+  {
+   "bytes": 16350,
+   "licence": "Apache-2.0",
+   "origin": "huggingface_hub 1.33.0",
+   "original": "site-packages/huggingface_hub/_login.py",
+   "path": "huggingface_hub-1.33.0/huggingface_hub/_login.py",
+   "sha256": "9f1b9d6c846fa858dd87c4a702e6b19bfcb9bee8d21c0dbca91c3db80a64bf96"
+  },
+  {
+   "bytes": 16354,
+   "licence": "Apache-2.0",
+   "origin": "huggingface_hub 1.33.0",
+   "original": "site-packages/huggingface_hub/_sandbox.py",
+   "path": "huggingface_hub-1.33.0/huggingface_hub/_sandbox.py",
+   "sha256": "0b6428a563d12cb82f107b94c923d4831ece8a28f17e5c3f299735ea77048c29"
+  },
+  {
+   "bytes": 3544,
+   "licence": "Apache-2.0",
+   "origin": "huggingface_hub 1.33.0",
+   "original": "site-packages/huggingface_hub/_webhooks_payload.py",
+   "path": "huggingface_hub-1.33.0/huggingface_hub/_webhooks_payload.py",
+   "sha256": "07dcea963726db40c6795c4929b6b9ef48ba44ff9c47d084ba930606e3431c70"
+  },
+  {
+   "bytes": 664,
+   "licence": "Apache-2.0",
+   "origin": "huggingface_hub 1.33.0",
+   "original": "site-packages/huggingface_hub/cli/__init__.py",
+   "path": "huggingface_hub-1.33.0/huggingface_hub/cli/__init__.py",
+   "sha256": "b56bb722cfa6dad949c1784cfef4f698f460a67b7d2a153daafc39691b278d4d"
+  },
+  {
+   "bytes": 10436,
+   "licence": "Apache-2.0",
+   "origin": "huggingface_hub 1.33.0",
+   "original": "site-packages/huggingface_hub/cli/_cp.py",
+   "path": "huggingface_hub-1.33.0/huggingface_hub/cli/_cp.py",
+   "sha256": "67ed99fed06cd5ee1706a44ee51f509da6d4e2a4e2f470e56c0e768d305a0a46"
+  },
+  {
+   "bytes": 5907,
+   "licence": "Apache-2.0",
+   "origin": "huggingface_hub 1.33.0",
+   "original": "site-packages/huggingface_hub/cli/_errors.py",
+   "path": "huggingface_hub-1.33.0/huggingface_hub/cli/_errors.py",
+   "sha256": "5f4ad44cefb77822b9bff30b184cdad41c5cb9719c70f63e87b4a1ce6b90737e"
+  },
+  {
+   "bytes": 16276,
+   "licence": "Apache-2.0",
+   "origin": "huggingface_hub 1.33.0",
+   "original": "site-packages/huggingface_hub/cli/cache.py",
+   "path": "huggingface_hub-1.33.0/huggingface_hub/cli/cache.py",
+   "sha256": "a6eb3732d2041060e2c6954a2f9bcdcb6a2491f697ff428469b35f0e7c893be3"
+  },
+  {
+   "bytes": 4982,
+   "licence": "Apache-2.0",
+   "origin": "huggingface_hub 1.33.0",
+   "original": "site-packages/huggingface_hub/cli/papers.py",
+   "path": "huggingface_hub-1.33.0/huggingface_hub/cli/papers.py",
+   "sha256": "1ef4fef338f67e2d78b9ae9ac16a47a6195b277eb6144248c12081251419fdc3"
+  },
+  {
+   "bytes": 16372,
+   "licence": "Apache-2.0",
+   "origin": "huggingface_hub 1.33.0",
+   "original": "site-packages/huggingface_hub/cli/skills.py",
+   "path": "huggingface_hub-1.33.0/huggingface_hub/cli/skills.py",
+   "sha256": "5fab0f11e529235793eb829ee74bab346b889f9763a186cbeae6b82e523830f7"
+  },
+  {
+   "bytes": 3850,
+   "licence": "Apache-2.0",
+   "origin": "huggingface_hub 1.33.0",
+   "original": "site-packages/huggingface_hub/cli/system.py",
+   "path": "huggingface_hub-1.33.0/huggingface_hub/cli/system.py",
+   "sha256": "701d8616557db22d076e6524ca88f99c02997febd6a5ff608bd5c0ab9d6cd396"
+  },
+  {
+   "bytes": 16346,
+   "licence": "Apache-2.0",
+   "origin": "huggingface_hub 1.33.0",
+   "original": "site-packages/huggingface_hub/dataclasses.py",
+   "path": "huggingface_hub-1.33.0/huggingface_hub/dataclasses.py",
+   "sha256": "8cd6637045e311e6957996fda1d2ac803eebd3e3d40111b59ae4e409e4ac83af"
+  },
+  {
+   "bytes": 929,
+   "licence": "Apache-2.0",
+   "origin": "huggingface_hub 1.33.0",
+   "original": "site-packages/huggingface_hub/inference/_mcp/types.py",
+   "path": "huggingface_hub-1.33.0/huggingface_hub/inference/_mcp/types.py",
+   "sha256": "c8735f3ec33d3210f4ea878a7646e6ac1b16fb75a151ea80dba7f27d17f1fdb9"
+  },
+  {
+   "bytes": 210,
+   "licence": "Apache-2.0",
+   "origin": "huggingface_hub 1.33.0",
+   "original": "site-packages/huggingface_hub/inference/_providers/publicai.py",
+   "path": "huggingface_hub-1.33.0/huggingface_hub/inference/_providers/publicai.py",
+   "sha256": "d48d96eab3919680794074af932e278d93b65ca2d3c00fa43dd3686aea13e6b8"
+  },
+  {
+   "bytes": 16377,
+   "licence": "Apache-2.0",
+   "origin": "huggingface_hub 1.33.0",
+   "original": "site-packages/huggingface_hub/serialization/_torch.py",
+   "path": "huggingface_hub-1.33.0/huggingface_hub/serialization/_torch.py",
+   "sha256": "8bb91b984ea7a3554e019d7825668a42e96ce32e7be839b5f3aa4e6ffe59a3a8"
+  },
+  {
+   "bytes": 16374,
+   "licence": "Apache-2.0",
+   "origin": "huggingface_hub 1.33.0",
+   "original": "site-packages/huggingface_hub/utils/_cache_manager.py",
+   "path": "huggingface_hub-1.33.0/huggingface_hub/utils/_cache_manager.py",
+   "sha256": "ccd621aaf6bf85230e531d2f38f009fd1f4567a620390345915e032b7cba7d1f"
+  },
+  {
+   "bytes": 2464,
+   "licence": "Apache-2.0",
+   "origin": "huggingface_hub 1.33.0",
+   "original": "site-packages/huggingface_hub/utils/_experimental.py",
+   "path": "huggingface_hub-1.33.0/huggingface_hub/utils/_experimental.py",
+   "sha256": "abdbd4bdcd49c9b545450d06451106f812e8b991090bfe343317306c094eb9dd"
+  },
+  {
+   "bytes": 7371,
+   "licence": "Apache-2.0",
+   "origin": "huggingface_hub 1.33.0",
+   "original": "site-packages/huggingface_hub/utils/_paths.py",
+   "path": "huggingface_hub-1.33.0/huggingface_hub/utils/_paths.py",
+   "sha256": "62f52f69e3f1b4bcb1cc03dc96db69293e0ee7a05385c986f124b0a3174d872a"
+  },
+  {
+   "bytes": 3542,
+   "licence": "Apache-2.0",
+   "origin": "huggingface_hub 1.33.0",
+   "original": "site-packages/huggingface_hub/utils/_typing.py",
+   "path": "huggingface_hub-1.33.0/huggingface_hub/utils/_typing.py",
+   "sha256": "d4b784efce5879da695d247d6b57d00eee6b853c57e6ff6405805a1eb3fae6b0"
+  },
+  {
+   "bytes": 2121,
+   "licence": "Apache-2.0",
+   "origin": "huggingface_hub 1.33.0",
+   "original": "site-packages/huggingface_hub/utils/sha.py",
+   "path": "huggingface_hub-1.33.0/huggingface_hub/utils/sha.py",
+   "sha256": "87cc3185e66972febbd5186d88815c1664130d2ae880dde4c10c7765a3445078"
+  },
+  {
+   "bytes": 16340,
+   "licence": "MIT",
+   "origin": "pydantic 2.13.5",
+   "original": "site-packages/pydantic/_internal/_discriminated_union.py",
+   "path": "pydantic-2.13.5/pydantic/_internal/_discriminated_union.py",
+   "sha256": "7ef5d4b514037b64558d2699d997065f3c418e1e4b99e125c5037289aaed05b9"
+  },
+  {
+   "bytes": 4127,
+   "licence": "MIT",
+   "origin": "pydantic 2.13.5",
+   "original": "site-packages/pydantic/_internal/_docs_extraction.py",
+   "path": "pydantic-2.13.5/pydantic/_internal/_docs_extraction.py",
+   "sha256": "7f2ce74801e1e40ce88675d94ad5741ef1fe9d16dabcd1cfca0fa49f1f92fc41"
+  },
+  {
+   "bytes": 611,
+   "licence": "MIT",
+   "origin": "pydantic 2.13.5",
+   "original": "site-packages/pydantic/_internal/_forward_ref.py",
+   "path": "pydantic-2.13.5/pydantic/_internal/_forward_ref.py",
+   "sha256": "e67dd8efedc028b9fcfc54b761cecabad2e23d48725e602d90464e6859e89f03"
+  },
+  {
+   "bytes": 8885,
+   "licence": "MIT",
+   "origin": "pydantic 2.13.5",
+   "original": "site-packages/pydantic/_internal/_mock_val_ser.py",
+   "path": "pydantic-2.13.5/pydantic/_internal/_mock_val_ser.py",
+   "sha256": "c2645115206fa9f70b6c8e353ec165881e2ed80677989a597a21116c3df1293a"
+  },
+  {
+   "bytes": 12878,
+   "licence": "MIT",
+   "origin": "pydantic 2.13.5",
+   "original": "site-packages/pydantic/_internal/_namespace_utils.py",
+   "path": "pydantic-2.13.5/pydantic/_internal/_namespace_utils.py",
+   "sha256": "865dfe4d102bf365368d3c8f3f7b7e42ab2f28b8abc6d90b7cd7eb37e7e9d31f"
+  },
+  {
+   "bytes": 12160,
+   "licence": "MIT",
+   "origin": "pydantic 2.13.5",
+   "original": "site-packages/pydantic/_migration.py",
+   "path": "pydantic-2.13.5/pydantic/_migration.py",
+   "sha256": "545ef72d1094cf722b6f9c55b75de36f7340717567105e93d7e27438b7de6790"
+  },
+  {
+   "bytes": 4407,
+   "licence": "MIT",
+   "origin": "pydantic 2.13.5",
+   "original": "site-packages/pydantic/annotated_handlers.py",
+   "path": "pydantic-2.13.5/pydantic/annotated_handlers.py",
+   "sha256": "59fc854aac28108157061ed3ef73f270a9682350e25f8e465a2d3e24eb024786"
+  },
+  {
+   "bytes": 148,
+   "licence": "MIT",
+   "origin": "pydantic 2.13.5",
+   "original": "site-packages/pydantic/class_validators.py",
+   "path": "pydantic-2.13.5/pydantic/class_validators.py",
+   "sha256": "8bf5778fe3d87462d22e68ff20965e913463ba73bc488573f0b325aae3f23fb1"
+  },
+  {
+   "bytes": 16315,
+   "licence": "MIT",
+   "origin": "pydantic 2.13.5",
+   "original": "site-packages/pydantic/color.py",
+   "path": "pydantic-2.13.5/pydantic/color.py",
+   "sha256": "1ba2111023cd9c6b855ecfe2a70ff558cadc9bfcdf7c6c250a2ce3e35935be0a"
+  },
+  {
+   "bytes": 150,
+   "licence": "MIT",
+   "origin": "pydantic 2.13.5",
+   "original": "site-packages/pydantic/error_wrappers.py",
+   "path": "pydantic-2.13.5/pydantic/error_wrappers.py",
+   "sha256": "44aea6a804dcf72303f8a043f48252f47a4a0a9ad61ddf30a3ce019e6fb77d1f"
+  },
+  {
+   "bytes": 1866,
+   "licence": "MIT",
+   "origin": "pydantic 2.13.5",
+   "original": "site-packages/pydantic/experimental/arguments_schema.py",
+   "path": "pydantic-2.13.5/pydantic/experimental/arguments_schema.py",
+   "sha256": "1059e35ffba5a7eb4fc948d05f9a6642dba0d4e14bfc071cf1b70c6cb77e7d56"
+  },
+  {
+   "bytes": 127,
+   "licence": "MIT",
+   "origin": "pydantic 2.13.5",
+   "original": "site-packages/pydantic/experimental/missing_sentinel.py",
+   "path": "pydantic-2.13.5/pydantic/experimental/missing_sentinel.py",
+   "sha256": "8507a382d174d3052e40c9e2f78dbd7af83e797c88c292af8ec0fca1fa9f8fec"
+  },
+  {
+   "bytes": 16375,
+   "licence": "MIT",
+   "origin": "pydantic 2.13.5",
+   "original": "site-packages/pydantic/functional_serializers.py",
+   "path": "pydantic-2.13.5/pydantic/functional_serializers.py",
+   "sha256": "a9686e6bfcd1214524e6af3ede1712869b13df2e3771d4ba5efc560cfde3a81f"
+  },
+  {
+   "bytes": 16383,
+   "licence": "MIT",
+   "origin": "pydantic 2.13.5",
+   "original": "site-packages/pydantic/mypy.py",
+   "path": "pydantic-2.13.5/pydantic/mypy.py",
+   "sha256": "645f0b5a6afd93165377aeae4d2cf3953ce55c992ed9fc86b19037cdb5d4d170"
+  },
+  {
+   "bytes": 2213,
+   "licence": "MIT",
+   "origin": "pydantic 2.13.5",
+   "original": "site-packages/pydantic/plugin/_loader.py",
+   "path": "pydantic-2.13.5/pydantic/plugin/_loader.py",
+   "sha256": "8408e04a58e82211b1dc0569229baac3948fb6d04d35e181493aea48c9cd8899"
+  },
+  {
+   "bytes": 16271,
+   "licence": "MIT",
+   "origin": "pydantic 2.13.5",
+   "original": "site-packages/pydantic/type_adapter.py",
+   "path": "pydantic-2.13.5/pydantic/type_adapter.py",
+   "sha256": "87cb2a9ad6159a790d2ee5629e4066a6606ce8166613a9f826e553082a2a00b9"
+  },
+  {
+   "bytes": 6532,
+   "licence": "MIT",
+   "origin": "pydantic 2.13.5",
+   "original": "site-packages/pydantic/v1/config.py",
+   "path": "pydantic-2.13.5/pydantic/v1/config.py",
+   "sha256": "6ba3f459eafdc7871bc0a5bb5eff29a1252a33858ff912d6c17e9832962af400"
+  },
+  {
+   "bytes": 16334,
+   "licence": "MIT",
+   "origin": "pydantic 2.13.5",
+   "original": "site-packages/pydantic/v1/generics.py",
+   "path": "pydantic-2.13.5/pydantic/v1/generics.py",
+   "sha256": "b028e1481bc375798711255b8ab7ad119a6ae09b46e30207a94c65247e1b81b2"
+  },
+  {
+   "bytes": 3390,
+   "licence": "MIT",
+   "origin": "pydantic 2.13.5",
+   "original": "site-packages/pydantic/v1/json.py",
+   "path": "pydantic-2.13.5/pydantic/v1/json.py",
+   "sha256": "590e47cbf848a5f751dd84bc93a37613a28c273b1d6c18bf95d58e3c9695f353"
+  },
+  {
+   "bytes": 16377,
+   "licence": "MIT",
+   "origin": "pydantic 2.13.5",
+   "original": "site-packages/pydantic/v1/mypy.py",
+   "path": "pydantic-2.13.5/pydantic/v1/mypy.py",
+   "sha256": "e7387e216c4f911acde4b5587a11f76f0559534a9715a865d4cce2bce0fab3a5"
+  },
+  {
+   "bytes": 16381,
+   "licence": "MIT",
+   "origin": "pydantic 2.13.5",
+   "original": "site-packages/pydantic/v1/networks.py",
+   "path": "pydantic-2.13.5/pydantic/v1/networks.py",
+   "sha256": "244994bd0d52bf608e7998bea8a45927598dd7d6246ebad499a952d155bbb2bc"
+  },
+  {
+   "bytes": 4822,
+   "licence": "MIT",
+   "origin": "pydantic 2.13.5",
+   "original": "site-packages/pydantic/warnings.py",
+   "path": "pydantic-2.13.5/pydantic/warnings.py",
+   "sha256": "dd0c90a3a94ddf970eece5c36c511759c35a3e518245aade815640f86fa56702"
+  },
+  {
+   "bytes": 16348,
+   "licence": "MIT",
+   "origin": "typing-inspection 0.4.4",
+   "original": "site-packages/typing_inspection/introspection.py",
+   "path": "typing-inspection-0.4.4/typing_inspection/introspection.py",
+   "sha256": "50f8e5ce10f96c9374556d0c37bf0d00c9d98b0d02b387941c0c78233a0e0b35"
+  }
+ ],
+ "note": "H5 negatives, 2026-10-02, built by a separate blind session (no detector read or run). 150 third-party files from 10 permissively licensed distributions in .venv (seed 4113351651, per-package cap 22). Disjoint by path and content sha256 from negatives, negatives_external, negatives_holdout2, negatives_holdout3, negatives_holdout4 and the H4 withdrawn first draw.",
+ "packages": {
+  "PyYAML": {
+   "count": 11,
+   "licence": "MIT",
+   "licence_files": [
+    "LICENSES/PyYAML-6.0.3-LICENSE.txt"
+   ],
+   "version": "6.0.3"
+  },
+  "anyio": {
+   "count": 22,
+   "licence": "MIT",
+   "licence_files": [
+    "LICENSES/anyio-4.15.1-LICENSE.txt"
+   ],
+   "version": "4.15.1"
+  },
+  "click": {
+   "count": 9,
+   "licence": "BSD-3-Clause",
+   "licence_files": [
+    "LICENSES/click-8.5.0-LICENSE.txt"
+   ],
+   "version": "8.5.0"
+  },
+  "filelock": {
+   "count": 11,
+   "licence": "MIT",
+   "licence_files": [
+    "LICENSES/filelock-4.0.8-LICENSE.txt"
+   ],
+   "version": "4.0.8"
+  },
+  "fsspec": {
+   "count": 22,
+   "licence": "BSD-3-Clause",
+   "licence_files": [
+    "LICENSES/fsspec-2026.9.0-LICENSE.txt"
+   ],
+   "version": "2026.9.0"
+  },
+  "h11": {
+   "count": 9,
+   "licence": "MIT",
+   "licence_files": [
+    "LICENSES/h11-0.16.0-LICENSE.txt"
+   ],
+   "version": "0.16.0"
+  },
+  "httpcore": {
+   "count": 21,
+   "licence": "BSD-3-Clause",
+   "licence_files": [
+    "LICENSES/httpcore-1.0.9-LICENSE.md.txt"
+   ],
+   "version": "1.0.9"
+  },
+  "huggingface_hub": {
+   "count": 22,
+   "licence": "Apache-2.0",
+   "licence_files": [
+    "LICENSES/huggingface_hub-1.33.0-LICENSE.txt"
+   ],
+   "version": "1.33.0"
+  },
+  "pydantic": {
+   "count": 22,
+   "licence": "MIT",
+   "licence_files": [
+    "LICENSES/pydantic-2.13.5-LICENSE.txt"
+   ],
+   "version": "2.13.5"
+  },
+  "typing-inspection": {
+   "count": 1,
+   "licence": "MIT",
+   "licence_files": [
+    "LICENSES/typing-inspection-0.4.4-LICENSE.txt"
+   ],
+   "version": "0.4.4"
+  }
+ },
+ "prescan": {
+  "candidates_scanned": 425,
+  "excluded_as_real_credentials": 0,
+  "files_with_hits": 14,
+  "hits": 21,
+  "judgement": "each flagged line read by eye; only a plausible live credential for a real service excludes a file; fixtures, hashes, docstring examples and placeholders are kept",
+  "reviewed_hits": {
+   "fsspec gist.py": "basic-auth flags on docstring/comment URL templates (username:token, :TOKEN placeholders)",
+   "fsspec github.py": "basic-auth flag on a docstring URL where org:repo sits in the userinfo position",
+   "fsspec smb.py": "basic-auth flag on a doctest URL with placeholder user and password words",
+   "fsspec utils.py": "basic-auth/keyword flags on a doctest of infer_storage_options with placeholder userinfo; hex flag on a doctest output of tokenize()",
+   "huggingface_hub _eval_results.py": "hex flag on a docstring example dataset revision (git commit id)",
+   "huggingface_hub _inference_endpoints.py": "hex flag on a docstring example model revision (git commit id)",
+   "huggingface_hub _jobs_api.py": "hex flags on docstring example job/owner object ids",
+   "huggingface_hub _revision.py": "hex flag on a doctest output revision (git commit id)",
+   "huggingface_hub _sandbox.py": "hex flag on a pinned sha256 of a published server artifact (integrity hash)",
+   "huggingface_hub constants.py": "keyword flag on an HTTP header-name constant (no value)",
+   "huggingface_hub hf_api.py": "hex flag on a docstring example commit hash",
+   "huggingface_hub utils/_cache_manager.py": "hex flags on docstring/doctest example commit hashes",
+   "huggingface_hub utils/sha.py": "hex flag on a doctest output of git_hash()",
+   "pydantic networks.py": "basic-auth/keyword flags on docstring URL anatomy and doctest output with placeholder userinfo"
+  },
+  "scanned": "every eligible candidate in the pool (after path, generated, empty and disjointness filters), truncated exactly as it would be written",
+  "tool": "detect-secrets 1.5.0 (Yelp, Apache-2.0), default plugins, `detect-secrets scan --all-files`, scratch venv outside the repo"
+ },
+ "real_credential_exclusions": {},
+ "seeds": {
+  "third_party": 4113351651
+ },
+ "selection": {
+  "exclude_substrings": [
+   "test",
+   "vendor",
+   "third_party",
+   "externals",
+   "__pycache__"
+  ],
+  "generated_rule": "first 10 lines",
+  "licence_rule": "metadata License-Expression (or License) in the approved set AND every License-File present AND the licence's own wording in a licence file",
+  "per_package_cap": 22,
+  "pool": 425
+ },
+ "site_packages": ".venv/lib/python3.14/site-packages"
+}

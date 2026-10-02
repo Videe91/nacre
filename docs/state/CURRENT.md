@@ -1187,3 +1187,19 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
     - multi-line literal openers from 20 language references (`scripts/build_credential_slot_regex.py`).
   - **Working data:** working set 499/500, H3 250/250, H4 249/250; FP 0.49% working, 0/400 on H4 negatives.
   - **H5:** being built blind by a separate session. Measured once after sealing.
+- 2026-10-02 — **Flaky-test hunt: `test_killed_runs_leave_no_database_behind`** timed out once in the full suite
+  (SIGTERM'd dry-run runner not exited in 120 s).
+  - **Reproduced** with a parallel kill sweep. **Root cause, from the server log** ("still waiting for backend with
+    PID N to accept ProcSignalBarrier"; that backend later logged "canceling authentication due to timeout"):
+    1. the runner's signal handler raised SystemExit mid psycopg handshake, leaving a half-authenticated backend;
+    2. `DROP DATABASE ... WITH (FORCE)` waits for every backend to accept its barrier, and an authenticating
+       backend does not (FORCE cannot terminate it: it has no database yet);
+    3. so the drop waited for `authentication_timeout` (60 s each).
+  - **Classified: a product race** in the runner's abort path.
+  - **Fix:** cooperative aborts. The signal is recorded at once; the run stops at the next safe point (between
+    families or reps); a second signal exits at once.
+  - **Deterministic test:** a signal delivered mid-"handshake" never interrupts it.
+  - **Stress:** 48 killed runs, 0 hangs, 0 barrier waits.
+  - **EXP-0001 runner:** has the same handler but uses SQLite, so it is unaffected.
+  - **Noted, not fixed (out of scope):** runs STARTED simultaneously can fail with "tuple concurrently updated",
+    because concurrent migrations GRANT on cluster-wide roles. Runs are sequential in practice.
