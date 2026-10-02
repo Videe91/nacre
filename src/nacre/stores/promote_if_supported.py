@@ -5,7 +5,7 @@ Owns: collecting agreeing proposals (same normalised key and kind) with real dec
   decision; the quorum rule; the single-source rule and its safeguards (D-0017 amendment 1); upgrades; carrying
   status, contradiction and supersession edges forward; MNEXA deviations 1-2.
 Public entry: promote_if_supported(), Promotion, belief_object_id, SINGLE_SOURCE, QUORUM
-Decisions: D-0017, D-0018, D-0020
+Decisions: D-0017, D-0018, D-0020, D-0025
 Assumptions: A-0027
 Notes: Rules (D-0017 + amendment 1):
     no head:   >= 2 distinct decisions -> v1 support=quorum;  else 1 decision grounded in a TRUSTED CORRECTION span
@@ -19,17 +19,24 @@ Notes: Rules (D-0017 + amendment 1):
   Identity: object_id = uuid5 over (stream, kind, sha256(key)), the D-0017 "derived from the normalised text within
   the scope" identity. Starting values (placeholders, Phase 4 tunes them): single_source confidence 50 / strength 50,
   quorum 80 / 100 (per cent, integers: no floats in the CBOR subset).
+  Ancestry (D-0020 amendment 1): a proposal counts only if its outcome resolves to its decision, directly or through
+  its action's recorded link (sleep/build_evidence_bundle.resolve_outcome_decision). Quorum counts distinct
+  RESOLVED decisions (D-0017), so two actions of one decision are one decision.
+  Addresses (D-0025 §3): the version's `addresses` = write_version.source_addresses() over the capture events of
+  every supporting proposal (its decision and its outcome, the proposal's own D-0023 sources). Recomputed for every
+  version from the current supporting set, never copied from the head. Absent when no source has any.
 """
 import hashlib
 import uuid
 from dataclasses import dataclass
 from uuid import UUID
 
-from nacre.core.event import EventType
 from nacre.core.root_key_provider import RootKeyProvider
 from nacre.ledger.read_stream import read_stream
 from nacre.scopes.open_scoped_session import ScopedSession
-from nacre.stores.write_version import Edge, VersionRecord, edges_from_body, read_version_events, write_version
+from nacre.sleep.build_evidence_bundle import BundleError, resolve_outcome_decision
+from nacre.stores.write_version import (Edge, VersionRecord, edges_from_body, read_version_events, source_addresses,
+                                        write_version)
 
 SINGLE_SOURCE = {"confidence_pct": 50, "strength_pct": 50}
 QUORUM = {"confidence_pct": 80, "strength_pct": 100}
@@ -58,10 +65,11 @@ def _proposals(events, key, kind):
         if not (isinstance(c, dict) and c.get("op") == "lesson_proposed" and c["key"] == key
                 and ("belief" if c["structure_status"] == "structured" else "fallback") == kind):
             continue
-        d, o = by_id.get(UUID(c["decision_id"])), by_id.get(UUID(c["outcome_id"]))
-        if d is None or o is None or d.envelope.event_type != EventType.DECISION or not isinstance(o.body, dict):
-            continue
-        if {"rel": "outcome_for", "event_id": c["decision_id"]} not in o.body["content"].get("refs", []):
+        o = by_id.get(UUID(c["outcome_id"]))
+        try:
+            if o is None or resolve_outcome_decision(o, by_id).decision_id != UUID(c["decision_id"]):
+                continue
+        except BundleError:
             continue
         out.setdefault(c["decision_id"], e)            # earliest proposal per decision (commit order)
     return out
@@ -96,9 +104,12 @@ def promote_if_supported(session: ScopedSession, key_provider: RootKeyProvider, 
         status, version = head["status"], head["version"] + 1
     support = None if kind == "fallback" else ("quorum" if n >= 2 else "single_source")
     first = canon[decisions[0]].body["content"]
+    by_id = {e.envelope.event_id: e for e in events}
+    sources = [by_id[UUID(x)] for dec in decisions
+               for x in (dec, canon[dec].body["content"]["outcome_id"])]
     content = {"key": pc["key"], "nucleus": first["nucleus"], "support_text": first["support_text"],
                "qualifiers": first["qualifiers"], "origin": "stated" if trusted else "inferred",
-               "support_decisions": decisions,
+               "support_decisions": decisions, **source_addresses(sources),
                **(QUORUM if support == "quorum" else SINGLE_SOURCE if support else {}),
                **({k: head["content"][k] for k in ("contradiction_decisions", "superseded_by") if head and k in head["content"]})}
     edges = []

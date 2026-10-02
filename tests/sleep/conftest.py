@@ -30,7 +30,18 @@ def world(org, provider):
     def session():
         with open_(owner) as s:
             yield s
-    return dict(org=org_id, proj=proj, session=session)
+
+    def new_stream():
+        """Another project scope of the same org that the owner can read and append to."""
+        other = uuid.uuid4()
+        with open_(owner) as s:
+            register_scope(s, provider, org_id=org_id, stream_id=other, kind=ScopeKind.PROJECT,
+                           idempotency_key=str(uuid.uuid4()))
+        with open_(owner) as s:
+            set_access(s, provider, org_id=org_id, principal_id=owner, stream_id=other, can_read=True, can_append=True,
+                       idempotency_key=str(uuid.uuid4()))
+        return other
+    return dict(org=org_id, proj=proj, session=session, new_stream=new_stream)
 
 
 @pytest.fixture

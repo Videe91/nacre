@@ -131,3 +131,19 @@ def test_q13_q14_checks_are_admissibility_only_and_confer_no_authority(rw, provi
     src = inspect.getsource(ce.commit_episode)
     for word in ("correct", "true", "verified", "confidence"):                     # no check claims boundary correctness
         assert word not in src.lower().replace("correctness", "").replace("return", "")
+
+
+def test_addresses_an_episode_carries_the_sorted_union_of_its_members_addresses(rw, provider, streams):
+    a = streams["a"]
+    with rw() as s:
+        d1, o1 = episode(s, provider, a, d_addresses=("system:payments",), o_addresses=("code:src/pay.py",))
+        d2, _o2 = episode(s, provider, a, d_addresses=("code:src/pay.py", "domain:billing"))
+        bare, _ = episode(s, provider, a)
+        run = _run(s, provider, a)
+        oid, _v = commit_episode(s, provider, stream_id=a, members=(d1, o1, d2), anchors=(),
+                                 boundary_method="runtime_rule", run_id=run)
+        oid2, _v = commit_episode(s, provider, stream_id=a, members=(bare,), anchors=(), boundary_method="runtime_rule",
+                                  run_id=run)
+        with_addr, without = _versions(s, provider, a, oid)[0], _versions(s, provider, a, oid2)[0]
+    assert with_addr["content"]["addresses"] == ["code:src/pay.py", "domain:billing", "system:payments"]
+    assert "addresses" not in without["content"]

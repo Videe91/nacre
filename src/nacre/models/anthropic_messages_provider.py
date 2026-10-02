@@ -32,6 +32,14 @@ Notes: The only file that imports `anthropic` (D-0021; checked by scripts/check_
     cache_read (priced at the table's `cached_input`, the cache-read price). The Usage type has no cache-write field,
     so a response reporting cache_creation_input_tokens > 0 cannot be costed truthfully and is a non-retryable
     "unpriced_usage" error. It should never happen: this adapter never sends cache_control.
+  - Billing (D-0021 amendment 2, owner 2026-10-02): every error raised AFTER a response came back (truncated,
+    refused, unexpected stop or content, unpriced or missing usage) is `billed=True` and carries the response's usage
+    when it is complete and priceable (else None: call_model records the worst case). An APITimeoutError is billed
+    without usage (the request may have been sent and charged: worst case). Any other APIConnectionError, an HTTP
+    status error, a client that could not be built and every pre-network refusal are `billed=False` (cost 0). Any
+    other AnthropicError raised by `messages.create` (e.g. a response that failed the SDK's validation) is billed
+    without usage, because it may have come after the provider answered. D1, flagged: a connection dropped after the
+    request was fully sent is indistinguishable here from one that never connected and is recorded unbilled.
 """
 import re
 import time
@@ -44,6 +52,20 @@ _SAFE = re.compile(r"^[a-z0-9_\-]{1,64}$")
 
 def _refuse(message: str, error_class: str) -> ProviderError:
     return ProviderError(message, retryable=False, error_class=error_class)
+
+
+def _billed(message: str, error_class: str, usage: Usage | None) -> ProviderError:
+    return ProviderError(message, retryable=False, error_class=error_class, billed=True, usage=usage)
+
+
+def _usage(r) -> Usage | None:
+    """The response's usage as a priceable Usage, or None when it is missing, malformed or has cache writes."""
+    u = getattr(r, "usage", None)
+    vals = [getattr(u, k, None) for k in ("input_tokens", "output_tokens")]
+    vals += [getattr(u, k, None) or 0 for k in ("cache_read_input_tokens", "cache_creation_input_tokens")]
+    if u is None or not all(type(v) is int and v >= 0 for v in vals) or vals[3]:
+        return None
+    return Usage(vals[0] + vals[2], vals[1], vals[2])
 
 
 def _label(value) -> str:
@@ -108,10 +130,17 @@ class AnthropicMessagesProvider:
     def complete(self, request: ModelRequest, *, timeout_s: float) -> ModelResponse:
         kwargs = self._kwargs(request, timeout_s)                # every refusal happens before the network
         import anthropic
+        try:
+            client = self._sdk()
+        except anthropic.AnthropicError as exc:                  # nothing was sent: not billed
+            raise _refuse(f"anthropic {type(exc).__name__}", type(exc).__name__) from None
         started = time.monotonic()
         try:
-            r = self._sdk().messages.create(**kwargs)
-        except anthropic.APIConnectionError as exc:              # includes APITimeoutError
+            r = client.messages.create(**kwargs)
+        except anthropic.APITimeoutError as exc:                 # possibly sent and charged: worst case
+            raise ProviderError(f"anthropic {type(exc).__name__}", retryable=True, error_class=type(exc).__name__,
+                                billed=True) from None
+        except anthropic.APIConnectionError as exc:
             raise ProviderError(f"anthropic {type(exc).__name__}", retryable=True,
                                 error_class=type(exc).__name__) from None
         except anthropic.APIStatusError as exc:
@@ -119,23 +148,31 @@ class AnthropicMessagesProvider:
             raise ProviderError(f"anthropic {type(exc).__name__} (HTTP {code})", retryable=code == 429 or code >= 500,
                                 error_class=type(exc).__name__) from None
         except anthropic.AnthropicError as exc:
-            raise ProviderError(f"anthropic {type(exc).__name__}", retryable=False,
-                                error_class=type(exc).__name__) from None
+            raise _billed(f"anthropic {type(exc).__name__}", type(exc).__name__, None) from None
         latency = int((time.monotonic() - started) * 1000)
+        usage = _usage(r)
+        try:
+            return self._response(r, usage, latency)
+        except ProviderError:
+            raise
+        except Exception:                                        # a malformed response is still a billed one
+            raise _billed("anthropic response could not be mapped", "unexpected_response", usage) from None
+
+    @staticmethod
+    def _response(r, usage: Usage | None, latency: int) -> ModelResponse:
         if r.stop_reason == "max_tokens":
-            raise _refuse("anthropic response truncated at max_tokens", "truncated")
+            raise _billed("anthropic response truncated at max_tokens", "truncated", usage)
         if r.stop_reason == "refusal":
             category = _label(getattr(getattr(r, "stop_details", None), "category", None))
-            raise _refuse(f"anthropic refusal ({category})", f"refused:{category}")
+            raise _billed(f"anthropic refusal ({category})", f"refused:{category}", usage)
         if r.stop_reason != "end_turn":
-            raise _refuse("anthropic stopped unexpectedly", f"unexpected_stop:{_label(r.stop_reason)}")
+            raise _billed("anthropic stopped unexpectedly", f"unexpected_stop:{_label(r.stop_reason)}", usage)
         kinds = {getattr(b, "type", None) for b in r.content}
         if kinds - {"text"}:
-            raise _refuse("anthropic returned non-text content", "unexpected_content")
-        u = r.usage
-        read = getattr(u, "cache_read_input_tokens", None) or 0
-        if getattr(u, "cache_creation_input_tokens", None):
-            raise _refuse("anthropic reported cache-write tokens, which Usage cannot price", "unpriced_usage")
-        return ModelResponse(text="".join(b.text for b in r.content), finish_reason=r.stop_reason,
-                             usage=Usage(u.input_tokens + read, u.output_tokens, read),
+            raise _billed("anthropic returned non-text content", "unexpected_content", usage)
+        if getattr(getattr(r, "usage", None), "cache_creation_input_tokens", None):
+            raise _billed("anthropic reported cache-write tokens, which Usage cannot price", "unpriced_usage", None)
+        if usage is None:
+            raise _billed("anthropic response has no usable usage", "missing_usage", None)
+        return ModelResponse(text="".join(b.text for b in r.content), finish_reason=r.stop_reason, usage=usage,
                              response_id=r.id, model_reported=r.model, latency_ms=latency)

@@ -245,7 +245,8 @@ def test_a_refusal_is_recorded_once_with_its_category_and_not_retried(claude_wor
     with w["open"](w["owner"]) as s:
         r = call_model(s, provider, AnthropicMessagesProvider(client), _req(), source_event_ids=[w["source"]()],
                        run_id=uuid.uuid4(), sleep=lambda _: None)
-    assert r.attempts == 1 and m.calls == 1 and r.error.error_class == "refused:bio" and r.cost_usd == 0
+    assert r.attempts == 1 and m.calls == 1 and r.error.error_class == "refused:bio"
+    assert r.cost_usd == Decimal("0.000025") and r.cost_basis == "usage"     # billed (D-0021 am. 2): 10 * 1 + 3 * 5
 
 
 # ---- errors, retries, keys (SI-2) ----

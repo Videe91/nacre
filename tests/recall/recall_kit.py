@@ -12,16 +12,17 @@ from nacre.stores.propose_lesson import propose_lesson
 AGENT, REVIEWER = uuid.UUID(int=21), uuid.UUID(int=22)
 
 
-def belief(s, kp, stream, correction: str, nucleus: str, *, person=None):
+def belief(s, kp, stream, correction: str, nucleus: str, *, person=None, d_addresses=(), o_addresses=()):
     """A single-source belief from one trusted review correction; returns the Promotion. With `person`, the reviewer
-    is that person, so the belief is under a contributor-set key that includes them (D-0023)."""
+    is that person, so the belief is under a contributor-set key that includes them (D-0023). `d_addresses` and
+    `o_addresses` are the capture addresses of the decision and the outcome (D-0025 §3)."""
     who = (dict(actor_kind=ActorKind.PERSON, actor_id=person, authorship=Authorship.SCOPE_PRINCIPAL) if person
            else dict(actor_kind=ActorKind.SYSTEM, actor_id=REVIEWER, authorship=Authorship.INTEGRATION_RESULT))
     d = record_decision(s, kp, stream_id=stream, actor_kind=ActorKind.AGENT, actor_id=AGENT, source=Source.CHAT,
                         authorship=Authorship.SCOPE_PRINCIPAL, idempotency_key=str(uuid.uuid4()),
-                        decision_text="first attempt").envelope
+                        decision_text="first attempt", addresses=d_addresses).envelope
     o = record_outcome(s, kp, stream_id=stream, idempotency_key=str(uuid.uuid4()), outcome_for=d.event_id,
-                       success=False, source=Source.REVIEW, **who,
+                       success=False, source=Source.REVIEW, addresses=o_addresses, **who,
                        sections=(Section("status", "FAIL"), Section("correction", correction))).envelope
     p = propose_lesson(s, kp, stream_id=stream, decision_id=d.event_id, outcome_id=o.event_id, section_index=1,
                        span=(0, len(correction)), nucleus=nucleus).event_id

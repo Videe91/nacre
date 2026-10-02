@@ -81,6 +81,10 @@ def _execute(tx, provider, org: UUID, req: ShredRequest) -> None:
     alive = {s for (s,) in db.execute("SELECT stream_id FROM keys.stream_master_keys WHERE stream_id = ANY(%s)",
                                       (list(markers),))}
     session = tx.as_app(req.requested_by, {org, *alive}, {org, *alive})
+    # One transaction appends to several streams: take every stream lock up front in sorted order, so two
+    # multi-stream transactions can never wait on each other in a cycle (2026-10-02, CURRENT F2).
+    for stream in sorted({org, *alive}):
+        session.conn.execute("SELECT pg_advisory_xact_lock(ledger.stream_lock_key(%s))", (stream,))
     for stream in sorted(alive):
         _event(session, provider, stream, org, req.requested_by, EventType.DELETION_MARKER,
                {"op": "keys_destroyed", "request_id": str(req.request_id), "key_ids": markers[stream]})

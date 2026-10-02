@@ -5,6 +5,18 @@
 - **Date:** 2026-10-01
 - **Relies on assumptions:** A-0025
 
+## Amendment 2 (2026-10-02): `frame_id` is recorded, not hashed. Corrects the wording of amendment 1
+- **The owner's ruling** was "add an optional frame_id field to model-call records". Amendment 1's sentence "and is
+  part of the recorded request identity" was added by Claude while writing it up. It is superseded here.
+- **Why:** a recorded replay (EXP-0004 `--recorded`, gate items 5 and 13) rebuilds fresh databases, so frame ids
+  differ while the prompt bytes do not. With the frame id in the replay key, every N-arm transfer missed its recording
+  (found by `tests/eval/test_run_exp0004_replicate.py`).
+- **The rule:**
+  - `frame_id` is recorded on the call's `result` event, top-level in the body;
+  - it is never in the canonical request, so the canonical form stays version 1;
+  - the request hash and the replay key cover only what is sent.
+- **Owner review:** this restores the ruling as given. The owner reviews it with the next batch.
+
 ## Amendment 1 (owner, 2026-10-02): an optional `frame_id` on model-call records
 - **The field:** a model call may carry an optional `frame_id` (the sha256 of the ContextFrame its memory section
   was rendered from, D-0025). It is recorded in the call's `result` event and is part of the recorded request

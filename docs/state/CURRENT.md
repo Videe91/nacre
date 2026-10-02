@@ -1630,3 +1630,79 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
     - the smoke run on the 600 pool passed, including the cold child process.
   - **Final gate:** see the next line.
   - **Final gate:** 1551 passed, 60 deselected in 431.53s (0:07:11) (pytest exit 0); check_structure exit 0.
+- 2026-10-02 — **F2 (product race) FIXED: deadlocks between key rows and stream locks.**
+  - **Reproduced deterministically first** (`tests/ledger/test_append_event.py::test_a_new_key_row_never_deadlocks_against_a_stream_lock_holder`;
+    `DeadlockDetected` before the fix).
+    - A holds stream S's lock and then needs a new data-key row (S, P, month).
+    - C, appending by person P, inserted that row and was waiting for S's lock.
+    - Postgres aborted one of them.
+    - This hits ordinary single-stream transactions that append under several subjects, such as the sleep pass.
+  - **Fix (D1, `ledger/append_event.py`):** the stream lock is taken BEFORE any key row (master, data or
+    contributor) is created. Stripping and OCR stay outside the lock.
+  - **Cross-stream:** the two production transactions that append to several streams now take their stream locks in
+    sorted order: `keys/execute_due_shreds.py` locks every stream up front, and `keys/rotate_root_key.py` loops the
+    orgs in sorted order. No dedicated interleaving test exists for these two yet; the keys suite passes (127).
+  - **Explore result:** every other production transaction appends to exactly one stream.
+  - **TO DO:**
+    - re-measure A-0007 pooled throughput on a quiet machine, because key resolution is now inside the serialised
+      section;
+    - mutation-check the lock move once the tree is quiet.
+- 2026-10-02 — **Built to the owner's rulings (4 builders, integrated):**
+  - **D-0020 amendment 1:**
+    - outcome → action → decision through the action's `execution_of` link; never inferred;
+    - unlinked outcomes are counted in `SleepReport.unlinked_action_outcomes`, not in `skipped`, with nothing
+      written;
+    - all 2,149 dev-split outcomes resolve;
+    - propose_lesson and promote_if_supported resolve through the action, and quorum counts distinct resolved
+      decisions;
+    - episode members are (decision, action, outcome);
+    - `stores/propose_contradiction.py` is still direct-only (relevant to E1).
+  - **D-0021 amendment 2:**
+    - billed failures are costed from usage, or at the worst case when usage is missing, with `cost_basis`
+      recorded;
+    - `ModelCall.cost_usd` is the sum over attempts;
+    - the EXP-0004 cap is enforced on exactly the recorded costs;
+    - the worst-case bound rests on new assumption A-0046.
+  - **D-0022 amendments 1–2:**
+    - `frame_id` is recorded on model calls; render_request sets it; the N arm passes it;
+    - it is NOT hashed: amendment 2 corrects Claude's wording of amendment 1, because hashing it broke recorded
+      replay across fresh databases;
+    - the canonical request stays version 1, and all 181 EXP-0003 recordings keep their hashes.
+  - **D-0018 amendment 2 (approved via D-0025):**
+    - `addresses[]` on all five capture entries;
+    - validation is D1 (refuse, never rewrite);
+    - version addresses are the union of their supporting sources;
+    - MCP and SDK accept them; EXP-0004 capture passes them (all 5,744 dev and 36,715 test addresses validate);
+    - byte-identical when absent (golden test).
+  - **τ:**
+    - `eval/select_exp0004_tau.py`: max balanced accuracy, ties to the higher τ, exact Fraction;
+    - a committed, write-once `tests/regression/exp0004/TAU.json` holding the rows;
+    - a `recall_tau` config_event in each run database's org stream;
+    - the test run refuses on a missing or mismatched record, a changed dev split or selection code, or a record
+      from a dry run;
+    - D1: dev-coverage recall has no character limit, so the probe reduction is exact (property test).
+  - **Fixed while integrating:** `record_prediction` without `expected_success` failed through MCP and the SDK
+    (None was dropped as "unset"). Tests added.
+- **Open for the owner** (not blocking the τ dev run; batch with D-0026 amendment 3):
+  - **billing:**
+    - (1) a dropped connection after the request was sent: recommend worst case;
+    - (2) HTTP 429/5xx unbilled: recommend keeping that, with an assumption;
+    - (3) the truncation asymmetry between adapters: recommend keeping it;
+    - (4) cache-write worst case: recommend the highest input-side price;
+  - **addresses:**
+    - (5) secret stripping can rewrite an address (a redacted address never matches); options are refuse,
+      exempt (weakens D3), or document;
+    - (6) contested and superseded versions keep the head's addresses;
+    - (7) capture is strict while recall normalises;
+  - **sleep:**
+    - (8) the action id on lesson proposals;
+    - (9) no persisted marker for unlinked outcomes;
+  - **τ** (defaults applied under the owner's rule; listed for visibility):
+    - candidates are the observed strong scores only;
+    - rows are pooled across replicates;
+    - the frozen record lives in a committed file plus per-run config_events.
+- **Builder full-suite runs** (concurrent, 4 builders on one Postgres) showed infra races: `tuple concurrently
+  updated`, the `nacre_app` password race (F3), `LockNotAvailable: lock timeout`, and mutation-test tree changes.
+  They are judged on the quiet-machine gate below; F3 and `tuple concurrently updated` stay TO HUNT.
+- 2026-10-02 — **Gate for this commit (quiet machine, load 4.4):** 1671 passed, 60 deselected (pytest exit 0); check_structure exit 0. No LockNotAvailable or setup race on a quiet run.
+  - The pre-commit hook flagged a 41-character dotted identifier in a docstring of select_exp0004_tau.py (entropy rule). Reworded; no allowlist. Docstring-only change after the gate (select tests re-run: pass).

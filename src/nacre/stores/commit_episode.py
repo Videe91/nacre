@@ -4,7 +4,7 @@ Owns: the MNEXA ADR-0009 rules adopted by D-0017: opaque identity, explicit line
   the version's edge set, identifier-based anchors that must match their members, consolidation-only formation,
   runtime-only commits, and boundary provenance.
 Public entry: commit_episode(), Anchor, EpisodeError, ANCHOR_BASES, BOUNDARY_METHODS, SLEEP_PASS_STARTED
-Decisions: D-0017, D-0020
+Decisions: D-0017, D-0020, D-0025
 Assumptions: none
 Notes: Invariants (MNEXA ADR-0009 Q-n, each tested in tests/stores/test_commit_episode.py):
     Q-1  members resolve to committed events of the stream;      Q-2/3 membership+order are the version's edges, new
@@ -20,6 +20,8 @@ Notes: Invariants (MNEXA ADR-0009 Q-n, each tested in tests/stores/test_commit_e
     Q-13 the checks are admissibility only;                      Q-14 the version is an interpretive claim, not truth;
     Q-15 several episodes may share a session, and one may span several sessions.
   D1: the `sleep_pass_started` marker op is defined here; sleep/run_sleep_pass.py writes it.
+  Addresses (D-0025 §3): the version's `addresses` = write_version.source_addresses() over the members (its edge
+  targets); absent when no member has any. The model-call `result` event is not a member and contributes none.
 """
 import uuid
 from dataclasses import dataclass
@@ -29,7 +31,7 @@ from nacre.core.event import ActorKind, EventType
 from nacre.core.root_key_provider import RootKeyProvider
 from nacre.ledger.read_stream import read_stream
 from nacre.scopes.open_scoped_session import ScopedSession
-from nacre.stores.write_version import Edge, VersionRecord, read_version_events, write_version
+from nacre.stores.write_version import Edge, VersionRecord, read_version_events, source_addresses, write_version
 
 ANCHOR_BASES = frozenset({"task_id", "cycle_id"})
 BOUNDARY_METHODS = frozenset({"runtime_rule", "model_proposed"})
@@ -85,7 +87,7 @@ def commit_episode(session: ScopedSession, key_provider: RootKeyProvider, *, str
                "boundary_method": boundary_method, "model": model,
                "model_call_event_id": str(model_call_event_id) if model_call_event_id else None,
                "run_id": str(run_id), "lineage_target": str(target_object_id) if target_object_id else None,
-               "epistemic_status": "interpretive_claim"}
+               "epistemic_status": "interpretive_claim", **source_addresses(events[m] for m in members)}
     edges = tuple(Edge("member", target_event_id=m) for m in members)
     if model_call_event_id:
         edges += (Edge("derived_from", target_event_id=model_call_event_id),)

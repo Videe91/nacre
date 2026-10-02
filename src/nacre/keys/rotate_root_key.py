@@ -73,7 +73,7 @@ def rotate_root_key(conn: psycopg.Connection, provider: RootKeyProvider, *, oper
                                         (new,)).fetchone()[0]
         if left:
             raise RotationError(f"{left} master key(s) still on an old root version; not destroying anything")
-        for org in orgs:
+        for org in sorted(orgs):         # one transaction, several org streams: locks in sorted order (CURRENT F2)
             session = tx.as_app(operator, {org}, {org})
             append_event(session, provider, AppendRequest(
                 stream_id=org, org_id=org, event_type=EventType.CONFIG_EVENT, payload_type=PayloadType.STRUCTURED,

@@ -12,6 +12,9 @@ Notes: A proposal is historical evidence with authority "proposal_only"; it is n
   grounded_in_trusted_correction = the section's role is `correction` AND capture/section_authority.py says it is
   authoritative (trusted by source and author). Only such proposals may promote alone (amendment 1).
   structure_status "unresolved" = support-first fallback (MNEXA 014 lesson): no nucleus, support span only.
+  Ancestry (D-0020 amendment 1): the outcome must resolve to `decision_id`, directly or through its action's
+  recorded link, by sleep/build_evidence_bundle.resolve_outcome_decision (the one definition of it). The proposal
+  keeps decision_id/outcome_id only; the action id is not persisted here (no field for it).
 """
 import uuid
 from dataclasses import dataclass
@@ -23,6 +26,7 @@ from nacre.core.root_key_provider import RootKeyProvider
 from nacre.ledger.append_event import AppendRequest, Authorship, append_event
 from nacre.ledger.read_stream import read_stream
 from nacre.scopes.open_scoped_session import ScopedSession
+from nacre.sleep.build_evidence_bundle import BundleError, resolve_outcome_decision
 from nacre.stores.write_version import VERSION_ACTOR, normalize
 
 QUALIFIER_TYPES = frozenset({"condition", "ordering", "scope", "negation"})
@@ -42,15 +46,18 @@ def propose_lesson(session: ScopedSession, key_provider: RootKeyProvider, *, str
                    outcome_id: UUID, section_index: int, span: tuple[int, int], nucleus: str | None,
                    qualifiers: tuple[Qualifier, ...] = (), run_id: UUID | None = None):
     """Append one `lesson_proposed` event; return its envelope. nucleus=None means a fallback (unresolved) proposal."""
-    events = {e.envelope.event_id: e for e in read_stream(session, key_provider, stream_id)
-              if e.envelope.event_id in (decision_id, outcome_id)}
+    events = {e.envelope.event_id: e for e in read_stream(session, key_provider, stream_id)}
     d, o = events.get(decision_id), events.get(outcome_id)
     if d is None or d.envelope.event_type != EventType.DECISION:
         raise ProposalError("decision_id must be a decision of this stream")
     if o is None or o.envelope.event_type != EventType.OUTCOME or not isinstance(o.body, dict):
         raise ProposalError("outcome_id must be a readable outcome of this stream")
     oc = o.body["content"]
-    if {"rel": "outcome_for", "event_id": str(decision_id)} not in oc.get("refs", []):
+    try:
+        linked = resolve_outcome_decision(o, events).decision_id == decision_id
+    except BundleError:
+        linked = False
+    if not linked:
         raise ProposalError("the outcome is not an outcome of that decision")
     if type(section_index) is not int or not 0 <= section_index < len(oc["sections"]):
         raise ProposalError("section_index out of range")

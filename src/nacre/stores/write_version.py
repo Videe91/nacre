@@ -2,9 +2,9 @@
 Functionality: Write one interpretation version: its memory event (the truth) and its projection rows, atomically.
 Owns: the version event body (op `version`, full structural record + content), the keyed MACs of the content and of
   every grounded span (MacPurpose.INTERP_MAC under the event's own data key), and the `interp` rows.
-Public entry: write_version(), read_version_events(), edges_from_body(), Edge, VersionRecord, normalize,
-  VERSION_ACTOR
-Decisions: D-0017, D-0008, D-0004, D-0023, D-0024
+Public entry: write_version(), read_version_events(), edges_from_body(), source_addresses(), Edge, VersionRecord,
+  normalize, VERSION_ACTOR
+Decisions: D-0017, D-0008, D-0004, D-0023, D-0024, D-0025
 Assumptions: A-0014
 Notes: The ONLY writer of interp.versions / interp.edges. Everything the projection holds is derivable from the event
   body, so stores/rebuild_projection.py can recompute it. Rows are written in the caller's transaction right after
@@ -19,8 +19,15 @@ Notes: The ONLY writer of interp.versions / interp.edges. Everything the project
   D-0024: the version's encrypted recall-index entry is written last, in the same transaction
   (recall.index_version), so an entry exists if and only if the version does. `embedder` defaults to the process's
   pinned local embedder.
+  D-0025 §3 (the D-0018 amendment): source_addresses() is the one definition of "a version's addresses = the union
+  of its source events' addresses": the sorted, de-duplicated union of the `addresses` in the given events' readable
+  content (an unreadable or shredded source contributes nothing). Callers (promote_if_supported, commit_episode) pass
+  the capture events their version derives from and spread the result into the version content; the `addresses` key
+  is present only when non-empty, so a version from sources without addresses is byte-identical to before.
+  recall/index_version.py reads `content["addresses"]` into the index entry.
 """
 import uuid
+from collections.abc import Iterable
 from dataclasses import dataclass, field
 from uuid import UUID
 
@@ -87,6 +94,16 @@ def edges_from_body(raw: list[dict]) -> list[Edge]:
                  target_version=x["target_version"],
                  span=(x["span_start"], x["span_end"]) if x["span_start"] is not None else None,
                  span_text=x["span_text"]) for x in raw]
+
+
+def source_addresses(events: Iterable[ReadEvent]) -> dict:
+    """{"addresses": sorted union of the events' content addresses}, or {} when none has any (D-0025 §3)."""
+    union = set()
+    for e in events:
+        c = e.body.get("content") if isinstance(e.body, dict) else None
+        if isinstance(c, dict):
+            union.update(c.get("addresses") or ())
+    return {"addresses": sorted(union)} if union else {}
 
 
 def write_version(session: ScopedSession, key_provider: RootKeyProvider, stream_id: UUID, rec: VersionRecord, *,

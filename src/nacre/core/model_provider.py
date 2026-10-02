@@ -3,7 +3,7 @@ Functionality: The model-call types and the ModelProvider protocol (types only, 
 Owns: ModelRequest / ModelResponse / Usage / CallPolicy, the canonical (hashable) form of a request, and the
   provider error type.
 Public entry: ModelRequest, Message, ModelParams, ModelResponse, Usage, CallPolicy, ModelProvider, ProviderError,
-  canonical_request(), request_sha256(), is_dated_pin()
+  canonical_request(), request_sha256(), is_dated_pin(), is_frame_id()
 Decisions: D-0021, D-0022, D-0008
 Assumptions: A-0025
 Notes: Every parameter that reaches the provider is in the canonical form, and unset ones are explicit None
@@ -11,6 +11,15 @@ Notes: Every parameter that reaches the provider is in the canonical form, and u
   because the deterministic CBOR subset has no floats (D-0008); repr round-trips exactly.
   The canonical form is versioned ("v": 1); changing it is a new version, never an edit, because recordings are
   keyed by its hash.
+  `frame_id` (D-0022 amendments 1-2, 2026-10-02): a request may name its ContextFrame (the sha256 hex of the frame's
+  canonical CBOR, D-0025). It is metadata: recorded on the call's result event, never sent to a provider, and NOT
+  part of the canonical request, so the canonical form stays version 1 and the request hash depends only on what is
+  sent. (Frame ids change across fresh databases while the prompt bytes do not, so a hash over the frame id would
+  break recorded replay; amendment 2.)
+  ProviderError carries the billing of a failed attempt (D-0021 amendment 2, owner 2026-10-02), with backwards
+  compatible keyword defaults: `billed` (the provider may have charged for this attempt) and `usage` (the provider's
+  reported usage, when it returned any). billed=False: nothing reached the provider (cost 0); billed=True with
+  usage: costed from that usage; billed=True without usage: costed at the worst case (models/call_model.py).
 """
 import hashlib
 import re
@@ -43,6 +52,7 @@ class ModelRequest:
     params: ModelParams
     purpose: str         # the seat, e.g. "sleep.propose"
     system: str | None = None
+    frame_id: str | None = None   # the ContextFrame the memory section came from (D-0022 am. 1); never sent
 
 
 @dataclass(frozen=True)
@@ -73,10 +83,13 @@ class CallPolicy:
 class ProviderError(RuntimeError):
     """A provider call failed. `retryable` marks transient failures (timeouts, rate limits, 5xx)."""
 
-    def __init__(self, message: str, *, retryable: bool, error_class: str):
+    def __init__(self, message: str, *, retryable: bool, error_class: str, billed: bool = False,
+                 usage: "Usage | None" = None):
         super().__init__(message)
         self.retryable = retryable
         self.error_class = error_class
+        self.billed = billed or usage is not None      # reported usage means the provider counted (and bills) it
+        self.usage = usage
 
 
 class ModelProvider(Protocol):
@@ -90,13 +103,25 @@ def _f(x: float | None) -> str | None:
     return None if x is None else repr(float(x))
 
 
+_FRAME_ID = re.compile(r"^[0-9a-f]{64}$")
+
+
+def is_frame_id(value) -> bool:
+    """True for a ContextFrame id: lowercase sha256 hex (D-0025)."""
+    return type(value) is str and bool(_FRAME_ID.match(value))
+
+
 def canonical_request(r: ModelRequest) -> dict:
-    """The exact, hashable description of what is sent to the provider (version 1)."""
-    return {"v": 1, "provider": r.provider, "model": r.model, "purpose": r.purpose, "system": r.system,
-            "messages": [{"role": m.role, "content": m.content} for m in r.messages],
-            "params": {"max_tokens": r.params.max_tokens, "temperature": _f(r.params.temperature),
-                       "top_p": _f(r.params.top_p), "seed": r.params.seed,
-                       "response_format": r.params.response_format}}
+    """The exact, hashable description of what is sent (version 1). frame_id is validated but never included."""
+    out = {"v": 1, "provider": r.provider, "model": r.model, "purpose": r.purpose, "system": r.system,
+           "messages": [{"role": m.role, "content": m.content} for m in r.messages],
+           "params": {"max_tokens": r.params.max_tokens, "temperature": _f(r.params.temperature),
+                      "top_p": _f(r.params.top_p), "seed": r.params.seed,
+                      "response_format": r.params.response_format}}
+    if r.frame_id is not None:
+        if not is_frame_id(r.frame_id):
+            raise ValueError("frame_id must be a lowercase sha256 hex digest (D-0022 amendment 1)")
+    return out
 
 
 def request_sha256(r: ModelRequest) -> str:

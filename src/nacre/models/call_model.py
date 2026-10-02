@@ -4,9 +4,10 @@ Functionality: Call a model end to end: policy, scope and price checks, the call
 Owns: the dated-pin check, the one-scope / readable-sources check (SI-1), the provider policy check (default deny),
   the fail-closed price lookup and cost, the retry loop, the `result` recording of each attempt (D-0022), and the
   replay short-circuit.
-Public entry: call_model(), ModelCall, ModelCallRefused, load_prices(), DEFAULT_POLICY
+Public entry: call_model(), ModelCall, ModelCallRefused, load_prices(), attempt_cost(), worst_case_cost(),
+  DEFAULT_POLICY
 Decisions: D-0021, D-0022, D-0005, D-0016, D-0023
-Assumptions: A-0025
+Assumptions: A-0025, A-0046
 Notes: The ONLY path from Nacre to a model provider (D-0021). Every attempt, failed or not, becomes one `result`
   event in the stream the prompt came from: actor_kind=model, actor_model = the requested dated pin,
   actor_model_version = the provider-reported model, source=system, authorship=external (so trust=untrusted:
@@ -26,6 +27,23 @@ Notes: The ONLY path from Nacre to a model provider (D-0021). Every attempt, fai
   policy and price checks still run, so a replay is refused wherever the live call would have been.
   D1: recordings are appended inside the CALLER's transaction. A caller that must keep recordings even if its own
   work later fails (the sleep pass: paid calls must survive a crash, D-0020) commits per call.
+  D-0021 amendment 2 (owner, 2026-10-02): every attempt records `cost_usd` and `cost_basis` (attempt_cost()):
+  - "usage": a response, or a billed ProviderError carrying the provider's reported usage (refused, truncated, any
+    other billed non-success): priced from that usage with the same formula as a success;
+  - "worst_case": a billed ProviderError without usage (e.g. a timeout after the request was sent): max_tokens at the
+    output price plus an upper bound on the input tokens at the uncached input price (worst_case_cost());
+  - "none": billed=False, the request never reached the provider (connection refused, pre-network refusal): 0.
+  Error bodies also record `billed` and, when reported, `usage`. ModelCall.cost_usd is the SUM over every recorded
+  attempt of the call (before amendment 2 failed attempts were 0, so it equalled the last attempt's cost), and
+  ModelCall.cost_basis is the weakest basis among them (worst_case > usage > none), so a caller summing ModelCall
+  costs sums exactly what the ledger records. Budget caps use attempt_cost() too (eval/cap_exp0004_budget.py).
+  D1 input-token upper bound (worst_case_cost): every message and the system prompt in UTF-8 bytes, plus the JSON
+  schema (compact JSON bytes) when one is sent, plus 16 tokens per message, per system prompt, per schema and once
+  for the request. Deterministic and an over-estimate under two premises, flagged to the owner as an assumption to
+  record: every tokenizer token covers at least one UTF-8 byte of the text it encodes, and provider-side framing is
+  at most 16 tokens per part.
+  D-0022 amendments 1-2: a request with a `frame_id` (malformed ids are refused before anything is sent) records it as
+  the body's `frame_id`; it is not part of the canonical request or its hash (replay matches on what is sent).
 """
 import json
 import time
@@ -38,7 +56,7 @@ from uuid import UUID
 from nacre.core.encode_cbor import encode_cbor
 from nacre.core.event import ActorKind, EventType, PayloadType, Source
 from nacre.core.model_provider import (CallPolicy, ModelProvider, ModelRequest, ModelResponse, ProviderError,
-                                       canonical_request, is_dated_pin, request_sha256)
+                                       canonical_request, is_dated_pin, is_frame_id, request_sha256)
 from nacre.core.root_key_provider import RootKeyProvider
 from nacre.keys.derive_contributor_key import MAX_CONTRIBUTORS, ContributorError, contributors_of
 from nacre.ledger.append_event import AppendRequest, Authorship, append_event
@@ -62,8 +80,9 @@ class ModelCall:
     event_id: UUID | None           # the last recording (None only for replays, which never re-record)
     request_sha256: str
     attempts: int
-    cost_usd: Decimal
+    cost_usd: Decimal                # the sum over every recorded attempt (D-0021 amendment 2)
     error: ProviderError | None = None
+    cost_basis: str = "usage"       # "usage" | "worst_case" | "none": the weakest basis among the attempts
 
     def raise_for_error(self) -> "ModelCall":
         """Raise the provider error, if any. Call it AFTER the session commits, so failed attempts stay recorded."""
@@ -82,6 +101,34 @@ def _cost(prices: dict, request: ModelRequest, usage) -> Decimal:
     cached = usage.cached_input_tokens or 0
     return ((Decimal(usage.input_tokens - cached) * Decimal(p["input"]) + Decimal(cached) * Decimal(p["cached_input"])
              + Decimal(usage.output_tokens) * Decimal(p["output"])) / million).quantize(Decimal("0.0000000001"))
+
+
+_PER_PART_OVERHEAD = 16
+_BASIS_RANK = {"none": 0, "usage": 1, "worst_case": 2}
+
+
+def worst_case_cost(prices: dict, request: ModelRequest) -> Decimal:
+    """The most `request` can be billed: an input-token upper bound at the input price + max_tokens at output."""
+    p = prices["models"][request.model]
+    parts = [m.content.encode() for m in request.messages] + ([request.system.encode()] if request.system else [])
+    if request.params.response_format is not None:
+        parts.append(json.dumps(request.params.response_format, sort_keys=True, separators=(",", ":"),
+                                ensure_ascii=False).encode())
+    tokens_in = sum(len(b) for b in parts) + _PER_PART_OVERHEAD * (len(parts) + 1)
+    return ((Decimal(tokens_in) * Decimal(p["input"]) + Decimal(request.params.max_tokens) * Decimal(p["output"]))
+            / Decimal(1_000_000)).quantize(Decimal("0.0000000001"))
+
+
+def attempt_cost(prices: dict, request: ModelRequest, response: ModelResponse | None = None,
+                 error: ProviderError | None = None) -> tuple[Decimal, str]:
+    """The recorded cost of one attempt and its basis ("usage" | "worst_case" | "none"), D-0021 amendment 2."""
+    if response is not None:
+        return _cost(prices, request, response.usage), "usage"
+    if error is None or not getattr(error, "billed", False):
+        return Decimal(0), "none"
+    if error.usage is not None:
+        return _cost(prices, request, error.usage), "usage"
+    return worst_case_cost(prices, request), "worst_case"
 
 
 def _source_stream(session: ScopedSession, source_event_ids: list[UUID]) -> tuple[UUID, UUID]:
@@ -125,6 +172,8 @@ def call_model(session: ScopedSession, key_provider: RootKeyProvider, model_prov
         raise ModelCallRefused(f"request is for {request.provider}, provider is {model_provider.name}")
     if policy.max_attempts < 1 or policy.timeout_s <= 0 or policy.backoff_s < 0:
         raise ModelCallRefused("invalid call policy")
+    if request.frame_id is not None and not is_frame_id(request.frame_id):
+        raise ModelCallRefused("frame_id must be a lowercase sha256 hex digest (D-0022 amendment 1)")
     stream, org = _source_stream(session, source_event_ids)
     if (request.provider, request.model) not in allowed_models(session, key_provider, org):
         raise ModelCallRefused(f"org policy does not allow {request.provider}/{request.model} (default deny, D-0021)")
@@ -140,6 +189,7 @@ def call_model(session: ScopedSession, key_provider: RootKeyProvider, model_prov
         return ModelCall(response, None, digest, 1, _cost(prices, request, response.usage))
 
     canonical = canonical_request(request)
+    total, basis = Decimal(0), "none"
     settings = {"timeout_s": repr(policy.timeout_s), "max_attempts": policy.max_attempts, "backoff_s": repr(policy.backoff_s)}
     for attempt in range(1, policy.max_attempts + 1):
         started = time.monotonic()
@@ -150,16 +200,26 @@ def call_model(session: ScopedSession, key_provider: RootKeyProvider, model_prov
             response, error = None, exc
         body = {"kind": "model_call", "purpose": request.purpose, "request": canonical, "request_sha256": digest,
                 "attempt": attempt, "call_policy": settings, "run_id": str(run_id), "price_table": prices["version"]}
+        if request.frame_id is not None:
+            body["frame_id"] = request.frame_id
+        cost, this_basis = attempt_cost(prices, request, response, error)
+        total += cost
+        basis = max(basis, this_basis, key=_BASIS_RANK.__getitem__)
+        body.update(cost_usd=str(cost), cost_basis=this_basis)
         if response is not None:
-            cost = _cost(prices, request, response.usage)
-            body.update(status="ok", latency_ms=response.latency_ms, cost_usd=str(cost), response={
+            body.update(status="ok", latency_ms=response.latency_ms, response={
                 "text": response.text, "finish_reason": response.finish_reason, "response_id": response.response_id,
                 "model_reported": response.model_reported,
                 "usage": {"input_tokens": response.usage.input_tokens, "output_tokens": response.usage.output_tokens,
                           "cached_input_tokens": response.usage.cached_input_tokens}})
         else:
             body.update(status="error", error_class=error.error_class, retryable=error.retryable,
-                        latency_ms=int((time.monotonic() - started) * 1000), cost_usd="0")
+                        billed=bool(getattr(error, "billed", False)),
+                        latency_ms=int((time.monotonic() - started) * 1000))
+            if getattr(error, "usage", None) is not None:
+                u = error.usage
+                body["usage"] = {"input_tokens": u.input_tokens, "output_tokens": u.output_tokens,
+                                 "cached_input_tokens": u.cached_input_tokens}
         body["redacted"] = _strings_change(canonical) or (response is not None and _strings_change(response.text))
         if len(encode_cbor(body)) > MAX_BODY_BYTES:
             raise ModelCallRefused("model-call body over 1 MiB; the attachment route is not built yet (D-0022)")
@@ -170,8 +230,8 @@ def call_model(session: ScopedSession, key_provider: RootKeyProvider, model_prov
             content=body, actor_model=request.model, sources=tuple(sorted(set(source_event_ids))),
             actor_model_version=response.model_reported if response is not None else None, cycle_id=run_id)).envelope
         if response is not None:
-            return ModelCall(response, env.event_id, digest, attempt, cost)
+            return ModelCall(response, env.event_id, digest, attempt, total, cost_basis=basis)
         if not error.retryable or attempt == policy.max_attempts:
-            return ModelCall(None, env.event_id, digest, attempt, Decimal(0), error)
+            return ModelCall(None, env.event_id, digest, attempt, total, error, cost_basis=basis)
         sleep(policy.backoff_s * attempt)
     raise AssertionError("unreachable")

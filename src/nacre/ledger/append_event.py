@@ -10,9 +10,11 @@ Assumptions: A-0007, A-0009, A-0010, A-0014, A-0021, A-0041
 Notes: Runs inside a scoped session (scopes/open_scoped_session.py); RLS admits only the principal's
   streams, and the transaction commits or rolls back with the session.
   Order (D-0003 for the locked part):
-    validate → trust → subject/month/key → strip  [unlocked: needs no sequence number; D1, A-0007]
-    → take the stream lock → idempotency check → read the head → assign commit_seq, committed_at
-    → encrypt → MAC → seal → INSERT.
+    validate → trust → subject/month → strip/scan  [unlocked: needs no sequence number; D1, A-0007]
+    → take the stream lock → key (master/data/contributor rows) → attachment store → idempotency check
+    → read the head → assign commit_seq, committed_at → encrypt → MAC → seal → INSERT.
+    D1 (2026-10-02): key resolution moved under the stream lock, so no key-row wait can form a cycle with this lock
+    (CURRENT F2). The A-0007 pooled throughput must be re-measured on a quiet machine for this order.
   recorded_at is set at intake, before the lock.
   Idempotency (D-0012 part B):
   - The key must be a caller-random UUID v4/v7.
@@ -112,6 +114,11 @@ def append_event(session: ScopedSession, provider: RootKeyProvider, request: App
         redactions = redactions + attachment_redactions
         if attachment_redactions:
             body["redactions"] = list(redactions)
+    # The stream lock is taken BEFORE any key row (master, data, contributor) is created: a transaction holding this
+    # stream's lock that later needs a new key row must never wait on a row inserted by a writer that is itself
+    # waiting for this lock (deadlock found 2026-10-02, CURRENT F2; tests/ledger/test_append_event.py). Stripping and
+    # OCR above stay outside the lock.
+    conn.execute("SELECT pg_advisory_xact_lock(ledger.stream_lock_key(%s))", (stream,))
     if request.sources:
         own = Contributor(subject, month, subject != stream)
         try:
@@ -125,7 +132,6 @@ def append_event(session: ScopedSession, provider: RootKeyProvider, request: App
     if request.attachment is not None:
         attachment_ref, attachment_sha256 = store_attachment(conn, key, blob_store, data)   # before commit (D-0013)
 
-    conn.execute("SELECT pg_advisory_xact_lock(ledger.stream_lock_key(%s))", (stream,))
     existing = _row(conn, "stream_id = %s AND idempotency_key = %s", (stream, request.idempotency_key))
     if existing is not None:
         original_key = load_key(conn, provider, existing.key_id)

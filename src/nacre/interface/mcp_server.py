@@ -89,7 +89,7 @@ def build_server(services: Services, authenticate: Callable[[str], Principal],
                         stakes: list[str] | None = None, cycle_id: str | None = None, task_id: str | None = None,
                         mode: str | None = None, actor_model: str | None = None,
                         actor_model_version: str | None = None, source: str = "chat", authorship: str = "external",
-                        actor_kind: str = "agent") -> dict[str, Any]:
+                        actor_kind: str = "agent", addresses: list[str] | None = None) -> dict[str, Any]:
         return call(ctx, "record_decision", args_of(locals()))
 
     @server.tool(structured_output=True, description="Record a prediction about a decision's outcome (D-0018).")
@@ -97,14 +97,18 @@ def build_server(services: Services, authenticate: Callable[[str], Principal],
                           expected_success: bool | None = None, predictor: str = "agent",
                           confidence_pct: int | None = None, expected_failing_check: str | None = None,
                           cycle_id: str | None = None, task_id: str | None = None, mode: str | None = None,
-                          source: str = "chat", authorship: str = "external", actor_kind: str = "agent") -> dict[str, Any]:
-        return call(ctx, "record_prediction", args_of(locals()))
+                          source: str = "chat", authorship: str = "external", actor_kind: str = "agent",
+                          addresses: list[str] | None = None) -> dict[str, Any]:
+        a = args_of(locals())
+        a["expected_success"] = expected_success          # None = no expectation, still sent
+        return call(ctx, "record_prediction", a)
 
     @server.tool(structured_output=True, description="Record an action taken for a decision (D-0018).")
     def record_action(ctx: Context, stream_id: str, idempotency_key: str, decision_id: str, action_kind: str,
                       description: str, stakes: list[str] | None = None, cycle_id: str | None = None,
                       task_id: str | None = None, mode: str | None = None, actor_tool: str | None = None,
-                      source: str = "chat", authorship: str = "external", actor_kind: str = "agent") -> dict[str, Any]:
+                      source: str = "chat", authorship: str = "external", actor_kind: str = "agent",
+                      addresses: list[str] | None = None) -> dict[str, Any]:
         return call(ctx, "record_action", args_of(locals()))
 
     @server.tool(structured_output=True, description="Record an outcome with role-tagged sections (D-0018).")
@@ -113,7 +117,7 @@ def build_server(services: Services, authenticate: Callable[[str], Principal],
                        stakes: list[str] | None = None, failing_checks: list[str] | None = None,
                        cycle_id: str | None = None, task_id: str | None = None, mode: str | None = None,
                        actor_tool: str | None = None, source: str = "chat", authorship: str = "external",
-                       actor_kind: str = "agent") -> dict[str, Any]:
+                       actor_kind: str = "agent", addresses: list[str] | None = None) -> dict[str, Any]:
         a = args_of(locals())
         a["success"] = success                    # None is a meaningful value here (unknown), keep it
         return call(ctx, "record_outcome", a)
@@ -123,7 +127,8 @@ def build_server(services: Services, authenticate: Callable[[str], Principal],
     def record_correction(ctx: Context, stream_id: str, idempotency_key: str, correction_of: str, text: str,
                           scope_of_correction: str | None = None, cycle_id: str | None = None,
                           task_id: str | None = None, mode: str | None = None, source: str = "review",
-                          authorship: str = "scope_principal", actor_kind: str = "person") -> dict[str, Any]:
+                          authorship: str = "scope_principal", actor_kind: str = "person",
+                          addresses: list[str] | None = None) -> dict[str, Any]:
         return call(ctx, "record_correction", args_of(locals()))
 
     return server

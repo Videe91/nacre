@@ -134,3 +134,35 @@ def test_https_and_loopback_http_are_accepted():
     Client("http://localhost:1/mcp", "t")
     with pytest.raises(NacreError):
         Client([], "t")
+
+
+def test_record_methods_send_addresses_and_invalid_ones_are_invalid_request(world, provider):
+    """D-0025 §3: the SDK's record_* methods take `addresses` and pass them through (in-process mode)."""
+    from nacre.core.db import DbRole, connect
+    from nacre.ledger.read_stream import read_stream
+    from nacre.scopes.open_scoped_session import open_scoped_session
+    c = Client.local(world["services"], world["pid"])
+    d = _decide(c, world["a"], addresses=("system:payments", "code:src/payments/retry.py"))
+    k = lambda: str(uuid.uuid4())                                   # noqa: E731
+    did = uuid.UUID(d["event_id"])
+    ids = {"p": c.record_prediction(world["a"], k(), did, "green", expected_success=True,
+                                       addresses=["entity:VX-41"])["event_id"],
+           "a": c.record_action(world["a"], k(), did, "edit", "patch", addresses=["file:a.py"])["event_id"],
+           "o": c.record_outcome(world["a"], k(), did, None, [("status", "ran")], addresses=["domain:b"])["event_id"]}
+    with connect(DbRole.APP, dsn=world["dsn"]["app"]) as conn, open_scoped_session(conn, world["pid"]) as s:
+        got = {str(e.envelope.event_id): e.body["content"] for e in read_stream(s, provider, world["a"])}
+    assert got[d["event_id"]]["addresses"] == ["code:src/payments/retry.py", "system:payments"]
+    assert [got[ids[x]]["addresses"] for x in "pao"] == [["entity:VX-41"], ["file:a.py"], ["domain:b"]]
+    for bad in (["payments"], ["code:x", "code:x"], "code:x"):
+        with pytest.raises(NacreError) as e:
+            _decide(c, world["a"], addresses=bad)
+        assert e.value.code == "invalid_request"
+    assert "addresses" in Client.record_correction.__code__.co_varnames
+
+
+def test_a_prediction_without_an_expected_success_is_recorded_locally(world):
+    # expected_success=None means "no expectation" and must reach capture (found 2026-10-02: it was dropped as unset)
+    c = Client.local(world["services"], world["pid"])
+    d = _decide(c, world["a"])
+    p = c.record_prediction(world["a"], str(uuid.uuid4()), uuid.UUID(d["event_id"]), "the retry succeeds")
+    assert p["created"] is True

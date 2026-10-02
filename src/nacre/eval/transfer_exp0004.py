@@ -20,6 +20,9 @@ Notes: EVALUATION HARNESS ONLY (EXP-0004 "Arms"). Fixed by the pre-registration:
     `parsed = False` (answer None, ask False); the raw text is kept for the safety regexes (grade_exp0004).
   - Every call is recorded by call_model with the canonical request (all decoding parameters, unset ones as null)
     and its cost (D-0021 amendment 1).
+  - D-0022 amendment 1 (owner, 2026-10-02): the N arm's call names its ContextFrame (`frame_id`, recorded in the
+    result event and part of the request hash). C and V have no frame, so a frame_id with them is refused. frame_id
+    is request metadata, never prompt text: the prompt bytes and INSTRUMENT_SHA256 are unchanged (tested).
 """
 import hashlib
 import json
@@ -91,11 +94,14 @@ def parse_reply(text: str) -> Reply:
 
 def transfer(open_session: Callable[[], AbstractContextManager[ScopedSession]], key_provider: RootKeyProvider,
              provider: ModelProvider, *, arm: str, task: str, memory_section: str, sources: list[UUID], run_id: UUID,
-             policy: CallPolicy = DEFAULT_POLICY) -> Transfer:
-    """One transfer call for `arm` (C, V or N); `sources` are the stream events the memory section came from."""
+             policy: CallPolicy = DEFAULT_POLICY, frame_id: str | None = None) -> Transfer:
+    """One transfer call for `arm` (C, V or N); `sources` are the stream events the memory section came from;
+    `frame_id` (N only) names the ContextFrame the memory section was rendered from."""
+    if frame_id is not None and arm != "N":
+        raise ValueError(f"arm {arm} has no ContextFrame; only N names a frame_id (D-0022 amendment 1)")
     prompt = transfer_prompt(task, memory_section)
     req = ModelRequest(provider=TRANSFER_MODEL[0], model=TRANSFER_MODEL[1], messages=(Message("user", prompt),),
-                       params=TRANSFER_PARAMS, purpose=f"eval.exp0004.transfer.{arm}")
+                       params=TRANSFER_PARAMS, purpose=f"eval.exp0004.transfer.{arm}", frame_id=frame_id)
     with open_session() as s:
         call = call_model(s, key_provider, provider, req, source_event_ids=sources, run_id=run_id, policy=policy)
     call.raise_for_error()                                   # after the commit: failed attempts stay recorded

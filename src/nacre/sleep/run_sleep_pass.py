@@ -4,7 +4,7 @@ Functionality: Run one sleep pass over a stream: flag, then consolidate every fl
 Owns: the run markers, choosing the episodes, the per-step transactions, reusing recorded model calls on resume,
   choosing the final proposal list, and the run report.
 Public entry: run_sleep_pass(), SleepReport, EPISODE_DONE, PASS_COMPLETED, REFUSED
-Decisions: D-0020, D-0019, D-0017, D-0021, D-0022, D-0023
+Decisions: D-0020, D-0018, D-0019, D-0017, D-0021, D-0022, D-0023
 Assumptions: A-0025, A-0026, A-0027
 Notes: Transactions (D-0020 idempotency and crash safety):
     1. `sleep_pass_started` marker + gate flags (D-0019);
@@ -19,6 +19,10 @@ Notes: Transactions (D-0020 idempotency and crash safety):
   D-0023: every episode write is keyed by its sources. When that is impossible (a shredded source, or more than 256
   contributors) the episode is REFUSED and a content-free `derived_write_refused` marker is recorded in its own
   committed session; there is never a stream-key fallback, and the episode is not retried.
+  D-0020 amendment 1: an outcome recorded against an ACTION is consolidated through the action's recorded decision
+  link (sleep/build_evidence_bundle.py); the episode's members are (decision, action, outcome) in that order. An
+  action with no readable decision link is not consolidated and is counted in `unlinked_action_outcomes`, never in
+  `skipped`; nothing is written for it (no marker), so every run reports it again (D1).
   Only OUTCOME flags are consolidated in Phase 2. Corrections of belief versions -> contradictions is not built yet
   (tracked in CURRENT.md). Injected or task data never enters here (gate items 11-12): the only inputs are the
   stream's own events.
@@ -43,7 +47,7 @@ from nacre.models.call_model import DEFAULT_POLICY, ModelCallRefused
 from nacre.models.recorded_provider import RecordedProvider, RecordingMiss
 from nacre.scopes.open_scoped_session import ScopedSession
 from nacre.sleep.admit_propositions import admit_propositions
-from nacre.sleep.build_evidence_bundle import BundleError, build_evidence_bundle
+from nacre.sleep.build_evidence_bundle import BundleError, UnlinkedAction, build_evidence_bundle
 from nacre.sleep.propose_propositions import propose_propositions
 from nacre.sleep.repair_structure import repair_structure
 from nacre.stores.commit_episode import SLEEP_PASS_STARTED, Anchor, commit_episode
@@ -61,6 +65,7 @@ class SleepReport:
     run_id: UUID
     episodes: int = 0
     skipped: int = 0
+    unlinked_action_outcomes: int = 0
     structured: int = 0
     fallback: int = 0
     rejections: Counter = field(default_factory=Counter)
@@ -122,6 +127,9 @@ def run_sleep_pass(open_session: Callable[[], AbstractContextManager[ScopedSessi
     for outcome_id in dict.fromkeys(todo):
         try:
             bundle = build_evidence_bundle(None, key_provider, stream_id, outcome_id, index)
+        except UnlinkedAction:
+            report.unlinked_action_outcomes += 1          # D-0020 am.1: counted, never inferred
+            continue
         except BundleError:
             report.skipped += 1
             continue
@@ -160,7 +168,8 @@ def _consolidate(open_session, key_provider, model_provider, stream_id, index, b
                 report.promoted += 1
         d = index[bundle.decision_id].envelope
         anchors = tuple(Anchor(b, getattr(d, b)) for b in ("task_id", "cycle_id") if getattr(d, b) is not None)
-        commit_episode(s, key_provider, stream_id=stream_id, members=(bundle.decision_id, outcome_id), anchors=anchors,
+        members = (bundle.decision_id, *((bundle.action_id,) if bundle.action_id else ()), outcome_id)
+        commit_episode(s, key_provider, stream_id=stream_id, members=members, anchors=anchors,
                        boundary_method="runtime_rule", run_id=run_id)
         _marker(s, key_provider, stream_id, {"op": EPISODE_DONE, "run_id": str(run_id), "outcome_id": str(outcome_id),
                                              "structured": len(admission.structured), "fallback": len(admission.fallback),

@@ -17,7 +17,7 @@ Notes: Called by stores/write_version.py right after the version's projection ro
     ciphertext. Embedding = 384 little-endian float32 bytes (CBOR has no floats here, D-0008).
   - Index text (D1): a belief or fallback indexes its `nucleus` (the retrieval handle, D-0017), falling back to
     `support_text`; an episode has no text and indexes "" (it ranks through identity addresses only).
-  - Addresses: `content["addresses"]` when present (D-0025 §3, the D-0018 amendment is not built yet), else [].
+  - Addresses: `content["addresses"]` when present (D-0025 §3; D-0018 amendment 2, built 2026-10-02), else [].
   - A stream whose active index generation has a different embedder refuses the write (IndexEmbedderMismatch):
     a model change needs a full re-index into a new generation first (owner decision, D-0024).
   - default_embedder() is the isolated worker (recall/embedder_worker.py, D-0024 amendment 1), one per process.

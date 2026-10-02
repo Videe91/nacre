@@ -3,8 +3,8 @@ Functionality: Render a frozen ContextFrame for a model: one deterministic memor
   provider, plus the provider-neutral request (system + task) the adapters map to their own APIs.
 Owns: the memory-section text, the contested wording (never phrased as fact), the coverage instruction, and the
   rule that rendering never adds, drops or reorders items.
-Public entry: render_memory_section(), render_request(), RENDER_VERSION
-Decisions: D-0025, D-0028, D-0021
+Public entry: render_memory_section(), render_request(), frame_id_of(), RENDER_VERSION
+Decisions: D-0025, D-0028, D-0021, D-0022, D-0008
 Assumptions: none
 Notes: D-0025 §7 and amendment 1 (owner, 2026-10-02).
   - A pure function of the frame body: same frame -> byte-identical memory section, whatever the provider (D-0028
@@ -15,7 +15,15 @@ Notes: D-0025 §7 and amendment 1 (owner, 2026-10-02).
     <text>." (amendment 1).
   - Coverage: on weak or none, the section ends with an instruction to ask rather than guess (D-0025 §6).
   - Nothing here reads the database or keys; reasoning prompts never flow back into the frame.
+  - D-0022 amendment 1 / D-0028 §3: the request names the frame it was rendered from (`frame_id`), so every
+    provider's recorded call of one recall names the same frame. frame_id_of() is the frame id rule of
+    recall/assemble_frame.py (sha256 of the body's deterministic CBOR, D-0025, D-0008), recomputed from the body so a
+    caller cannot pair a body with another frame's id; a test pins it to assemble_frame's Frame.frame_id. frame_id is
+    metadata: it never changes the prompt bytes.
 """
+import hashlib
+
+from nacre.core.encode_cbor import encode_cbor
 from nacre.core.model_provider import Message, ModelParams, ModelRequest
 
 RENDER_VERSION = 1
@@ -43,9 +51,14 @@ def render_memory_section(frame_body: dict) -> str:
     return "\n".join(lines) + "\n"
 
 
+def frame_id_of(frame_body: dict) -> str:
+    """The frame's id: sha256 hex of its deterministic CBOR (as recall/assemble_frame.py computes it)."""
+    return hashlib.sha256(encode_cbor(frame_body)).hexdigest()
+
+
 def render_request(frame_body: dict, *, task: str, provider: str, model: str, params: ModelParams,
                    purpose: str, system: str) -> ModelRequest:
     """The provider-neutral request: the caller's system prompt, then the memory section, then the task."""
     content = render_memory_section(frame_body) + "\nTask:\n" + task
     return ModelRequest(provider=provider, model=model, messages=(Message("user", content),), params=params,
-                        purpose=purpose, system=system)
+                        purpose=purpose, system=system, frame_id=frame_id_of(frame_body))

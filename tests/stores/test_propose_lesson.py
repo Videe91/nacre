@@ -3,7 +3,7 @@ import uuid
 
 import pytest
 
-from stores_kit import RULE, episode, propose
+from stores_kit import RULE, action_episode, episode, propose
 from nacre.ledger.read_stream import read_stream
 from nacre.stores.propose_lesson import ProposalError, Qualifier, propose_lesson
 
@@ -52,3 +52,15 @@ def test_ancestry_must_be_real(rw, provider, streams):
             propose_lesson(s, provider, stream_id=a, decision_id=d2, outcome_id=o1, section_index=1, span=(0, 5), nucleus=None)
         with pytest.raises(ProposalError, match="decision"):
             propose_lesson(s, provider, stream_id=a, decision_id=uuid.uuid4(), outcome_id=o1, section_index=1, span=(0, 5), nucleus=None)
+
+
+def test_d0020_am1_an_outcome_for_an_action_is_an_outcome_of_the_actions_decision(rw, provider, streams):
+    a = streams["a"]
+    with rw() as s:
+        d, act, o = action_episode(s, provider, a)
+        c = _content(s, provider, a, propose(s, provider, a, d, o))
+        assert (c["decision_id"], c["outcome_id"], c["grounded_in_trusted_correction"]) == (str(d), str(o), True)
+        other, _ = episode(s, provider, a)
+        for wrong in (act, other):                     # the action itself, or a decision the action does not execute
+            with pytest.raises(ProposalError):
+                propose(s, provider, a, wrong, o)

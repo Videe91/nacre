@@ -195,3 +195,48 @@ def test_in_process_callers_write_asserted_and_failures_have_stable_codes(world)
         with pytest.raises(OperationError) as e:
             run_operation(svc, Caller(pid), op, args)
         assert e.value.code == code
+
+
+def _contents(world, provider, pid):
+    from nacre.ledger.read_stream import read_stream
+    with connect(DbRole.APP, dsn=world["dsn"]["app"]) as conn, open_scoped_session(conn, pid) as s:
+        return {str(e.envelope.event_id): e.body["content"] for e in read_stream(s, provider, world["a"])}
+
+
+def test_record_tools_accept_addresses_and_pass_them_through(world, provider):
+    """D-0025 §3 (the D-0018 amendment): every record_* tool takes `addresses`; they land sorted in the event body,
+    and an invalid one is invalid_request with nothing written."""
+    tools = {t.name: t for t in asyncio.run(world["server"]().list_tools())}
+    assert all("addresses" in tools[n].input_schema["properties"] for n in TOOLS if n.startswith("record_"))
+    pid, _, token = world["principal"]()
+    srv = world["server"]()
+    world["holder"]["token"] = token
+    addr = ["system:payments", "code:src/payments/retry.py"]
+    d = payload(call(srv, "record_decision", _decision(world["a"], addresses=addr)))["event_id"]
+    k = lambda: str(uuid.uuid4())                                   # noqa: E731
+    p = payload(call(srv, "record_prediction", {"stream_id": str(world["a"]), "idempotency_key": k(), "decision_id": d,
+                                               "expected_outcome": "green", "expected_success": True,
+                                               "addresses": ["entity:VX-41"]}))["event_id"]
+    ac = payload(call(srv, "record_action", {"stream_id": str(world["a"]), "idempotency_key": k(), "decision_id": d,
+                                            "action_kind": "edit", "description": "patch", "addresses": ["file:a.py"]}))
+    o = payload(call(srv, "record_outcome", {"stream_id": str(world["a"]), "idempotency_key": k(), "outcome_for": d,
+                                            "success": None, "sections": [{"role": "status", "text": "ran"}],
+                                            "addresses": ["domain:billing", "cluster:eu"]}))
+    got = _contents(world, provider, pid)
+    assert got[d]["addresses"] == sorted(addr) and got[p]["addresses"] == ["entity:VX-41"]
+    assert got[ac["event_id"]]["addresses"] == ["file:a.py"]
+    assert got[o["event_id"]]["addresses"] == ["cluster:eu", "domain:billing"]
+    before = _count(world["dsn"])
+    with pytest.raises(ToolError, match=": invalid_request: "):
+        call(srv, "record_decision", _decision(world["a"], addresses=["payments"]))
+    assert _count(world["dsn"]) == before
+
+
+def test_a_prediction_without_an_expected_success_is_recorded(world):
+    _, _, token = world["principal"]()
+    world["holder"]["token"] = token
+    srv = world["server"]()
+    d = payload(call(srv, "record_decision", _decision(world["a"])))["event_id"]
+    p = payload(call(srv, "record_prediction", {"stream_id": str(world["a"]), "idempotency_key": str(uuid.uuid4()),
+                                                "decision_id": d, "expected_outcome": "the retry succeeds"}))
+    assert p["created"] is True and p["trust_basis"] == "verified"

@@ -8,6 +8,8 @@ Assumptions: A-0025
 Notes: D-0022 recorded mode for everyday tests and the gate's determinism check (Phase 2 gate item 4). It reads
   through a scoped session, so a recording is only replayable where its scope is readable (SI-5). It never imports
   a provider SDK and never touches the network (SI-6). A miss raises RecordingMiss; there is no live fallback.
+  D-0022 amendments 1-2: a request's frame_id is NOT part of request_sha256 (the replay key is what is sent), so a
+  recording replays across fresh databases, where frame ids differ but prompt bytes do not.
 """
 from collections import defaultdict, deque
 from uuid import UUID

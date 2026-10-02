@@ -104,22 +104,22 @@ class Client:
                         stakes: Sequence[str] | None = None, cycle_id: UUID | None = None,
                         task_id: UUID | None = None, mode: str | None = None, actor_model: str | None = None,
                         actor_model_version: str | None = None, source: str = "chat", authorship: str = "external",
-                        actor_kind: str = "agent") -> dict[str, Any]:
+                        actor_kind: str = "agent", addresses: Sequence[str] | None = None) -> dict[str, Any]:
         return self._call("record_decision", dict(locals()))
 
     def record_prediction(self, stream_id: UUID, idempotency_key: str, decision_id: UUID, expected_outcome: str, *,
                           expected_success: bool | None = None, predictor: str = "agent",
                           confidence_pct: int | None = None, expected_failing_check: str | None = None,
                           cycle_id: UUID | None = None, task_id: UUID | None = None, mode: str | None = None,
-                          source: str = "chat", authorship: str = "external", actor_kind: str = "agent"
-                          ) -> dict[str, Any]:
-        return self._call("record_prediction", dict(locals()))
+                          source: str = "chat", authorship: str = "external", actor_kind: str = "agent",
+                          addresses: Sequence[str] | None = None) -> dict[str, Any]:
+        return self._call("record_prediction", dict(locals()), keep_none=("expected_success",))
 
     def record_action(self, stream_id: UUID, idempotency_key: str, decision_id: UUID, action_kind: str,
                       description: str, *, stakes: Sequence[str] | None = None, cycle_id: UUID | None = None,
                       task_id: UUID | None = None, mode: str | None = None, actor_tool: str | None = None,
-                      source: str = "chat", authorship: str = "external", actor_kind: str = "agent"
-                      ) -> dict[str, Any]:
+                      source: str = "chat", authorship: str = "external", actor_kind: str = "agent",
+                      addresses: Sequence[str] | None = None) -> dict[str, Any]:
         return self._call("record_action", dict(locals()))
 
     def record_outcome(self, stream_id: UUID, idempotency_key: str, outcome_for: UUID, success: bool | None,
@@ -127,7 +127,7 @@ class Client:
                        stakes: Sequence[str] | None = None, failing_checks: Sequence[str] | None = None,
                        cycle_id: UUID | None = None, task_id: UUID | None = None, mode: str | None = None,
                        actor_tool: str | None = None, source: str = "chat", authorship: str = "external",
-                       actor_kind: str = "agent") -> dict[str, Any]:
+                       actor_kind: str = "agent", addresses: Sequence[str] | None = None) -> dict[str, Any]:
         a = dict(locals())
         a["sections"] = [{"role": r, "text": t} for r, t in sections]
         return self._call("record_outcome", a, keep_none=("success",))     # None = outcome unknown, still sent
@@ -135,5 +135,6 @@ class Client:
     def record_correction(self, stream_id: UUID, idempotency_key: str, correction_of: UUID, text: str, *,
                           scope_of_correction: str | None = None, cycle_id: UUID | None = None,
                           task_id: UUID | None = None, mode: str | None = None, source: str = "review",
-                          authorship: str = "scope_principal", actor_kind: str = "person") -> dict[str, Any]:
+                          authorship: str = "scope_principal", actor_kind: str = "person",
+                          addresses: Sequence[str] | None = None) -> dict[str, Any]:
         return self._call("record_correction", dict(locals()))

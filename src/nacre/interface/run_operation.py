@@ -18,6 +18,8 @@ Notes: D-0026 §3-5 (and amendment 3, PROPOSED: get_frame and record_statement a
     system/scope_principal/system; service: its first source/integration_result/system). It is `asserted`:
     record_context_assembled takes no verified claims.
   - No `on_behalf_of`, refs or attachments: the capture entries accept none in Phase 3 (amendment 3, "also recorded").
+  - `addresses` (D-0025 §3, the D-0018 amendment) pass through to every record_* as a tuple; the capture entry
+    validates them (an invalid one is `invalid_request`, never dropped). They are content, not a claim.
   - Error codes: unauthenticated, forbidden_claim, scope_not_granted, rate_limited, invalid_request, unknown_operation,
     internal. `internal` never carries the exception text.
 """
@@ -75,7 +77,7 @@ _CAPTURE = {"record_decision": ("decision", record_decision), "record_prediction
 OPERATIONS = ("recall_context",) + tuple(_CAPTURE)
 _UUIDS = {"stream_id", "decided_from", "cycle_id", "task_id", "decision_id", "outcome_for", "evaluates_prediction",
           "correction_of"}
-_TUPLES = {"stakes", "failing_checks"}
+_TUPLES = {"stakes", "failing_checks", "addresses"}
 _TRACE_CLAIM = {"agent": ("chat", "external", "agent"), "person": ("chat", "scope_principal", "person"),
                 "operator": ("system", "scope_principal", "system")}
 
@@ -84,7 +86,7 @@ def _coerce(args: dict) -> dict:
     out = {}
     for k, v in args.items():
         if v is None:
-            if k == "success":                   # an outcome's success may be unknown (None); keep it
+            if k in ("success", "expected_success"):   # unknown (None) is a meaningful value; keep it
                 out[k] = None
             continue
         if k in _UUIDS:

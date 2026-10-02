@@ -28,11 +28,14 @@ def test_a_whole_dev_scope_captures_with_the_sets_trust(w, provider):
         with w["session"]() as s:
             capture_day(s, provider, stream, day, ids)
     n = sum(len(ep) for day in sc.days for ep in day)
-    assert len(ids.events) == n and ids.dropped_addresses == n          # every event carries one (uncaptured) address
+    assert len(ids.events) == n and ids.dropped_addresses == 0          # addresses are captured (D-0018 amendment 2)
     with w["session"]() as s:
         evs = read_stream(s, provider, stream)
     assert len(evs) == n
     src = {e["event_id"]: e for day in sc.days for ep in day for e in ep}
+    by_id = {v: k for k, v in ids.events.items()}
+    for e in evs:                                                       # each body holds the set event's addresses
+        assert tuple(e.body["content"].get("addresses", ())) == tuple(sorted(src[by_id[e.envelope.event_id]].get("addresses") or ()))
     by_id = {e.envelope.event_id: e for e in evs}
     for dataset_id, eid in ids.events.items():
         env = by_id[eid].envelope

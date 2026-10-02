@@ -5,7 +5,7 @@ Owns: the per-run id map (dataset event ids -> ledger event ids; dataset authors
   the event-type -> capture-function mapping, the actor / source / authorship mapping, and refusing any event shape
   the mapping does not know.
 Public entry: capture_day(), IdMap, CaptureMappingError
-Decisions: D-0018, D-0012, D-0016, D-0023
+Decisions: D-0018, D-0012, D-0016, D-0023, D-0025
 Assumptions: A-0026, A-0038
 Notes: EVALUATION HARNESS ONLY: the one place where EXP-0004 history becomes capture input (as load_mnexa_family.py
   for EXP-0003). Only the arm view (load_exp0004_set.ArmScope) is passed here; grading fields never are.
@@ -17,8 +17,9 @@ Notes: EVALUATION HARNESS ONLY: the one place where EXP-0004 history becomes cap
     (confidence 0..1 -> confidence_pct = round(100 x c), D1: the CBOR subset has no floats); action -> record_action;
     outcome -> record_outcome(sections, success, failing_checks, evaluates_prediction). `reasoning_owner`, `dispatched`
     and `decided_from = null` are the capture defaults and are checked, not passed.
-  - Event `addresses` are NOT captured: the capture functions do not accept them yet (the D-0018 amendment of D-0025 §3
-    is not built). They are counted in `IdMap.dropped_addresses` and reported (gap for the owner).
+  - Event `addresses` are passed to every capture call as given (D-0025 §3, the D-0018 amendment): the capture
+    function validates them and refuses an invalid one (the run stops; nothing is dropped). `IdMap.dropped_addresses`
+    stays for the run report's schema and is always 0.
   - Trust is derived by append_event from source + authorship (D-0012); a dataset `trust` that disagrees with the
     derived one is refused (it would mean the mapping is wrong).
 """
@@ -72,7 +73,7 @@ def _append(s: ScopedSession, kp: RootKeyProvider, stream: UUID, ev: dict, ids: 
         raise CaptureMappingError(f"{ev['event_id']}: unmapped event type or reference")
     who = dict(stream_id=stream, actor_kind=ActorKind(ev["actor_kind"]), actor_id=ids.actor(ev["author"]),
                source=Source(ev["source"]), authorship=Authorship(ev["authorship"]),
-               idempotency_key=str(uuid.uuid4()), cycle_id=cycle_id)
+               idempotency_key=str(uuid.uuid4()), cycle_id=cycle_id, addresses=tuple(ev.get("addresses") or ()))
     if t == "decision":
         if b.get("decided_from") is not None or b.get("reasoning_owner", "external") != "external":
             raise CaptureMappingError(f"{ev['event_id']}: decided_from / reasoning_owner not mappable")
@@ -106,6 +107,5 @@ def capture_day(session: ScopedSession, key_provider: RootKeyProvider, stream_id
             if ev.get("trust") is not None and env.trust.value != ev["trust"]:
                 raise CaptureMappingError(f"{ev['event_id']}: derived trust differs from the set's")
             ids.events[ev["event_id"]] = env.event_id
-            ids.dropped_addresses += len(ev.get("addresses") or ())
             out.append(env.event_id)
     return out

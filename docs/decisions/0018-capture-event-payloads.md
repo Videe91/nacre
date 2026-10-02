@@ -17,6 +17,30 @@ cannot be judged from free text, so two optional structured fields are added (ab
 Names are compared after trimming and casefolding. Neither field grants authority; they feed the D-0019 surprise rule
 only.
 
+## Amendment 2 (approved by the owner in D-0025 decision 2, 2026-10-01; built 2026-10-02): identity addresses on capture
+- **Payload:** every capture event (`decision`, `prediction`, `action`, `outcome`, `correction`) may carry an
+  optional `addresses` list in its body.
+  - Addresses are content: they are encrypted with the event and erased with its key.
+  - They are supplied by the caller and never inferred from text by a model.
+- **Format:** an address is a typed string `<type>:<value>`, with type one of `file`, `code`, `entity`, `system`,
+  `cluster`, `domain` (D-0025 §3).
+- **Validation at capture:** a failure is a refusal, never a silent drop or rewrite. These limits are D1, recorded in
+  `capture/record_decision.py`:
+  - the type is lower case;
+  - the value is non-empty, printable, and has no surrounding whitespace;
+  - at most 256 characters per address and 64 per event, all distinct.
+- **Storage:** sorted. The key is written only when the list is non-empty, so events without addresses are
+  byte-identical to before (golden test).
+- **Versions:** a version's addresses are the sorted union of its source events' addresses, written only when
+  non-empty and copied into the encrypted recall-index entry (D-0024 §1). The sources are:
+  - for a belief or fallback, the decision and outcome of each supporting proposal;
+  - for an episode, its members.
+- **No authority:** addresses grant none. They feed only identity narrowing and the entity channel (D-0025 §3–4).
+- **Open for the owner** (CURRENT, 2026-10-02):
+  - secret stripping can rewrite an address, and a redacted address then never matches;
+  - contested and superseded versions keep the head's addresses;
+  - capture refuses non-canonical forms, while recall normalises them.
+
 ## Context
 - **SPEC:** "Each cycle records decision, prediction, action and outcome as separate evidence (ADR-0016). Absence of
   an outcome is absence of evidence, never failure."

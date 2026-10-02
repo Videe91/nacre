@@ -1,17 +1,18 @@
 """Cross-provider frame test, offline part (D-0028 §3; Phase 3 gate item 13). One frame body is rendered for an
 OpenAI request and an Anthropic request: the memory-section bytes are identical and only the provider envelope
 differs. Both calls go through call_model with the real adapters over fake SDK clients (no network, no key), and an
-offline replay through RecordedProvider reproduces both with zero network calls. The live smoke run is the owner's.
-NOT covered here: "both result events name the same frame_id in their request". ModelRequest (D-0021) has no field
-that carries a frame_id and render_request does not put it in the request; how a call names its frame is an open D2
-question, so this file does not invent a carrier."""
+offline replay through RecordedProvider reproduces both with zero network calls, and both recorded result events
+name the same frame_id in their result events (D-0022 amendments 1-2: ModelRequest.frame_id, set by render_request). The live
+smoke run is the owner's."""
 import types
 import uuid
 
 from anthropic.types import Message as SdkMessage
 
 from nacre.core.model_provider import ModelParams
-from nacre.interface.render_frame import render_memory_section, render_request
+from nacre.core.event import ActorKind, EventType
+from nacre.interface.render_frame import frame_id_of, render_memory_section, render_request
+from nacre.ledger.read_stream import read_stream
 from nacre.models.anthropic_messages_provider import AnthropicMessagesProvider
 from nacre.models.call_model import call_model
 from nacre.models.openai_responses_provider import OpenAIResponsesProvider
@@ -96,6 +97,16 @@ def test_both_calls_are_recorded_and_an_offline_replay_reproduces_both(world, pr
                 call_model(s, provider, AnthropicMessagesProvider(ac), a_req, source_event_ids=[source], run_id=run)]
     assert [c.response.text for c in live] == ["openai: yes, with backoff", "anthropic: yes, with backoff"]
     assert len(o_create.calls) == len(a_create.calls) == 1
+    assert all("frame_id" not in sent for sent in (*o_create.calls, *a_create.calls))   # metadata, never sent
+
+    with world["open"](world["owner"]) as s:                              # D-0028 §3: one recall, one frame_id
+        bodies = [e.body["content"] for e in read_stream(s, provider, world["proj"])
+                  if e.envelope.event_type == EventType.RESULT and e.envelope.actor_kind == ActorKind.MODEL]
+    assert [(b["request"]["provider"], b["status"]) for b in bodies] == [("openai", "ok"), ("anthropic", "ok")]
+    fid = frame_id_of(FRAME)
+    assert [b["frame_id"] for b in bodies] == [fid, fid]                  # recorded; not hashed (D-0022 am. 2)
+    assert all("frame_id" not in b["request"] for b in bodies)
+    assert o_req.frame_id == a_req.frame_id == fid
 
     with world["open"](world["owner"]) as s:                              # offline: sockets refuse (no_network)
         replay = RecordedProvider(s, provider, [world["proj"]])

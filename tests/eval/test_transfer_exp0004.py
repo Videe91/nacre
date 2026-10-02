@@ -79,3 +79,30 @@ def test_a_transfer_is_recorded_with_its_decoding_parameters(org, provider):
     params = calls[0]["request"]["params"]
     assert params["temperature"] == "0.0" and params["max_tokens"] == 400 and params["top_p"] is None
     assert params["response_format"] == T.REPLY_SCHEMA and calls[0]["request"]["model"] == "gpt-4o-mini-2024-07-18"
+
+
+def test_only_the_n_arm_names_a_frame_and_the_prompt_bytes_do_not_change(org, provider):
+    """D-0022 amendment 1: frame_id is request metadata recorded in the result event; the instrument is untouched."""
+    w = world(org, provider)
+    stream = w["new_scope"]()
+    with w["session"]() as s:
+        d = record_decision(s, provider, stream_id=stream, actor_kind=ActorKind.AGENT, actor_id=uuid.uuid4(),
+                            source=Source.CHAT, authorship=Authorship.SCOPE_PRINCIPAL,
+                            idempotency_key=str(uuid.uuid4()), decision_text="anchor").envelope
+    fid = hashlib.sha256(b"a frame").hexdigest()
+    for arm in ("C", "V"):
+        with pytest.raises(ValueError, match="only N"):
+            T.transfer(w["session"], provider, EchoFake(), arm=arm, task="Q", memory_section="m", sources=[d.event_id],
+                       run_id=uuid.uuid4(), frame_id=fid)
+    n = T.transfer(w["session"], provider, EchoFake(), arm="N", task="Q", memory_section="1. Use X.",
+                   sources=[d.event_id], run_id=uuid.uuid4(), frame_id=fid)
+    plain = T.transfer(w["session"], provider, EchoFake(), arm="N", task="Q", memory_section="1. Use X.",
+                       sources=[d.event_id], run_id=uuid.uuid4())
+    assert n.prompt == plain.prompt == T.transfer_prompt("Q", "1. Use X.") and T.instrument_sha256() == T.INSTRUMENT_SHA256
+    assert n.request_sha256 == plain.request_sha256          # same bytes sent; frame_id is never hashed (D-0022 am. 2)
+    with w["session"]() as s:
+        from nacre.ledger.read_stream import read_stream
+        framed, unframed = [e.body["content"] for e in read_stream(s, provider, stream)
+                            if e.body["content"].get("kind") == "model_call"]
+    assert framed["frame_id"] == fid and "frame_id" not in unframed
+    assert framed["request"] == unframed["request"]                # what was sent is identical (D-0022 am. 2)

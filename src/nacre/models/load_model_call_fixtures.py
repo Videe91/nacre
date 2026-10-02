@@ -11,6 +11,8 @@ Notes: Recorded mode (D-0022): everyday tests and the gate's determinism check (
   exported (RecordedProvider replays nothing else). Loading writes `result` events directly, because a fixture is not
   a live call; each loaded body carries `loaded_from_fixture` (the file's sha256) so it is never mistaken for one,
   and call_model's scope, policy and price checks still guard every replay.
+  D-0022 amendments 1-2: a fixture line may carry a top-level `frame_id`; loading sets the body's `frame_id`, as
+  call_model does. Lines without one load exactly as before.
 """
 import hashlib
 import json
@@ -39,7 +41,9 @@ def export_model_calls(session: ScopedSession, key_provider: RootKeyProvider, st
         c = e.body.get("content") if isinstance(e.body, dict) else None
         if (e.envelope.event_type == EventType.RESULT and e.envelope.actor_kind == ActorKind.MODEL and isinstance(c, dict)
                 and c.get("kind") == "model_call" and c.get("status") == "ok" and not c.get("redacted")):
-            lines.append(json.dumps({k: c[k] for k in _FIELDS} | {"model": e.envelope.actor_model}, sort_keys=True))
+            frame = {"frame_id": c["frame_id"]} if c.get("frame_id") is not None else {}
+            lines.append(json.dumps({k: c[k] for k in _FIELDS} | {"model": e.envelope.actor_model} | frame,
+                                    sort_keys=True))
     Path(path).write_text("".join(line + "\n" for line in lines))
     return len(lines)
 
@@ -56,6 +60,8 @@ def load_model_calls(session: ScopedSession, key_provider: RootKeyProvider, stre
         rec = json.loads(line)
         body = {"kind": "model_call", "status": "ok", "redacted": False, "attempt": 1, "loaded_from_fixture": digest,
                 **{k: rec[k] for k in _FIELDS}}
+        if rec.get("frame_id") is not None:
+            body["frame_id"] = rec["frame_id"]
         append_event(session, key_provider, AppendRequest(
             stream_id=stream_id, event_type=EventType.RESULT, payload_type=PayloadType.TRACE, actor_kind=ActorKind.MODEL,
             actor_id=_FIXTURE_ACTOR, source=Source.SYSTEM, authorship=Authorship.EXTERNAL,

@@ -3,7 +3,7 @@ Functionality: Record a prediction about a decision's outcome as capture evidenc
 Owns: prediction validation (expected outcome, predictor, optional confidence), its `response_to` reference, and the
   append.
 Public entry: record_prediction()
-Decisions: D-0018, D-0019, D-0002
+Decisions: D-0018, D-0019, D-0002, D-0025
 Assumptions: none
 Notes: Body = deterministic CBOR structured content (D-0008); every string is secret-stripped by append_event.
   The envelope's caused_by is set to the primary reference (D-0018). Stakes tags, where allowed, come from a closed
@@ -12,10 +12,12 @@ Notes: Body = deterministic CBOR structured content (D-0008); every string is se
   expected_success (true/false/None) is what D-0019's surprise rule compares with the outcome's `success`.
   D-0018 amendment 1: expected_failing_check names the specific test/check expected to fail (only with
   expected_success = false). Without it a predicted failure is "vague" and never suppresses a flag (D-0019 R4).
+  Addresses (D-0025 §3, the D-0018 amendment): optional caller-supplied `addresses`, validated by
+  record_decision.check_addresses(); the key is in the body only when non-empty (old bytes unchanged).
 """
 from uuid import UUID
 
-from nacre.capture.record_decision import CaptureError
+from nacre.capture.record_decision import CaptureError, check_addresses
 from nacre.capture.validate_refs import Ref, validate_refs
 from nacre.core.event import ActorKind, EventType, Mode, PayloadType, Source
 from nacre.core.root_key_provider import RootKeyProvider
@@ -27,7 +29,8 @@ def record_prediction(session: ScopedSession, key_provider: RootKeyProvider, *, 
                       actor_id: UUID, source: Source, authorship: Authorship, idempotency_key: str, decision_id: UUID,
                       expected_outcome: str, expected_success: bool | None, predictor: str = "agent",
                       confidence_pct: int | None = None, expected_failing_check: str | None = None,
-                      cycle_id: UUID | None = None, task_id: UUID | None = None, mode: Mode | None = None, verified=None) -> AppendResult:
+                      cycle_id: UUID | None = None, task_id: UUID | None = None, mode: Mode | None = None,
+                      addresses: tuple[str, ...] = (), verified=None) -> AppendResult:
     """Append one `prediction` event that responds to `decision_id`."""
     if not isinstance(expected_outcome, str) or not expected_outcome.strip():
         raise CaptureError("expected_outcome must be non-empty text")
@@ -44,7 +47,8 @@ def record_prediction(session: ScopedSession, key_provider: RootKeyProvider, *, 
     if session.conn.execute("SELECT event_type FROM ledger.events WHERE event_id = %s", (decision_id,)).fetchone()[0] != "decision":
         raise CaptureError("a prediction responds to a decision")
     body = {"expected_outcome": expected_outcome, "expected_success": expected_success, "predictor": predictor,
-            "confidence_pct": confidence_pct, "expected_failing_check": expected_failing_check, "refs": refs}
+            "confidence_pct": confidence_pct, "expected_failing_check": expected_failing_check, "refs": refs,
+            **check_addresses(addresses)}
     return append_event(session, key_provider, verified=verified, request=AppendRequest(
         stream_id=stream_id, event_type=EventType.PREDICTION, payload_type=PayloadType.STRUCTURED, actor_kind=actor_kind,
         actor_id=actor_id, source=source, authorship=authorship, idempotency_key=idempotency_key, content=body,

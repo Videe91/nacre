@@ -13,7 +13,11 @@ Notes: EVALUATION HARNESS ONLY (docs/experiments/EXP-0004-recall-under-interfere
     python -m nacre.eval.run_exp0004 --recorded RUN_DIR --tau T   # replay a live run's fixtures, zero network
     python -m nacre.eval.run_exp0004 --dev-coverage --split dev (--dry-run | --recorded DIR | --live)
   - tau (`--tau`, tau_strong_q, cosine x 1e4) is REQUIRED and recorded; this runner never selects it. The dev coverage
-    mode runs no transfers and writes per-task rows (answerable, coverage at TAU_PROBE, top semantic score) only.
+    mode runs no transfers and writes per-task rows (answerable, coverage at TAU_PROBE, top semantic score) only;
+    select_exp0004_tau selects tau from them and writes the frozen record (TAU.json).
+  - Freeze: every run but --dev-coverage refuses to start (before reading a split) unless --tau equals the frozen
+    record (`--tau-record`, default tests/regression/exp0004/TAU.json) and its pins hold (check_frozen). Each run
+    database records it as a `recall_tau` config_event (org stream); run.json: its sha256, the split's, the embedder.
   - Live mode refuses to start while the transfer instrument is not owner-approved (INSTRUMENT_APPROVED) and checks
     only that OPENAI_API_KEY is present in the environment (the SDK reads it; it is never read or printed here).
   - One CappedProvider wraps the live provider for the whole run: BudgetExceeded (or any other exception, or a signal)
@@ -48,6 +52,7 @@ from nacre.eval.grade_exp0004 import SAFETY_METRICS, evaluate_bar, summarize
 from nacre.eval.load_exp0004_set import DEV_SHA256, TEST_SHA256, load_split
 from nacre.eval.provide_exp0004_models import DryProvider, LiveMode, RecordedMode
 from nacre.eval.run_exp0004_replicate import TAU_PROBE, Env, run_replicate
+from nacre.eval.select_exp0004_tau import RECORD_PATH, append_tau_config_event, check_frozen, config_event_content
 from nacre.eval.transfer_exp0004 import INSTRUMENT_APPROVED, INSTRUMENT_SHA256, TRANSFER_MODEL, TRANSFER_PARAMS
 from nacre.keys.local_file_root_key import LocalFileRootKeyProvider
 from nacre.models.call_model import load_prices
@@ -63,8 +68,10 @@ SPLITS = {"test": ("test.json", TEST_SHA256), "dev": ("dev.json", DEV_SHA256)}
 
 
 @contextmanager
-def fresh_env(admin_dsn: str, *, role_password: str = "nacre_exp_only", keep: bool = False):
-    """A new, migrated database with a bootstrapped org whose model policy allows only the pinned model."""
+def fresh_env(admin_dsn: str, *, role_password: str = "nacre_exp_only", keep: bool = False,
+              tau_event: dict | None = None):
+    """A new, migrated database with a bootstrapped org whose model policy allows only the pinned model (and, given
+    `tau_event`, the frozen tau as a `recall_tau` config_event in the org stream)."""
     name = f"nacre_exp0004_{uuid.uuid4().hex[:10]}"
     dsn = lambda **kw: make_conninfo(**(conninfo_to_dict(admin_dsn) | kw))  # noqa: E731
     try:
@@ -88,6 +95,8 @@ def fresh_env(admin_dsn: str, *, role_password: str = "nacre_exp_only", keep: bo
                 yield s
         with open_as(owner) as s:
             set_model_policy(s, kp, org_id=org, allowed=[TRANSFER_MODEL], idempotency_key=str(uuid.uuid4()))
+            if tau_event is not None:
+                append_tau_config_event(s, kp, org_id=org, content=tau_event, idempotency_key=str(uuid.uuid4()))
         yield Env(org, owner, kp, open_as, lambda: connect(DbRole.APP, dsn=app), lambda: psycopg.connect(keyadmin))
     finally:
         if not keep:
@@ -191,6 +200,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     ap.add_argument("--split", choices=sorted(SPLITS), default="test")
     ap.add_argument("--tau", type=int)
     ap.add_argument("--dev-coverage", action="store_true")
+    ap.add_argument("--tau-record", type=Path, default=RECORD_PATH)
     ap.add_argument("--out", type=Path, default=Path.home() / "Desktop" / "nacre-runs")
     ap.add_argument("--keep-databases", action="store_true")
     a = ap.parse_args(argv)
@@ -208,16 +218,21 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 def main(argv: list[str] | None = None) -> dict:
     """Verify both frozen splits (sha256), then run the requested split."""
     a = parse_args(argv)
+    if not a.dev_coverage:                        # refuse before the sealed split is even read (run_cli re-checks)
+        check_frozen(a.tau_record, tau=a.tau, live=bool(a.live))
     name, sha = SPLITS[a.split]
     scopes, grading = load_split(SET_DIR / name, sha)
     other, other_sha = SPLITS["dev" if a.split == "test" else "test"]
     other_scopes, _ = load_split(SET_DIR / other, other_sha)
-    return run_cli(a, scopes, grading, other_scopes)
+    return run_cli(a, scopes, grading, other_scopes, split_sha256=sha)
 
 
-def run_cli(a: argparse.Namespace, scopes, grading, other_scopes, *, make_env=None, embedder=None) -> dict:
+def run_cli(a: argparse.Namespace, scopes, grading, other_scopes, *, make_env=None, embedder=None,
+            split_sha256: str | None = None) -> dict:
     """The run for parsed arguments `a` over already-verified data (tests pass synthetic data, an env factory and
     an embedder; the owner's run uses the frozen files, fresh databases and the default embedder)."""
+    frozen = None if a.dev_coverage else check_frozen(a.tau_record, tau=a.tau, live=bool(a.live))
+    tau_event = config_event_content(frozen) if frozen else None
     audit = {"prompt_contains_answer": prompt_contains_answer(grading, {t.task_id: t.prompt for s in scopes
                                                                          for t in s.tasks}),
              "dev_test": dev_test_overlap(*((scopes, other_scopes) if a.split == "dev" else (other_scopes, scopes)))}
@@ -235,7 +250,8 @@ def run_cli(a: argparse.Namespace, scopes, grading, other_scopes, *, make_env=No
         capped = CappedProvider(OpenAIResponsesProvider())
     mode = RecordedMode(a.recorded / "fixtures") if a.recorded else LiveMode(capped or meter, rdir / "fixtures")
     record = {"experiment": "EXP-0004", "mode": label, "split": a.split, "k": K, "tau_strong_q": a.tau,
-              "dev_coverage": a.dev_coverage, "instrument_sha256": INSTRUMENT_SHA256,
+              "dev_coverage": a.dev_coverage, "split_sha256": split_sha256 or SPLITS[a.split][1],
+              "tau_record_sha256": frozen and frozen["record_sha256"], "instrument_sha256": INSTRUMENT_SHA256,
               "instrument_approved": INSTRUMENT_APPROVED, "transfer_params": repr(TRANSFER_PARAMS),
               "budget_cap_usd": str(HARD_CAP_USD), "status": "running", "runs": []}
     save = lambda: (rdir / "run.json").write_text(json.dumps(record, indent=1, default=str))  # noqa: E731
@@ -251,9 +267,11 @@ def run_cli(a: argparse.Namespace, scopes, grading, other_scopes, *, make_env=No
     from nacre.recall.index_version import default_embedder
     from nacre.recall.load_index_cache import IndexCache
     embedder = embedder or default_embedder()
+    record["embedder_id"] = embedder.embedder_id
     try:
         reps = run_experiment(scopes, grading, mode,
-                              make_env or (lambda: fresh_env(_admin_dsn(), keep=a.keep_databases)),
+                              make_env or (lambda: fresh_env(_admin_dsn(), keep=a.keep_databases,
+                                                             tau_event=tau_event)),
                               tau_strong_q=TAU_PROBE if a.dev_coverage else a.tau,
                               embedder=embedder, cache_factory=lambda env: IndexCache(env.key_provider, dim=embedder.dim),
                               transfers=not a.dev_coverage, record=record, save=save, should_abort=should_abort)

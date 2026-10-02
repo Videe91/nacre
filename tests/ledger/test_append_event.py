@@ -252,3 +252,42 @@ def test_concurrent_writers_produce_a_gapless_valid_chain(session, provider, str
     for row in rows:
         assert bytes(row["prev_hash"]) == prev
         prev = bytes(row["hash"])
+
+
+def test_a_new_key_row_never_deadlocks_against_a_stream_lock_holder(session, provider, streams):
+    # Product race found 2026-10-02 (CURRENT F2), deterministic interleaving:
+    #   A holds stream a's lock (it appended), then needs a NEW data-key row (a, P, month);
+    #   C, meanwhile, appends an event by person P to a, so it also needs (a, P, month), then the stream lock.
+    # If key rows were created before the stream lock, C would hold the uncommitted row while waiting for the lock,
+    # and A would wait for C's row: a deadlock (Postgres aborts one). Key rows are created under the stream lock, so
+    # C waits for the lock first and both commit.
+    a, principal, person = streams["a"], uuid.uuid4(), uuid.uuid4()
+    with session(principal, read=[a], write=[a]) as s:
+        append_event(s, provider, req(a, content="committed first: the stream's master key exists"))
+    by_person = dict(actor_kind=ActorKind.PERSON, actor_id=person, source=Source.CHAT,
+                     authorship=Authorship.SCOPE_PRINCIPAL)
+    errors = []
+
+    def c():
+        try:
+            with connect(DbRole.APP, dsn=streams["dsn"]["app"]) as conn, open_scoped_session(conn, principal) as s:
+                append_event(s, provider, req(a, content="from C", **by_person))
+        except Exception as exc:  # noqa: BLE001 - surfaced below
+            errors.append(exc)
+
+    with connect(DbRole.APP, dsn=streams["dsn"]["app"]) as conn, open_scoped_session(conn, principal) as s:
+        append_event(s, provider, req(a, content="A holds the stream lock"))
+        t = threading.Thread(target=c)
+        t.start()
+        with psycopg.connect(streams["dsn"]["admin"], autocommit=True) as watch:
+            for _ in range(500):                          # until C is blocked on the stream (advisory) lock
+                if watch.execute("SELECT count(*) FROM pg_locks WHERE locktype = 'advisory' AND NOT granted"
+                                 ).fetchone()[0]:
+                    break
+                threading.Event().wait(0.01)
+            else:
+                pytest.fail(f"C never waited for the stream lock: {errors}")
+        append_event(s, provider, req(a, content="A needs P's key", **by_person))
+    t.join(30)
+    assert not t.is_alive() and errors == []
+    assert len(_rows(streams["dsn"]["admin"], a)) == 4

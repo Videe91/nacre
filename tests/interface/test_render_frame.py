@@ -1,7 +1,13 @@
 """Tests for interface/render_frame.py (R21, D-0025 §7 + amendment 1): deterministic, provider-independent memory
 section; contested items never phrased as fact and placed as the frame orders them; coverage instruction."""
-from nacre.core.model_provider import ModelParams
-from nacre.interface.render_frame import render_memory_section, render_request
+import hashlib
+import types
+import uuid
+
+from nacre.core.encode_cbor import encode_cbor
+from nacre.core.model_provider import ModelParams, canonical_request
+from nacre.interface.render_frame import frame_id_of, render_memory_section, render_request
+from nacre.recall.assemble_frame import assemble_frame
 
 
 def _frame(coverage="strong", contested=True):
@@ -43,3 +49,24 @@ def test_the_request_is_identical_across_providers_apart_from_the_provider_field
     a = render_request(_frame(), task="Decide.", provider="anthropic", model="claude-haiku-4-5-20251001", params=p,
                        purpose="transfer", system="sys")
     assert o.messages == a.messages and o.system == a.system
+
+
+def test_the_request_names_its_frame_without_changing_the_prompt():
+    """D-0022 amendment 1 / D-0028 §3: frame_id is metadata; the prompt bytes are what they were."""
+    frame = _frame()
+    r = render_request(frame, task="t", provider="openai", model="gpt-4o-mini-2024-07-18",
+                       params=ModelParams(max_tokens=5), purpose="seat", system="s")
+    assert r.frame_id == frame_id_of(frame) == hashlib.sha256(encode_cbor(frame)).hexdigest()
+    assert r.messages[0].content == render_memory_section(frame) + "\nTask:\nt"
+    assert "frame_id" not in canonical_request(r) and canonical_request(r)["v"] == 1        # D-0022 am. 2
+    other = render_request(_frame(contested=False), task="t", provider="openai", model="gpt-4o-mini-2024-07-18",
+                           params=ModelParams(max_tokens=5), purpose="seat", system="s")
+    assert other.frame_id != r.frame_id
+
+
+def test_frame_id_of_is_assemble_frames_id_rule():
+    snapshot = types.SimpleNamespace(canonical=lambda: {"streams": [], "as_of": 3})
+    f = assemble_frame(None, None, snapshot=snapshot, scopes=[("project", uuid.UUID(int=1))],
+                       principal_id=uuid.UUID(int=2), query_text="q", addresses=[], relaxations=[], candidates=[],
+                       ranked=[], active={"semantic": True}, texts={}, coverage="none")
+    assert frame_id_of(f.body) == f.frame_id

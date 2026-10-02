@@ -5,7 +5,7 @@ Functionality: Run ONE EXP-0004 replicate in one fresh database: every scope's h
 Owns: the replicate's order of work, scope registration and grants (each scope's principal is granted only the scopes
   the set lists, so cross-scope twins are unreachable), the erasure step, the per-task arm calls and their sources, the
   trial rows, and the per-replicate safety and audit counters.
-Public entry: run_replicate(), Env, ReplicateResult, TAU_PROBE, SCOPE_LEVEL
+Public entry: run_replicate(), Env, ReplicateResult, TAU_PROBE, SCOPE_LEVEL, N_BUDGET, DEV_COVERAGE_BUDGET
 Decisions: D-0025, D-0016, D-0018, D-0020, D-0021, D-0023, D-0014
 Assumptions: A-0034, A-0036, A-0038
 Notes: EVALUATION HARNESS ONLY. Only the arm view reaches an arm; grading fields are read after an arm answered.
@@ -21,11 +21,16 @@ Notes: EVALUATION HARNESS ONLY. Only the arm view reaches an arm; grading fields
     memory) the scope's anchor = its first captured event under the stream key (agent- or system-authored), so the
     recording is keyed but never erased with a person.
   - TAU_PROBE (dev coverage mode only): below any quantised cosine, so `coverage` reports whether the top item meets
-    the channel-agreement condition; strong at a given tau = that AND top_semantic >= tau. It selects nothing.
+    the channel-agreement condition; strong at a given tau = that AND top_semantic >= tau. It selects nothing
+    (select_exp0004_tau does, on the rows). D1: the dev coverage mode (no transfers) recalls with DEV_COVERAGE_BUDGET
+    (N's 10 items, NO character limit) so the frame's first item is always the ranked top when the probe says strong;
+    under N_BUDGET a top item longer than 4,000 chars is skipped and items[0] would be another item, making the
+    reduction inexact. Coverage itself never depends on the budget.
   - Latency: recall_ms is end to end (snapshot, frame, trace commit); `recall_cold` marks the first recall of a scope in
     its replicate (its index entries load into the cache then); every later one is warm (D1).
   - The replicate never retries a failed step: any exception (including BudgetExceeded) propagates to the runner.
 """
+import sys
 import uuid
 from collections import Counter
 from collections.abc import Callable
@@ -61,6 +66,7 @@ from nacre.sleep.run_sleep_pass import run_sleep_pass
 TAU_PROBE = -10001
 SCOPE_LEVEL = "project"
 N_BUDGET = Budget(items=10, chars=4000)
+DEV_COVERAGE_BUDGET = Budget(items=N_BUDGET.items, chars=sys.maxsize)
 
 
 @dataclass
@@ -107,7 +113,8 @@ def _history(env: Env, sc: ArmScope, ids: IdMap, mode, rep: int, run_id: UUID, p
             res.fixtures += mode.prepare(owner_session, env.key_provider, stream, rep, sc.scope_id, anchor)
         rep_ = run_sleep_pass(owner_session, env.key_provider, mode.sleep_provider, stream, policy=policy)
         res.sleep.update(episodes=rep_.episodes, calls_live=rep_.calls_live, calls_reused=rep_.calls_reused,
-                         promoted=rep_.promoted, refused=rep_.refused, fallback=rep_.fallback)
+                         promoted=rep_.promoted, refused=rep_.refused, fallback=rep_.fallback,
+                         skipped=rep_.skipped, unlinked_action_outcomes=rep_.unlinked_action_outcomes)
         res.sleep["cost_usd_micro"] += int(rep_.cost_usd * 1_000_000)
     return anchor
 
@@ -125,12 +132,12 @@ def _erase(env: Env, scopes: list[ArmScope], ids: IdMap) -> int:
     return len(persons)
 
 
-def _recall(env, principal, stream, granted, task, cache, embedder, tau):
+def _recall(env, principal, stream, granted, task, cache, embedder, tau, budget):
     req = RecallRequest(stream, tuple((SCOPE_LEVEL, g) for g in granted), task.prompt, task.addresses)
     t = perf_counter()
     with env.app_connect() as conn:
         r = recall_context(conn, env.key_provider, principal, req, cache=cache, embedder=embedder, tau_strong_q=tau,
-                           config_version=f"exp0004-tau-{tau}", budget=N_BUDGET)
+                           config_version=f"exp0004-tau-{tau}", budget=budget)
     return r, int((perf_counter() - t) * 1000)
 
 
@@ -145,7 +152,8 @@ def _tasks(env, sc, ids, anchor, mode, grading, cache, embedder, tau, run_id, re
         naive = build_naive_index(s, env.key_provider, granted, embedder)
     for n, task in enumerate(sc.tasks):
         g: GradingTask = grading[task.task_id]
-        r, latency = _recall(env, principal, stream, granted, task, cache, embedder, tau)
+        r, latency = _recall(env, principal, stream, granted, task, cache, embedder, tau,
+                             N_BUDGET if transfers else DEV_COVERAGE_BUDGET)
         items = r.frame.body["items"]
         top = items[0]["scores"]["semantic"] if items else None
         res.coverage_rows.append({"rep": rep, "task_id": task.task_id, "category": g.category,
@@ -171,7 +179,8 @@ def _tasks(env, sc, ids, anchor, mode, grading, cache, embedder, tau, run_id, re
         sent = {}
         for arm, (memory, sources) in memories.items():
             t = transfer(owner_session, env.key_provider, provider, arm=arm, task=task.prompt, memory_section=memory,
-                         sources=sources, run_id=run_id, policy=policy)
+                         sources=sources, run_id=run_id, policy=policy,
+                         frame_id=r.frame.frame_id if arm == "N" else None)       # D-0022 am.1: N only
             sent[arm] = (t.prompt, memory)
             row = grade_trial(g, t.reply) | {"arm": arm, "rep": rep, "run_id": str(run_id), "cost_usd": str(t.cost_usd),
                                              "input_tokens": t.input_tokens, "output_tokens": t.output_tokens,

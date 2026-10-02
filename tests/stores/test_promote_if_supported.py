@@ -1,5 +1,5 @@
 """Tests for stores/promote_if_supported.py: quorum, D-0017 amendment 1 (one test per safeguard), deviations 1-2."""
-from stores_kit import RULE, episode, grounded_belief, propose
+from stores_kit import RULE, action_episode, episode, grounded_belief, propose
 from nacre.stores.contest_belief import contest_belief
 from nacre.stores.promote_if_supported import QUORUM, SINGLE_SOURCE, promote_if_supported
 from nacre.stores.propose_contradiction import propose_contradiction
@@ -126,3 +126,43 @@ def test_unresolved_trusted_support_becomes_a_recall_eligible_fallback(rw, provi
         heads = read_heads(s, provider, a)
     assert (p.status, p.support) == ("fallback", None)
     assert [(h.kind, h.status, h.content["support_text"]) for h in heads] == [("fallback", "fallback", RULE)]
+
+
+def _version_content(s, provider, stream, oid, version):
+    from nacre.stores.write_version import read_version_events
+    (v,) = [v.body["content"] for v in read_version_events(s, provider, stream)
+            if v.body["content"]["object_id"] == str(oid) and v.body["content"]["version"] == version]
+    return v["content"]
+
+
+def test_addresses_a_version_carries_the_sorted_union_of_its_sources_addresses(rw, provider, streams):
+    a = streams["a"]
+    with rw() as s:
+        d, o = episode(s, provider, a, d_addresses=("system:payments", "code:src/payments/retry.py"),
+                       o_addresses=("code:src/payments/retry.py", "file:Dockerfile"))
+        first = promote_if_supported(s, provider, a, propose(s, provider, a, d, o))
+        v1 = _version_content(s, provider, a, first.object_id, 1)
+        d2, o2 = episode(s, provider, a, trusted=False, o_addresses=("cluster:eu-west",))
+        promote_if_supported(s, provider, a, propose(s, provider, a, d2, o2))
+        v2 = _version_content(s, provider, a, first.object_id, 2)
+    assert v1["addresses"] == ["code:src/payments/retry.py", "file:Dockerfile", "system:payments"]
+    assert v2["addresses"] == ["cluster:eu-west", "code:src/payments/retry.py", "file:Dockerfile", "system:payments"]
+
+
+def test_addresses_a_version_from_sources_without_addresses_has_no_addresses_key(rw, provider, streams):
+    a = streams["a"]
+    with rw() as s:
+        b = grounded_belief(s, provider, a)
+        assert "addresses" not in _version_content(s, provider, a, b.object_id, 1)
+
+
+def test_d0020_am1_action_linked_outcomes_count_their_decisions_toward_the_quorum(rw, provider, streams):
+    a = streams["a"]
+    with rw() as s:
+        d1, _, o1 = action_episode(s, provider, a)
+        d2, _, o2 = action_episode(s, provider, a)
+        p1 = promote_if_supported(s, provider, a, propose(s, provider, a, d1, o1))
+        p2 = promote_if_supported(s, provider, a, propose(s, provider, a, d2, o2))
+        (h,) = read_heads(s, provider, a)
+    assert (p1.support, p2.support, p2.version) == ("single_source", "quorum", 2)
+    assert h.content["support_decisions"] == sorted([str(d1), str(d2)])

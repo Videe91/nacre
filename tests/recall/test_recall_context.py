@@ -165,3 +165,33 @@ def test_every_kind_pair_a_recall_returns_only_granted_scopes(migrated_db, provi
     with connect(DbRole.APP, dsn=migrated_db["app"]) as conn, pytest.raises(SnapshotRefused):
         recall_context(conn, provider, reader, RecallRequest(mine, (("task", mine), ("team", other)), "deploy"),
                        cache=cache, embedder=default_embedder(), tau_strong_q=6000, config_version="test-1")
+
+
+def test_capture_addresses_reach_the_index_entry_and_narrow_recall(rw, snap, principal, provider, streams):
+    """D-0025 §3 end to end: capture with addresses -> lesson -> promote -> the index entry holds the sorted union ->
+    narrow_by_identity keeps only the matching version and the frame records the exact matches."""
+    from nacre.recall.narrow_by_identity import narrow_by_identity
+    a = streams["a"]
+    with rw() as s:
+        hit = belief(s, provider, a, TEXTS[0][0], TEXTS[0][1],
+                     d_addresses=("system:payments", "code:src/payments/retry.py"),
+                     o_addresses=("code:src/payments/retry.py", "file:Dockerfile"))
+        other = belief(s, provider, a, TEXTS[1][0], TEXTS[1][1], d_addresses=("system:billing",))
+        bare = belief(s, provider, a, TEXTS[2][0], TEXTS[2][1])
+        vid = {p.object_id: s.conn.execute("SELECT event_id FROM interp.versions WHERE object_id = %s",
+                                           (p.object_id,)).fetchone()[0] for p in (hit, other, bare)}
+    cache = IndexCache(provider, dim=DIM)
+    with snap() as s:
+        entries = cache.entries(s, {a: list(vid.values())})[a]
+    addr = {o: entries[v].addresses for o, v in vid.items()}
+    assert addr == {hit.object_id: ("code:src/payments/retry.py", "file:Dockerfile", "system:payments"),
+                    other.object_id: ("system:billing",), bare.object_id: ()}
+    request = ("system:payments", "code:src/payments/retry.py")
+    n = narrow_by_identity(list(vid.values()), {v: e.addresses for v, e in entries.items()}, request, min_pool=1)
+    assert n.version_event_ids == (vid[hit.object_id],) and n.relaxations == ()
+    assert n.exact_matches == {vid[hit.object_id]: 2, vid[other.object_id]: 0, vid[bare.object_id]: 0}
+    r = _recall(streams, principal, provider, cache, a, addresses=request)
+    scores = {i["version_event_id"]: i["scores"]["entity"] for i in r.frame.body["items"]}
+    assert r.frame.body["addresses"] == list(request) and r.frame.body["channels"]["entity"] is True
+    assert scores[str(vid[hit.object_id])] == 2 and all(v == 0 for k, v in scores.items() if k != str(vid[hit.object_id]))
+    assert r.frame.body["relaxations"]          # 3 candidates < MIN_POOL: relaxed (recorded), nothing hidden
