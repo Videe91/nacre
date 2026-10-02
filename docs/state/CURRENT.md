@@ -1364,3 +1364,9 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
     - (3) Linux network isolation (a network namespace or seccomp) is not built;
     - (4) at the 120 s timeout, an attachment at every OCR cap cannot finish;
     - (5) the 16-frame cap rejects about 20% of animated GIFs: sample frames instead?
+- 2026-10-02 — **I1 measured ONCE: GATE ITEM 11 FAILED.**
+  - **Result:** 88.1% of gated secrets not stored (< 95%); all 408 by detection, none by unscannable.
+  - **Clean images:** 0 unscannable, 11 false rejections (all log screenshots).
+  - **I1 demoted; no patching.**
+  - **Misses:** concentrated in chat screenshots and credential-slot values; spread over all sizes.
+  - **Latency:** median 1.17 s per image. **Owner decision needed on gate item 11.**

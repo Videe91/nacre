@@ -1,0 +1,6477 @@
+{
+ "gate_target": ">= 0.95 of secrets at >= 12 physical px not stored",
+ "gated": {
+  "not_stored": 408,
+  "secrets": 463,
+  "rate": 0.8812095032397408,
+  "of_which_rejected_as_secret": 408,
+  "of_which_rejected_as_unscannable": 0
+ },
+ "all_sizes": {
+  "not_stored": 485,
+  "secrets": 548,
+  "rate": 0.885036496350365
+ },
+ "clean_images": {
+  "n": 100,
+  "unscannable": 0,
+  "false_secret": 11
+ },
+ "pass": false,
+ "meta": {
+  "commit": "8f6e60641fbb4a29325c3f38617c24045a211d0d",
+  "seconds": 657.1,
+  "date": "2026-10-02",
+  "run": "single official I1 measurement"
+ },
+ "cases": [
+  {
+   "case_id": "i1-s000",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 10,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.938
+  },
+  {
+   "case_id": "i1-s001",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 10,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.949
+  },
+  {
+   "case_id": "i1-s002",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 10,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.918
+  },
+  {
+   "case_id": "i1-s003",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 10,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.28
+  },
+  {
+   "case_id": "i1-s004",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 10,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.881
+  },
+  {
+   "case_id": "i1-s005",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 11,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.965
+  },
+  {
+   "case_id": "i1-s006",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 11,
+   "wrapped": [
+    true,
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.368
+  },
+  {
+   "case_id": "i1-s007",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 11,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.902
+  },
+  {
+   "case_id": "i1-s008",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 11,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.135
+  },
+  {
+   "case_id": "i1-s009",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 11,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.876
+  },
+  {
+   "case_id": "i1-s010",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 12,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.142
+  },
+  {
+   "case_id": "i1-s011",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 12,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.125
+  },
+  {
+   "case_id": "i1-s012",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 12,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.131
+  },
+  {
+   "case_id": "i1-s013",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 12,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.263
+  },
+  {
+   "case_id": "i1-s014",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 12,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.174
+  },
+  {
+   "case_id": "i1-s015",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 14,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.974
+  },
+  {
+   "case_id": "i1-s016",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 14,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.887
+  },
+  {
+   "case_id": "i1-s017",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 14,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.886
+  },
+  {
+   "case_id": "i1-s018",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 14,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.106
+  },
+  {
+   "case_id": "i1-s019",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 14,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.87
+  },
+  {
+   "case_id": "i1-s020",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 16,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.929
+  },
+  {
+   "case_id": "i1-s021",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 16,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.016
+  },
+  {
+   "case_id": "i1-s022",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 16,
+   "wrapped": [
+    true
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.337
+  },
+  {
+   "case_id": "i1-s023",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 16,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.248
+  },
+  {
+   "case_id": "i1-s024",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 16,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.831
+  },
+  {
+   "case_id": "i1-s025",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.026
+  },
+  {
+   "case_id": "i1-s026",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    true
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.244
+  },
+  {
+   "case_id": "i1-s027",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.186
+  },
+  {
+   "case_id": "i1-s028",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    true
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.415
+  },
+  {
+   "case_id": "i1-s029",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.894
+  },
+  {
+   "case_id": "i1-s030",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.924
+  },
+  {
+   "case_id": "i1-s031",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.941
+  },
+  {
+   "case_id": "i1-s032",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 20,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.864
+  },
+  {
+   "case_id": "i1-s033",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.204
+  },
+  {
+   "case_id": "i1-s034",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.892
+  },
+  {
+   "case_id": "i1-s035",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 22,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.326
+  },
+  {
+   "case_id": "i1-s036",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 22,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.933
+  },
+  {
+   "case_id": "i1-s037",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 22,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.901
+  },
+  {
+   "case_id": "i1-s038",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 22,
+   "wrapped": [
+    true
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.497
+  },
+  {
+   "case_id": "i1-s039",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 22,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.274
+  },
+  {
+   "case_id": "i1-s040",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 24,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.928
+  },
+  {
+   "case_id": "i1-s041",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 24,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.018
+  },
+  {
+   "case_id": "i1-s042",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 24,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.163
+  },
+  {
+   "case_id": "i1-s043",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 24,
+   "wrapped": [
+    false,
+    true
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.702
+  },
+  {
+   "case_id": "i1-s044",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 24,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.288
+  },
+  {
+   "case_id": "i1-s045",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 28,
+   "wrapped": [
+    false,
+    false,
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.122
+  },
+  {
+   "case_id": "i1-s046",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 28,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.217
+  },
+  {
+   "case_id": "i1-s047",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 28,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.905
+  },
+  {
+   "case_id": "i1-s048",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 28,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.072
+  },
+  {
+   "case_id": "i1-s049",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 28,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.86
+  },
+  {
+   "case_id": "i1-s050",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 32,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.887
+  },
+  {
+   "case_id": "i1-s051",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 32,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.058
+  },
+  {
+   "case_id": "i1-s052",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 32,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.881
+  },
+  {
+   "case_id": "i1-s053",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 32,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.245
+  },
+  {
+   "case_id": "i1-s054",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 32,
+   "wrapped": [
+    true
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.522
+  },
+  {
+   "case_id": "i1-s055",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 40,
+   "wrapped": [
+    false,
+    false,
+    true
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.554
+  },
+  {
+   "case_id": "i1-s056",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 40,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.056
+  },
+  {
+   "case_id": "i1-s057",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 40,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.811
+  },
+  {
+   "case_id": "i1-s058",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 40,
+   "wrapped": [
+    true
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.261
+  },
+  {
+   "case_id": "i1-s059",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 40,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.044
+  },
+  {
+   "case_id": "i1-s060",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 10,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.209
+  },
+  {
+   "case_id": "i1-s061",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 10,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.012
+  },
+  {
+   "case_id": "i1-s062",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 10,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.2
+  },
+  {
+   "case_id": "i1-s063",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 10,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.19
+  },
+  {
+   "case_id": "i1-s064",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 10,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.875
+  },
+  {
+   "case_id": "i1-s065",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 11,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.993
+  },
+  {
+   "case_id": "i1-s066",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 11,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.984
+  },
+  {
+   "case_id": "i1-s067",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 11,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.918
+  },
+  {
+   "case_id": "i1-s068",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 11,
+   "wrapped": [
+    false,
+    false,
+    true
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.54
+  },
+  {
+   "case_id": "i1-s069",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 11,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.884
+  },
+  {
+   "case_id": "i1-s070",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 12,
+   "wrapped": [
+    true
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.305
+  },
+  {
+   "case_id": "i1-s071",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 12,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.946
+  },
+  {
+   "case_id": "i1-s072",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 12,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.91
+  },
+  {
+   "case_id": "i1-s073",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 12,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.128
+  },
+  {
+   "case_id": "i1-s074",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 12,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.256
+  },
+  {
+   "case_id": "i1-s075",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 14,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.252
+  },
+  {
+   "case_id": "i1-s076",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 14,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.044
+  },
+  {
+   "case_id": "i1-s077",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 14,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.936
+  },
+  {
+   "case_id": "i1-s078",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 14,
+   "wrapped": [
+    true,
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.235
+  },
+  {
+   "case_id": "i1-s079",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 14,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.805
+  },
+  {
+   "case_id": "i1-s080",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 16,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.075
+  },
+  {
+   "case_id": "i1-s081",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 16,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.875
+  },
+  {
+   "case_id": "i1-s082",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 16,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.874
+  },
+  {
+   "case_id": "i1-s083",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 16,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.268
+  },
+  {
+   "case_id": "i1-s084",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 16,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.829
+  },
+  {
+   "case_id": "i1-s085",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.006
+  },
+  {
+   "case_id": "i1-s086",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    true
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.275
+  },
+  {
+   "case_id": "i1-s087",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.777
+  },
+  {
+   "case_id": "i1-s088",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 20,
+   "wrapped": [
+    false,
+    false,
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.233
+  },
+  {
+   "case_id": "i1-s089",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.801
+  },
+  {
+   "case_id": "i1-s090",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 20,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.433
+  },
+  {
+   "case_id": "i1-s091",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.127
+  },
+  {
+   "case_id": "i1-s092",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.155
+  },
+  {
+   "case_id": "i1-s093",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.301
+  },
+  {
+   "case_id": "i1-s094",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.367
+  },
+  {
+   "case_id": "i1-s095",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 22,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.979
+  },
+  {
+   "case_id": "i1-s096",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 22,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.953
+  },
+  {
+   "case_id": "i1-s097",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 22,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.949
+  },
+  {
+   "case_id": "i1-s098",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 22,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.29
+  },
+  {
+   "case_id": "i1-s099",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 22,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.949
+  },
+  {
+   "case_id": "i1-s100",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 24,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.9
+  },
+  {
+   "case_id": "i1-s101",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 24,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.914
+  },
+  {
+   "case_id": "i1-s102",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 24,
+   "wrapped": [
+    true
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.55
+  },
+  {
+   "case_id": "i1-s103",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 24,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.223
+  },
+  {
+   "case_id": "i1-s104",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 24,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.898
+  },
+  {
+   "case_id": "i1-s105",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 28,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.471
+  },
+  {
+   "case_id": "i1-s106",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 28,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.292
+  },
+  {
+   "case_id": "i1-s107",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 28,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.042
+  },
+  {
+   "case_id": "i1-s108",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 28,
+   "wrapped": [
+    true,
+    false,
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.807
+  },
+  {
+   "case_id": "i1-s109",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 28,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.891
+  },
+  {
+   "case_id": "i1-s110",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 32,
+   "wrapped": [
+    true,
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.35
+  },
+  {
+   "case_id": "i1-s111",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 32,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.028
+  },
+  {
+   "case_id": "i1-s112",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 32,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.857
+  },
+  {
+   "case_id": "i1-s113",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 32,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.281
+  },
+  {
+   "case_id": "i1-s114",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 32,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.834
+  },
+  {
+   "case_id": "i1-s115",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 40,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.091
+  },
+  {
+   "case_id": "i1-s116",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 40,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.882
+  },
+  {
+   "case_id": "i1-s117",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 40,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.907
+  },
+  {
+   "case_id": "i1-s118",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 40,
+   "wrapped": [
+    true,
+    true
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.441
+  },
+  {
+   "case_id": "i1-s119",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 40,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.746
+  },
+  {
+   "case_id": "i1-s120",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 10,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.022
+  },
+  {
+   "case_id": "i1-s121",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 10,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.034
+  },
+  {
+   "case_id": "i1-s122",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 10,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.253
+  },
+  {
+   "case_id": "i1-s123",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 10,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.088
+  },
+  {
+   "case_id": "i1-s124",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 10,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.169
+  },
+  {
+   "case_id": "i1-s125",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 11,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.923
+  },
+  {
+   "case_id": "i1-s126",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 11,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.152
+  },
+  {
+   "case_id": "i1-s127",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 11,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.935
+  },
+  {
+   "case_id": "i1-s128",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 11,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.187
+  },
+  {
+   "case_id": "i1-s129",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 11,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.868
+  },
+  {
+   "case_id": "i1-s130",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 12,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.861
+  },
+  {
+   "case_id": "i1-s131",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 12,
+   "wrapped": [
+    false,
+    false,
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.313
+  },
+  {
+   "case_id": "i1-s132",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 12,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.901
+  },
+  {
+   "case_id": "i1-s133",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 12,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.115
+  },
+  {
+   "case_id": "i1-s134",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 12,
+   "wrapped": [
+    true
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.191
+  },
+  {
+   "case_id": "i1-s135",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 14,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.899
+  },
+  {
+   "case_id": "i1-s136",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 14,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.927
+  },
+  {
+   "case_id": "i1-s137",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 14,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.874
+  },
+  {
+   "case_id": "i1-s138",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 14,
+   "wrapped": [
+    true,
+    true,
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.378
+  },
+  {
+   "case_id": "i1-s139",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 14,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.03
+  },
+  {
+   "case_id": "i1-s140",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 16,
+   "wrapped": [
+    true
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.183
+  },
+  {
+   "case_id": "i1-s141",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 16,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.022
+  },
+  {
+   "case_id": "i1-s142",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 16,
+   "wrapped": [
+    true
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.951
+  },
+  {
+   "case_id": "i1-s143",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 16,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.239
+  },
+  {
+   "case_id": "i1-s144",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 16,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.806
+  },
+  {
+   "case_id": "i1-s145",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 20,
+   "wrapped": [
+    false,
+    false,
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.921
+  },
+  {
+   "case_id": "i1-s146",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 20,
+   "wrapped": [
+    false,
+    true
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.145
+  },
+  {
+   "case_id": "i1-s147",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.001
+  },
+  {
+   "case_id": "i1-s148",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.265
+  },
+  {
+   "case_id": "i1-s149",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 20,
+   "wrapped": [
+    false,
+    true,
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.249
+  },
+  {
+   "case_id": "i1-s150",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    true
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.565
+  },
+  {
+   "case_id": "i1-s151",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 20,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.995
+  },
+  {
+   "case_id": "i1-s152",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 20,
+   "wrapped": [
+    false,
+    false,
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.952
+  },
+  {
+   "case_id": "i1-s153",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.162
+  },
+  {
+   "case_id": "i1-s154",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 20,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.334
+  },
+  {
+   "case_id": "i1-s155",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 22,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.203
+  },
+  {
+   "case_id": "i1-s156",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 22,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.201
+  },
+  {
+   "case_id": "i1-s157",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 22,
+   "wrapped": [
+    false,
+    false,
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.488
+  },
+  {
+   "case_id": "i1-s158",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 22,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.125
+  },
+  {
+   "case_id": "i1-s159",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 22,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.869
+  },
+  {
+   "case_id": "i1-s160",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 24,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.889
+  },
+  {
+   "case_id": "i1-s161",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 24,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.938
+  },
+  {
+   "case_id": "i1-s162",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 24,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.935
+  },
+  {
+   "case_id": "i1-s163",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 24,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.327
+  },
+  {
+   "case_id": "i1-s164",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 24,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.919
+  },
+  {
+   "case_id": "i1-s165",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 28,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.026
+  },
+  {
+   "case_id": "i1-s166",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 28,
+   "wrapped": [
+    true
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.485
+  },
+  {
+   "case_id": "i1-s167",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 28,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.849
+  },
+  {
+   "case_id": "i1-s168",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 28,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.27
+  },
+  {
+   "case_id": "i1-s169",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 28,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.854
+  },
+  {
+   "case_id": "i1-s170",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 32,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.382
+  },
+  {
+   "case_id": "i1-s171",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 32,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.248
+  },
+  {
+   "case_id": "i1-s172",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 32,
+   "wrapped": [
+    true
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.109
+  },
+  {
+   "case_id": "i1-s173",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 32,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.229
+  },
+  {
+   "case_id": "i1-s174",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 32,
+   "wrapped": [
+    false,
+    false,
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.275
+  },
+  {
+   "case_id": "i1-s175",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 40,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.908
+  },
+  {
+   "case_id": "i1-s176",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 40,
+   "wrapped": [
+    false,
+    true,
+    true
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.313
+  },
+  {
+   "case_id": "i1-s177",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 40,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.889
+  },
+  {
+   "case_id": "i1-s178",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 40,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.242
+  },
+  {
+   "case_id": "i1-s179",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 40,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.987
+  },
+  {
+   "case_id": "i1-s180",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 10,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.98
+  },
+  {
+   "case_id": "i1-s181",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 10,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.027
+  },
+  {
+   "case_id": "i1-s182",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 10,
+   "wrapped": [
+    true
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.517
+  },
+  {
+   "case_id": "i1-s183",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 10,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.217
+  },
+  {
+   "case_id": "i1-s184",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 10,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.889
+  },
+  {
+   "case_id": "i1-s185",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 11,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.972
+  },
+  {
+   "case_id": "i1-s186",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 11,
+   "wrapped": [
+    false,
+    false,
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.01
+  },
+  {
+   "case_id": "i1-s187",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 11,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.989
+  },
+  {
+   "case_id": "i1-s188",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 11,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.404
+  },
+  {
+   "case_id": "i1-s189",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 11,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.895
+  },
+  {
+   "case_id": "i1-s190",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 12,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.114
+  },
+  {
+   "case_id": "i1-s191",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 12,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.983
+  },
+  {
+   "case_id": "i1-s192",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 12,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.836
+  },
+  {
+   "case_id": "i1-s193",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 12,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.026
+  },
+  {
+   "case_id": "i1-s194",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 12,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.856
+  },
+  {
+   "case_id": "i1-s195",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 14,
+   "wrapped": [
+    false,
+    false,
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.05
+  },
+  {
+   "case_id": "i1-s196",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 14,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.922
+  },
+  {
+   "case_id": "i1-s197",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 14,
+   "wrapped": [
+    false,
+    false,
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.911
+  },
+  {
+   "case_id": "i1-s198",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 14,
+   "wrapped": [
+    true,
+    true
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.134
+  },
+  {
+   "case_id": "i1-s199",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 14,
+   "wrapped": [
+    false,
+    false,
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.241
+  },
+  {
+   "case_id": "i1-s200",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 16,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.026
+  },
+  {
+   "case_id": "i1-s201",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 16,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.863
+  },
+  {
+   "case_id": "i1-s202",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 16,
+   "wrapped": [
+    true
+   ],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.926
+  },
+  {
+   "case_id": "i1-s203",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 16,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.095
+  },
+  {
+   "case_id": "i1-s204",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 16,
+   "wrapped": [
+    true
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.074
+  },
+  {
+   "case_id": "i1-s205",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.123
+  },
+  {
+   "case_id": "i1-s206",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 20,
+   "wrapped": [
+    true,
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.301
+  },
+  {
+   "case_id": "i1-s207",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.775
+  },
+  {
+   "case_id": "i1-s208",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.096
+  },
+  {
+   "case_id": "i1-s209",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.79
+  },
+  {
+   "case_id": "i1-s210",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 20,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.924
+  },
+  {
+   "case_id": "i1-s211",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 20,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.225
+  },
+  {
+   "case_id": "i1-s212",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.869
+  },
+  {
+   "case_id": "i1-s213",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 20,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.102
+  },
+  {
+   "case_id": "i1-s214",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 20,
+   "wrapped": [
+    true,
+    false,
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.531
+  },
+  {
+   "case_id": "i1-s215",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 22,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.879
+  },
+  {
+   "case_id": "i1-s216",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 22,
+   "wrapped": [
+    false,
+    false,
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.951
+  },
+  {
+   "case_id": "i1-s217",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 22,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.862
+  },
+  {
+   "case_id": "i1-s218",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 22,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.616
+  },
+  {
+   "case_id": "i1-s219",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 22,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.115
+  },
+  {
+   "case_id": "i1-s220",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 24,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.018
+  },
+  {
+   "case_id": "i1-s221",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 24,
+   "wrapped": [
+    false,
+    false,
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.387
+  },
+  {
+   "case_id": "i1-s222",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 24,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.534
+  },
+  {
+   "case_id": "i1-s223",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 24,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.28
+  },
+  {
+   "case_id": "i1-s224",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 24,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.817
+  },
+  {
+   "case_id": "i1-s225",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 28,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.839
+  },
+  {
+   "case_id": "i1-s226",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 28,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.943
+  },
+  {
+   "case_id": "i1-s227",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 28,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.902
+  },
+  {
+   "case_id": "i1-s228",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 28,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.201
+  },
+  {
+   "case_id": "i1-s229",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 28,
+   "wrapped": [
+    false,
+    false,
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.837
+  },
+  {
+   "case_id": "i1-s230",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 32,
+   "wrapped": [
+    true
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.565
+  },
+  {
+   "case_id": "i1-s231",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 32,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.073
+  },
+  {
+   "case_id": "i1-s232",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 32,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.882
+  },
+  {
+   "case_id": "i1-s233",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 32,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.307
+  },
+  {
+   "case_id": "i1-s234",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 32,
+   "wrapped": [
+    true
+   ],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.157
+  },
+  {
+   "case_id": "i1-s235",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 40,
+   "wrapped": [
+    false,
+    true,
+    true
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.657
+  },
+  {
+   "case_id": "i1-s236",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 40,
+   "wrapped": [
+    true
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.44
+  },
+  {
+   "case_id": "i1-s237",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 40,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.973
+  },
+  {
+   "case_id": "i1-s238",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 40,
+   "wrapped": [
+    true
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.743
+  },
+  {
+   "case_id": "i1-s239",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 40,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.784
+  },
+  {
+   "case_id": "i1-s240",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 10,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.931
+  },
+  {
+   "case_id": "i1-s241",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 10,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.002
+  },
+  {
+   "case_id": "i1-s242",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 10,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.999
+  },
+  {
+   "case_id": "i1-s243",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 10,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.466
+  },
+  {
+   "case_id": "i1-s244",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 10,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.918
+  },
+  {
+   "case_id": "i1-s245",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 11,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.077
+  },
+  {
+   "case_id": "i1-s246",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 11,
+   "wrapped": [
+    true
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.502
+  },
+  {
+   "case_id": "i1-s247",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 11,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.936
+  },
+  {
+   "case_id": "i1-s248",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 11,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.337
+  },
+  {
+   "case_id": "i1-s249",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 11,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.924
+  },
+  {
+   "case_id": "i1-s250",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 12,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.328
+  },
+  {
+   "case_id": "i1-s251",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 12,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.294
+  },
+  {
+   "case_id": "i1-s252",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 12,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.743
+  },
+  {
+   "case_id": "i1-s253",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 12,
+   "wrapped": [
+    false,
+    false,
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.723
+  },
+  {
+   "case_id": "i1-s254",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 12,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.64
+  },
+  {
+   "case_id": "i1-s255",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 14,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.199
+  },
+  {
+   "case_id": "i1-s256",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 14,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.984
+  },
+  {
+   "case_id": "i1-s257",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 14,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.026
+  },
+  {
+   "case_id": "i1-s258",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 14,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.459
+  },
+  {
+   "case_id": "i1-s259",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 14,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.947
+  },
+  {
+   "case_id": "i1-s260",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 16,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.931
+  },
+  {
+   "case_id": "i1-s261",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 16,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.327
+  },
+  {
+   "case_id": "i1-s262",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 16,
+   "wrapped": [
+    true
+   ],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.858
+  },
+  {
+   "case_id": "i1-s263",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 16,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.77
+  },
+  {
+   "case_id": "i1-s264",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 16,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.065
+  },
+  {
+   "case_id": "i1-s265",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.895
+  },
+  {
+   "case_id": "i1-s266",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 20,
+   "wrapped": [
+    true,
+    false,
+    true
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.96
+  },
+  {
+   "case_id": "i1-s267",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.619
+  },
+  {
+   "case_id": "i1-s268",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 20,
+   "wrapped": [
+    true,
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.997
+  },
+  {
+   "case_id": "i1-s269",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 20,
+   "wrapped": [
+    false,
+    true
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.645
+  },
+  {
+   "case_id": "i1-s270",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.279
+  },
+  {
+   "case_id": "i1-s271",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.258
+  },
+  {
+   "case_id": "i1-s272",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.147
+  },
+  {
+   "case_id": "i1-s273",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.608
+  },
+  {
+   "case_id": "i1-s274",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 20,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.076
+  },
+  {
+   "case_id": "i1-s275",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 22,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.588
+  },
+  {
+   "case_id": "i1-s276",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 22,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.348
+  },
+  {
+   "case_id": "i1-s277",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 22,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.313
+  },
+  {
+   "case_id": "i1-s278",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 22,
+   "wrapped": [
+    true
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.717
+  },
+  {
+   "case_id": "i1-s279",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 22,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.327
+  },
+  {
+   "case_id": "i1-s280",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 24,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.679
+  },
+  {
+   "case_id": "i1-s281",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 24,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.509
+  },
+  {
+   "case_id": "i1-s282",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 24,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.62
+  },
+  {
+   "case_id": "i1-s283",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 24,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.102
+  },
+  {
+   "case_id": "i1-s284",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 24,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.156
+  },
+  {
+   "case_id": "i1-s285",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 28,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.65
+  },
+  {
+   "case_id": "i1-s286",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 28,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.815
+  },
+  {
+   "case_id": "i1-s287",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 28,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.355
+  },
+  {
+   "case_id": "i1-s288",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 28,
+   "wrapped": [
+    false,
+    false,
+    true
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.918
+  },
+  {
+   "case_id": "i1-s289",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 28,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.468
+  },
+  {
+   "case_id": "i1-s290",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 32,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.696
+  },
+  {
+   "case_id": "i1-s291",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 32,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.039
+  },
+  {
+   "case_id": "i1-s292",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 32,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.625
+  },
+  {
+   "case_id": "i1-s293",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 32,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.578
+  },
+  {
+   "case_id": "i1-s294",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 32,
+   "wrapped": [
+    true,
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.949
+  },
+  {
+   "case_id": "i1-s295",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 40,
+   "wrapped": [
+    false,
+    true,
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 3.541
+  },
+  {
+   "case_id": "i1-s296",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 40,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.087
+  },
+  {
+   "case_id": "i1-s297",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 40,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.54
+  },
+  {
+   "case_id": "i1-s298",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 40,
+   "wrapped": [
+    true
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 3.337
+  },
+  {
+   "case_id": "i1-s299",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 40,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.044
+  },
+  {
+   "case_id": "i1-s300",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 10,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.717
+  },
+  {
+   "case_id": "i1-s301",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 10,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.086
+  },
+  {
+   "case_id": "i1-s302",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 10,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 3.293
+  },
+  {
+   "case_id": "i1-s303",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 10,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.202
+  },
+  {
+   "case_id": "i1-s304",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 10,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.615
+  },
+  {
+   "case_id": "i1-s305",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 11,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.745
+  },
+  {
+   "case_id": "i1-s306",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 11,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 2.073
+  },
+  {
+   "case_id": "i1-s307",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 11,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.827
+  },
+  {
+   "case_id": "i1-s308",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 11,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.73
+  },
+  {
+   "case_id": "i1-s309",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 11,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.958
+  },
+  {
+   "case_id": "i1-s310",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 12,
+   "wrapped": [
+    true
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 3.014
+  },
+  {
+   "case_id": "i1-s311",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 12,
+   "wrapped": [
+    false,
+    false,
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.059
+  },
+  {
+   "case_id": "i1-s312",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 12,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.888
+  },
+  {
+   "case_id": "i1-s313",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 12,
+   "wrapped": [
+    false,
+    false,
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.688
+  },
+  {
+   "case_id": "i1-s314",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 12,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.379
+  },
+  {
+   "case_id": "i1-s315",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 14,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.329
+  },
+  {
+   "case_id": "i1-s316",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 14,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.406
+  },
+  {
+   "case_id": "i1-s317",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 14,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.922
+  },
+  {
+   "case_id": "i1-s318",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 14,
+   "wrapped": [
+    true
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 3.005
+  },
+  {
+   "case_id": "i1-s319",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 14,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.543
+  },
+  {
+   "case_id": "i1-s320",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 16,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.181
+  },
+  {
+   "case_id": "i1-s321",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 16,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.704
+  },
+  {
+   "case_id": "i1-s322",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 16,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.595
+  },
+  {
+   "case_id": "i1-s323",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 16,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 3.188
+  },
+  {
+   "case_id": "i1-s324",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 16,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.548
+  },
+  {
+   "case_id": "i1-s325",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 20,
+   "wrapped": [
+    false,
+    false,
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.036
+  },
+  {
+   "case_id": "i1-s326",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 20,
+   "wrapped": [
+    true,
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.972
+  },
+  {
+   "case_id": "i1-s327",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.479
+  },
+  {
+   "case_id": "i1-s328",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 20,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.691
+  },
+  {
+   "case_id": "i1-s329",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.492
+  },
+  {
+   "case_id": "i1-s330",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 2.789
+  },
+  {
+   "case_id": "i1-s331",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 20,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.269
+  },
+  {
+   "case_id": "i1-s332",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.342
+  },
+  {
+   "case_id": "i1-s333",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 2.314
+  },
+  {
+   "case_id": "i1-s334",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 20,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 3.048
+  },
+  {
+   "case_id": "i1-s335",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 22,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.771
+  },
+  {
+   "case_id": "i1-s336",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 22,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.694
+  },
+  {
+   "case_id": "i1-s337",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 22,
+   "wrapped": [
+    false,
+    false,
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.451
+  },
+  {
+   "case_id": "i1-s338",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 22,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.452
+  },
+  {
+   "case_id": "i1-s339",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 22,
+   "wrapped": [
+    false,
+    false,
+    false
+   ],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.455
+  },
+  {
+   "case_id": "i1-s340",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 24,
+   "wrapped": [
+    false,
+    false,
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.121
+  },
+  {
+   "case_id": "i1-s341",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 24,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.61
+  },
+  {
+   "case_id": "i1-s342",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 24,
+   "wrapped": [
+    true
+   ],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 3.015
+  },
+  {
+   "case_id": "i1-s343",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 24,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.838
+  },
+  {
+   "case_id": "i1-s344",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 24,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.495
+  },
+  {
+   "case_id": "i1-s345",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 28,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.339
+  },
+  {
+   "case_id": "i1-s346",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 28,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.847
+  },
+  {
+   "case_id": "i1-s347",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 28,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.947
+  },
+  {
+   "case_id": "i1-s348",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 28,
+   "wrapped": [
+    true
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.685
+  },
+  {
+   "case_id": "i1-s349",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 28,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.454
+  },
+  {
+   "case_id": "i1-s350",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 32,
+   "wrapped": [
+    true,
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.252
+  },
+  {
+   "case_id": "i1-s351",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 32,
+   "wrapped": [
+    false,
+    true
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.832
+  },
+  {
+   "case_id": "i1-s352",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 32,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.21
+  },
+  {
+   "case_id": "i1-s353",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 32,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.925
+  },
+  {
+   "case_id": "i1-s354",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 32,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.161
+  },
+  {
+   "case_id": "i1-s355",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 40,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.513
+  },
+  {
+   "case_id": "i1-s356",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 40,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.152
+  },
+  {
+   "case_id": "i1-s357",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 40,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.632
+  },
+  {
+   "case_id": "i1-s358",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 40,
+   "wrapped": [
+    true
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.859
+  },
+  {
+   "case_id": "i1-s359",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 40,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.035
+  },
+  {
+   "case_id": "i1-s360",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 10,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.43
+  },
+  {
+   "case_id": "i1-s361",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 10,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.472
+  },
+  {
+   "case_id": "i1-s362",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 10,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.684
+  },
+  {
+   "case_id": "i1-s363",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 10,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.04
+  },
+  {
+   "case_id": "i1-s364",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 10,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.228
+  },
+  {
+   "case_id": "i1-s365",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 11,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.395
+  },
+  {
+   "case_id": "i1-s366",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 11,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.737
+  },
+  {
+   "case_id": "i1-s367",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 11,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.177
+  },
+  {
+   "case_id": "i1-s368",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 11,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.856
+  },
+  {
+   "case_id": "i1-s369",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 11,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.176
+  },
+  {
+   "case_id": "i1-s370",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 12,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.43
+  },
+  {
+   "case_id": "i1-s371",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 12,
+   "wrapped": [
+    false,
+    false,
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.442
+  },
+  {
+   "case_id": "i1-s372",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 12,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.16
+  },
+  {
+   "case_id": "i1-s373",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 12,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.61
+  },
+  {
+   "case_id": "i1-s374",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 12,
+   "wrapped": [
+    true
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.839
+  },
+  {
+   "case_id": "i1-s375",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 14,
+   "wrapped": [
+    false,
+    true,
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.372
+  },
+  {
+   "case_id": "i1-s376",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 14,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.245
+  },
+  {
+   "case_id": "i1-s377",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 14,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.128
+  },
+  {
+   "case_id": "i1-s378",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 14,
+   "wrapped": [
+    true
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.867
+  },
+  {
+   "case_id": "i1-s379",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 14,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.687
+  },
+  {
+   "case_id": "i1-s380",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 16,
+   "wrapped": [
+    true,
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.03
+  },
+  {
+   "case_id": "i1-s381",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 16,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.468
+  },
+  {
+   "case_id": "i1-s382",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 16,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.605
+  },
+  {
+   "case_id": "i1-s383",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 16,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.782
+  },
+  {
+   "case_id": "i1-s384",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 16,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.914
+  },
+  {
+   "case_id": "i1-s385",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 20,
+   "wrapped": [
+    false,
+    true,
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.855
+  },
+  {
+   "case_id": "i1-s386",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.045
+  },
+  {
+   "case_id": "i1-s387",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.21
+  },
+  {
+   "case_id": "i1-s388",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.504
+  },
+  {
+   "case_id": "i1-s389",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 20,
+   "wrapped": [
+    false,
+    true
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.644
+  },
+  {
+   "case_id": "i1-s390",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    true
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.058
+  },
+  {
+   "case_id": "i1-s391",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.214
+  },
+  {
+   "case_id": "i1-s392",
+   "has_secret": true,
+   "n_secrets": 2,
+   "physical_px": 20,
+   "wrapped": [
+    false,
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.344
+  },
+  {
+   "case_id": "i1-s393",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.701
+  },
+  {
+   "case_id": "i1-s394",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 20,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.475
+  },
+  {
+   "case_id": "i1-s395",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 22,
+   "wrapped": [
+    false
+   ],
+   "scene": "terminal",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.301
+  },
+  {
+   "case_id": "i1-s396",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 22,
+   "wrapped": [
+    false
+   ],
+   "scene": "ide",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.775
+  },
+  {
+   "case_id": "i1-s397",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 22,
+   "wrapped": [
+    false
+   ],
+   "scene": "browser",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.205
+  },
+  {
+   "case_id": "i1-s398",
+   "has_secret": true,
+   "n_secrets": 3,
+   "physical_px": 22,
+   "wrapped": [
+    false,
+    false,
+    false
+   ],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 2.049
+  },
+  {
+   "case_id": "i1-s399",
+   "has_secret": true,
+   "n_secrets": 1,
+   "physical_px": 22,
+   "wrapped": [
+    false
+   ],
+   "scene": "chat",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 0.993
+  },
+  {
+   "case_id": "i1-c000",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 10,
+   "wrapped": [],
+   "scene": "terminal",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.222
+  },
+  {
+   "case_id": "i1-c001",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 10,
+   "wrapped": [],
+   "scene": "ide",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.236
+  },
+  {
+   "case_id": "i1-c002",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 10,
+   "wrapped": [],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.095
+  },
+  {
+   "case_id": "i1-c003",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 10,
+   "wrapped": [],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.675
+  },
+  {
+   "case_id": "i1-c004",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 10,
+   "wrapped": [],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.088
+  },
+  {
+   "case_id": "i1-c005",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 11,
+   "wrapped": [],
+   "scene": "terminal",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.266
+  },
+  {
+   "case_id": "i1-c006",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 11,
+   "wrapped": [],
+   "scene": "ide",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.044
+  },
+  {
+   "case_id": "i1-c007",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 11,
+   "wrapped": [],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.128
+  },
+  {
+   "case_id": "i1-c008",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 11,
+   "wrapped": [],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.402
+  },
+  {
+   "case_id": "i1-c009",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 11,
+   "wrapped": [],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.057
+  },
+  {
+   "case_id": "i1-c010",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 12,
+   "wrapped": [],
+   "scene": "terminal",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.247
+  },
+  {
+   "case_id": "i1-c011",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 12,
+   "wrapped": [],
+   "scene": "ide",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.957
+  },
+  {
+   "case_id": "i1-c012",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 12,
+   "wrapped": [],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.125
+  },
+  {
+   "case_id": "i1-c013",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 12,
+   "wrapped": [],
+   "scene": "log",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.45
+  },
+  {
+   "case_id": "i1-c014",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 12,
+   "wrapped": [],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.972
+  },
+  {
+   "case_id": "i1-c015",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 14,
+   "wrapped": [],
+   "scene": "terminal",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.152
+  },
+  {
+   "case_id": "i1-c016",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 14,
+   "wrapped": [],
+   "scene": "ide",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.183
+  },
+  {
+   "case_id": "i1-c017",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 14,
+   "wrapped": [],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.913
+  },
+  {
+   "case_id": "i1-c018",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 14,
+   "wrapped": [],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.52
+  },
+  {
+   "case_id": "i1-c019",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 14,
+   "wrapped": [],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.968
+  },
+  {
+   "case_id": "i1-c020",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 16,
+   "wrapped": [],
+   "scene": "terminal",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.162
+  },
+  {
+   "case_id": "i1-c021",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 16,
+   "wrapped": [],
+   "scene": "ide",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.387
+  },
+  {
+   "case_id": "i1-c022",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 16,
+   "wrapped": [],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.837
+  },
+  {
+   "case_id": "i1-c023",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 16,
+   "wrapped": [],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.324
+  },
+  {
+   "case_id": "i1-c024",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 16,
+   "wrapped": [],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.968
+  },
+  {
+   "case_id": "i1-c025",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 20,
+   "wrapped": [],
+   "scene": "terminal",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.205
+  },
+  {
+   "case_id": "i1-c026",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 20,
+   "wrapped": [],
+   "scene": "ide",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.961
+  },
+  {
+   "case_id": "i1-c027",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 20,
+   "wrapped": [],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.074
+  },
+  {
+   "case_id": "i1-c028",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 20,
+   "wrapped": [],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.47
+  },
+  {
+   "case_id": "i1-c029",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 20,
+   "wrapped": [],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.965
+  },
+  {
+   "case_id": "i1-c030",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 20,
+   "wrapped": [],
+   "scene": "terminal",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.214
+  },
+  {
+   "case_id": "i1-c031",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 20,
+   "wrapped": [],
+   "scene": "ide",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.074
+  },
+  {
+   "case_id": "i1-c032",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 20,
+   "wrapped": [],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.134
+  },
+  {
+   "case_id": "i1-c033",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 20,
+   "wrapped": [],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.564
+  },
+  {
+   "case_id": "i1-c034",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 20,
+   "wrapped": [],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.029
+  },
+  {
+   "case_id": "i1-c035",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 22,
+   "wrapped": [],
+   "scene": "terminal",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.17
+  },
+  {
+   "case_id": "i1-c036",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 22,
+   "wrapped": [],
+   "scene": "ide",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.072
+  },
+  {
+   "case_id": "i1-c037",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 22,
+   "wrapped": [],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.043
+  },
+  {
+   "case_id": "i1-c038",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 22,
+   "wrapped": [],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.357
+  },
+  {
+   "case_id": "i1-c039",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 22,
+   "wrapped": [],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.992
+  },
+  {
+   "case_id": "i1-c040",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 24,
+   "wrapped": [],
+   "scene": "terminal",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.2
+  },
+  {
+   "case_id": "i1-c041",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 24,
+   "wrapped": [],
+   "scene": "ide",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.99
+  },
+  {
+   "case_id": "i1-c042",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 24,
+   "wrapped": [],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.043
+  },
+  {
+   "case_id": "i1-c043",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 24,
+   "wrapped": [],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.306
+  },
+  {
+   "case_id": "i1-c044",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 24,
+   "wrapped": [],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.984
+  },
+  {
+   "case_id": "i1-c045",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 28,
+   "wrapped": [],
+   "scene": "terminal",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.16
+  },
+  {
+   "case_id": "i1-c046",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 28,
+   "wrapped": [],
+   "scene": "ide",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.009
+  },
+  {
+   "case_id": "i1-c047",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 28,
+   "wrapped": [],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.163
+  },
+  {
+   "case_id": "i1-c048",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 28,
+   "wrapped": [],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.456
+  },
+  {
+   "case_id": "i1-c049",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 28,
+   "wrapped": [],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.97
+  },
+  {
+   "case_id": "i1-c050",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 32,
+   "wrapped": [],
+   "scene": "terminal",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.152
+  },
+  {
+   "case_id": "i1-c051",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 32,
+   "wrapped": [],
+   "scene": "ide",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.966
+  },
+  {
+   "case_id": "i1-c052",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 32,
+   "wrapped": [],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.092
+  },
+  {
+   "case_id": "i1-c053",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 32,
+   "wrapped": [],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.325
+  },
+  {
+   "case_id": "i1-c054",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 32,
+   "wrapped": [],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.93
+  },
+  {
+   "case_id": "i1-c055",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 40,
+   "wrapped": [],
+   "scene": "terminal",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.139
+  },
+  {
+   "case_id": "i1-c056",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 40,
+   "wrapped": [],
+   "scene": "ide",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.937
+  },
+  {
+   "case_id": "i1-c057",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 40,
+   "wrapped": [],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.041
+  },
+  {
+   "case_id": "i1-c058",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 40,
+   "wrapped": [],
+   "scene": "log",
+   "verdict": "secret",
+   "reason": null,
+   "seconds": 1.623
+  },
+  {
+   "case_id": "i1-c059",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 40,
+   "wrapped": [],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.937
+  },
+  {
+   "case_id": "i1-c060",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 10,
+   "wrapped": [],
+   "scene": "terminal",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.097
+  },
+  {
+   "case_id": "i1-c061",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 10,
+   "wrapped": [],
+   "scene": "ide",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.022
+  },
+  {
+   "case_id": "i1-c062",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 10,
+   "wrapped": [],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.071
+  },
+  {
+   "case_id": "i1-c063",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 10,
+   "wrapped": [],
+   "scene": "log",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.346
+  },
+  {
+   "case_id": "i1-c064",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 10,
+   "wrapped": [],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.984
+  },
+  {
+   "case_id": "i1-c065",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 11,
+   "wrapped": [],
+   "scene": "terminal",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.089
+  },
+  {
+   "case_id": "i1-c066",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 11,
+   "wrapped": [],
+   "scene": "ide",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.022
+  },
+  {
+   "case_id": "i1-c067",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 11,
+   "wrapped": [],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.084
+  },
+  {
+   "case_id": "i1-c068",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 11,
+   "wrapped": [],
+   "scene": "log",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.29
+  },
+  {
+   "case_id": "i1-c069",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 11,
+   "wrapped": [],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.951
+  },
+  {
+   "case_id": "i1-c070",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 12,
+   "wrapped": [],
+   "scene": "terminal",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.044
+  },
+  {
+   "case_id": "i1-c071",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 12,
+   "wrapped": [],
+   "scene": "ide",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.078
+  },
+  {
+   "case_id": "i1-c072",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 12,
+   "wrapped": [],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.939
+  },
+  {
+   "case_id": "i1-c073",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 12,
+   "wrapped": [],
+   "scene": "log",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.459
+  },
+  {
+   "case_id": "i1-c074",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 12,
+   "wrapped": [],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.923
+  },
+  {
+   "case_id": "i1-c075",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 14,
+   "wrapped": [],
+   "scene": "terminal",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.096
+  },
+  {
+   "case_id": "i1-c076",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 14,
+   "wrapped": [],
+   "scene": "ide",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.001
+  },
+  {
+   "case_id": "i1-c077",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 14,
+   "wrapped": [],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.968
+  },
+  {
+   "case_id": "i1-c078",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 14,
+   "wrapped": [],
+   "scene": "log",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.421
+  },
+  {
+   "case_id": "i1-c079",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 14,
+   "wrapped": [],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.905
+  },
+  {
+   "case_id": "i1-c080",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 16,
+   "wrapped": [],
+   "scene": "terminal",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.115
+  },
+  {
+   "case_id": "i1-c081",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 16,
+   "wrapped": [],
+   "scene": "ide",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.982
+  },
+  {
+   "case_id": "i1-c082",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 16,
+   "wrapped": [],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.021
+  },
+  {
+   "case_id": "i1-c083",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 16,
+   "wrapped": [],
+   "scene": "log",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.526
+  },
+  {
+   "case_id": "i1-c084",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 16,
+   "wrapped": [],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.907
+  },
+  {
+   "case_id": "i1-c085",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 20,
+   "wrapped": [],
+   "scene": "terminal",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.083
+  },
+  {
+   "case_id": "i1-c086",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 20,
+   "wrapped": [],
+   "scene": "ide",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.006
+  },
+  {
+   "case_id": "i1-c087",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 20,
+   "wrapped": [],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.915
+  },
+  {
+   "case_id": "i1-c088",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 20,
+   "wrapped": [],
+   "scene": "log",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.45
+  },
+  {
+   "case_id": "i1-c089",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 20,
+   "wrapped": [],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.91
+  },
+  {
+   "case_id": "i1-c090",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 20,
+   "wrapped": [],
+   "scene": "terminal",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.1
+  },
+  {
+   "case_id": "i1-c091",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 20,
+   "wrapped": [],
+   "scene": "ide",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.137
+  },
+  {
+   "case_id": "i1-c092",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 20,
+   "wrapped": [],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.017
+  },
+  {
+   "case_id": "i1-c093",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 20,
+   "wrapped": [],
+   "scene": "log",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.531
+  },
+  {
+   "case_id": "i1-c094",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 20,
+   "wrapped": [],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.96
+  },
+  {
+   "case_id": "i1-c095",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 22,
+   "wrapped": [],
+   "scene": "terminal",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.053
+  },
+  {
+   "case_id": "i1-c096",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 22,
+   "wrapped": [],
+   "scene": "ide",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.101
+  },
+  {
+   "case_id": "i1-c097",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 22,
+   "wrapped": [],
+   "scene": "browser",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.982
+  },
+  {
+   "case_id": "i1-c098",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 22,
+   "wrapped": [],
+   "scene": "log",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 1.275
+  },
+  {
+   "case_id": "i1-c099",
+   "has_secret": false,
+   "n_secrets": 0,
+   "physical_px": 22,
+   "wrapped": [],
+   "scene": "chat",
+   "verdict": "clean",
+   "reason": null,
+   "seconds": 0.936
+  }
+ ]
+}
