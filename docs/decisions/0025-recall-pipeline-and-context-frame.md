@@ -31,30 +31,24 @@
 - **Tests (binding):** the labelling, the evidence attached, the ranking below uncontested, the rendering never
   bare, and `read_heads` unchanged.
 
-## Amendment 2: where the ContextAssembled trace lives. PROPOSED (D3), awaiting owner approval (2026-10-02)
-**The gap (found building R18):** §8 does not say which stream holds the trace, and the obvious choices conflict.
-- **The requesting principal's own stream:**
-  - its content parts would copy text derived from OTHER streams;
-  - derived keys are per stream (D-0023), so `forget_period` on a source stream would NOT reach the trace copy (an
-    erasure hole).
-- **The items' source streams:** a recall principal may hold only READ grants there and cannot append.
+## Amendment 2 (owner, 2026-10-02, D3): the ContextAssembled trace copies NO recalled content
+This replaces §8's split into content parts and the proposal made while building R18.
+- **The trace is ONE event in the stream the recall was issued from.** There is no privileged cross-stream writer.
+- **What it stores:**
+  1. the query, encrypted under the requester's key per D-0023 (`on_behalf_of` applies);
+  2. the snapshot positions, the config version and the embedder version;
+  3. per-item references (event id and version);
+  4. a per-item content MAC keyed under that item's OWN derived key, so it dies with erasure;
+  5. the frame hash.
+- **It holds no recalled text,** so erasure in a source stream never leaves a copy in the trace; the item's MAC
+  simply becomes unverifiable.
+- **Replay (R20)** reconstructs the frame from the snapshot. Erased items replay as `shredded`.
+- **Tests (binding):** a trace verifies before erasure; after erasing one item's contributor, that item replays as
+  shredded while the other items still verify.
 
-**Proposal:**
-1. **Content parts:** written into EACH ITEM'S OWN SOURCE STREAM, one part per stream (split further if over 256
-   contributors), under contributor-set keys with `sources` = that stream's item versions.
-   - Contributors stay local, so `erase_person` and `forget_period` reach the parts unchanged.
-   - They are written by a dedicated **recall-trace service principal** that holds append grants on the streams it
-     traces (granted alongside read grants; `source = system`, never authoritative, D-0026 amendment 1).
-2. **Query part:** written in the requester's home stream under the requester's key, or the person's key via
-   `on_behalf_of` (D-0023 §6).
-3. **Header:** in the home stream. It holds no content, only ids and MACs; it is under the stream key with an
-   explicit empty `sources` (as content-free run markers already are); and it lists every part id across streams.
-4. **Atomicity:** all of these are written in ONE transaction, committed before the frame is returned (§8
-   unchanged).
-
-**Questions for the owner (D3):**
-- (a) Approve per-source-stream content parts written by a recall-trace service principal?
-- (b) Is "home stream" the principal's user or agent scope (proposed), and what happens when a principal has none?
+## Amendment 3 (owner, 2026-10-02): budget
+- **Confirmed:** contested items count against the budget and fill last (they are pinned only against relevance
+  pruning).
 
 ## Context
 - **SPEC "Recall and the reasoning boundary"** defines eight steps:

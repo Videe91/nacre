@@ -1275,3 +1275,16 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   keys stay local, so erasure and forget_period reach them); query part and header in the requester's home stream;
   one transaction. **R19 and R20 depend on it.** Not blocked: the interface work (R1–R5, R21–R24) and EXP-0004
   preparation.
+- 2026-10-02 — **Owner decisions.**
+  - **D-0029 accepted:**
+    - any reader may report a leak; reports are rate-limited, record the reporter, and are visible to admins;
+    - lifting a suppression needs an org admin with a reason, and the reporter is notified;
+    - suppression reaches derived records transitively;
+    - built after the interface work.
+  - **D-0025 amendment 2 (D3):** the trace copies no recalled content.
+    - **Where:** one event in the issuing stream; no cross-stream writer.
+    - **What:** the query under the requester's key; snapshot, config and embedder versions; per-item refs plus a
+      content MAC under the item's own derived key; the frame hash.
+    - **Replay:** erased items replay as shredded.
+  - **Amendment 3:** the budget reading is confirmed.
+  - **Next:** R18–R20; in parallel, the interface work, binary scanning and EXP-0004 preparation.

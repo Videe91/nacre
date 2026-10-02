@@ -1,10 +1,16 @@
 # D-0029: Compensating controls for secrets the detector misses
 
-- **Status:** accepted in principle (owner directive, 2026-10-02). The design details below are PROPOSED: the owner
-  reviews them before any code.
+- **Status:** accepted (owner, 2026-10-02) with the decisions below. Built AFTER the interface work (owner).
 - **Tier:** D3 (what may be recalled or exported; the privacy boundary).
 - **Date:** 2026-10-02
 - **Relies on assumptions:** A-0010, A-0044, A-0045 (new)
+
+## Owner decisions at acceptance (2026-10-02)
+1. **Any reader of the stream may report a leak.** Reports record the reporter, are **rate-limited**, and are
+   **visible to admins**.
+2. **Lifting** a suppression requires an org admin with a recorded reason, and **the reporter is notified**.
+3. **Suppression reaches derived records transitively.**
+4. **Order:** build after the interface work.
 
 ## Context
 - **Gate item 12 is NOT MET, with the risk accepted by the owner on 2026-10-02** (holdout log).
