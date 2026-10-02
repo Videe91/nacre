@@ -6,7 +6,7 @@ Owns: the replicate's order of work, scope registration and grants (each scope's
   the set lists, so cross-scope twins are unreachable), the erasure step, the per-task arm calls and their sources, the
   trial rows, and the per-replicate safety and audit counters.
 Public entry: run_replicate(), Env, ReplicateResult, TAU_PROBE, SCOPE_LEVEL, N_BUDGET, DEV_COVERAGE_BUDGET
-Decisions: D-0025, D-0016, D-0018, D-0020, D-0021, D-0023, D-0014
+Decisions: D-0025, D-0016, D-0018, D-0020, D-0021, D-0023, D-0014, D-0030
 Assumptions: A-0034, A-0036, A-0038
 Notes: EVALUATION HARNESS ONLY. Only the arm view reaches an arm; grading fields are read after an arm answered.
   - Capture is written by the run owner's session with actor = the dataset author (capture_exp0004_day). Sleep pass =
@@ -29,6 +29,9 @@ Notes: EVALUATION HARNESS ONLY. Only the arm view reaches an arm; grading fields
   - Latency: recall_ms is end to end (snapshot, frame, trace commit); `recall_cold` marks the first recall of a scope in
     its replicate (its index entries load into the cache then); every later one is warm (D1).
   - The replicate never retries a failed step: any exception (including BudgetExceeded) propagates to the runner.
+  - D-0030 owner condition 3 (dev coverage mode only): right after each scope's history, measure_contradiction_links
+    reads that scope's links from the ledger and scores them against the scope's T3 grading refs (one `link_rows`
+    row per scope and replicate). Grading refs are read only there, after the sleep passes ran.
 """
 import sys
 import uuid
@@ -48,6 +51,7 @@ from nacre.eval.audit_exp0004 import check_frame, prompts_differ_only_in_memory,
 from nacre.eval.capture_exp0004_day import IdMap, capture_day
 from nacre.eval.grade_exp0004 import grade_trial
 from nacre.eval.load_exp0004_set import ArmScope, GradingTask
+from nacre.eval.measure_contradiction_links import measure_links, t3_families
 from nacre.eval.naive_memory_arm import build_naive_index, render_naive_section
 from nacre.eval.transfer_exp0004 import NO_MEMORY, transfer
 from nacre.interface.render_frame import render_memory_section
@@ -86,6 +90,7 @@ class ReplicateResult:
     frames: Counter = field(default_factory=Counter)
     replay_items: Counter = field(default_factory=Counter)
     coverage_rows: list[dict] = field(default_factory=list)
+    link_rows: list[dict] = field(default_factory=list)
     replays: list[tuple[UUID, UUID, int]] = field(default_factory=list)
     prompts_identical: bool = True
     sleep: Counter = field(default_factory=Counter)
@@ -114,8 +119,14 @@ def _history(env: Env, sc: ArmScope, ids: IdMap, mode, rep: int, run_id: UUID, p
         rep_ = run_sleep_pass(owner_session, env.key_provider, mode.sleep_provider, stream, policy=policy)
         res.sleep.update(episodes=rep_.episodes, calls_live=rep_.calls_live, calls_reused=rep_.calls_reused,
                          promoted=rep_.promoted, refused=rep_.refused, fallback=rep_.fallback,
-                         skipped=rep_.skipped, unlinked_action_outcomes=rep_.unlinked_action_outcomes)
+                         skipped=rep_.skipped, unlinked_action_outcomes=rep_.unlinked_action_outcomes,
+                         judge_calls=rep_.judge_calls, judge_pairs=rep_.judge_pairs,
+                         judge_parse_errors=rep_.judge_parse_errors, links_proposed=rep_.links_proposed,
+                         beliefs_contested=rep_.beliefs_contested,
+                         explicit_links=rep_.explicit_links["linked"])
+        res.sleep.update({f"link_rejected_{k}": v for k, v in rep_.links_rejected_by_reason.items()})
         res.sleep["cost_usd_micro"] += int(rep_.cost_usd * 1_000_000)
+        res.sleep["judge_cost_usd_micro"] += int(rep_.judge_cost_usd * 1_000_000)
     return anchor
 
 
@@ -211,7 +222,14 @@ def run_replicate(env: Env, scopes: list[ArmScope], grading: dict[str, GradingTa
     anchors = {}
     for sc in scopes:
         should_abort()
+        judged_before = res.sleep["judge_pairs"]
         anchors[sc.scope_id] = _history(env, sc, ids, mode, rep, run_id, policy, res)
+        if not transfers:                                # D-0030 condition 3: dev coverage mode only
+            with env.open_as(env.owner) as s:
+                row = measure_links(s, env.key_provider, ids.stream(sc.scope_id),
+                                    t3_families(grading.values(), sc.scope_id, ids.events),
+                                    res.sleep["judge_pairs"] - judged_before)
+            res.link_rows.append({"rep": rep, "scope_id": sc.scope_id} | row)
     for sc in scopes:                                    # before erasure: the history recordings are still readable
         res.fixtures += mode.checkpoint(lambda: env.open_as(env.owner), env.key_provider, ids.stream(sc.scope_id), rep,
                                         sc.scope_id)

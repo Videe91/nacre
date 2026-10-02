@@ -165,8 +165,14 @@ def test_end_to_end_dev_coverage_then_select_then_a_frozen_run(pg_dsn, test_role
     scopes, grading = split_views(tiny_split())
     make_env = env_factory(pg_dsn, test_role_password)
     dev = R.parse_args(["--dry-run", "--dev-coverage", "--split", "dev", "--out", str(tmp_path / "dev")])
-    assert R.run_cli(dev, scopes, grading, [], make_env=make_env, embedder=emb) == {"coverage_rows": 3 * 8}
+    out = R.run_cli(dev, scopes, grading, [], make_env=make_env, embedder=emb)
+    assert set(out) == {"coverage_rows", "contradiction_links"} and out["coverage_rows"] == 3 * 8
     (ddir,) = (tmp_path / "dev").iterdir()
+    links = out["contradiction_links"]                    # D-0030 condition 3: beside the tau rows and in run.json
+    assert json.loads((ddir / "run.json").read_text())["contradiction_links"] == links
+    assert len(json.loads((ddir / "link_rows.json").read_text())) == links["scopes"] == 3 * 2
+    assert links["true_conflicts"] == 3 * 2 * 2 and links["pairs_judged"] > 0      # EchoFake's judge reply never parses
+    assert (links["links"], links["correct_link_rate"], links["false_link_rate"]) == (0, 0.0, 0.0)
     rec = build_record(ddir, grading, date="2026-10-02")
     assert rec["dev_run"]["mode"] == "dry" and rec["selection"]["rows"] == 24 and rec["selection"]["strong_eligible"]
     replay = R.parse_args(["--recorded", str(ddir), "--dev-coverage", "--split", "dev", "--out", str(tmp_path / "rep")])

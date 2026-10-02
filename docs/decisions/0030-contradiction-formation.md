@@ -1,11 +1,39 @@
 # D-0030: Contradiction formation — linking a trusted correction to the belief it corrects
 
-- **Status:** proposed (2026-10-02). Not built. Owner review requested before any code.
+- **Status:** ACCEPTED WITH CONDITIONS (owner, 2026-10-02). See "Owner conditions" below; they override the
+  proposal where they differ. Two open points (S1 supersession, S2 reversal) await the owner.
 - **Tier:** D2 (cross-module behaviour: sleep pass, stores; a new model seat). It also touches **what counts as
   independent support** (D-0017), which the owner may treat as **D3**. Flagged in question 2.
 - **Date:** 2026-10-02
 - **Relies on assumptions:** A-0027 (quorum rules); new A-0047, A-0048 (below)
 - **Amends:** D-0017 (support and contest grouping), D-0020 (§ "Contradictions in Phase 2").
+
+## Owner conditions at acceptance (2026-10-02). They override the proposal below where they differ
+1. **The judge only proposes contradiction links.** Admission stays evidence-gated with the two-vote quorum.
+   - The proposal's `same_claim` (paraphrase support) is therefore NOT adopted: support is unchanged (D-0017,
+     identical normalised text).
+   - **Reading:** contest needs ≥ 2 distinct decisions whose grounded contradiction links target the same belief
+     head. Judge links are grouped by target head, not by text.
+2. **The judge compares only beliefs that share an address, in the same scope (stream).** It must quote the exact
+   conflicting spans from BOTH sides:
+   - the episode's authoritative correction section;
+   - the belief's `support_text`.
+
+   No quote, no link. Both spans are checked deterministically (exact, unique, contiguous).
+3. **Before EXP-0004, measure on the dev split only:**
+   - the correct-link rate (true v1↔v2 conflicts linked / all true conflicts);
+   - the false-link rate (non-conflicting belief pairs wrongly linked / all candidate pairs judged).
+
+   Report both. (The proposal's ≥ 0.90 / 0 thresholds were not adopted as stated; the owner asked for both rates to
+   be reported.)
+4. **Supersession order is decided by the ledger's `commit_seq`**, never by timestamps or model judgement.
+5. **Judge calls are recorded and costed per D-0022** (and D-0021 amendment 2).
+6. **Contradiction links are reversible.**
+7. **Tests for each condition.**
+
+**Open, asked 2026-10-02 (the build covers everything else first):**
+- **S1:** how supersession works without paraphrase support (see CURRENT);
+- **S2:** what reversing a link does to a contested or superseded belief.
 
 ## Context
 - **Owner (2026-10-02, EXP-0004 E1):** "a trusted correction of a belief becomes a contradiction proposal, per

@@ -1760,3 +1760,57 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
     - Four run_mutants tests failed because the latency agent's isolated worktree sits at `.claude/worktrees/` and
       was copied as untracked files. `.claude/worktrees/` is now in `.gitignore`.
   - **Re-run:** 1676 passed, 60 deselected (pytest exit 0); check_structure exit 0.
+- 2026-10-02 — **D-0030 ACCEPTED WITH CONDITIONS (owner).** The conditions are recorded in the ADR.
+  - **Conditions:**
+    - the judge only proposes contradiction links (no paraphrase support);
+    - same-scope, shared-address candidates only, with exact quotes from BOTH sides (no quote, no link);
+    - report correct-link and false-link rates on the dev split;
+    - supersession order by commit_seq;
+    - judge calls recorded and costed;
+    - links are reversible;
+    - a test per condition.
+  - **BUILDING** (background builder): everything except supersession and reversal.
+  - **OWNER QUESTIONS S1 and S2** (asked 2026-10-02):
+    - **S1, supersession without paraphrase support.** Each paraphrased v2 correction becomes its own single-source
+      belief, so D-0017's "one replacement with ≥ 2 shared decisions" can never hold. Recommended: the old head is
+      superseded when it is contested by ≥ 2 distinct decisions with grounded links, and each linking decision
+      supports an active replacement; `superseded_by` points to the replacement whose supporting event has the
+      highest commit_seq (condition 4). Alternative: no supersession, so the old head stays "CONTESTED, not
+      established" in recall.
+    - **S2, reversal.** Recommended: a `contradiction_withdrawn` event (by an operator, through the admin CLI and
+      recorded) removes one link. If a contested or superseded head then has fewer than 2 grounded links, a new
+      version restores its prior status with a `reinstated` edge: an explicit, recorded exception to D-0017
+      deviation 1 (which forbids re-activation by promotion only). Alternative: a withdrawal stops future contests
+      but never restores a status.
+- 2026-10-02 — **Latency agent:** the owner requires options for BOTH the write path and the read path, measured at
+  1k, 10k and 100k. Passed to the agent.
+- 2026-10-02 — **D-0030 BUILT, except S1 (supersession) and S2 (reversal),** which await the owner.
+  - **New files:**
+    - `sleep/find_contradiction_candidates.py`, `sleep/judge_relations.py` (prompt sha256 fc15a70a…, pinned),
+      `sleep/ground_contradiction_links.py`, `sleep/link_explicit_corrections.py`;
+    - `eval/measure_contradiction_links.py`.
+  - **Changed:** `stores/propose_contradiction.py` (action-linked outcomes; judged and explicit links);
+    `stores/contest_belief.py` (judged links grouped by target head; explicit links never vote); and the sleep pass
+    and dev runner wiring.
+  - **D1 notes:**
+    - each judge call is committed in its own session BEFORE the episode transaction (paid calls are never lost),
+      and the links and contest run inside the transaction after promotions;
+    - the judge sees only authoritative correction sections and the candidates' support_text;
+    - the explicit trigger requires envelope trust = trusted;
+    - the pairs-judged denominator comes from the sleep report.
+  - **Dev measurement:** `link_rows.json` beside `coverage_rows.json`, plus `run.json["contradiction_links"]`. Dry and
+    fake runs give 0 links; the real rates come from the owner's live dev run. A-0047 and A-0048 stay open until then.
+  - **Seams:**
+    - S1: `run_sleep_pass._contest_linked` (supersession is called there; order by commit_seq only, condition 4);
+    - S2: a link's identity is its `contradiction_proposed` event id.
+  - **Builder's full-suite run:** 1741 passed, 60 deselected (exit 0).
+  - **Gaps for the owner** (batch; none blocks the τ dev run):
+    - (1) explicit links carry no decision, so they never vote;
+    - (2) self-candidates: a belief already supported by this episode's decision is not excluded;
+    - (3) only authoritative `correction` sections ground a link, not failing-evaluation sections;
+    - (4) the judge result is not a D-0023 source of the link;
+    - (5) the explicit trigger checks envelope trust only;
+    - (6) which candidates each judge call saw is not persisted.
+- 2026-10-02 — **Owner batch document:** `docs/plans/owner-batch-2026-10-02.md` (D-0026 amendment 3, billing and
+  address edge cases), committed with this gate.
+- 2026-10-02 — **Gate for the D-0030 commit:** 1741 passed, 60 deselected (pytest exit 0); check_structure exit 0.

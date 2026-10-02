@@ -5,7 +5,7 @@ Owns: the command line (live / dry-run / recorded replay; dev coverage mode), th
   replicate loop with no reruns, the infrastructure-abort record, the results writer (trials, summary, safety, Bar,
   reported-only metrics, the too-good-to-be-true audit) and the run folder.
 Public entry: main(), parse_args(), run_cli(), run_experiment(), build_results(), fresh_env(), K
-Decisions: D-0016, D-0021, D-0022, D-0025, D-0006
+Decisions: D-0016, D-0021, D-0022, D-0025, D-0006, D-0030
 Assumptions: A-0034, A-0036
 Notes: EVALUATION HARNESS ONLY (docs/experiments/EXP-0004-recall-under-interference.md).
     python -m nacre.eval.run_exp0004 --live --tau T          # owner; OPENAI_API_KEY exported in the shell
@@ -14,7 +14,7 @@ Notes: EVALUATION HARNESS ONLY (docs/experiments/EXP-0004-recall-under-interfere
     python -m nacre.eval.run_exp0004 --dev-coverage --split dev (--dry-run | --recorded DIR | --live)
   - tau (`--tau`, tau_strong_q, cosine x 1e4) is REQUIRED and recorded; this runner never selects it. The dev coverage
     mode runs no transfers and writes per-task rows (answerable, coverage at TAU_PROBE, top semantic score) only;
-    select_exp0004_tau selects tau from them and writes the frozen record (TAU.json).
+    select_exp0004_tau selects tau from them and writes the frozen record (TAU.json). D-0030: plus link_rows.json.
   - Freeze: every run but --dev-coverage refuses to start (before reading a split) unless --tau equals the frozen
     record (`--tau-record`, default tests/regression/exp0004/TAU.json) and its pins hold (check_frozen). Each run
     database records it as a `recall_tau` config_event (org stream); run.json: its sha256, the split's, the embedder.
@@ -50,6 +50,7 @@ from nacre.eval.audit_exp0004 import dev_test_overlap, prompt_contains_answer
 from nacre.eval.cap_exp0004_budget import HARD_CAP_USD, BudgetExceeded, CappedProvider, worst_case_cost
 from nacre.eval.grade_exp0004 import SAFETY_METRICS, evaluate_bar, summarize
 from nacre.eval.load_exp0004_set import DEV_SHA256, TEST_SHA256, load_split
+from nacre.eval.measure_contradiction_links import write_link_rows
 from nacre.eval.provide_exp0004_models import DryProvider, LiveMode, RecordedMode
 from nacre.eval.run_exp0004_replicate import TAU_PROBE, Env, run_replicate
 from nacre.eval.select_exp0004_tau import RECORD_PATH, append_tau_config_event, check_frozen, config_event_content
@@ -284,6 +285,9 @@ def run_cli(a: argparse.Namespace, scopes, grading, other_scopes, *, make_env=No
     rows = [row for r in reps for row in r.coverage_rows]
     (rdir / "coverage_rows.json").write_text(json.dumps(rows, indent=1))
     out = {"coverage_rows": len(rows)}
+    if a.dev_coverage:                            # D-0030 condition 3: link rates beside the tau rows, and in run.json
+        out["contradiction_links"] = record["contradiction_links"] = write_link_rows(rdir, [x for r in reps
+                                                                                           for x in r.link_rows])
     if not a.dev_coverage:
         (rdir / "trials.json").write_text(json.dumps([t for r in reps for t in r.trials], indent=1))
         out = build_results(reps, aborted=False, audit=audit)

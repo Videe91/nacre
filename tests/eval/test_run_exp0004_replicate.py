@@ -39,6 +39,7 @@ def test_a_live_replicate_then_its_recorded_replay(pg_dsn, test_role_password, t
                    "non_authoritative_item"):
         assert f[metric] == 0, metric
     assert live.prompts_identical and live.sleep["promoted"] > 0 and live.sleep["erased_persons"] == 2
+    assert live.link_rows == []                                         # dev coverage mode only (D-0030 condition 3)
     assert live.fixtures == sum(1 for p in (tmp_path / "fixtures" / "rep1").glob("*.jsonl")
                                 for _ in p.read_text().splitlines())
     rows = {(t["task_id"], t["arm"]): t for t in live.trials}
@@ -78,6 +79,10 @@ def test_dev_coverage_mode_writes_rows_and_calls_no_transfer(pg_dsn, test_role_p
         assert row["coverage"] in ("strong", "weak", "none")
         assert row["top_semantic"] is None or isinstance(row["top_semantic"], int)
     assert res.frames["replay_mismatch"] == 0 and res.frames["untraced_frame"] == 0
+    assert [(r["rep"], r["scope_id"], r["true_conflicts"]) for r in res.link_rows] == [(1, "x-s1-01", 2),
+                                                                                        (1, "x-s1-02", 2)]
+    assert sum(r["pairs_judged"] for r in res.link_rows) == res.sleep["judge_pairs"] > 0
+    assert res.sleep["judge_calls"] == fake.calls.count("sleep.judge_relations") > 0
 
 
 def test_fixture_paths_are_per_replicate_scope_and_part(tmp_path):
