@@ -1496,3 +1496,45 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
       (test_rotation_finality ×2).
   - **pytest, rerun of those 2 files** with the venv linked and COMPOSE_PROJECT_NAME=nacre: 25 passed.
   - **Not rerun:** the full suite in one pass.
+- 2026-10-02 — **R25/R26 EXP-0004 runner and naive arm built (10 files, 82 tests); developed on the dev split only.**
+  - **Sealing:** the test split's content was never displayed; only its sha256 was checked against the pin and the
+    structure checker run.
+  - **Built:**
+    - arms C/V/N; k = 3 fresh databases; no reruns;
+    - the $15 cap, failing closed;
+    - the Bar constants, tested against the doc;
+    - grading refs never reach an arm;
+    - safety metrics 2–6, plus replay of every frame;
+    - the audit;
+    - recorded replay with the network blocked, which reproduces the grades;
+    - a dev coverage mode that reports rows and does not choose τ.
+  - **BLOCKER for the live run (owner decision + a sleep/ change):** every one of the 2,149 dev outcomes is
+    `outcome_for` the ACTION, and `sleep/build_evidence_bundle.py` refuses outcomes for actions. So N would learn
+    nothing (a sleep pass gave episodes=0). The harness does not remap the data.
+  - **Also outside the harness:**
+    - (a) **T3 changing facts:** the sleep pass does not yet turn later corrections into contradiction or
+      supersession. Stale-fact errors are therefore expected, and safety metric 4 is not really exercised.
+    - (b) **Event addresses:** capture does not accept `addresses[]`, so every dev event's address is dropped (the
+      count is reported).
+    - (c) **Recall budget:** the frame caps item text at 4,000 characters; the doc says 4,000 rendered characters.
+  - **OWNER CHOICES the doc leaves open (drafted, not decided):**
+    - (1) **Instrument wording and order:** draft is memory → task → base instruction → JSON request. Live mode
+      refuses until `INSTRUMENT_APPROVED` is set.
+    - (2) **Decoding:** draft is temperature 0, max 400 tokens, strict JSON schema; the alternative is provider
+      defaults, as in EXP-0003.
+    - (3) **Invalid JSON:** draft is "never a success", with the safety regexes still run on the raw text.
+    - (4) **Correct ask:** the strict reading (ask = true and answer empty); the loose count is reported.
+    - (5) **V's text format:** joined text fields, numbered lines, no labels.
+    - (6) **Cap enforcement:** reserve each call's worst-case cost before the call.
+    - (7) **Erasure timing:** after all histories, before tasks, grace simulated, requester = org admin.
+    - (8) **Capture:** direct, as the dataset author, written `asserted`.
+    - (9) **N's recall request:** scope level `project`; query = prompt; addresses = the task's.
+    - (10)–(18): the C anchor, cold latency, dev coverage mode, audit readings, trace and replay checks,
+      fixtures exported before erasure, dry-run cost as an upper bound only, Python `re`, serial run length (about
+      10k sleep calls per replicate).
+  - **Gate for this commit:** full suite 1551 passed, 0 failed, 57 deselected (pytest exit 0); check_structure exit 0.
+  - **Pre-commit hook blocked a duplicated test-role password literal** in tests/eval/exp0004_kit.py. Fixed by
+    restructuring, with no allowlist: a `test_role_password` fixture in tests/conftest.py, passed into the kit. Gate
+    re-run after the fix: 1551 passed (exit 0), check_structure exit 0.
+  - **Open:** one setup error, `tuple concurrently updated` (concurrent ALTER ROLE across pytest processes at load
+    ~53; the known concurrent-migration limitation). It did not recur in 4 runs. To hunt.

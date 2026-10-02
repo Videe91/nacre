@@ -74,6 +74,12 @@ _seq = count(1)
 
 
 @pytest.fixture
+def test_role_password() -> str:
+    """The test-only role password, for helpers that build their own databases (never import it from conftest)."""
+    return TEST_ROLE_PASSWORD
+
+
+@pytest.fixture
 def provider(tmp_path):
     return LocalFileRootKeyProvider.initialise(tmp_path / "rootkeys")
 
