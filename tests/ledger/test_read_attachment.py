@@ -1,11 +1,13 @@
 """Tests for store_attachment + read_attachment + append_event attachments (D-0013, owner additions)."""
 import hashlib
+import io
 import random
 import string
 import uuid
 
 import psycopg
 import pytest
+from PIL import Image
 
 from nacre.core.event import ActorKind, EventType, PayloadType, Source
 from nacre.keys.decrypt_payload import Shredded
@@ -16,7 +18,15 @@ from nacre.ledger.read_stream import read_stream
 from nacre.ledger.store_attachment import MAX_ATTACHMENT_BYTES, AttachmentError, store_attachment
 
 rng = random.Random(15)
-PNG = b"\x89PNG\r\n\x1a\n" + bytes(range(256)) * 4
+
+def _png():
+    """A real, clean PNG: binaries must pass the D-0027 scan, so a fake PNG header would now be unscannable."""
+    out = io.BytesIO()
+    Image.new("RGB", (64, 64), (200, 220, 240)).save(out, "PNG")
+    return out.getvalue()
+
+
+PNG = _png()
 
 
 def _gh():
@@ -49,7 +59,7 @@ def test_round_trip_and_body_metadata(rw, provider, streams, blobs):
         assert read_attachment(s, provider, blobs, env) == PNG
         (e,) = read_stream(s, provider, streams["a"])
     assert e.body["attachment"] == {"media_type": "image/png", "description": "screenshot of the failing page",
-                                    "scan": "unscanned"}
+                                    "scan": "binary-scanned"}
     assert env.attachment_sha256 == hashlib.sha256(blobs.get(env.attachment_ref)).digest()
     assert PNG not in blobs.get(env.attachment_ref)
 
@@ -165,9 +175,10 @@ def test_text_is_detected_by_content_not_by_declared_media_type(rw, provider, st
     assert token.encode() not in stored and e.body["attachment"]["scan"] == "text-scanned"
 
 
-def test_binary_labelled_as_text_is_stored_unscanned(rw, provider, streams, blobs):
+def test_binary_labelled_as_text_is_scanned_as_binary(rw, provider, streams, blobs):
+    # D-0027 test 5: a binary declared as text/plain is still decided by content (scanned as binary, not stripped).
     with rw() as s:
         r = append_event(s, provider, req(streams["a"], attachment_media_type="text/plain"), blob_store=blobs)
         (e,) = read_stream(s, provider, streams["a"])
         assert read_attachment(s, provider, blobs, r.envelope) == PNG
-    assert e.body["attachment"]["scan"] == "unscanned"
+    assert e.body["attachment"]["scan"] == "binary-scanned"

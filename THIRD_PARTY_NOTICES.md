@@ -20,3 +20,11 @@
 ## Secret-corpus negatives (test data)
 CPython standard-library files (PSF licence) and permissively licensed third-party package files. Each set's
 `MANIFEST.json` and `LICENSES/` folder give per-file origin and licence.
+
+## RapidOCR and the PP-OCR models (binary attachment scanning, D-0027)
+- **Library:** `rapidocr==3.9.2` (Apache-2.0).
+- **Models:** the PP-OCRv6 detection (small), PP-OCRv6 recognition (small) and cls mobile v2.0 ONNX models that
+  ship inside the rapidocr wheel (PaddleOCR, Apache-2.0).
+- **Pinned:** their sha256s are pinned in `src/nacre/ledger/ocr_image_text.py`; loading is refused on a mismatch,
+  and nothing is downloaded at runtime.
+

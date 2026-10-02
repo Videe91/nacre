@@ -1,4 +1,5 @@
 """Tests for ledger/collect_orphan_blobs.py (D-0015 with owner amendments, A-0022)."""
+import io
 import os
 import threading
 import time
@@ -7,6 +8,7 @@ from datetime import timedelta
 
 import psycopg
 import pytest
+from PIL import Image
 
 from nacre.core.event import ActorKind, EventType, PayloadType, Source
 from nacre.ledger.append_event import AppendRequest, append_event
@@ -14,7 +16,15 @@ from nacre.ledger.collect_orphan_blobs import CollectionError, collect_orphan_bl
 from nacre.ledger.local_disk_blob_store import LocalDiskBlobStore
 from nacre.ledger.read_attachment import read_attachment
 
-PNG = b"\x89PNG\r\n\x1a\n" + bytes(range(256)) * 4
+
+def _png():
+    """A real, clean PNG: binaries must pass the D-0027 scan, so a fake PNG header would now be unscannable."""
+    out = io.BytesIO()
+    Image.new("RGB", (64, 64), (200, 220, 240)).save(out, "PNG")
+    return out.getvalue()
+
+
+PNG = _png()
 DAY = 24 * 3600
 
 
@@ -51,7 +61,7 @@ def orphan(rw, provider, streams, blobs, data=PNG):
     """A blob whose append rolled back. The data key is created first in a committed append, as in real use;
     otherwise the rollback would also drop the key and the orphan could never be deduplicated onto."""
     with rw() as s:
-        append_event(s, provider, req(streams["a"], b"prime the key " + os.urandom(8)), blob_store=blobs)
+        append_event(s, provider, req(streams["a"], b"prime the key " + os.urandom(8).hex().encode()), blob_store=blobs)
     with pytest.raises(RuntimeError):
         with rw() as s:
             ref = append_event(s, provider, req(streams["a"], data), blob_store=blobs).envelope.attachment_ref

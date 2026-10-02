@@ -3,9 +3,10 @@ Functionality: Append one event to its stream's ledger, end to end.
 Owns: (via ledger/validate_append.py: request validation and trust) secret stripping of the body,
   idempotent retries (principal-bound request MAC), subject and key-month choice, sequencing under the
   stream lock, encryption, sealing and the insert.
-Public entry: append_event(), AppendResult (AppendRequest, Authorship, AppendError re-exported from validate_append)
-Decisions: D-0002, D-0003, D-0004, D-0005, D-0007, D-0008, D-0012, D-0013, D-0023
-Assumptions: A-0007, A-0009, A-0010, A-0014, A-0021
+Public entry: append_event(), AppendResult, AttachmentRejected (AppendRequest, Authorship, AppendError re-exported
+  from validate_append)
+Decisions: D-0002, D-0003, D-0004, D-0005, D-0007, D-0008, D-0012, D-0013, D-0023, D-0027
+Assumptions: A-0007, A-0009, A-0010, A-0014, A-0021, A-0041
 Notes: Runs inside a scoped session (scopes/open_scoped_session.py); RLS admits only the principal's
   streams, and the transaction commits or rolls back with the session.
   Order (D-0003 for the locked part):
@@ -25,8 +26,10 @@ Notes: Runs inside a scoped session (scopes/open_scoped_session.py); RLS admits 
   - person is not stripped (it is identity, encrypted anyway); source_ref is stripped.
   - Attachments (D-0013): stored BEFORE the lock, and so before the event commits. Text vs binary is decided by
     CONTENT (valid UTF-8, >= 95% printable), never by the declared media type (owner), so relabelling cannot
-    bypass stripping. Text is secret-stripped and marked scan="text-scanned"; binary is stored as given and
-    marked scan="unscanned" (A-0021; Phase 3 gate: extract and scan). Metadata goes in the encrypted body.
+    bypass stripping. Text is secret-stripped and marked scan="text-scanned". Binary (D-0027) is scanned by
+    ledger/scan_binary_attachment.py BEFORE store_attachment encrypts it: a secret or an unscannable file raises
+    AttachmentRejected (no opt-out, owner); a clean file is stored as given, marked scan="binary-scanned".
+    "unscanned" is no longer written. Metadata goes in the encrypted body.
 """
 import hmac
 from dataclasses import dataclass, field, fields
@@ -45,6 +48,7 @@ from nacre.keys.encrypt_payload import MacPurpose, derive_mac, encrypt_payload
 from nacre.keys.derive_contributor_key import Contributor, ContributorError, contributors_of, derived_key
 from nacre.keys.get_or_create_key import get_or_create_key, load_key
 from nacre.ledger.seal_event import GENESIS_PREV_HASH, seal_event
+from nacre.ledger.scan_binary_attachment import Clean, rejection_message, scan_binary_attachment
 from nacre.ledger.store_attachment import store_attachment
 from nacre.ledger.validate_append import AppendError, AppendRequest, Authorship, validate_append  # noqa: F401 (re-exported)
 from nacre.ledger.strip_secrets import strip_secrets
@@ -59,6 +63,10 @@ class AppendResult:
     created: bool                                   # False: an idempotent retry returned the original
     redactions: tuple[str, ...] = field(default=())
     public_credentials: tuple[str, ...] = field(default=())
+
+
+class AttachmentRejected(AppendError):
+    """D-0027: the binary attachment holds a secret, or cannot be scanned. The message never holds the value."""
 
 
 class IdempotencyConflict(AppendError):
@@ -89,6 +97,14 @@ def append_event(session: ScopedSession, provider: RootKeyProvider, request: App
         request.actor_id if request.actor_kind == ActorKind.PERSON else stream)
     month = date(recorded_at.year, recorded_at.month, 1)
     body, redactions, public = _body(request)
+    if request.attachment is not None:
+        if blob_store is None:
+            raise AppendError("an attachment needs a blob store")
+        # Stripped or scanned before any key is created or locked: OCR can take seconds (D-0027).
+        data, attachment_redactions, body["attachment"]["scan"] = _strip_attachment(request)
+        redactions = redactions + attachment_redactions
+        if attachment_redactions:
+            body["redactions"] = list(redactions)
     if request.sources:
         own = Contributor(subject, month, subject != stream)
         try:
@@ -100,13 +116,6 @@ def append_event(session: ScopedSession, provider: RootKeyProvider, request: App
         key = get_or_create_key(conn, provider, stream, subject, month)
     attachment_ref = attachment_sha256 = None
     if request.attachment is not None:
-        if blob_store is None:
-            raise AppendError("an attachment needs a blob store")
-        data, attachment_redactions, scanned = _strip_attachment(request)
-        body["attachment"]["scan"] = "text-scanned" if scanned else "unscanned"
-        redactions = redactions + attachment_redactions
-        if attachment_redactions:
-            body["redactions"] = list(redactions)
         attachment_ref, attachment_sha256 = store_attachment(conn, key, blob_store, data)   # before commit (D-0013)
 
     conn.execute("SELECT pg_advisory_xact_lock(ledger.stream_lock_key(%s))", (stream,))
@@ -193,17 +202,22 @@ def _body(r: AppendRequest):
     return body, tuple(redactions), tuple(sorted(public))
 
 
-def _strip_attachment(r: AppendRequest) -> tuple[bytes, tuple[str, ...], bool]:
-    """(stored bytes, redactions, scanned). Text = valid, mostly printable UTF-8, whatever the declared type."""
+def _strip_attachment(r: AppendRequest) -> tuple[bytes, tuple[str, ...], str]:
+    """(stored bytes, redactions, scan marker). Text = valid, mostly printable UTF-8, whatever the declared type;
+    anything else is binary and must pass the D-0027 scan."""
     try:
         text = r.attachment.decode("utf-8")
+        printable = sum(c.isprintable() or c in "\n\r\t" for c in text)
+        is_text = not text or printable / len(text) >= _PRINTABLE_SHARE
     except UnicodeDecodeError:
-        return r.attachment, (), False
-    printable = sum(c.isprintable() or c in "\n\r\t" for c in text)
-    if text and printable / len(text) < _PRINTABLE_SHARE:
-        return r.attachment, (), False
+        is_text = False
+    if not is_text:
+        verdict = scan_binary_attachment(r.attachment, r.attachment_media_type)
+        if not isinstance(verdict, Clean):
+            raise AttachmentRejected(rejection_message(verdict))
+        return r.attachment, (), "binary-scanned"
     result = strip_secrets(text)
-    return result.text.encode("utf-8"), result.redactions, True
+    return result.text.encode("utf-8"), result.redactions, "text-scanned"
 
 
 _ENUMS = {"event_type": EventType, "payload_type": PayloadType, "actor_kind": ActorKind, "source": Source,

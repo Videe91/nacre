@@ -1288,3 +1288,26 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
     - **Replay:** erased items replay as shredded.
   - **Amendment 3:** the budget reading is confirmed.
   - **Next:** R18–R20; in parallel, the interface work, binary scanning and EXP-0004 preparation.
+- 2026-10-02 — **R18–R20 built (D-0025 amendment 2).**
+  - **The trace:** one event in the issuing stream with no recalled content: the query under the requester's key,
+    per-item refs and content MACs (`TRACE_MAC` under each item's own key), the frame hash, and the config (τ,
+    budget, embedder).
+  - **`recall_context`** commits the trace before returning the frame.
+  - **`replay_frame`:** every item is verified before erasure; after erasing one item's contributor, that item is
+    `shredded` and the others still verify; the frame hash is compared only when nothing is shredded.
+  - **Every kind pair** passes end to end through `recall_context`.
+  - **Pending:** gate item 7, latency evidence on the production pooled setup.
+- 2026-10-02 — **R5 binary attachment scanning built** (by a separate build session, blind to I1).
+  - **Files:** `scan_binary_attachment.py` + `extract_binary_text.py` + `ocr_image_text.py` (RapidOCR, pinned
+    offline models).
+  - **Behaviour:** called from `append_event` before any key is created; secret or unscannable → reject; clean →
+    `binary-scanned`.
+  - **Tests:** 37; mutation run 20/20 killed. OCR latency 0.2–1.5 s per screenshot, 4.6 s for a 1000×4000 image.
+  - **Owner decisions needed:**
+    - (1) Pillow as a RUNTIME dependency (D-0006 amendment 3, proposed), plus RapidOCR's transitive dependencies;
+    - (2) a D-0008 body key for extractor versions (not persisted yet);
+    - (3) tiny tar.gz files (< ~100 B) always exceed the 100× ratio and are rejected: allow a minimum size?
+    - (4) D1 extra OCR limits (25 MP, 16 frames, 64 images per attachment) are noted for review.
+  - **Deviation:** integrated in `append_event`, not `store_attachment`.
+  - **A-0021:** resolved for scanned formats.
+  - **I1** (gate item 11) can now be measured once; awaiting the owner's go.
