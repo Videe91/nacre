@@ -1261,3 +1261,12 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   - **Scope levels** are ranked narrowest first.
   - `read_heads` is unchanged (a test asserts it still withholds contested heads).
   - **Still to come:** ranking below uncontested (R15) and never-as-fact rendering (R16/R21).
+- 2026-10-02 — **R14–R17 built.**
+  - **R14 identity narrowing:** D1 placement of file (with code) and entity (after code) in the relaxation order.
+  - **R15 ranking:** contested always below uncontested.
+  - **R16 frame assembly:** contested items labelled, with their contradicting evidence; a deterministic CBOR
+    frame; the query text never in the frame.
+  - **R17 coverage:** a contested top item is never strong.
+  - **D1 reading to confirm (owner):** D-0025 §5 "pinned whatever the budget" vs the EXP-0004 budget fixed at
+    10 items / 4,000 chars. Implemented as: contested items are pinned against relevance PRUNING but count against
+    the budget and fill last, so a tight budget can drop them.
