@@ -28,12 +28,18 @@ def emb(monkeypatch):
     (["--dry-run"], "--tau is required"),
     (["--dry-run", "--dev-coverage", "--split", "test"], "--dev-coverage runs on --split dev only"),
     (["--dry-run", "--dev-coverage", "--split", "dev", "--tau", "5000"], "takes no --tau"),
-    (["--live", "--tau", "5000"], "DRAFT"),
 ])
 def test_the_command_line_guards(argv, message, monkeypatch):
     monkeypatch.setenv("OPENAI_API_KEY", "set-but-never-read")
     with pytest.raises(SystemExit, match=message):
         R.parse_args(argv)
+
+
+def test_live_refuses_an_unapproved_instrument(monkeypatch):
+    monkeypatch.setattr(R, "INSTRUMENT_APPROVED", False)          # the guard stays, should the text ever change
+    monkeypatch.setenv("OPENAI_API_KEY", "set-but-never-read")
+    with pytest.raises(SystemExit, match="DRAFT"):
+        R.parse_args(["--live", "--tau", "5000"])
 
 
 def test_live_also_needs_the_key_in_the_environment(monkeypatch):

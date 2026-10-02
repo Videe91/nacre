@@ -5,6 +5,15 @@
 - **Date:** 2026-10-01
 - **Relies on assumptions:** A-0025
 
+## Amendment 1 (owner, 2026-10-02): an optional `frame_id` on model-call records
+- **The field:** a model call may carry an optional `frame_id` (the sha256 of the ContextFrame its memory section
+  was rendered from, D-0025). It is recorded in the call's `result` event and is part of the recorded request
+  identity.
+- **Absent means absent:** a call without a frame records nothing. Records written before this amendment decode
+  unchanged.
+- **Why:** D-0028 §3 requires the OpenAI and Anthropic calls of one recall to name the same `frame_id`, and no
+  carrier existed.
+
 ## Context
 The owner requires recorded model responses **stored as ledger events** for everyday tests, and live repeated runs
 for the gate.

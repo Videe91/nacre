@@ -5,6 +5,15 @@
 - **Date:** 2026-10-01
 - **Relies on assumptions:** A-0003, A-0026, A-0027, A-0029 (A-0023 superseded)
 
+## Amendment 1 (owner, 2026-10-02): outcomes recorded against an action
+- **The rule:** an outcome whose `outcome_for` is an **action** is resolved to its decision through the action's
+  recorded backward link (the action event's `decision_id`, D-0018). The episode is then built as for an outcome
+  recorded against the decision.
+- **No link, no episode:** an action with no readable decision link is not consolidated. It is counted in the
+  sleep report and never inferred (not from timing, text or neighbours).
+- **Why:** the frozen EXP-0004 set records every outcome against its action, so without this the Nacre arm learns
+  nothing (found while building R25).
+
 ## Context
 SPEC defines the sleep pass as an offline job, per scope, only where flagged events exist. It proposes lessons with
 evidence-disciplined consolidation, grounds every claim in exact spans behind an authoritative-role gate with atomic

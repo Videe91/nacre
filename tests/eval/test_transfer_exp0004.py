@@ -30,7 +30,10 @@ def test_one_pinned_model_and_explicit_decoding_parameters():
     assert T.TRANSFER_MODEL == ("openai", "gpt-4o-mini-2024-07-18") and "`gpt-4o-mini-2024-07-18`" in DOC
     assert T.TRANSFER_PARAMS.temperature == 0.0 and T.TRANSFER_PARAMS.max_tokens == 400
     assert T.TRANSFER_PARAMS.response_format == T.REPLY_SCHEMA
-    assert T.INSTRUMENT_APPROVED is False                 # a draft until the owner approves the wording
+    # approved by the owner (2026-10-02) on exactly these criteria, recorded in the pre-registration with the hash
+    assert T.INSTRUMENT_APPROVED is True
+    assert T.instrument_sha256() == T.INSTRUMENT_SHA256 and T.INSTRUMENT_SHA256 in DOC
+    assert "Fixed before the run (owner, 2026-10-02)" in DOC
 
 
 def test_assembly_is_marker_safe_and_differs_only_in_the_memory_section():

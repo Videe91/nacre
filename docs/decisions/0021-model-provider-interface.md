@@ -15,6 +15,14 @@
 Cost is computed from a dated, versioned price table kept in the repo with its source. **Fail closed:** a model with
 no price entry cannot be called.
 
+## Amendment 2 (owner, 2026-10-02): billed failures are costed, and the cap is enforced on that cost
+- **Refused and truncated calls:** a call the provider bills records its cost from the provider's reported usage,
+  even when the adapter raises a non-retryable error for it.
+- **Usage unavailable:** when usage is missing, the call records the worst case, `max_tokens × the output price`
+  plus the input tokens sent × the input price, and labels it `worst_case`.
+- **Budget caps** (for example EXP-0004's $15) are enforced on these recorded costs.
+- **Fixed before any live run.** Found while building R24: billed failures were recorded at $0.
+
 ## Context
 Phase 2 is the first phase that calls models (the sleep pass). SPEC requires model independence: any model
 reasons, and memory never depends on one.

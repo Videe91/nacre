@@ -10,10 +10,10 @@ Assumptions: A-0025
 Notes: EVALUATION HARNESS ONLY (EXP-0004 "Arms"). Fixed by the pre-registration: one model for every seat and arm
   (gpt-4o-mini-2024-07-18); a fixed prompt with a memory section and the task; the reply {"answer": string|null,
   "ask": boolean}; BASE_INSTRUCTION verbatim; the text frozen by sha256 before the run; C's memory section "(none)".
-  - DRAFT, NOT OWNER-APPROVED (INSTRUMENT_APPROVED = False): the rest of the prompt wording, the order (memory, then
-    task), TRANSFER_PARAMS (temperature 0, max 400 output tokens, strict JSON-schema output, as the sleep seats) and the
-    parser's strictness are open in the EXP-0004 text. The runner refuses a live run until the owner approves them and
-    flips the flag; the sha256 then freezes exactly what was approved.
+  - APPROVED (owner, 2026-10-02; EXP-0004 "Fixed before the run"): the owner approved the instrument on three
+    criteria, verified here: identical across arms except the memory section; temperature 0, max 400 output tokens
+    and a dated pin; the text pinned by INSTRUMENT_SHA256 before the run. Any change to the text breaks the pin test
+    and needs a new approval.
   - Assembly splits the template on its two markers, so memory text containing a marker or braces cannot alter the
     rest of the prompt; everything except the memory section is byte-identical across arms (audited).
   - Parser: strict JSON object with exactly the keys answer (string or null) and ask (boolean). Anything else is
@@ -45,7 +45,7 @@ INSTRUMENT_TEMPLATE = (
     'Reply with a JSON object only: {"answer": string or null, "ask": true or false}. '
     'Put your answer to the task in "answer"; if you ask instead, set "answer" to null.')
 INSTRUMENT_SHA256 = "ebbcaf3ca1e4992202f7b7ee7105c398a43c7d7c9a3c20578517f0c859f4529b"
-INSTRUMENT_APPROVED = False
+INSTRUMENT_APPROVED = True
 TRANSFER_MODEL = ("openai", "gpt-4o-mini-2024-07-18")
 REPLY_SCHEMA = {"type": "json_schema", "name": "transfer_reply", "strict": True,
                 "schema": {"type": "object", "additionalProperties": False, "required": ["answer", "ask"],

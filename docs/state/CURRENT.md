@@ -1546,3 +1546,87 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   - Both runs: working tree verified unchanged.
   - **Found by the guard:** the SDK stdio test launched its server child without `-B`, so the child wrote bytecode
     into the mutation worktree and run_mutants refused (correctly). The child now runs with `-B`.
+- 2026-10-02 — **Owner decisions (EXP-0004 path and others).**
+  - **Sleep: option (a)** (D-0020 amendment 1). An outcome recorded against an action is resolved to its decision
+    through the action's recorded `decision_id`. An action with no link is not consolidated, is counted in the
+    report, and the link is never inferred. TO BUILD.
+  - **Transfer instrument and decoding: APPROVED on the owner's three criteria**, verified and recorded in
+    EXP-0004 "Fixed before the run". `INSTRUMENT_APPROVED = True`; a test pins the doc section and the hash.
+  - **Open runner choices:** defaults identical across arms, fixed and documented in EXP-0004. Escalated: only
+    choices that affect one arm differently or touch the bar (below).
+  - **τ:** maximum balanced accuracy of strong vs answerable, on the dev split only; recorded as a config_event and
+    frozen before the test run. TO BUILD (selection and recording).
+  - **Budget** (D-0021 amendment 2): billed refused and truncated calls are costed from usage; worst case when usage
+    is missing; caps are enforced on that cost. TO BUILD BEFORE ANY LIVE RUN.
+  - **`frame_id`:** an optional field on model-call records (D-0022 amendment 1). TO BUILD.
+  - **Redaction NOT adopted; over-limit GIFs stay rejected,** with the rate reported (D-0027 amendment 5).
+  - **D-0026 amendment 3:** to be brought as one batch with recommendations (not blocking).
+  - **Flaky issues:** hunt both as planned.
+- **ESCALATED to the owner (EXP-0004; each affects one arm differently or touches the bar). THE LIVE RUN WAITS:**
+  - **(E1) T3 contradiction formation (touches the stale-fact ceiling).**
+    - **The gap:** the sleep pass never turns a later authoritative correction into a contradiction of an existing
+      belief. D-0020 builds only `correction_of` → belief-version contradictions, and defers automatic detection
+      until ContextAssembled exists. EXP-0004's histories are pre-generated, so their decisions carry no
+      ContextAssembled link. v1 and v2 would both stay active, and the stale ceiling (≤ 13/270) would likely fail
+      with no rerun.
+    - **Options:**
+      - (a) A proposed ADR (D2) for automatic detection: when a newly admitted lesson and an active belief share
+        their identity addresses and their normalised subject but disagree, propose a contradiction pinned to that
+        head; then the D-0017 quorum contest and supersede path applies as it is. Design first, then build.
+      - (b) Run without it and accept the stale risk.
+    - **Recommendation:** (a).
+  - **(E2) Rendered-character budget (N arm).** EXP-0004 says 4,000 *rendered* characters, but `assemble_frame`
+    caps item text at 4,000.
+    - **Options:** (a) make the frame budget count rendered characters (a D-0025 change: the renderer's per-item
+      overhead is deterministic); (b) keep it and document the deviation.
+    - **Recommendation:** (a), so the arm matches the pre-registration.
+  - **(E3) V's text format (V only).**
+    - **Draft:** each event's text fields joined by a space, numbered lines, no role, source or trust labels,
+      corrections included, no character cap.
+    - **Alternatives:** labelled sections, or one item per section.
+    - **Recommendation:** the draft. It matches "every captured event's text … pasted in rank order" most literally.
+  - **(E4) N's recall request (N only).**
+    - **Draft:** scope level `project`, query = the task prompt, addresses = the task's addresses (as the set's "as
+      a real agent would send").
+    - **Recommendation:** the draft.
+  - **Also needed for N, already decided:** `addresses[]` on capture (D-0025 owner decision 2; a D-0018
+    amendment). It is approved but not built, so every set address is dropped today. TO BUILD.
+- 2026-10-02 — **Gate item 7 (recall latency): NOT MEASURED.** Evidence:
+  `docs/assumptions/evidence/D-0025-recall-latency-2026-10-02.md`. Benchmark: `scripts/bench_recall_latency.py` and
+  `tests/recall/test_recall_latency.py` (bench; a missing pool fails, never skips).
+  - **(F1) The write path is O(N²) per stream.**
+    - **Why:** each new lesson decrypts the whole stream three times (`propose_lesson` read_stream;
+      `promote_if_supported` read_stream plus read_version_events). Every decrypt reloads the root-key file and
+      unwraps the master key, with no cache (about 55% of the profile).
+    - **Measured:** one round of 100 lessons takes about 0.11–0.12 s × the pool size.
+    - **Projected:** 10k ≈ 16 h, 100k ≈ 67 days. This is a product scaling defect, not only a benchmark problem.
+    - **OWNER DECISION:**
+      - (a) an ADR to fix the whole-stream reads and key reloads in the write path (recommended; it limits
+        production too);
+      - (b) an approved bulk-seeding method for benchmarks only;
+      - (c) run the 16 h build on a quiet machine.
+  - **(F2) PRODUCT RACE: a cross-stream deadlock.** Two transactions that each append to more than one stream
+    deadlock on the advisory stream lock plus the `keys.data_keys` insert (Postgres log 12:48 UTC). Under the
+    flaky/race rule: fix the code (a consistent lock order) plus a deterministic interleaving test. TO DO.
+  - **(F3) Test-infra race:** the `nacre_app` password is per cluster. Tests and benches each set their own, so
+    running both at once breaks new connections; it killed the 3k build. It may also explain the
+    `tuple concurrently updated` error seen earlier. Rule for now: never run tests and benches concurrently. TO HUNT
+    with the flaky issues.
+  - **Labelled trial (NOT evidence; 600 entries, load 7–8):**
+    - warm end to end p95 136 ms; warm read side p95 103 ms (target ≤ 50 ms at 10k); cold p95 555 ms;
+    - the read side already misses at 600, with about 110 SQL round trips per recall, ranking re-tokenising every
+      candidate, and assemble_frame reading the whole stream once per item;
+    - if a quiet 10k run confirms this, D-0025 §9's remedy order applies (inverted index, then group commit, then
+      Rust). No remedy is implemented.
+  - **Cached bench pools:** databases `nacre_bench_recall_{600,1000,3000}` (3000 stopped at 2,800), keys under
+    `~/.cache/nacre/bench_recall/`.
+- 2026-10-02 — **Gate for the decisions commit.**
+  - **First run:** 1 failure. A guard test assumed the draft instrument; it now sets the flag explicitly.
+  - **Pre-commit hook:** it then blocked two credential literals in `scripts/bench_recall_latency.py` (the dev
+    admin DSN default and a bench-only app password). Fixed by restructuring, with no allowlist:
+    - the admin DSN is required from NACRE_TEST_DSN (the bench test passes `pg_dsn`);
+    - the app password is random per invocation, handed to child processes through the environment, and set via
+      ALTER ROLE at each start;
+    - the smoke run on the 600 pool passed, including the cold child process.
+  - **Final gate:** see the next line.
+  - **Final gate:** 1551 passed, 60 deselected in 431.53s (0:07:11) (pytest exit 0); check_structure exit 0.

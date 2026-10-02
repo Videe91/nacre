@@ -25,7 +25,13 @@
      of truth**. The pre-commit hook accepts only those exact bytes there.
    - Regeneration is checked only on the pinned platform.
 
-## Amendment 4 (PROPOSED 2026-10-02, D3): redact instead of reject. MEASURED; RECOMMENDATION: DO NOT ADOPT
+## Amendment 5 (owner, 2026-10-02)
+- **Amendment 4 (redaction): NOT ADOPTED.** Rejection stays: 79.3% of gated secrets fully covered vs 88.1% kept out of storage.
+- **GIFs over the 16 unique-frame limit stay rejected as unscannable.** The rejection rate is reported: in the
+  2026-10-02 survey, 33 of 35 animated GIFs (164 unique GIFs) exceeded the limit both before and after
+  de-duplication.
+
+## Amendment 4 (REJECTED by owner 2026-10-02, see amendment 5): redact instead of reject. MEASURED; RECOMMENDATION WAS: DO NOT ADOPT
 **The owner's proposal:** for detected secrets, paint over the OCR region with a generous margin (the whole text
 line) and store the redacted image.
 
