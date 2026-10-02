@@ -27,7 +27,7 @@ def record_prediction(session: ScopedSession, key_provider: RootKeyProvider, *, 
                       actor_id: UUID, source: Source, authorship: Authorship, idempotency_key: str, decision_id: UUID,
                       expected_outcome: str, expected_success: bool | None, predictor: str = "agent",
                       confidence_pct: int | None = None, expected_failing_check: str | None = None,
-                      cycle_id: UUID | None = None, task_id: UUID | None = None, mode: Mode | None = None) -> AppendResult:
+                      cycle_id: UUID | None = None, task_id: UUID | None = None, mode: Mode | None = None, verified=None) -> AppendResult:
     """Append one `prediction` event that responds to `decision_id`."""
     if not isinstance(expected_outcome, str) or not expected_outcome.strip():
         raise CaptureError("expected_outcome must be non-empty text")
@@ -45,7 +45,7 @@ def record_prediction(session: ScopedSession, key_provider: RootKeyProvider, *, 
         raise CaptureError("a prediction responds to a decision")
     body = {"expected_outcome": expected_outcome, "expected_success": expected_success, "predictor": predictor,
             "confidence_pct": confidence_pct, "expected_failing_check": expected_failing_check, "refs": refs}
-    return append_event(session, key_provider, AppendRequest(
+    return append_event(session, key_provider, verified=verified, request=AppendRequest(
         stream_id=stream_id, event_type=EventType.PREDICTION, payload_type=PayloadType.STRUCTURED, actor_kind=actor_kind,
         actor_id=actor_id, source=source, authorship=authorship, idempotency_key=idempotency_key, content=body,
         caused_by=decision_id, cycle_id=cycle_id, task_id=task_id, mode=mode))

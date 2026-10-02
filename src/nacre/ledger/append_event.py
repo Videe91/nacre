@@ -5,7 +5,7 @@ Owns: (via ledger/validate_append.py: request validation and trust) secret strip
   stream lock, encryption, sealing and the insert.
 Public entry: append_event(), AppendResult, AttachmentRejected (AppendRequest, Authorship, AppendError re-exported
   from validate_append)
-Decisions: D-0002, D-0003, D-0004, D-0005, D-0007, D-0008, D-0012, D-0013, D-0023, D-0027
+Decisions: D-0002, D-0003, D-0004, D-0005, D-0007, D-0008, D-0012, D-0013, D-0023, D-0026, D-0027
 Assumptions: A-0007, A-0009, A-0010, A-0014, A-0021, A-0041
 Notes: Runs inside a scoped session (scopes/open_scoped_session.py); RLS admits only the principal's
   streams, and the transaction commits or rolls back with the session.
@@ -44,6 +44,7 @@ from nacre.core.encode_cbor import encode_cbor
 from nacre.core.event import (ENVELOPE_VERSION, ActorKind, Envelope, EventType, Mode, PayloadType, Source,
                               TimeBasis, TimePrecision, Trust, TrustBasis, new_event_id)
 from nacre.core.blob_store import BlobStore
+from nacre.core.verified_claims import VerifiedClaims, authority_sections
 from nacre.core.root_key_provider import RootKeyProvider
 from nacre.keys.encrypt_payload import MacPurpose, derive_mac, encrypt_payload
 from nacre.keys.derive_contributor_key import Contributor, ContributorError, contributors_of, derived_key
@@ -79,10 +80,13 @@ class OriginalErased(IdempotencyConflict):
 
 
 def append_event(session: ScopedSession, provider: RootKeyProvider, request: AppendRequest,
-                 blob_store: BlobStore | None = None) -> AppendResult:
-    """Validate, strip, encrypt, seal and insert one event; or return the original on an exact retry."""
+                 blob_store: BlobStore | None = None, *, verified: VerifiedClaims | None = None) -> AppendResult:
+    """Validate, strip, encrypt, seal and insert one event; or return the original on an exact retry. With `verified`
+    (from interface/check_claims.py) the envelope records trust_basis = verified, only if those claims describe this
+    exact request and its writing principal (D-0026 §3)."""
     recorded_at = datetime.now(UTC)
     trust = validate_append(request)
+    basis = _trust_basis(session, request, verified)
     conn, stream = session.conn, request.stream_id
     try:
         mac_input = encode_cbor(_mac_input(request, session.access.principal_id))
@@ -138,7 +142,7 @@ def append_event(session: ScopedSession, provider: RootKeyProvider, request: App
     seq, prev_hash = (head[0] + 1, bytes(head[1])) if head else (1, GENESIS_PREV_HASH)
     values = {name: getattr(request, name, None) for name in (f.name for f in fields(Envelope))}
     values.update(envelope_version=ENVELOPE_VERSION, event_id=new_event_id(), commit_seq=seq, recorded_at=recorded_at,
-                  committed_at=datetime.now(UTC), trust=trust, trust_basis=TrustBasis.ASSERTED, key_id=key.key_id,
+                  committed_at=datetime.now(UTC), trust=trust, trust_basis=basis, key_id=key.key_id,
                   attachment_ref=attachment_ref, attachment_sha256=attachment_sha256, prev_hash=prev_hash)
     aad = {k: values[k] for k in ("envelope_version", "event_id", "stream_id", "key_id", "event_type", "payload_type")}
     values["body_ciphertext"] = encrypt_payload(conn, key, aad, body)
@@ -149,6 +153,19 @@ def append_event(session: ScopedSession, provider: RootKeyProvider, request: App
     conn.execute(f"INSERT INTO ledger.events ({', '.join(columns)}) VALUES ({', '.join(['%s'] * len(columns))})",
                  [values[c] for c in columns])
     return AppendResult(Envelope(**values), created=True, redactions=redactions, public_credentials=public)
+
+
+def _trust_basis(session: ScopedSession, r: AppendRequest, v: VerifiedClaims | None) -> TrustBasis:
+    if v is None:
+        return TrustBasis.ASSERTED
+    corr, fail_eval = authority_sections(r.event_type.value, r.content)
+    want = (session.access.principal_id, r.actor_id, r.stream_id, r.source.value, r.authorship.value,
+            r.actor_kind.value, r.payload_type == PayloadType.STRUCTURED, corr, fail_eval, r.on_behalf_of)
+    got = (v.principal_id, v.principal_id, v.stream_id, v.source, v.authorship, v.actor_kind, v.payload_structured,
+           v.has_correction, v.has_failing_evaluation, v.on_behalf_of)
+    if want != got:
+        raise AppendError("verified claims do not describe this write (D-0026): nothing was written")
+    return TrustBasis.VERIFIED
 
 
 # ---- MAC input, body, rows ---------------------------------------------------------------------------

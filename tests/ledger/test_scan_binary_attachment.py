@@ -300,10 +300,11 @@ def test_ocr_guards(monkeypatch):
     monkeypatch.setattr(extract, "MAX_IMAGE_PIXELS", 10_000)
     assert_unscannable(in_process(image(size=(200, 200))), "larger than")
     monkeypatch.setattr(extract, "MAX_IMAGE_PIXELS", 25_000_000)
-    frames = [Image.new("RGB", (8, 8), (i, 0, 0)) for i in range(extract.MAX_FRAMES + 1)]
+    # genuinely different frames (15 levels apart; 1 level apart would be near-duplicates, D-0027 amendment 3)
+    frames = [Image.new("RGB", (8, 8), (i * 15, 0, 0)) for i in range(extract.MAX_FRAMES + 1)]
     out = io.BytesIO()
     frames[0].save(out, "GIF", save_all=True, append_images=frames[1:])
-    assert_unscannable(scan_binary_attachment(out.getvalue()), "frames")
+    assert_unscannable(scan_binary_attachment(out.getvalue()), "more than 16 unique frames")
     monkeypatch.setattr(extract, "MAX_OCR_IMAGES", 1)
     assert_unscannable(in_process(zipped({"a.png": image(), "b.png": image(size=(64, 64))})), "to OCR")
 

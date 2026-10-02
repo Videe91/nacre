@@ -22,6 +22,9 @@ Notes: D-0027 §1. Nothing is written to disk: member names are text to scan, ne
     counted, so only zip members and compressor output count toward the byte limits. PDF pages count as members.
   - D1 extra limits on the OCR path (not in D-0027, fail closed, flagged to the owner): an image may have at most
     MAX_IMAGE_PIXELS pixels and MAX_FRAMES frames, and one attachment may send at most MAX_OCR_IMAGES images to OCR.
+  - D-0027 amendment 3: for a GIF, MAX_FRAMES counts UNIQUE frames (ledger/dedupe_gif_frames.py collapses identical
+    and near-identical ones first); only those are OCR'd, located by their first frame number. Never sampled. Other
+    multi-frame formats (TIFF pages, animated WebP/PNG) still count every frame (the amendment names GIFs only).
   - Fail closed: an unknown binary (top level or member), an encrypted zip member or PDF, any parser error, or a
     limit -> ExtractionRefused. Reasons are fixed text plus locations; a library's message is never echoed. D1: valid
     text that only looks like BMP/bzip2 (2-3 ASCII magic bytes) and fails to parse is scanned as text instead.
@@ -51,6 +54,7 @@ import pypdf
 import pypdfium2
 from PIL import Image
 
+from nacre.ledger.dedupe_gif_frames import unique_gif_frames
 from nacre.ledger.ocr_image_text import OCR_ENGINE_ID, OCR_VERSIONS, ocr_image_text
 
 MAX_DEPTH, MAX_MEMBERS, MAX_TOTAL_BYTES, MAX_RATIO, RATIO_FLOOR_BYTES = 3, 10_000, 64 * 1024 * 1024, 100, 1_000_000
@@ -282,12 +286,14 @@ def _image(data, loc, budget, kind) -> Iterator[TextPiece]:
     with Image.open(io.BytesIO(data), formats=[kind]) as img:     # only the sniffed decoder is ever tried
         frames = getattr(img, "n_frames", 1)
         _refuse_if(img.width * img.height > MAX_IMAGE_PIXELS, f"image larger than {MAX_IMAGE_PIXELS} pixels at {loc}")
-        _refuse_if(frames > MAX_FRAMES, f"image with more than {MAX_FRAMES} frames at {loc}")
         meta = [v for v in img.info.values() if isinstance(v, str)]
         meta += [v.decode("utf-8", "replace") if isinstance(v, bytes) else v
                  for v in img.getexif().values() if isinstance(v, (str, bytes))]
+        keep = unique_gif_frames(img, MAX_FRAMES) if kind == "GIF" and frames > 1 else range(frames)
+        unique = "unique " if kind == "GIF" else ""
+        _refuse_if(len(keep) > MAX_FRAMES, f"image with more than {MAX_FRAMES} {unique}frames at {loc}")
         yield TextPiece(f"{loc} image metadata", "\n".join(meta), PILLOW_ID)
-        for frame in range(frames):
+        for frame in keep:
             img.seek(frame)
             budget.ocr()
             yield from _ocr(img.copy(), loc if frames == 1 else f"{loc} frame {frame + 1}")

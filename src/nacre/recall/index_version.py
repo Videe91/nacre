@@ -20,6 +20,7 @@ Notes: Called by stores/write_version.py right after the version's projection ro
   - Addresses: `content["addresses"]` when present (D-0025 §3, the D-0018 amendment is not built yet), else [].
   - A stream whose active index generation has a different embedder refuses the write (IndexEmbedderMismatch):
     a model change needs a full re-index into a new generation first (owner decision, D-0024).
+  - default_embedder() is the isolated worker (recall/embedder_worker.py, D-0024 amendment 1), one per process.
 """
 from dataclasses import dataclass
 from functools import lru_cache
@@ -56,8 +57,8 @@ class IndexEntry:
 
 @lru_cache(maxsize=1)
 def default_embedder() -> Embedder:
-    from nacre.recall.embed_local import LocalEmbedder
-    return LocalEmbedder()
+    from nacre.recall.embedder_worker import WorkerEmbedder     # D-0024 amendment 1: never in-process
+    return WorkerEmbedder()
 
 
 def entry_aad(stream_id: UUID, generation: int, version_event_id: UUID, embedder_id: str) -> bytes:

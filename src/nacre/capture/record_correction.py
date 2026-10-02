@@ -24,7 +24,7 @@ from nacre.scopes.open_scoped_session import ScopedSession
 def record_correction(session: ScopedSession, key_provider: RootKeyProvider, *, stream_id: UUID, actor_kind: ActorKind,
                       actor_id: UUID, source: Source, authorship: Authorship, idempotency_key: str, correction_of: UUID,
                       text: str, scope_of_correction: str | None = None, cycle_id: UUID | None = None,
-                      task_id: UUID | None = None, mode: Mode | None = None) -> AppendResult:
+                      task_id: UUID | None = None, mode: Mode | None = None, verified=None) -> AppendResult:
     """Append one `correction` event pointing at `correction_of`."""
     if not isinstance(text, str) or not text.strip():
         raise CaptureError("correction text must be non-empty")
@@ -32,7 +32,7 @@ def record_correction(session: ScopedSession, key_provider: RootKeyProvider, *, 
         raise CaptureError("scope_of_correction, when given, must be non-empty text")
     body = {"text": text, "scope_of_correction": scope_of_correction,
             "refs": validate_refs(session, stream_id, [Ref("correction_of", correction_of)])}
-    return append_event(session, key_provider, AppendRequest(
+    return append_event(session, key_provider, verified=verified, request=AppendRequest(
         stream_id=stream_id, event_type=EventType.CORRECTION, payload_type=PayloadType.STRUCTURED, actor_kind=actor_kind,
         actor_id=actor_id, source=source, authorship=authorship, idempotency_key=idempotency_key, content=body,
         caused_by=correction_of, cycle_id=cycle_id, task_id=task_id, mode=mode))

@@ -6,6 +6,10 @@ Public entry: LocalEmbedder, EmbedderPinError, EMBEDDER_ID, default_model_dir()
 Decisions: D-0024
 Assumptions: A-0034
 Notes: The only file that imports onnxruntime or tokenizers (checked by scripts/check_structure.py).
+  - D-0024 amendment 1: LocalEmbedder runs ONLY inside the isolated worker (recall/run_embedder_worker.py); the main
+    process uses recall/embedder_worker.py. The runtime imports are therefore inside LocalEmbedder.__init__ (D1), so
+    the main process can import the pins, EMBEDDER_ID, DIM and default_model_dir() without loading onnxruntime or
+    tokenizers (tested in a fresh interpreter, tests/recall/test_embedder_worker.py).
   - Model: sentence-transformers/all-MiniLM-L6-v2, Apache-2.0 (sentence-transformers team, Nils Reimers et al.;
     fine-tuned from nreimers/MiniLM-L6-H384-uncased, Microsoft MiniLM). Attribution: THIRD_PARTY_NOTICES.md.
   - The files are NOT in git (owner, 2026-10-01). scripts/fetch_embedder.py fetches them from the pinned commit
@@ -24,8 +28,6 @@ from collections.abc import Sequence
 from pathlib import Path
 
 import numpy as np
-import onnxruntime as ort
-from tokenizers import Tokenizer
 
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 REVISION = "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
@@ -69,6 +71,8 @@ class LocalEmbedder:
 
     def __init__(self, model_dir: Path | None = None, *, threads: int = 0):
         files = _verified(Path(model_dir) if model_dir else default_model_dir())
+        import onnxruntime as ort                   # here, not at module level: see Notes (D-0024 amendment 1)
+        from tokenizers import Tokenizer
         self._tok = Tokenizer.from_str(files["tokenizer.json"].decode())
         self._tok.enable_truncation(max_length=MAX_SEQ_LEN)
         self._tok.enable_padding(pad_id=0, pad_token="[PAD]")

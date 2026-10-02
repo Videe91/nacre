@@ -1,5 +1,5 @@
 {
- "version": "2026-10-01",
+ "version": "2026-10-02",
  "currency": "USD",
  "unit": "per 1,000,000 tokens",
  "rule": "D-0021 amendment 1: a model with no entry here cannot be called (fail closed). Change = new version + source.",
@@ -10,6 +10,19 @@
    "cached_input": "0.075",
    "output": "0.60",
    "source": "https://developers.openai.com/api/docs/models/gpt-4o-mini (read 2026-10-01; listed as the default snapshot, no deprecation date shown)"
+  },
+  "claude-haiku-4-5-20251001": {
+   "provider": "anthropic",
+   "input": "1",
+   "cached_input": "0.10",
+   "cache_write_5m": "1.25",
+   "cache_write_1h": "2",
+   "output": "5",
+   "capabilities": {
+    "temperature": true,
+    "json_schema": true
+   },
+   "source": "https://platform.claude.com/docs/en/about-claude/pricing (read 2026-10-02; https://docs.claude.com/en/docs/about-claude/pricing redirects there). Claude Haiku 4.5 row: base input $1 / MTok, 5m cache writes $1.25 / MTok, 1h cache writes $2 / MTok, cache hits and refreshes $0.10 / MTok, output $5 / MTok. cached_input = the cache-hit price. capabilities per D-0028 (Claude API reference, 2026-10-01: Haiku 4.5 accepts temperature; output_config.format json_schema)."
   }
  }
 }

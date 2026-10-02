@@ -23,7 +23,7 @@ from nacre.scopes.open_scoped_session import ScopedSession
 def record_action(session: ScopedSession, key_provider: RootKeyProvider, *, stream_id: UUID, actor_kind: ActorKind,
                   actor_id: UUID, source: Source, authorship: Authorship, idempotency_key: str, decision_id: UUID,
                   action_kind: str, description: str, stakes: tuple[str, ...] = (), cycle_id: UUID | None = None,
-                  task_id: UUID | None = None, mode: Mode | None = None, actor_tool: str | None = None) -> AppendResult:
+                  task_id: UUID | None = None, mode: Mode | None = None, actor_tool: str | None = None, verified=None) -> AppendResult:
     """Append one `action` event that executes `decision_id`."""
     if not isinstance(action_kind, str) or not action_kind or not isinstance(description, str) or not description.strip():
         raise CaptureError("action_kind and description must be non-empty text")
@@ -31,7 +31,7 @@ def record_action(session: ScopedSession, key_provider: RootKeyProvider, *, stre
         raise CaptureError(f"stakes must be distinct tags from {sorted(STAKES)}")
     body = {"action_kind": action_kind, "description": description, "dispatched": True, "stakes": sorted(stakes),
             "refs": validate_refs(session, stream_id, [Ref("execution_of", decision_id)])}
-    return append_event(session, key_provider, AppendRequest(
+    return append_event(session, key_provider, verified=verified, request=AppendRequest(
         stream_id=stream_id, event_type=EventType.ACTION, payload_type=PayloadType.STRUCTURED, actor_kind=actor_kind,
         actor_id=actor_id, source=source, authorship=authorship, idempotency_key=idempotency_key, content=body,
         caused_by=decision_id, cycle_id=cycle_id, task_id=task_id, mode=mode, actor_tool=actor_tool))

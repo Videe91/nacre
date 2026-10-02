@@ -3,7 +3,7 @@ Functionality: Check a write's claims against the authenticated principal, insid
   (source, authorship, actor_kind) per principal kind, correction authority, delegations for on_behalf_of, scope grants.
 Owns: the D-0026 amendment 1 claim table, the reviewer-grant and delegation lookups (live, revocable, time-limited,
   scoped), and the typed rejection codes. Over-claims are REJECTED, never downgraded.
-Public entry: check_claims(), Claims, VerifiedClaims, ClaimRejected
+Public entry: check_claims(), claims_of(), Claims, ClaimRejected (VerifiedClaims lives in core/verified_claims.py)
 Decisions: D-0026, D-0012, D-0018, D-0019, D-0023
 Assumptions: A-0040
 Notes: D-0026 amendment 1 (owner, 2026-10-02, D3):
@@ -19,11 +19,18 @@ Notes: D-0026 amendment 1 (owner, 2026-10-02, D3):
   - Delegations and reviewer grants are read in the caller's transaction (nacre_app sees only its own rows, 0013), so
     a revocation or expiry takes effect for the next write.
   - The stream must be in the session's write grants (scope_not_granted otherwise).
+  - Authority (cross-checked with capture/section_authority.py): a write that WOULD be authoritative under D-0018 (a
+    correction or failing-evaluation section, on a trusted event from ci/review/git or a person actor) is rejected
+    unless the principal holds that authority. Agents' corrections are always rejected; their failing evaluations are
+    untrusted evidence and allowed. (2026-10-02, found by the cross-check test: a person without a reviewer grant
+    could otherwise record an authoritative failing evaluation.)
+  - claims_of(request) derives the Claims from an AppendRequest, so the claims checked are the write's own.
 """
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from uuid import UUID
 
+from nacre.core.verified_claims import VerifiedClaims, authority_sections
 from nacre.interface.authenticate_principal import Principal
 from nacre.scopes.open_scoped_session import ScopedSession
 
@@ -43,13 +50,27 @@ class Claims:
     payload_structured: bool
     has_correction: bool                     # a `correction` event, or an outcome carrying a correction section
     on_behalf_of: UUID | None = None
+    has_failing_evaluation: bool = False     # an outcome with success = false carrying an evaluation section
 
 
-@dataclass(frozen=True)
-class VerifiedClaims:
-    principal_id: UUID
-    claims: Claims
-    authoritative_allowed: bool
+_TRUSTED = {("chat", "scope_principal"), ("git", "scope_principal"), ("review", "scope_principal"),
+            ("system", "scope_principal"), ("ci", "integration_result"), ("review", "integration_result"),
+            ("git", "integration_result"), ("system", "integration_result")}      # D-0012 Part A (structured results)
+
+
+def _would_be_authoritative(c: Claims) -> bool:
+    """D-0018 through section_authority: an authority-bearing section on a trusted event whose source is ci/review/git
+    or whose actor is a person."""
+    trusted = (c.source, c.authorship) in _TRUSTED and (c.authorship != "integration_result" or c.payload_structured)
+    return (c.has_correction or c.has_failing_evaluation) and trusted and (
+        c.source in ("ci", "review", "git") or c.actor_kind == "person")
+
+
+def claims_of(request) -> Claims:
+    """The Claims an AppendRequest makes (ledger.validate_append.AppendRequest)."""
+    corr, fail_eval = authority_sections(request.event_type.value, request.content)
+    return Claims(request.stream_id, request.source.value, request.authorship.value, request.actor_kind.value,
+                  request.payload_type.value == "structured", corr, request.on_behalf_of, fail_eval)
 
 
 def _live(session: ScopedSession, sql: str, params: tuple, now: datetime) -> bool:
@@ -94,4 +115,9 @@ def check_claims(session: ScopedSession, principal: Principal, claims: Claims, *
     if claims.has_correction and not authoritative:
         raise ClaimRejected("forbidden_claim", "corrections come only from reviewer-granted persons or structured "
                             "CI/integration results")
-    return VerifiedClaims(principal.principal_id, claims, authoritative)
+    if _would_be_authoritative(claims) and not authoritative:
+        raise ClaimRejected("forbidden_claim", "this write would be authoritative (D-0018) without that authority")
+    c = claims
+    return VerifiedClaims(principal.principal_id, c.stream_id, c.source, c.authorship, c.actor_kind,
+                          c.payload_structured, c.has_correction, c.has_failing_evaluation, c.on_behalf_of,
+                          authoritative)

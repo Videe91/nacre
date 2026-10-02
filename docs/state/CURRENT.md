@@ -1380,3 +1380,119 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   - **D-0024 amendment 1:** the embedder runs as an isolated long-lived worker (no network, no DB credentials).
   - **New Phase 3 gate item 17:** Linux network isolation for the scan and embedder workers before any deployment.
   - **Phase 4/5:** OCR-tolerant matching for prefix tokens.
+- 2026-10-02 — **Claim verification in the write path (D-0026 remaining tests).**
+  - `core/verified_claims.py` holds the VerifiedClaims type (only check_claims constructs it; a structure test
+    enforces this).
+  - `append_event(..., verified=)` writes `trust_basis = verified` only when the claims describe the exact request
+    (principal = actor, stream, source, authorship, actor_kind, structured, correction, failing evaluation,
+    on_behalf_of). On a mismatch it raises and writes nothing.
+  - The capture entries pass `verified` through.
+  - **Tests** (`tests/interface/test_verified_writes.py`):
+    - verified vs asserted;
+    - a mismatch writes nothing;
+    - an agent cannot plant a correction;
+    - verified agent decisions promote only under the two-decision rule;
+    - an exhaustive cross-check of check_claims against section_authority.
+  - **The cross-check found a gap, now fixed:** a person without a reviewer grant could record an authoritative
+    failing evaluation. check_claims now rejects any write that would be authoritative under D-0018 without that
+    authority.
+- 2026-10-02 — **R22 MCP server and R23 SDK built (D-0026 §4–5).**
+  - **Files:**
+    - `interface/mcp_server.py`: transport and dispatch;
+    - `interface/run_operation.py`: shared by the MCP tools and the SDK's in-process mode;
+    - `interface/limit_rate.py`;
+    - `sdk/client.py`.
+  - **Tools:** recall_context and the five record_* entries. No admin or erasure tool (introspection test).
+  - **Authentication:** on every call (revocation is immediate). stdio reads NACRE_TOKEN; HTTP reads a bearer
+    token.
+  - **HTTP:** loopback only; a non-loopback host refuses to start.
+  - **Limits and errors:** 1 MiB argument limit; typed error codes that never echo the token.
+  - **SDK:** tested against a real loopback HTTP server and a real stdio server process. It refuses to send a token
+    over plain HTTP to a non-loopback host.
+  - **Dependencies:** `mcp==2.2.0` (exact pin); `requirements.lock` regenerated (61 packages, check passes).
+  - **D1 notes:**
+    - recall traces use the caller kind's own claim from the amendment 1 table (`asserted`);
+    - SDK remote calls open one MCP connection per call.
+  - **OWNER QUESTIONS: D-0026 amendment 3 (PROPOSED).**
+    - (1) `get_frame`: frames are not stored, so the proposal is to return a trace_ref and replay it;
+    - (2) drop `record_statement` (no D-0018 payload);
+    - (3) `require_verified`: a scope column, enforced in append_event;
+    - (4) rate-limit values (120/min, burst 30; built with these defaults pending the ruling).
+- 2026-10-02 — **OWNER QUESTION: how τ is fixed on the dev split** (D-0025 §6 names the split, not the objective).
+  - **Proposed (benchmark method, D2, to be pre-registered before the dev run):** choose `tau_strong_q` to
+    maximise balanced accuracy of `coverage == strong` against "the task is answerable" (T1/T2/T3 not erased), over
+    the observed quantised scores, with ties going to the higher τ.
+  - **Why:** it is computed from recall alone, so no transfer call depends on it.
+  - **Note:** the dev run still needs the live sleep pass, so it is the owner's run.
+  - **Alternatives:**
+    - maximise the dev correct-ask rate (needs transfer calls);
+    - a fixed percentile of T5 scores.
+- 2026-10-02 — **R24 Anthropic adapter built (D-0028).**
+  - **Pins:** `anthropic==1.11.0` as an optional extra (exact pin), like openai. Optional extras are not in
+    requirements.lock.
+  - **Price entry:** `claude-haiku-4-5-20251001`, read 2026-10-02 from https://platform.claude.com/docs/en/about-claude/pricing:
+    - input $1, cache hit $0.10, 5-minute cache write $1.25, 1-hour cache write $2, output $5 per MTok;
+    - capabilities: temperature, json_schema;
+    - the price table version is now 2026-10-02.
+  - **D1:** the 1.x SDK has no `temperature` argument, so it is sent through `extra_body` (only when set).
+  - **Gate 13, offline part:** the memory-section bytes are identical across providers, and the recorded replay
+    makes no network calls. The live smoke run is the owner's.
+  - **OWNER QUESTIONS (D2, not decided):**
+    - (1) **No carrier for `frame_id` in a model request.** D-0021's ModelRequest has none, so "both result
+      events name the same frame_id" (D-0028 §3) is not yet asserted. Options: a request field (new canonical
+      version), adding it in render_request, or a call_model body field.
+    - (2) **Usage has no cache-write field.** Such tokens fail closed with `unpriced_usage`. Nacre never sends
+      cache_control, so this should not occur.
+    - (3) **Paid failures are recorded at $0.** Truncated and refused responses are billed but recorded as
+      errors with cost 0, which undercounts the budget cap.
+    - (4) **response_format is OpenAI-shaped.** It is translated, `strict: false` is refused, and a
+      provider-neutral field would be a D-0021 change.
+- 2026-10-02 — **D-0027 amendment 4 (redact instead of reject) MEASURED on I1 working data; PROPOSED; not built.**
+  - **Safety:** the best setting fully covers 79.3% of gated secrets, or 80.6% with a rescan. Today's rejection
+    keeps 88.1% out of storage.
+  - **Usability:** the 11 false-positive log screenshots would be stored with 26–49% of their lines painted.
+  - **Recommendation:** keep rejection (option a).
+  - **Evidence:** `A-0042-redaction-study-2026-10-02-I1.md`.
+  - **OWNER DECISION NEEDED.**
+- 2026-10-02 — **Embedder isolated worker built (D-0024 amendment 1)** (`recall/embedder_worker.py`,
+  `recall/run_embedder_worker.py`; `default_embedder()` now returns the worker).
+  - **Isolation:**
+    - the worker starts with an empty environment and cwd `/`;
+    - macOS sandbox-exec, using the scan child's profile; if sandbox-exec is missing, the worker refuses to start;
+    - rlimits: core 0, file size 0, 64 fds; 4 GiB address space on Linux only, NOT measured there;
+    - Python sockets disabled; onnxruntime is never imported in the main process.
+  - **Test probe:** no database or provider environment variables; libc `connect` gets EPERM; writes and spawn
+    refused.
+  - **Latency:** the worker adds about 0.1 ms per query (1.35–1.43 ms median vs 1.23–1.35 ms in-process).
+  - **Finding:** under the sandbox, onnxruntime still tries to persist a telemetry device ID after
+    `disable_telemetry_events()`. The OS sandbox is doing real work.
+  - **Mutation run:** 25 mutants, 23 killed, 1 equivalent (documented), 1 crashed and was later killed. Every
+    round exited 3 because a concurrent session was writing to the tree; the snippets were verified restored.
+  - **D1:** this file does not reuse isolate_scan_process, because its whole-lifetime CPU limit would kill a
+    long-lived worker.
+- 2026-10-02 — **GIF frame de-duplication built (D-0027 amendment 3)** (`ledger/dedupe_gif_frames.py`).
+  - **D1 rule:** frames are duplicates if identical, or if every channel is within 2/255. Each frame is compared
+    with every kept frame. No blur or perceptual hash, so a frame adding one secret character is never merged.
+  - **FINDING:** de-duplication rescues 0 of the 33 surveyed GIFs over 16 frames (164 unique GIFs, 35 animated),
+    and looser tolerances of 8 or 32 rescue none either. Real terminal recordings change almost every frame (timers,
+    progress), e.g. 361 → 360 unique frames.
+  - **OWNER QUESTIONS:**
+    - (1) a different rule for these GIFs (e.g. more unique frames within the timeout), or keep rejecting them as
+      unscannable?
+    - (2) de-duplicate TIFF pages and animated WebP/APNG too?
+    - (3) the decoded-frame count is bounded only by the 120 s timeout: add an explicit cap?
+- 2026-10-02 — **TO HUNT (flaky-test rule):** `test_find_credential_proximity.py::test_time_stays_linear_on_dense_megabyte_inputs`.
+  - **Observed:** it took 10.0 s against an 8 s ceiling at load ~56 on 14 cores (three concurrent builders), and it
+    also failed when run alone at that load. It passed in the full suite later.
+  - **Status:** not yet hunted on a quiet machine.
+- 2026-10-02 — **Gate for the commit below** (claims, R22–R24, embedder worker, GIF de-duplication, D-0026
+  amendment 3, D-0027 amendment 4 proposals).
+  - **Where:** a clean git worktree holding exactly the staged change. The EXP-0004 builder's in-progress eval
+    files were excluded.
+  - **check_structure:** 0 failures, 1 warning (extract_binary_text.py at 317 lines).
+  - **pytest, first run:** 1464 passed, 5 failed, 57 deselected.
+    - **Cause of the 5 failures:** the worktree environment. The worktree had no `.venv`
+      (test_scan_staged_secrets ×3), and docker compose derived its project name from the worktree directory
+      (test_rotation_finality ×2).
+  - **pytest, rerun of those 2 files** with the venv linked and COMPOSE_PROJECT_NAME=nacre: 25 passed.
+  - **Not rerun:** the full suite in one pass.

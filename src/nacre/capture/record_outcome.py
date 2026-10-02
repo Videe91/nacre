@@ -38,7 +38,7 @@ def record_outcome(session: ScopedSession, key_provider: RootKeyProvider, *, str
                    actor_id: UUID, source: Source, authorship: Authorship, idempotency_key: str, outcome_for: UUID,
                    success: bool | None, sections: tuple[Section, ...], evaluates_prediction: UUID | None = None,
                    stakes: tuple[str, ...] = (), failing_checks: tuple[str, ...] = (), cycle_id: UUID | None = None,
-                   task_id: UUID | None = None, mode: Mode | None = None, actor_tool: str | None = None) -> AppendResult:
+                   task_id: UUID | None = None, mode: Mode | None = None, actor_tool: str | None = None, verified=None) -> AppendResult:
     """Append one `outcome` event for the decision or action `outcome_for`."""
     if success not in (True, False, None):
         raise CaptureError("success must be true, false or None")
@@ -56,7 +56,7 @@ def record_outcome(session: ScopedSession, key_provider: RootKeyProvider, *, str
     body = {"success": success, "sections": [{"role": s.role, "text": s.text} for s in sections],
             "stakes": sorted(stakes), "failing_checks": list(failing_checks),
             "refs": validate_refs(session, stream_id, refs)}
-    return append_event(session, key_provider, AppendRequest(
+    return append_event(session, key_provider, verified=verified, request=AppendRequest(
         stream_id=stream_id, event_type=EventType.OUTCOME, payload_type=PayloadType.STRUCTURED, actor_kind=actor_kind,
         actor_id=actor_id, source=source, authorship=authorship, idempotency_key=idempotency_key, content=body,
         caused_by=outcome_for, cycle_id=cycle_id, task_id=task_id, mode=mode, actor_tool=actor_tool))

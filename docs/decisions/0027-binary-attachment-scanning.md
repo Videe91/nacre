@@ -25,6 +25,36 @@
      of truth**. The pre-commit hook accepts only those exact bytes there.
    - Regeneration is checked only on the pinned platform.
 
+## Amendment 4 (PROPOSED 2026-10-02, D3): redact instead of reject. MEASURED; RECOMMENDATION: DO NOT ADOPT
+**The owner's proposal:** for detected secrets, paint over the OCR region with a generous margin (the whole text
+line) and store the redacted image.
+
+**Measured on I1 as working data**, against pixel ground truth. Evidence:
+`docs/assumptions/evidence/A-0042-redaction-study-2026-10-02-I1.md`.
+
+**Secrets remaining readable after redaction.** Today's rejection keeps **88.1%** of gated secrets out of storage.
+With redaction, the best setting fully covers only **79.3%** of them (80.6% with a rescan-and-reject pass). The loss
+comes from two places:
+- **Missed secrets:** the 55 secrets OCR misses are stored as they are under any redaction.
+- **Collateral secrets:** undetected secrets in an image where something else was detected. Rejection drops the
+  whole image today, so they are protected; redaction stores them.
+
+**Clean-image usability.** The 11 falsely rejected log screenshots would be stored instead of rejected, with 26–49%
+of their lines painted. Non-secret lines in images that hold secrets keep 44–82%, depending on the margin.
+
+**Other findings:**
+- Wrapped secrets leave readable tails unless the neighbouring lines are also painted.
+- A second scan is needed, because 7–24 redacted images still trigger the detector. It doubles the latency of
+  flagged images.
+
+**Options:**
+- **(a) Recommended:** keep rejection. Record this study, and revisit after the Phase 4/5 second-opinion classifier
+  and OCR-tolerant matching.
+- **(b)** Adopt the least-bad setting, `m50_nbr`: margin 0.5 × line height, plus the neighbouring lines, plus a
+  mandatory rescan that rejects if anything is still detected. This is about 9 points less safe than today.
+- **(c) Not measured:** a hybrid. Redact only when there is exactly one finding and no other line looks like a
+  credential slot; otherwise reject. It needs its own measurement before any decision.
+
 ## Amendment 3 (owner decisions, 2026-10-02)
 - **Gate item 11 NOT MET, RISK ACCEPTED BY OWNER (2026-10-02):** I1 408/463 = 88.1% of gated secrets not stored
   (target 95%); clean images 11/100 (log screenshots) falsely rejected, 0/100 unscannable.

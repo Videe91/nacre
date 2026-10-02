@@ -33,7 +33,7 @@ def record_decision(session: ScopedSession, key_provider: RootKeyProvider, *, st
                     context_evidence_sha256: str | None = None, refs: tuple[Ref, ...] = (),
                     stakes: tuple[str, ...] = (), cycle_id: UUID | None = None, task_id: UUID | None = None,
                     mode: Mode | None = None, actor_model: str | None = None,
-                    actor_model_version: str | None = None) -> AppendResult:
+                    actor_model_version: str | None = None, verified=None) -> AppendResult:
     """Append one `decision` event."""
     if not isinstance(decision_text, str) or not decision_text.strip():
         raise CaptureError("decision_text must be non-empty text")
@@ -50,7 +50,7 @@ def record_decision(session: ScopedSession, key_provider: RootKeyProvider, *, st
             "decided_from": str(decided_from) if decided_from else None,
             "context_evidence_sha256": context_evidence_sha256, "stakes": sorted(stakes),
             "refs": validate_refs(session, stream_id, list(refs))}
-    return append_event(session, key_provider, AppendRequest(
+    return append_event(session, key_provider, verified=verified, request=AppendRequest(
         stream_id=stream_id, event_type=EventType.DECISION, payload_type=PayloadType.STRUCTURED, actor_kind=actor_kind,
         actor_id=actor_id, source=source, authorship=authorship, idempotency_key=idempotency_key, content=body,
         caused_by=decided_from or (refs[0].event_id if refs else None), cycle_id=cycle_id, task_id=task_id, mode=mode,

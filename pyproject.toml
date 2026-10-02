@@ -20,6 +20,7 @@ dependencies = [
     "pypdfium2==5.13.0",
     "rapidocr==3.9.2",
     "Pillow==12.3.0",
+    "mcp==2.2.0",            # D-0026 (owner decision 5): exact pin; imported only by interface/mcp_server.py and sdk/client.py
     # D-0006 amendment 3 (owner condition): the headless OpenCV build, never opencv-python (GUI/Qt). rapidocr
     # declares opencv-python, so it is dropped by the override below (uv) or by installing the hash-locked
     # requirements.lock with --no-deps (pip). scripts/check_dependency_lock.py fails if opencv-python is installed.
@@ -29,6 +30,9 @@ dependencies = [
 [project.optional-dependencies]
 # D-0021: provider SDKs are optional extras, exact pins; imported only by their adapter in src/nacre/models/.
 openai = ["openai==3.22.1"]
+# D-0028 (owner decision 2): the Anthropic SDK, optional extra, exact pin; imported only by
+# src/nacre/models/anthropic_messages_provider.py.
+anthropic = ["anthropic==1.11.0"]
 # Test-only (D-0008): cbor2 is a cross-check oracle, never imported by src/.
 test = [
     "pytest>=9",

@@ -95,6 +95,56 @@ them. Token lookup runs BEFORE any scoped session exists, so it cannot rely on s
 **Questions for the owner (D3):** approve the two new roles and these grants? Or should principal administration
 reuse `nacre_keyadmin` (fewer roles, but a broader one)?
 
+## Amendment 3 (PROPOSED 2026-10-02, D2): four gaps found while building the MCP server (R22)
+Building R22 surfaced four choices that §4 and the owner decisions do not settle. None is built until the owner rules.
+Everything else in §4 is built: stdio, loopback-only HTTP, `recall_context` and the five `record_*` tools, typed errors,
+1 MiB body limit, and no admin or erasure tools.
+
+**Gap 1: `get_frame(frame_id)` has nothing to look up.** Frames are not stored (D-0025 §6: a recall returns
+`(frame_id, frame)`), and the ContextAssembled trace is encrypted, so the server cannot find a trace by `frame_id`.
+`replay_frame` returns verdicts, not the frame.
+- **(a) Recommended:** `recall_context` also returns a `trace_ref` (`<stream>:<commit_seq>`), and the tool becomes
+  `get_frame(trace_ref, frame_id)`. The server replays the trace as the caller and returns the rebuilt frame only
+  when every item is `verified` and the rebuilt `frame_id` equals the given one. Otherwise it returns
+  `frame_unavailable` with verdict counts and no content. This needs `replay_frame` to return the rebuilt frame body
+  (an internal change). No new storage.
+- (b) Store a plaintext `frame_id → (stream, commit_seq)` index. This lost: it is a new table, and it reveals that
+  two recalls produced the same frame.
+- (c) Drop `get_frame` in Phase 3. This lost: §4 names it and EXP-0004 replay benefits from it.
+
+**Gap 2: `record_statement` has no capture entry.** D-0018 defines decision, prediction, action, outcome and
+correction payloads only.
+- **(a) Recommended:** drop `record_statement` from the Phase 3 MCP surface. A person's direct statement is already a
+  `correction` (D-0018) or a chat `message`, and neither needs a new payload.
+- (b) Define a statement payload in a D-0018 amendment first. This lost: it is a new persistence format with no
+  consumer yet.
+
+**Gap 3: where `require_verified` lives.** Owner decision 3 approved it as the default for interface scopes. It needs
+a per-scope flag, and `scopes.scopes` has none.
+- **(a) Recommended:**
+  - add a migration with `scopes.scopes.require_verified boolean NOT NULL DEFAULT false`;
+  - scopes created through the interface or admin CLI set it to true;
+  - `append_event` rejects a write with no matching `verified` claims when the stream's scope has the flag
+    (`unverified_write`), in the write transaction.
+  - Existing scopes keep false (the eval harness and tests write `asserted` in-process, §3).
+- (b) Enforce it only in the MCP server. This lost: any other path to `append_event` would bypass it.
+
+**Gap 4: the per-principal rate limit.** §4 sets no number.
+- **(a) Recommended:**
+  - an in-process token bucket per principal, 120 calls per minute with bursts of 30;
+  - over the limit is `rate_limited` with a retry-after;
+  - the values live in config, and a change is a config_event.
+  - Built now with these defaults behind one constant, pending this ruling.
+- (b) A Postgres-backed limit shared across processes. This lost: Phase 3 runs one server process per machine.
+
+**Also recorded (not choices):**
+- **HTTP authentication:** a bearer token on every request (`Authorization: Bearer`), checked per call by
+  `authenticate_principal`.
+- **stdio authentication:** the token is read once from `NACRE_TOKEN` at start and re-checked on every call
+  (revocation is immediate).
+- **No attachments in Phase 3:** the capture entries accept none, so the MCP tools accept none. The D-0027 path
+  applies when they do.
+
 ## ERRATUM (resolved by amendment 1 above; kept for history)
 - **The defect:** the "source ceilings" table in §1 names `source` values `agent` and `person`. D-0012 has no such
   sources.

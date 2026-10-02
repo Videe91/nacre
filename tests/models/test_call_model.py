@@ -37,7 +37,7 @@ def test_a_call_is_recorded_with_pin_policy_settings_tokens_and_cost(world, prov
     assert c["status"] == "ok" and c["request_sha256"] == request_sha256(req()) == r.request_sha256
     assert c["call_policy"] == {"timeout_s": "30.0", "max_attempts": 2, "backoff_s": "1.5"}
     assert c["response"]["usage"] == {"input_tokens": 1000, "output_tokens": 500, "cached_input_tokens": None}
-    assert c["cost_usd"] == "0.0004500000" and c["price_table"] == "2026-10-01" and c["redacted"] is False
+    assert c["cost_usd"] == "0.0004500000" and c["price_table"] == "2026-10-02" and c["redacted"] is False
     assert c["request"]["params"]["temperature"] is None                     # provider default, recorded as such
 
 
