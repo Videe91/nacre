@@ -28,6 +28,14 @@
    - local-only embeddings in Phase 3 (an API embedder needs its own ADR under D-0021);
    - exact search with no ANN until A-0032 breaks.
 
+## Amendment 1 (owner, 2026-10-02): the embedder runs as an isolated long-lived worker
+- **Isolation:** the local embedder runs in a separate long-lived worker process with NO network and NO database
+  credentials (an empty environment, sockets blocked, the macOS sandbox profile of D-0027).
+- **Interface:** the main process sends texts and receives vectors. The worker is restarted on failure.
+- **Why:** the R5 build saw signs that onnxruntime's native telemetry may use the network, which Python cannot
+  block in-process. `disable_telemetry_events()` stays as well.
+- **Linux:** before deployment the worker also needs Linux network isolation (Phase 3 gate item 17).
+
 ## Clarification (owner, 2026-10-02): when erasure takes effect
 - **Erasure takes effect at the next recall's snapshot.** A recall whose snapshot began **before** the erasure
   committed may still see the erased entry: its own snapshot predates the erasure, in the cache and in Postgres

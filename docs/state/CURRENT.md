@@ -1370,3 +1370,13 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   - **I1 demoted; no patching.**
   - **Misses:** concentrated in chat screenshots and credential-slot values; spread over all sizes.
   - **Latency:** median 1.17 s per image. **Owner decision needed on gate item 11.**
+- 2026-10-02 — **Owner decisions.**
+  - **Gate item 11 NOT MET, RISK ACCEPTED (2026-10-02)** (I1 88.1%; 11/100 clean log screenshots falsely
+    rejected).
+  - **D-0029 amendment 1:** suppression and rotate notices extended to attachments.
+  - **D-0027 amendment 3:** macOS sandbox approved; timeout behaviour accepted; GIFs de-duplicated before the
+    16-frame limit, never sampled. Redact-instead-of-reject to be PROPOSED (amendment 4) with working-data
+    measurements first.
+  - **D-0024 amendment 1:** the embedder runs as an isolated long-lived worker (no network, no DB credentials).
+  - **New Phase 3 gate item 17:** Linux network isolation for the scan and embedder workers before any deployment.
+  - **Phase 4/5:** OCR-tolerant matching for prefix tokens.

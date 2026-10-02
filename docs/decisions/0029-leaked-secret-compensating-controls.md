@@ -12,6 +12,13 @@
 3. **Suppression reaches derived records transitively.**
 4. **Order:** build after the interface work.
 
+## Amendment 1 (owner, 2026-10-02): attachments too
+- **Why:** gate item 11 (OCR scanning) is NOT MET, with the risk accepted (I1: 88.1% of gated secrets not stored).
+- **Scope extended:** suppression and rotate notices cover ATTACHMENTS as well:
+  - a reported attachment's content is withheld from every read and export, and from everything derived from it;
+  - an attachment rejected or redacted for a secret returns a rotate notice naming the rule and location, never the
+    value.
+
 ## Context
 - **Gate item 12 is NOT MET, with the risk accepted by the owner on 2026-10-02** (holdout log).
 - **Final numbers:** H6 common contexts 83.8%, long-tail 46.7%, false positives 1.0%; earlier H4 88.8% and H5

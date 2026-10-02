@@ -25,6 +25,22 @@
      of truth**. The pre-commit hook accepts only those exact bytes there.
    - Regeneration is checked only on the pinned platform.
 
+## Amendment 3 (owner decisions, 2026-10-02)
+- **Gate item 11 NOT MET, RISK ACCEPTED BY OWNER (2026-10-02):** I1 408/463 = 88.1% of gated secrets not stored
+  (target 95%); clean images 11/100 (log screenshots) falsely rejected, 0/100 unscannable.
+- **Approved:**
+  - the macOS `sandbox-exec` profile for the scan child;
+  - the timeout behaviour (an attachment at every OCR cap at once is rejected as unscannable).
+- **GIFs:**
+  - first de-duplicate identical or near-identical frames;
+  - then apply the 16-frame limit to UNIQUE frames;
+  - never sample.
+- **Proposed next (amendment 4, D3, owner review before building):** redact instead of reject. Paint over the OCR
+  region of a detected secret, with a generous margin (the whole text line), and store the redacted image. It will
+  first be measured on working data (I1): secrets still readable after redaction, and clean-image usability.
+- **Phase 4/5:** OCR-tolerant matching for prefix-based provider tokens (0/O, 1/l/I), alongside the second-opinion
+  classifier.
+
 ## Amendment 2 (owner, 2026-10-02)
 - **Expansion guard:** the 100× ratio check applies only when the expanded size exceeds 1 MB. The absolute caps
   (64 MiB total decompressed, 10,000 members, depth 3) always apply.

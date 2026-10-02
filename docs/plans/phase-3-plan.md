@@ -54,12 +54,13 @@
 | 8 | **EXP-0004 passes its pre-registered bar** (N ≥ 0.80; N − V ≥ 15 pp, and ≥ 5 pp per set; N − C ≥ 40 pp; N ≥ 0.70 and N ≥ V in every category; stale ≤ 0.05 of T3 and ≤ ½ V; asks ≥ 0.80; safety 0; no reruns) | EXP-0004 | live run by the owner; recorded replay with 0 network |
 | 9 | Interface claims: over-claims rejected; valid claims written `verified`; no agent can plant an authoritative correction | D-0026 tests 1, 3 | tests |
 | 10 | Tokens never stored or logged; typo checksum; expiry and revocation; no admin or erasure tools on MCP; HTTP without TLS refuses non-loopback | D-0026 tests 2, 4, 5 | tests, plus scans |
-| 11 | **Binary attachment scanning:** each carrier rejected on a secret; clean files stored `binary-scanned`; bomb guards; unscannable always rejected (no opt-out); I1 OCR recall ≥ 95% at ≥ 12 px | D-0027; owner item 2026-09-30 | tests; sealed I1 measurement |
+| 11 | **Binary attachment scanning: built (R5). I1 OCR target NOT MET, RISK ACCEPTED BY OWNER (2026-10-02):** 408/463 = 88.1% of gated secrets not stored (target 95%); clean images 0/100 unscannable, 11/100 (log screenshots) falsely rejected. Compensating: D-0029 suppression and rotate notices extended to attachments. Proposed: D-0027 amendment 3 (redact instead of reject), awaiting owner | D-0027; owner item 2026-09-30 | `A-0042-measurement-2026-10-02-I1.md` |
 | 12 | **Credential-slot target: NOT MET, RISK ACCEPTED BY OWNER (2026-10-02).** Three blind holdouts failed: H4 88.8% (target 90%), H5 74.0% (90%), and H6 on the revised targets: common 83.8% (95%), long-tail 46.7% (80%), FP 1.0% (≤ 2%, met). No new target definition (owner). **Compensating controls (D-0029):** a report-leaked-secret suppression path; a rotate-this-credential notice for every detected secret. **Future (Phase 4/5):** evaluate a second-opinion secret classifier (local model) on a fresh holdout | holdout log; D-0029 | risk acceptance recorded; D-0029 tests |
 | 13 | **Cross-provider frame:** one `frame_id` rendered for OpenAI and Anthropic with byte-identical memory sections; both recorded and replayable offline; a live smoke run | D-0028 §3 | test, plus an owner smoke run |
 | 14 | Embedder pinned: hash mismatch refuses to start; ONNX equivalence vs reference vectors (if D-0024 (ii)) | D-0024 test 5 | test |
 | 15 | Index rebuild is byte-identical and switches atomically | D-0024 test 4 | test |
 | 16 | Structure: every new file registered in INDEX with its header; no SDK import outside adapters; no plaintext-index DDL (structure check rejects `vector`, `tsvector` and trigram index DDL in migrations) | constitution; D-0024 | `check_structure.py` (extended) |
+| 17 | **Linux network isolation (owner, 2026-10-02):** before ANY deployment, the scan child and the embedder worker run with no network on Linux (e.g. a container with no network), shown by a probe test like the macOS sandbox's | D-0006 amendment 3; D-0024 amendment 1 | probe test on the deployment target |
 
 **Reported, not gated:**
 - the transplant data point (EXP-0004 N arm with a Claude transfer seat, D-0028 §4);
@@ -136,6 +137,8 @@
 **Gate item 12:** the H4 credential-slot target number (proposed ≥ 90%).
 
 ## Not in Phase 3 (recorded so nothing is silently dropped)
+- **Phase 4/5 (owner, 2026-10-02):** OCR-tolerant matching for prefix-based provider tokens (0/O, 1/l/I confusions),
+  alongside the second-opinion secret classifier.
 - **Phase 4/5 (owner, 2026-10-02):** evaluate a second-opinion secret classifier (a local model) on a fresh,
   pre-registered holdout. It is the follow-up to gate item 12 not met (D-0029 §3).
 - Threat store and predictor checks: the frame reserves the fields.
