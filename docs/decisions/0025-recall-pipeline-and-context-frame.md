@@ -50,6 +50,16 @@ This replaces §8's split into content parts and the proposal made while buildin
 - **Confirmed:** contested items count against the budget and fill last (they are pinned only against relevance
   pruning).
 
+## Amendment 4 (owner, 2026-10-02): the character budget counts RENDERED characters (EXP-0004 E2)
+- **The rule:** `budget.chars` bounds the length of the rendered memory section
+  (`interface/render_frame.render_memory_section`: header, numbered item lines with qualifiers, scope and contested
+  wording, and the coverage instruction). Previously it bounded the sum of item texts.
+- **Fill order:** items are still added in rank order. A candidate is skipped when adding it would push the rendered
+  section past the budget (as before, a later shorter item may still fit).
+- **Recorded:** the frame's `budget` records `"counts": "rendered"`. A trace whose budget has no `counts` was made
+  under the old rule (`"text"`), and replay rebuilds it under that rule, so old traces replay unchanged.
+- **Why:** EXP-0004 pre-registered "4,000 rendered characters" for the N arm.
+
 ## Context
 - **SPEC "Recall and the reasoning boundary"** defines eight steps:
   1. freeze the snapshot;

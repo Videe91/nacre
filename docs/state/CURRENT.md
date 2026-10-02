@@ -1728,3 +1728,35 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   - **Runs:** passes 3/3 quiet, and under 20 busy processes (load ~30).
   - **Not done:** mutation-checking against a re-introduced quadratic scan.
 - 2026-10-02 — **Gate for the flaky-hunt commit:** 1674 passed, 60 deselected (pytest exit 0); check_structure exit 0. It started at load 24 (the decaying artificial-load test), so the new timing test also passed under load in the full suite.
+- 2026-10-02 — **Owner rulings: sequence E1 ADR → build E1 → τ dev run → EXP-0004.**
+  - **E2 approved:** rendered-character budget. E3 and E4 approved as drafted; recorded in EXP-0004.
+  - **Latency (gate item 7):** bring options for removing the O(N²) write path, measured at 1k, 10k and 100k. It must
+    be fixed before Phase 3 closes.
+  - **D-0026 amendment 3 plus the billing and address edge cases:** one batch, when convenient.
+- 2026-10-02 — **E2 BUILT (D-0025 amendment 4).**
+  - `assemble_frame` bounds the rendered memory section; the frame records `budget.counts = "rendered"`.
+  - `Budget.of()` rebuilds old traces under the old text rule, so old frames stay byte-identical.
+  - **Tests:** the bound is exact for every prefix of the ranked items; the first item is skipped when its text fits
+    but its rendered line does not; the old rule is reproduced.
+- 2026-10-02 — **E1: D-0030 PROPOSED** (`docs/decisions/0030-contradiction-formation.md`). Not built.
+  - **The data:** EXP-0004 v2 corrections never reference v1, and they are paraphrased. So D-0017's grouping by
+    identical text can never reach a contest quorum or the supersede rule's "≥ 2 shared decisions".
+  - **Proposal:** option A, plus D-0020's explicit trigger.
+    - **Candidates:** beliefs that share an identity address with the episode.
+    - **Judgement:** a grounded relation judge (`same_claim` / `contradicts` / `unrelated`, each quoting an exact
+      span from an authoritative section).
+    - **Effects:** `same_claim` gives paraphrase support; `contradicts` gives a contradiction grouped by its
+      replacement belief.
+    - **Unchanged:** quorum 2 and supersession.
+  - **Measurement on the τ dev run:** T3 resolution ≥ 0.90 and zero false contests (thresholds for the owner to
+    confirm).
+  - **New assumptions:** A-0047, A-0048.
+  - **OWNER QUESTIONS:** D-0030 questions 1–4 (question 2 may be D3).
+- 2026-10-02 — **Latency options:** a research agent is prototyping and measuring in an isolated git worktree. It
+  does not touch the main tree.
+- 2026-10-02 — **Gate for the E2 / D-0030 commit.**
+  - **First run:** 6 failures.
+    - Two τ property tests stubbed frame items without the fields the rendered budget reads. Test stub fixed.
+    - Four run_mutants tests failed because the latency agent's isolated worktree sits at `.claude/worktrees/` and
+      was copied as untracked files. `.claude/worktrees/` is now in `.gitignore`.
+  - **Re-run:** 1676 passed, 60 deselected (pytest exit 0); check_structure exit 0.

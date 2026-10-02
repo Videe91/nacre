@@ -11,7 +11,10 @@ Notes: D-0025 §5, §7 and amendment 1 (owner, 2026-10-02).
   - Contested candidates are pinned against relevance pruning ("shown with its status", §5) but count against the
     budget and are filled after every uncontested one (they are ranked last, amendment 1). D1 reading of §5's "pinned
     whatever the budget" together with EXP-0004's fixed budget (10 items, 4,000 chars): the budget always holds.
-  - Fill: in rank order until the item or character budget would be exceeded (characters = the item texts).
+  - Fill: in rank order until the item or character budget would be exceeded. D-0025 amendment 4 (owner, 2026-10-02):
+    characters = the RENDERED memory section (interface/render_frame.render_memory_section, with this frame's coverage),
+    recorded as budget "counts": "rendered". Budget(counts="text") rebuilds frames made under the old rule (the sum
+    of item texts, recorded with no "counts"), so replay of old traces is unchanged.
   - Items carry text, kind, status, scope level, the four scores, qualifiers and origin from the version content,
     and for contested items `contested: true` plus `contradicting`: the evidence event ids and the contradiction text
     recorded in the contested version (never phrased as fact: rendering is the interface's job, R21).
@@ -27,6 +30,7 @@ from uuid import UUID
 
 from nacre.core.encode_cbor import encode_cbor
 from nacre.core.root_key_provider import RootKeyProvider
+from nacre.interface.render_frame import render_memory_section
 from nacre.ledger.read_stream import read_stream
 from nacre.recall.rank_candidates import Ranked
 from nacre.scopes.open_scoped_session import ScopedSession
@@ -38,6 +42,12 @@ FRAME_VERSION = 1
 class Budget:
     items: int = 10
     chars: int = 4000
+    counts: str = "rendered"           # D-0025 amendment 4; "text" = the pre-amendment rule (replay of old traces)
+
+    @staticmethod
+    def of(recorded: Mapping) -> "Budget":
+        """The budget a frame or trace recorded (no "counts" = made under the old rule)."""
+        return Budget(recorded["items"], recorded["chars"], recorded.get("counts", "text"))
 
 
 @dataclass(frozen=True)
@@ -88,6 +98,14 @@ def content_view(item: dict) -> bytes:
     return encode_cbor({k: item[k] for k in _CONTENT_FIELDS if k in item})
 
 
+
+def _budget_record(budget: Budget) -> dict:
+    if budget.counts not in ("rendered", "text"):
+        raise ValueError(f"unknown budget counting rule {budget.counts!r}")
+    out = {"items": budget.items, "chars": budget.chars}
+    return out | {"counts": "rendered"} if budget.counts == "rendered" else out     # old frames: byte-identical
+
+
 def assemble_frame(session: ScopedSession, key_provider: RootKeyProvider, *, snapshot, scopes, principal_id: UUID,
                    query_text: str, addresses: Sequence[str], relaxations: Sequence[str], candidates: Sequence,
                    ranked: Sequence[Ranked], active: Mapping[str, bool], texts: Mapping[UUID, str], coverage: str,
@@ -100,9 +118,12 @@ def assemble_frame(session: ScopedSession, key_provider: RootKeyProvider, *, sna
         if r.version_event_id in pruned or len(items) >= budget.items:
             continue
         text = texts.get(r.version_event_id, "")
-        if used + len(text) > budget.chars:
+        if used + len(text) > budget.chars:              # cheap pre-check: a rendered line is never shorter
             continue
         item = frame_item(session, key_provider, by_id[r.version_event_id], text, r)
+        if budget.counts == "rendered" and \
+                len(render_memory_section({"coverage": coverage, "items": items + [item]})) > budget.chars:
+            continue
         items.append(item)
         used += len(text)
     body = {"v": FRAME_VERSION, "frame_kind": "context", "pipeline_version": pipeline_version,
@@ -110,7 +131,7 @@ def assemble_frame(session: ScopedSession, key_provider: RootKeyProvider, *, sna
             "principal_id": str(principal_id), "query_sha256": hashlib.sha256(query_text.encode()).hexdigest(),
             "addresses": list(addresses), "relaxations": list(relaxations),
             "channels": {k: bool(v) for k, v in sorted(active.items())}, "coverage": coverage,
-            "budget": {"items": budget.items, "chars": budget.chars}, "config": dict(config or {}), "items": items,
+            "budget": _budget_record(budget), "config": dict(config or {}), "items": items,
             "threats": [], "prediction": None}
     cbor = encode_cbor(body)
     return Frame(hashlib.sha256(cbor).hexdigest(), body, cbor)

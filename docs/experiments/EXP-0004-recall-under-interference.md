@@ -235,6 +235,15 @@ This section adds the choices the pre-registration left open. It changes nothing
 - **Order:** the run is serial.
 - **Dry-run cost:** an upper bound only, not an estimate.
 
+### Owner rulings on the escalated choices (2026-10-02)
+- **E2, approved:** N's budget counts rendered characters (D-0025 amendment 4).
+- **E3, approved as drafted:** V's memory section is each event's text fields joined by a space, as numbered lines in
+  rank order, with no role, source or trust labels, corrections included, and no character cap.
+- **E4, approved as drafted:** N's recall request is scope level `project`, query = the task prompt, addresses = the
+  task's addresses.
+- **E1:** an ADR proposal on contradiction formation comes first. The τ dev run follows once E1 is built, because
+  contested beliefs cannot make coverage strong.
+
 ### Escalated to the owner (they affect one arm differently or touch the bar)
 - **V's text format.** It affects V only.
 - **N's recall request.** It affects N only.

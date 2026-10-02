@@ -3,7 +3,10 @@ the sha256 of its CBOR; contested items labelled, carrying their contradicting e
 uncontested item; budgets; quorum pruning; the query text never in the frame."""
 import uuid
 
+import pytest
+
 from recall_kit import belief, counter_episode
+from nacre.interface.render_frame import render_memory_section
 from nacre.recall.assemble_frame import Budget, _pruned, assemble_frame
 from nacre.recall.embed_local import DIM
 from nacre.recall.freeze_snapshot import freeze_snapshot
@@ -70,6 +73,36 @@ def test_budgets_hold_and_a_tight_budget_drops_the_contested_item_first(rw, snap
     assert len(f.body["items"]) == 2 and not any(i["contested"] for i in f.body["items"])
     f2 = _recall(snap, provider, streams["a"], Budget(items=10, chars=40))
     assert sum(len(i["text"]) for i in f2.body["items"]) <= 40
+
+
+def test_the_character_budget_counts_the_rendered_section(rw, snap, provider, streams):
+    # D-0025 amendment 4 (owner, 2026-10-02; EXP-0004 E2): chars bound the RENDERED memory section.
+    _world(rw, provider, streams["a"])
+    full = _recall(snap, provider, streams["a"], Budget(items=10, chars=100_000))
+    rendered = [len(render_memory_section({"coverage": "weak", "items": full.body["items"][:k]}))
+                for k in range(len(full.body["items"]) + 1)]
+    texts = [len(i["text"]) for i in full.body["items"]]
+    cap = rendered[1] - 1                    # the first item's TEXT fits, but its rendered line does not
+    assert texts[0] <= cap
+    tight = _recall(snap, provider, streams["a"], Budget(items=10, chars=cap))
+    assert len(render_memory_section(tight.body)) <= cap
+    assert tight.body["items"][:1] != full.body["items"][:1]          # the first ranked item no longer fits
+    assert tight.body["budget"] == {"items": 10, "chars": cap, "counts": "rendered"}
+    for k, size in enumerate(rendered):                              # exact: k items fit when rendered[k] <= chars
+        if k and size <= 100_000:
+            f = _recall(snap, provider, streams["a"], Budget(items=k, chars=size))
+            assert f.body["items"] == full.body["items"][:k] and len(render_memory_section(f.body)) == size
+
+
+def test_frames_made_under_the_old_rule_rebuild_unchanged(rw, snap, provider, streams):
+    _world(rw, provider, streams["a"])
+    old = _recall(snap, provider, streams["a"], Budget(items=10, chars=60, counts="text"))
+    assert old.body["budget"] == {"items": 10, "chars": 60}                       # no "counts": the old bytes
+    assert sum(len(i["text"]) for i in old.body["items"]) <= 60
+    assert Budget.of(old.body["budget"]) == Budget(10, 60, "text")
+    assert Budget.of({"items": 3, "chars": 9, "counts": "rendered"}) == Budget(3, 9)
+    with pytest.raises(ValueError):
+        _recall(snap, provider, streams["a"], Budget(counts="tokens"))
 
 
 def test_pruning_needs_two_active_channels_outside_their_top_m():

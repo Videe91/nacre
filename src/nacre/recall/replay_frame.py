@@ -72,7 +72,7 @@ def replay_frame(conn: psycopg.Connection, key_provider: RootKeyProvider, replay
             request = RecallRequest(trace_stream, trace.scopes, trace.query, trace.addresses)
             rebuilt = build_frame(s, key_provider, snapshot, request, principal_id=trace.principal_id, cache=cache,
                                   embedder=embedder, tau_strong_q=trace.config["tau_strong_q"],
-                                  budget=Budget(trace.budget["items"], trace.budget["chars"]),
+                                  budget=Budget.of(trace.budget),
                                   config_version=trace.config["config_version"])
             frame_match = rebuilt.frame_id == trace.frame_id
     return Replay("replayed", verdicts, frame_match)

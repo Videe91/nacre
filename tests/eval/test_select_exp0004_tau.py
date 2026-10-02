@@ -87,7 +87,8 @@ _ACTIVE = st.fixed_dictionaries({c: st.booleans() for c in ("semantic", "lexical
 def _frame_top(ranked, active, texts, budget):
     """items[0]'s semantic score from the REAL assemble_frame fill (frame_item stubbed: it only reads the ledger)."""
     stub = lambda session, kp, c, text, r: {"version_event_id": str(r.version_event_id),  # noqa: E731
-                                            "scores": {"semantic": r.semantic}}
+                                            "scores": {"semantic": r.semantic}, "text": text,
+                                            "scope_level": "project", "contested": False}   # what rendering reads
     with mock.patch.object(AF, "frame_item", stub):
         f = AF.assemble_frame(None, None, snapshot=SimpleNamespace(canonical=lambda: {}), scopes=[],
                               principal_id=uuid.uuid4(), query_text="q", addresses=[], relaxations=[],
