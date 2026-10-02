@@ -17,7 +17,9 @@ Notes: Layers, in order:
   3. Entropy layer (D-0007): a high-entropy token right after an assignment or credential cue. D1
      parameters, tuned on the corpus: see ENTROPY_* below. It skips runs longer than 64 (blobs,
      hashes), runs starting "//" (URL tails), and unquoted values after a spaced " = " (code
-     expressions such as `X = module.Name`), and requires lower, upper and digits.
+     expressions such as `X = module.Name`), and requires lower, upper and digits. A candidate holding an internal
+  '=' (a chained assignment such as `_authToken=CLIENT_SECRET=value`) is judged on its last right-hand side only
+  (2026-10-02, after the H4 dotenv miss: the whole chain exceeded the 64-char limit and was skipped).
   Only the secret part of a match is replaced, as "[REDACTED:<rule id>]", so the surrounding context
   (e.g. "token = ") survives. Overlapping secret spans are merged; the label is the most specific rule
   (provider rule > generic rule > entropy).
@@ -40,7 +42,7 @@ import re2
 RULES_FILE = Path(__file__).resolve().parent / "data" / "gitleaks-v8.30.1.toml"
 RULES_SHA256 = "e163e53b9e7e8a8511e77271e2b323ed057759542a6d988258afe3a1fa329caf"
 NACRE_RULES_FILE = Path(__file__).resolve().parent / "data" / "nacre-rules-v1.toml"
-NACRE_RULES_SHA256 = "12395ce7bdf81a39ff30de5b0b580171c0836c047a25bfbf2a0151f37dc53e62"
+NACRE_RULES_SHA256 = "4b9d285ead869d645c0460458dcba134718bb1e830da194aea87c19a9caac411"
 
 ENTROPY_MIN_BITS = 4.3        # above hex's 4.0 ceiling
 ENTROPY_MIN_LEN, ENTROPY_MAX_LEN = 20, 64   # longer runs are data (blobs, hashes), not credentials
@@ -198,6 +200,10 @@ def _entropy_findings(text):
     for m in ENTROPY_CANDIDATE.finditer(text):
         start, end = m.span(1)
         token = text[start:end]
+        core = token.rstrip("=")                            # trailing '=' is base64 padding, part of the value
+        if "=" in core:                                     # a chained assignment (a=b=VALUE): judge only the last
+            start += core.rindex("=") + 1                   # right-hand side, so a nested KEY=VALUE is neither
+            token = text[start:end]                         # skipped as too long nor redacted with its '=' (D1)
         before = text[max(0, start - 16):start].lower()
         if token.startswith("//"):
             continue                                        # the rest of a URL after "scheme:"

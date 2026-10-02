@@ -80,3 +80,32 @@ failures and written a fix; then it is **demoted** to working data and a fresh o
   - **the dotenv miss:** the generator's `CLIENT_SECRET=<value>` placed after `_authToken=` in the `.npmrc`
     context.
 
+
+## Rule work after the H4 failure (2026-10-02, working data only; H4 is working data now)
+- **Root cause of the 2 single-character exposures** (Spring `.properties`, .NET connection string):
+  - `credential-slot-value` had an optional string-prefix group (`b`/`r`/`f`/`u`, for `b"…"` literals) that could
+    match WITHOUT a following quote, so it swallowed the first character of an unquoted value starting with one of
+    those letters.
+  - **Fix:** a prefix is taken only together with its quote.
+  - **Shared by other rules?** Probed every layer with values starting with each letter and digit across 16
+    contexts. Only this rule lost a first character; gitleaks `generic-api-key` covered the whole value wherever
+    it overlapped.
+  - **Separate entropy-layer quirk found:** after a cue word, its value class included `=`, so it redacted a
+    leading `=` too (over-coverage, not exposure). Fixed by the next item.
+- **Nested dotenv miss:**
+  - **Cause:** the entropy layer's candidate started at the first `:`/`=` and took `_authToken=CLIENT_SECRET=value`
+    as one 73-character token, over the 64 limit, so it was skipped; the scan does not overlap.
+  - **Fix (general):** a candidate holding an internal `=` (not trailing padding) is judged on its last
+    right-hand side.
+- **Multi-line literals:** the slot rule now takes a credential-named key followed by a multi-line string literal,
+  heredoc or block scalar whose content starts on a later line.
+  - The openers come from 20 language references (Python, Kotlin, Java, Scala, Swift, Elixir, Ruby, Bash, HCL,
+    PHP, PowerShell, C#, Rust, C++, Go/JS, TOML, Dart, Lua, Nix, YAML, plus XML CDATA). The sources are listed in
+    `scripts/build_credential_slot_regex.py`, which generates the rule's regex.
+- **Working data after the revision:**
+  - **Credential-slot catch:** working set 499/500; H3 250/250; H4 249/250. The remaining miss is the digit gap,
+    A-0044.
+  - **Every other H4 group** is ≥ 99% (the dotenv case is fixed).
+  - **False positives:** H4 negatives 0/400; working negatives 4/811 = 0.49% (unchanged).
+- **Next:** H5, built blind by a separate session (multi-line contexts in languages the rule writer did not
+  target), sealed, then measured once. If it fails, there is no patching on H5.

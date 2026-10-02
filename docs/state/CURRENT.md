@@ -1180,3 +1180,10 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   - **Back-fill:** generation 1 is back-filled for streams indexed before R9.
   - **Locking:** the append lock is held throughout, so no version can land mid-rebuild.
   - **Refactor:** `index_version` gained an explicit generation, `entry_plaintext()` and `open_plaintext()`.
+- 2026-10-02 — **Credential-slot rule revised on working data (H4 now working).**
+  - **Fixes:**
+    - the root cause of the 1-character exposures (a string prefix matched without its quote);
+    - nested dotenv (the entropy layer judges the last right-hand side of a chained assignment);
+    - multi-line literal openers from 20 language references (`scripts/build_credential_slot_regex.py`).
+  - **Working data:** working set 499/500, H3 250/250, H4 249/250; FP 0.49% working, 0/400 on H4 negatives.
+  - **H5:** being built blind by a separate session. Measured once after sealing.

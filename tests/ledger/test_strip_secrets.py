@@ -201,3 +201,61 @@ def test_credential_slot_rule_shapes(shape):
 ])
 def test_credential_slot_rule_leaves_non_values_alone(text):
     assert "credential-slot-value" not in {f.rule_id for f in strip_secrets(text).findings}
+
+
+# Multi-line string literals in a credential slot, one per documented form (scripts/build_credential_slot_regex.py
+# lists the language references). The value starts on a later line than the key.
+_Q3, _S3 = '"' * 3, "'" * 3
+
+
+@pytest.mark.parametrize("shape", [
+    "password = " + _Q3 + "\n    {v}\n" + _Q3,                               # Python triple quotes
+    "secret = rb" + _S3 + "\n{v}\n" + _S3,                                   # Python bytes raw prefix
+    "val apiToken = " + _Q3 + "\n    {v}\n" + _Q3 + ".trimIndent()",         # Kotlin raw string
+    "String password = " + _Q3 + "\n        {v}\n        " + _Q3 + ";",      # Java text block
+    "val secret = s" + _Q3 + "\n  {v}\n" + _Q3,                              # Scala interpolator
+    "let token = #" + _Q3 + "\n{v}\n" + _Q3 + "#",                           # Swift extended delimiter
+    "private_key: ~S" + _Q3 + "\n  {v}\n  " + _Q3,                           # Elixir sigil heredoc
+    "password = <<~EOS.chomp\n  {v}\nEOS",                                   # Ruby squiggly heredoc + method
+    "export API_TOKEN=$(cat <<'EOF'\n{v}\nEOF\n)",                           # Bash here-document in $(...)
+    'secret = <<-EOT\n    {v}\n    EOT',                                     # HCL heredoc
+    "$password = <<<'NOW'\n{v}\nNOW;",                                       # PHP nowdoc
+    '$token = @"\n{v}\n"@',                                                  # PowerShell here-string
+    'var secret = $' + _Q3 + "\n    {v}\n    " + _Q3 + ";",                  # C# raw string literal
+    'let token = r#"\n{v}\n"#;',                                             # Rust raw string
+    'auto secret = R"KEY(\n{v}\n)KEY";',                                     # C++ raw string
+    "const apiKey = `\n  {v}\n`;",                                          # JS template literal / Go raw string
+    "password = " + _S3 + "\n{v}\n" + _S3,                                   # TOML multi-line literal
+    "local secret = [==[\n{v}\n]==]",                                        # Lua long bracket
+    "password = ''\n  {v}\n'';",                                            # Nix indented string
+    "api_key: |2-\n    {v}\n",                                               # YAML block scalar, indentation + chomp
+    "token: >+\n  {v}\n",                                                    # YAML folded, keep
+    "<password><![CDATA[{v}]]></password>",                                  # XML CDATA
+])
+def test_credential_slot_multiline_literals(shape):
+    v = _slot_value(shape)
+    r = strip_secrets(shape.format(v=v))
+    assert v not in r.text
+
+
+@pytest.mark.parametrize("first", list("bBrRfFuU"))
+def test_a_value_starting_with_a_string_prefix_letter_is_covered_from_its_first_character(first):
+    # H4 root cause (2026-10-02): the optional string prefix (b"", r"") matched without a quote and swallowed the
+    # value's first character. A prefix is now taken only together with its quote.
+    v = first + _slot_value(first)[1:]
+    for text in (f"spring.datasource.password={v}\n", f"Password={v};Encrypt=True", f'token = {first}"{v[1:]}"'):
+        r = strip_secrets(text)
+        secret = v if not text.startswith("token") else v[1:]
+        start = text.index(secret)
+        covered = {i for f in r.findings for i in range(f.start, f.end)}
+        assert all(i in covered for i in range(start, start + len(secret))), text
+
+
+def test_a_chained_assignment_is_judged_on_its_last_value():
+    # H4 dotenv miss (2026-10-02): `_authToken=NAME=value` made one >64-char candidate that the entropy layer skipped.
+    import random
+    r = random.Random(5)
+    v = "".join(r.choice(string.ascii_letters + string.digits + "_-") for _ in range(48))
+    text = f"//registry.npmjs.org/:_authToken=CLIENT_SECRET={v}\n"
+    res = strip_secrets(text)
+    assert v not in res.text and "CLIENT_SECRET=" in res.text      # the name and '=' survive; the value does not
