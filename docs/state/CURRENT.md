@@ -1270,3 +1270,8 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   - **D1 reading to confirm (owner):** D-0025 §5 "pinned whatever the budget" vs the EXP-0004 budget fixed at
     10 items / 4,000 chars. Implemented as: contested items are pinned against relevance PRUNING but count against
     the budget and fill last, so a tight budget can drop them.
+- 2026-10-02 — **R18 BLOCKED (owner decision, D3):** where the ContextAssembled trace lives. Proposed as D-0025
+  amendment 2: content parts in each item's source stream, written by a recall-trace service principal (contributor
+  keys stay local, so erasure and forget_period reach them); query part and header in the requester's home stream;
+  one transaction. **R19 and R20 depend on it.** Not blocked: the interface work (R1–R5, R21–R24) and EXP-0004
+  preparation.
