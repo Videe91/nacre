@@ -14,7 +14,12 @@
    - An exact pin in the `test` extra; never imported by `src/`.
    - The committed I1 images plus the sha256s in `I1_MANIFEST.json` are the source of truth.
    - Regenerating the images with Pillow is checked only on the pinned platform (Pillow 12.3.0, Darwin-arm64).
-3. **2026-10-02: PROPOSED, owner to confirm. Pillow becomes a RUNTIME dependency.**
+3. **2026-10-02: ACCEPTED (owner) on conditions. Pillow becomes a RUNTIME dependency.**
+   - **Conditions (binding):**
+     - extraction and OCR run in an ISOLATED SUBPROCESS: no network, no database credentials, memory and CPU
+       limits, a timeout;
+     - `opencv-python-headless` instead of `opencv-python`;
+     - ALL transitive dependencies pinned and hash-locked.
    - **Why:** RapidOCR, the OCR engine the owner approved in D-0027, requires Pillow at runtime.
    - **Transitive dependencies it pulls in (left unpinned, as elsewhere):** opencv-python, Shapely, pyclipper,
      omegaconf, antlr4-python3-runtime, requests, PyYAML, tqdm, colorlog, six.

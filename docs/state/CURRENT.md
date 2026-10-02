@@ -1319,3 +1319,13 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
 - 2026-10-02 — **R21 `interface/render_frame.py` built.** The memory section is a pure function of the frame,
   identical for every provider; contested items read "CONTESTED, not established: … Contradicting evidence: …";
   weak or none coverage asks instead of guessing.
+- 2026-10-02 — **Owner decisions.**
+  - **D-0026 amendment 2 ACCEPTED:** separate `nacre_auth`, `nacre_principal_admin`, and read-only `nacre_app`;
+    tokens as keyed hashes (HMAC under a key outside the DB); expiry and immediate revocation; throttled last-used
+    stamping. **R1–R4, R22–R23 proceed.**
+  - **D-0006 amendment 3 ACCEPTED on conditions:** isolated extraction/OCR subprocess; opencv-python-headless; all
+    transitive dependencies pinned and hash-locked.
+  - **D-0008 amendment 7:** an optional `extractors` field; old records decode byte-identically.
+  - **D-0027 amendment 2:** the ratio check only above 1 MB expanded, absolute caps always; OCR limits confirmed
+    (report hit rates); I1 measured once (fail → report and demote); report the unscannable rate on clean images.
+  - **Then:** R24–R26, τ, and the pooled latency evidence.

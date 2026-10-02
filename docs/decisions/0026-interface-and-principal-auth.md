@@ -60,7 +60,16 @@ rejected, never downgraded.
   5. the D-0018 / D-0019 authority check (the gate and the sleep-pass admission) agrees with this table on every
      row. That is a cross-check test against `capture/section_authority.py`.
 
-## Amendment 2: database roles for authentication and principal admin. PROPOSED (D3), awaiting owner (2026-10-02)
+## Amendment 2: database roles for authentication and principal admin. ACCEPTED (owner, 2026-10-02) as proposed
+**Owner conditions at acceptance (binding):**
+- **Separate roles:** `nacre_auth`, `nacre_principal_admin`, and `nacre_app` read-only on `auth`.
+  `nacre_keyadmin` is NOT reused.
+- **Tokens are stored only as KEYED hashes:** HMAC-SHA256 under a token-hashing key held outside the database, like
+  the root key, so a database copy alone cannot test guesses.
+- **Expiry and immediate revocation:** checked on every call.
+- **Last-used stamping is throttled:** at most one write per token per interval.
+
+**The proposal as approved:**
 **The gap (found before building R1):** D-0026 names the `auth.*` tables but not which database roles may touch
 them. Token lookup runs BEFORE any scoped session exists, so it cannot rely on stream RLS.
 
