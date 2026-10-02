@@ -1316,3 +1316,6 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
     (`nacre_auth`) and principal admin (`nacre_principal_admin`), and the `nacre_app` read grants.
   - **Not blocked meanwhile:** EXP-0004 preparation (runner R25/R26, τ on the dev split), the Anthropic adapter
     (R24), `render_frame` (R21).
+- 2026-10-02 — **R21 `interface/render_frame.py` built.** The memory section is a pure function of the frame,
+  identical for every provider; contested items read "CONTESTED, not established: … Contradicting evidence: …";
+  weak or none coverage asks instead of guessing.
