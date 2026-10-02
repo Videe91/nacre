@@ -2,7 +2,7 @@
 Functionality: Assemble the frozen ContextFrame: quorum pruning, budget fill in rank order, item contents (with the
   contradicting evidence of contested items), canonical CBOR and the frame_id.
 Owns: the pruning rule, the budget fill, the frame's fields and canonical form, and frame_id = sha256(CBOR).
-Public entry: assemble_frame(), Frame, Budget, FRAME_VERSION
+Public entry: assemble_frame(), frame_item(), content_view(), Frame, Budget, FRAME_VERSION
 Decisions: D-0025, D-0008, D-0023
 Assumptions: A-0036
 Notes: D-0025 §5, §7 and amendment 1 (owner, 2026-10-02).
@@ -15,6 +15,8 @@ Notes: D-0025 §5, §7 and amendment 1 (owner, 2026-10-02).
   - Items carry text, kind, status, scope level, the four scores, qualifiers and origin from the version content,
     and for contested items `contested: true` plus `contradicting`: the evidence event ids and the contradiction text
     recorded in the contested version (never phrased as fact: rendering is the interface's job, R21).
+  - content_view(item): the pool-independent part of an item (no scores), which the trace MACs under the item's own
+    key (D-0025 amendment 2), so other items still verify after one item is erased and the pool changes.
   - Canonical form: deterministic CBOR, no floats (D-0008); frame_id = sha256 of those bytes. The frame holds the
     query's sha256, never the query text (the trace stores the text under the requester's key, D-0025 §8).
 """
@@ -61,10 +63,35 @@ def _version_content(session: ScopedSession, kp: RootKeyProvider, stream: UUID, 
     return body.get("content", {}) if isinstance(body, dict) else {}
 
 
+_CONTENT_FIELDS = ("version_event_id", "object_id", "version", "kind", "status", "scope_level", "text", "qualifiers",
+                   "origin", "contested", "contradicting")
+
+
+def frame_item(session: ScopedSession, key_provider: RootKeyProvider, c, text: str, r: Ranked | None) -> dict:
+    """One frame item for candidate `c` (merge_scopes.Candidate); scores from `r` (None: replay of content only)."""
+    content = _version_content(session, key_provider, c.stream_id, c.commit_seq)
+    item = {"version_event_id": str(c.version_event_id), "object_id": str(c.object_id), "version": c.version,
+            "kind": c.kind, "status": c.status, "scope_level": c.scope_level, "text": text,
+            "qualifiers": [{"type": q.get("type"), "text": q.get("text")} for q in content.get("qualifiers", [])],
+            "origin": content.get("origin"),
+            "scores": ({"semantic": r.semantic, "lexical": r.lexical, "entity": r.entity, "fused_q": r.fused_q}
+                       if r is not None else None),
+            "contested": c.status == "contested"}
+    if c.status == "contested":
+        item["contradicting"] = {"event_ids": [str(e) for e in c.contradicting_event_ids],
+                                 "text": content.get("contradiction_text")}
+    return item
+
+
+def content_view(item: dict) -> bytes:
+    """Canonical bytes of the item's content (no scores): what the trace MACs under the item's own key."""
+    return encode_cbor({k: item[k] for k in _CONTENT_FIELDS if k in item})
+
+
 def assemble_frame(session: ScopedSession, key_provider: RootKeyProvider, *, snapshot, scopes, principal_id: UUID,
                    query_text: str, addresses: Sequence[str], relaxations: Sequence[str], candidates: Sequence,
                    ranked: Sequence[Ranked], active: Mapping[str, bool], texts: Mapping[UUID, str], coverage: str,
-                   budget: Budget = Budget(), pipeline_version: str = "recall-v1") -> Frame:
+                   budget: Budget = Budget(), pipeline_version: str = "recall-v1", config: Mapping | None = None) -> Frame:
     """The frame for this recall (canonical bytes and id). `candidates` are merge_scopes.Candidate."""
     by_id = {c.version_event_id: c for c in candidates}
     pruned = _pruned(ranked, active, 3 * budget.items)
@@ -75,17 +102,7 @@ def assemble_frame(session: ScopedSession, key_provider: RootKeyProvider, *, sna
         text = texts.get(r.version_event_id, "")
         if used + len(text) > budget.chars:
             continue
-        c = by_id[r.version_event_id]
-        content = _version_content(session, key_provider, c.stream_id, c.commit_seq)
-        item = {"version_event_id": str(c.version_event_id), "object_id": str(c.object_id), "version": c.version,
-                "kind": c.kind, "status": c.status, "scope_level": c.scope_level, "text": text,
-                "qualifiers": [{"type": q.get("type"), "text": q.get("text")} for q in content.get("qualifiers", [])],
-                "origin": content.get("origin"),
-                "scores": {"semantic": r.semantic, "lexical": r.lexical, "entity": r.entity, "fused_q": r.fused_q},
-                "contested": c.status == "contested"}
-        if c.status == "contested":
-            item["contradicting"] = {"event_ids": [str(e) for e in c.contradicting_event_ids],
-                                     "text": content.get("contradiction_text")}
+        item = frame_item(session, key_provider, by_id[r.version_event_id], text, r)
         items.append(item)
         used += len(text)
     body = {"v": FRAME_VERSION, "frame_kind": "context", "pipeline_version": pipeline_version,
@@ -93,7 +110,7 @@ def assemble_frame(session: ScopedSession, key_provider: RootKeyProvider, *, sna
             "principal_id": str(principal_id), "query_sha256": hashlib.sha256(query_text.encode()).hexdigest(),
             "addresses": list(addresses), "relaxations": list(relaxations),
             "channels": {k: bool(v) for k, v in sorted(active.items())}, "coverage": coverage,
-            "budget": {"items": budget.items, "chars": budget.chars}, "items": items,
+            "budget": {"items": budget.items, "chars": budget.chars}, "config": dict(config or {}), "items": items,
             "threats": [], "prediction": None}
     cbor = encode_cbor(body)
     return Frame(hashlib.sha256(cbor).hexdigest(), body, cbor)

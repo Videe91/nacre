@@ -5,7 +5,7 @@ Owns: body validation (D-0008 body map v1), the ciphertext header, the AAD, the 
   count and its 2^28 cap, and HKDF sub-keys for request_mac / attachment_ref / interp MACs, and for sealing
   purpose-separated derived data (the recall index, D-0024).
 Public entry: encrypt_payload(), seal_bytes(), derive_mac(), derive_subkey(), SubkeyPurpose
-Decisions: D-0002, D-0004, D-0007, D-0008, D-0017, D-0024
+Decisions: D-0002, D-0004, D-0007, D-0008, D-0017, D-0024, D-0025
 Assumptions: A-0015
 Notes: Ciphertext = version(0x01) | algorithm(0x01, AES-256-GCM) | flags(0x00) | key_id(16) | nonce(12) | ct+tag.
   AAD = encode_envelope(AAD fields) | header bytes 0-2 (D-0008): the event's identity, type and
@@ -46,6 +46,7 @@ class MacPurpose(StrEnum):
     REQUEST_MAC = "request_mac"
     ATTACHMENT_REF = "attachment_ref"
     INTERP_MAC = "interp_mac"          # D-0017: keyed MACs in the interp projection (no plaintext, shredded with the key)
+    TRACE_MAC = "recall_trace_mac"     # D-0025 amendment 2: per-item content MACs in recall traces (die with the item key)
 
 
 class SubkeyPurpose(StrEnum):
