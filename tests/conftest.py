@@ -11,6 +11,7 @@ from psycopg.conninfo import conninfo_to_dict, make_conninfo
 from nacre.core.db import DbRole, connect
 from nacre.keys.local_file_root_key import LocalFileRootKeyProvider
 from nacre.schema.apply_migrations import apply_migrations
+from nacre.schema.enable_role_logins import enable_role_logins
 from nacre.scopes.open_scoped_session import open_scoped_session
 
 DEFAULT_TEST_DSN = "postgresql://postgres:nacre_dev@127.0.0.1:54329/postgres"
@@ -53,10 +54,8 @@ def migrated_db(fresh_db):
     Test-only: enables LOGIN on the cluster-wide NOLOGIN roles with a test password."""
     with connect(DbRole.MIGRATOR, dsn=fresh_db) as conn:
         apply_migrations(conn)
-    with psycopg.connect(fresh_db, autocommit=True) as admin:
-        for role in ("nacre_app", "nacre_verifier", "nacre_checkpointer", "nacre_keyadmin", "nacre_gc", "nacre_auth",
-                     "nacre_principal_admin"):
-            admin.execute(f"ALTER ROLE {role} LOGIN PASSWORD '{TEST_ROLE_PASSWORD}'")
+    enable_role_logins(fresh_db, ("nacre_app", "nacre_verifier", "nacre_checkpointer", "nacre_keyadmin", "nacre_gc",
+                                  "nacre_auth", "nacre_principal_admin"), TEST_ROLE_PASSWORD)   # serialised cluster-wide
     return {
         "admin": fresh_db,
         "app": dsn_with(fresh_db, user="nacre_app", password=TEST_ROLE_PASSWORD),

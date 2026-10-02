@@ -189,7 +189,7 @@ def _ensure_db(n) -> dict:
     with psycopg.connect(ADMIN, autocommit=True) as c:
         exists = c.execute("SELECT 1 FROM pg_database WHERE datname = %s", (name,)).fetchone()
         if exists and (d / "meta.json").exists():
-            c.execute(sql.SQL("ALTER ROLE nacre_app LOGIN PASSWORD {}").format(sql.Literal(APP_PASSWORD)))
+            enable_role_logins(ADMIN, ["nacre_app"], APP_PASSWORD)
             return json.loads((d / "meta.json").read_text())
         if exists:
             c.execute(f'DROP DATABASE "{name}" WITH (FORCE)')      # orphan: its root keys are gone
@@ -202,18 +202,19 @@ def _ensure_db(n) -> dict:
             meta = {**json.loads((_dir(src) / "meta.json").read_text()), "n": n, "db": name, "cloned_from": src}
             (d / "progress.txt").write_text(str(_progress(src)))
             (d / "meta.json").write_text(json.dumps(meta))
-            c.execute(sql.SQL("ALTER ROLE nacre_app LOGIN PASSWORD {}").format(sql.Literal(APP_PASSWORD)))
+            enable_role_logins(ADMIN, ["nacre_app"], APP_PASSWORD)
             return meta
         c.execute(f'CREATE DATABASE "{name}"')
     db = _dsn(dbname=name)
     with connect(DbRole.MIGRATOR, dsn=db) as conn:
         from nacre.schema.apply_migrations import apply_migrations
+    from nacre.schema.enable_role_logins import enable_role_logins
         apply_migrations(conn)
     LocalFileRootKeyProvider.initialise(d / "rootkeys")
     ids, principal = {k: uuid.uuid4() for k in LEVELS}, uuid.uuid4()
     org = ids["org"]
     with psycopg.connect(db, autocommit=True) as c:
-        c.execute(sql.SQL("ALTER ROLE nacre_app LOGIN PASSWORD {}").format(sql.Literal(APP_PASSWORD)))
+        enable_role_logins(ADMIN, ["nacre_app"], APP_PASSWORD)
         for kind in reversed(LEVELS):
             c.execute("INSERT INTO scopes.scopes (stream_id, kind, org_id, source_event_id) VALUES (%s,%s,%s,%s)",
                       (ids[kind], kind, org, uuid.uuid4()))
@@ -419,6 +420,6 @@ if __name__ == "__main__":
     if not ADMIN:
         sys.exit("set NACRE_TEST_DSN to the test Postgres superuser DSN (as tests/conftest.py's pg_dsn uses)")
     with psycopg.connect(ADMIN, autocommit=True) as c:             # every invocation: this run's app password
-        c.execute(sql.SQL("ALTER ROLE nacre_app LOGIN PASSWORD {}").format(sql.Literal(APP_PASSWORD)))
+        enable_role_logins(ADMIN, ["nacre_app"], APP_PASSWORD)
     fn = {"build": build, "measure": measure, "cold": cold, "drop": drop}[cmd]
     print(json.dumps(fn(n, *rest), indent=1))

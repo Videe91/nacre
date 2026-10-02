@@ -30,7 +30,8 @@ from nacre.core.db import DbRole, connect, open_pool  # noqa: E402
 from nacre.core.event import ActorKind, EventType, PayloadType, Source  # noqa: E402
 from nacre.keys.local_file_root_key import LocalFileRootKeyProvider  # noqa: E402
 from nacre.ledger.append_event import AppendRequest, append_event  # noqa: E402
-from nacre.schema.apply_migrations import apply_migrations  # noqa: E402
+from nacre.schema.apply_migrations import apply_migrations
+from nacre.schema.enable_role_logins import enable_role_logins  # noqa: E402
 from nacre.scopes.open_scoped_session import open_scoped_session  # noqa: E402
 
 ADMIN = os.environ.get("NACRE_TEST_DSN", "postgresql://postgres:nacre_dev@127.0.0.1:54329/postgres")
@@ -66,15 +67,15 @@ def main(writers=16, per_writer=200, mode="threads"):
         db = _dsn(dbname=name)
         with connect(DbRole.MIGRATOR, dsn=db) as conn:
             apply_migrations(conn)
+        app = _dsn(dbname=name, user="nacre_app", password="nacre_bench_only")
+        enable_role_logins(db, ["nacre_app"], conninfo_to_dict(app)["password"])   # serialised (flaky hunt)
         with psycopg.connect(db, autocommit=True) as c:
-            c.execute("ALTER ROLE nacre_app LOGIN PASSWORD 'nacre_bench_only'")
             org, stream, principal = uuid.uuid4(), uuid.uuid4(), uuid.uuid4()
             for s, kind in ((org, "org"), (stream, "project")):
                 c.execute("INSERT INTO scopes.scopes (stream_id, kind, org_id, source_event_id) VALUES (%s,%s,%s,%s)",
                           (s, kind, org, uuid.uuid4()))
             c.execute("""INSERT INTO scopes.scope_grants (principal_id, stream_id, org_id, can_read, can_append,
                          source_event_id, source_seq) VALUES (%s,%s,%s,true,true,%s,1)""", (principal, stream, org, uuid.uuid4()))
-        app = _dsn(dbname=name, user="nacre_app", password="nacre_bench_only")
         provider_dir = Path(tempfile.mkdtemp()) / "rootkeys"
         provider = LocalFileRootKeyProvider.initialise(provider_dir)
 

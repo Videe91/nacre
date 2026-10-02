@@ -46,6 +46,7 @@ from nacre.models.load_model_call_fixtures import export_model_calls, load_model
 from nacre.models.recorded_provider import RecordedProvider  # noqa: E402
 from nacre.models.set_model_policy import set_model_policy  # noqa: E402
 from nacre.schema.apply_migrations import apply_migrations  # noqa: E402
+from nacre.schema.enable_role_logins import enable_role_logins  # noqa: E402
 from nacre.scopes.bootstrap_org import bootstrap_org  # noqa: E402
 from nacre.scopes.open_scoped_session import open_scoped_session  # noqa: E402
 from nacre.scopes.register_scope import ScopeKind, register_scope  # noqa: E402
@@ -138,9 +139,8 @@ def one_run(rep, rdir, record, mode, recorded_dir, keep_db=False, rebuild=False)
         db = _dsn(dbname=name)
         with connect(DbRole.MIGRATOR, dsn=db) as conn:
             apply_migrations(conn)
-        with psycopg.connect(db, autocommit=True) as c:
-            c.execute("ALTER ROLE nacre_app LOGIN PASSWORD 'nacre_exp_only'")
         app = _dsn(dbname=name, user="nacre_app", password="nacre_exp_only")
+        enable_role_logins(db, ["nacre_app"], conninfo_to_dict(app)["password"])   # serialised (flaky hunt)
         provider = LocalFileRootKeyProvider.initialise(Path(tempfile.mkdtemp()) / "rootkeys")
         owner = uuid.uuid4()
         with connect(DbRole.MIGRATOR, dsn=db) as admin:

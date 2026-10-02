@@ -58,6 +58,7 @@ from nacre.keys.local_file_root_key import LocalFileRootKeyProvider
 from nacre.models.call_model import load_prices
 from nacre.models.set_model_policy import set_model_policy
 from nacre.schema.apply_migrations import apply_migrations
+from nacre.schema.enable_role_logins import enable_role_logins
 from nacre.scopes.bootstrap_org import bootstrap_org
 from nacre.scopes.open_scoped_session import open_scoped_session
 
@@ -79,9 +80,7 @@ def fresh_env(admin_dsn: str, *, role_password: str = "nacre_exp_only", keep: bo
             c.execute(f'CREATE DATABASE "{name}"')
         with connect(DbRole.MIGRATOR, dsn=dsn(dbname=name)) as conn:
             apply_migrations(conn)
-        with psycopg.connect(dsn(dbname=name), autocommit=True) as c:
-            for role in ("nacre_app", "nacre_keyadmin"):
-                c.execute(f"ALTER ROLE {role} LOGIN PASSWORD '{role_password}'")
+        enable_role_logins(dsn(dbname=name), ["nacre_app", "nacre_keyadmin"], role_password)   # serialised
         app = dsn(dbname=name, user="nacre_app", password=role_password)
         keyadmin = dsn(dbname=name, user="nacre_keyadmin", password=role_password)
         kp = LocalFileRootKeyProvider.initialise(Path(tempfile.mkdtemp()) / "rootkeys")

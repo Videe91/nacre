@@ -1706,3 +1706,25 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   They are judged on the quiet-machine gate below; F3 and `tuple concurrently updated` stay TO HUNT.
 - 2026-10-02 — **Gate for this commit (quiet machine, load 4.4):** 1671 passed, 60 deselected (pytest exit 0); check_structure exit 0. No LockNotAvailable or setup race on a quiet run.
   - The pre-commit hook flagged a 41-character dotted identifier in a docstring of select_exp0004_tau.py (entropy rule). Reworded; no allowlist. Docstring-only change after the gate (select tests re-run: pass).
+- 2026-10-02 — **Mutation check of the F2 lock fix:** a mutant restoring the old order (lock after key creation) is
+  killed by the interleaving test; the working tree was verified unchanged.
+- 2026-10-02 — **Flaky hunt 1, `tuple concurrently updated`: TEST-INFRA RACE, FIXED.**
+  - **Cause:** roles are cluster-wide `pg_authid` rows. Concurrent `ALTER ROLE` on the same role, from separate
+    pytest processes or the EXP-0004 runner, fails.
+  - **Reproduced deterministically:** writer 1 holds an uncommitted ALTER ROLE; writer 2's ALTER ROLE fails when
+    writer 1 commits.
+  - **Fix:** `schema/enable_role_logins.py`. Every caller serialises on one advisory lock in the cluster's
+    `postgres` database (advisory locks are per database), and the password is a bound literal. Callers:
+    tests/conftest.py, eval/run_exp0004.py fresh_env, scripts/bench_append_throughput.py, scripts/run_exp0003.py,
+    scripts/bench_recall_latency.py. No other raw ALTER ROLE remains, except a deliberate hostile-default test in
+    tests/core/test_db.py.
+  - **Tests:** a positive control (the bare race fails), and the helper waiting and then succeeding.
+  - **NOT fixed (F3):** runs with DIFFERENT passwords (tests vs a benchmark) still overwrite each other. Rule: never
+    run them concurrently.
+- 2026-10-02 — **Flaky hunt 2, `test_time_stays_linear_on_dense_megabyte_inputs`: TEST BUG, FIXED.**
+  - **Cause:** an absolute 8 s ceiling measured the machine. It took 3.3 s quiet and 10.0 s at load ~56.
+  - **Now:** a scaling test. Doubling the input must keep the time ratio below 3 (linear ≈ 2, quadratic ≈ 4), with
+    a 60 s hang guard; the single 1.2 MB value case is a separate hang guard.
+  - **Runs:** passes 3/3 quiet, and under 20 busy processes (load ~30).
+  - **Not done:** mutation-checking against a re-introduced quadratic scan.
+- 2026-10-02 — **Gate for the flaky-hunt commit:** 1674 passed, 60 deselected (pytest exit 0); check_structure exit 0. It started at load 24 (the decaying artificial-load test), so the new timing test also passed under load in the full suite.

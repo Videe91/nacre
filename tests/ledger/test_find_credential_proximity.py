@@ -61,15 +61,31 @@ def test_a_value_with_no_credential_word_before_it_is_out_of_reach_by_design():
 
 
 
-@pytest.mark.parametrize("text", ["token " * 200_000, "token = value_here; password: x\n" * 40_000,
-                                  "token " + "a1" * 600_000])
-def test_time_stays_linear_on_dense_megabyte_inputs(text):
-    # 2026-10-02: per-word scans of the whole text made 320 kB take 18.8 s and hung the full suite; now every step is
-    # bounded. Generous ceiling, still far below the quadratic behaviour (> 20 s here).
+@pytest.mark.parametrize("unit, count", [("token ", 100_000), ("token = value_here; password: x\n", 20_000)])
+def test_time_stays_linear_on_dense_megabyte_inputs(unit, count):
+    # 2026-10-02: per-word scans of the whole text made 320 kB take 18.8 s and hung the full suite; every step is now
+    # bounded. Flaky-test hunt (2026-10-02): an absolute 8 s ceiling failed at load ~56 (10.0 s) and passed quiet
+    # (3.3 s), so it measured the machine, not the algorithm (a TEST bug). Doubling the input must roughly double the
+    # time (linear ~2x, quadratic ~4x); both sizes run under the same load. A 60 s guard still catches a hang.
+    import time
+
+    def timed(text):
+        t = time.perf_counter()
+        proximity_findings(text)
+        return time.perf_counter() - t
+
+    timed(unit * 1000)                                           # warm-up (regex compilation)
+    small = min(timed(unit * count) for _ in range(2))
+    large = min(timed(unit * 2 * count) for _ in range(2))
+    assert large < 60.0
+    assert large / small < 3.0, (small, large)
+
+
+def test_a_long_run_after_one_label_is_bounded():
     import time
     t = time.perf_counter()
-    proximity_findings(text)
-    assert time.perf_counter() - t < 8.0
+    proximity_findings("token " + "a1" * 600_000)
+    assert time.perf_counter() - t < 60.0                       # hang guard only (one 1.2 MB value)
 
 
 @pytest.mark.parametrize("text", [
