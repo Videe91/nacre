@@ -1,0 +1,269 @@
+{
+ "groups": {
+  "credential-slot:alnum-24": {
+   "n": 50,
+   "rate": 0.88,
+   "misses": [
+    "alnum-24 | context: import Config\n\nconfig :billing, Billing.",
+    "alnum-24 | context: $ docker login --username ci-bot --passw",
+    "alnum-24 | context: import Config\n\nconfig :billing, Billing."
+   ],
+   "residue_rate": 0.0,
+   "strict_rate": 0.88,
+   "longest_fragment": 24
+  },
+  "credential-slot:base64-32-bytes": {
+   "n": 50,
+   "rate": 0.9,
+   "misses": [
+    "base64-32-bytes | context: import Config\n\nconfig :billing, Billing.",
+    "base64-32-bytes | context: import Config\n\nconfig :billing, Billing.",
+    "base64-32-bytes | context: import Config\n\nconfig :billing, Billing."
+   ],
+   "residue_rate": 0.0,
+   "strict_rate": 0.9,
+   "longest_fragment": 44
+  },
+  "credential-slot:hex-40": {
+   "n": 50,
+   "rate": 0.9,
+   "misses": [
+    "hex-40 | context: import Config\n\nconfig :billing, Billing.",
+    "hex-40 | context: import Config\n\nconfig :billing, Billing.",
+    "hex-40 | context: import Config\n\nconfig :billing, Billing."
+   ],
+   "residue_rate": 0.0,
+   "strict_rate": 0.88,
+   "longest_fragment": 40
+  },
+  "credential-slot:hex-64": {
+   "n": 50,
+   "rate": 0.9,
+   "misses": [
+    "hex-64 | context: import Config\n\nconfig :billing, Billing.",
+    "hex-64 | context: import Config\n\nconfig :billing, Billing.",
+    "hex-64 | context: import Config\n\nconfig :billing, Billing."
+   ],
+   "residue_rate": 0.0,
+   "strict_rate": 0.9,
+   "longest_fragment": 64
+  },
+  "credential-slot:uuid": {
+   "n": 50,
+   "rate": 0.9,
+   "misses": [
+    "uuid | context: import Config\n\nconfig :billing, Billing.",
+    "uuid | context: import Config\n\nconfig :billing, Billing.",
+    "uuid | context: import Config\n\nconfig :billing, Billing."
+   ],
+   "residue_rate": 0.0,
+   "strict_rate": 0.88,
+   "longest_fragment": 36
+  },
+  "generic:credentials-in-url/https-userinfo": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:db-connection-string/mongodb": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:db-connection-string/mysql": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:db-connection-string/postgresql": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:dotenv/assignment": {
+   "n": 50,
+   "rate": 0.98,
+   "misses": [
+    "assignment | context: registry=https://registry.npmjs.org/\n//r"
+   ],
+   "residue_rate": 0.0,
+   "strict_rate": 0.98,
+   "longest_fragment": 48
+  },
+  "generic:jwt/hs256": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:private-key/openssh-ed25519": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:private-key/openssh-rsa": {
+   "n": 17,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:private-key/pkcs1-rsa": {
+   "n": 17,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:private-key/pkcs8-ec": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:private-key/pkcs8-rsa": {
+   "n": 17,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:private-key/sec1-ec": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "provider:GitHub": {
+   "n": 100,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "provider:GitLab": {
+   "n": 100,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "provider:Heroku": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "provider:PyPI": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "provider:Sentry": {
+   "n": 150,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "provider:Supabase": {
+   "n": 100,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "public:Sentry/DSN (public key only)": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 0.0,
+   "longest_fragment": 0
+  },
+  "public:Supabase/legacy anon JWT": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 0.0,
+   "longest_fragment": 0
+  },
+  "public:Supabase/sb_publishable": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 0.0,
+   "longest_fragment": 0
+  }
+ },
+ "fp_rate": 0.0,
+ "fp_docs": [],
+ "negatives": 400,
+ "fp_findings_per_mb": 0.0,
+ "rules_hit": {
+  "credential-slot-value": 255,
+  "url-userinfo-password": 250,
+  "entropy": 2,
+  "generic-api-key": 20,
+  "jwt": 88,
+  "jwt-compact": 12,
+  "private-key": 201,
+  "github-app-token": 16,
+  "github-refresh-token": 9,
+  "github-oauth": 11,
+  "github-pat": 14,
+  "github-installation-token-stateless": 50,
+  "gitlab-pat": 50,
+  "gitlab-pat-routable-current": 50,
+  "heroku-oauth-token": 50,
+  "pypi-upload-token": 50,
+  "sentry-org-token": 42,
+  "sentry-org-token-full": 8,
+  "sentry-user-token": 44,
+  "sentry-user-token-bounded": 6,
+  "supabase-secret-key": 50
+ },
+ "meta": {
+  "commit": "4842b82c618d7aa6d50ebfb47d062d2bd8476fa6",
+  "nacre_rules_sha256": "12395ce7bdf81a39ff30de5b0b580171c0836c047a25bfbf2a0151f37dc53e62",
+  "gitleaks_rules_sha256": "e163e53b9e7e8a8511e77271e2b323ed057759542a6d988258afe3a1fa329caf",
+  "seconds": 5.0,
+  "date": "2026-10-02",
+  "run": "single official H4 measurement"
+ }
+}

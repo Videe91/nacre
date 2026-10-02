@@ -28,6 +28,15 @@
    - local-only embeddings in Phase 3 (an API embedder needs its own ADR under D-0021);
    - exact search with no ANN until A-0032 breaks.
 
+## Clarification (owner, 2026-10-02): when erasure takes effect
+- **Erasure takes effect at the next recall's snapshot.** A recall whose snapshot began **before** the erasure
+  committed may still see the erased entry: its own snapshot predates the erasure, in the cache and in Postgres
+  alike.
+- **Every recall whose snapshot begins after the erasure commits is never served the erased content,** in any
+  process.
+- This is the existing §3 guarantee stated explicitly; the decision is unchanged.
+- Tested in `tests/recall/test_load_index_cache.py` (older snapshot sees it; the next one never does).
+
 ## Context
 - **What recall needs:** a semantic channel (SPEC "Similarity ranks"), and so embeddings of memory content.
 - **The risk:** embeddings are content-derived and partly invertible (inversion attacks recover much of the source

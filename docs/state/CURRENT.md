@@ -1163,3 +1163,12 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   - **Working data:** 748/750 caught (H3 credential slots were 54–72%); working-negatives FP 0.37% → 0.49%.
   - **H3 other categories and FP:** still pass.
   - **H4 is ready for its single gate measurement**, awaiting the owner's go.
+- 2026-10-02 — **H4 measured ONCE (owner go): GATE ITEM 12 FAILED.**
+  - **Credential-slot catch:** 222/250 = 88.8% (< 90%).
+  - **FP:** 0/400 (≤ 2%: met); no type-annotation false positives.
+  - **Other groups:** all ≥ 99% except generic:dotenv/assignment 49/50.
+  - **Pre-decision applied:** no rule change, no re-measurement; H4 demoted (all categories).
+  - **Misses:** 25/28 are one context (Elixir triple-quoted heredoc), 1 is the digit gap, 2 are partial.
+  - **Open:** gate item 12 needs a fresh sealed H5 after any rule work. **Owner decision needed.**
+  - **Also recorded:** A-0044 (the digit requirement's gap); D-0024 clarification (erasure takes effect at the next
+    recall's snapshot, so a recall already in flight may still see the entry).
