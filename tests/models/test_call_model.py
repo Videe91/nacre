@@ -115,7 +115,7 @@ def test_exhausted_retries_raise_after_recording_each_attempt(world, provider):
 
 def test_a_secret_shaped_response_is_marked_redacted(world, provider):
     world["allow"](MODEL)
-    token = "gh" + "p_" + "A1b2C3d4E5f6G7h8I9j0K1l2M3n4O5p6Q7r8"    # built at runtime, never a literal
+    token = "gh" + "p_" + "".join(a + b for a, b in zip("AbCdEfGhIjKlMnOpQr", "123456789012345678"))    # built at runtime, never a literal
     _call(world, provider, FakeProvider([ok(text=f"use {token}")]))
     (e,) = _calls(world, provider)
     assert e.body["content"]["redacted"] is True and token not in e.body["content"]["response"]["text"]

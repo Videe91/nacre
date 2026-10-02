@@ -158,3 +158,35 @@ failures and written a fix; then it is **demoted** to working data and a fresh o
 - **H6 contents:** built and sealed by a separate blind session. It includes command-line, attribute-pair and
   heredoc shapes.
 - **Pre-decided (owner):** a pass closes gate item 12. A fail means **no H7**: the result goes to the owner.
+- **Proximity layer built (2026-10-02; working data only; H6 still being built blind).**
+  - **What:** `ledger/find_credential_proximity.py`, layer 4 of `strip_secrets`. A code layer, not a TOML regex: a
+    2.3 kB regex exhausted RE2's DFA.
+  - **Tightened on working data:**
+    - a token containing a credential word is an identifier (cryptography class names such as
+      `X25519PrivateKey`);
+    - a contiguous alphabet run is a constant;
+    - compound key names (signing, encryption, master, session, HMAC, shared, webhook key) added to the
+      credential words;
+    - the opener search continues past an opener whose next line holds no value.
+  - **Working data:** credential-slot catch working set 499/500, H3 250/250, H4 249/250, H5 249/250; the 3
+    remaining misses are digit-free values (A-0044).
+  - **False positives:** 7/1611 = 0.43% over the working, H4 and H5 negatives with synthetic negatives.
+- **Repository false positives found before H6 (2026-10-02, still working data).**
+  - **The trigger:** the first proximity version flagged **208 of the repository's 2,106 text files** (1,672
+    findings), mostly recorded model-call results and evidence JSON.
+    - The working negatives (library source code) had not shown this.
+    - Agent data looks more like these JSON and log records than like library code.
+  - **Tightenings, all applied before H6 is measured:**
+    - the credential word must be a whole identifier component (not inside `authoritative`, `tokens`,
+      `tokenizer`);
+    - the value must be in the word's own field (no `, "` or brace between);
+    - nearest label wins (`span_sha256=<hex>` belongs to `span_sha256`);
+    - a lowercase path is a name;
+    - a token right after `_` or `.` is an identifier tail.
+  - **Also fixed:** time was quadratic on large inputs (320 kB took 18.8 s; the full suite stalled); now linear,
+    about 1.3 s for 1.2 MB.
+  - **After:** 0 findings in the repository; working credential-slot catch unchanged (99.6–100%); working FP
+    0.37%.
+  - **Not covered by the pre-registered FP target:** the H6 FP target is measured on code negatives. The
+    repository result shows that JSON/log-style data is a separate FP risk.
+

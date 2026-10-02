@@ -20,6 +20,8 @@ Notes: Layers, in order:
      expressions such as `X = module.Name`), and requires lower, upper and digits. A candidate holding an internal
   '=' (a chained assignment such as `_authToken=CLIENT_SECRET=value`) is judged on its last right-hand side only
   (2026-10-02, after the H4 dotenv miss: the whole chain exceeded the 64-char limit and was skipped).
+  4. Proximity layer (ledger/find_credential_proximity.py, owner 2026-10-02): a high-entropy, digit-bearing token
+     after a credential word in the same statement, or on the first non-empty line after a string/heredoc opener.
   Only the secret part of a match is replaced, as "[REDACTED:<rule id>]", so the surrounding context
   (e.g. "token = ") survives. Overlapping secret spans are merged; the label is the most specific rule
   (provider rule > generic rule > entropy).
@@ -38,6 +40,8 @@ from functools import cache
 from pathlib import Path
 
 import re2
+
+from nacre.ledger.find_credential_proximity import proximity_findings
 
 RULES_FILE = Path(__file__).resolve().parent / "data" / "gitleaks-v8.30.1.toml"
 RULES_SHA256 = "e163e53b9e7e8a8511e77271e2b323ed057759542a6d988258afe3a1fa329caf"
@@ -73,7 +77,8 @@ class RulesError(RuntimeError):
 def strip_secrets(text: str, path: str | None = None) -> StripResult:
     """Redact every secret in `text`; leave public credentials in place and report their kinds."""
     public = _public_spans(text)
-    found = [f for f in _rule_findings(text, path) + _entropy_findings(text)
+    proximity = [Finding(rule_id, s, e) for rule_id, s, e in proximity_findings(text)]
+    found = [f for f in _rule_findings(text, path) + _entropy_findings(text) + proximity
              if not any(f.start < e and s < f.end for s, e, _ in public)]
     merged = _merge(found)
     out, last = [], 0
@@ -222,7 +227,7 @@ def _entropy_findings(text):
 def _label_rank(rule_id):
     """Which rule names a merged span: provider-specific first, then generic rules, then entropy (D1).
     Labels only; merging never changes what is redacted."""
-    if rule_id == "entropy":
+    if rule_id in ("entropy", "credential-proximity-value"):
         return 2
     return 1 if rule_id.startswith("generic-") or rule_id == "url-userinfo-password" else 0
 

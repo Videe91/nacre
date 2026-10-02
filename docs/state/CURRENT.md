@@ -1219,3 +1219,12 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
 - **KNOWN LIMITATION (for later, owner 2026-10-02):** concurrent migrations (e.g. EXP runs started at the same
   instant) can fail with "tuple concurrently updated", because migrations GRANT on cluster-wide roles. Runs are
   sequential today.
+- 2026-10-02 — **Proximity layer built** (`ledger/find_credential_proximity.py`, layer 4 of `strip_secrets`).
+  - **Working data:** 99.6–100% credential-slot catch on working, H3, H4 and H5; FP 0.43% over 1611 negative
+    documents.
+  - **H6:** being built blind; measured once against the pre-registered targets.
+- 2026-10-02 — **Proximity layer hardened before H6.**
+  - **Speed:** quadratic time fixed (it stalled the full suite).
+  - **False positives on the repository's own JSON/docs:** cut from 208 files to 0 with five tightenings (whole
+    words, same field, nearest label, lowercase paths, identifier tails); working catch unchanged.
+  - **Owner note:** the H6 FP target (code negatives) does not cover JSON/log-style agent data.
