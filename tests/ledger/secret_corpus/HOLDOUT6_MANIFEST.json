@@ -1,0 +1,758 @@
+{
+ "build_call": "build(seed=HOLDOUT6_SEED, per_generator=50, contexts=HOLDOUT6_CONTEXTS, embed_documents=True, cover_all_contexts=True, credential_slots=HOLDOUT6_CREDENTIAL_SLOTS, embed_negatives=False)",
+ "builder_statement": "Sealed 2026-10-02 by a separate session that did not read detector code (strip_secrets.py, src/nacre/ledger/data/, scripts/scan_staged_secrets.py, scripts/build_credential_slot_regex.py, scripts/hooks/, tests/ledger/test_strip_secrets.py, measure.py, A-0010 measurement evidence, other holdout-log sections, docs/decisions/, docs/state/, git history) and ran no detector, hook or measurement. Seed and negatives seed drawn once from os.urandom. Common/long-tail classes fixed in holdout_6.py before the build, from public prevalence data (sources in its docstring). Never consult H6 samples or results while writing or tuning rules.",
+ "contexts": {
+  "attribute_pair_slots": [
+   2,
+   6,
+   16,
+   17
+  ],
+  "benign_entropy_non_slots": [
+   22,
+   23
+  ],
+  "class": {
+   "0": "common",
+   "1": "common",
+   "10": "common",
+   "11": "common",
+   "12": "common",
+   "13": "long-tail",
+   "14": "long-tail",
+   "15": "long-tail",
+   "16": "long-tail",
+   "17": "long-tail",
+   "18": "long-tail",
+   "19": "long-tail",
+   "2": "common",
+   "20": "long-tail",
+   "21": "long-tail",
+   "3": "common",
+   "4": "common",
+   "5": "common",
+   "6": "common",
+   "7": "common",
+   "8": "common",
+   "9": "common"
+  },
+  "command_line_slots": [
+   8,
+   9,
+   13,
+   14,
+   15
+  ],
+  "common": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12
+  ],
+  "count": 30,
+  "credential_slots": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19,
+   20,
+   21
+  ],
+  "descriptions": "holdout_6.py module docstring",
+  "heredoc_slots": [
+   5,
+   12,
+   18,
+   19,
+   20
+  ],
+  "long_tail": [
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19,
+   20,
+   21
+  ],
+  "non_slot": [
+   22,
+   23,
+   24,
+   25,
+   26,
+   27,
+   28,
+   29
+  ]
+ },
+ "holdout": "H6",
+ "negatives": {
+  "composition": {
+   "stdlib": 0,
+   "third_party": 150,
+   "total": 150
+  },
+  "count": 150,
+  "dir": "tests/ledger/secret_corpus/negatives_holdout6",
+  "disjoint_from": [
+   "negatives",
+   "negatives_external",
+   "negatives_holdout2",
+   "negatives_holdout3",
+   "negatives_holdout4",
+   "negatives_holdout5",
+   "H4 withdrawn first draw"
+  ],
+  "files": [
+   {
+    "path": "pyyaml/yaml/__init__.py",
+    "sha256": "b19dfcc333d6a75dfd73073901164507252f271b41d3b5f7d85510033a0547a7"
+   },
+   {
+    "path": "pyyaml/yaml/loader.py",
+    "sha256": "5156becc8aa6905482218abf3e04869b835226db4763645fff3438fdbd5f1cdd"
+   },
+   {
+    "path": "pyyaml/yaml/nodes.py",
+    "sha256": "80f28d8fca4a09d87677882bde021820d9cf39a3b11a12405226211919cf13ce"
+   },
+   {
+    "path": "pygments/pygments/lexers/console.py",
+    "sha256": "516849db50690d68f7f75de5d8d7b9362eccfcdc1e52b2d34bc83207d68e9dbb"
+   },
+   {
+    "path": "pygments/pygments/lexers/freefem.py",
+    "sha256": "9a40555db68a916de0090005634cb517f4032aca7bad90fe49ef3dbac4b79481"
+   },
+   {
+    "path": "pygments/pygments/lexers/hdl.py",
+    "sha256": "83320856fc5c1b6c617981fbba96c51bad2249653fb31e4d986e1c9f7272bb8d"
+   },
+   {
+    "path": "pygments/pygments/lexers/inferno.py",
+    "sha256": "27acc5ad8be43cb77f3c6a9c1fb4769d1b1a8d6f117d1b97d716654730b8f580"
+   },
+   {
+    "path": "pygments/pygments/lexers/jvm.py",
+    "sha256": "94e3730d103bed8736f12eccb328d392268942fff02f58911e46ec1cfce3bae7"
+   },
+   {
+    "path": "pygments/pygments/lexers/mips.py",
+    "sha256": "429801a0c3f3b24d6df747081745bf115f9067c2f08136a94be7d2212c597057"
+   },
+   {
+    "path": "pygments/pygments/lexers/phix.py",
+    "sha256": "ae81bcdf80042be6169e9d5dc63e5792e932febb29b809aa03418c6e7ac4e14e"
+   },
+   {
+    "path": "pygments/pygments/lexers/pony.py",
+    "sha256": "aeaae13684cfa0018b99a6028724cce002e0693b272da92f980122d63b155303"
+   },
+   {
+    "path": "pygments/pygments/lexers/ptx.py",
+    "sha256": "9aaa9a0b5ec31a999d736bf9e6efb87bfd61b41c665efb8a2b4ed572c6f369ba"
+   },
+   {
+    "path": "pygments/pygments/lexers/sas.py",
+    "sha256": "045f872eace39c15bae27930dc4e4ea659179c891ff8e4b7497dc799624acf25"
+   },
+   {
+    "path": "pygments/pygments/lexers/scdoc.py",
+    "sha256": "f67eb84be6ced5d238c7ed8ace1da3ac333a804981e5823b721ea774f078f9cc"
+   },
+   {
+    "path": "pygments/pygments/lexers/scripting.py",
+    "sha256": "6ce5e7257c517d629f7b3b70227c96cb9d243e3e00011e322f5d5d4aaa9a82ae"
+   },
+   {
+    "path": "pygments/pygments/lexers/webidl.py",
+    "sha256": "31031a645b2496e076f65306a6218fd9fe9fce88dae2f57c16da02185407e9f3"
+   },
+   {
+    "path": "pygments/pygments/lexers/wren.py",
+    "sha256": "da5873c294b6ef15ba9c4458fcd78e0e034df57ea607bbe5de875748f9e0a98f"
+   },
+   {
+    "path": "pygments/pygments/lexers/x10.py",
+    "sha256": "d19d2184f6e849f21513d3538bf8135e023fb91ad2f00463d2f9bb27065a833f"
+   },
+   {
+    "path": "pygments/pygments/lexers/yara.py",
+    "sha256": "fc84b3864a3bbfd02127ed5c5883594b21b79b2daf24ec85487c528e6e157536"
+   },
+   {
+    "path": "pygments/pygments/style.py",
+    "sha256": "29829f6bf5cf41338fc69853b91ad3f541a76e3e3afc6b6b1324119467baab57"
+   },
+   {
+    "path": "pygments/pygments/styles/algol_nu.py",
+    "sha256": "e7cd4b7f975bdf4de0ef30dbef3f9596f1a514da5b5cc225027ad1071b631adb"
+   },
+   {
+    "path": "pygments/pygments/styles/dracula.py",
+    "sha256": "1fe10cd5633723177638163d6f3a0e6ca978233766862adf0d515b27d5ac8b44"
+   },
+   {
+    "path": "pygments/pygments/styles/igor.py",
+    "sha256": "40efcce7e675c48c559eeb045382d9af8553fbe9d311156df9ca5f6e73afe329"
+   },
+   {
+    "path": "pygments/pygments/styles/solarized.py",
+    "sha256": "55db4b62143bc438ff8931cffc492beab01d31c1377d14ab8259e05526a5eb73"
+   },
+   {
+    "path": "pygments/pygments/styles/stata_dark.py",
+    "sha256": "37a8a65b292a1e84f976b3a7fac551533b7501930a1b71c753e43b2cacf6779d"
+   },
+   {
+    "path": "anyio/anyio/_core/_concurrency_utils.py",
+    "sha256": "92f45732b9c3aa041306465cf9fdbbf7e9419d933861b493a17aa19c05027d27"
+   },
+   {
+    "path": "anyio/anyio/_core/_exceptions.py",
+    "sha256": "0786612e40504f8b48eaf4a1bf8f8626e8b8f76209b282034f0d454091249802"
+   },
+   {
+    "path": "anyio/anyio/_core/_streams.py",
+    "sha256": "15ccc5c08803a6790ad1b3835895cca6c50961dbc00f4e24694686cc953c0cad"
+   },
+   {
+    "path": "anyio/anyio/abc/_eventloop.py",
+    "sha256": "d3e530801df9d6b928702b7c9b77e34e670dc761719f9da7528ba31b90f332f5"
+   },
+   {
+    "path": "anyio/anyio/abc/_resources.py",
+    "sha256": "86b6f42d75201d2a778bc1ba5bc249721773297820d66d13f8beee7579afdb2d"
+   },
+   {
+    "path": "anyio/anyio/abc/_sockets.py",
+    "sha256": "8d05a73d7ee20c80f2bf2bd591bb858637b3c38a08d96820cdb5ba565dbe7aab"
+   },
+   {
+    "path": "anyio/anyio/itertools.py",
+    "sha256": "4d2eff5026b663772082d68b9561db8cec9fe9084f7d051d3ddb8d5be75d5d31"
+   },
+   {
+    "path": "anyio/anyio/lowlevel.py",
+    "sha256": "4325a4bdf7ad6c21f498792abf5cb11b039a899edfcb18696641d63973d5e495"
+   },
+   {
+    "path": "anyio/anyio/streams/memory.py",
+    "sha256": "ae9c4dcc331a83d3c23b29c1a8deb82b2b807c03c1e35bc5c913fe369a3e944d"
+   },
+   {
+    "path": "anyio/anyio/streams/stapled.py",
+    "sha256": "509d9182dd0d526335568bd134ea19a2273deb495c6c38dbdef85f660ddbfd9d"
+   },
+   {
+    "path": "click/click/_utils.py",
+    "sha256": "782642b7026db180f941892435627c318ffc001223cbc31cce030cc95637dab4"
+   },
+   {
+    "path": "click/click/_winconsole.py",
+    "sha256": "292c5f35b3256116ba18e26e08b82c8363dbddd56480934fa8b24f69ef8f6b5d"
+   },
+   {
+    "path": "click/click/decorators.py",
+    "sha256": "334f14b30b2ee6eca893eb04dddd9b003b43279304842bbac090d5221bc819c8"
+   },
+   {
+    "path": "filelock/filelock/__init__.py",
+    "sha256": "644857d02a33bd1c45430b26f1861ceae88bbee2187be6a80f6d0009f8f28b38"
+   },
+   {
+    "path": "filelock/filelock/_async.py",
+    "sha256": "2fd8cb5759a4fe4d2a508b6745dd601821424a44e5c9b073d63660acd7b09873"
+   },
+   {
+    "path": "filelock/filelock/_descriptor.py",
+    "sha256": "b2cd457f2100cab675401dcb0d752d24793964501f48068275a6b9629d55ce4e"
+   },
+   {
+    "path": "filelock/filelock/_error.py",
+    "sha256": "6bc3e644919437acedd72deea01d55b2e90da7fbb4e16298509e83ff6cd2ec5d"
+   },
+   {
+    "path": "filelock/filelock/_soft.py",
+    "sha256": "c9da56d79af78065b6901687863f05be7013430e7e91f5e7496c9885b11034a0"
+   },
+   {
+    "path": "filelock/filelock/_soft_rw/_sync.py",
+    "sha256": "bbe29bbff6b10c52db235828412d0d2efd7ebf1b2b062e689ecc303d3e66dc99"
+   },
+   {
+    "path": "filelock/filelock/asyncio.py",
+    "sha256": "4dfa2eec42ca9a896f3aaab7cb7e0c5828c6fd0cf1b7541a19db667a75323790"
+   },
+   {
+    "path": "fsspec/fsspec/archive.py",
+    "sha256": "f51b0f9df23973858d0dd722b010449da2176b8f0c27080f927290366da40ec4"
+   },
+   {
+    "path": "fsspec/fsspec/asyn.py",
+    "sha256": "2091b1fd75e685ffd657f3222037cf6fcb8fe0a2ec5030623456a21eb4082b64"
+   },
+   {
+    "path": "fsspec/fsspec/compression.py",
+    "sha256": "deffc57b7f60cd14567da797a733630063ea813ce61136110a8dea1d5a83de9a"
+   },
+   {
+    "path": "fsspec/fsspec/implementations/cache_mapper.py",
+    "sha256": "5b8c25c723f165b4a9f48b49d29611541321e9bc3d785ca980fea4518bae888e"
+   },
+   {
+    "path": "fsspec/fsspec/implementations/cache_metadata.py",
+    "sha256": "10f850576ee580f958444629ac3113d6f70c79dd79a5534c8adf936b5963a321"
+   },
+   {
+    "path": "fsspec/fsspec/implementations/http.py",
+    "sha256": "a901ca2ac538f43288b8f9026d009d6db2ce2b11c2040f11c75938356b5ee5db"
+   },
+   {
+    "path": "fsspec/fsspec/implementations/libarchive.py",
+    "sha256": "4a9200d45fb37fb91bdbe558515ba132b5d304e841c545ca8045b545a01d0e80"
+   },
+   {
+    "path": "fsspec/fsspec/registry.py",
+    "sha256": "29e0cd2fd1cec875ff0f80f8a9018023e6370d08622de502d552b623cd4d65a1"
+   },
+   {
+    "path": "h11/h11/_util.py",
+    "sha256": "2d69248d7c89685940cba2eddfdc3bdd44ad925153e68bdcbe8d13918ed162e9"
+   },
+   {
+    "path": "h11/h11/_writers.py",
+    "sha256": "a052a6e8fb637877db8f844b5fb541eca0dcd60218e778171b7fc747d96d9930"
+   },
+   {
+    "path": "httpcore/httpcore/__init__.py",
+    "sha256": "f644ff92a0a10822544c7c30db866647f7b371d6e94585a4b03fa060dce464ff"
+   },
+   {
+    "path": "httpcore/httpcore/_async/socks_proxy.py",
+    "sha256": "94b2a02e58203df84596a8b438378190e5afb7d0a0841054caab27b14d6dc7a4"
+   },
+   {
+    "path": "httpcore/httpcore/_backends/sync.py",
+    "sha256": "6e113877d88af549b176c76c826d847ca9d76819acd9682019853eee3994ba35"
+   },
+   {
+    "path": "httpcore/httpcore/_models.py",
+    "sha256": "f7c1b2a060978a6c1b893aa68974f5b030d8221d8c9588767d96b74c77b5f955"
+   },
+   {
+    "path": "httpcore/httpcore/_synchronization.py",
+    "sha256": "cd28b5de6002a250679278d90649d40ba84a343413e02ea28e77b367eaf44f6b"
+   },
+   {
+    "path": "httpcore2/httpcore2/_async/http2.py",
+    "sha256": "e436cfd5f34c0b7810af9b5fcf6269e71686e2947e9e11801b87bf51c2344fd0"
+   },
+   {
+    "path": "httpcore2/httpcore2/_backends/auto.py",
+    "sha256": "348fd45fcb028116eec6b6cafbab69695eeb8050603957e8e9dea2b532aa037a"
+   },
+   {
+    "path": "httpcore2/httpcore2/_backends/base.py",
+    "sha256": "6c681fb899473a33d98100251a90b85264c2698b6b6e55a8ddf2f5d8724a1935"
+   },
+   {
+    "path": "httpcore2/httpcore2/_backends/sync.py",
+    "sha256": "b05a7e52c627c7b8b8a8b4159cfa7520fbe39f765e34ee8ee6d009f4eb7658d3"
+   },
+   {
+    "path": "httpcore2/httpcore2/_models.py",
+    "sha256": "acf3e192e954872033c3b796c041c1257f911c29513d9dbba7706a90768eb318"
+   },
+   {
+    "path": "httpcore2/httpcore2/_ssl.py",
+    "sha256": "c9ef441e4c53523482c15be847321dab3b29eaaa5c939acc5712ad95ea8d06e3"
+   },
+   {
+    "path": "httpcore2/httpcore2/_sync/http2.py",
+    "sha256": "ad651f4210332e6b86ae187d096f8b5ac90e13bdbf8a61c6df4f3bd2000459d2"
+   },
+   {
+    "path": "httpcore2/httpcore2/_utils.py",
+    "sha256": "12a248b05b81034957a2081ed4912191db2467b62951ea12e124ab16d9900f43"
+   },
+   {
+    "path": "httpx2/httpx2/__init__.py",
+    "sha256": "05f8f2a866892611e9e4db160eb43b189523aabd73197368a95def6f9794a33a"
+   },
+   {
+    "path": "httpx2/httpx2/_alias.py",
+    "sha256": "12f9fa4b7056ba0cdde578030183ac41fe39fed010a6069ee0927a53a9f4d81c"
+   },
+   {
+    "path": "httpx2/httpx2/_auth.py",
+    "sha256": "a81359e88fc3ad63cb2d945ad28653e9c0f734fe4dac6e9fe8a44451d84aba0a"
+   },
+   {
+    "path": "httpx2/httpx2/_decoders.py",
+    "sha256": "0b8efd1921d42d3fb1173dd1af94f0674b949f68a1fda7dece7ed0720a087c00"
+   },
+   {
+    "path": "httpx2/httpx2/_multipart.py",
+    "sha256": "92c80825aac02ef3bb11c80399ce34197e86c953ba5c6d1f6accde8577516938"
+   },
+   {
+    "path": "httpx2/httpx2/_transports/__init__.py",
+    "sha256": "7bae70f57e1130af4eff443a90faa95ebd628de11fe9bf716e5e0a7eb0180c22"
+   },
+   {
+    "path": "httpx2/httpx2/_transports/default.py",
+    "sha256": "8fc43a2882d471aff751366a7f28e91c5e31831a4b29aa3bb4e66931a2148e97"
+   },
+   {
+    "path": "httpx2/httpx2/_transports/mock.py",
+    "sha256": "dcb668c0dfd85db5decc0d8fe03e20dbd6c27a64e24f91abf14fef06fc6d831b"
+   },
+   {
+    "path": "httpx2/httpx2/_urlparse.py",
+    "sha256": "22555199fad4b550b0e4c845dccc2ddb3e3f0b533efb7c742e2afa444a8aac08"
+   },
+   {
+    "path": "httpx2/httpx2/websockets/_api.py",
+    "sha256": "d3921456ad088d24fb51be291036e20fcdd650c56cd2bb50ee2e7d36318c8a34"
+   },
+   {
+    "path": "httpx2/httpx2/websockets/_exceptions.py",
+    "sha256": "6e99c15fd7c37645a1f63296aaa5c0710fe3b083c3452bb351ec71cff44fcea0"
+   },
+   {
+    "path": "huggingface_hub/huggingface_hub/_eval_results.py",
+    "sha256": "b682055e9f5cc2bc0e0abdb50bc5ae0d5fe8e7f58fd9987fd5d625917a2b92ef"
+   },
+   {
+    "path": "huggingface_hub/huggingface_hub/_jobs_api.py",
+    "sha256": "ef28039a6c5ea3200a9cba413c4fe1cc244d707a9de60a9c5ea2a5b20fa4aa01"
+   },
+   {
+    "path": "huggingface_hub/huggingface_hub/_revision.py",
+    "sha256": "ffc0588f7e5d279bbd88ecda0ae4c43ed5b29a9430e1fbe4fa3fc64b142ee3d3"
+   },
+   {
+    "path": "huggingface_hub/huggingface_hub/cli/datasets.py",
+    "sha256": "5f5c4c2531611c7e4d26d9a34d2e8d3758387df6a2e806e1fe86c31093399afa"
+   },
+   {
+    "path": "huggingface_hub/huggingface_hub/cli/spaces.py",
+    "sha256": "6e54026967859d70b5056a0544dadf8fce3b1486adc71556063ce4463e00142e"
+   },
+   {
+    "path": "huggingface_hub/huggingface_hub/cli/upload.py",
+    "sha256": "0d065f923045f19c79cf3b99f168e2b642966001bb36900b86d844111ccd2f27"
+   },
+   {
+    "path": "huggingface_hub/huggingface_hub/cli/webhooks.py",
+    "sha256": "1dda4fa74d5ce8471efc4b8d349af8eab9d1922def1788f8a3df92a984541e73"
+   },
+   {
+    "path": "huggingface_hub/huggingface_hub/constants.py",
+    "sha256": "7b846aeb03e6381c6143fe0026df84ef0465d83f43ea41dcc9ad65cfa09ee67c"
+   },
+   {
+    "path": "huggingface_hub/huggingface_hub/hf_file_system.py",
+    "sha256": "f8d6c61cae79c4c1d88f11d6c327fc798761fbcf49e7102940d99f1aea62ae4d"
+   },
+   {
+    "path": "huggingface_hub/huggingface_hub/inference/_common.py",
+    "sha256": "5fe7c13fcb3ac6e35302e42c19521eb6113c74d41a6be98aec3b39e2a5550f3f"
+   },
+   {
+    "path": "huggingface_hub/huggingface_hub/inference/_providers/cerebras.py",
+    "sha256": "40e27ed54fa8b3bb84ee9e9e5279ff3ff00fabec90871dbc6deedcdd3ab612e0"
+   },
+   {
+    "path": "huggingface_hub/huggingface_hub/inference/_providers/deepinfra.py",
+    "sha256": "9fc708f44afe8cc46ea81225ca8510795b96349e5c05534c42eee9c00d2154f0"
+   },
+   {
+    "path": "huggingface_hub/huggingface_hub/inference/_providers/fal_ai.py",
+    "sha256": "5e81f523eddadc510917f2016b614c0184c7e23bfa26a45380546ea3b1d21ff6"
+   },
+   {
+    "path": "huggingface_hub/huggingface_hub/repocard_data.py",
+    "sha256": "241213718595e771c781f12882a83cb45adb2e5213251c465181d7345f06d086"
+   },
+   {
+    "path": "huggingface_hub/huggingface_hub/serialization/__init__.py",
+    "sha256": "8c28b0fef550616e7683055f5a2aa0a1c7f6435f641934254465697fee122cff"
+   },
+   {
+    "path": "huggingface_hub/huggingface_hub/utils/_datetime.py",
+    "sha256": "b5b3722340e4876ee849c3d4b4b213ffc6a9a882245d961b8a08ce9fd4b768cc"
+   },
+   {
+    "path": "huggingface_hub/huggingface_hub/utils/_deprecation.py",
+    "sha256": "9f890d1db1a2a6ab9239b27e831a1d71f77a96aa1effcb3e548b13ba8dceaee9"
+   },
+   {
+    "path": "huggingface_hub/huggingface_hub/utils/_detect_agent.py",
+    "sha256": "230d8a5bd0546567c8ca99fd0ad89398489b1f028af71c7902be3ccf570c53e4"
+   },
+   {
+    "path": "huggingface_hub/huggingface_hub/utils/_parsing.py",
+    "sha256": "ad5ef28149d6b130ae919d756765871c3e1382fd9dba4df06d8f55dd59a80ee0"
+   },
+   {
+    "path": "huggingface_hub/huggingface_hub/utils/_subprocess.py",
+    "sha256": "b4554104da2dfc72d5a90efdcbcef74c66f5d82e0f513330b9bf868730d37a61"
+   },
+   {
+    "path": "huggingface_hub/huggingface_hub/utils/_telemetry.py",
+    "sha256": "4e96b762638b84afcc1272f68b67d12d0cbc6aa0046566e3e8c282d7c1ecf010"
+   },
+   {
+    "path": "huggingface_hub/huggingface_hub/utils/_terminal.py",
+    "sha256": "b27bec0492ff5f529fb339021440b287af7176694e2da959f3f12b59351d5ecb"
+   },
+   {
+    "path": "idna/idna/core.py",
+    "sha256": "8745a54e79231cd4715e317ba5632c8f95c3c383cc70500246179af0c217fa7c"
+   },
+   {
+    "path": "openai/openai/_event_handler.py",
+    "sha256": "414ec980087c6dcfe2aa003093f363f6fe8bfd0869d597acb021a601f23e9192"
+   },
+   {
+    "path": "openai/openai/_exceptions.py",
+    "sha256": "390bb6b51fc56dc5b059ba72a6ea587a8a00d33f46f873f02b31d688f5b90456"
+   },
+   {
+    "path": "openai/openai/_extras/_common.py",
+    "sha256": "3565ad81b749b0ede140643169719f564d0b8de204e40159f154bfefde6184c7"
+   },
+   {
+    "path": "openai/openai/_extras/sounddevice_proxy.py",
+    "sha256": "c43a04db5606bb5ddd48024992238cf5075beee388bf9cec91a2515fac5c8848"
+   },
+   {
+    "path": "openai/openai/_files.py",
+    "sha256": "1a4207d424e435f7a6c3bb9b8ac99d9ef7819c7b215d7b3f39ff2a6340334254"
+   },
+   {
+    "path": "openai/openai/_qs.py",
+    "sha256": "6527d0bfa6ab1810685a5732eb4ccad7398f1362237b48bc93329d9e8c565235"
+   },
+   {
+    "path": "openai/openai/_utils/__init__.py",
+    "sha256": "f8ddae5f2c5c817c7e5059b08b23e1b02235708bbf7b676e4ad5154c45e2c4a9"
+   },
+   {
+    "path": "openai/openai/_utils/_datetime_parse.py",
+    "sha256": "6c0053b3405ceab69b745be72305e312158bd794dc460599ffa5c64ea37cc549"
+   },
+   {
+    "path": "openai/openai/_utils/_reflection.py",
+    "sha256": "6935e6f96d0ac30e0f268e4b3e452743dd8dfb652facad7e0faedc255065220c"
+   },
+   {
+    "path": "openai/openai/_version.py",
+    "sha256": "db1adfd042045b2f43e968d7ff58b6371052fe1f28b203926aa01c91cef8e123"
+   },
+   {
+    "path": "openai/openai/lib/_parsing/__init__.py",
+    "sha256": "1d1f7a369e3b2dbc703f9c384d88848b4b0e4a0fdb939c8b4ed7a82982807d8c"
+   },
+   {
+    "path": "openai/openai/lib/azure.py",
+    "sha256": "ca4258df3bcfc3dffb89b7c859abdd903cd27b9ab1c4efe7d798e2f109755667"
+   },
+   {
+    "path": "openai/openai/lib/live/_transcript_state.py",
+    "sha256": "94dc43b492cf54d9375a2370c08c61c0e7a00d17e4d385bf18b7e4f75464da92"
+   },
+   {
+    "path": "openai/openai/lib/responses_websocket/__init__.py",
+    "sha256": "3e77fc522aeb77b8c7fca0085346894cbad9d0ed40f4074fbcd5c02fe91cf5de"
+   },
+   {
+    "path": "openai/openai/types/beta/realtime/conversation_item_deleted_event.py",
+    "sha256": "a1af891d970017f5cd63e8b475f2b1018d13bd8e36d01f2edcb231d2fd27a597"
+   },
+   {
+    "path": "openai/openai/types/beta/realtime/conversation_item_retrieve_event_param.py",
+    "sha256": "07b146017c0b998c750d9d197df4de82fcd3652569bd2c12bb5fc469c67275de"
+   },
+   {
+    "path": "openai/openai/types/beta/realtime/conversation_item_truncate_event_param.py",
+    "sha256": "a39083fd8ccd49fc8601ee3596cb21b8f826cc24f41a1e187efab12d34264e0c"
+   },
+   {
+    "path": "openai/openai/types/beta/realtime/input_audio_buffer_clear_event.py",
+    "sha256": "87801ddeb2edaa8149beeaf4ef1a4fb8f7eafff15b25abc2a34b423b05f0b350"
+   },
+   {
+    "path": "openai/openai/types/beta/realtime/rate_limits_updated_event.py",
+    "sha256": "ca03a3c47bea9bba07f7795f18aa16a2ade5fe36e17f6c8777346e19a2657730"
+   },
+   {
+    "path": "openai/openai/types/beta/realtime/response_created_event.py",
+    "sha256": "3740f991e81912b886fa6952c5422bdccaca1affee680364c1690963bb765b0b"
+   },
+   {
+    "path": "openai/openai/types/beta/realtime/session_create_response.py",
+    "sha256": "ff04ca18e190d4a249e3c17cddf47a06c24e198683678d72268b5cfdecfe70b4"
+   },
+   {
+    "path": "openai/openai/version.py",
+    "sha256": "7236d728ef14b776a2bf8625427ba07dfec0742e3c3294a775cc7deaaf3c61bf"
+   },
+   {
+    "path": "pydantic/pydantic/__init__.py",
+    "sha256": "e62127278c07bf5384cdd2903f368a69929f3b8a524000bae4e0eb608ebf4bc6"
+   },
+   {
+    "path": "pydantic/pydantic/_internal/_config.py",
+    "sha256": "473cacd49a1f7e7e097331257180eab192d18018079f69585aa0d1e79a0048f0"
+   },
+   {
+    "path": "pydantic/pydantic/_internal/_dataclasses.py",
+    "sha256": "660a9c9b559a24b0704d0402e6618a368c23953817de67d7fc9e5edaf776e253"
+   },
+   {
+    "path": "pydantic/pydantic/_internal/_decorators_v1.py",
+    "sha256": "b5f75f76940a6384765c23b0a876d97a840cbabe95362811adf86e757047c77f"
+   },
+   {
+    "path": "pydantic/pydantic/_internal/_model_construction.py",
+    "sha256": "48c9757f0351aeb94cbc4ff0bef07e433520e0e07d320bdf96c8b5fcac1a4d6f"
+   },
+   {
+    "path": "pydantic/pydantic/_internal/_serializers.py",
+    "sha256": "6085af4a6011e5f9db19258239076e5add72078650638d9e02bb9cf9e9eb6fa7"
+   },
+   {
+    "path": "pydantic/pydantic/deprecated/json.py",
+    "sha256": "1e55821b7e5146bc72cee4d2e8b4d089907046198365699ea901fcacb5bac00f"
+   },
+   {
+    "path": "pydantic/pydantic/deprecated/tools.py",
+    "sha256": "36b9bda054595a9f3e8e57ef3e02482c4b32c29e18cd90f9d972063c32f11dc2"
+   },
+   {
+    "path": "pydantic/pydantic/env_settings.py",
+    "sha256": "e881de79612a9543d152fdd5f805e217f5bdd5f836270fccdced25df827f7b20"
+   },
+   {
+    "path": "pydantic/pydantic/experimental/pipeline.py",
+    "sha256": "059c74aab50a7301ee2ce291ce05c04f05707df4a1e9ed830afeed568a04a1cf"
+   },
+   {
+    "path": "pydantic/pydantic/functional_validators.py",
+    "sha256": "050b73545a3eb48677b522bfaaba189a0677eed514abb7e4295105cef75f031b"
+   },
+   {
+    "path": "pydantic/pydantic/json.py",
+    "sha256": "647f11908ee1e01cfece9f0e7530316c952856f72853e8e131d459d01fa4d317"
+   },
+   {
+    "path": "pydantic/pydantic/types.py",
+    "sha256": "1e14e3c5bc1cc7a434f6bb40dd7bbba155c146e1047ff71fad51c6e311b3b9b7"
+   },
+   {
+    "path": "pydantic/pydantic/utils.py",
+    "sha256": "d799d1d90a6a4c1165415e1336d4c8b4cc93271fdf6f257e80f988118d46a287"
+   },
+   {
+    "path": "pydantic/pydantic/v1/datetime_parse.py",
+    "sha256": "e10cb5910a6adeb3556497881de48f0e9b92d81be1a7528fb73246d71bbe1f4d"
+   },
+   {
+    "path": "pydantic/pydantic/v1/decorator.py",
+    "sha256": "cda6b1c71a163c29bcd7c0f56ecd3285aa518d79b7d95f06d191d609d335b970"
+   },
+   {
+    "path": "pydantic/pydantic/v1/errors.py",
+    "sha256": "f8aed536e8b0df1dde32c1956bd98bbcd0b1db91e39267e775fdaf33242d8a36"
+   },
+   {
+    "path": "pydantic/pydantic/v1/parse.py",
+    "sha256": "049b5daa2651b5abfd55114298ec6863e2889909a33f2f80fcda288e21546716"
+   },
+   {
+    "path": "pydantic/pydantic/v1/types.py",
+    "sha256": "03e97012d3f69d647cac5858474754907863099221e4c5f96517c16250202379"
+   },
+   {
+    "path": "pydantic/pydantic/v1/typing.py",
+    "sha256": "eec0c4ff78170d579ddfdcb42d0390635e94738277752e7adb95e5b236b81868"
+   },
+   {
+    "path": "pydantic/pydantic/v1/version.py",
+    "sha256": "6291d63902ad1a8c5fca29331ab7265c954a515601f4405da0247df784314a71"
+   },
+   {
+    "path": "pydantic/pydantic/validators.py",
+    "sha256": "a706c825755bd42576980138c3f1067cd8fb0f0cec29a5b0fed4cbe9cbe24eeb"
+   },
+   {
+    "path": "truststore/truststore/__init__.py",
+    "sha256": "06eee4aa49a9ba784bb23e710aef204ffdb992da0f5dc4a7c1ef151e4d46989a"
+   },
+   {
+    "path": "truststore/truststore/_api.py",
+    "sha256": "0910c84046483677663181b1c1b9f5db1ce5baddf89b4e9ed94248d8846a232e"
+   },
+   {
+    "path": "truststore/truststore/_macos.py",
+    "sha256": "e666107900d438f89401f0ac8b9c358c956dc50bf45c037f87fcdd22880e6ec6"
+   },
+   {
+    "path": "truststore/truststore/_ssl_constants.py",
+    "sha256": "3540f87d529d483d36ae2efe75bd2d9ced15a8b3fd687bb3992b5c5bbb40974f"
+   }
+  ]
+ },
+ "negatives_seed": 471139560,
+ "pre_registration": "A-0010 holdout log, 'PRE-REGISTRATION: gate item 12, revised' (owner, 2026-10-02)",
+ "samples": {
+  "by_category_expected": {
+   "credential-slot/secret": 250,
+   "generic/secret": 540,
+   "negative/negative": 250,
+   "provider/public": 150,
+   "provider/secret": 550
+  },
+  "total": 1740
+ },
+ "sealed": "2026-10-02",
+ "seed": 2441296908,
+ "sha256": {
+  "corpus_digest": "3e0ee9c15b4fa81033f229bd6476815d5d85ce28a629e1acf25e28dc5165c6ed",
+  "holdout_6_py_sha256": "ba8ce058d7034b521b7da1394708e5b87eb29c9f533b40b2522927e4ad4b4887",
+  "negatives_manifest_sha256": "1970a5ae648ece54ad232c6601400ec76126798522dd93adb4e4edb6b51377a6",
+  "total": "f272bb5db331030d715752b3ceb38f6728a626614d07dfb161162f78fd63272e",
+  "total_method": "sha256 of json.dumps({corpus_digest, holdout_6_py_sha256, negatives_manifest_sha256}, sort_keys=True); corpus_digest = secret_corpus.corpus.digest(build_holdout6()), the same method that pins H3, H4 and H5"
+ }
+}

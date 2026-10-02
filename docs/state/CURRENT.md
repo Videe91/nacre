@@ -1228,3 +1228,12 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   - **False positives on the repository's own JSON/docs:** cut from 208 files to 0 with five tightenings (whole
     words, same field, nearest label, lowercase paths, identifier tails); working catch unchanged.
   - **Owner note:** the H6 FP target (code negatives) does not cover JSON/log-style agent data.
+- 2026-10-02 — **H6 measured ONCE: revised gate item 12 FAILED.**
+  - **Results:** common 83.8% (< 95%); long-tail 46.7% (< 80%); FP 1.0% (met); other groups ≥ 99%.
+  - **Pre-decided:** no H7; the result goes to the owner.
+  - **Causes:**
+    - the repository-FP tightenings killed attribute pairs;
+    - the credential word is on an earlier line;
+    - vocabulary (`pass:`, `htpasswd`);
+    - two contexts have no credential word at all.
+  - **Gate item 12 remains open; owner decision needed.**

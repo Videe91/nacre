@@ -1,0 +1,419 @@
+{
+ "groups": {
+  "credential-slot:alnum-24": {
+   "n": 50,
+   "rate": 0.7,
+   "misses": [
+    "alnum-24 | context: {\n  \"name\": \"staging\",\n  \"values\": [\n   ",
+    "alnum-24 | context:       containers:\n      - name: grafana\n",
+    "alnum-24 | context: $ openssl pkcs12 -export -in tls.crt -in"
+   ],
+   "residue_rate": 0.0,
+   "strict_rate": 0.7,
+   "longest_fragment": 24
+  },
+  "credential-slot:base64-32-bytes": {
+   "n": 50,
+   "rate": 0.84,
+   "misses": [
+    "base64-32-bytes | context: # create the dashboard login\nsudo htpass",
+    "base64-32-bytes | context: rabbitmqctl add_user ingest bMikzrqWDVM9",
+    "base64-32-bytes | context: * OK [CAPABILITY IMAP4rev1 STARTTLS AUTH"
+   ],
+   "residue_rate": 0.0,
+   "strict_rate": 0.84,
+   "longest_fragment": 44
+  },
+  "credential-slot:hex-40": {
+   "n": 50,
+   "rate": 0.66,
+   "misses": [
+    "hex-40 | context: {\n  \"name\": \"staging\",\n  \"values\": [\n   ",
+    "hex-40 | context:       containers:\n      - name: grafana\n",
+    "hex-40 | context: $ openssl pkcs12 -export -in tls.crt -in"
+   ],
+   "residue_rate": 0.0,
+   "strict_rate": 0.66,
+   "longest_fragment": 40
+  },
+  "credential-slot:hex-64": {
+   "n": 50,
+   "rate": 0.66,
+   "misses": [
+    "hex-64 | context: {\n  \"name\": \"staging\",\n  \"values\": [\n   ",
+    "hex-64 | context:       containers:\n      - name: grafana\n",
+    "hex-64 | context: $ openssl pkcs12 -export -in tls.crt -in"
+   ],
+   "residue_rate": 0.0,
+   "strict_rate": 0.66,
+   "longest_fragment": 64
+  },
+  "credential-slot:uuid": {
+   "n": 50,
+   "rate": 0.66,
+   "misses": [
+    "uuid | context: {\n  \"name\": \"staging\",\n  \"values\": [\n   ",
+    "uuid | context:       containers:\n      - name: grafana\n",
+    "uuid | context: $ openssl pkcs12 -export -in tls.crt -in"
+   ],
+   "residue_rate": 0.0,
+   "strict_rate": 0.66,
+   "longest_fragment": 36
+  },
+  "generic:credentials-in-url/https-userinfo": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:db-connection-string/mongodb": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:db-connection-string/mysql": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:db-connection-string/postgresql": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:dotenv/assignment": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:jwt/hs256": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:private-key/openssh-ed25519": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:private-key/openssh-rsa": {
+   "n": 30,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:private-key/pkcs1-rsa": {
+   "n": 30,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:private-key/pkcs8-ec": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:private-key/pkcs8-rsa": {
+   "n": 30,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "generic:private-key/sec1-ec": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "provider:GitHub": {
+   "n": 100,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "provider:GitLab": {
+   "n": 100,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "provider:Heroku": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "provider:PyPI": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "provider:Sentry": {
+   "n": 150,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "provider:Supabase": {
+   "n": 100,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 1.0,
+   "longest_fragment": 0
+  },
+  "public:Sentry/DSN (public key only)": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 0.0,
+   "longest_fragment": 0
+  },
+  "public:Supabase/legacy anon JWT": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 0.0,
+   "longest_fragment": 0
+  },
+  "public:Supabase/sb_publishable": {
+   "n": 50,
+   "rate": 1.0,
+   "misses": [],
+   "residue_rate": 0.0,
+   "strict_rate": 0.0,
+   "longest_fragment": 0
+  }
+ },
+ "fp_rate": 0.01,
+ "fp_docs": [
+  [
+   "negatives_holdout6/httpcore/httpcore/_async/socks_proxy.py",
+   [
+    "entropy"
+   ]
+  ],
+  [
+   "negatives_holdout6/huggingface_hub/huggingface_hub/_eval_results.py",
+   [
+    "generic-api-key"
+   ]
+  ],
+  [
+   "negatives_holdout6/huggingface_hub/huggingface_hub/constants.py",
+   [
+    "generic-api-key"
+   ]
+  ],
+  [
+   "negatives_holdout6/openai/openai/lib/azure.py",
+   [
+    "credential-proximity-value"
+   ]
+  ]
+ ],
+ "negatives": 400,
+ "fp_findings_per_mb": 3.2874568726751514,
+ "rules_hit": {
+  "credential-slot-value": 133,
+  "generic-api-key": 41,
+  "url-userinfo-password": 248,
+  "credential-proximity-value": 24,
+  "nuget-config-password": 33,
+  "entropy": 13,
+  "jwt": 96,
+  "jwt-compact": 4,
+  "private-key": 240,
+  "github-app-token": 21,
+  "github-pat": 6,
+  "github-refresh-token": 14,
+  "github-oauth": 9,
+  "github-installation-token-stateless": 48,
+  "gitlab-pat": 50,
+  "gitlab-pat-routable-current": 48,
+  "heroku-oauth-token": 48,
+  "pypi-upload-token": 48,
+  "sentry-org-token": 33,
+  "sentry-org-token-full": 16,
+  "sentry-user-token": 46,
+  "sentry-user-token-bounded": 2,
+  "supabase-secret-key": 48
+ },
+ "credential_slot_by_class": {
+  "common": {
+   "n": 160,
+   "caught": 134,
+   "rate": 0.8375
+  },
+  "long-tail": {
+   "n": 90,
+   "caught": 42,
+   "rate": 0.4666666666666667
+  }
+ },
+ "credential_slot_by_context": {
+  "0": {
+   "class": "common",
+   "n": 15,
+   "caught": 15
+  },
+  "1": {
+   "class": "common",
+   "n": 15,
+   "caught": 15
+  },
+  "2": {
+   "class": "common",
+   "n": 15,
+   "caught": 4
+  },
+  "3": {
+   "class": "common",
+   "n": 15,
+   "caught": 15
+  },
+  "4": {
+   "class": "common",
+   "n": 15,
+   "caught": 15
+  },
+  "5": {
+   "class": "common",
+   "n": 15,
+   "caught": 15
+  },
+  "6": {
+   "class": "common",
+   "n": 10,
+   "caught": 2
+  },
+  "7": {
+   "class": "common",
+   "n": 10,
+   "caught": 10
+  },
+  "8": {
+   "class": "common",
+   "n": 10,
+   "caught": 3
+  },
+  "9": {
+   "class": "common",
+   "n": 10,
+   "caught": 10
+  },
+  "10": {
+   "class": "common",
+   "n": 10,
+   "caught": 10
+  },
+  "11": {
+   "class": "common",
+   "n": 10,
+   "caught": 10
+  },
+  "12": {
+   "class": "common",
+   "n": 10,
+   "caught": 10
+  },
+  "13": {
+   "class": "long-tail",
+   "n": 10,
+   "caught": 0
+  },
+  "14": {
+   "class": "long-tail",
+   "n": 10,
+   "caught": 0
+  },
+  "15": {
+   "class": "long-tail",
+   "n": 10,
+   "caught": 0
+  },
+  "16": {
+   "class": "long-tail",
+   "n": 10,
+   "caught": 10
+  },
+  "17": {
+   "class": "long-tail",
+   "n": 10,
+   "caught": 2
+  },
+  "18": {
+   "class": "long-tail",
+   "n": 10,
+   "caught": 0
+  },
+  "19": {
+   "class": "long-tail",
+   "n": 10,
+   "caught": 10
+  },
+  "20": {
+   "class": "long-tail",
+   "n": 10,
+   "caught": 10
+  },
+  "21": {
+   "class": "long-tail",
+   "n": 10,
+   "caught": 10
+  }
+ },
+ "meta": {
+  "commit": "affd522a8a85cbe296248dafdf58589376072706",
+  "nacre_rules_sha256": "4b9d285ead869d645c0460458dcba134718bb1e830da194aea87c19a9caac411",
+  "gitleaks_rules_sha256": "e163e53b9e7e8a8511e77271e2b323ed057759542a6d988258afe3a1fa329caf",
+  "seconds": 20.6,
+  "date": "2026-10-02",
+  "run": "single official H6 measurement",
+  "sealed_files_verified": true
+ }
+}

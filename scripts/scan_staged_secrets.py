@@ -48,6 +48,9 @@ NACRE_ALLOWLIST = [
      r"^PyYAML-6\.0\.3/yaml/(constructor|tokens)\.py$",
      "file paths of two H5 real-code negatives in H5's own manifests, caught by the entropy layer (capitalised "
      "distribution name + version + path); sealed files, cannot be restructured; exact values only (2026-10-02)"),
+    (r"^tests/ledger/secret_corpus/holdout_6\.py$", r"^(value|\{v\})$",
+     "H6 context template and its docstring: the literal word 'value' and the f-string placeholder {v} in a "
+     "mongodb+srv:// userinfo; sealed file, exact values only (2026-10-02)"),
     (r".*", r"^(x25519\.)?X25519PrivateKey$",
      "the pyca/cryptography class name, matched by generic-api-key after `private_key:` (reviewed FP, "
      "negatives MANIFEST); exact value only"),
