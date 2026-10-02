@@ -25,6 +25,16 @@
      of truth**. The pre-commit hook accepts only those exact bytes there.
    - Regeneration is checked only on the pinned platform.
 
+## Amendment 2 (owner, 2026-10-02)
+- **Expansion guard:** the 100× ratio check applies only when the expanded size exceeds 1 MB. The absolute caps
+  (64 MiB total decompressed, 10,000 members, depth 3) always apply.
+- **OCR limits confirmed:** 25 MP per image, 16 frames, 64 images per attachment. Report how often typical files hit
+  them.
+- **Isolation:** extraction and OCR run in an isolated subprocess (D-0006 amendment 3 conditions).
+- **Extractor versions:** recorded in the attachment metadata (D-0008 amendment 7).
+- **I1:** measured ONCE against its pre-registered target. If it fails: report and demote, no patching. Also report
+  the unscannable-rejection rate on clean images.
+
 ## Context
 - **Owner's Phase 3 gate item (2026-09-30):**
   - extract text from binaries (unpack archives, PDF text, OCR for images) before storage;

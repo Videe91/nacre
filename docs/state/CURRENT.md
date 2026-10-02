@@ -1329,3 +1329,5 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   - **D-0027 amendment 2:** the ratio check only above 1 MB expanded, absolute caps always; OCR limits confirmed
     (report hit rates); I1 measured once (fail → report and demote); report the unscannable rate on clean images.
   - **Then:** R24–R26, τ, and the pooled latency evidence.
+- 2026-10-02 — **Correction:** commit 73497a2's message lists D-0008 amendment 7 and D-0027 amendment 2, but a
+  script error left them out of that commit. They are added in the next commit.

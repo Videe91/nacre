@@ -148,3 +148,11 @@ The tests cover:
 - Real payloads need a type outside the allowed subset (floats, tagged decimals). That needs a v2 format.
 - Cross-language implementations disagree on bytes for the same body (golden-vector test).
 - Body sizes make the missing compression hurt (measure in Phase 3).
+
+## Amendment 7 (owner, 2026-10-02): extractor versions on scanned binaries
+- **The field:** the attachment map gains an OPTIONAL key `extractors`, recorded on `scan = "binary-scanned"`
+  attachments: a map of text to text naming each extractor and its version (e.g. pypdf, pypdfium2, rapidocr, the
+  model sha256s).
+- **Old records:** absent on them, and they must decode BYTE-IDENTICALLY (the body re-encodes to the same CBOR).
+- **Validation:** encrypt_payload's attachment map accepts the key; nothing else changes.
+
