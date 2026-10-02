@@ -145,3 +145,35 @@ def test_mac_and_sealing_subkey_purposes_never_share_an_hkdf_label():
     m = bytes(range(32))
     keys = [derive_subkey(m, p) for p in (*MacPurpose, *SubkeyPurpose)]
     assert len(set(keys)) == len(keys) and m not in keys
+
+
+# D-0008 amendment 7: frozen BEFORE the amendment (encoder at 140f6bd): a binary-scanned attachment body as written then.
+OLD_ATTACHMENT_BODY = bytes.fromhex(
+    "a367636f6e74656e74f66a6174746163686d656e74a3647363616e6e62696e6172792d7363616e6e65646a6d656469615f747970656969"
+    "6d6167652f706e676b6465736372697074696f6e781e73637265656e73686f74206f6620746865206661696c696e6720706167656f636f"
+    "6e74656e745f76657273696f6e01")
+
+
+def test_an_old_attachment_body_without_extractors_decodes_and_re_encodes_byte_identically(writer):
+    from nacre.core.decode_cbor import decode_cbor
+    from nacre.core.encode_cbor import encode_cbor
+    body = decode_cbor(OLD_ATTACHMENT_BODY)
+    assert body["attachment"] == {"media_type": "image/png", "description": "screenshot of the failing page",
+                                  "scan": "binary-scanned"}
+    assert encode_cbor(body) == OLD_ATTACHMENT_BODY
+    s, key = writer
+    encrypt_payload(s.conn, key, aad(key), body)                          # still a valid body
+    new = {**body, "attachment": {**body["attachment"], "extractors": {"pypdf": "6.19.0", "python": "3.14.3"}}}
+    encrypt_payload(s.conn, key, aad(key), new)
+    assert decode_cbor(encode_cbor(new)) == new and encode_cbor(new) != OLD_ATTACHMENT_BODY
+
+
+@pytest.mark.parametrize("extractors", [["pypdf"], {"pypdf": 6}, {"pypdf": None}, "pypdf==6.19.0",
+                                        {"pypdf": {"v": "6"}}])
+def test_extractors_must_be_a_map_of_text(writer, extractors):
+    s, key = writer
+    body = {"content_version": 1, "content": None, "attachment": {"scan": "binary-scanned", "extractors": extractors}}
+    with pytest.raises(EncryptError, match="attachment"):
+        encrypt_payload(s.conn, key, aad(key), body)
+    with pytest.raises(EncryptError, match="person"):                   # the nested map is allowed only in attachment
+        encrypt_payload(s.conn, key, aad(key), {"content_version": 1, "content": "x", "person": {"extractors": {}}})

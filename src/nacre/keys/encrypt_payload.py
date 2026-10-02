@@ -39,7 +39,8 @@ HEADER_BYTES = 3 + 16 + 12
 _BODY_KEYS = {"content_version", "content", "person", "source_ref", "attachment", "redactions",
               "public_credentials"}  # D-0008 amendment 5: optional
 _PERSON_KEYS = {"name", "handle", "email"}
-_ATTACHMENT_KEYS = {"description", "media_type", "scan"}   # scan: D-0008 amendment 6
+_ATTACHMENT_KEYS = {"description", "media_type", "scan", "extractors"}   # scan: D-0008 amendment 6
+_NESTED_TEXT_MAPS = {"extractors"}   # D-0008 amendment 7: optional map text -> text inside the attachment map
 
 
 class MacPurpose(StrEnum):
@@ -130,5 +131,10 @@ def _check_map(body: dict, name: str, allowed: set[str]) -> None:
     if name not in body:
         return
     value = body[name]
-    if type(value) is not dict or set(value) - allowed or any(type(v) is not str for v in value.values()):
+    if type(value) is not dict or set(value) - allowed or any(
+            not _is_text_map(v) if k in _NESTED_TEXT_MAPS else type(v) is not str for k, v in value.items()):
         raise EncryptError(f"{name} must be a map of text with keys from {sorted(allowed)}")
+
+
+def _is_text_map(value: object) -> bool:
+    return type(value) is dict and all(type(k) is str and type(v) is str for k, v in value.items())

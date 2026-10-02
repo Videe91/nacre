@@ -1331,3 +1331,36 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
   - **Then:** R24–R26, τ, and the pooled latency evidence.
 - 2026-10-02 — **Correction:** commit 73497a2's message lists D-0008 amendment 7 and D-0027 amendment 2, but a
   script error left them out of that commit. They are added in the next commit.
+- 2026-10-02 — **R1–R4 built (D-0026 + amendments 1–2).**
+  - **R1:** migration 0013 (auth tables; roles `nacre_auth` / `nacre_principal_admin`; app read-only on its own
+    rows).
+  - **R2:** authentication: keyed-hash tokens under a key file outside the DB; expiry, revocation and disable
+    checked every call; last-used stamping throttled to once per 10 minutes.
+  - **R3:** the claim table in code.
+  - **R4:** the admin CLI; every change is an auth row plus an org config event, atomically; a token is shown once
+    and never recorded.
+  - **Pending:**
+    - wiring `append_event` to write `trust_basis = verified` from a VerifiedClaims, plus the two remaining D-0026
+      tests (quorum counting of verified agent decisions; the cross-check against `section_authority`);
+    - the `mcp` dependency and lock regeneration after the R5 builder's lock work.
+- 2026-10-02 — **R5 follow-ups built (owner conditions).**
+  - **Isolated scan child:** empty environment, no DB credentials, rlimits, memory watchdog, Python sockets
+    blocked, and on macOS a `sandbox-exec` profile (no network, no writes, no fork). The sandbox is a D1 addition to
+    confirm.
+  - **Dependencies:** opencv-python-headless; `requirements.lock` (41 packages, sha256 hashes) plus
+    `scripts/check_dependency_lock.py`.
+  - **Expansion guard:** the ratio check only above 1,000,000 bytes expanded.
+  - **Extractor versions:** `extractors` recorded (D-0008 amendment 7; old records decode byte-identically).
+  - **OCR-limit hit rates over 308 sampled typical files (9,345-file pool):**
+    - 16-frame cap: 14 of 308; about 20% of animated GIFs, including terminal recordings;
+    - 25 MP: 1 file in the whole pool;
+    - 64 images: none;
+    - no false secret findings;
+    - latency median 0.66 s, p95 1.74 s.
+  - **OWNER QUESTIONS:**
+    - (1) onnxruntime native telemetry may use the network (intermittent signs on macOS). `embed_local` now calls
+      `disable_telemetry_events()` as a precaution; should the embedder also be isolated like the scan child?
+    - (2) approve the macOS sandbox;
+    - (3) Linux network isolation (a network namespace or seccomp) is not built;
+    - (4) at the 120 s timeout, an attachment at every OCR cap cannot finish;
+    - (5) the 16-frame cap rejects about 20% of animated GIFs: sample frames instead?

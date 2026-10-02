@@ -13,6 +13,9 @@ Notes: The only file that imports onnxruntime or tokenizers (checked by scripts/
     the network: it loads from a local directory and refuses to start if a file is missing or its sha256 differs.
   - Equivalence (owner decision): output is compared with frozen sentence-transformers reference vectors by cosine
     >= 0.9999 per text (tests/recall/data/minilm_reference_vectors.json), never by byte equality.
+  - onnxruntime telemetry is disabled before the session is created (2026-10-02: the R5 build saw signs that
+    onnxruntime's native telemetry client may use the network on macOS; native code is not stopped by Python socket
+    blocks). Whether that is enough is an open owner question; see CURRENT.md.
   - Pipeline as sentence-transformers' modules.json: Transformer (max_seq_length 256) -> mean pooling -> Normalize.
 """
 import hashlib
@@ -69,6 +72,7 @@ class LocalEmbedder:
         self._tok = Tokenizer.from_str(files["tokenizer.json"].decode())
         self._tok.enable_truncation(max_length=MAX_SEQ_LEN)
         self._tok.enable_padding(pad_id=0, pad_token="[PAD]")
+        ort.disable_telemetry_events()          # D-0024 "no network at runtime": opt out of onnxruntime telemetry
         opts = ort.SessionOptions()
         opts.intra_op_num_threads = threads
         opts.log_severity_level = 3

@@ -20,6 +20,10 @@ dependencies = [
     "pypdfium2==5.13.0",
     "rapidocr==3.9.2",
     "Pillow==12.3.0",
+    # D-0006 amendment 3 (owner condition): the headless OpenCV build, never opencv-python (GUI/Qt). rapidocr
+    # declares opencv-python, so it is dropped by the override below (uv) or by installing the hash-locked
+    # requirements.lock with --no-deps (pip). scripts/check_dependency_lock.py fails if opencv-python is installed.
+    "opencv-python-headless==5.0.0.93",
 ]
 
 [project.optional-dependencies]
@@ -41,3 +45,7 @@ pythonpath = ["src"]
 markers = ["holdout: slow A-0010 holdout/working measurements and holdout pins",
            "bench: A-0007 latency benchmarks (timing-sensitive; run with `pytest -m bench` on a quiet machine)"]
 addopts = "-m 'not holdout and not bench'"
+
+[tool.uv]
+# D-0006 amendment 3: never install rapidocr's opencv-python; opencv-python-headless (above) provides cv2.
+override-dependencies = ["opencv-python ; sys_platform == 'never'"]

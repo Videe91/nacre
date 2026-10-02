@@ -28,7 +28,8 @@ Notes: Runs inside a scoped session (scopes/open_scoped_session.py); RLS admits 
     CONTENT (valid UTF-8, >= 95% printable), never by the declared media type (owner), so relabelling cannot
     bypass stripping. Text is secret-stripped and marked scan="text-scanned". Binary (D-0027) is scanned by
     ledger/scan_binary_attachment.py BEFORE store_attachment encrypts it: a secret or an unscannable file raises
-    AttachmentRejected (no opt-out, owner); a clean file is stored as given, marked scan="binary-scanned".
+    AttachmentRejected (no opt-out, owner); a clean file is stored as given, marked scan="binary-scanned", with the
+    versions of the extractors that ran in the attachment map's `extractors` (D-0008 amendment 7).
     "unscanned" is no longer written. Metadata goes in the encrypted body.
 """
 import hmac
@@ -101,7 +102,9 @@ def append_event(session: ScopedSession, provider: RootKeyProvider, request: App
         if blob_store is None:
             raise AppendError("an attachment needs a blob store")
         # Stripped or scanned before any key is created or locked: OCR can take seconds (D-0027).
-        data, attachment_redactions, body["attachment"]["scan"] = _strip_attachment(request)
+        data, attachment_redactions, body["attachment"]["scan"], extractors = _strip_attachment(request)
+        if extractors:
+            body["attachment"]["extractors"] = extractors        # D-0008 amendment 7
         redactions = redactions + attachment_redactions
         if attachment_redactions:
             body["redactions"] = list(redactions)
@@ -202,9 +205,9 @@ def _body(r: AppendRequest):
     return body, tuple(redactions), tuple(sorted(public))
 
 
-def _strip_attachment(r: AppendRequest) -> tuple[bytes, tuple[str, ...], str]:
-    """(stored bytes, redactions, scan marker). Text = valid, mostly printable UTF-8, whatever the declared type;
-    anything else is binary and must pass the D-0027 scan."""
+def _strip_attachment(r: AppendRequest) -> tuple[bytes, tuple[str, ...], str, dict[str, str] | None]:
+    """(stored bytes, redactions, scan marker, extractor versions). Text = valid, mostly printable UTF-8, whatever the
+    declared type; anything else is binary and must pass the D-0027 scan."""
     try:
         text = r.attachment.decode("utf-8")
         printable = sum(c.isprintable() or c in "\n\r\t" for c in text)
@@ -215,9 +218,9 @@ def _strip_attachment(r: AppendRequest) -> tuple[bytes, tuple[str, ...], str]:
         verdict = scan_binary_attachment(r.attachment, r.attachment_media_type)
         if not isinstance(verdict, Clean):
             raise AttachmentRejected(rejection_message(verdict))
-        return r.attachment, (), "binary-scanned"
+        return r.attachment, (), "binary-scanned", dict(verdict.extractors)
     result = strip_secrets(text)
-    return result.text.encode("utf-8"), result.redactions, "text-scanned"
+    return result.text.encode("utf-8"), result.redactions, "text-scanned", None
 
 
 _ENUMS = {"event_type": EventType, "payload_type": PayloadType, "actor_kind": ActorKind, "source": Source,

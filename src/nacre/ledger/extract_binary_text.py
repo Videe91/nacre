@@ -2,13 +2,21 @@
 Functionality: Extract every piece of text from one binary attachment, in memory and within fixed limits, end to end.
 Owns: format sniffing by content, the archive walk (zip, tar, gzip, bzip2, xz; office files as zips), the PDF text
   layer and page rendering, image decoding, the extraction limits, and refusing what cannot be scanned.
-Public entry: extract_binary_text(), TextPiece, ExtractionRefused, MAX_DEPTH, MAX_MEMBERS, MAX_TOTAL_BYTES, MAX_RATIO
-Decisions: D-0027, D-0008
+Public entry: extract_binary_text(), TextPiece, ExtractionRefused, EXTRACTOR_VERSIONS, MAX_DEPTH, MAX_MEMBERS,
+  MAX_TOTAL_BYTES, MAX_RATIO, RATIO_FLOOR_BYTES
+Decisions: D-0027, D-0008, D-0006
 Assumptions: A-0021, A-0041
 Notes: D-0027 §1. Nothing is written to disk: member names are text to scan, never paths. The kind is decided by
   magic bytes, never by a name or a declared media type (D-0008 amendment 6).
   - Limits (owner-approved): nesting <= 3, <= 10,000 members, <= 64 MiB produced by decompression, produced bytes
     <= 100 x the attachment's size. Bytes are counted as decompressed, never read from (lying) headers.
+  - D-0027 amendment 2: the 100x ratio applies only once more than RATIO_FLOOR_BYTES have been produced (a tiny
+    tar.gz is legitimately > 100x: tar pads to 10 KiB). D1: "1 MB" is read as 1,000,000 bytes (the stricter reading).
+    The absolute caps (64 MiB, 10,000 members, depth 3) always apply.
+  - Runs inside the isolated scan child (D-0006 amendment 3, ledger/run_binary_scan_child.py), never in the
+    process that holds database credentials.
+  - TextPiece.extractor is a label; EXTRACTOR_VERSIONS maps it to the names and versions recorded on a clean
+    attachment (D-0008 amendment 7).
   - D1 counting: every archive or compression layer is one nesting level, except that a tar directly inside
     gzip/bzip2/xz shares its compressor's level (a .tar.gz is one archive). Tar members are slices of bytes already
     counted, so only zip members and compressor output count toward the byte limits. PDF pages count as members.
@@ -43,13 +51,15 @@ import pypdf
 import pypdfium2
 from PIL import Image
 
-from nacre.ledger.ocr_image_text import OCR_ENGINE_ID, ocr_image_text
+from nacre.ledger.ocr_image_text import OCR_ENGINE_ID, OCR_VERSIONS, ocr_image_text
 
-MAX_DEPTH, MAX_MEMBERS, MAX_TOTAL_BYTES, MAX_RATIO = 3, 10_000, 64 * 1024 * 1024, 100
+MAX_DEPTH, MAX_MEMBERS, MAX_TOTAL_BYTES, MAX_RATIO, RATIO_FLOOR_BYTES = 3, 10_000, 64 * 1024 * 1024, 100, 1_000_000
 MAX_IMAGE_PIXELS, MAX_FRAMES, MAX_OCR_IMAGES, PDF_RENDER_SCALE, PDF_RENDER_MAX_SIDE = 25_000_000, 16, 64, 2.0, 4000
-_CHUNK, _PY = 1024 * 1024, f"python {platform.python_version()}"
-PYPDF_ID, PDFIUM_ID, PILLOW_ID = (f"pypdf=={version('pypdf')}", f"pypdfium2=={version('pypdfium2')}",
-                                  f"Pillow=={version('Pillow')}")
+_CHUNK, _PY = 1024 * 1024, "python"
+PYPDF_ID, PDFIUM_ID, PILLOW_ID = "pypdf", "pypdfium2", "Pillow"
+EXTRACTOR_VERSIONS = {_PY: {"python": platform.python_version()}, PYPDF_ID: {"pypdf": version("pypdf")},
+                      PDFIUM_ID: {"pypdfium2": version("pypdfium2")}, PILLOW_ID: {"Pillow": version("Pillow")},
+                      OCR_ENGINE_ID: OCR_VERSIONS}
 _MAGIC = ((b"PK\x03\x04", "zip"), (b"PK\x05\x06", "zip"), (b"\x1f\x8b", "gzip"), (b"BZh", "bzip2"),
           (b"\xfd7zXZ\x00", "xz"), (b"\x89PNG\r\n\x1a\n", "PNG"), (b"\xff\xd8\xff", "JPEG"), (b"GIF87a", "GIF"),
           (b"GIF89a", "GIF"), (b"II*\x00", "TIFF"), (b"MM\x00*", "TIFF"), (b"BM", "BMP"))
@@ -68,7 +78,7 @@ class ExtractionRefused(ValueError):
 class TextPiece:
     location: str                                   # where it came from; never holds unscanned names
     text: str
-    extractor: str                                  # extractor name and version
+    extractor: str                                  # a key of EXTRACTOR_VERSIONS
     regions: tuple[tuple[int, str], ...] = field(default=())   # (start offset in text, finer location)
 
 
@@ -86,7 +96,8 @@ class _Budget:
     def produce(self, n):
         self.produced += n
         _refuse_if(self.produced > MAX_TOTAL_BYTES, f"more than {MAX_TOTAL_BYTES} bytes uncompressed (archive-bomb guard)")
-        _refuse_if(self.produced > self.cap, f"expansion ratio above {MAX_RATIO}x (archive-bomb guard)")
+        _refuse_if(self.produced > RATIO_FLOOR_BYTES and self.produced > self.cap,
+                   f"expansion ratio above {MAX_RATIO}x (archive-bomb guard)")
 
     def ocr(self):
         self.ocr_images += 1
@@ -135,10 +146,10 @@ def _walk(data: bytes, loc: str, level: int, budget: _Budget) -> Iterator[TextPi
         text = _as_text(data)
         if text is None:
             raise ExtractionRefused(f"unknown binary format at {loc}")
-        yield TextPiece(loc, text, "text")
+        yield TextPiece(loc, text, _PY)
         if text.lstrip().startswith("<"):
             plain = html.unescape(_XML_TAG.sub("", _XML_BREAK.sub("\n", text)))
-            yield TextPiece(f"{loc} (markup removed)", plain, "text")
+            yield TextPiece(f"{loc} (markup removed)", plain, _PY)
         return
     try:
         if kind in ("zip", "tar", "gzip", "bzip2", "xz"):
@@ -153,11 +164,11 @@ def _walk(data: bytes, loc: str, level: int, budget: _Budget) -> Iterator[TextPi
         raise
     except Exception as exc:     # any parser failure: fail closed, without echoing the library's message
         if kind in _WEAK_MAGIC and _as_text(data) is not None:
-            yield TextPiece(loc, _as_text(data), "text")
+            yield TextPiece(loc, _as_text(data), _PY)
             return
         raise ExtractionRefused(f"corrupt or unsupported {kind} at {loc} ({type(exc).__name__})") from None
     # Last, so a finding inside the structure is reported with its finer location first.
-    yield TextPiece(f"{loc} (raw bytes)", "\n".join(m.decode("ascii") for m in _RAW_RUNS.findall(data)), "raw-bytes")
+    yield TextPiece(f"{loc} (raw bytes)", "\n".join(m.decode("ascii") for m in _RAW_RUNS.findall(data)), _PY)
 
 
 def _members(names_and_data, loc, level, budget, extractor) -> Iterator[TextPiece]:
@@ -189,7 +200,7 @@ def _zip(data, loc, level, budget, kind) -> Iterator[TextPiece]:
             return None
         with zf.open(info) as stream:
             return _read_counted(stream, budget)
-    yield from _members(((i.filename, partial(read, i)) for i in infos), loc, level, budget, f"zip ({_PY})")
+    yield from _members(((i.filename, partial(read, i)) for i in infos), loc, level, budget, _PY)
 
 
 def _tar(data, loc, level, budget, kind) -> Iterator[TextPiece]:
@@ -202,7 +213,7 @@ def _tar(data, loc, level, budget, kind) -> Iterator[TextPiece]:
             return m.linkname.encode() if m.linkname else None      # a link target is text to scan
         stream = tf.extractfile(m)        # a sparse member expands holes: count it like decompression
         return _read_counted(stream, budget) if m.issparse() else stream.read()
-    yield from _members(((m.name, partial(read, m)) for m in members), loc, level, budget, f"tar ({_PY})")
+    yield from _members(((m.name, partial(read, m)) for m in members), loc, level, budget, _PY)
 
 
 def _compressed(data, loc, level, budget, kind) -> Iterator[TextPiece]:
@@ -210,7 +221,7 @@ def _compressed(data, loc, level, budget, kind) -> Iterator[TextPiece]:
     with opener(io.BytesIO(data)) as stream:     # each read decompresses at most _CHUNK bytes
         payload = _read_counted(stream, budget)
     inner = f"{loc} ({kind}-decompressed)"
-    yield TextPiece(inner, "", f"{kind} ({_PY})")
+    yield TextPiece(inner, "", _PY)
     if _kind(payload) == "tar":
         yield from _tar(payload, inner, level, budget, "tar")         # .tar.gz: one archive, one level
     else:

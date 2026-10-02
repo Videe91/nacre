@@ -58,8 +58,10 @@ def test_round_trip_and_body_metadata(rw, provider, streams, blobs):
     with rw() as s:
         assert read_attachment(s, provider, blobs, env) == PNG
         (e,) = read_stream(s, provider, streams["a"])
+    extractors = e.body["attachment"].pop("extractors")                    # D-0008 amendment 7
     assert e.body["attachment"] == {"media_type": "image/png", "description": "screenshot of the failing page",
                                     "scan": "binary-scanned"}
+    assert extractors["Pillow"] == "12.3.0" and extractors["rapidocr"] == "3.9.2"
     assert env.attachment_sha256 == hashlib.sha256(blobs.get(env.attachment_ref)).digest()
     assert PNG not in blobs.get(env.attachment_ref)
 

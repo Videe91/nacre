@@ -1,8 +1,11 @@
-"""Tests for ledger/scan_binary_attachment.py, extract_binary_text.py, ocr_image_text.py and the append_event
-integration (D-0027 tests 1-5). Secrets are built at runtime; images are synthetic, rendered here (never I1)."""
+"""Tests for ledger/scan_binary_attachment.py, run_binary_scan_child.py, extract_binary_text.py, ocr_image_text.py and
+the append_event integration (D-0027 tests 1-5). Secrets are built at runtime; images are synthetic, rendered here
+(never I1). scan_binary_attachment() runs in the isolated child; tests that scale a limit down with monkeypatch run the
+same work in this process (detect_binary_secrets), because a monkeypatch does not reach the child."""
 import bz2
 import gzip
 import io
+import json
 import lzma
 import random
 import socket
@@ -18,11 +21,13 @@ from PIL import Image, ImageDraw, ImageFont, PngImagePlugin
 
 import nacre.ledger.extract_binary_text as extract
 import nacre.ledger.ocr_image_text as ocr
+import nacre.ledger.scan_binary_attachment as scan
 from nacre.core.event import ActorKind, EventType, PayloadType, Source
 from nacre.ledger.append_event import AppendRequest, AttachmentRejected, append_event
 from nacre.ledger.local_disk_blob_store import LocalDiskBlobStore
 from nacre.ledger.read_attachment import read_attachment
 from nacre.ledger.read_stream import read_stream
+from nacre.ledger.run_binary_scan_child import detect_binary_secrets
 from nacre.ledger.scan_binary_attachment import (Clean, SecretDetected, Unscannable, rejection_message,
                                                  scan_binary_attachment)
 
@@ -91,6 +96,11 @@ def office(kind, xml: str, media: bytes | None = None):
 
 def docx_runs(*runs):
     return office("docx", "<w:p>" + "".join(f"<w:r><w:t>{r}</w:t></w:r>" for r in runs) + "</w:p>")
+
+
+def in_process(data: bytes):
+    """The child's work without the child: for limits scaled down with monkeypatch (which cannot reach the child)."""
+    return scan._parse(json.dumps(detect_binary_secrets(data)).encode())
 
 
 def assert_secret(verdict, token, *where):
@@ -226,8 +236,11 @@ def test_clean_files_of_every_kind_are_clean_with_extractor_versions():
     for kind, data in _clean_carriers().items():
         verdict = scan_binary_attachment(data)
         assert isinstance(verdict, Clean), (kind, verdict)
-    assert ocr.OCR_ENGINE_ID in scan_binary_attachment(image(CLEAN_TEXT)).extractors
-    assert any(e.startswith("pypdf==") for e in scan_binary_attachment(pdf_text(CLEAN_TEXT)).extractors)
+    ocr_versions = dict(scan_binary_attachment(image(CLEAN_TEXT)).extractors)
+    assert ocr_versions["rapidocr"] == "3.9.2" and ocr_versions["Pillow"] == "12.3.0"
+    assert ocr_versions["rapidocr-model-rec"] == "PP-OCRv6_rec_small.onnx sha256:" + ocr._PINNED["Rec"][1]
+    assert dict(scan_binary_attachment(pdf_text(CLEAN_TEXT)).extractors) == {"pypdf": "6.19.0", "python": "3.14.3"}
+    assert dict(scan_binary_attachment(zipped({"a.txt": b"hello"})).extractors) == {"python": "3.14.3"}
 
 
 def test_a_tar_gz_inside_two_zips_is_within_the_depth_limit():
@@ -243,6 +256,24 @@ def test_limits_are_the_owner_approved_values():
 def test_expansion_ratio_bomb():
     assert_unscannable(scan_binary_attachment(zipped({"zeros.bin": b"\0" * 4_000_000})), "expansion ratio")
     assert_unscannable(scan_binary_attachment(lzma.compress(b"a" * 4_000_000)), "expansion ratio")
+
+
+def test_the_ratio_applies_only_above_one_megabyte():
+    # D-0027 amendment 2: a tiny tar.gz is legitimately far above 100x (tar pads to 10 KiB) and must pass.
+    tiny = tarred({"x": b"ok"})                                             # 94 bytes -> 10,240 (109x)
+    assert 100 * len(tiny) < len(gzip.decompress(tiny)) and isinstance(scan_binary_attachment(tiny), Clean)
+    assert extract.RATIO_FLOOR_BYTES == 1_000_000
+    under = zipped({"zeros.bin": b"\0" * 1_000_000})                         # ~1000x, exactly at the floor: passes
+    assert 100 * len(under) < 1_000_000 and isinstance(in_process(under), Clean)
+    over = zipped({"zeros.bin": b"\0" * 1_000_001})                          # one byte over the floor: the ratio applies
+    assert_unscannable(in_process(over), "expansion ratio")
+
+
+def test_absolute_caps_apply_below_the_ratio_floor(monkeypatch):
+    monkeypatch.setattr(extract, "MAX_TOTAL_BYTES", 1000)
+    assert_unscannable(in_process(zipped({"zeros.bin": b"\0" * 1001})), "bytes uncompressed")
+    monkeypatch.setattr(extract, "MAX_TOTAL_BYTES", 64 * 1024 * 1024)
+    assert_unscannable(in_process(zipped({f"{i}": b"" for i in range(10_001)}, zipfile.ZIP_STORED)), "members")
 
 
 def test_member_count_bomb():
@@ -262,19 +293,19 @@ def test_depth_four_nesting():
 def test_total_uncompressed_bytes(monkeypatch):
     monkeypatch.setattr(extract, "MAX_TOTAL_BYTES", 1 << 20)          # the real 64 MiB, scaled down for speed
     text = "".join(rng.choice(string.ascii_letters) for _ in range(1_200_000)).encode()
-    assert_unscannable(scan_binary_attachment(zipped({"big.txt": text})), "bytes uncompressed")
+    assert_unscannable(in_process(zipped({"big.txt": text})), "bytes uncompressed")
 
 
 def test_ocr_guards(monkeypatch):
     monkeypatch.setattr(extract, "MAX_IMAGE_PIXELS", 10_000)
-    assert_unscannable(scan_binary_attachment(image(size=(200, 200))), "larger than")
+    assert_unscannable(in_process(image(size=(200, 200))), "larger than")
     monkeypatch.setattr(extract, "MAX_IMAGE_PIXELS", 25_000_000)
     frames = [Image.new("RGB", (8, 8), (i, 0, 0)) for i in range(extract.MAX_FRAMES + 1)]
     out = io.BytesIO()
     frames[0].save(out, "GIF", save_all=True, append_images=frames[1:])
     assert_unscannable(scan_binary_attachment(out.getvalue()), "frames")
     monkeypatch.setattr(extract, "MAX_OCR_IMAGES", 1)
-    assert_unscannable(scan_binary_attachment(zipped({"a.png": image(), "b.png": image(size=(64, 64))})), "to OCR")
+    assert_unscannable(in_process(zipped({"a.png": image(), "b.png": image(size=(64, 64))})), "to OCR")
 
 
 # ---- test 4: encrypted and unknown files are unscannable ---------------------------------------------------
@@ -323,7 +354,7 @@ def test_ocr_refuses_a_model_that_does_not_match_its_pin(monkeypatch):
     try:
         with pytest.raises(ocr.OcrPinError, match="pinned sha256"):
             ocr.ocr_image_text(Image.new("RGB", (8, 8)))
-        assert_unscannable(scan_binary_attachment(image()), "OCR failed")
+        assert_unscannable(in_process(image()), "OCR failed")
     finally:
         ocr._engine.cache_clear()
 
@@ -387,3 +418,4 @@ def test_clean_binaries_are_stored_as_binary_scanned(rw, provider, streams, tmp_
         (e,) = read_stream(s, provider, streams["a"])
         assert read_attachment(s, provider, blobs, env) == data
     assert e.body["attachment"]["scan"] == "binary-scanned"
+    assert e.body["attachment"]["extractors"]["python"] == "3.14.3"                 # D-0008 amendment 7

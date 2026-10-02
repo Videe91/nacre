@@ -3,7 +3,7 @@ Functionality: Read the text lines of one image with the pinned local OCR engine
 Owns: the model pins (file sha256s), verifying the model files before loading, offline loading (explicit model
   paths, so the engine never downloads), tiling tall images into overlapping bands, and returning each line with
   its pixel region.
-Public entry: ocr_image_text(), OcrLine, OcrPinError, OCR_ENGINE_ID
+Public entry: ocr_image_text(), OcrLine, OcrPinError, OCR_ENGINE_ID, OCR_VERSIONS
 Decisions: D-0027, D-0024
 Assumptions: A-0041
 Notes: D-0027 owner decision 3: RapidOCR on onnxruntime (the D-0024 runtime). onnxruntime is imported by rapidocr,
@@ -19,6 +19,7 @@ Notes: D-0027 owner decision 3: RapidOCR on onnxruntime (the D-0024 runtime). on
     on a cut appears whole in one band). Width is never cut, so a long line is never split; widths above
     MAX_SIDE_PX are downscaled by the engine (recorded limit). Duplicate lines from overlaps are harmless: the
     caller only detects.
+  - OCR_VERSIONS (D-0008 amendment 7): the engine, runtime and pinned model files, recorded on a clean attachment.
   - D1 engine settings: rapidocr defaults (text_score 0.5), except max_side_len = MAX_SIDE_PX and log level error.
     Not tuned on I1 (sealed; this session never read it).
 """
@@ -40,6 +41,8 @@ _PINNED = {   # role: (file name, sha256)
 }
 OCR_ENGINE_ID = (f"rapidocr=={version('rapidocr')} (PP-OCRv6 det/rec small, cls mobile v2.0) "
                  f"onnxruntime=={version('onnxruntime')}")
+OCR_VERSIONS = {"rapidocr": version("rapidocr"), "onnxruntime": version("onnxruntime"),
+                **{f"rapidocr-model-{role.lower()}": f"{name} sha256:{digest}" for role, (name, digest) in _PINNED.items()}}
 BAND_PX, BAND_OVERLAP_PX, MAX_SIDE_PX = 1600, 120, 4096
 _LOCK = threading.Lock()
 

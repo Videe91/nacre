@@ -21,7 +21,8 @@
      - `opencv-python-headless` instead of `opencv-python`;
      - ALL transitive dependencies pinned and hash-locked.
    - **Why:** RapidOCR, the OCR engine the owner approved in D-0027, requires Pillow at runtime.
-   - **Transitive dependencies it pulls in (left unpinned, as elsewhere):** opencv-python, Shapely, pyclipper,
+   - **Transitive dependencies it pulls in** (now pinned and hash-locked in `requirements.lock`; check with
+     `scripts/check_dependency_lock.py`; `opencv-python` replaced by `opencv-python-headless`): opencv-python, Shapely, pyclipper,
      omegaconf, antlr4-python3-runtime, requests, PyYAML, tqdm, colorlog, six.
    - **Pins:** pypdf 6.19.0, pypdfium2 5.13.0 and rapidocr 3.9.2 are exact-pinned (D-0027 §3–4).
    - **Note:** Pillow now decodes untrusted images on the write path; only the decoder matching the file's magic
