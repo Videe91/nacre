@@ -22,7 +22,8 @@ def test_applies_all_shipped_migrations_in_order_then_nothing(fresh_db):
                      "0009_interpretation_plane.sql",
                      "0010_projection_generations.sql",
                      "0011_key_contributors.sql",
-                     "0012_recall_index.sql"]
+                     "0012_recall_index.sql",
+                     "0013_auth.sql"]
     assert second == []
     assert _applied(fresh_db) == first
 

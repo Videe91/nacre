@@ -27,6 +27,8 @@ class DbRole(StrEnum):
     MIGRATOR = "migrator"
     KEYADMIN = "keyadmin"      # D-0014
     GC = "gc"                  # D-0015
+    AUTH = "auth"              # D-0026 amendment 2: token lookup only
+    PRINCIPAL_ADMIN = "principal_admin"   # D-0026 amendment 2: the admin CLI
 
 
 def _dsn(role: DbRole, dsn: str | None) -> str:
