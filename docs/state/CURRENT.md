@@ -1538,3 +1538,11 @@ against EXP-0001. **Not in the gate:** the checker model (its own experiment lat
     re-run after the fix: 1551 passed (exit 0), check_structure exit 0.
   - **Open:** one setup error, `tuple concurrently updated` (concurrent ALTER ROLE across pytest processes at load
     ~53; the known concurrent-migration limitation). It did not recur in 4 runs. To hunt.
+- 2026-10-02 — **Mutation runs on a quiet tree** (`scripts/run_mutants.py`):
+  - **Claim verification:** 3 run, 3 killed (the check_claims authority rule; append_event's claim comparison; the
+    VERIFIED return).
+  - **Interface:** 7 run, 7 killed (the loopback refusal, the 1 MiB limit, the missing-token refusal, the rate limit,
+    check_claims being called for a principal, the SDK's plain-HTTP refusal, the token-bucket admit).
+  - Both runs: working tree verified unchanged.
+  - **Found by the guard:** the SDK stdio test launched its server child without `-B`, so the child wrote bytecode
+    into the mutation worktree and run_mutants refused (correctly). The child now runs with `-B`.

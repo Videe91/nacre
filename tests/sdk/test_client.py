@@ -105,7 +105,7 @@ def test_stdio_launches_the_server_with_the_token_in_its_env_only(world):
     d = world["dsn"]
     cmd = ["/usr/bin/env", f"PYTHONPATH={ROOT / 'src'}", f"NACRE_DSN_APP={d['app']}", f"NACRE_DSN_AUTH={d['auth']}",
            f"NACRE_ROOT_KEY_DIR={world['root']}", f"NACRE_TOKEN_KEY_FILE={world['key_file']}",
-           sys.executable, "-m", "nacre.interface.mcp_server", "--tau-strong-q", "6000", "--config-version", "t"]
+           sys.executable, "-B", "-m", "nacre.interface.mcp_server", "--tau-strong-q", "6000", "--config-version", "t"]
     c = Client(cmd, world["token"])
     out = _decide(c, world["a"])
     assert out["trust_basis"] == "verified" and out["created"] is True
